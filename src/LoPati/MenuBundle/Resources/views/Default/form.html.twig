@@ -22,9 +22,9 @@
                 {# Translations fields #}
                 {% else %}
                     {% for translationsLocale in form if (translationsLocale.name == locale) %}
-                   <div class="prova2">
+                   
                         {{ form_widget(translationsLocale) }}
-                        </div>
+                        
                     {% endfor %}
                 {% endif %}
             </li>
