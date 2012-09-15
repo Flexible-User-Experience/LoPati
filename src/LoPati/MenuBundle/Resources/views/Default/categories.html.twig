@@ -1,0 +1,108 @@
+	<ul>
+	{% if pagina is not none %}
+		{% for categoria in categories %}
+
+	
+				{% if  categoria.link == null %} {# categoria no te enllaç #}
+					
+					{% if categoria.arxiu == 0 %}
+						
+							{% if categoria.subcategoria[0].llista == 0 %}
+									
+									
+
+									{% if (id  == categoria.subcategoria[0].link ) or (pagina.categoria == categoria)%}
+									
+												{% if categoria.subcategoria[0].link  is not empty %}
+											
+																	<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu : 1, titol: categoria, llista: 0} %} </span></li>
+												
+												{% endif %}
+									{% else %}	
+												{% if categoria.subcategoria[0].link.id is not empty%}
+										
+															<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0 } %} </span></li>
+												
+												{% endif %}
+									{% endif %}
+					
+							{% else %}
+									{% if (id  == categoria.subcategoria[0].link ) or (pagina.categoria == categoria)%}
+									<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu: 1, titol: categoria, llista: 1 } %} </span></li>
+									
+									{% else %}
+									<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu: 0, titol: categoria, llista: 1 } %} </span></li>
+									{% endif %}
+							{% endif %}
+							
+					{% else %}
+					
+						
+							
+							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 6, actiu : 0, titol: categoria, llista: 1} %} </span></li>
+							
+						
+							
+					{% endif %}
+						
+						
+				{% else %}
+			
+			
+						{% if ((id == categoria.link.id) or (( pagina is defined) and (pagina.categoria == categoria)))  %}
+
+							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0} %} </span></li>
+						{% else %}	
+					
+					<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0} %} </span></li>
+						{% endif %}
+				{%  endif %}
+		{% endfor %}		
+
+	{% else %}
+	
+			{% for categoria in categories %}
+
+
+				{% if  categoria.link == null %} {# categoria no te enllaç #}
+				
+				{% if categoria.arxiu == 0 %}
+			
+						{% if categoria.subcategoria[0].llista == 0 %}
+						
+							{% if categoria.subcategoria[0].link  is not empty %}
+						
+							
+									{% if (id  == categoria.subcategoria[0].link.id )%}
+									
+																	<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu : 1, titol: categoria, llista: 0} %} </span></li>
+								
+									{% else %}	
+															<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0 } %} </span></li>
+									
+									{% endif %}
+							{% endif %}
+						{% else %}
+					
+									<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu: 0, titol: categoria, llista: 1 } %} </span></li>
+									
+						{% endif %}
+					{% else %}
+								<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 6, actiu: 0, titol: categoria, llista: 1 } %} </span></li>
+					
+					{% endif %}	
+						
+				{% else %}
+			
+			
+						{% if (id == categoria.link.id)  %}
+
+							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0} %} </span></li>
+						{% else %}	
+					
+					<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0} %} </span></li>
+						{% endif %}
+				{%  endif %}
+		{% endfor %}	
+	{% endif %}
+	</ul>

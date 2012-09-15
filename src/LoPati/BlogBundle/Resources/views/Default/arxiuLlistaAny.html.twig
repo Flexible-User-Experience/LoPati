@@ -1,0 +1,44 @@
+{% extends '::frontend.html.twig' %}
+
+
+{% block title %}: {{ arxiu | capitalize }} / {{any.any}}{% endblock %}
+
+{% block menu %}
+ {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria_id, onlycategories: 1 } %} 
+ {% endblock %}
+ {% block contenidor %}
+ <div style="width: 100%; height: 29px; background: none;"></div>
+ 
+<div class="contenidor">
+<div class="continguts">
+
+<div class="subopcions">
+
+<div class="contingut">
+
+<p style="margin-top: 0px;"><img src="{{ vich_uploader_asset(any, 'imagePetita2')| imagine_filter('portada') }}" alt="{{ any.any }}" title="{{ any.any }}"></p>
+<div class="separadorcontingutreg"></div>
+
+{% for pagina in pagines %}
+<div class="contingutreg">
+							<a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': pagina.categoria.slug, 'titol': pagina.slug }) }}">
+							{% if pagina.imagePetitaName is not empty %}
+							<img src="{{ vich_uploader_asset(pagina, 'imagePetita')| imagine_filter('portada') }}" style="max-width: 150px; float: left; margin: 0px 25px 0px 0px;" alt="{{ pagina.titol }}" title="{{ pagina.titol }}"></a>
+							{% endif %}
+							<p class="titol"><a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': pagina.categoria.slug, 'titol': pagina.slug }) }}">{{ pagina.titol }}</a></p>
+							<p style="color: #000;">{{ pagina.resum }}</p>
+							<p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
+					</div>
+
+					<div class="separadorcontingutreg"></div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+{%  endblock %}
+
+	{% block menuArxiu %}
+ {% render "BlogBundle:Default:menuDretaArxiu" with {any_current: any.any, categoria_id:categoria_id, arxiu: categoria.slug } %} 
+	
+{% endblock %}

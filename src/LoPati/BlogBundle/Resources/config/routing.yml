@@ -1,0 +1,100 @@
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+inici:
+  pattern: /
+  defaults: { _controller: BlogBundle:Default:index}
+
+
+      
+portada:
+  pattern: /{_locale}/
+  defaults: { _controller: BlogBundle:Default:portada}
+  requirements:
+        _locale: ca|es|en|fr|de
+prova:
+  pattern: /{_locale}/prova
+  defaults: { _controller: BlogBundle:Default:prova}
+  requirements:
+        _locale: ca|es|en|fr|de
+  
+categoriaenenllas:
+  pattern: /{_locale}/{categoria}/{id}/
+  defaults: { _controller: BlogBundle:Default:pagina}
+  requirements:
+    id:  \d+
+    _method:  GET
+
+
+arxiuarticle:
+  pattern: /{_locale}/{arxiu}/{any}/{titol}/{id}/
+  defaults: { _controller: BlogBundle:Default:arxiuArticle}
+  requirements:
+    _locale: ca|es|en
+    id:  \d+
+    any: \d+
+    _method:  GET
+
+
+llista:
+  pattern: /{_locale}/{categoria}/{subcategoria}/{categoria_id}/{subcategoria_id}/
+  defaults: { _controller: BlogBundle:Default:llista}
+  requirements:
+    categoria_id: \d+
+    subcategoria_id: \d+
+    _method:  GET
+
+
+
+arxiullistaany:
+  pattern: /{_locale}/{arxiu}/{any}/{categoria_id}/
+  defaults: { _controller: BlogBundle:Default:arxiuLlistaAny}
+  requirements:
+    _locale: ca|es|en
+    any:  \d+
+    categoria_id: \d+
+    _method:  GET
+    
+
+    
+arxiu:
+  pattern: /{_locale}/{arxiu}/{categoria}/{categoria_id}/
+  defaults: { _controller: BlogBundle:Default:arxiu}
+  requirements:
+        _locale: ca|es|en
+        arxiu: \d+
+        categoria: "[a-zA-Z]+"
+        categoria_id: \d+
+        id: \d+
+
+
+
+categoriasenseenllas:
+  pattern: /{_locale}/{categoria}/{subcategoria}/{id}/
+  defaults: { _controller: BlogBundle:Default:pagina}
+  requirements:
+    id:  \d+
+    _method:  GET
+   
+pagina:
+  pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
+  defaults: { _controller: BlogBundle:Default:article}
+  requirements:
+    id:  \d+
+    _method:  GET
+
+
+    
+
+ 

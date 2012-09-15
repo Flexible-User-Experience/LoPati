@@ -1,0 +1,37 @@
+{% extends '::frontend.html.twig' %}
+
+
+{% block title %}: Arxiu {% endblock %}
+
+
+
+{% block menu %}
+ {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria_id, onlycategories: 1 } %} 
+ {% endblock %}
+{% block contenidor %}
+<div style="width: 100%; height: 29px; background: none;"></div>
+<div class="contenidor">
+<div class="continguts" style="margin-top: 0px;>
+
+<div class="opcions">
+
+				<p style="height: 30px; margin: 0px; padding: 0px;">&nbsp</p>
+				{% for any in anys %}
+			
+			
+				    <div class="opciollista" style='border: 0px solid #fff;;'>
+				 
+					 <a onMouseOut="{{ vich_uploader_asset(any, 'imagePetita')| imagine_filter('portada') }}" onMouseOver="{{ vich_uploader_asset(any, 'imagePetita2')| imagine_filter('portada') }}" href='{{ path('arxiullistaany', {'any': any.any, 'categoria_id': categoria_id, 'arxiu': arxiu.slug  }) }}'><img name='mini45' src='{{ vich_uploader_asset(any, 'imagePetita')| imagine_filter('portada') }}' alt='12' title='12'>
+					 
+					 
+					 
+					 </a>
+					
+				    </div> <!-- opciollista-->
+
+				    
+
+{% endfor %}
+</div>
+</div>
+{%  endblock %}

@@ -1,0 +1,13 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}: {{ pagina.titol }}{% endblock %}
+{% block menu %}
+
+  {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id: pagina.categoria.id, subcategoria_id: pagina.subcategoria.id } %} 
+ {% endblock %}
+{% block contenidor %}
+	
+
+{% include 'BlogBundle:Default:blog.html.twig' with {'pagina': pagina} %}
+
+{%  endblock %}

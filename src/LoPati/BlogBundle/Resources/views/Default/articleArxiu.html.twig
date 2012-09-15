@@ -1,0 +1,19 @@
+{% extends '::frontend.html.twig' %}
+
+
+{% block title %}: {% endblock %}
+
+{% block menu %}
+ {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:pagina.categoria.id, onlycategories: 1 } %} 
+ {% endblock %}
+ {% block contenidor %}
+
+	
+
+{% include 'BlogBundle:Default:blog.html.twig' %}
+
+{%  endblock %}
+	{% block menuArxiu %}
+ {% render "BlogBundle:Default:menuDretaArxiu" with {any_current:null, categoria_id:pagina.categoria.id, arxiu:pagina.categoria.slug } %} 
+	
+{% endblock %}

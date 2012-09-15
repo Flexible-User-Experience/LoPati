@@ -1,0 +1,47 @@
+services:
+         
+  sonata.lopati.admin.categoria:
+    class: LoPati\MenuBundle\Admin\CategoriaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Menú', label: primer nivell }
+    arguments:
+      - null
+      - LoPati\MenuBundle\Entity\Categoria
+      - MenuBundle:Admin
+
+  sonata.lopati.admin.subcategoria:
+    class: LoPati\MenuBundle\Admin\SubCategoriaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Menú', label: segon nivell }
+    arguments:
+      - null
+      - LoPati\MenuBundle\Entity\SubCategoria
+      - MenuBundle:Admin
+        
+  sonata.lopati.admin.pagina:
+    class: LoPati\BlogBundle\Admin\PaginaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: pàgina }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Pagina
+      - BlogBundle:Admin
+  
+      
+  sonata.lopati.admin.arxiu:
+    class: LoPati\BlogBundle\Admin\ArxiuAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Arxiu', label: arxiu }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Arxiu
+      - BlogBundle:Admin 
+  
+  sonata.lopati.admin.configuracio:
+    class: LoPati\BlogBundle\Admin\ConfiguracioAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Peu de pàgina', label: configuració }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Configuracio
+      - BlogBundle:Admin 

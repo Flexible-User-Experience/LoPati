@@ -1,0 +1,150 @@
+<?php
+
+namespace LoPati\BlogBundle\Entity\Translation;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product_translations",
+ *   uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
+ * 	"locale", "object_id", "field"
+ *   })}
+ * )
+ */
+class ProductTranslation extends AbstractPersonalTranslation
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="LoPati\BlogBundle\Entity\Product", inversedBy="translations")
+     * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $object;
+    
+    public function __toString()
+    {
+    	//return $this->getName();
+    }
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $locale
+     */
+    private $locale;
+
+    /**
+     * @var string $field
+     */
+    private $field;
+
+    /**
+     * @var string $content
+     */
+    private $content;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     * @return ProductTranslation
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Set field
+     *
+     * @param string $field
+     * @return ProductTranslation
+     */
+    public function setField($field)
+    {
+        $this->field = $field;
+    
+        return $this;
+    }
+
+    /**
+     * Get field
+     *
+     * @return string 
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return ProductTranslation
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set object
+     *
+     * @param LoPati\BlogBundle\Entity\Product $object
+     * @return ProductTranslation
+     */
+    public function setObject(\LoPati\BlogBundle\Entity\Product $object = null)
+    {
+        $this->object = $object;
+    
+        return $this;
+    }
+
+    /**
+     * Get object
+     *
+     * @return LoPati\BlogBundle\Entity\Product 
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+}

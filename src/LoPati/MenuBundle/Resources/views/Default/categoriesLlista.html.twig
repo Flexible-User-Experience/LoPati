@@ -1,0 +1,34 @@
+	<ul>
+
+
+		{% for categoria in categories %}
+	
+	
+				{% if  categoria.link == null %} {# categoria no te enllaç #}
+						
+						{% if categoria.subcategoria[0].llista == 0 %}
+									{% if id is sameas(categoria.subcategoria[0].link.id) %}
+																		<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu : 1, titol: categoria.nom, llista: 0} %} </span></li>
+								
+									{% else %}	
+																<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria.nom, llista: 0 } %} </span></li>
+									{% endif %}
+						{% else %}
+					
+									
+						{% endif %}
+				{% else %}
+				
+			
+						{% if id == categoria.link.id %}
+					
+							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria.nom, llista: 0} %} </span></li>
+						{% else %}	
+						
+					<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria.nom, llista: 0} %} </span></li>
+						{% endif %}
+				{%  endif %}
+		{% endfor %}		
+
+			
+	</ul>

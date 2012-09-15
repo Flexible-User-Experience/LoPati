@@ -1,0 +1,20 @@
+<dl>
+	{% for categoria in categories %}
+		<dt><a style="color:#444" href="/admin/lopati/menu/categoria/{{categoria.id}}/edit">{{ categoria.ordre }}: {{ categoria.nom }}</a></dt>
+		<dd>
+			<dl>
+				{% for subcategoria in categoria.subCategoria %}
+					<dt><a style="color:#666" href="/admin/lopati/menu/subcategoria/{{subcategoria.id}}/edit">{{ categoria.ordre }}.{{ subcategoria.ordre }}: {{ subcategoria.nom }}</a></dt>
+					<dd>
+						<dl>
+							{% for pagina in subcategoria.pagines %}
+								<dt><a style="color:#888" href="/admin/lopati/blog/pagina/{{pagina.id}}/edit">{{ pagina.titol }}</a></dt>
+								<dd></dd>
+							{% endfor %}
+						</dl>
+					</dd>
+				{% endfor %}
+			</dl>
+		</dd>	
+	{% endfor %}
+</dl>

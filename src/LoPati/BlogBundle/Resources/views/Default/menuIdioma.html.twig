@@ -1,0 +1,22 @@
+		
+		
+		<p>
+		
+		{% if idioma == 'ca' %}
+		<a href="/ca"><strong>català</strong></a>
+		 {% else %}
+		 <a href="/ca">català</a>
+		 {% endif %}
+		 | 
+			{% if idioma == 'es' %}
+		<a href="/es"><strong>español</strong></a>
+		 {% else %}
+		 <a href="/es">español</a>
+		 {% endif %}
+		 | 
+			{% if idioma == 'en' %}
+		<a href="/en"><strong>english</strong></a>
+		 {% else %}
+		 <a href="/en">english</a>
+		 {% endif %}
+		</p>

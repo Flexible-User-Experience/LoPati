@@ -1,0 +1,7 @@
+parameters:
+#    menu.example.class: LoPati\MenuBundle\Example
+
+services:
+#    menu.example:
+#        class: %menu.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
