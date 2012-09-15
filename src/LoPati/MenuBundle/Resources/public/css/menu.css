@@ -22,6 +22,14 @@ span.span_translation_tab_content {
 
 input[type="text"].input_translation_tab_content {
   margin-left: 20px;
+  display:block;
+  margin-bottom:20px;
+}
+input[type="text"].input_translation_tab_content2 {
+	margin-top:20px;
+  margin-left: 20px;
+  display:block;
+  margin-bottom:20px;
 }
 
 .imatge_admin{
