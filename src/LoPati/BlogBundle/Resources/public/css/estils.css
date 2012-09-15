@@ -2114,3 +2114,28 @@ ol.bloc01 li div.bloc01-img img:hover {
 	
 	
 }
+
+.pagination {
+	color: #666;
+	margin: 0px;
+	padding: 5px 0px 25px 0px;
+	clear: both;
+	font-size: 80%;
+}
+.pagination span.current {
+	color: #E31853;
+	padding: 0px 20px 0px 0px;
+}
+.pagination a {
+	color: #666;
+	text-decoration: none;
+	margin: 0px 20px 0px 0px;
+}
+.pagination a:hover {
+	color: #E31853;
+}
+.pagination .next,.last,.first,.previous{
+	
+	display:none;
+	
+}

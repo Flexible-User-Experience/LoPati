@@ -34,7 +34,7 @@ class DefaultController extends Controller {
  		$pagination = $paginator->paginate(
  				$consulta,
  				$this->get('request')->query->get('page', 1),
-				4/*limit per page*/
+				8/*limit per page*/
  		);
 		
 	//	$pagination = $consulta->getResult();

@@ -1,0 +1,37 @@
+{% block a2lix_translations_widget %}
+    {% set locales = form.vars.locales %}
+    {% if fields is defined %}
+        {% set locales = form.vars.default_locale|merge(locales) %}
+    {% endif %}
+
+    <div class="translations_tabs">
+    xxx
+        <ul class="translations_tabs_locale">
+            {% for locale in locales %}
+                <li data-lang="{{ locale }}"><a href="#">{{ locale|capitalize }}xxx</a></li>
+            {% endfor %}
+        </ul>
+
+        <ul class="translations_tabs_content">
+            {% for locale in locales %}
+            <li data-lang="{{ locale }}">
+                {# Natives fields for default locale #}
+                {% if (fields is defined) and (form.vars.locale[0] == locale) %}
+                    {% for field in fields %}
+                        {{ form_row(field) }}
+                    {% endfor %}
+                    
+                {# Translations fields #}
+                {% else %}
+                	
+                    {% for translationsLocale in form if (translationsLocale.name == locale) %}
+                    <div class="prova">
+                        {{ form_widget(translationsLocale) }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
