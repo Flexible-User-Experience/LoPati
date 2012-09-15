@@ -2,8 +2,11 @@
 app/config/parameters.yml
 vendor/*
 web/bundles/*
+web/uploads/cache/*
 composer.lock
 composer.phar
 *~
 *.sublime-project
 *.sublime-workspace
+.DS_Store
+
