@@ -33,4 +33,13 @@
     </div>
 {% endblock %}
 
+{% block translationsLocale_widget %}
+    {% for field in form %}
+        <div class="traduccio">
+        {{ form_label(field) }}
+        {{ form_widget(field) }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
 
