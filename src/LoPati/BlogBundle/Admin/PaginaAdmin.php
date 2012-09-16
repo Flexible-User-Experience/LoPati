@@ -81,20 +81,23 @@ class PaginaAdmin extends Admin
 		
 		->with('Traduccions')
 		->add('translations', 'a2lix_translations',array(
-				'label'=>' ',
+				'label'=> ' ',
 				'required' => false,
 				'fields' => array(                          // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
 
-
+						'resum'=>array(
+								
+								 'type' => 'textarea',
+								'attr'=>array(
+										'style'=>'height:90px;width:480px;')),
 						'data_realitzacio'=> array(
 								'label'=>'Data realització',
 								),
 						'lloc'=> array(
-								'attr'=> array(
-										'class'=>'input_translation_tab_content')),
+								),
 						'peuImageGran1'=> array(
 								'label'=>'Peu imatge principal',
-								),
+							),
 						'descripcio' => array(
 								'label' => 'Descripció',                   // Custom label
 								'attr' => array(
