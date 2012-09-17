@@ -37,7 +37,7 @@ class ArxiuAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-		->addIdentifier('id')
+		//->addIdentifier('id')
 		->addIdentifier('any')
 		->add('imagePetitaName')
 		->add('imagePetita2Name')

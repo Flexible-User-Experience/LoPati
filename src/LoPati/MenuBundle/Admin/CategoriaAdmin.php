@@ -25,7 +25,9 @@ class CategoriaAdmin extends Admin
 		->add('actiu', null, array('label' => 'Actiu'))
 		->add('arxiu', 'checkbox', array('label' => 'És Arxiu ?' ,'required'  => false))
 		->add('link', null, array('label' => 'Pàgina vinculada', 'required'  => false))
+		->with('Traduccions')
 		->add('translations', 'a2lix_translations',array(
+				'label' => ' ',
 				'by_reference' => false,
 				'required' => false,
 				'fields' => array(                          // [Optionnal] Fields configurations. If not, auto detection from translatable annotations

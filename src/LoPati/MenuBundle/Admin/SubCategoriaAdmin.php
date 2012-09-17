@@ -24,7 +24,9 @@ class SubCategoriaAdmin extends Admin
 		))*/
 		->add('link',null,array('label' => 'Pàgina vinculada','required'  => false))
 		->add('categoria', 'sonata_type_model', array('expanded' => false, 'label' => 'Menú primer nivell'))
+		->with('Traduccions')
 		->add('translations', 'a2lix_translations', array(
+						'label' => ' ',
 						'by_reference' => false,
 						'required' => false,
 						'fields' => array(                          // [Optionnal] Fields configurations. If not, auto detection from translatable annotations

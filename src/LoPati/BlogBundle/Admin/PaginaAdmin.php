@@ -58,7 +58,7 @@ class PaginaAdmin extends Admin
 		->add('portada', null, array('label' => 'És portada ?', 'required' => false))
 		->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required'=>false))
 		->add('imagePetitaName', null, array('label' => 'Nom', 'required' => false, 'read_only'=>true,))
-		->add('imagePetita2', 'file', array('label' => 'Imatge petita roija', 'required'=>false))
+		->add('imagePetita2', 'file', array('label' => 'Imatge petita vermell', 'required'=>false))
 		->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only'=>true,))
 		
 		->with('Documents adjunts')
@@ -84,9 +84,8 @@ class PaginaAdmin extends Admin
 				'label'=> ' ',
 				'required' => false,
 				'fields' => array(                          // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
-
+						'titol' => array('label' => 'Títol'),
 						'resum'=>array(
-								
 								 'type' => 'textarea',
 								'attr'=>array(
 										'style'=>'height:90px;width:480px;')),
