@@ -112,7 +112,7 @@ class DefaultController extends Controller {
 				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat >= :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');*/
 		
 		$consulta= $em->createQuery('SELECT p FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu
-				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat >= :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');
+				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat > :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');
 		/*
 		$consulta->setParameter('categoria',$categoria);
 		$consulta->setParameter('subCategoria',$subcategoria);
@@ -174,10 +174,10 @@ class DefaultController extends Controller {
 		$consulta->setParameter('any',$any);
 		$any = $consulta->getSingleResult();
 		
-		$consulta2= $em->createQuery('SELECT p FROM BlogBundle:Pagina p WHERE p.categoria = :categoria
+		$consulta2= $em->createQuery('SELECT p FROM BlogBundle:Pagina p WHERE p.data_caducitat <= :avui
 				AND p.actiu = :actiu AND p.data_publicacio BETWEEN :data1 AND :data2 ORDER BY p.data_publicacio DESC');
 		
-		$consulta2->setParameter('categoria',$categoria_id);
+		$consulta2->setParameter('avui', new \DateTime('today'));
 		$consulta2->setParameter('actiu','1');
 		$consulta2->setParameter('data1',new \DateTime($any."-01-01"));
 		$consulta2->setParameter('data2',new \DateTime($any."-12-31"));
