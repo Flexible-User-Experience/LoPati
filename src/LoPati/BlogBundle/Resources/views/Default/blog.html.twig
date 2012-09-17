@@ -6,7 +6,7 @@
 	
 			<div class="registre">
 			{% if pagina.imageGran1Name  %}
-				<img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}' alt='Lo Pati - Centre d´Art  - Terres de l´Ebre : {{ pagina.titol }}' title='Lo Pati - Centre d´Art  - Terres de l´Ebre : {{ pagina.titol }}' class='imatgeprincipal'>
+				<img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}' alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" class='imatgeprincipal'>
 			
 			{% endif %}
 				<p style="font-size: 85%; margin: 0px 0px 18px 0px; padding: 0px;">{{ pagina.peuImageGran1 }}</p>
