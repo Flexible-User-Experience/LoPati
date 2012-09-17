@@ -112,7 +112,7 @@ class PaginaAdmin extends Admin
 				->setHelps(array('urlFlickr'=>'Ex: http://www.flickr.com/photos/lopati/..'))
 				->setHelps(array('resum'=>'Max: 300 caràcters'))
 		->setHelps(array('data_publicacio'=>'Format: dd-MM-yyyy'))
-		->setHelps(array('data_caducitat'=>'Data fins quan sera visible la pàgina'))
+		->setHelps(array('data_caducitat'=>'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy '))
 		;
 	}
 
