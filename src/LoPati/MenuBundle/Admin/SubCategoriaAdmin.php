@@ -42,7 +42,7 @@ class SubCategoriaAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-		->addIdentifier('id')
+		//->addIdentifier('id')
 		->addIdentifier('nom', null, array('label' => 'Nom'))
 		->add('categoria', null, array('label' => 'Menú primer nivell'))
 		->add('ordre')

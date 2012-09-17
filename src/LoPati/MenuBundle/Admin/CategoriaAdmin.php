@@ -43,7 +43,7 @@ class CategoriaAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-		->add('id')
+		//->add('id')
 		->addIdentifier('nom', null, array('label' => 'Nom'))
 		->add('ordre')
 		->add('link', null, array('label' => 'Pàgina vinculada'))
