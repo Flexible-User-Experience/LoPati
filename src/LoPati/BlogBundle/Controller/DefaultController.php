@@ -15,9 +15,9 @@ class DefaultController extends Controller {
 		$req = $this->getRequest();
 		$session = $this->get('session');
 	
-		$req->setLocale('ca');	
+		$culture=$req->getPreferredLanguage(array('ca', 'es', 'en'));	
 		
-		return $this->redirect($this->generateUrl('portada', array('_locale'=>'ca')));
+		return $this->redirect($this->generateUrl('portada', array('_locale' =>$culture)));
 	}
 	public function portadaAction($_locale) {
 
