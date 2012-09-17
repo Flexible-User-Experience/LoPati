@@ -135,21 +135,15 @@ class PaginaAdmin extends Admin
 			'_sort_by' => 'titol' // field name
 	);
 	
-	/*
- public function prePersist($object)
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $this->updateImages($object);
+        $datagridMapper
+            ->add('titol')
+            ->add('actiu')
+            ->add('portada')
+            ->add('data_publicacio')
+            ->add('categoria')
+            ->add('subCategoria')
+        ;
     }
-
-    public function preUpdate($object)
-    {
-        $this->updateImages($object);
-    }
-
-    private function updateImages($object)
-    {
-        
-            $object->upload();
-        
-    }*/
 }

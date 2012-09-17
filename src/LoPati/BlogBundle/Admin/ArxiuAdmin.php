@@ -30,8 +30,6 @@ class ArxiuAdmin extends Admin
 		
 		->setHelps(array('any'=>'Ex: 2012'))
 		;
-
-		
 	}
 	
 	protected function configureListFields(ListMapper $mapper)
@@ -39,12 +37,11 @@ class ArxiuAdmin extends Admin
 		$mapper
 		//->addIdentifier('id')
 		->addIdentifier('any')
-		->add('imagePetitaName')
-		->add('imagePetita2Name')
-		
-		
+		->add('imagePetitaName', null, array('label' => 'Imatge any'))
+		->add('imagePetita2Name', null, array('label' => 'Imatge any vermell'))
 		;
 	}
+
 	protected $datagridValues = array(
 			'_page' => 1,
 			'_sort_order' => 'DESC', // sort direction
