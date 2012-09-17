@@ -25,7 +25,7 @@ class ArxiuAdmin extends Admin
 		->add('actiu','checkbox',array('required'=>FALSE))
 		->add('imagePetita', 'file', array('label' => 'Imatge any', 'required'=>false))
 		->add('imagePetitaName', 'text', array('label' => 'Nom', 'required' => false, 'read_only'=>true,))
-		->add('imagePetita2', 'file', array('label' => 'Imatge  roija', 'required'=>false))
+		->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required'=>false))
 		->add('imagePetita2Name', 'text', array('label' => 'Nom', 'required' => false, 'read_only'=>true,))
 		
 		->setHelps(array('any'=>'Ex: 2012'))

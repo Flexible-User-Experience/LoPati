@@ -55,13 +55,11 @@ class Pagina {
 	/** @ORM\Column(type="boolean", nullable=true) */
 	protected $actiu = FALSE;
 	
-
-	
 	/** @ORM\Column(type="boolean", nullable=true) */
 	protected $portada = FALSE;
 
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $compartir = TRUE;
+	protected $compartir = FALSE;
 
 	/** @ORM\Column(type="date") */
 	protected $data_publicacio;
