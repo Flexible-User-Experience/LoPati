@@ -225,5 +225,8 @@ liip_imagine:
             quality: 70
             filters:
                 thumbnail: { size: [155,null], mode: outbound }
-      
 
+        thumb_imatge_pagina_arbre_continguts:
+            quality: 70
+            filters:
+                thumbnail: { size: [50,null], mode: outbound }

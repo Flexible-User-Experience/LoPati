@@ -10,7 +10,7 @@
 							{% for pagina in subcategoria.pagines %}
 								<dt>
 									{% if (pagina.imageGran1Name) %}
-										<img style="max-width:50px;" src="{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}"/>
+										<img src="{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('thumb_imatge_pagina_arbre_continguts') }}"/>
 									{% endif %}
 									<a style="color:#888" href="/admin/lopati/blog/pagina/{{pagina.id}}/edit">{{ pagina.titol }}</a></dt>
 								<dd></dd>
