@@ -25,8 +25,9 @@ class DefaultController extends Controller {
 		
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
 		$consulta = $em->createQuery('SELECT p FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub WHERE
-				p.portada = TRUE AND p.actiu = TRUE ORDER BY p.data_publicacio DESC');
+				p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
 		
+		$consulta->setParameter('avui', new \DateTime('today'));
 	$query = $em->createQuery($consulta);
 
 	//$pagination = $consulta->getResult();
