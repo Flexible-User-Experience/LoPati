@@ -26,7 +26,7 @@
         "stof/doctrine-extensions-bundle": "dev-master",
         "a2lix/translation-form-bundle" : "dev-master",
         "liip/imagine-bundle": "dev-master",
-        "sonata-project/user-bundle" : "dev-master",
+        "sonata-project/user-bundle" : "dev-master"
 
         
         
