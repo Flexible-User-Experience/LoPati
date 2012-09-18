@@ -45,11 +45,11 @@
 <div class="destacats">
 
 	<div class="buscador">
-		<form name="buscador1" action="buscador.asp?i=ca" method="post">
+		<form name="buscador1" action="#" method="post">
 			<p style="width: 155px; float: left;"><label><input name="textabuscar" type="textabuscar" style="width: 155px; height: 18px; border: 1px solid #666; margin: 0px;" value=""></label></p>
 			<p style="width: 25px;  float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" value="buscar" title="buscar" src="/images/boto10ca.png"></p>
 		</form>
-	</div> <!-- buscador -->
+	</div> <!-- buscador --> 
 
 	<div class="idiomes">
 	{% render 'BlogBundle:Default:menuIdioma'  %}
@@ -62,7 +62,8 @@
 {% endblock %}
 	
 	<div class="xarxes">
-		<p>segueix-nos a:</p>
+	
+		<p>{% trans %}tr.follow{% endtrans %}:</p>
 		<!-- <a href="rss.asp?i=ca" rel="external" onmouseover="document.rss.src='images/icona_rss_color.gif';" onmouseout="document.rss.src='images/icona_rss.gif';"><img style="width: 18px;" name="rss" src="images/icona_rss.gif" alt="RSS" title="RSS"></a> -->
 		<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external" onmouseover="document.facebook.src='/images/xarxa_fb_color.gif';" onmouseout="document.facebook.src='/images/xarxa_fb.gif';"><img style="width: 18px;" name="facebook" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
 		<a href="http://www.vimeo.com/lopati" rel="external" onmouseover="document.vimeo.src='/images/xarxa_vimeo_color.gif';" onmouseout="document.vimeo.src='/images/xarxa_vimeo.gif';"><img style="width: 18px;" name="vimeo" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>

@@ -1,6 +1,6 @@
 {% extends '::frontend.html.twig' %}
 
-{% block title %}: Arxiu {% endblock %}
+{% block title %}: {% trans %}tr.archive{% endtrans %} {% endblock %}
 
 {% block menu %}
 	{% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria_id, onlycategories: 1 } %} 
