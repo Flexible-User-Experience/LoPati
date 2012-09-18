@@ -24,7 +24,7 @@ class DefaultController extends Controller {
 		//$pagination= null;
 		
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
-		$consulta = $em->createQuery('SELECT p FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub WHERE
+		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub WHERE
 				p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
 		
 		$consulta->setParameter('avui', new \DateTime('today'));
@@ -111,7 +111,7 @@ class DefaultController extends Controller {
 		/*$consulta= $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN c.subCategoria sub WHERE p.actiu = :actiu
 				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat >= :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');*/
 		
-		$consulta= $em->createQuery('SELECT p FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu
+		$consulta= $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu
 				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat > :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');
 		/*
 		$consulta->setParameter('categoria',$categoria);

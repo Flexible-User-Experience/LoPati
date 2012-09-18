@@ -1,7 +1,13 @@
 {% extends '::frontend.html.twig' %}
 
+{% set categoria=null %}
+{% set subcategoria=null %}
+{% if pagines[0] %}
+	{% set categoria=pagines[0].categoria %}
+	{% set subcategoria=pagines[0].subcategoria.nom %}
+{% endif %}
 
-{% block title %}: Arxiu{% endblock %}
+{% block title %}: {{ categoria }} / {{ subcategoria }} {% endblock %}
 
 
 {% block menu %}

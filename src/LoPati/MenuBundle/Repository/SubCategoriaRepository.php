@@ -11,7 +11,7 @@ class SubCategoriaRepository extends EntityRepository
 	
 		$em = $this->getEntityManager();
 	
-		$consulta2 = $em->createQuery('SELECT sub FROM MenuBundle:SubCategoria sub WHERE
+		$consulta2 = $em->createQuery('SELECT sub, cat FROM MenuBundle:SubCategoria  sub JOIN sub.categoria cat WHERE
 				sub.categoria = :categoria AND sub.actiu = :actiu AND ((sub.link IS NOT null) OR (sub.llista = TRUE))  ORDER BY sub.ordre ASC');
 	
 	

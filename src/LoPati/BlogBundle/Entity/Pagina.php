@@ -83,12 +83,12 @@ class Pagina {
 	protected $lloc = NULL;
 
 	/** 
-	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria", inversedBy="pagines") 
+	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria") 
 	 */
 	protected $categoria;
 
 	/** 
-	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria", inversedBy="pagines") 
+	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria") 
 	 */
 	protected $subCategoria;
 	
