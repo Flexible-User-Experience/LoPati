@@ -10,14 +10,18 @@ use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller {
 
-	public function indexAction() {
+	public function indexAction($_locale=null) {
 
 		$req = $this->getRequest();
+	
 		$session = $this->get('session');
 	
 		$culture=$req->getPreferredLanguage(array('ca', 'es', 'en'));	
-		
+	
 		return $this->redirect($this->generateUrl('portada', array('_locale' =>$culture)));
+			
+		
+			
 	}
 	public function portadaAction($_locale) {
 
