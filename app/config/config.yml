@@ -64,6 +64,7 @@ doctrine:
                 alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
             ApplicationSonataUserBundle: ~
             SonataUserBundle: ~
+            FOSUserBundle: ~ 
             
 
          
