@@ -44,4 +44,22 @@ services:
     arguments:
       - null
       - LoPati\BlogBundle\Entity\Configuracio
-      - BlogBundle:Admin 
+      - BlogBundle:Admin
+      
+  sonata.lopati.admin.newsletteruser:
+    class: LoPati\NewsletterBundle\Admin\NewsletterUserAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletter', label: user }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\NewsletterUser
+      - BlogBundle:Admin
+      
+  sonata.lopati.admin.newsletter:
+    class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletter', label: noticia }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\Newsletter
+      - BlogBundle:Admin    
