@@ -51,7 +51,7 @@ class Newsletter
     private $sended;
 
     /**
-     * @ORM\OneToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina", mappedBy="Newsletter")
+     * @ORM\OneToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina", mappedBy="id")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $pagines;
@@ -60,6 +60,10 @@ class Newsletter
     {
         $this->created = new \DateTime();
         $this->sended = null;
+       
+        	$this->pagines = new \Doctrine\Common\Collections\ArrayCollection();
+        	
+        
     }
 
     /**
@@ -155,5 +159,9 @@ class Newsletter
     public function getPagines()
     {
     	return $this->pagines;
+    }
+    public function addPagines(\LoPati\BlogBundle\Entity\Pagina $pagina)
+    {
+    	$this->pagines[] = $pagina;
     }
 }
