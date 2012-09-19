@@ -106,6 +106,14 @@ sonata_admin:
     list: SonataAdminBundle:CRUD:list.html.twig
     show: SonataAdminBundle:CRUD:show.html.twig
     edit: SonataAdminBundle:CRUD:edit.html.twig
+  dashboard:  
+    groups:
+      Menú:
+      Pàgines:
+      Arxiu:
+      Peu de pàgina:
+      
+    
 
   
 
