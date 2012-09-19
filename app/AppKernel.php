@@ -42,7 +42,7 @@ class AppKernel extends Kernel
         		new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         		new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         		new Liip\ImagineBundle\LiipImagineBundle(),
-        		new Lexik\Bundle\MailerBundle\LexikMailerBundle(),
+        	
         		
         		
         	

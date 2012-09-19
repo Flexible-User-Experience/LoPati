@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller {
 
-	public function indexAction($_locale=null) {
+	public function indexAction() {
 
 		$req = $this->getRequest();
 	
@@ -18,6 +18,7 @@ class DefaultController extends Controller {
 	
 		$culture=$req->getPreferredLanguage(array('ca', 'es', 'en'));	
 	
+		
 		return $this->redirect($this->generateUrl('portada', array('_locale' =>$culture)));
 			
 		
@@ -26,7 +27,7 @@ class DefaultController extends Controller {
 	public function portadaAction($_locale) {
 
 		//$pagination= null;
-		
+		$this->getRequest()->setLocale($_locale);
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
 		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub WHERE
 				p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
@@ -191,7 +192,7 @@ class DefaultController extends Controller {
 		$consulta3->setParameter('id',$categoria_id);
 		$categoria = $consulta3->getSingleResult();
 		
-		return $this->render('BlogBundle:Default:arxiuLlistaAny.html.twig', array('categoria_id' => $categoria_id, 'any' => $any, 'arxiu' => $arxiu, 'pagines' => $pagines, 'categoria' => $categoria ));
+		return $this->render('BlogBundle:Default:arxiuLlistaAny.html.twig', array('categoria_id' => $categoria->getId(), 'any' => $any, 'arxiu' => $arxiu, 'pagines' => $pagines, 'categoria' => $categoria ));
 	
 	}
 	

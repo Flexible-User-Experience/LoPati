@@ -32,7 +32,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    #bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -233,12 +233,5 @@ liip_imagine:
                 thumbnail: { size: [50,null], mode: outbound }
                 
                 
-lexik_mailer:
-    admin_email: %your_admin_email%                     # 
-    base_layout: "LexikMailerBundle::layout.html.twig"  # 
-    classes:
-        email_entity:      "Lexik\Bundle\MailerBundle\Entity\Email"               # the email entity to use to represent an email template
-        annotation_driver: "Lexik\Bundle\MailerBundle\Mapping\Driver\Annotation"  # annotation driver used to get the user's name and email
-        message_factory:   "Lexik\Bundle\MailerBundle\Message\MessageFactory"     # message factory service class
-        message_renderer:  "Lexik\Bundle\MailerBundle\Message\MessageRenderer"    # message renderer service class             
+           
   

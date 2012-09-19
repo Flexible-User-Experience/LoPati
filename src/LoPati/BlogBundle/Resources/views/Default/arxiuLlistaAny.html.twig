@@ -4,7 +4,8 @@
 {% block title %}: {{ arxiu | capitalize }} / {{any.any}}{% endblock %}
 
 {% block menu %}
- {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria_id, onlycategories: 1 } %} 
+
+ {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria.id, onlycategories: 1, arxiu: 0 } %} 
  {% endblock %}
  {% block contenidor %}
  <div style="width: 100%; height: 29px; background: none;"></div>
@@ -21,11 +22,12 @@
 
 {% for pagina in pagines %}
 <div class="contingutreg">
-							<a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': pagina.categoria.slug, 'titol': pagina.slug }) }}">
+
+							<a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': categoria.slug, 'titol': pagina.slug }) }}">
 							{% if pagina.imagePetitaName is not empty %}
 							<img src="{{ vich_uploader_asset(pagina, 'imagePetita')| imagine_filter('portada') }}" style="max-width: 150px; float: left; margin: 0px 25px 0px 0px;" alt="{{ pagina.titol }}" title="{{ pagina.titol }}"></a>
 							{% endif %}
-							<p class="titol"><a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': pagina.categoria.slug, 'titol': pagina.slug }) }}">{{ pagina.titol }}</a></p>
+							<p class="titol"><a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': categoria.slug, 'titol': pagina.slug }) }}">{{ pagina.titol }}</a></p>
 							<p style="color: #000;">{{ pagina.resum }}</p>
 							<p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
 					</div>

@@ -1,8 +1,9 @@
 {% if onlycategories == 1 %}
-{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories} %}
+
+{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'categoria_id':categoria_id, 'arxiu': 1} %}
 {% else %}
 
-{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories} %}
+{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'arxiu': 0} %}
 
 
 {% if subcategories is not empty %}

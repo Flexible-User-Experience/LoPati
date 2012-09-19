@@ -1,3 +1,5 @@
+
+    
 BlogBundle:
     resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,9 +12,7 @@ _imagine:
     resource: .
     type:     imagine
     
-LexikMailerBundle:
-    resource: "@LexikMailerBundle/Resources/config/routing.xml"
-    prefix:   /news
+
 
 # Internal routing configuration to handle ESI
 #_internal:
