@@ -51,7 +51,7 @@ class Newsletter
     private $sended;
 
     /**
-     * @ORM\OneToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina", mappedBy="id")
+     * @ORM\ManyToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $pagines;
