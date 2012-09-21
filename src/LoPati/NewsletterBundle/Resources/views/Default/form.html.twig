@@ -1,0 +1,7 @@
+<form action="{{ path('newsletter_user') }}" method="post" class="newsletter">
+{{ form_label(form.email) }}    
+{{ form_widget(form.email) }}
+    {{ form_widget(form.idioma) }}
+    {{ form_widget(form._token) }}    
+    <button type="submit">newsletter</button>
+</form>

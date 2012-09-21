@@ -62,4 +62,6 @@ services:
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
-      - BlogBundle:Admin    
+      - BlogBundle:Admin
+      
+ 

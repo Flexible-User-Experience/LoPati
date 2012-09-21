@@ -1,0 +1,10 @@
+<p><strong>Estimado usuario:</strong></p>
+<p>
+    Usted se ha registrado en <a href="http://www.toldosbenavente.es">http://www.toldosbenavente.es</a> para recibir nuestro Boletín Informativo. 
+    Para confirmar su inscripción y que pueda recibir nuestro boletín, por favor pinche esta direccion: <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
+</p>
+<p>
+    Si el enlace no funciona, copie esto {{ url('newsletter_confirmation', { 'token': token }) }} en la barra de dirección de su navegador.
+</p>
+
+<p>Gracias por su interés.</p>

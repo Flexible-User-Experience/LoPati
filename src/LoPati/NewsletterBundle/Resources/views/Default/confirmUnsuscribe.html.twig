@@ -1,0 +1,8 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body %}
+<div class="post-content">                
+    <h2>Eliminar suscripción</h2>
+    <p>Si está seguro que desea eliminar su suscripción a nuestro Boletín Informativo, pinche aquí: <a href="{{ url('newsletter_unsuscribe', { 'token': token }) }}">Eliminar suscripción</a></p>        
+</div>
+{% endblock body %}

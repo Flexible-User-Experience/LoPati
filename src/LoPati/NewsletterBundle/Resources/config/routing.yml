@@ -1,3 +1,18 @@
+Frontend:
+    resource: "@NewsletterBundle/Controller"
+    type:     annotation
+    prefix:   /
+    
 newsletter_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: NewsletterBundle:Default:index }
+
+newsletter_user:
+    pattern:  /newsletter/suscribe
+    defaults: { _controller: NewsletterBundle:Default:suscribe}
+    requirements:
+      _method:  POST
+
+newsletter_confirmation:
+    pattern:  /newsletter/confirmation/{token}
+    defaults: { _controller: NewsletterBundle:Default:confirmation}

@@ -16,9 +16,7 @@ class NewsletterAdmin extends Admin
 		$formMapper
 		->add('name')
 		->add('text')
-				       ->add('pagines','sonata_type_model', array('by_reference' => false,
-				       		'multiple' => true,
-				       		'expanded' => true,))
+		->add('pagines')
 
 		
 		;

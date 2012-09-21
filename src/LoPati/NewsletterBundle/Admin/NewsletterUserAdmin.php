@@ -28,6 +28,7 @@ class NewsletterUserAdmin extends Admin
 		->addIdentifier('email')
 		->add('idioma')
 		->add('active',null,array('label'=>'Actiu'))
+		->add('token')
 		
 		
 		;

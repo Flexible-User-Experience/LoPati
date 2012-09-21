@@ -1,3 +1,6 @@
+NewsletterBundle:
+    resource: "@NewsletterBundle/Resources/config/routing.yml"
+    prefix:   /
 
     
 BlogBundle:
@@ -12,7 +15,6 @@ _imagine:
     resource: .
     type:     imagine
     
-
 
 # Internal routing configuration to handle ESI
 #_internal:
