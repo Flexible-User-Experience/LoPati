@@ -9,7 +9,7 @@ use LoPati\BlogBundle\Entity;
  * LoPati\NewsletterBundle\Entity\Newsletter
  *
  * @ORM\Table(name="newsletters")
- * @ORM\Entity(repositoryClass="Lopati\NewsletterBundle\Repository\NewsletterRepository")
+ * @ORM\Entity
  */
 class Newsletter
 {
@@ -49,7 +49,13 @@ class Newsletter
      * @ORM\Column(name="sended", type="date", nullable=true)
      */
     private $sended;
-
+	
+    /**
+     * @var string $sended
+     *
+     * @ORM\Column(name="test", type="boolean", nullable=true)
+     */
+    private $test=FALSE;
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina")
      * @ORM\OrderBy({"titol" = "DESC"})
@@ -166,4 +172,20 @@ class Newsletter
     {
     	$this->pagines[] = $pagina;
     }
+    
+    public function setTest($created)
+    {
+    	$this->test = $created;
+    }
+    
+    /**
+     * Get created
+     *
+     * @return date
+     */
+    public function getTest()
+    {
+    	return $this->test;
+    }
+    
 }
