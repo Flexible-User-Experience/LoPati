@@ -59,6 +59,13 @@ class NewsletterUser
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+    
+    /**
+     * @var boolean $active
+     *
+     * @ORM\Column(name="fail", type="integer")
+     */
+    private $fail=0;
 
     public function __construct()
     {
@@ -170,6 +177,21 @@ class NewsletterUser
     public function getCreated()
     {
         return $this->created;
+    }
+    
+    public function setFail($fail)
+    {
+    	$this->fail = $fail;
+    }
+    
+    /**
+     * Get created
+     *
+     * @return date
+     */
+    public function getFail()
+    {
+    	return $this->fail;
     }
     public function __toString(){
     	

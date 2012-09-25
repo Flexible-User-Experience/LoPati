@@ -13,11 +13,12 @@ class NewsletterAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->add('name')
-		->add('text')
+		->add('dataNewsletter','date', array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy'))	
 		->add('pagines')
-
+		->add('estat')
 		
+
+		->setHelps(array('dataNewsletter'=>'Format: dd-MM-yyyy'))
 		;
 	}
 	
@@ -26,6 +27,9 @@ class NewsletterAdmin extends Admin
 		$mapper
 	->addIdentifier('id')
 	->add('test')
+	->add('estat')
+	->add('enviats')
+	->add('subscrits')
 	->add('_action', 'actions', array(
 			'actions' => array(
 					'preview' => array(

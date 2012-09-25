@@ -22,34 +22,49 @@ class Newsletter
      */
     private $id;
 
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+
 
     /**
-     * @var text $text
+     * @var string $dataNewsletter
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="dataNewsletter", type="date")
      */
-    private $text;
+    private $dataNewsletter;
     
     /**
-     * @var string $created
+     * @var string $iniciEnviament
      *
-     * @ORM\Column(name="created", type="date")
+     * @ORM\Column(name="iniciEnviament", type="datetime", nullable=true)
      */
-    private $created;
+    private $iniciEnviament;
+    
     
     /**
-     * @var string $sended
+     * @var string $fiEnviament
      *
-     * @ORM\Column(name="sended", type="date", nullable=true)
+     * @ORM\Column(name="fiEnviament", type="datetime", nullable=true)
      */
-    private $sended;
+    private $fiEnviament;
 	
+    
+    /**
+     *
+     * @ORM\Column(name="estat", type="string", length=15, nullable=true)
+     */
+    private $estat="Esperant";
+    
+    /**
+     *
+     * @ORM\Column(name="subscrits", type="integer", nullable=true)
+     */
+    private $subscrits;
+    
+    /**
+     *
+     * @ORM\Column(name="enviats", type="integer", nullable=true)
+     */
+    private $enviats;
+    
     /**
      * @var string $sended
      *
@@ -84,75 +99,71 @@ class Newsletter
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
+    public function setDataNewsletter($created)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set text
-     *
-     * @param text $text
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-    }
-
-    /**
-     * Get text
-     *
-     * @return text 
-     */
-    public function getText()
-    {
-        return $this->text;
+    	$this->dataNewsletter = $created;
     }
     
-    /**
-     * Set created
-     *
-     * @param date $created
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-    }
 
-    /**
-     * Get created
-     *
-     * @return date 
-     */
-    public function getCreated()
+    public function getDataNewsletter()
     {
-        return $this->created;
+    	return $this->dataNewsletter;
     }
     
-    public function setSended($sended)
+    
+
+
+    public function setIniciEnviament($created)
     {
-        $this->sended = $sended;
+        $this->iniciEnviament = $created;
     }
 
-    public function getSended()
+
+    public function getIniciEnviament()
     {
-        return $this->sended;
+        return $this->iniciEnviament;
     }
+    
+    public function setFiEnviament($sended)
+    {
+        $this->fiEnviament = $sended;
+    }
+
+    public function getFiEnviament()
+    {
+        return $this->fiEnviament;
+    }
+    
+    public function setEstat($estat)
+    {
+    	$this->estat = $estat;
+    }
+    
+    public function getEstat()
+    {
+    	return $this->estat;
+    }
+    
+    public function setSubscrits($estat)
+    {
+    	$this->subscrits = $estat;
+    }
+    
+    public function getSubscrits()
+    {
+    	return $this->subscrits;
+    }
+    
+    public function setEnviats($estat)
+    {
+    	$this->enviats = $estat;
+    }
+    
+    public function getEnviats()
+    {
+    	return $this->enviats;
+    }
+ 
     
     public function setPagines($pagines)
     {
@@ -187,5 +198,6 @@ class Newsletter
     {
     	return $this->test;
     }
+    
     
 }

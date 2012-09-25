@@ -130,6 +130,18 @@ sonata_block:
         
 sonata_user:
     security_acl: true
+    class:                  # Entity Classes
+            user:               Application\Sonata\UserBundle\Entity\User
+            group:              Application\Sonata\UserBundle\Entity\Group
+    admin:                  # Admin Classes
+            user:
+                class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+                controller:     SonataAdminBundle:CRUD
+                translation:    SonataUserBundle
+            group:           
+                class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+                controller:     SonataAdminBundle:CRUD
+                translation:    SonataUserBundle
         
 fos_user:
     db_driver:      orm # can be orm or odm
