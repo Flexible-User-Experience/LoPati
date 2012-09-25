@@ -36,11 +36,11 @@ EOT
 			$contenedor = $this->getContainer();
 			$em = $contenedor->get('doctrine')->getEntityManager();
 			
-			$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE
+			$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n  WHERE
 					 NOT EXISTS (SELECT n2 FROM NewsletterBundle:Newsletter n2 WHERE n2.estat = :sending ) AND n.estat = :estat ORDER BY n.id ASC	 ');
 			$query->setParameter('estat','Waiting');
 			$query->setParameter('sending','Sending');
-			$query->setMaxResults('1');
+			//$query->setMaxResults('1');
 			$newsletter = $query->getOneOrNullResult();
 			
 			$output->writeln('canvi estat:' .count($newsletter));
@@ -54,7 +54,7 @@ EOT
 			$query->setMaxResults('1');
 			$newsletter2 = $query->getOneOrNullResult();
 			
-			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s WHERE s.newsletter = :newsletter ');
+			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s   WHERE s.newsletter = :newsletter ');
 			$query->setParameter('newsletter',$newsletter2);
 			$query->setMaxResults($max);
 			$users = $query->getResult();

@@ -4,6 +4,7 @@ namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * LoPati\NewsletterBundle\Entity\NewsletterSend
