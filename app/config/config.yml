@@ -3,6 +3,9 @@ imports:
     - { resource: security.yml }
 
 
+
+
+    
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -84,12 +87,8 @@ a2lix_translation_form:
   
           
 # Swiftmailer Configuration
-swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
-    spool:     { type: memory }
+
+
     
 # sonata
 # sonata
@@ -253,6 +252,13 @@ liip_imagine:
             filters:
                 thumbnail: { size: [50,null], mode: outbound }
                 
-                
-           
+sonata_intl:
+    timezone:
+        # default timezone used as fallback
+        default: Europe/Paris
+
+        # locale specific overrides
+        locales:
+            ca: Europe/Paris
+            en_UK: Europe/London       
   

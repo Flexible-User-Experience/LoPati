@@ -16,7 +16,7 @@ class NewsletterAdmin extends Admin
 		->add('dataNewsletter','date', array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy'))	
 		->add('pagines')
 		->add('estat')
-		
+
 
 		->setHelps(array('dataNewsletter'=>'Format: dd-MM-yyyy'))
 		;
@@ -25,11 +25,14 @@ class NewsletterAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-	->addIdentifier('id')
+	->addIdentifier('dataNewsletter',null,array('label'=>'Data Newsletter', 'template'=>'NewsletterBundle:Admin:list_custom_dataNewsletter_field.html.twig'))
 	->add('test')
-	->add('estat')
+	->add('estat',null, array('label'=>'Estat', 'template' => 'NewsletterBundle:Admin:list_custom_estat_field.html.twig'))
 	->add('enviats')
 	->add('subscrits')
+	->add('iniciEnviament',null, array('label'=>'Inici enviament', 'template' => 'NewsletterBundle:Admin:list_custom_iniciEnviament_field.html.twig'))
+	->add('fiEnviament',null, array('label'=>'Fi enviament', 'template' => 'NewsletterBundle:Admin:list_custom_fiEnviament_field.html.twig'))
+	
 	->add('_action', 'actions', array(
 			'actions' => array(
 					'preview' => array(
@@ -52,4 +55,9 @@ class NewsletterAdmin extends Admin
 				
 						;
 	}
+	protected $datagridValues = array(
+			'_page' => 1,
+			'_sort_order' => 'DESC', // sort direction
+			'_sort_by' => 'dataNewsletter' // field name
+	);
 }

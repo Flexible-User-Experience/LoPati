@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sonata\AdminBundle\Route\RouteCollection;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class AdminController extends Controller {
 	
@@ -18,10 +19,12 @@ class AdminController extends Controller {
 		if ($news->getEstat() == null){
 		
 			$news->setEstat('Waiting');
+			$news->setIniciEnviament(new \DateTime('now'));
 			
 			$query = $em->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.fail >= :fail AND u.active = :actiu ');
 			$query->setParameter('fail','4');
 			$query->setParameter('actiu','1');
+			
 			$users = $query->getResult();
 			
 			foreach ($users as $user){
@@ -67,8 +70,26 @@ class AdminController extends Controller {
 	
 	public function testAction($id)
 	{
-		//$object->getId();
-		//<a href="{{ admin.generateObjectUrl('enviar', object) }}">
+		$userName = $this->container->get('security.context')
+		->getToken()
+		->getUser()
+		->getUsername();
+		
+		$user = $this->getDoctrine()
+		->getRepository('ApplicationSonataUserBundle:User')
+		->findOneByUsername($userName);
+		
+		
+		$config='metalrockero@gmail.com';
+		$message = \Swift_Message::newInstance()
+		->setSubject('Confirme su direccion de correo electronico.')
+		//->setFrom($config->getEmail())
+		->setFrom('mailing@cupon.com')
+		->setTo('hola@notengo.com')
+		->setBody('hola')
+		;
+		$this->get('mailer')->send($message);
+		
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
 		$news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
 		$news->setTest('1');
@@ -76,7 +97,6 @@ class AdminController extends Controller {
 		
 		return $this->redirect('../list');
 		
-		////$router->generate( 'slug_route_name', array( 'slug' => $sent->getSlug() ), true );
 		
 	
 	}

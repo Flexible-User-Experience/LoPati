@@ -36,5 +36,10 @@ class NewsletterUserAdmin extends Admin
 		
 		;
 	}
+	protected $datagridValues = array(
+			'_page' => 1,
+			'_sort_order' => 'ASC', // sort direction
+			'_sort_by' => 'email' // field name
+	);
 	
 }

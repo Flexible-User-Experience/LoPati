@@ -10,13 +10,7 @@ swiftmailer:
     username: metalrockero@gmail.com
     password: c0b1n1na
     delivery_address: metalrockero@gmail.com
-    spool:
-      type: file
-      path: %kernel.cache_dir%/swiftmailer/spool
-    antiflood:
-        threshold:            99
-        sleep:                0
-    
+
 web_profiler:
     toolbar: true
     intercept_redirects: false

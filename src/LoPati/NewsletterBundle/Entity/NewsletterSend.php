@@ -27,7 +27,7 @@ class NewsletterSend
 	private $id;
 	
 	
-	/** @ORM\ManyToOne(targetEntity="NewsletterUSer")
+	/** @ORM\ManyToOne(targetEntity="NewsletterUser")
 	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $user;

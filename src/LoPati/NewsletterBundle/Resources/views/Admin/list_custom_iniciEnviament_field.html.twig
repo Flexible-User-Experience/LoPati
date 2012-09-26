@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field%}
+
+    <div>
+        {{ object.iniciEnviament | date('d/m/Y H:i:s') }}
+    </div>
+
+{% endblock %}
