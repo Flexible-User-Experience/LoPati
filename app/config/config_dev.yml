@@ -8,7 +8,7 @@ framework:
 swiftmailer:
     transport: gmail
     username: metalrockero@gmail.com
-    password: c0b1n1na
+    password: xxx
     delivery_address: kkuertt@hotmail.com
 
 web_profiler:
