@@ -63,8 +63,15 @@ class AdminController extends Controller {
 	
 	public function previewAction($id)
 	{
+		$em = $this->getDoctrine()->getEntityManager();
+		$query = $em->createQuery('SELECT n,p FROM NewsletterBundle:Newsletter n JOIN n.pagines p WHERE n.id = :id ');
+		$query->setParameter('id',$id);
+		$pagines = $query->getSingleResult();
+		
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888/'
+		: 'http://lopati.cat';
 		//$object->getId();
-				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id));
+				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines));
 		
 	}
 	
@@ -74,11 +81,20 @@ class AdminController extends Controller {
 		->getToken()
 		->getUser()
 		->getUsername();
-		
 		$user = $this->getDoctrine()
 		->getRepository('ApplicationSonataUserBundle:User')
 		->findOneByUsername($userName);
 		
+		$em = $this->getDoctrine()->getEntityManager();
+		$query = $em->createQuery('SELECT n,p FROM NewsletterBundle:Newsletter n JOIN n.pagines p WHERE n.id = :id ');
+		$query->setParameter('id',$id);
+		$pagines = $query->getSingleResult();
+		
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888/'
+		: 'http://lopati.cat';
+		
+
+		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines));
 		
 		$config='metalrockero@gmail.com';
 		$message = \Swift_Message::newInstance()
@@ -86,7 +102,7 @@ class AdminController extends Controller {
 		//->setFrom($config->getEmail())
 		->setFrom('mailing@cupon.com')
 		->setTo('hola@notengo.com')
-		->setBody('hola')
+		->setBody($contenido,'text/html')
 		;
 		$this->get('mailer')->send($message);
 		

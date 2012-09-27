@@ -231,14 +231,5 @@ liip_imagine:
             filters:
                 thumbnail: { size: [50,null], mode: outbound }
                 
-# Sonata intl Bundle
-sonata_intl:
-    timezone:
-        # default timezone used as fallback
-        default: Europe/Paris
-
-        # locale specific overrides
-        locales:
-            ca: Europe/Paris
-            en_UK: Europe/London       
+ 
 

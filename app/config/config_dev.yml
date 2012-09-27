@@ -9,7 +9,7 @@ swiftmailer:
     transport: gmail
     username: metalrockero@gmail.com
     password: c0b1n1na
-    delivery_address: metalrockero@gmail.com
+    delivery_address: kkuertt@hotmail.com
 
 web_profiler:
     toolbar: true
