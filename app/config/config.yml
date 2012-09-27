@@ -1,10 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-
-
-
-
     
 framework:
     #esi:             ~
@@ -20,7 +16,6 @@ framework:
     default_locale:  %locale%
     trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
-    
 
 # Twig Configuration
 twig:
@@ -29,7 +24,6 @@ twig:
     form:
         resources:
             - 'MenuBundle:Default:form.html.twig'
-
 
 # Assetic Configuration
 assetic:
@@ -69,9 +63,7 @@ doctrine:
             SonataUserBundle: ~
             FOSUserBundle: ~ 
             
-
-         
-
+# Doctrine Extensions Bundle
 stof_doctrine_extensions:
     default_locale: ca
     translation_fallback: true
@@ -80,21 +72,12 @@ stof_doctrine_extensions:
             translatable: true
             sluggable: true
 
+# a2lix Bundle
 a2lix_translation_form:
     default_locale: ca                  # [Optionnal] Default to 'en'
     locales: [en,es]
   
-  
-          
-# Swiftmailer Configuration
-
-
-    
-# sonata
-# sonata
-
-
-                
+# Sonata Admin Bundle             
 sonata_admin:
   title:  'Administrador de continguts'
   title_logo: /images/logo_lopati_inverted.png
@@ -112,11 +95,8 @@ sonata_admin:
       Arxiu:
       Peu de pàgina:
       Newsletter:
-      
-    
 
-  
-
+# Sonata Block Bundle
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -127,6 +107,7 @@ sonata_block:
         sonata.block.service.action:
         sonata.block.service.rss:
         
+# Sonata FOS User Bundle
 sonata_user:
     security_acl: true
     class:                  # Entity Classes
@@ -141,7 +122,8 @@ sonata_user:
                 class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
                 controller:     SonataAdminBundle:CRUD
                 translation:    SonataUserBundle
-        
+  
+# Friends Of Symfony Bundle (FOS)      
 fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  main
@@ -149,11 +131,13 @@ fos_user:
 
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
-        
+       
+# TinyMCE Bundle 
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
     textarea_class: "tinymce"
+    language: ca
     theme:
         simple:
             mode: "textareas"
@@ -189,7 +173,6 @@ stfalcon_tinymce:
             theme_advanced_statusbar_location: ""
             paste_auto_cleanup_on_paste: true
             spellchecker_languages: "+English=en,Dutch=nl"
-            language: ca
             width: "600"
         bbcode:
             mode: "none"
@@ -207,9 +190,7 @@ stfalcon_tinymce:
             inline_styles: false
             convert_fonts_to_spans: false  
            
-
-
-
+# Vich Uploader Bundle
 vich_uploader:
     db_driver: orm
     mappings:
@@ -225,9 +206,7 @@ vich_uploader:
             inject_on_load: false
             delete_on_remove: true
             
-            
-
-            
+# Liip Imagine Bundle            
 liip_imagine:
     cache_prefix:         /uploads/cache
     filter_sets:
@@ -252,6 +231,7 @@ liip_imagine:
             filters:
                 thumbnail: { size: [50,null], mode: outbound }
                 
+# Sonata intl Bundle
 sonata_intl:
     timezone:
         # default timezone used as fallback
@@ -261,4 +241,4 @@ sonata_intl:
         locales:
             ca: Europe/Paris
             en_UK: Europe/London       
-  
+
