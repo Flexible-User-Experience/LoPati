@@ -516,7 +516,7 @@ class Pagina {
 	 * @param LoPati\MenuBundle\Entity\SubCategoria $SubCategoria
 	 */
 	public function setSubCategoria(
-			\LoPati\MenuBundle\Entity\SubCategoria $subCategoria=null) {
+			\LoPati\MenuBundle\Entity\SubCategoria $subCategoria) {
 		$this->subCategoria = $subCategoria;
 	}
 

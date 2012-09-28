@@ -3,6 +3,8 @@
 {% block field%}
 
         <div>
+        {% if object.fiEnviament %}
         {{ object.fiEnviament | date('d/m/Y H:i:s') }}
+        {% endif %}
     </div>
 {% endblock %}

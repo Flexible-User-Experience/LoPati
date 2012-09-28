@@ -29,7 +29,7 @@ EOT
 
 		$max = $input->getArgument('max');
 
-		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
+		$host = 'dev' == $input->getOption('env') ? 'http://localhost:8888'
 				: 'http://lopati.cat';
 
 		$output->writeln($host);
@@ -60,7 +60,7 @@ EOT
 		$newsletter2 = $query->getOneOrNullResult();
 		
 		if ($newsletter2) {
-			
+			$output->writeln('entra pagines');
 			
 			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($newsletter2->getId());
 			
@@ -79,6 +79,7 @@ EOT
 			if ($users){
 			$output->writeln('users per enviar:' . count($users));
 			$enviats = 0;
+			$idioma="ca";
 			foreach ($users as $user) {
 				
 				if ($user->getUser()->getIdioma()=='es'){
@@ -88,11 +89,19 @@ EOT
 							foreach ($pagines->getPagines() as $pagina){
 								
 								$pagina->setLocale('es');
+								$subCategoria=$pagina->getSubCategoria();
+								$subCategoria->setlocale('es');
+							//	$pagina->setSubCategoria($pagina->getSubCategoria())->setLocale('es');
+								$em->refresh($subCategoria);
 								$em->refresh($pagina);
+								
 							}
+					
+					
 								$idioma="es";
 					
 				}elseif ($user->getUser()->getIdioma()=='en'){
+					$idioma="en";
 					
 					$output->writeln('entra ingles');
 					/*
@@ -100,15 +109,15 @@ EOT
 					$em->refresh($pagines);*/
 				}
 				$output->writeln('mail:' . $user->getUser()->getIdioma());
-				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>'ca'));
+				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma));
 				
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
 						->setSubject(
-								'Confirme su direccion de correo electronico.')
+								'Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
 						//->setFrom($config->getEmail())
-						->setFrom('mailing@cupon.com')
-						->setTo('sfsfso@gdfsfs.arig') /*->setBody($contenedor->get('twig')->render
+						->setFrom('no-reply@lopati.cat')
+						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
 													  )), 'text/html'	)*/

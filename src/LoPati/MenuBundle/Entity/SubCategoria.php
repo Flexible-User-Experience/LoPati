@@ -47,6 +47,12 @@ class SubCategoria {
 	protected $pagines;
 	
 	/**
+	 * @Gedmo\Locale
+	 * Used locale to override Translation listener`s locale
+	 * this is not a mapped field of entity metadata, just a simple property
+	 */
+	private $locale;
+	/**
 	 * @ORM\OneToMany(
 	 * 	targetEntity="LoPati\MenuBundle\Entity\Translation\SubCategoriaTranslation",
 	 * 	mappedBy="object",
@@ -264,5 +270,18 @@ class SubCategoria {
     public function getPagines()
     {
     	return $this->pagines;
+    }
+    public function setLocale($locale) {
+    	$this->locale = $locale;
+    
+    }
+    
+    /**
+     * Get compartir
+     *
+     * @return boolean
+     */
+    public function getLocale() {
+    	return $this->locale;
     }
 }

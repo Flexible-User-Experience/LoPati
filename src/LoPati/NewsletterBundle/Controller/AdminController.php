@@ -69,7 +69,7 @@ class AdminController extends Controller {
 		
 
 		
-		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888'
 		: 'http://lopati.cat';
 		//$object->getId();
 				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca'));

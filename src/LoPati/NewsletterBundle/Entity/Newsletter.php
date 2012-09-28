@@ -36,7 +36,7 @@ class Newsletter
      *
      * @ORM\Column(name="iniciEnviament", type="datetime", nullable=true)
      */
-    private $iniciEnviament;
+    private $iniciEnviament=null;
     
     
     /**
@@ -44,7 +44,7 @@ class Newsletter
      *
      * @ORM\Column(name="fiEnviament", type="datetime", nullable=true)
      */
-    private $fiEnviament;
+    private $fiEnviament=null;
 	
     
     /**
@@ -81,7 +81,7 @@ class Newsletter
     
     public function __construct()
     {
-        $this->created = new \DateTime();
+       
         $this->sended = null;
        
         	$this->pagines = new \Doctrine\Common\Collections\ArrayCollection();
@@ -113,9 +113,9 @@ class Newsletter
     
 
 
-    public function setIniciEnviament($created)
+    public function setIniciEnviament($iniciEnviament)
     {
-        $this->iniciEnviament = $created;
+        $this->iniciEnviament = $iniciEnviament;
     }
 
 
@@ -124,9 +124,9 @@ class Newsletter
         return $this->iniciEnviament;
     }
     
-    public function setFiEnviament($sended)
+    public function setFiEnviament($fiEnviament)
     {
-        $this->fiEnviament = $sended;
+        $this->fiEnviament = $fiEnviament;
     }
 
     public function getFiEnviament()

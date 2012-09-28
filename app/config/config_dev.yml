@@ -10,7 +10,7 @@ swiftmailer:
     transport: %mailer_transport%
     username: %mailer_user%
     password:   %mailer_password%
-    delivery_address: %mailer_delivery%
+    delivery_address:   metalrockero@gmail.com
 
 web_profiler:
     toolbar: true
