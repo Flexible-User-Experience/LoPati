@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters.yml }
     - { resource: config.yml }
 
 framework:
@@ -6,10 +7,10 @@ framework:
     profiler: { only_exceptions: false }
 
 swiftmailer:
-    transport: gmail
-    username: metalrockero@gmail.com
-    password: xxx
-    delivery_address: kkuertt@hotmail.com
+    transport: %mailer_transport%
+    username: %mailer_user%
+    password:   %mailer_password%
+    delivery_address: %mailer_delivery%
 
 web_profiler:
     toolbar: true

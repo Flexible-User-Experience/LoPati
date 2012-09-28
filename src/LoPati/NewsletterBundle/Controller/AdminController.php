@@ -63,15 +63,16 @@ class AdminController extends Controller {
 	
 	public function previewAction($id)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery('SELECT n,p FROM NewsletterBundle:Newsletter n JOIN n.pagines p WHERE n.id = :id ');
-		$query->setParameter('id',$id);
-		$pagines = $query->getSingleResult();
 		
-		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888/'
+		$em = $this->getDoctrine()->getEntityManager();
+		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($id);
+		
+
+		
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
 		: 'http://lopati.cat';
 		//$object->getId();
-				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines));
+				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca'));
 		
 	}
 	
@@ -86,15 +87,13 @@ class AdminController extends Controller {
 		->findOneByUsername($userName);
 		
 		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery('SELECT n,p FROM NewsletterBundle:Newsletter n JOIN n.pagines p WHERE n.id = :id ');
-		$query->setParameter('id',$id);
-		$pagines = $query->getSingleResult();
+		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($id);
 		
 		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888/'
 		: 'http://lopati.cat';
 		
 
-		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines));
+		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>'ca'));
 		
 		$config='metalrockero@gmail.com';
 		$message = \Swift_Message::newInstance()

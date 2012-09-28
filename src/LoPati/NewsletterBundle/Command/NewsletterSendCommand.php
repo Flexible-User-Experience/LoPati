@@ -60,6 +60,13 @@ EOT
 		$newsletter2 = $query->getOneOrNullResult();
 		
 		if ($newsletter2) {
+			
+			
+			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($newsletter2->getId());
+			
+		
+			
+			
 			//$this->container->getParameter('cupon.ciudad_por_defecto'),
 			$output->writeln('entra newsletter2');
 			$query = $em
@@ -73,8 +80,28 @@ EOT
 			$output->writeln('users per enviar:' . count($users));
 			$enviats = 0;
 			foreach ($users as $user) {
+				
+				if ($user->getUser()->getIdioma()=='es'){
+					
+					$output->writeln('entra castella');
+			
+							foreach ($pagines->getPagines() as $pagina){
+								
+								$pagina->setLocale('es');
+								$em->refresh($pagina);
+							}
+								$idioma="es";
+					
+				}elseif ($user->getUser()->getIdioma()=='en'){
+					
+					$output->writeln('entra ingles');
+					/*
+					$pagines->setLocale('en');
+					$em->refresh($pagines);*/
+				}
 				$output->writeln('mail:' . $user->getUser()->getIdioma());
-
+				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>'ca'));
+				
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
 						->setSubject(
@@ -85,7 +112,7 @@ EOT
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
 													  )), 'text/html'	)*/
-						->setBody('desde command');
+						->setBody($contenido,'text/html');
 				$num = $contenedor->get('mailer')->send($message);
 
 				if ($num) {

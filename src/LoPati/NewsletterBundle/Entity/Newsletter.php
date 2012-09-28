@@ -9,7 +9,7 @@ use LoPati\BlogBundle\Entity;
  * LoPati\NewsletterBundle\Entity\Newsletter
  *
  * @ORM\Table(name="newsletters")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterRepository")
  */
 class Newsletter
 {

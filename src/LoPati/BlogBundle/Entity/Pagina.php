@@ -81,7 +81,13 @@ class Pagina {
 	 * @Gedmo\Translatable
 	 */
 	protected $lloc = NULL;
-
+	
+	/**
+	 * @Gedmo\Locale
+	 * Used locale to override Translation listener`s locale
+	 * this is not a mapped field of entity metadata, just a simple property
+	 */
+	private $locale;
 	/** 
 	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria") 
 	 */
@@ -693,6 +699,20 @@ class Pagina {
 	 */
 	public function getCompartir() {
 		return $this->compartir;
+	}
+	
+	public function setLocale($locale) {
+		$this->locale = $locale;
+		
+	}
+	
+	/**
+	 * Get compartir
+	 *
+	 * @return boolean
+	 */
+	public function getLocale() {
+		return $this->locale;
 	}
 
 }

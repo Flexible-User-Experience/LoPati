@@ -38,6 +38,7 @@ assetic:
         #yui_css:
         #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
+    
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -230,6 +231,11 @@ liip_imagine:
             quality: 70
             filters:
                 thumbnail: { size: [50,null], mode: outbound }
+     
+        imatge_pagina_newsletter:
+            quality: 80
+            filters:
+                thumbnail: { size: [578,null], mode: outbound }
                 
  
 
