@@ -2,7 +2,7 @@ Frontend:
     resource: "@NewsletterBundle/Controller"
     type:     annotation
     prefix:   /
-    
+
 newsletter_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: NewsletterBundle:Default:index }
@@ -13,6 +13,16 @@ newsletter_user:
     requirements:
       _method:  POST
 
+newsletter_unsuscribe:
+    pattern:  /newsletter/unsuscribe/{token}
+    defaults: { _controller: NewsletterBundle:Default:unsuscribe}
+
 newsletter_confirmation:
     pattern:  /newsletter/confirmation/{token}
     defaults: { _controller: NewsletterBundle:Default:confirmation}
+
+newsletter:
+    pattern: /{_locale}/newsletter/{data}/
+    defaults: { _controller: NewsletterBundle:Default:visit }
+    requirements:
+       _locale: ca|es|en

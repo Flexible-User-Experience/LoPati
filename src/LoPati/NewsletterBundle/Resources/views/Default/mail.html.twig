@@ -6,80 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Lo Pati | Centre d'Art - Terres de l'Ebre : Newsletter - {{ pagines.dataNewsletter | date }}</title>
 <style type="text/css">
-a{
-	text-decoration: none;
-	color:#666;
-	
-	}
-	a:hover{
-			text-decoration: none;
-			color:#E31853;
-		}
-	
-
-a:focus{
-		text-decoration: none;
-	
+.links a{
+margin:0;
+color: #666;
+text-decoration:none;
 }
-.Titul {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-}
-.Titul p {
-	font-family: Arial, Helvetica, sans-serif;
-}
-c {
-	font-size: 10px;
-}
-p {
-	font-family: Arial, Helvetica, sans-serif;
-	line-height: 5px;
-	font-size: 10px;
-}
-.cont {
-	font-size: 9px;
-}
-.cont {
-	font-size: 10px;
-}
-.cont {
-}
-.cont .cont .cont {
-	font-size: 9px;
-}
-#cv {
-	font-family: Arial, Helvetica, sans-serif;
-}
-#b {
-	font-family: Arial, Helvetica, sans-serif;
-	line-height: 10px;
-}
-.cont .Titul {
-	font-size: 12px;
-}
-.vds {
-	font-family: "Arial Black", Gadget, sans-serif;
-}
-.bfa {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-}
-.contring {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
-}
-body p {
-	font-size: 12px;
-}
-.contring p strong {
-	font-size: 12px;
-}
-.contring p strong {
-	line-height: normal;
-}
-.contring strong {
-	font-weight: normal;
-	color: #666;
+.links p{
+margin:0 ;
 }
 </style>
 </head>
@@ -89,10 +22,12 @@ body p {
   <tr>
     <td width="4" rowspan="2">&nbsp;</td>
     <td width="174" rowspan="2" valign="top" class="Titul"><h1 style="font-size:14px; margin:6px 0; padding:0; line-height:0px; ">Lo Patí Newsletter</h1>
-    <h2 style="font-size:14px; margin:0; padding:0; color:#E31853;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2></td>
+    <h2 style="font-size:14px; margin:0; padding:0; color:#E31853 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2></td>
     <td width="40">&nbsp;  </td>
-    <td colspan="2" valign="top"><a href="http://www.google.es" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
-    <a href="http://www.google.es" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>    
+    <td colspan="2" valign="top"><a href="{{ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
+    {% if token is defined %}
+    <a href="http://www.google.es" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
+    {% endif %}
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>
   </tr>
@@ -151,7 +86,7 @@ body p {
     <td width="4" rowspan="6">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="3" class="vds"><h3 style="margin-top:5px;margin-bottom:0px; padding:0; font-size:25px;">{{ pagina.titol }}</h3></td>
+    <td colspan="3" class="vds"><h3 style="margin-top:5px;margin-bottom:0px; padding:0; font-size:25px; color: black !important;">{{ pagina.titol }}</h3></td>
   </tr>
   <tr height="5">
     <td>&nbsp;</td>
@@ -162,29 +97,30 @@ body p {
     <td valign="top" class="bfa">
      {% if  pagina.lloc%}
     <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">Lloc</p>
-    <p style="color:#666; margin-top:10px; margin-bottom:0px; line-height:15px;">{{ pagina.lloc }}</p>
+    <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
     {% endif %}
     {% if  pagina.dataRealitzacio%}
-    <p style="color:#E31853; margin-top:20px; margin-bottom:0px; font-weight:bold;">Data</p>
-    <p style="color:#666; margin-top:10px; margin-bottom:0px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">Data</p>
+    <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
     {% endif %}
     {% if pagina.links %}
-    <p style="color:#E31853; margin-top:20px; margin-bottom:0px; font-weight:bold;">Enllaços</p>
-
-{{ pagina.links|raw }}
-
+    <div class="links">
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">Enllaços</p>
+	
+		{{ pagina.links|raw }}
+		</div>
 {% endif %}
 
 {% if pagina.titolDocument1 and pagina.document1Name  %}
-<p style="font-weight:bold; display:block; margin-bottom:20px;"> </p>
 
-<p style="font-weight:bold; display:block; margin-top:0px;">
+
+<p style="font-weight:bold; display:block; margin-top:20px;">
 <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document1')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;"><img src="{{ host ~ '/images/icona-doc01.gif'}}">
 <span style="padding: 0px 0px 0px 3px; color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument1 }}</span></a></p>
 {% endif %}
 
 {% if pagina.titolDocument2 and pagina.document2Name  %}
-<p style="font-weight:bold; display:block; margin-top:10px;">
+<p style="font-weight:bold; display:block; margin-top:-15px;">
 <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document2')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;"><img src="{{ host ~ '/images/icona-doc01.gif'}}">
 <span style="padding: 0px 0px 0px 3px;color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument2 }}</span></a></p>
 {% endif %}
@@ -244,26 +180,26 @@ body p {
   <tr>
     <td rowspan="5" valign="top"><a href="http://www.lopati.cat"><img src="{{ host ~ '/images/logo.jpg'}}" width="170" height="107" alt="logotip lo pati" title="logotip lo pati" /></a></td>
     <td width="40" rowspan="5">&nbsp;</td>
-    <td width="174" align="left" valign="top" class="contring"><strong style="font-weight: bold; color: #666;">Lo Pati</strong><br />
-      <span style="color: #666"> Centre d'Art - Terres de l'Ebre<br />
+    <td width="174" align="left" valign="top" class="contring"><strong style="font-weight: bold; color: #666; font-size:14px;">Lo Pati</strong><br />
+      <span style="color: #666; font-size:13px;"> Centre d'Art - Terres de l'Ebre<br />
       C/ Gran Capità, 38-40<br />
       Tel. 977 700 904<br />
     43870 Amposta</span></td>
     <td width="19" rowspan="5">&nbsp;</td>
-    <td width="171" align="left" valign="top" class="contring" id="cv"><strong style="color: #666; font-weight: bold;">Organitza:</strong><br />     
-     <a rel="external" href="http://www.amposta.cat/" target="_blank" style="text-decoration:none; color:#666;">Ajuntament d'Amposta</a><br />
-    <br />      <strong style="font-weight: bold; color: #666;">Amb el suport de:</strong><br />     
-     <a rel="external" href="http://www.gencat.cat/cultura" target="_blank" style="text-decoration:none; color:#666;">Generalitat de Catalunya</a><br />      
-    <a rel="external" href="http://www.diputaciodetarragona.cat/" target="_blank" style="text-decoration:none; color:#666;">Diputació de Tarragona</a></td>
+    <td width="171" align="left" valign="top" class="contring" id="cv"><strong style="color: #666; font-weight: bold; font-size:13px;">Organitza:</strong><br />     
+     <a rel="external" href="http://www.amposta.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Ajuntament d'Amposta</a><br />
+    <br />      <strong style="font-weight: bold; color: #666; font-size:13px;">Amb el suport de:</strong><br />     
+     <a rel="external" href="http://www.gencat.cat/cultura" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Generalitat de Catalunya</a><br />      
+    <a rel="external" href="http://www.diputaciodetarragona.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Diputació de Tarragona</a></td>
   </tr>
   <tr>
     
     <td width="174" align="left" valign="top" class="contring" id="cv">&nbsp;</td>
   </tr>
   <tr>
-    <td height="18" align="left" valign="top" class="contring" style="color: #666; font-weight: bold;">Segueix-nos a:</td>
-    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv"><strong style="font-weight: bold; color: #666;">Col·labora:</strong><br />
-    <a rel="external" href="http://www.museuterresebre.cat/" target="_blank" style="text-decoration:none; color:#666;">Museu de les Terres de l'Ebre</a></td>
+    <td height="18" align="left" valign="top" class="contring" style="color: #666; font-weight: bold; font-size:13px;">Segueix-nos a:</td>
+    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv"><strong style="font-weight: bold; color: #666; font-size:13px;">Col·labora:</strong><br />
+    <a rel="external" href="http://www.museuterresebre.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Museu de les Terres de l'Ebre</a></td>
   </tr>
   <tr>
     <td align="left" valign="top" class="contring"><a href="https://www.facebook.com/pages/Lo-Pati/339606589419890" style="color:#666; font-size:9px;" target="_blank">

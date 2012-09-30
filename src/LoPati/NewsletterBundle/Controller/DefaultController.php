@@ -125,7 +125,15 @@ class DefaultController extends Controller
     	return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
     }
 
-
+	public function visitAction($data,$_locale){
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
+		: 'http://lopati.cat';
+		$newDate = date("Y-m-d", strtotime($data));
+		$em = $this->getDoctrine()->getEntityManager();
+		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterByData($newDate);
+		return $this->render('NewsletterBundle:Default:mail.html.twig',array('host'=>$host, 'pagines'=>$pagines, 'idioma'=>$_locale));
+		
+	}
 
     
 }

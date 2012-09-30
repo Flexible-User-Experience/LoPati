@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use LoPati\BlogBundle\Entity;
 
 /**
@@ -10,6 +11,7 @@ use LoPati\BlogBundle\Entity;
  *
  * @ORM\Table(name="newsletters")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterRepository")
+ * @UniqueEntity("dataNewsletter")
  */
 class Newsletter
 {
@@ -51,7 +53,7 @@ class Newsletter
      *
      * @ORM\Column(name="estat", type="string", length=15, nullable=true)
      */
-    private $estat="Esperant";
+    private $estat=null;
     
     /**
      *

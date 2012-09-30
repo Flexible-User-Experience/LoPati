@@ -29,7 +29,7 @@ EOT
 
 		$max = $input->getArgument('max');
 
-		$host = 'dev' == $input->getOption('env') ? 'http://localhost:8888'
+		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
 				: 'http://lopati.cat';
 
 		$output->writeln($host);
@@ -62,7 +62,7 @@ EOT
 		if ($newsletter2) {
 			$output->writeln('entra pagines');
 			
-			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($newsletter2->getId());
+			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
 			
 		
 			
@@ -109,7 +109,8 @@ EOT
 					$em->refresh($pagines);*/
 				}
 				$output->writeln('mail:' . $user->getUser()->getIdioma());
-				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma));
+				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig',
+				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user>getUser()->getToken()));
 				
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()

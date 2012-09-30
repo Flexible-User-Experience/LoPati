@@ -65,11 +65,11 @@ class AdminController extends Controller {
 	{
 		
 		$em = $this->getDoctrine()->getEntityManager();
-		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($id);
+		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
 
 		
-		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888'
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
 		: 'http://lopati.cat';
 		//$object->getId();
 				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca'));
@@ -87,9 +87,9 @@ class AdminController extends Controller {
 		->findOneByUsername($userName);
 		
 		$em = $this->getDoctrine()->getEntityManager();
-		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletter($id);
+		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
-		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://localhost:8888/'
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
 		: 'http://lopati.cat';
 		
 

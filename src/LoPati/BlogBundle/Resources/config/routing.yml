@@ -22,12 +22,12 @@ portada:
   pattern: /{_locale}/
   defaults: { _controller: BlogBundle:Default:portada}
   requirements:
-        _locale: ca|es|en|fr|de
+        _locale: ca|es|en
 prova:
   pattern: /{_locale}/prova
   defaults: { _controller: BlogBundle:Default:prova}
   requirements:
-        _locale: ca|es|en|fr|de
+        _locale: ca|es|en
   
 categoriaenenllas:
   pattern: /{_locale}/{categoria}/{id}/
@@ -35,6 +35,7 @@ categoriaenenllas:
   requirements:
     id:  \d+
     _method:  GET
+    _locale: ca|es|en
 
 
 arxiuarticle:
@@ -54,6 +55,7 @@ llista:
     categoria_id: \d+
     subcategoria_id: \d+
     _method:  GET
+    _locale: ca|es|en
 
 
 
@@ -86,6 +88,7 @@ categoriasenseenllas:
   requirements:
     id:  \d+
     _method:  GET
+    _locale: ca|es|en
    
 pagina:
   pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
@@ -93,6 +96,7 @@ pagina:
   requirements:
     id:  \d+
     _method:  GET
+    _locale: ca|es|en
 
 
     
