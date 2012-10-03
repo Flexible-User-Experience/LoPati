@@ -110,7 +110,7 @@ EOT
 				}
 				$output->writeln('mail:' . $user->getUser()->getIdioma());
 				$contenido = $contenedor->get('twig')->render('NewsletterBundle:Default:mail.html.twig',
-				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user>getUser()->getToken()));
+				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user->getUser()->getToken()));
 				
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
