@@ -95,12 +95,12 @@ class AdminController extends Controller {
 
 		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>'ca'));
 		
-		$config='metalrockero@gmail.com';
+		
 		$message = \Swift_Message::newInstance()
 		->setSubject('Confirme su direccion de correo electronico.')
 		//->setFrom($config->getEmail())
-		->setFrom('mailing@cupon.com')
-		->setTo('hola@notengo.com')
+		->setFrom('butlleti@lopati.cat')
+		->setTo($user->getEmail())
 		->setBody($contenido,'text/html')
 		;
 		$this->get('mailer')->send($message);
