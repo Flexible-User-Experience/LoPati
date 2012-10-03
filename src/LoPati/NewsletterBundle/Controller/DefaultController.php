@@ -71,7 +71,7 @@ class DefaultController extends Controller
             ;
             $this->get('mailer')->send($mensaje);*/
         } else {
-            $this->get('session')->setFlash('error', 'Ya existe un usuario con ese email.');
+            $this->get('session')->setFlash('notice', 'Ya existe un usuario con ese email.');
         }
      /*   $request = $this->getRequest();
         $request->setLocale($request->getLocale());*/
