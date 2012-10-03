@@ -25,11 +25,6 @@ twig:
         resources:
             - 'MenuBundle:Default:form.html.twig'
 
-swiftmailer:
-    transport: %mailer_transport%
-    username: %mailer_user%
-    password:   %mailer_password%
-    delivery_address:   metalrockero@gmail.com
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
