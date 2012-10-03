@@ -2139,3 +2139,10 @@ ol.bloc01 li div.bloc01-img img:hover {
 	display:none;
 	
 }
+.success{
+	margin:10px 0;
+	text-align: center;
+	padding: 3px 0;
+	background-color: #FDD;
+	
+}

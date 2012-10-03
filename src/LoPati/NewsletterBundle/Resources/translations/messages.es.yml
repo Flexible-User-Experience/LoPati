@@ -1,0 +1,4 @@
+suscribe:
+    register: Se ha registrado correctamente. Ahora recibira un email de confirmacion para activar su usuario.
+    confirmation:
+          enhorabona: ¡Enhorabuena! Se ha registrado correctamente.

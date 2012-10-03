@@ -6,7 +6,7 @@ parameters:
     database_user: user            #change this
     database_password: password    #change this
     unix_socket:                   #path/to/mysql.sock
-    mailer_transport: smtp
+    mailer_transport: gmail
     mailer_host: localhost
     mailer_user: null
     mailer_password: null
