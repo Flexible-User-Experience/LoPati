@@ -24,7 +24,7 @@ margin:0 ;
     <td width="174" rowspan="2" valign="top" class="Titul"><h1 style="font-size:14px; margin:6px 0; padding:0; line-height:0px; ">Lo Patí Newsletter</h1>
     <h2 style="font-size:14px; margin:0; padding:0; color:#E31853 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2></td>
     <td width="40">&nbsp;  </td>
-    <td colspan="2" valign="top"><a href="{{ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
+    <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
     {% if token is defined %}
     <a href="http://www.google.es" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
     {% endif %}
