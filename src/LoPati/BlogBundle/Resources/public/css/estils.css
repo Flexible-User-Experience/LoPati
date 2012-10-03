@@ -1762,7 +1762,6 @@ html>body .registre1 { overflow: auto; }
 
 .xarxes {
 	width: 100%;
-	height: 24px;
 	margin: 10px 0px;
 	border-top: 1px solid #666;
 	font-size: 80%;
@@ -2144,5 +2143,9 @@ ol.bloc01 li div.bloc01-img img:hover {
 	text-align: center;
 	padding: 3px 0;
 	background-color: #FDD;
+	
+}
+#newsletter form{
+	margin: 10px 0;
 	
 }
