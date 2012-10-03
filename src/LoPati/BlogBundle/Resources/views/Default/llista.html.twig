@@ -17,6 +17,12 @@
  {% endblock %}
 {% block contenidor %}
 <div class="contenidor">
+       {% if app.session.hasFlash('notice') %}      
+                             
+                            <div class="flash success">
+                                {{ app.session.flash('notice') }}
+                            </div>                            
+       {% endif %}
 <div class="continguts">
 
 <div class="subopcions">

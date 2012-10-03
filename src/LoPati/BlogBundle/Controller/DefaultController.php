@@ -12,13 +12,21 @@ class DefaultController extends Controller {
 
 	public function indexAction() {
 
+		
 		$req = $this->getRequest();
+		
+		if($this->get('session')->get('_locale')){
+			
+			$culture=$this->get('session')->get('_locale');
+		}
+
+		else{
 	
 		$session = $this->get('session');
 	
 		$culture=$req->getPreferredLanguage(array('ca', 'es', 'en'));	
 	
-		
+		}
 		return $this->redirect($this->generateUrl('portada', array('_locale' =>$culture)));
 			
 		
@@ -28,9 +36,12 @@ class DefaultController extends Controller {
 
 		//$pagination= null;
 		$this->getRequest()->setLocale($_locale);
+		$this->get('session')->get('_locale');
+		$this->get('session')->set('_locale', $_locale);
+		
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
-		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub WHERE
-				p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
+		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub
+			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
 		
 		$consulta->setParameter('avui', new \DateTime('today'));
 	$query = $em->createQuery($consulta);

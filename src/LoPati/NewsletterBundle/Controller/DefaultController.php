@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
 
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
@@ -45,17 +46,19 @@ class DefaultController extends Controller
            // $config = $em->getRepository('MegapointCmsBundle:Configuration')->config();
            $config='metalrockero@gmail.com';
             $message = \Swift_Message::newInstance()
-                    ->setSubject('Confirme su direccion de correo electronico.')
+                    ->setSubject($this->renderView('NewsletterBundle:Default:confirmationSubject.html.twig',
+                    		array('idioma'=>$newsletterUser->getIdioma())),'text/html')
                     //->setFrom($config->getEmail())
             		->setFrom('mailing@cupon.com')
                     ->setTo($newsletterUser->getEmail())
                     ->setBody($this->renderView('NewsletterBundle:Default:confirmation.html.twig', array(
-                        'token' => $newsletterUser->getToken()
+                        'token' => $newsletterUser->getToken(), 'user'=>$newsletterUser
                     )), 'text/html')
             ;
             $this->get('mailer')->send($message);
-
-            $this->get('session')->setFlash('notice', 'Se ha registrado correctamente. Ahora recibira un email de confirmacion para activar su usuario.');
+            $request->setLocale($this->get('session')->get('_locale'));
+            $flash = $this->get('translator')->trans('suscribe.register');
+            $this->get('session')->setFlash('notice', $flash);
        
             
             
@@ -70,8 +73,10 @@ class DefaultController extends Controller
         } else {
             $this->get('session')->setFlash('error', 'Ya existe un usuario con ese email.');
         }
-
-        return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
+     /*   $request = $this->getRequest();
+        $request->setLocale($request->getLocale());*/
+        $this->getRequest()->setLocale($this->getRequest()->getLocale());
+        return $this->redirect($this->generateUrl('portada', array('_locale' =>$this->get('session')->get('_locale'))));
     }
 
     /**
@@ -98,11 +103,11 @@ class DefaultController extends Controller
                     )), 'text/html')
             ;
             $this->get('mailer')->send($message);
-
-            $this->get('session')->setFlash('notice', '¡Enhorabuena! Se ha registrado correctamente.');
+            $request->setLocale($user->getIdioma());
+            $this->get('session')->setFlash('notice',$this->get('translator')->trans('suscribe.confirmation.enhorabona'));
         }
-
-        return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
+        $culture=$this->get('session')->get('_locale');
+        return $this->redirect($this->generateUrl('portada', array('_locale' => $culture)));
     }
     
     /**
