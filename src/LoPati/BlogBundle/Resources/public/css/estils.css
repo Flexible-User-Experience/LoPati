@@ -2149,3 +2149,22 @@ ol.bloc01 li div.bloc01-img img:hover {
 	margin: 10px 0;
 	
 }
+#form_newsletter{
+	display:none;
+	
+}
+#form_newsletter #mp_newsletter_user_email{
+
+
+border: 1px solid #666;
+margin:3px 0px 10px 0;
+}
+#newsletter h5{
+	margin:10px 0;
+	font-size:1em;
+	font-weight:normal;
+	color: #666;
+	cursor:pointer;
+	
+	
+}

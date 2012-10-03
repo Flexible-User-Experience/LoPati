@@ -2,3 +2,5 @@ suscribe:
     register: S'ha registrat correctament. Ara rebrà un correu electrònic de confirmació per activar el seu usuari.
     confirmation:
           enhorabona: Enhorabona! S'ha registrat correctament.
+          
+enviar: enviar

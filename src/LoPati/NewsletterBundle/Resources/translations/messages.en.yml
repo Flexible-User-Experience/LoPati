@@ -2,3 +2,5 @@ suscribe:
     register: You've successfully. Now you will receive a confirmation email to activate your username.
     confirmation:
           enhorabona: Congratulations! You've successfully.
+          
+enviar: send

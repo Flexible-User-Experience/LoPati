@@ -12,8 +12,7 @@
 <link rel="shortcut icon" href="/images/favicon.ico">
 
 <link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css" />
-
-
+<script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
 
 </head>
 <body>
@@ -65,6 +64,7 @@
 
 {% endblock %}
 <div id="newsletter" class="xarxes">
+	<h5 onclick="newsletter(this)">{% trans %}tr.newsletter{% endtrans %}:</h5>
 	{% render "NewsletterBundle:Default:form" %}
 	</div>
 	<div class="xarxes">

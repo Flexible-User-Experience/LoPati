@@ -18,7 +18,7 @@ class NewsletterUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('email')
+                ->add('email',null,array('label'=>'email'))
                 ->add('idioma','choice', array( 'choices'   => array( 'ca' => 'Català','es' => 'Castellano','en'=>'English'), 'required'  => true,))
         ;
     }
