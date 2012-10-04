@@ -49,7 +49,7 @@ services:
   sonata.lopati.admin.newsletteruser:
     class: LoPati\NewsletterBundle\Admin\NewsletterUserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletter', label: user }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: usuari }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterUser
@@ -58,7 +58,7 @@ services:
   sonata.lopati.admin.newsletter:
     class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletter', label: noticia }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: noticia }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter

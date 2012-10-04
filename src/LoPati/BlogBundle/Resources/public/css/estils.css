@@ -2155,7 +2155,7 @@ ol.bloc01 li div.bloc01-img img:hover {
 }
 #form_newsletter #mp_newsletter_user_email{
 
-
+with: 175px;
 border: 1px solid #666;
 margin:3px 0px 10px 0;
 }
