@@ -117,7 +117,7 @@ EOT
 						->setSubject(
 								'Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
 						//->setFrom($config->getEmail())
-						->setFrom('no-reply@lopati.cat')
+						->setFrom('butlleti@lopati.cat')
 						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
