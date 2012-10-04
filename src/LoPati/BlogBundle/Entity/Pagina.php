@@ -115,7 +115,7 @@ class Pagina {
 	
 	/**
 	 * @Assert\File(
-	 *     maxSize="1M",
+	 *     maxSize="10M",
 	 *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
 	 * )
 	 * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetitaName")
@@ -133,7 +133,7 @@ class Pagina {
 	
 	/**
 	 * @Assert\File(
-	 *     maxSize="1M",
+	 *     maxSize="10M",
 	 *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
 	 * )
 	 * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetita2Name")
@@ -151,7 +151,7 @@ class Pagina {
 	
 	/**
 	 * @Assert\File(
-	 *     maxSize="1M",
+	 *     maxSize="10M",
 	 *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
 	 * )
 	 * @Vich\UploadableField(mapping="imatge", fileNameProperty="imageGran1Name")
@@ -175,10 +175,7 @@ class Pagina {
 	/////////////////////////////
 	
 	/**
-	 * @Assert\File(
-	 *     maxSize="25M"
-	 *          
-	 * )
+	 * @Assert\File(maxSize="10M")
 	 * @Vich\UploadableField(mapping="pdf", fileNameProperty="document1Name")
 	 *
 	 * @var File $document1
@@ -266,9 +263,7 @@ class Pagina {
 	}
 	
 	/**
-	 * @Assert\File(
-	 *     maxSize="25M" 
-	 * )
+	 * @Assert\File(maxSize="10M")
 	 * @Vich\UploadableField(mapping="pdf", fileNameProperty="document2Name")
 	 *
 	 * @var File $document2
