@@ -10,3 +10,7 @@ borrar: borrar
 confirm:
   eliminar: Eliminar suscripción
   text: Si está seguro que desea eliminar su suscripción a nuestro Boletín Informativo, clicka en el botón.
+  
+unsuscribe:
+  confirmation:
+    enhorabona: Se ha eliminado su suscripción correctamente.

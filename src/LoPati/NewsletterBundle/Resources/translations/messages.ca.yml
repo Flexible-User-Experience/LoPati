@@ -10,3 +10,7 @@ borrar: esborrar
 confirm:
   eliminar: Eliminar subscripció
   text: Si està segur de voler eliminar la seva subscripció al nostre Butlletí Informatiu, clicka al botó.
+
+unsuscribe:
+  confirmation:
+    enhorabona: S'ha eliminat la seva subscripció correctament.

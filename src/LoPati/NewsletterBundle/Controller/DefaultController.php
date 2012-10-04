@@ -148,6 +148,7 @@ class DefaultController extends Controller
 	 */
 	public function unsuscribeAction(Request $request,$token)
 	{
+		$request->setLocale($this->get('session')->get('_locale'));
 		//return array('token' => $token);
 		$em = $this->getDoctrine()->getEntityManager();
 		$user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
@@ -156,7 +157,7 @@ class DefaultController extends Controller
 			$em->remove($user);
 			$em->flush();
 			 
-			$this->get('session')->setFlash('notice', '¡Enhorabuena! Se ha eliminado su suscripcion correctamente.');
+			$this->get('session')->setFlash('notice', $this->get('translator')->trans('unsuscribe.confirmation.enhorabona'));
 		}
 		 
 		return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));

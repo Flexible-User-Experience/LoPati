@@ -26,7 +26,7 @@ margin:0 ;
     <td width="40">&nbsp;  </td>
     <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
     {% if token is defined %}
-    <a href="http://www.google.es" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
+    <a href="{{  url('newsletter_confirm_unsuscribe', { 'token': token } ) }}" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
     {% endif %}
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>

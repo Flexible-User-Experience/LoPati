@@ -87,6 +87,8 @@ class AdminController extends Controller {
 		->findOneByUsername($userName);
 		
 		$em = $this->getDoctrine()->getEntityManager();
+		$newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
+		
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
 		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
@@ -97,7 +99,7 @@ class AdminController extends Controller {
 		
 		
 		$message = \Swift_Message::newInstance()
-		->setSubject('Confirme su direccion de correo electronico.')
+		->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
 		//->setFrom($config->getEmail())
 		->setFrom('butlleti@lopati.cat')
 		->setTo($user->getEmail())

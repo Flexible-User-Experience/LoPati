@@ -10,3 +10,7 @@ borrar: delete
 confirm:
   eliminar: Remove subscription
   text: If you really want to unsubscribe to our newsletter click the button.
+  
+unsuscribe:
+  confirmation:
+    enhorabona: Removed the subscription correctly.
