@@ -14,7 +14,7 @@ class NewsletterAdmin extends Admin
 	{
 		$formMapper
 		->add('dataNewsletter','date', array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy'))	
-		->add('pagines')
+		->add('pagines',null,array('label'=>'Pàgines','attr'=>array('style'=>'width:500px; height:500px;')))
 		->add('estat')
 
 

@@ -5,6 +5,8 @@ namespace LoPati\NewsletterBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use LoPati\BlogBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * LoPati\NewsletterBundle\Entity\Newsletter
@@ -75,7 +77,7 @@ class Newsletter
     private $test=FALSE;
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina")
-     * @ORM\OrderBy({"titol" = "DESC"})
+     * @ORM\OrderBy({"id" = "DESC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      * 
      */
@@ -201,5 +203,9 @@ class Newsletter
     	return $this->test;
     }
     
+    public function __toString(){
+    	//date('F d, Y h:i:s A', strtotime($this->dataNewsletter;))
+    	return "Newsletter";
     
+    }
 }
