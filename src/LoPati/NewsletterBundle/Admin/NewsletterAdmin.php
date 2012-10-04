@@ -25,7 +25,7 @@ class NewsletterAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-	->addIdentifier('dataNewsletter',null,array('label'=>'Data Newsletter', 'template'=>'NewsletterBundle:Admin:list_custom_dataNewsletter_field.html.twig'))
+	->addIdentifier('dataNewsletter',null,array('label'=>'Data newsletter', 'template'=>'NewsletterBundle:Admin:list_custom_dataNewsletter_field.html.twig'))
 	->add('test')
 	->add('estat',null, array('label'=>'Estat', 'template' => 'NewsletterBundle:Admin:list_custom_estat_field.html.twig'))
 	->add('enviats')
@@ -42,7 +42,7 @@ class NewsletterAdmin extends Admin
 					'enviar' => array(
 							'template' => 'NewsletterBundle:Admin:enviar.html.twig'),
 					
-	)))		
+	), 'label' => 'Accions'))		
 		;
 	}
 	protected function configureRoutes(RouteCollection $collection) {

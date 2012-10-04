@@ -32,8 +32,6 @@ class NewsletterUserAdmin extends Admin
 		->add('active',null,array('label'=>'Actiu'))
 		->add('token')
 		->add('fail')
-		
-		
 		;
 	}
 	protected $datagridValues = array(
@@ -41,5 +39,13 @@ class NewsletterUserAdmin extends Admin
 			'_sort_order' => 'ASC', // sort direction
 			'_sort_by' => 'email' // field name
 	);
+
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('email')
+            ->add('active')
+        ;
+    }
 	
 }
