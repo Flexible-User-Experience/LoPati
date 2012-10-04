@@ -91,7 +91,7 @@ class ConfiguracioAdmin extends Admin
 						//'view' => array(),
 						'edit' => array(),
 						'delete' => array(),
-				)));
+				), 'label' => 'Accions'));
 	}
 	
 }	

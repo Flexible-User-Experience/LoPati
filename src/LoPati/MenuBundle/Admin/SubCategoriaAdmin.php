@@ -53,8 +53,8 @@ class SubCategoriaAdmin extends Admin
 				'actions' => array(
 						//'view' => array(),
 						'edit' => array(),
-						'delete' => array(),
-				)));
+						//'delete' => array(),
+				), 'label' => 'Accions'));
 	}
 	
 	protected $datagridValues = array(

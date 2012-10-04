@@ -39,7 +39,12 @@ class ArxiuAdmin extends Admin
 		->addIdentifier('any')
 		->add('imagePetitaName', null, array('label' => 'Imatge any'))
 		->add('imagePetita2Name', null, array('label' => 'Imatge any vermell'))
-		;
+		->add('_action', 'actions', array(
+				'actions' => array(
+						//'view' => array(),
+						'edit' => array(),
+						//'delete' => array(),
+				), 'label' => 'Accions'));
 	}
 
 	protected $datagridValues = array(
