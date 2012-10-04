@@ -18,7 +18,7 @@ class NewsletterUserAdmin extends Admin
 		->add('email')
 		->add('idioma', 'choice', array( 'choices'   => array( 'ca' => 'Català','es' => 'Castellano','en'=>'English'), 'required'  => true,))
 		->add('active',null,array('label'=>'Actiu','required'=>false))
-		->add('fail')
+		//->add('fail')
 		
 		;
 	}
