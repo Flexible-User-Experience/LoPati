@@ -2,20 +2,21 @@ parameters:
 #    newsletter.example.class: LoPati\NewsletterBundle\Example
 
 services:
-  sonata.lopati.admin.user.newsletter:
-    class: LoPati\NewsletterBundle\Admin\NewsletterUserAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: usuari }
-    arguments:
-      - null
-      - LoPati\NewsletterBundle\Entity\NewsletterUser
-      - MenuBundle:Admin
+#### NO FUNCIONA EL MENU CORRECTAMENT
+#  sonata.lopati.admin.user.newsletter:
+#    class: LoPati\NewsletterBundle\Admin\NewsletterUserAdmin
+#    tags:
+#      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: usuari }
+#    arguments:
+#      - null
+#      - LoPati\NewsletterBundle\Entity\NewsletterUser
+#      - MenuBundle:Admin
 
-  sonata.lopati.admin.newsletter:
-    class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: newsletter }
-    arguments:
-      - null
-      - LoPati\NewsletterBundle\Entity\Newsletter
-      - MenuBundle:Admin
+#  sonata.lopati.admin.newsletter:
+#    class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
+#    tags:
+#      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: newsletter }
+#    arguments:
+#      - null
+#      - LoPati\NewsletterBundle\Entity\Newsletter
+#      - MenuBundle:Admin
