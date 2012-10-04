@@ -37,6 +37,8 @@ class DefaultController extends Controller
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
 
         $form->bindRequest($request);
+        
+        $request->setLocale($this->get('session')->get('_locale'));
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
@@ -49,14 +51,14 @@ class DefaultController extends Controller
                     ->setSubject($this->renderView('NewsletterBundle:Default:confirmationSubject.html.twig',
                     		array('idioma'=>$newsletterUser->getIdioma())),'text/html')
                     //->setFrom($config->getEmail())
-            		->setFrom('mailing@cupon.com')
+            		->setFrom('butlleti@lopati.cat')
                     ->setTo($newsletterUser->getEmail())
                     ->setBody($this->renderView('NewsletterBundle:Default:confirmation.html.twig', array(
                         'token' => $newsletterUser->getToken(), 'user'=>$newsletterUser
                     )), 'text/html')
             ;
             $this->get('mailer')->send($message);
-            $request->setLocale($this->get('session')->get('_locale'));
+            
             $flash = $this->get('translator')->trans('suscribe.register');
             $this->get('session')->setFlash('notice', $flash);
        
@@ -71,11 +73,11 @@ class DefaultController extends Controller
             ;
             $this->get('mailer')->send($mensaje);*/
         } else {
-            $this->get('session')->setFlash('notice', 'Ya existe un usuario con ese email.');
+            $this->get('session')->setFlash('notice', $this->get('translator')->trans('suscribe.error'));
         }
      /*   $request = $this->getRequest();
         $request->setLocale($request->getLocale());*/
-        $this->getRequest()->setLocale($this->getRequest()->getLocale());
+    
         return $this->redirect($this->generateUrl('portada', array('_locale' =>$this->get('session')->get('_locale'))));
     }
 
@@ -87,48 +89,42 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-
+		
+        $request->setLocale($this->get('session')->get('_locale'));
+		
         if ($user) {
             $user->setActive(true);
             $em->flush();
-
+			
+            //	$request->setLocale($user->getIdioma());
+         
            
+            $logger = $this->get('logger');
+            $logger->info('user idioma:'.$user->getIdioma());
+            $logger->info('get idioma:'.$request->getLocale());
+            $logger->info('session idioma:'.$this->get('session')->get('_locale'));
             
+         
             $message = \Swift_Message::newInstance()
-                    ->setSubject('Activada su direccion de correo electronico.')
-                    ->setFrom('noreply@lopati.cat')
+                    ->setSubject($this->renderView('NewsletterBundle:Default:confirmationTrueSubject.html.twig',
+                    		array('idioma'=>$user->getIdioma())),'text/html')
+                    ->setFrom('butlleti@lopati.cat')
                     ->setTo($user->getEmail())
                     ->setBody($this->renderView('NewsletterBundle:Default:activated.html.twig', array(
                         'user' => $user
-                    )), 'text/html')
+                    )), 'text/html')	
             ;
+            
+            
+         
             $this->get('mailer')->send($message);
-            $request->setLocale($user->getIdioma());
             $this->get('session')->setFlash('notice',$this->get('translator')->trans('suscribe.confirmation.enhorabona'));
         }
         $culture=$this->get('session')->get('_locale');
         return $this->redirect($this->generateUrl('portada', array('_locale' => $culture)));
     }
     
-    /**
-     * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_confirm_unsuscribe")
-     * @Template
-     */
-    public function confirmUnsuscribeAction(Request $request,$token)
-    {
-        //return array('token' => $token);
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-    	
-    	if ($user) {
-    		$em->remove($user);
-    		$em->flush();
-    	
-    		$this->get('session')->setFlash('notice', '¡Enhorabuena! Se ha eliminado su suscripcion correctamente.');
-    	}
-    	
-    	return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
-    }
+
 
 	public function visitAction($data,$_locale){
 		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
@@ -140,5 +136,29 @@ class DefaultController extends Controller
 		
 	}
 
-    
+	public function confirmUnsuscribeAction(Request $request,$token)
+	{
+		$request->setLocale($this->get('session')->get('_locale'));
+				return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig',array('token'=>$token));
+		
+	}
+	/**
+	 * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_confirm_unsuscribe")
+	 * @Template
+	 */
+	public function unsuscribeAction(Request $request,$token)
+	{
+		//return array('token' => $token);
+		$em = $this->getDoctrine()->getEntityManager();
+		$user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
+		 
+		if ($user) {
+			$em->remove($user);
+			$em->flush();
+			 
+			$this->get('session')->setFlash('notice', '¡Enhorabuena! Se ha eliminado su suscripcion correctamente.');
+		}
+		 
+		return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
+	}
 }

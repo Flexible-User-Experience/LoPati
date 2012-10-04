@@ -12,6 +12,14 @@ newsletter_user:
     defaults: { _controller: NewsletterBundle:Default:suscribe}
     requirements:
       _method:  POST
+      
+newsletter_unsuscribe:
+    pattern:  /newsletter/unsuscribe/{token}
+    defaults: { _controller: NewsletterBundle:Default:unsuscribe}
+
+newsletter_confirm_unsuscribe:
+    pattern:  /newsletter/confirm/unsuscribe/{token}
+    defaults: { _controller: NewsletterBundle:Default:confirmUnsuscribe}
 
 newsletter_unsuscribe:
     pattern:  /newsletter/unsuscribe/{token}

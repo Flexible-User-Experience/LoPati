@@ -49,16 +49,27 @@ EOT
 			// genero array con por medio del separador "," que es el que tiene el archivo txt
 			$sql = explode(",",$row);
 			// incrementamos contador
-			$user= new newsletterUser();
-			$user->setEmail($sql[0]);
-			$user->setActive('1');
-			$user->setIdioma('ca');
-			$em->persist($user);
+			$query = $em
+			->createQuery(
+					'SELECT u FROM NewsletterBundle:NewsletterUser u  WHERE
+					u.email = :mail');
+			$query->setParameter('mail', $sql[0]);
 			
+			$query->setMaxResults('1');
+			$existeix = $query->getOneOrNullResult();
 			
-			$i++;
-			$numero_fila++;
-
+						if (!$existeix){
+						
+						$user= new newsletterUser();
+						$user->setEmail($sql[0]);
+						$user->setActive('1');
+						$user->setIdioma('ca');
+						$em->persist($user);
+						
+						
+						$i++;
+						$numero_fila++;	
+						}
 			
 		}
 		$output->writeln('Guardant mails....');

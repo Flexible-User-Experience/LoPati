@@ -1,6 +1,12 @@
 suscribe:
     register: Se ha registrado correctamente. Ahora recibira un email de confirmacion para activar su usuario.
+    error:  Ya existe un usuario con ese email.
     confirmation:
           enhorabona: ¡Enhorabuena! Se ha registrado correctamente.
+          subject:  Activada su dirección de correo electrónico.
           
 enviar: enviar
+borrar: borrar
+confirm:
+  eliminar: Eliminar suscripción
+  text: Si está seguro que desea eliminar su suscripción a nuestro Boletín Informativo, clicka en el botón.

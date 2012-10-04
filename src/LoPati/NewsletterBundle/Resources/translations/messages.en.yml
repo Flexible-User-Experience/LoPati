@@ -1,6 +1,12 @@
 suscribe:
     register: You've successfully. Now you will receive a confirmation email to activate your username.
+    error:  There is already a user with that email.
     confirmation:
           enhorabona: Congratulations! You've successfully.
+          subject:  On your email address.
           
 enviar: send
+borrar: delete
+confirm:
+  eliminar: Remove subscription
+  text: If you really want to unsubscribe to our newsletter click the button.
