@@ -30,8 +30,8 @@
 				<div class="destacats">
 					<div class="buscador">
 						<form name="buscador1" action="#" method="post">
-							<p style="width: 155px; float: left;"><label><input name="textabuscar" type="textabuscar" style="width: 155px; height: 18px; border: 1px solid #666; margin: 0px;" value=""></label></p>
-							<p style="width: 25px;  float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" value="buscar" title="buscar" src="/images/boto10ca.png"></p>
+							<p style="width: 155px; float: left;"><input name="textabuscar" type="text" style="width: 155px; height: 18px; border: 1px solid #666; margin: 0px;" value=""></p>
+							<p style="width: 25px; float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" value="buscar" title="buscar" src="/images/boto10ca.png"></p>
 						</form>
 					</div>
 					<div class="idiomes">
@@ -41,7 +41,7 @@
 					<div id="newsletter" class="xarxes">
 						<h5 onclick="newsletter(this)">{% trans %}tr.newsletter{% endtrans %}:</h5>
 						{% render "NewsletterBundle:Default:form" %}
-						</div>
+					</div>
 					<div class="xarxes">			
 						<p>{% trans %}tr.follow{% endtrans %}:</p>
 						<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external" onmouseover="document.facebook.src='/images/xarxa_fb_color.gif';" onmouseout="document.facebook.src='/images/xarxa_fb.gif';"><img style="width: 18px;" name="facebook" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
