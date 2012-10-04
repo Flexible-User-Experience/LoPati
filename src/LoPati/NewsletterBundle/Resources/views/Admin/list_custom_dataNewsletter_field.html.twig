@@ -3,6 +3,6 @@
 {% block field%}
 
         <div>
-        {{ object.dataNewsletter | format_datetime('dd MMMM Y', 'ca', 'Europe/Paris') }}        	 
+        {{ object.dataNewsletter | date('d-m-Y') }}        	 
     </div>
 {% endblock %}
