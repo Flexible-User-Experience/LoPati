@@ -121,7 +121,7 @@ class AdminController extends Controller {
 		: 'http://lopati.cat';
 		
 
-		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 
+		$contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 
 				'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament, 
 				'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
 				'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
