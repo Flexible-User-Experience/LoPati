@@ -58,7 +58,7 @@ services:
   sonata.lopati.admin.newsletter:
     class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: noticia }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: butlletí }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
