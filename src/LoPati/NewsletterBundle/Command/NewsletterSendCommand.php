@@ -8,6 +8,9 @@ use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
+
+
+
 class NewsletterSendCommand extends ContainerAwareCommand {
 	protected function configure() {
 		$this->setName('newsletter:send')
@@ -80,8 +83,9 @@ EOT
 			$output->writeln('users per enviar:' . count($users));
 			$enviats = 0;
 			$idioma="ca";
+			$output->writeln(count($users));
 			foreach ($users as $user) {
-				
+	
 				if ($user->getUser()->getIdioma()=='es'){
 					
 					$output->writeln('entra castella');

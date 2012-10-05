@@ -26,7 +26,7 @@ margin:0 ;
     <td width="40">&nbsp;  </td>
     <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
     {% if token is defined %}
-    <a href="{{  url('newsletter_confirm_unsuscribe', { 'token': token } ) }}" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
+    <a href="{{ host ~ path('newsletter_confirm_unsuscribe',  { 'token': token } ) }}" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
     {% endif %}
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>
@@ -96,16 +96,16 @@ margin:0 ;
   <tr>
     <td valign="top" class="bfa">
      {% if  pagina.lloc%}
-    <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">Lloc</p>
+    <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{% trans %}tr.lloc {% endtrans %}</p>
     <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
     {% endif %}
     {% if  pagina.dataRealitzacio%}
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">Data</p>
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{% trans %}tr.data{% endtrans %}</p>
     <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
     {% endif %}
     {% if pagina.links %}
     <div class="links">
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">Enllaços</p>
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ "tr.links" | trans }}</p>
 	
 		{{ pagina.links|raw }}
 		</div>
@@ -136,7 +136,7 @@ margin:0 ;
     
     		{% if pagina.datavisible %}
 
-    <p style="clear: both; color: #999;"><br>Publicat: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
+    <p style="clear: both; color: #999;"><br>{{ "tr.publicat" | trans }}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
     {% endif %}
     </td>
     
