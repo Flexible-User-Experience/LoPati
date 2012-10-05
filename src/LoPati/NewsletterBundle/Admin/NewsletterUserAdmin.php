@@ -20,6 +20,7 @@ class NewsletterUserAdmin extends Admin
 		->add('active',null,array('label'=>'Actiu','required'=>false))
 		//->add('fail')
 		
+		
 		;
 	}
 	
@@ -32,6 +33,7 @@ class NewsletterUserAdmin extends Admin
 		->add('active',null,array('label'=>'Actiu'))
 		->add('token')
 		->add('fail')
+		->add('created',null,array('label'=>'Data alta'))
 		;
 	}
 	protected $datagridValues = array(
@@ -44,7 +46,8 @@ class NewsletterUserAdmin extends Admin
     {
         $datagridMapper
             ->add('email')
-            ->add('active')
+            ->add('active',null, array('label'=>'Actiu'))
+            ->add('created',null, array('label'=>'Data Alta'))
         ;
     }
 	

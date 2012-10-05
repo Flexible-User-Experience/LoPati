@@ -49,7 +49,7 @@ class NewsletterUser
     /**
      * @var string $created
      *
-     * @ORM\Column(name="created", type="date")
+     * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
