@@ -164,8 +164,8 @@ EOT
 					$em->refresh($pagines);*/
 				}
 				$output->writeln('mail:' . $user->getUser()->getIdioma());
-				
-				$contenido = $contenedor->get('twig')->renderView('NewsletterBundle:Default:mail.html.twig',
+				//$this->getContainer()->get('templating')->render(...);
+				$contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig',
 				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user->getUser()->getToken(),
 				 		'visualitzar_correctament' => $visualitzar_correctament,
 				 		 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
