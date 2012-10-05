@@ -24,9 +24,9 @@ margin:0 ;
     <td width="174" rowspan="2" valign="top" class="Titul"><h1 style="font-size:14px; margin:6px 0; padding:0; line-height:0px; ">Lo Patí Newsletter</h1>
     <h2 style="font-size:14px; margin:0; padding:0; color:#E31853 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2></td>
     <td width="40">&nbsp;  </td>
-    <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">Clica aquí per visualitzar correctament</a>  
+    <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">{{ visualitzar_correctament }}</a>  
     {% if token is defined %}
-    <a href="{{ host ~ path('newsletter_confirm_unsuscribe',  { 'token': token } ) }}" style="font-size:10px; text-decoration:none; color:#666;">Clica aquí per donar-te de baixa</a>   
+    <a href="{{ host ~ path('newsletter_confirm_unsuscribe',  { 'token': token } ) }}" style="font-size:10px; text-decoration:none; color:#666;">{{ baixa }}</a>   
     {% endif %}
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>
@@ -96,16 +96,16 @@ margin:0 ;
   <tr>
     <td valign="top" class="bfa">
      {% if  pagina.lloc%}
-    <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{% trans %}tr.lloc {% endtrans %}</p>
+    <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{{ lloc }}</p>
     <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
     {% endif %}
     {% if  pagina.dataRealitzacio%}
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{% trans %}tr.data{% endtrans %}</p>
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ data }}</p>
     <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
     {% endif %}
     {% if pagina.links %}
     <div class="links">
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ "tr.links" | trans }}</p>
+    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ links}}</p>
 	
 		{{ pagina.links|raw }}
 		</div>
@@ -136,7 +136,7 @@ margin:0 ;
     
     		{% if pagina.datavisible %}
 
-    <p style="clear: both; color: #999;"><br>{{ "tr.publicat" | trans }}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
+    <p style="clear: both; color: #999;"><br>{{ publicat}}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
     {% endif %}
     </td>
     
@@ -186,9 +186,9 @@ margin:0 ;
       Tel. 977 700 904<br />
     43870 Amposta</span></td>
     <td width="19" rowspan="5">&nbsp;</td>
-    <td width="171" align="left" valign="top" class="contring" id="cv"><strong style="color: #666; font-weight: bold; font-size:13px;">Organitza:</strong><br />     
+    <td width="171" align="left" valign="top" class="contring" id="cv"><strong style="color: #666; font-weight: bold; font-size:13px;">{{ organitza }}:</strong><br />     
      <a rel="external" href="http://www.amposta.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Ajuntament d'Amposta</a><br />
-    <br />      <strong style="font-weight: bold; color: #666; font-size:13px;">Amb el suport de:</strong><br />     
+    <br />      <strong style="font-weight: bold; color: #666; font-size:13px;">{{ suport }}:</strong><br />     
      <a rel="external" href="http://www.gencat.cat/cultura" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Generalitat de Catalunya</a><br />      
     <a rel="external" href="http://www.diputaciodetarragona.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Diputació de Tarragona</a></td>
   </tr>
@@ -197,8 +197,8 @@ margin:0 ;
     <td width="174" align="left" valign="top" class="contring" id="cv">&nbsp;</td>
   </tr>
   <tr>
-    <td height="18" align="left" valign="top" class="contring" style="color: #666; font-weight: bold; font-size:13px;">Segueix-nos a:</td>
-    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv"><strong style="font-weight: bold; color: #666; font-size:13px;">Col·labora:</strong><br />
+    <td height="18" align="left" valign="top" class="contring" style="color: #666; font-weight: bold; font-size:13px;">{{ follow }}:</td>
+    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv"><strong style="font-weight: bold; color: #666; font-size:13px;">{{ colabora }}:</strong><br />
     <a rel="external" href="http://www.museuterresebre.cat/" target="_blank" style="text-decoration:none; color:#666; font-size:13px;">Museu de les Terres de l'Ebre</a></td>
   </tr>
   <tr>

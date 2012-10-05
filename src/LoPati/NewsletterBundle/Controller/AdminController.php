@@ -64,6 +64,17 @@ class AdminController extends Controller {
 	public function previewAction($id)
 	{
 		
+		$visualitzar_correctament="Clica aquí per visualitzar correctament";
+		$baixa="Clica aquí per donar-te de baixa";
+		$lloc="Lloc";
+		$data="Data";
+		$publicat="Publicat";
+		$links="Enllaços";
+		$organitza="Organitza";
+		$suport="Amb el suport de";
+		$follow="Segueix-nos a";
+		$colabora="Col·labora";
+		
 		$em = $this->getDoctrine()->getEntityManager();
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
@@ -72,12 +83,27 @@ class AdminController extends Controller {
 		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
 		: 'http://lopati.cat';
 		//$object->getId();
-				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca'));
+				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament,
+						 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,'links'=>$links,
+						 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
+				 		'colabora'=>$colabora));
 		
 	}
 	
 	public function testAction($id)
 	{
+		
+		$visualitzar_correctament="Clica aquí per visualitzar correctament";
+		$baixa="Clica aquí per donar-te de baixa";
+		$lloc="Lloc";
+		$data="Data";
+		$publicat="Publicat";
+		$links="Enllaços";
+		$organitza="Organitza";
+		$suport="Amb el suport de";
+		$follow="Segueix-nos a";
+		$colabora="Col·labora";
+		
 		$userName = $this->container->get('security.context')
 		->getToken()
 		->getUser()
@@ -95,7 +121,11 @@ class AdminController extends Controller {
 		: 'http://lopati.cat';
 		
 
-		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 'idioma'=>'ca'));
+		$contenido = $this->render('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 
+				'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament, 
+				'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
+				'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
+				 		'colabora'=>$colabora));
 		
 		
 		$message = \Swift_Message::newInstance()
