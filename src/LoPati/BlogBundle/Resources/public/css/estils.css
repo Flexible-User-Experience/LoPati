@@ -2140,7 +2140,7 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 }
 #form_newsletter #mp_newsletter_user_email{
 
-with: 175px;
+width: 175px;
 border: 1px solid #666;
 margin:3px 0px 10px 0;
 }
