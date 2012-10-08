@@ -2092,23 +2092,8 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	overflow: hidden;
 }
 
-ol.bloc01 li div.bloc01-img {
-	width: 155px;
-	height: 155px;
-	overflow: hidden;
-	background-color: #E31853;
-}
-ol.bloc01 li div.bloc01-img img {
-	width: 155px;
-	height: 155px;
-  transition: opacity 0.25s;
-  -moz-transition: opacity 0.25s; /* Firefox >= 4 */
-  -webkit-transition: opacity 0.25s; /* Safari and Chrome */
-  -o-transition: opacity 0.25s; /* Opera */
-}
-ol.bloc01 li div.bloc01-img img:hover {
-  opacity: 0.35;
-}
+
+
 .contingutregistre1 .links p{	margin:0;
 	
 	

@@ -15,11 +15,21 @@
                     <li id="bloc{{ portada.id }}">
                         <div class="bloc01a">
                             <div class="bloc01a-shot">
+                            {%  if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null)%}
                                 <div class="bloc01-img">
-                                    <a href="{{ path('pagina', {'id': portada.id,'categoria' : portada.categoria.slug, 'subcategoria' : portada.subcategoria.slug,'titol' : portada.slug }) }}"><img src="{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}" alt="{{ portada.titol }}" title="{{ portada.titol }}"></a>
+                                    <a onMouseOut="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}'" 
+                                    onMouseOver="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita2') | imagine_filter('portada') }}'" href="{{ path('pagina', {'id': portada.id,'categoria' : portada.categoria.slug, 'subcategoria' : portada.subcategoria.slug,'titol' : portada.slug }) }}">
+                                    <img id="id{{ portada.id }}" src="{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}" alt="{{ portada.titol }}" title="{{ portada.titol }}"></a>
                                 </div>
+            
+
+							{% endif %}
+       						{%  if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null)%}
                                 <p class='tema'>{{ portada.subcategoria.nom }}</p>
-                                <h1><a href="{{ path('pagina', {'id': portada.id,'categoria' : portada.categoria.slug, 'subcategoria' : portada.subcategoria.slug,'titol' : portada.slug }) }}">{{ portada.titol }}{% if portada.resum %}<span class="seguir"> [+]<span></span></span>{% endif %}</a></h1>
+                                <h1><a onMouseOut="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}'" 
+                                    onMouseOver="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita2') | imagine_filter('portada') }}'" href="{{ path('pagina', {'id': portada.id,'categoria' : portada.categoria.slug, 'subcategoria' : portada.subcategoria.slug,'titol' : portada.slug }) }}">{{ portada.titol }}{% if portada.resum %}<span class="seguir"> [+]<span></span></span>{% endif %}</a></h1>
+                          
+                          {% endif %}
                             </div>
                         </div>
 					</li>
