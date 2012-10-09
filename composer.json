@@ -19,6 +19,7 @@
         "sensio/generator-bundle": "2.1.x-dev",
         "jms/security-extra-bundle": "1.2.*",
         "jms/di-extra-bundle": "1.1.*",
+         "sonata-project/cache-bundle" : "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master",
         "vich/uploader-bundle": "dev-master",
