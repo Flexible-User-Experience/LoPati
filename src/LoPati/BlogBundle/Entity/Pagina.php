@@ -175,7 +175,7 @@ class Pagina {
 	/////////////////////////////
 	
 	/**
-	 * @Assert\File(maxSize="10M")
+	 * @Assert\File(maxSize="16M")
 	 * @Vich\UploadableField(mapping="pdf", fileNameProperty="document1Name")
 	 *
 	 * @var File $document1
@@ -263,7 +263,7 @@ class Pagina {
 	}
 	
 	/**
-	 * @Assert\File(maxSize="10M")
+	 * @Assert\File(maxSize="16M")
 	 * @Vich\UploadableField(mapping="pdf", fileNameProperty="document2Name")
 	 *
 	 * @var File $document2
@@ -492,7 +492,7 @@ class Pagina {
 	 * @param LoPati\MenuBundle\Entity\Categoria $categoria
 	 */
 	public function setCategoria(
-			\LoPati\MenuBundle\Entity\Categoria $categoria) {
+			\LoPati\MenuBundle\Entity\Categoria $categoria=null	) {
 		$this->categoria = $categoria;
 	}
 

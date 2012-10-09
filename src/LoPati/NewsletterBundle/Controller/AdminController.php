@@ -74,6 +74,7 @@ class AdminController extends Controller {
 		$suport="Amb el suport de";
 		$follow="Segueix-nos a";
 		$colabora="Col·labora";
+		$butlleti="Butlletí";
 		
 		$em = $this->getDoctrine()->getEntityManager();
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
@@ -86,7 +87,7 @@ class AdminController extends Controller {
 				return $this->render('NewsletterBundle:Admin:preview.html.twig',array('id'=>$id, 'host'=>$host, 'pagines'=>$pagines, 'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament,
 						 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,'links'=>$links,
 						 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
-				 		'colabora'=>$colabora));
+				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
 		
 	}
 	
@@ -103,6 +104,7 @@ class AdminController extends Controller {
 		$suport="Amb el suport de";
 		$follow="Segueix-nos a";
 		$colabora="Col·labora";
+		$butlleti="Butlletí";
 		
 		$userName = $this->container->get('security.context')
 		->getToken()
@@ -125,13 +127,15 @@ class AdminController extends Controller {
 				'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament, 
 				'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
 				'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
-				 		'colabora'=>$colabora));
+				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
 		
 		
 		$message = \Swift_Message::newInstance()
-		->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
+		//->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
+		->setSubject('Butlletí nº ' .$newsletter2->getNumero())
+		
 		//->setFrom($config->getEmail())
-		->setFrom('butlleti@lopati.cat')
+		->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
 		->setTo($user->getEmail())
 		->setBody($contenido,'text/html')
 		;

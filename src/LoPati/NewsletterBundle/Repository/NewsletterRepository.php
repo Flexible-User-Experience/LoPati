@@ -10,7 +10,8 @@ class NewsletterRepository extends EntityRepository
 		
 		
 		$em = $this->getEntityManager();
-		$query = $em->createQuery('SELECT n,p,sub FROM NewsletterBundle:Newsletter n JOIN n.pagines p JOIN p.subCategoria sub WHERE n.id = :id ');
+		$query = $em->createQuery('SELECT n,p,sub FROM NewsletterBundle:Newsletter n JOIN n.pagines p JOIN p.subCategoria sub
+				 WHERE n.id = :id ORDER BY p.data_publicacio DESC');
 		$query->setParameter('id',$id);
 		
 		return $query->getSingleResult();

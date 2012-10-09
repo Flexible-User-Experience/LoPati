@@ -21,8 +21,11 @@ margin:0 ;
 <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td width="4" rowspan="2">&nbsp;</td>
-    <td width="174" rowspan="2" valign="top" class="Titul"><h1 style="font-size:14px; margin:6px 0; padding:0; line-height:0px; ">Lo Patí Newsletter</h1>
-    <h2 style="font-size:14px; margin:0; padding:0; color:#E31853 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2></td>
+    <td width="174" rowspan="2" valign="top" class="Titul">
+    <h2 style="font-size:14px; margin:0; padding:0; color:#666 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris')}} </h2>
+{#      <h2 style="font-size:14px; margin:0; padding:0; color:#666 !important;">{{butlleti}}: {{ pagines.id }} </h2></td>#}
+
+</td>
     <td width="40">&nbsp;  </td>
     <td colspan="2" valign="top"><a href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}" style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">{{ visualitzar_correctament }}</a>  
     {% if token is defined %}

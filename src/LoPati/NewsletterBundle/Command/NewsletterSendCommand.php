@@ -97,6 +97,7 @@ EOT
 				$suport="Amb el suport de";
 				$follow="Segueix-nos a";
 				$colabora="Col·labora";
+				$butlleti="Butlletí";
 				
 				
 				if ($user->getUser()->getIdioma()=='es'){
@@ -114,6 +115,7 @@ EOT
 					$suport="Con el apoyo de";
 					$follow="Siguenos en";
 					$colabora="Colabora";
+					$butlleti="Boletín";
 			
 							foreach ($pagines->getPagines() as $pagina){
 								
@@ -144,6 +146,7 @@ EOT
 					$suport="With de support of";
 					$follow="Follow us";
 					$colabora="Collaborate";
+					$butlleti="Newsletter";
 					
 								foreach ($pagines->getPagines() as $pagina){
 								
@@ -170,13 +173,14 @@ EOT
 				 		'visualitzar_correctament' => $visualitzar_correctament,
 				 		 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
 				 		'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
-				 		'colabora'=>$colabora));
+				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
 				
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
-						->setSubject(
-								'Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
+						//->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
 						//->setFrom($config->getEmail())
+				->setSubject('Butlletí nº ' .$newsletter2->getNumero())
+				->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
 						->setFrom('butlleti@lopati.cat')
 						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(

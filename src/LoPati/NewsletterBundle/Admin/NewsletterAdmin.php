@@ -13,6 +13,7 @@ class NewsletterAdmin extends Admin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
+		->add('numero',null,array('label'=>'nº newsletter'))
 		->add('dataNewsletter','date', array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy'))	
 		->add('pagines',null,array('label'=>'Pàgines','attr'=>array('style'=>'width:500px; height:500px;')))
 		//->add('estat')
@@ -25,6 +26,7 @@ class NewsletterAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
+		->addIdentifier('numero',null,array('label'=>'nº newsletter'))
 	->addIdentifier('dataNewsletter',null,array('label'=>'Data newsletter', 'template'=>'NewsletterBundle:Admin:list_custom_dataNewsletter_field.html.twig'))
 	->add('test')
 	->add('estat',null, array('label'=>'Estat', 'template' => 'NewsletterBundle:Admin:list_custom_estat_field.html.twig'))
@@ -58,6 +60,6 @@ class NewsletterAdmin extends Admin
 	protected $datagridValues = array(
 			'_page' => 1,
 			'_sort_order' => 'DESC', // sort direction
-			'_sort_by' => 'dataNewsletter' // field name
+			'_sort_by' => 'numero' // field name
 	);
 }

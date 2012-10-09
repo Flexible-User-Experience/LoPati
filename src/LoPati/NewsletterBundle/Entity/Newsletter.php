@@ -13,6 +13,7 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @ORM\Table(name="newsletters")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterRepository")
+ * @UniqueEntity("numero")
  * @UniqueEntity("dataNewsletter")
  */
 class Newsletter
@@ -22,11 +23,20 @@ class Newsletter
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue
+     * 
      */
     private $id;
 
-
+    /**
+     * @var integer $numero
+     *
+     * @ORM\Column(name="numero", type="integer", unique=true)
+     * 
+     *
+     */
+    private $numero;
+    
 
     /**
      * @var string $dataNewsletter
@@ -102,7 +112,22 @@ class Newsletter
     {
         return $this->id;
     }
-
+	
+    public function getNumero()
+    {
+    	return $this->numero;
+    }
+    
+    public function setNumero($created)
+    {
+    	$this->numero = $created;
+    }
+    
+    public function setId($created)
+    {
+    	$this->id = $created;
+    }
+    
     public function setDataNewsletter($created)
     {
     	$this->dataNewsletter = $created;

@@ -132,7 +132,54 @@ class DefaultController extends Controller
 		$newDate = date("Y-m-d", strtotime($data));
 		$em = $this->getDoctrine()->getEntityManager();
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterByData($newDate);
-		return $this->render('NewsletterBundle:Default:mail.html.twig',array('host'=>$host, 'pagines'=>$pagines, 'idioma'=>$_locale));
+		$visualitzar_correctament="Clica aquí per visualitzar correctament";
+		
+		if ($_locale == 'ca'){
+			$visualitzar_correctament="Clica aquí per visualitzar correctament";
+			$baixa="Clica aquí per donar-te de baixa";
+			$lloc="Lloc";
+			$data="Data";
+			$links="Enllaços";
+			$publicat="Publicat";
+			
+			$organitza="Organitza";
+			$suport="Amb el suport de";
+			$follow="Segueix-nos a";
+			$colabora="Col·labora";
+			$butlleti="Butlletí";
+		}else if ($_locale == 'es'){
+			$visualitzar_correctament="Pulsa aquí para visualizar correctamente";
+			$baixa="Pulsa aquí para darte de baja";
+			$lloc="Lugar";
+			$data="Fecha";
+			$publicat="Publicado";
+			$links="Enlaces";
+				
+			$organitza="Organiza";
+			$suport="Con el apoyo de";
+			$follow="Siguenos en";
+			$colabora="Colabora";
+			$butlleti="Boletín";
+		}else if($_locale == 'en'){
+			$visualitzar_correctament="Click here to visualize correctly";
+			$baixa="Click here to provide you low";
+			$lloc="Place";
+			$data="Date";
+			$publicat="Published";
+			$links="Links";
+				
+			$organitza="Organizes";
+			$suport="With de support of";
+			$follow="Follow us";
+			$colabora="Collaborate";
+			$butlleti="Newsletter";
+		}
+		
+		return $this->render('NewsletterBundle:Default:mail.html.twig',array('host'=>$host, 'pagines'=>$pagines, 'idioma'=>$_locale,
+				'visualitzar_correctament' => $visualitzar_correctament,
+				 		 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
+				 		'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
+				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
 		
 	}
 
