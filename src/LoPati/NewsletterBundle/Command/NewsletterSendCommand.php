@@ -35,8 +35,13 @@ EOT
 		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
 				: 'http://lopati.cat';
 		
-		$output->writeln(new \DateTime());
+		
+		$hora=new \DateTime();
+		$output->writeln($hora->format('Y-m-d H:i:s'));
 		$output->writeln($host);
+		
+		
+
 		
 		$contenedor = $this->getContainer();
 		$em = $contenedor->get('doctrine')->getEntityManager();
@@ -50,7 +55,7 @@ EOT
 		$query->setMaxResults('1');
 		$newsletter = $query->getOneOrNullResult();
 
-		$output->writeln('canvi estat:' . count($newsletter));
+		//$output->writeln('canvi estat:' . count($newsletter));
 
 		if ($newsletter)
 			$newsletter->setEstat('Sending');
@@ -64,7 +69,7 @@ EOT
 		$newsletter2 = $query->getOneOrNullResult();
 		
 		if ($newsletter2) {
-			$output->writeln('entra pagines');
+			//$output->writeln('entra pagines');
 			
 			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
 			
@@ -72,7 +77,7 @@ EOT
 			
 			
 			//$this->container->getParameter('cupon.ciudad_por_defecto'),
-			$output->writeln('entra newsletter2');
+			//$output->writeln('entra newsletter2');
 			$query = $em
 					->createQuery(
 							'SELECT s FROM NewsletterBundle:NewsletterSend s   WHERE s.newsletter = :newsletter ');
@@ -81,10 +86,11 @@ EOT
 			$users = $query->getResult();
 			
 			if ($users){
-			$output->writeln('users per enviar:' . count($users));
+			$output->writeln('users per enviar correu:' . count($users));
 			$enviats = 0;
+			$fallats = 0;
 			$idioma="ca";
-			$output->writeln(count($users));
+			//$output->writeln(count($users));
 			foreach ($users as $user) {
 				
 				$visualitzar_correctament="Clica aquí per visualitzar correctament";
@@ -103,7 +109,7 @@ EOT
 				
 				if ($user->getUser()->getIdioma()=='es'){
 					
-					$output->writeln('entra castella');
+						//$output->writeln('entra castella');
 					
 					$visualitzar_correctament="Pulsa aquí para visualizar correctamente";
 					$baixa="Pulsa aquí para darte de baja";
@@ -134,7 +140,7 @@ EOT
 					
 				}elseif ($user->getUser()->getIdioma()=='en'){
 					
-					$output->writeln('entra ingles');
+					//$output->writeln('entra ingles');
 					
 					$visualitzar_correctament="Click here to visualize correctly";
 					$baixa="Click here to provide you low";
@@ -167,7 +173,7 @@ EOT
 					$pagines->setLocale('en');
 					$em->refresh($pagines);*/
 				}
-				$output->writeln('mail:' . $user->getUser()->getIdioma());
+				//$output->writeln('mail:' . $user->getUser()->getIdioma());
 				//$this->getContainer()->get('templating')->render(...);
 				$contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig',
 				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user->getUser()->getToken(),
@@ -195,23 +201,25 @@ EOT
 					$enviats++;
 
 				} else {
-
+					$fallats++;
 					$user->getUser()->setFail($user->getUser()->getFail() + 1);
 				}
 				$em->remove($user);
-				$output->writeln('shan enviat:' . $num);
+				//$output->writeln('shan enviat:' . $num);
 
 			}
 			$newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
+			$output->writeln('shan enviat: ' . $enviats . ' mails correctament');
+			$output->writeln('han fallat: ' . $fallats . ' mails');
 			}else{
-				$output->writeln('entra else');
+				//$output->writeln('entra else');
 				$newsletter2->setEstat('Sended');
 				$newsletter2->setFiEnviament(new \DateTime('now'));
 			}
 		}
 		$em->flush();
 
-		$output->writeln('Generando emails...');
+		//$output->writeln('Generando emails...');
 		// ...
 	}
 }
