@@ -64,14 +64,7 @@ services:
       - LoPati\NewsletterBundle\Entity\Newsletter
       - NewsletterBundle:Admin
       
-  sonata.lopati.admin.newslettersend:
-    class: LoPati\NewsletterBundle\Admin\NewsletterSendAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: send }
-    arguments:
-      - null
-      - LoPati\NewsletterBundle\Entity\NewsletterSend
-      - NewsletterBundle:Admin
+
       
 
       
