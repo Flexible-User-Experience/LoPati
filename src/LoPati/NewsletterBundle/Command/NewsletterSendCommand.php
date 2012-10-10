@@ -34,9 +34,10 @@ EOT
 
 		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
 				: 'http://lopati.cat';
-
+		
+		$output->writeln(new \DateTime());
 		$output->writeln($host);
-
+		
 		$contenedor = $this->getContainer();
 		$em = $contenedor->get('doctrine')->getEntityManager();
 
