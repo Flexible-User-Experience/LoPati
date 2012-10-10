@@ -230,7 +230,7 @@ class Newsletter
     
     public function __toString(){
     	//date('F d, Y h:i:s A', strtotime($this->dataNewsletter;))
-    	return "Newsletter";
+    	return "Newsletter nº".$this->numero. " id:" .$this->id;
     
     }
 }
