@@ -215,9 +215,11 @@ EOT
 							//Error handled here
 						} catch (Swift_MimeException   $e) {
 							//Error handled here
-						}				
+							
+						} catch (Swift_RfcComplianceException   $e) {
+							//Error handled here
+						}
 						
-
 				
 				if ($num) {
 
