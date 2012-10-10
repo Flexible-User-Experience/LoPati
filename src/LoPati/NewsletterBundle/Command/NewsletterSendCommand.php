@@ -199,6 +199,7 @@ EOT
 				if ($num) {
 
 					$enviats++;
+					$output->write($enviats.'.. ');
 
 				} else {
 					$fallats++;
@@ -209,6 +210,7 @@ EOT
 
 			}
 			$newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
+			$output->writeln(' ');
 			$output->writeln('shan enviat: ' . $enviats . ' mails correctament');
 			$output->writeln('han fallat: ' . $fallats . ' mails');
 			}else{
