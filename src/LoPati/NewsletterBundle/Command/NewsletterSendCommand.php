@@ -214,7 +214,7 @@ EOT
 				}
 				$em->remove($user);
 				//$output->writeln('shan enviat:' . $num);
-
+				$em->flush();
 			}
 			$newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
 			$output->writeln(' ');
