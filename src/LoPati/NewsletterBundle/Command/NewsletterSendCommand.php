@@ -211,7 +211,7 @@ EOT
 							$message->setTo($to);
 							$output->write('enviant a' . $to .'.. ');
 							$num = $contenedor->get('mailer')->send($message);
-						} catch (Swift_TransportException $e) {
+						} catch (Swift_RfcComplianceException $e) {
 							//Error handled here
 						}		
 						
