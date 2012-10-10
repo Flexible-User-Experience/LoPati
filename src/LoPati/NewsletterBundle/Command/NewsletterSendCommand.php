@@ -92,7 +92,13 @@ EOT
 			$idioma="ca";
 			//$output->writeln(count($users));
 			foreach ($users as $user) {
+				$output->writeln('llista correus a enviar');
+				$to=$user->getUser()->getEmail();
+				$output->write(' .. ' . $to .' .. ');
 				
+			}
+			foreach ($users as $user) {
+				$output->writeln('entra usuari' .$user->getUser()->getEmail() );
 				$visualitzar_correctament="Clica aquí per visualitzar correctament";
 				$baixa="Clica aquí per donar-te de baixa";
 				$lloc="Lloc";
