@@ -112,9 +112,9 @@ EOT
 				$colabora="Col·labora";
 				$butlleti="Butlletí";
 				
-				
+				$output->writeln('if es');
 				if ($user->getUser()->getIdioma()=='es'){
-					
+					$output->writeln('entra es');
 						//$output->writeln('entra castella');
 					
 					$visualitzar_correctament="Pulsa aquí para visualizar correctamente";
@@ -145,7 +145,7 @@ EOT
 								$idioma="es";
 					
 				}elseif ($user->getUser()->getIdioma()=='en'){
-					
+					$output->writeln('entra en');
 					//$output->writeln('entra ingles');
 					
 					$visualitzar_correctament="Click here to visualize correctly";
@@ -181,13 +181,14 @@ EOT
 				}
 				//$output->writeln('mail:' . $user->getUser()->getIdioma());
 				//$this->getContainer()->get('templating')->render(...);
+				$output->writeln('nem a renderitzar mail.html.twig');
 				$contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig',
 				 array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user->getUser()->getToken(),
 				 		'visualitzar_correctament' => $visualitzar_correctament,
 				 		 'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
 				 		'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
 				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
-				
+				$output->writeln('hem renderitzat');
 				$to=$user->getUser()->getEmail();
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
