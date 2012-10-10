@@ -208,16 +208,25 @@ EOT
 						
 		
 						try {
+							
 							$message->setTo($to);
 							$output->write('enviant a' . $to .'.. ');
 							$num = $contenedor->get('mailer')->send($message);
+							
 						} catch (\Swift_TransportException  $e) {
-							//Error handled here
+
+							$output->writeln(' ');
+							$output->writeln('ha fallat:' . $to);
+							
 						} catch (\Swift_MimeException   $e) {
 							//Error handled here
+							$output->writeln(' ');
+							$output->writeln('ha fallat:' . $to);
 							
 						} catch (\Swift_RfcComplianceException   $e) {
-							//Error handled here
+							//Error handled here				
+							$output->writeln(' ');
+							$output->writeln('ha fallat:' . $to);
 						}
 						
 				
