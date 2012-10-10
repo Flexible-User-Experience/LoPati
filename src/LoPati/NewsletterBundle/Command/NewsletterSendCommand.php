@@ -182,6 +182,7 @@ EOT
 				 		'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
 				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
 				
+				$to=$user->getUser()->getEmail();
 				$config = 'metalrockero@gmail.com';
 				$message = \Swift_Message::newInstance()
 						//->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
@@ -189,17 +190,17 @@ EOT
 				->setSubject('Butlletí nº ' .$newsletter2->getNumero())
 				->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
 						->setFrom('butlleti@lopati.cat')
-						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
+						->setTo($to) /*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
 													  )), 'text/html'	)*/
 						->setBody($contenido,'text/html');
 				$num = $contenedor->get('mailer')->send($message);
-
+				$output->write('enviant a' . $to .'.. ');
 				if ($num) {
 
 					$enviats++;
-					$output->write($enviats.'.. ');
+					$output->write('enviat ');
 
 				} else {
 					$fallats++;
