@@ -197,11 +197,22 @@ EOT
 				->setSubject('Butlletí nº ' .$newsletter2->getNumero())
 				->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
 						//->setFrom('butlleti@lopati.cat')
-						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
+				->setBody($contenido,'text/html');
+				
+						//->setTo($user->getUser()->getEmail()) 
+						/*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
 													  )), 'text/html'	)*/
-						->setBody($contenido,'text/html');
+
+						
+		
+						try {
+							$message->setTo($to);
+						} catch (Swift_TransportException $e) {
+							//Error handled here
+						}		
+						
 				$output->write('enviant a' . $to .'.. ');
 				$num = $contenedor->get('mailer')->send($message);
 				
