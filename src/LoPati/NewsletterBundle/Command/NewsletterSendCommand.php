@@ -196,7 +196,7 @@ EOT
 						//->setFrom($config->getEmail())
 				->setSubject('Butlletí nº ' .$newsletter2->getNumero())
 				->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
-						->setFrom('butlleti@lopati.cat')
+						//->setFrom('butlleti@lopati.cat')
 						->setTo($user->getUser()->getEmail()) /*->setBody($contenedor->get('twig')->render
 													          ('NewsletterBundle:Default:confirmation.html.twig', array(
 													          
