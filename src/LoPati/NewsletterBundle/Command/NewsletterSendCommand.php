@@ -98,7 +98,7 @@ EOT
 				
 			}
 			foreach ($users as $user) {
-				$output->writeln('entra usuari' .$user->getUser()->getEmail() );
+				$output->writeln('entra usuari ' .$user->getUser()->getEmail() );
 				$visualitzar_correctament="Clica aquí per visualitzar correctament";
 				$baixa="Clica aquí per donar-te de baixa";
 				$lloc="Lloc";
@@ -201,8 +201,9 @@ EOT
 													          
 													  )), 'text/html'	)*/
 						->setBody($contenido,'text/html');
-				$num = $contenedor->get('mailer')->send($message);
 				$output->write('enviant a' . $to .'.. ');
+				$num = $contenedor->get('mailer')->send($message);
+				
 				if ($num) {
 
 					$enviats++;
