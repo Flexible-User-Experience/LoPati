@@ -29,6 +29,13 @@ class NewsletterSendAdmin extends Admin
 
 				;
 	}
-
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+	{
+		$datagridMapper
+		->add('id')
+		->add('user')
+		->add('newsletter')
+		;
+	}
 
 }
