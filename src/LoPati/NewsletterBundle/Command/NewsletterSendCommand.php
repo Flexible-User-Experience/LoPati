@@ -209,12 +209,13 @@ EOT
 		
 						try {
 							$message->setTo($to);
+							$output->write('enviant a' . $to .'.. ');
+							$num = $contenedor->get('mailer')->send($message);
 						} catch (Swift_TransportException $e) {
 							//Error handled here
 						}		
 						
-				$output->write('enviant a' . $to .'.. ');
-				$num = $contenedor->get('mailer')->send($message);
+
 				
 				if ($num) {
 
