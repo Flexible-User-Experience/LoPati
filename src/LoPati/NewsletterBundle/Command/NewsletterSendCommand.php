@@ -211,12 +211,12 @@ EOT
 							$message->setTo($to);
 							$output->write('enviant a' . $to .'.. ');
 							$num = $contenedor->get('mailer')->send($message);
-						} catch (Swift_TransportException  $e) {
+						} catch (\Swift_TransportException  $e) {
 							//Error handled here
-						} catch (Swift_MimeException   $e) {
+						} catch (\Swift_MimeException   $e) {
 							//Error handled here
 							
-						} catch (Swift_RfcComplianceException   $e) {
+						} catch (\Swift_RfcComplianceException   $e) {
 							//Error handled here
 						}
 						
