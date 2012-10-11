@@ -220,7 +220,7 @@ liip_imagine:
         imatge_pagina:
             quality: 90
             filters:
-                thumbnail: { size: [615,null], mode: outbound }
+                thumbnail: { size: [710,null], mode: outbound }
                 
         portada:
             quality: 90
