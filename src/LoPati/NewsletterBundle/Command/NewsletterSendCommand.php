@@ -205,7 +205,7 @@ EOT
 													          
 													  )), 'text/html'	)*/
 
-						
+						$num=0;
 		
 						try {
 							
