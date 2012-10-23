@@ -5,10 +5,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LoPati\MenuBundle\Util\Util;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 
 
 class DefaultController extends Controller {
+	
+	
+	public function searchAction() {
+	
+	
+		$finder =$this->container->get('foq_elastica.finder.website.pagines');
+		
+		/** var array of Acme\UserBundle\Entity\User */
+		$pagines = $finder->find('XYZ');
+		
+		/** var array of Acme\UserBundle\Entity\User limited to 10 results */
+		//$pagines = $finder->find('bob', 10);
+		
+		
+		return $this->render('BlogBundle:Default:search.html.twig',array('pagines'=>$pagines));
+		
+			
+	}
+	
+	
+	
 
 	public function indexAction() {
 

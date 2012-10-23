@@ -1,0 +1,11 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}{% endblock %}
+{% block menu %}
+    {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %}
+{% endblock %}
+{% block contenidor %}
+    {% if app.session.hasFlash('notice') %}
+        <div class="flash success">{{ app.session.flash('notice') }}</div>
+    {% endif %}
+
+{% endblock %}

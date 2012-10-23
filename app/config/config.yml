@@ -244,4 +244,23 @@ liip_imagine:
                 thumbnail: { size: [578,null], mode: outbound }
                 
  
+#app/config/config.yml
+foq_elastica:
+    clients:
+        default: { host: localhost, port: 8889 }
+        
+    indexes:
+        website:
+            client: default
+            types:
+                pagines:
+                    mappings:
+                        titol: { boost: 5 }
+                        descripcio: { boost: 3 }
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model: LoPati\BlogBundle\Entity\Pagina
+                        provider:
+                        listener:
+                        finder:         
 

@@ -16,7 +16,11 @@ inici:
   pattern: /
   defaults: { _controller: BlogBundle:Default:index}
 
-
+search:
+  pattern: /{_locale}/search/
+  defaults: { _controller: BlogBundle:Default:search}
+  requirements:
+        _locale: ca|es|en
       
 portada:
   pattern: /{_locale}/

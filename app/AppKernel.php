@@ -43,6 +43,7 @@ class AppKernel extends Kernel
         		new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         		new Liip\ImagineBundle\LiipImagineBundle(),
         		new Sonata\IntlBundle\SonataIntlBundle(),
+        		new FOQ\ElasticaBundle\FOQElasticaBundle(),
         	
         		
         		

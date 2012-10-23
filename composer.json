@@ -25,10 +25,11 @@
         "vich/uploader-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
-        "a2lix/translation-form-bundle" : "dev-master",
+        "a2lix/translation-form-bundle" : "0.3.9",
         "liip/imagine-bundle": "dev-master",
         "sonata-project/user-bundle" : "dev-master",
-        "sonata-project/intl-bundle" : "dev-master"
+        "sonata-project/intl-bundle" : "dev-master",
+        "exercise/elastica-bundle": "dev-master"
 
 
         
