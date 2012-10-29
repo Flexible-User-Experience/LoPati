@@ -247,7 +247,7 @@ liip_imagine:
 #app/config/config.yml
 foq_elastica:
     clients:
-        default: { host: localhost, port: 8888 }
+        default: { host: localhost, port: %port_elastica% }
         
     indexes:
         website:
