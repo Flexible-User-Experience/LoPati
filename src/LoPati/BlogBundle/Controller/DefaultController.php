@@ -62,10 +62,11 @@ class DefaultController extends Controller {
 		$this->get('session')->set('_locale', $_locale);
 		
 		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
-		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat JOIN p.subCategoria sub
-			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.data_caducitat > :avui OR p.data_caducitat IS NULL) ORDER BY p.data_publicacio DESC');
+		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
+			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC');
 		
-		$consulta->setParameter('avui', new \DateTime('today'));
+		//$consulta->setParameter('avui', new \DateTime('today'));
+		$consulta->setParameter('categoria', 'Arxiu');
 	$query = $em->createQuery($consulta);
 
 	//$pagination = $consulta->getResult();
@@ -134,7 +135,7 @@ class DefaultController extends Controller {
 		//$categories = $em->getRepository('MenuBundle:Categoria')->findAll();
 		$query = $em->createQuery('SELECT c FROM BlogBundle:Configuracio c WHERE c.id =1');
 		
-		$configuracio = $query->getSingleResult();
+		$configuracio = $query->getOneOrNullResult();
 		return $this->render('BlogBundle:Default:peu.html.twig', array('peu' => $configuracio));
 	}
 	

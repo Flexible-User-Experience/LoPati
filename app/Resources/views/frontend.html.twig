@@ -1,14 +1,13 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
-		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<META HTTP-EQUIV="pragma" CONTENT="no-cache">
-		<META NAME="keywords" CONTENT="art contemporani,xarxa centres arts visuals catalunya,amposta,terres de l'ebre,mergent,residencia artsites,paissatge,art urba,street,art,poesia,experimental,video,art digital,cultura contemprania,pensament,pedagogia,arte contemporaneo,coleccion,col·leccio,arxiu,archivo,mediateca,soriano montagut,carles santos">
+	    <meta charset="UTF-8" />
+	    <META NAME="keywords" CONTENT="art contemporani,xarxa centres arts visuals catalunya,amposta,terres de l'ebre,mergent,residencia artsites,paissatge,art urba,street,art,poesia,experimental,video,art digital,cultura contemprania,pensament,pedagogia,arte contemporaneo,coleccion,col·leccio,arxiu,archivo,mediateca,soriano montagut,carles santos">
 		<META NAME="description" CONTENT="Centre d'Art de les Terres de l'Ebre, amb seu a Amposta. Difusió, formació, producció, col·lecció i arxiu. Forma part de la Xarxa de Centres d'Arts Visuals de Catalunya.">
-		<META NAME="robots" CONTENT="index, follow">
+		
 		<title>Lo Pati | Centre d'Art - Terres de l'Ebre{% block title %}{% endblock %}</title>
 		<link rel="shortcut icon" href="/favicon.ico">
-		<link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
 	</head>
 	<body>
@@ -31,7 +30,7 @@
 					<div class="buscador">
 						<form name="buscador1" action="#" method="post">
 							<p style="width: 155px; float: left;"><input name="textabuscar" type="text" style="width: 155px; height: 18px; border: 1px solid #666; margin: 0px;" value=""></p>
-							<p style="width: 25px; float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" value="buscar" title="buscar" src="/images/boto10ca.png"></p>
+							<p style="width: 25px; float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" title="buscar" src="/images/boto10ca.png" alt="boto lupa per buscar"></p>
 						</form>
 					</div>
 					<div class="idiomes">
@@ -44,14 +43,16 @@
 					</div>
 					<div class="xarxes">			
 						<p>{% trans %}tr.follow{% endtrans %}:</p>
-						<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external" onmouseover="document.facebook.src='/images/xarxa_fb_color.gif';" onmouseout="document.facebook.src='/images/xarxa_fb.gif';"><img style="width: 18px;" name="facebook" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
-						<a href="http://www.vimeo.com/lopati" rel="external" onmouseover="document.vimeo.src='/images/xarxa_vimeo_color.gif';" onmouseout="document.vimeo.src='/images/xarxa_vimeo.gif';"><img style="width: 18px;" name="vimeo" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
-						<a href="http://www.flickr.com/lopati" rel="external" onmouseover="document.flickr.src='/images/xarxa_flickr_color.gif';" onmouseout="document.flickr.src='/images/xarxa_flickr.gif';"><img style="width: 18px;" name="flickr" src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
+						<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external" onmouseover="document.facebook.src='/images/xarxa_fb_color.gif';" onmouseout="document.facebook.src='/images/xarxa_fb.gif';"><img style="width: 18px;"  src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
+						<a href="http://www.vimeo.com/lopati" rel="external" onmouseover="document.vimeo.src='/images/xarxa_vimeo_color.gif';" onmouseout="document.vimeo.src='/images/xarxa_vimeo.gif';"><img style="width: 18px;"  src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
+						<a href="http://www.flickr.com/lopati" rel="external" onmouseover="document.flickr.src='/images/xarxa_flickr_color.gif';" onmouseout="document.flickr.src='/images/xarxa_flickr.gif';"><img style="width: 18px;"  src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
 					</div>
-					<p><br></p>
+					
 				</div>
 			</div>
 		</div>
+		
 		{% render 'BlogBundle:Default:peu' %}
+		
 	</body>
 </html>

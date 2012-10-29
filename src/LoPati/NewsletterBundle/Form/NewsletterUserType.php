@@ -19,7 +19,7 @@ class NewsletterUserType extends AbstractType
     {
         $builder
                 ->add('email',null,array('label'=>'email'))
-                ->add('idioma','choice', array( 'choices'   => array( 'ca' => 'Català','es' => 'Castellano','en'=>'English'), 'required'  => true,))
+                ->add('idioma','choice', array( 'choices'   => array( 'ca' => 'Català','es' => 'Castellano','en'=>'English'), 'data'=>'ca', 'required'=>false))
         ;
     }
 

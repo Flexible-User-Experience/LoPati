@@ -36,7 +36,7 @@ class PaginaAdmin extends Admin
 		->add('data_caducitat','date', array('label' => 'Data caducitat', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
 		->add('data_realitzacio', null, array('label' => 'Data realització'))
 		->add('lloc', null, array('label' => 'Lloc'))
-		->add('video',null, array('required'=> FALSE))
+		->add('video','url', array('required'=> FALSE))
 		->add('actiu', null, array('label' => 'Actiu ?','required'  => false))
 		->add('compartir',null,array('label' => 'Compartir ?','required'  => false))
 
@@ -124,7 +124,7 @@ class PaginaAdmin extends Admin
 		->add('portada', null, array('label' => 'És portada'))
 		->add('actiu')
 		->add('categoria', null, array('label' => 'Menú primer nivell'))
-		->add('subcategoria', null, array('label' => 'Menú segon nivell'))
+		->add('subcategoria', 'textarea', array('label' => 'Menú segon nivell'))
 		->add('data_publicacio', null, array('label'=>'Data publicació', 'template' => 'BlogBundle:Default:list_custom_date_field.html.twig'));
 	}
 	

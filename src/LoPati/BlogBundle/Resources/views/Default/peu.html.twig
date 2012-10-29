@@ -1,6 +1,7 @@
 <div class="peu" style="text-align: left;">
 	<div style='width: 155px; margin: 0px 27px 10px 0px; font-size: 80%; float: left;'>
-		{% if peu.adresa %}
+{% if peu is not empty %}
+	{% if peu.adresa %}
 			{{ peu.adresa | raw }}
 		{% endif %}
 	</div>
@@ -13,6 +14,7 @@
 	<div style='width: 155px; margin: 0px 27px 10px 0px; font-size: 80%; float: left;'>
 		{{ peu.colabora | raw }}
 	</div>
+{% endif %}
 	<div style="width: 155px; margin: 0px 0px 10px 32px; font-size: 80%; float: left;">
 		<a rel="external" href="http://cat.creativecommons.org/llicencia/" target="_blank">
 			<img src="/images/creativecommons.png" style="width: 70px;" alt="continguts amb llicència creative commons">

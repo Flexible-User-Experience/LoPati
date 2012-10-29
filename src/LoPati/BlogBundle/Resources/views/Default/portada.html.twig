@@ -12,6 +12,8 @@
         <div class="continguts">
             <ol class="bloc01">
                 {% for portada in portades %}
+                
+                	 {% if (date(portada.dataCaducitat) >  date() and portada.subCategoria is not null) or (portada.datacaducitat is null and portada.subCategoria is not null) %}
                     <li id="bloc{{ portada.id }}">
                         <div class="bloc01a">
                             <div class="bloc01a-shot">
@@ -33,6 +35,35 @@
                             </div>
                         </div>
 					</li>
+					{% else %}
+
+
+					
+						{% if date(portada.dataCaducitat) <=  date() and portada.dataCaducitat is not null%}
+						
+						                    <li id="bloc{{ portada.id }}">
+                        <div class="bloc01a">
+                            <div class="bloc01a-shot">
+                            {%  if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null)%}
+                                <div class="bloc01-img">
+                                    <a onMouseOut="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}'" 
+                                    onMouseOver="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita2') | imagine_filter('portada') }}'" href="{{ path('arxiuarticle', {'id': portada.id,  'any': portada.datapublicacio|date("Y"), 'arxiu': portada.categoria.slug, 'titol': portada.slug }) }}">
+                                    <img id="id{{ portada.id }}" src="{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}" alt="{{ portada.titol }}" title="{{ portada.titol }}"></a>
+                                </div>
+            
+
+							{% endif %}
+       						{%  if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null)%}
+                                <p class='tema'>{{ portada.categoria.nom }}</p>
+                                <h1><a onMouseOut="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita') | imagine_filter('portada') }}'" 
+                                    onMouseOver="document.getElementById('id{{ portada.id }}').src='{{ vich_uploader_asset(portada, 'imagePetita2') | imagine_filter('portada') }}'" href="{{ path('arxiuarticle', {'id': portada.id,  'any': portada.datapublicacio|date("Y"), 'arxiu': portada.categoria.slug, 'titol': portada.slug }) }}">{{ portada.titol }}{% if portada.resum %}<span class="seguir"> [+]<span></span></span>{% endif %}</a></h1>
+                          
+                          {% endif %}
+                            </div>
+                        </div>
+					</li>
+						{% endif %}
+					{% endif %}
                 {% endfor %}
             </ol>
         </div>

@@ -94,7 +94,8 @@ class Pagina {
 	protected $categoria;
 
 	/** 
-	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria") 
+	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria")	
+	 * @ORM\JoinColumn(name="subCategoria_id", referencedColumnName="id", nullable=true) 
 	 */
 	protected $subCategoria;
 	
@@ -511,7 +512,7 @@ class Pagina {
 	 * @param LoPati\MenuBundle\Entity\SubCategoria $SubCategoria
 	 */
 	public function setSubCategoria(
-			\LoPati\MenuBundle\Entity\SubCategoria $subCategoria) {
+			\LoPati\MenuBundle\Entity\SubCategoria $subCategoria=null) {
 		$this->subCategoria = $subCategoria;
 	}
 
