@@ -13,4 +13,5 @@ parameters:
     locale: ca
     secret: 9118197c01dddcc43752b3136f2f10de8
     database_path: null
+    port_elastica: 80
   
