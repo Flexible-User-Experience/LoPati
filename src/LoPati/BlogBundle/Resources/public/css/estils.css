@@ -2070,7 +2070,7 @@ ol.bloc01 li div.bloc01a p {
 }
 ol.bloc01 li div.bloc01a div.bloc01a-shot {
 	padding: 0px;
-	background: url(images/bloc01-check-sm.png) no-repeat top left; 
+	/*background: url(images/bloc01-check-sm.png) no-repeat top left; */
 }
 ol.bloc01 li div.bloc01a a.bloc01-over {
 	opacity: 0;
