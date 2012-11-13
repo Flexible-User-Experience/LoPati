@@ -12,11 +12,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\PaginaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\PaginaTranslation")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
+
 class Pagina {
 
 	/**
@@ -69,6 +70,16 @@ class Pagina {
 
 	/** @ORM\Column(type="date", nullable=true) */
 	protected $data_caducitat = null;
+
+    /**
+     * @ORM\Column(type="date",nullable=true)
+     */
+    protected $startDate;
+
+    /**
+     * @ORM\Column(type="date",nullable=true)
+     */
+    protected $endDate;
 
 	/** 
 	 * @ORM\Column(type="string", length=255, nullable=true )
@@ -632,7 +643,34 @@ class Pagina {
 		return $this->data_caducitat;
 	}
 
-	/**
+
+
+    public function setDataIniciAgenda($dataCaducitat) {
+        $this->data_inici_agenda = $dataCaducitat;
+    }
+
+    /**
+     * Get data_caducitat
+     *
+     * @return date
+     */
+    public function getDataIniciAgenda() {
+        return $this->data_inici_agenda;
+    }
+
+    public function setDataFiAgenda($dataCaducitat) {
+        $this->data_fi_agenda = $dataCaducitat;
+    }
+
+    /**
+     * Get data_caducitat
+     *
+     * @return date
+     */
+    public function getDataFiAgenda() {
+        return $this->data_fi_agenda;
+    }
+    /**
 	 * Set data_realitzacio
 	 *
 	 * @param string $dataRealitzacio
@@ -711,4 +749,43 @@ class Pagina {
 		return $this->locale;
 	}
 
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Get startDate
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     * @return Training
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
 }

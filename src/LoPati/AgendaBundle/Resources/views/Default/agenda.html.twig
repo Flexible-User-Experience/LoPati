@@ -1,0 +1,61 @@
+{% extends '::frontend.html.twig' %}
+
+
+
+
+{% block title %}:  {% endblock %}
+
+
+{% block menu %}
+
+
+    {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %}
+</div>
+{% endblock %}
+{% block contenidor %}
+    <div class="contenidor">
+        {% if app.session.hasFlash('notice') %}
+
+            <div class="flash success">
+                {{ app.session.flash('notice') }}
+            </div>
+        {% endif %}
+        <div class="continguts">
+
+            <div class="subopcions">
+                <div class="contingut">
+
+                    {% if pagines %}
+                        <h1>{% trans %}agenda{% endtrans %}</h1>
+                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia| format_datetime('dd MMMM Y',app.request.locale, 'Europe/Paris')}} </h2>
+                        <div class="separadorcontingutreg" ></div>
+                    {% endif %}
+
+
+                    {% for pagina in pagines %}
+
+                        <div class="contingutreg">
+
+
+                                {% if pagina.imagePetitaName  %}
+                                    <a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>
+                                <img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width: 150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}' title='{{ pagina.titol }}'></a>
+                            {% endif %}
+
+                            <p class="titol"><a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>{{ pagina.titol }}</a></p>
+
+                            {% if pagina.resum  %}
+                                <p style='color: #000;'>{{ pagina.resum }}...</p>
+                            {% endif %}
+
+                            <p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
+                        </div>  <!--  contingutreg -->
+                        <div class="separadorcontingutreg"></div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%  endblock %}

@@ -1,0 +1,31 @@
+agenda: Agenda
+activitats: Activitats per al dia
+formaciones.titulo: Formacions
+formaciones.noformaciones: No existeix cap formació disponible durant els 3 mesos visualitzats.
+
+calendar.day.monday: Dilluns
+calendar.day.tuesday: Dimarts
+calendar.day.wednesday: Dimecres
+calendar.day.thursday: Dijous
+calendar.day.friday: Divendres
+calendar.day.saturday: Dissabte
+calendar.day.sunday: Diumenge
+calendar.day.short_monday: Dl
+calendar.day.short_tuesday: Dm
+calendar.day.short_wednesday: Dc
+calendar.day.short_thursday: Dj
+calendar.day.short_friday: Dv
+calendar.day.short_saturday: Ds
+calendar.day.short_sunday: Dg
+
+enero: gener
+febrero: febrer
+marzo: març
+abril: abril
+mayo: maig
+junio: juny
+julio: juliol
+agosto: agost
+septiembre: setembre
+noviembre: novembre
+diciembre: desembre

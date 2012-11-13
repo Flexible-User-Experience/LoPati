@@ -123,7 +123,9 @@ sonata_user:
                 class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
                 controller:     SonataAdminBundle:CRUD
                 translation:    SonataUserBundle
-  
+
+
+
 # Friends Of Symfony Bundle (FOS)      
 fos_user:
     db_driver:      orm # can be orm or odm

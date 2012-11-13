@@ -130,7 +130,7 @@ img.mig {
 .contenidor {
 	width: 756px;
 	margin: 0px;
-	min-height: 300px; height: auto !important; height: 300px;
+	min-height: 450px; height: auto !important; height: 300px;
 	padding: 0px;
 	float: left;
 	margin: 0px;
@@ -2156,4 +2156,42 @@ margin:3px 0px 10px 0;
 #mp_newsletter_button_confirm{
 	cursor:pointer;
 	
+}
+.agenda{
+    width:100%;
+    border-top:1px solid #666;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.agenda table.calendari{
+    margin-top:7px;
+}
+.calendar-header-title{
+
+    position: relative;
+    right: 25px;
+
+}
+#agenda_boto_esquerre, #agenda_boto_dret{
+    position:relative;
+    left:156px;
+    float:left;
+    width:15px;
+    cursor: pointer;
+}
+
+ table.calendari tbody tr td {
+    padding: 3px 5px;
+     font-size: 0.9em;
+     text-align: right;
+}
+
+table.calendari tbody tr td a{
+    text-decoration: none;
+    color: #E31853;
+
+}
+#activitats_agenda{
+    font-size:1.3em;
+    margin:0 5px;
 }

@@ -1,3 +1,7 @@
+agenda:
+    resource: "@AgendaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 NewsletterBundle:
     resource: "@NewsletterBundle/Resources/config/routing.yml"
     prefix:   /

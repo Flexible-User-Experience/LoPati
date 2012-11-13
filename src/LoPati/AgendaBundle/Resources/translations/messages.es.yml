@@ -1,0 +1,32 @@
+agenda: Agenda
+activitats: Actividades pera el día
+formaciones.titulo: Formaciones
+formaciones.noformaciones: No existe ninguna formación disponible durante los 3 meses visualizados.
+
+calendar.day.monday: Lunes
+calendar.day.tuesday: Martes
+calendar.day.wednesday: Miércoles
+calendar.day.thursday: Jueves
+calendar.day.friday: Viernes
+calendar.day.saturday: Sábado
+calendar.day.sunday: Domingo
+calendar.day.short_monday: Lu
+calendar.day.short_tuesday: Ma
+calendar.day.short_wednesday: Mi
+calendar.day.short_thursday: Ju
+calendar.day.short_friday: Vi
+calendar.day.short_saturday: Sa
+calendar.day.short_sunday: Do
+
+enero: enero
+febrero: febrero
+marzo: marzo
+abril: abril
+mayo: mayo
+junio: junio
+julio: julio
+agosto: agosto
+septiembre: septiembre
+octubre: octubre
+noviembre: noviembre
+diciembre: diciembre

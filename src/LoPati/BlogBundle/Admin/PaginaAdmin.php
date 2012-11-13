@@ -78,7 +78,11 @@ class PaginaAdmin extends Admin
 		
 		->add('urlVimeo',null, array('required'=> FALSE, 'label'=> 'URL video Vimeo'))
 		->add('urlFlickr',null, array('required'=> FALSE,'label'=> 'URL galeria Flickr'))
-		
+
+        ->with('Agenda')
+            ->add('startDate','date', array('label' => 'Data inici', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
+            ->add('endDate','date', array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
+
 		->with('Traduccions')
 		->add('translations', 'a2lix_translations',array(
 				'label'=> ' ',

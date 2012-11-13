@@ -1,0 +1,7 @@
+parameters:
+#    agenda.example.class: LoPati\AgendaBundle\Example
+
+services:
+#    agenda.example:
+#        class: %agenda.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

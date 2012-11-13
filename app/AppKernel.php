@@ -53,7 +53,8 @@ class AppKernel extends Kernel
         	new LoPati\BlogBundle\BlogBundle(),
         	new LoPati\MenuBundle\MenuBundle(),
         	new LoPati\NewsletterBundle\NewsletterBundle(),
-        		
+
+            new LoPati\AgendaBundle\AgendaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
