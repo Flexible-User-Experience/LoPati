@@ -645,31 +645,7 @@ class Pagina {
 
 
 
-    public function setDataIniciAgenda($dataCaducitat) {
-        $this->data_inici_agenda = $dataCaducitat;
-    }
 
-    /**
-     * Get data_caducitat
-     *
-     * @return date
-     */
-    public function getDataIniciAgenda() {
-        return $this->data_inici_agenda;
-    }
-
-    public function setDataFiAgenda($dataCaducitat) {
-        $this->data_fi_agenda = $dataCaducitat;
-    }
-
-    /**
-     * Get data_caducitat
-     *
-     * @return date
-     */
-    public function getDataFiAgenda() {
-        return $this->data_fi_agenda;
-    }
     /**
 	 * Set data_realitzacio
 	 *
