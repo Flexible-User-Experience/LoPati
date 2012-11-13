@@ -764,4 +764,7 @@ class Pagina {
     {
         return $this->endDate;
     }
+    public function getTranslatedTitle(){
+
+    }
 }

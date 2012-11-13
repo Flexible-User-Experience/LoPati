@@ -30,7 +30,26 @@
                         {% for dia in 0..6 %}
 
                                 {% if daysMatrix[(semana*7)+dia] is defined %}
-                                    {% if daysMatrix[(semana*7)+dia]['nday'] >= currentItem.startDate | date('d') and  daysMatrix[(semana*7)+dia]['nday'] <= currentItem.endDate | date('d') %}
+
+                                    {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
+
+                                        {% set day= '0'~daysMatrix[(semana*7)+dia]['nday'] %}
+
+                                    {% else %}
+                                        {% set day=daysMatrix[(semana*7)+dia]['nday'] %}
+                                     {% endif %}
+
+                                    {% if mes < '10' %}
+
+                                        {% set mes2= '0'~mes %}
+
+                                    {% else %}
+                                        {% set mes2=mes %}
+                                    {% endif %}
+                                    {% set dayComplete= any ~'-'~ mes2 ~'-'~ day %}
+
+
+                                    {% if dayComplete >= currentItem.startDate | date('Y-m-d') and  dayComplete <= currentItem.endDate | date('Y-m-d') %}
                                         <td class="{{ dia == 5 or dia == 6 ? 'weekend hit' : 'hit' }}">
                                             <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : currentItem.startDate | date('m'), 'day' : currentItem.startDate | date('d') } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
 

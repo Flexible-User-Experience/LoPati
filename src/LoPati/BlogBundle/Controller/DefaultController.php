@@ -28,9 +28,20 @@ class DefaultController extends Controller {
 		
 			
 	}
-	
-	
-	
+
+
+    public function provaAction() {
+
+        $em = $this->getDoctrine()->getManager();
+        $pagina = $em->getRepository('BlogBundle:Pagina')->find(1);
+
+
+
+        return $this->render('BlogBundle:Default:prova.html.twig',array('pagina'=>$pagina));
+
+
+    }
+
 
 	public function indexAction() {
 
@@ -61,7 +72,7 @@ class DefaultController extends Controller {
 		$this->get('session')->get('_locale');
 		$this->get('session')->set('_locale', $_locale);
 		
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
 			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC');
 		
@@ -115,13 +126,7 @@ class DefaultController extends Controller {
 		return $this->render('BlogBundle:Default:pagina.html.twig', array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video));
 	}
 	
-	public function provaAction(){
-		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery('SELECT c FROM MenuBundle:Categoria c WHERE c.actiu = true ORDER BY c.ordre');
-		$categories = $query->getResult();
-		return $this->render('BlogBundle:Default:prova.html.twig', array('categories' => $categories));
-	}
-	
+
 	public function arbre_de_contingutAction(){
 		$em = $this->getDoctrine()->getEntityManager();
 		$query = $em->createQuery('SELECT c FROM MenuBundle:Categoria c WHERE c.actiu = true ORDER BY c.ordre');

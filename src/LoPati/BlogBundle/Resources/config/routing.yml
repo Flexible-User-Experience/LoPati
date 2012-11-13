@@ -102,6 +102,12 @@ pagina:
     _method:  GET
     _locale: ca|es|en
 
+prova:
+  pattern: /{_locale}/prova/
+  defaults: { _controller: BlogBundle:Default:prova}
+  requirements:
+    _locale: ca|es|en
+
 
     
 
