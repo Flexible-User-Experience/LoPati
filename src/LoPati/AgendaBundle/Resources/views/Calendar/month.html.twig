@@ -51,7 +51,7 @@
 
                                     {% if dayComplete >= currentItem.startDate | date('Y-m-d') and  dayComplete <= currentItem.endDate | date('Y-m-d') %}
                                         <td class="{{ dia == 5 or dia == 6 ? 'weekend hit' : 'hit' }}">
-                                            <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : currentItem.startDate | date('m'), 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
+                                            <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : mes, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
 
                                         {% if itemsIndex < items | length - 1 %}
                                             {% set itemsIndex = itemsIndex + 1 %}
