@@ -289,10 +289,10 @@ table {
 }
 .idiomes {
 	width: 180px;
-	height: 35px;
+	height: 20px;
 	font-size: 90%;
 	text-align: left;
-	margin: 5px 0px;
+	margin-top:25px;
 }
 .idiomes a {
 	color: #666;
@@ -310,6 +310,7 @@ table {
 	padding: 0px;
 }
 .buscador p {
+    width:  159px;
 	margin: 0px;
 	padding: 0px;
 	height: 30px;
@@ -2165,11 +2166,12 @@ margin:3px 0px 10px 0;
 }
 .agenda table.calendari{
     margin-top:7px;
+    width: 180px;
 }
 .calendar-header-title{
 
     position: relative;
-    right: 25px;
+    right: 28px;
 
 }
 #agenda_boto_esquerre, #agenda_boto_dret{
