@@ -2185,7 +2185,15 @@ margin:3px 0px 10px 0;
      font-size: 0.9em;
      text-align: right;
 }
+table.calendari tbody tr td:first-child {
 
+    padding-left:0;
+}
+
+table.calendari tbody tr td:last-child{
+
+    padding-right:0;
+}
 table.calendari tbody tr td a{
     text-decoration: none;
     color: #E31853;
