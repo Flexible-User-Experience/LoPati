@@ -83,18 +83,19 @@ class DefaultController extends Controller {
 		
 		//$consulta->setParameter('avui', new \DateTime('today'));
 		$consulta->setParameter('categoria', 'Arxiu');
-	$query = $em->createQuery($consulta);
+
+        //$query = $em->createQuery($consulta);
 
 	//$pagination = $consulta->getResult();
- 	/*	$paginator = $this->get('knp_paginator');
+ 		$paginator = $this->get('knp_paginator');
  		$pagination = $paginator->paginate(
  				$consulta,
- 				$this->get('request')->query->get('page', 1),
+ 				$this->getRequest()->query->get('page', 1),
 				8/*limit per page*/
- 	//	);
+ 		);
 
 
-        $pagination = $consulta->getResult();
+       // $pagination = $consulta->getResult();
 
 	//	$pagination = $consulta->getResult();
 /*
