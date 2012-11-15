@@ -77,7 +77,7 @@ class DefaultController extends Controller {
 		$this->get('session')->get('_locale');
 		$this->get('session')->set('_locale', $_locale);
 		
-		$em = $this->getDoctrine()->->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
 		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
 			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC');
 		
