@@ -2204,6 +2204,11 @@ table.calendari tbody tr td a{
     color: #E31853;
 
 }
+table.calendari tbody tr td a:hover{
+text-decoration: underline;
+
+
+}
 #activitats_agenda{
     font-size:1.3em;
     margin:0 5px;
