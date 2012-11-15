@@ -4,6 +4,7 @@
     {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %}
 {% endblock %}
 {% block contenidor %}
+    </div>
     {% if app.session.hasFlash('notice') %}
         <div class="flash success">{{ app.session.flash('notice') }}</div>
     {% endif %}
@@ -11,7 +12,7 @@
     <div class="contenidor">
 
       <h3> {{ pagines|length}} {% trans %} resultat_cerca {% endtrans %}: {{ textabuscar }}</h3>
-        <ul id="llista_resultats_cerca">
+        <ul class="llista_resultats_cerca">
     {% for pagina in pagines %}
 
 
@@ -22,7 +23,7 @@
                 <li><a href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : pagina.categoria.slug }) }}">{{ pagina.titol }}</a></li>
             {% elseif date(pagina.dataCaducitat) <=  date() and pagina.dataCaducitat is not null%}
 
-                <li><a href="{{ path('arxiuarticle', {'id': portada.id,  'any': portada.datapublicacio|date("Y"), 'arxiu': portada.categoria.slug, 'titol': portada.slug }) }}">{{ portada.titol }}</a></li>
+                <li><a href="{{ path('arxiuarticle', {'id': pagina.id,  'any': pagina.datapublicacio|date("Y"), 'arxiu': pagina.categoria.slug, 'titol': pagina.slug }) }}">{{ pagina.titol }}</a></li>
             {% endif %}
          {% endif %}
         {% else %}

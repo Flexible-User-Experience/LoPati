@@ -2208,8 +2208,11 @@ table.calendari tbody tr td a{
     font-size:1.3em;
     margin:0 5px;
 }
-#llista_resultats_cerca {
-    margin-left:10px;
-    list-style-type: disc;
+.llista_resultats_cerca {
+       list-style-type: disc;
     
+}
+.llista_resultats_cerca li{
+  float:none;
+   margin:5px 0;
 }
