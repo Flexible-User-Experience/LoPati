@@ -764,7 +764,62 @@ class Pagina {
     {
         return $this->endDate;
     }
-    public function getTranslatedTitle(){
+    public function getTranslatedTitleEs(){
 
+        $i=0;
+
+       while ($i<count($this->translations)){
+               if ($this->translations[$i]->getLocale()=='es' && $this->translations[$i]->getField()=='titol'){
+
+                   return $this->translations[$i]->getContent();
+               }else{
+                   $i++;
+               }
+       }
+        return null;
+    }
+    public function getTranslatedDescripcioEs(){
+
+        $i=0;
+
+        while ($i<count($this->translations)){
+            if ($this->translations[$i]->getLocale()=='es' && $this->translations[$i]->getField()=='descripcio'){
+
+                return $this->translations[$i]->getContent();
+            }else{
+                $i++;
+            }
+        }
+        return null;
+    }
+    public function getTranslatedDescripcioEn(){
+
+        $i=0;
+
+        while ($i<count($this->translations)){
+            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='descripcio'){
+
+                return $this->translations[$i]->getContent();
+            }else{
+                $i++;
+            }
+        }
+        return null;
+    }
+    public function getTranslatedTitleEn(){
+
+        $i=0;
+
+        while ($i<count($this->translations)){
+
+            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='titol'){
+
+                return $this->translations[$i]->getContent();
+
+            }else{
+                $i++;
+            }
+        }
+        return null;
     }
 }

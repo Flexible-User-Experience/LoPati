@@ -13,18 +13,23 @@ class DefaultController extends Controller {
 	
 	
 	public function searchAction() {
-	
-	
+
+        $pagines=null;
+        $textabuscar=null;
+
+        if ($this->getRequest()->getMethod() == 'POST') {
+
+
 		$finder =$this->container->get('foq_elastica.finder.website.pagines');
 		
 		/** var array of Acme\UserBundle\Entity\User */
-		$pagines = $finder->find('XYZ');
+		$pagines = $finder->find($this->getRequest()->get('textabuscar'));
 		
 		/** var array of Acme\UserBundle\Entity\User limited to 10 results */
 		//$pagines = $finder->find('bob', 10);
-		
-		
-		return $this->render('BlogBundle:Default:search.html.twig',array('pagines'=>$pagines));
+		$textabuscar=$this->getRequest()->get('textabuscar');
+        }
+		return $this->render('BlogBundle:Default:search.html.twig',array('pagines'=>$pagines,'textabuscar'=>$textabuscar));
 		
 			
 	}

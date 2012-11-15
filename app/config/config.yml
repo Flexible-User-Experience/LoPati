@@ -259,6 +259,10 @@ foq_elastica:
                     mappings:
                         titol: { boost: 5 }
                         descripcio: { boost: 3 }
+                        translatedTitleEs: { boost: 5 }
+                        translatedDescripcioEs: { boost: 3 }
+                        translatedTitleEn: { boost: 5 }
+                        translatedDescripcioEn: { boost: 3 }
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: LoPati\BlogBundle\Entity\Pagina
