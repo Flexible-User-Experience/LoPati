@@ -28,14 +28,14 @@ A:Hover {
 }
 a:focus {
 	outline:none;
-} 
-
-.registre form { 
-	margin: 0px; 
 }
-.registre form .camp { 
-	width: 150px; 
-	float: left; 
+
+.registre form {
+	margin: 0px;
+}
+.registre form .camp {
+	width: 150px;
+	float: left;
 }
 .registre form p {
 	padding: 2px;
@@ -50,7 +50,7 @@ a:focus {
 	border: 1px solid #999999;
 	padding: 2px;
 }
-.registre form .obligatori { 
+.registre form .obligatori {
 	background-color: #b6abab;
 	border: 1px solid #999999;
 }
@@ -125,7 +125,7 @@ img.mig {
 	margin: 5px 5px 5px 5px;
 	padding: 5px;
 	border: 1px solid #cccccc;
-	background-color: #ffffff; 
+	background-color: #ffffff;
 }
 .contenidor {
 	width: 756px;
@@ -168,11 +168,11 @@ img.mig {
 
 
 .situacio {
-    width: 100%; 
-    height: 20px; 
-    line-height: 30px; 
+    width: 100%;
+    height: 20px;
+    line-height: 30px;
     vertical-align: middle;
-    margin: 2px 0px 0px 0px; 
+    margin: 2px 0px 0px 0px;
     padding: 0px;
     color: #ffffff;
 	font-size: 80%;
@@ -180,27 +180,27 @@ img.mig {
 	background-color: #fff;
 }
 .situacio ul {
-    width: 95%; 
-    height: 20px; 
+    width: 95%;
+    height: 20px;
     padding: 0px 0px 0px 10px;
-    margin: 0px 10px; 
+    margin: 0px 10px;
     list-style-type:none;
     float: left;
     vertical-align: middle;
-	
+
 }
 .situacio ul li {
-    height: 15px; 
-    line-height: 15px; 
-    vertical-align: middle; 
+    height: 15px;
+    line-height: 15px;
+    vertical-align: middle;
     float: left;
     margin: 0px 0px 0px 0px;
 	padding: 0px 5px 0px 5px;
     color: #ffffff;
 }
 .situacio ul li a {
-    height: 15px; 
-    line-height: 15px; 
+    height: 15px;
+    line-height: 15px;
     vertical-align: middle;
     margin: 0px;
 	padding: 0px 10px 0px 0px;
@@ -212,14 +212,14 @@ img.mig {
     color: #766868;
 }
 .situacio ul li p {
-    height: 15px; 
-    line-height: 15px; 
+    height: 15px;
+    line-height: 15px;
     vertical-align: middle;
     margin: 0px;
     float: left;
 	font-weight: bold;
     text-decoration: none;
-    color: #404040; 
+    color: #404040;
 }
 
 
@@ -266,9 +266,9 @@ table {
 }
 
 .cap {
-	width: 100%; 
+	width: 100%;
 	height: 134px;
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
 	clear: both;
 }
@@ -280,10 +280,10 @@ table {
 	float: left;
 }
 
-.cap .sup { 
+.cap .sup {
 	width: 180px;
 	height: 134px;
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
 	float: right;
 }
@@ -389,46 +389,46 @@ table {
 }
 
 
-.imatge { 
-    margin: 0px 0px 0px 0px; 
+.imatge {
+    margin: 0px 0px 0px 0px;
     padding: 0px;
 	clear: both;
 }
 
 .pagina {
 	width: 950px;
-	min-height: 600px; 
-	height: auto !important; 
-	height: 600px; 
+	min-height: 600px;
+	height: auto !important;
+	height: 600px;
 	margin: 40px auto;
 	background-color: #ffffff;
 	position: relative;
 	/*
-	overflow: hidden; 
+	overflow: hidden;
 	_display: inline-block; /*nomes per IE6*/
 }
 
 
-.blocs { 
+.blocs {
     width: 100%;
-    float: left; 
+    float: left;
 }
-.blocmig { 
+.blocmig {
     margin: 0px 195px 0px 165px;
 }
 .blocesquerra {
-    width: 165px; 
-    float: left; 
-    margin-left: -100%; height: 100%; 
+    width: 165px;
+    float: left;
+    margin-left: -100%; height: 100%;
     background-color: #ff00ff;
 }
 .blocesquerra p { margin: 5px 10px 0px 10px; }
 .blocdreta {
-    width: 195px; 
-    float: left;  
-    margin-left: -195px; 
-    height: 100%; 
-    background-color: #8000ff; 
+    width: 195px;
+    float: left;
+    margin-left: -195px;
+    height: 100%;
+    background-color: #8000ff;
 }
 .principal {
     float: left;
@@ -436,7 +436,7 @@ table {
     margin: 5px 0px 0px 5px;
     padding: 0px;
     vertical-align: top;
-    list-style-type: disc; 
+    list-style-type: disc;
     min-height: 500px;
     height: auto !important;
     height: 500px;
@@ -446,19 +446,19 @@ table {
 /***
  * Menu
  ***/
-.categories { 
-  width: 100%; 
-  height: 28px; 
+.categories {
+  width: 100%;
+  height: 28px;
   max-height: 28x;
-  margin: 0px; 
-  padding: 0px; 
+  margin: 0px;
+  padding: 0px;
   overflow: visible;
   border-top: solid 1px #666;
   border-bottom: solid 1px #666;
   font-size: 100%;
 }
 
-.categories ul { 
+.categories ul {
   width: 100%;
   height: 28px;
   padding: 0px;
@@ -466,7 +466,7 @@ table {
   clear: both;
 }
 
-.categories ul li { 
+.categories ul li {
   width: auto;
   vertical-align: middle;
   margin: 7px 10px 5px 0px;
@@ -481,7 +481,7 @@ table {
 .categories ul li img { margin: 0px; }
 
 .categories ul li a {
-  display: block; 
+  display: block;
   width: auto;
   vertical-align: middle;
   text-decoration: none;
@@ -496,7 +496,7 @@ table {
 .categories ul li a.actiu {
 	color: #E31853;
 	}
-	
+
 .categories ul li a span {
   vertical-align: text-bottom;
   margin-left: 0px;
@@ -509,11 +509,11 @@ table {
 }
 
 .subcat {
-	width: 100%; 
-  height: 28px; 
+	width: 100%;
+  height: 28px;
   max-height: 28x;
-  margin: 0px; 
-  padding: 0px; 
+  margin: 0px;
+  padding: 0px;
   overflow: visible;
   border-bottom: solid 1px #666;
   font-size: 100%;
@@ -527,7 +527,7 @@ table {
   clear: both;
 }
 
-.subcat ul li { 
+.subcat ul li {
   width: auto;
   vertical-align: middle;
   margin: 7px 10px 5px 0px;
@@ -540,13 +540,13 @@ table {
 .subcat ul li span a.actiu {
 	color: #E31853;
 }
-	
+
 .subcat ul li:last-child {
   border-right: none;
 }
 
 .subcat ul li a {
-	display: block; 
+	display: block;
   width: auto;
   vertical-align: middle;
   text-decoration: none;
@@ -577,7 +577,7 @@ table {
 	background-repeat: no-repeat;
 	background-position: 0px 0px; */
 	background-color: #766868;
-	
+
 }
 .dalt .daltmig {
 	float: left;
@@ -608,7 +608,7 @@ table {
 	background-repeat: no-repeat;
 	background-position: left bottom; */
 	background-color: #766868;
-	
+
 }
 .baix .baixmig {
 	float: left;
@@ -630,13 +630,13 @@ table {
 
 
 
-.categories02 { 
+.categories02 {
 	width: 400px;
 	height: 30px;
 	float: right;
 	margin: 0px 20px 10px 0px;
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	overflow: visible;
 	font-size: 95%;
 }
@@ -645,12 +645,12 @@ table {
 	height: 30px;
 	line-height: 30px;
 	vertical-align: middle;
-	padding: 0px 20px 0px 0px; 
+	padding: 0px 20px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	clear: both;
 	border-left: 1px solid #8D9E9B;
 }
-.categories02 ul li { 
+.categories02 ul li {
 	height: 30px;
 	line-height: 30px;
 	vertical-align: middle;
@@ -661,7 +661,7 @@ table {
 	border-right: 1px solid #8D9E9B;
 }
 .categories02 ul li a {
-	display: block; 
+	display: block;
 	height: 30px;
 	line-height: 30px;
 	vertical-align: middle;
@@ -671,7 +671,7 @@ table {
 	color: #000000;
 }
 .categories02 ul li a:hover {
-	display: block; 
+	display: block;
 	height: 30px;
 	line-height: 30px;
 	vertical-align: middle;
@@ -688,37 +688,37 @@ table {
 }
 .subcat02 ul {
 	width: 200px;
-	padding: 0px 0px; 
-	margin: 0px 0px 0px 0px; 
-	list-style-type:none; 
+	padding: 0px 0px;
+	margin: 0px 0px 0px 0px;
+	list-style-type:none;
 	border-left: 1px solid #8D9E9B;
 	border-right: 1px solid #8D9E9B;
 	background-color: #B6C2C1;
 }
-.subcat02 ul li { 
-	margin: 0px 0px 0px 0px; 
+.subcat02 ul li {
+	margin: 0px 0px 0px 0px;
 	min-height: 25px;
 	height: auto !important;
-	height: 25px; 
-	line-height: 25px; 
+	height: 25px;
+	line-height: 25px;
 	vertical-align: middle;
 }
 .subcat02 ul li a {
-	height: 25px; 
-	display: block; 
-	margin: 0px; 
+	height: 25px;
+	display: block;
+	margin: 0px;
 	padding: 0px 5px;
-	font-size: 90%;  
+	font-size: 90%;
 	border-bottom: 1px solid #8D9E9B;
 	background-color: #B6C2C1;
-	color: #000000; 
+	color: #000000;
 	text-decoration: none;
 	font-weight: normal;
 }
 .subcat02 ul li a:hover {
-	height: 25px; 
-	display: block; 
-	margin: 0px; 
+	height: 25px;
+	display: block;
+	margin: 0px;
 	padding: 0px 5px;
 	color: #000000;
 	background-color: #dedede;
@@ -735,7 +735,7 @@ table {
 	background-image: url(/images/fons_subcat_01_02.png);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	
+
 }
 .dalt02 .daltmig02 {
 	float: left;
@@ -764,7 +764,7 @@ table {
 	background-image: url(/images/fons_subcat_01_02.png);
 	background-repeat: no-repeat;
 	background-position: left bottom;
-	
+
 }
 .baix02 .baixmig02 {
 	float: left;
@@ -799,7 +799,7 @@ table {
 	width: 180px;
 	min-height: 150px;
 	height: auto !important;
-	height: 150px; 
+	height: 150px;
 	margin: 0px;
 	padding: 0px;
 	clear: both;
@@ -809,7 +809,7 @@ table {
 	width: 100%;
 	min-height: 30px;
 	height: auto !important;
-	height: 30px; 
+	height: 30px;
 	margin: 0px 0px 20px 0px;
 	padding: 0px;
 }
@@ -851,12 +851,13 @@ table {
 .subcat_dreta .paginador a {
 	color: #666;
 	text-decoration: none;
-	margin: 0px 19px 0px 0px;
+	margin: 0px 26px 0px 0px;
 }
+
 .subcat_dreta .paginador a:hover {
 	color: #E31853;
 }
-
+.subcat_dreta .paginador a:last-child { margin:0; }
 ul.resultat_buscador {
 }
 ul.resultat_buscador li {
@@ -872,7 +873,7 @@ ul.resultat_buscador a {
 	height: auto !important;
 	height: 40px;
 	margin: 0px auto;
-	text-align: left; 
+	text-align: left;
 	padding: 5px 0px;
 	clear: both;
 	font-size: 80%;
@@ -916,13 +917,13 @@ ul.resultat_buscador a {
 	background-repeat: no-repeat;
 }
 .opcions {
-	width: 100%; 
-	min-height: 250px; height: auto !important; height: 250px; 
+	width: 100%;
+	min-height: 250px; height: auto !important; height: 250px;
 	margin: 0px;
 }
 .opciollista {
-	width: 155px; 
-	min-height: 130px; height: auto !important; height: 130px; 
+	width: 155px;
+	min-height: 130px; height: auto !important; height: 130px;
 	float: left;
 	margin: 0px 27px 15px 0px;
 	padding: 0px;
@@ -934,8 +935,8 @@ ul.resultat_buscador a {
 	max-width: 155px;
 	padding: 0px;
 }
-html>body .opciollista { 
-	overflow: auto; 
+html>body .opciollista {
+	overflow: auto;
 }
 .opciollistaseparador {
 	width: 95%;
@@ -951,17 +952,17 @@ html>body .opciollista {
 	font-family: sans-serif, arial;
 }
 .opciollista a {
-	min-height: 15px; 
-	height: auto !important; 
-	height: 15px; 
+	min-height: 15px;
+	height: auto !important;
+	height: 15px;
 	color: #666;
 	text-decoration: none;
 }
 .opciollista a:hover {
 	color: #000;
 }
-.opciollista .resum { 
-	padding: 0px; 
+.opciollista .resum {
+	padding: 0px;
 	margin: 0px;
 }
 
@@ -985,7 +986,7 @@ html>body .opciollista {
 }
 .subopcions .contingut {
 	width: 710px;
-	min-height: 250px; height: auto !important; height: 250px; 
+	min-height: 250px; height: auto !important; height: 250px;
 	float: left;
 	margin: 0px;
 	padding: 0px;
@@ -1023,8 +1024,8 @@ html>body .opciollista {
 
 .iconesregistre {
 	width: 35px;
-	min-height: 30px; 
-	height: auto !important; 
+	min-height: 30px;
+	height: auto !important;
 	height: 30px;
 	margin: 10px 10px 10px 5px;
 	float: left;
@@ -1037,16 +1038,16 @@ html>body .opciollista {
 }
 .iconesregistre1 {
 	width: 35px;
-	min-height: 130px; height: auto !important; height: 130px; 
-height: auto !important; 
+	min-height: 130px; height: auto !important; height: 130px;
+height: auto !important;
 height: 30px;
 	margin: 10px 10px 10px 5px;
 	float: left;
 	text-align: center;
 }
 .registreportada {
-	width: 227px; 
-	min-height: 250px; height: auto !important; height: 250px; 
+	width: 227px;
+	min-height: 250px; height: auto !important; height: 250px;
 	float: left;
 	margin: 0px 20px 25px 0px;
 	padding: 0px;
@@ -1062,7 +1063,7 @@ html>body .registreportada { overflow: auto; }
 	font-weight: bold;
 	font-family: sans-serif, arial;
 }
-.registreportada h1 a { 
+.registreportada h1 a {
 	color: #000;
 	text-decoration: none;
 }
@@ -1169,7 +1170,7 @@ html>body .registreportada .miniaturesh { overflow: auto; }
 
 .registre {
 	width: 756px;
-	min-height: 200px; height: auto !important; height: 200px; 
+	min-height: 200px; height: auto !important; height: 200px;
 	clear: both;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
@@ -1220,7 +1221,7 @@ html>body .registre { overflow: auto; }
 	width: 18px;
 }
 .contingutregistre2 {
-	width: 460px; 
+	width: 460px;
 	float: left;
 	min-height: 200px; height: auto !important; height: 200px;
 	margin: 0px;
@@ -1353,9 +1354,9 @@ html>body .registre .miniaturesh { overflow: auto; }
 
 .galeria_gran {
 	width: 98%;
-	min-height: 300px; 
-	height: auto !important; 
-	height: 300px; 
+	min-height: 300px;
+	height: auto !important;
+	height: 300px;
 	margin: 5px 0px;
 	text-align: center;
 }
@@ -1440,10 +1441,10 @@ html>body .registre .miniaturesh { overflow: auto; }
 
 
 .registre1 {
-	width: 560px; 
-	min-height: 120px; 
-	height: auto !important; 
-	height: 30px; 
+	width: 560px;
+	min-height: 120px;
+	height: auto !important;
+	height: 30px;
 	clear: both;
 	margin: 10px 0px 0px 10px;
 	padding: 0px 0px 0px 0px;
@@ -1453,7 +1454,7 @@ html>body .registre1 { overflow: auto; }
 	font-size: 190%;
 	color: #392e2e;
 }
-.registre1 a { 
+.registre1 a {
 	color: #1A5184;
 }
 .registre1 a:hover {
@@ -1742,8 +1743,8 @@ html>body .registre1 { overflow: auto; }
 }
 
 
-.tirafotos { 
- width: 325px; 
+.tirafotos {
+ width: 325px;
  min-height: 140px;  height: auto !important; height: 140px;
  margin: 0px;
  padding: 0px;
@@ -1752,9 +1753,9 @@ html>body .registre1 { overflow: auto; }
   }
 .tirafotos img  { border: 1px solid #E3E1E1; }
 .tirafotos ul { list-style-type: none; width: 100%; margin: 5px;    }
-.tirafotos li { 
- width: 150px;  
- margin: 0px 7px 0px 0px; 
+.tirafotos li {
+ width: 150px;
+ margin: 0px 7px 0px 0px;
  display: inline; float: left;
  }
 
@@ -1899,7 +1900,7 @@ ul.mapa4 a:hover {
 	height: 20px;
 	margin: 2px 0px;
 	padding: 5px;
-	font-size:12px; 
+	font-size:12px;
 	width: auto;
 	height: auto;
 	text-decoration: none;
@@ -2032,7 +2033,7 @@ ol.bloc01  h1 {
 	font-family: sans-serif, arial;
 	margin: 3px 0px;
 }
-ol.bloc01  h1 a { 
+ol.bloc01  h1 a {
 	color: #666;
 	text-decoration: none;
 }
@@ -2089,15 +2090,15 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	line-height: 2;
 	text-decoration: none;
 	color: #000;
-	background: rgba(255, 255, 255, 0.8); 
+	background: rgba(255, 255, 255, 0.8);
 	overflow: hidden;
 }
 
 
 
 .contingutregistre1 .links p{	margin:0;
-	
-	
+
+
 }
 
 .pagination {
@@ -2120,24 +2121,24 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	color: #E31853;
 }
 .pagination .next,.last,.first,.previous{
-	
+
 	display:none;
-	
+
 }
 .success{
 	margin:10px 0;
 	text-align: center;
 	padding: 3px 0;
 	background-color: #FDD;
-	
+
 }
 #newsletter form{
 	margin: 10px 0;
-	
+
 }
 #form_newsletter{
 	display:none;
-	
+
 }
 #form_newsletter #mp_newsletter_user_email{
 
@@ -2151,12 +2152,12 @@ margin:3px 0px 10px 0;
 	font-weight:normal;
 	color: #666;
 	cursor:pointer;
-	
-	
+
+
 }
 #mp_newsletter_button_confirm{
 	cursor:pointer;
-	
+
 }
 .agenda{
     width:100%;
@@ -2215,7 +2216,7 @@ font-weight: bold;
 }
 .llista_resultats_cerca {
        list-style-type: disc;
-    
+
 }
 .llista_resultats_cerca li{
   float:none;
