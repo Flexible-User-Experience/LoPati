@@ -836,7 +836,7 @@ table {
 	color: #666;
 	font-size: 100%;
 	margin: 0px;
-	padding: 4px 0px 0px 0px;
+	padding: 10px 0px 0px 2px;
 	height: 25px;
 	border-top: 1px solid #666;
 }
@@ -846,9 +846,9 @@ table {
 }
 .subcat_dreta .paginador .pactual {
 	color: #E31853;
-	padding: 0px 26px 0px 0px;
+	padding: 0px 23px 0px 0px;
 }
-.subcat_dreta .paginador a {
+.subcat_dreta .paginador td {
 	color: #666;
 	text-decoration: none;
 	margin: 0px 26px 0px 0px;
@@ -857,7 +857,7 @@ table {
 .subcat_dreta .paginador a:hover {
 	color: #E31853;
 }
-.subcat_dreta .paginador a:last-child { margin:0; }
+.subcat_dreta .paginador td:last-child { margin:0; }
 ul.resultat_buscador {
 }
 ul.resultat_buscador li {
@@ -1993,16 +1993,20 @@ ul.mapa4 a:hover {
 	margin: 0px;
 	padding: 5px 0px 25px 0px;
 	clear: both;
-	font-size: 80%;
+	font-size: 0.9em;
 }
 .paginador .pactual {
 	color: #E31853;
-	padding: 0px 20px 0px 0px;
+	padding: 0px 23px 0px 0px;
 }
 .paginador a {
 	color: #666;
 	text-decoration: none;
-	margin: 0px 20px 0px 0px;
+	margin: 0px 23px 0px 0px;
+}
+.paginador td:last-child a{
+    margin:0;
+
 }
 .paginador a:hover {
 	color: #E31853;

@@ -1,26 +1,28 @@
+
+
 <div class="subcat_dreta">
-		<h2>{% trans %}tr.archive{% endtrans %}</h2>
-	
-		
-		{% for any in anys %}
-			{% if  loop.first %}<p class="paginador"> {% endif %}
-			
-			
-			{% if any.any == any_current %}
-			
-				<span class="pactual">{{ any.any |slice(2, 2) }}</span>	
-		
-			{% else %}
-			
-				<a href="{{ path('arxiullistaany', {'any': any.any, 'categoria_id': categoria_id, 'arxiu': 'arxiu'  }) }}">{{ any.any |slice(2, 2) }}</a>
-				
-			{% endif %}
-			
-			{% if loop.index % 5 == 0 %} </p> <p class="paginador"> {% endif %}
-			
-		
-			{% if loop.last %} </p> {% endif %}
-		{% endfor %}
-	
-		
-	</div>
+    <h2>{% trans %}tr.archive{% endtrans %}</h2>
+
+    <table>
+    {% for any in anys %}
+        {% if  loop.first %}<tr class="paginador"> {% endif %}
+
+
+        {% if any.any == any_current %}
+
+            <td><span class="pactual">{{ any.any |slice(2, 2) }}</span></td>
+
+        {% else %}
+
+            <td></tf><a href="{{ path('arxiullistaany', {'any': any.any, 'categoria_id': categoria_id, 'arxiu': 'arxiu'  }) }}">{{ any.any |slice(2, 2) }}</a></td>
+
+        {% endif %}
+
+        {% if loop.index % 5 == 0 %} </tr> <tr class="paginador"> {% endif %}
+
+
+        {% if loop.last %} </tr> {% endif %}
+    {% endfor %}
+
+</table>
+</div>
