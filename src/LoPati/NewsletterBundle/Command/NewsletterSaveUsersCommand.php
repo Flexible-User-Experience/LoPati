@@ -57,10 +57,10 @@ EOT
 					u.email = :mail');
 			$query->setParameter('mail', $sql);
 			
-			//$query->setMaxResults('1');
-			$existeix = $query->getOneOrNullResult();
+			$query->setMaxResults('1');
+			$existeix = $query->getResult();
 			
-						if (isset($existeix)){
+						if (count($existeix)>0){
 
 
                             $output->writeln("No s'ha pogut afegir el email: ".$sql);
