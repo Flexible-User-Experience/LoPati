@@ -58,7 +58,7 @@ EOT
 			$query->setMaxResults('1');
 			$existeix = $query->getOneOrNullResult();
 			
-						if (!$existeix){
+						if (is_null($existeix)){
 						
 						$user= new newsletterUser();
 						$user->setEmail($sql[0]);
