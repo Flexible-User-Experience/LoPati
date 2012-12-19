@@ -46,7 +46,8 @@ EOT
 		// mientras exista una fila
 		while (!feof($handle)){
 
-		$row=fgets($handle, 4096);
+		//$row=fgets($handle, 4096);
+            $row=stream_get_line($handle, 4096,'');
 			// genero array con por medio del separador "," que es el que tiene el archivo txt
             $sql=str_replace(" ", "", $row);
             $sql=str_replace(",", "", $sql);
