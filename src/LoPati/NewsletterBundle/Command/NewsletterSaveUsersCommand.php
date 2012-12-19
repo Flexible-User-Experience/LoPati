@@ -60,21 +60,24 @@ EOT
 			$query->setMaxResults('1');
 			$existeix = $query->getOneOrNullResult();
 			
-						if (is_null($existeix)){
-						
-						$user= new newsletterUser();
-						$user->setEmail($sql);
-						$user->setActive('1');
-						$user->setIdioma('ca');
-						$em->persist($user);
-						
-						$output->writeln("S'ha afegit un registre nou amb email: ".$sql);
-						$i++;
-						$numero_fila++;
+						if ($existeix->getEmail() == $sql){
 
-						}else{
+
                             $output->writeln("No s'ha pogut afegir el email: ".$sql);
                             $z++;
+
+
+
+						}else{
+                            $user= new newsletterUser();
+                            $user->setEmail($sql);
+                            $user->setActive('1');
+                            $user->setIdioma('ca');
+                            $em->persist($user);
+
+                            $output->writeln("S'ha afegit un registre nou amb email: ".$sql);
+                            $i++;
+                            $numero_fila++;
 
 
                         }
