@@ -41,6 +41,7 @@ EOT
 		$i=0;
 		$numero_fila=0;
 		
+        $z=0;
 
 		// mientras exista una fila
 		while (!feof($handle)){
@@ -66,14 +67,21 @@ EOT
 						$user->setIdioma('ca');
 						$em->persist($user);
 						
-						
+						$output->writeln("S'ha afegit un registre nou amb email: ".$sql[0]);
 						$i++;
-						$numero_fila++;	
-						}
+						$numero_fila++;
+
+						}else{
+                            $output->writeln("No s'ha pogut afegir el email: ".$sql[0]);
+                            $z++;
+
+
+                        }
 			
 		}
 		$output->writeln('Guardant mails....');
 		$em->flush();
+        $output->writeln($z. ' mails fallats');
 		$output->writeln($i. ' mails guardats');
 
 	}
