@@ -68,12 +68,12 @@ EOT
 						$user->setIdioma('ca');
 						$em->persist($user);
 						
-						$output->writeln("S'ha afegit un registre nou amb email: ".$sql[0]);
+						$output->writeln("S'ha afegit un registre nou amb email: ".$sql);
 						$i++;
 						$numero_fila++;
 
 						}else{
-                            $output->writeln("No s'ha pogut afegir el email: ".$sql[0]);
+                            $output->writeln("No s'ha pogut afegir el email: ".$sql);
                             $z++;
 
 
