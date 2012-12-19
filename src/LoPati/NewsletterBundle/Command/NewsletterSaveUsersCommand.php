@@ -48,13 +48,14 @@ EOT
 
 		$row=fgets($handle, 4096);
 			// genero array con por medio del separador "," que es el que tiene el archivo txt
-			$sql = explode(",",$row);
-			// incrementamos contador
+            $sql=str_replace(" ", "", $row);
+            $sql=str_replace(",", "", $sql);
+
 			$query = $em
 			->createQuery(
 					'SELECT u FROM NewsletterBundle:NewsletterUser u  WHERE
 					u.email = :mail');
-			$query->setParameter('mail', $sql[0]);
+			$query->setParameter('mail', $sql);
 			
 			$query->setMaxResults('1');
 			$existeix = $query->getOneOrNullResult();
@@ -62,7 +63,7 @@ EOT
 						if (is_null($existeix)){
 						
 						$user= new newsletterUser();
-						$user->setEmail($sql[0]);
+						$user->setEmail($sql);
 						$user->setActive('1');
 						$user->setIdioma('ca');
 						$em->persist($user);
