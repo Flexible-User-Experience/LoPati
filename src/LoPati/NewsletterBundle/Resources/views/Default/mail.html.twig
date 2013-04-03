@@ -69,7 +69,11 @@ margin:0 ;
     <td width="4">&nbsp;</td>
 
     
-    <td colspan="5" align="center" valign="middle"><img src="{{ host ~ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina_newsletter')}}" alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" /></td>
+    <td colspan="5" align="center" valign="middle">
+        {% if pagina.imageGran1Name() %}
+        <img src="{{ host ~ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina')}}" alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" width=578 title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" />
+    {% endif %}
+    </td>
     <td width="4">&nbsp;</td>
   </tr>
   <tr>
