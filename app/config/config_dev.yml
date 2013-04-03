@@ -11,6 +11,9 @@ swiftmailer:
     username: %mailer_user%
     password:   %mailer_password%
     delivery_address:   metalrockero@gmail.com
+    host:       %mailer_host%
+    encryption: %encryption%
+    auth_mode:  %auth_mode%
 
 web_profiler:
     toolbar: true
