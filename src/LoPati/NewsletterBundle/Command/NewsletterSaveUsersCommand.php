@@ -72,6 +72,8 @@ EOT
 
 
 						}else{
+
+                            if (strlen($sql)){
                             $user= new newsletterUser();
                             $user->setEmail($sql);
                             $user->setActive('1');
@@ -79,8 +81,11 @@ EOT
                             $em->persist($user);
 
                             $output->writeln("S'ha afegit un registre nou amb email: ".$sql);
+
                             $i++;
+                            }
                             $numero_fila++;
+
 
 
                         }
