@@ -83,6 +83,7 @@ EOT
                             $output->writeln("S'ha afegit un registre nou amb email: ".$sql);
 
                             $i++;
+                                $em->flush();
                             }
                             $numero_fila++;
 
@@ -92,7 +93,7 @@ EOT
 			
 		}
 		$output->writeln('Guardant mails....');
-		$em->flush();
+
         $output->writeln($z. ' mails fallats');
 		$output->writeln($i. ' mails guardats');
 
