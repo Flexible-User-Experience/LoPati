@@ -2204,24 +2204,32 @@ table.calendari tbody tr td:last-child{
 
     padding-right:0;
 }
-table.calendari tbody tr td a{
+
+table.calendari tbody tr td a {
     text-decoration: none;
     color: #E31853;
 
 }
-table.calendari tbody tr td a:hover{
-font-weight: bold;
 
-
+table.calendari tbody tr td a:hover {
+    font-weight: bold;
 }
+
+table.calendari tbody tr td.hit-single a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 #activitats_agenda{
     font-size:1.3em;
     margin:0 5px;
 }
+
 .llista_resultats_cerca {
        list-style-type: disc;
 
 }
+
 .llista_resultats_cerca li{
   float:none;
    margin:10px 0;
