@@ -31,15 +31,13 @@ class DefaultController extends Controller
         $pagines = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromDayAndMonthAndYear($day,$month,$year);
            $dia=date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
         return $this->render('AgendaBundle:Default:agenda.html.twig', array('pagines'=>$pagines,'dia'=>$dia));
-
-
-
     }
+
     public function calendariAction($fletxa=null)
     {
         $em = $this->getDoctrine()->getManager();
       //  $pagina = $em->getRepository('ASBAEPageBundle:Page')->findOneBy(array('code' => '003-001'));
-        $pagina=null;
+        $pagina = null;
         $session = $this->getRequest()->getSession();
 
        // if ($this->getRequest()->getMethod() == 'POST' || ) {
@@ -50,7 +48,7 @@ class DefaultController extends Controller
             $logger->debug('[formacion] Valid POST form! submit=');
             $mes1 = $session->get('estatMes');
             $any1 = $session->get('estatAny');
-            if ($fletxa== 'esquerra') {
+            if ($fletxa == 'esquerra') {
                 // Disminueix el mes actual
                 $mes1 = $mes1 - 1;
                 if ($mes1 == 0) {
@@ -73,18 +71,6 @@ class DefaultController extends Controller
                 $mes1 = $session->get('estatMes');
                 $any1 = $session->get('estatAny');
             } else {
-                /*// ___OLD BEHAVIOUR__ -> Si NO existeix agafa el mes i any en funcio de l'ultim item registrat a la BBDD
-                $lastItem = $em->getRepository('ASBAEEventsBundle:Training')->getLastItemOrderByStartDate();
-                if (count($lastItem) > 0) {
-                    $lastStartDate = $lastItem[0]->getStartDate();
-                    $mes1 = date('n', $lastStartDate->getTimestamp());
-                    $any1 = date('Y', $lastStartDate->getTimestamp());
-                } else {
-                    // o si NO existeix cap item registrat a la BBDD agafa el mes i any actual
-                    $mes1 = date('n');
-                    $any1 = date('Y');
-                }*/
-
                 // Si NO existeix agafa el mes i any actual
                 $mes1 = date('n');
                 $any1 = date('Y');
@@ -93,7 +79,6 @@ class DefaultController extends Controller
                 $session->set('estatAny', $any1);
             }
         }
-
 
         // Calcula els dos mesos posteriors
         $mes2 = $mes1 + 1; $any2 = $any1;
@@ -149,8 +134,6 @@ class DefaultController extends Controller
             $num++;
         }
         $maxWeeks3 = self::getMaxWeeks($daysMatrix3);
-
-
 
        return $this->render('AgendaBundle:Default:calendari.html.twig', array(
             'pagina' => $pagina,

@@ -1,22 +1,17 @@
 {% extends '::frontend.html.twig' %}
 
-
-
-
 {% block title %}: {% trans %}agenda{% endtrans %} {{ dia| format_datetime('dd MMMM Y',app.request.locale, 'Europe/Paris')}}  {% endblock %}
 
 
 {% block menu %}
-
-
     {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %}
 </div>
 {% endblock %}
+
 {% block contenidor %}
     <div style="width: 100%; height: 29px; background: none;"></div>
     <div class="contenidor">
         {% if app.session.hasFlash('notice') %}
-
             <div class="flash success">
                 {{ app.session.flash('notice') }}
             </div>
@@ -31,7 +26,6 @@
                         <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia| format_datetime('dd MMMM Y',app.request.locale, 'Europe/Paris')}} </h2>
                         <div class="separadorcontingutreg" ></div>
                     {% endif %}
-
 
                     {% for pagina in pagines %}
 
