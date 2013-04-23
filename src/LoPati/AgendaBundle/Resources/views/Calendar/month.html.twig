@@ -15,60 +15,38 @@
         </thead>
     {% endif %}
     <tbody>
-        {% set itemsIndex = 0 %}
-        {% if items[itemsIndex] is defined %}
-            {% set currentItem = items[itemsIndex] %}
-            {% for semana in 0..maxWeek %}
-                <tr>
-                    {% for dia in 0..6 %}
-                        {% if daysMatrix[(semana*7)+dia] is defined %}
-                            {# el dia existeix al calendari, per tant s'ha de pintar la cel·la amb el número del dia corresponent #}
-                            {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
-                                {% set day = '0' ~ daysMatrix[(semana*7)+dia]['nday'] %}
-                            {% else %}
-                                {% set day = daysMatrix[(semana*7)+dia]['nday'] %}
-                            {% endif %}
-                            {% if mes < '10' %}
-                                {% set mes2 = '0' ~ mes %}
-                            {% else %}
-                                {% set mes2 = mes %}
-                            {% endif %}
-                            {% set dayComplete = any ~ '-' ~ mes2 ~ '-' ~ day %}
-                            {% if dayComplete >= currentItem.startDate | date('Y-m-d') and dayComplete <= currentItem.endDate | date('Y-m-d') and (dia == 4 or dia == 5) %} {# NOMES MARCA DIVENDRES I DISSABTE (canviar-ho a l'estiu) #}
-                                {# a mes s'ha detectat un esdevenint dins d'aquella data #}
-                                <td class="hit">
-                                    <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : mes, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
-                                    {% if  dayComplete == currentItem.endDate | date('Y-m-d') %}
-                                        {% if itemsIndex < items | length - 1 %}
-                                            {% set itemsIndex = itemsIndex + 1 %}
-                                            {% set currentItem = items[itemsIndex] %}
-                                        {% endif %}
-                                    {% endif %}
-                            {% else %}
-                                {# NO hi ha cap esdevenint, per tant pintar només el número de dia #}
-                                <td>
-                                        {{ daysMatrix[(semana*7)+dia]['nday'] }}
-                            {% endif %}
+        {% for semana in 0..maxWeek %}
+            <tr>
+                {% for dia in 0..6 %}
+                    {% if daysMatrix[(semana*7)+dia] is defined %}
+                        {# el dia existeix al calendari, per tant s'ha de pintar la cel·la amb el número del dia corresponent #}
+                        {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
+                            {% set day = '0' ~ daysMatrix[(semana*7)+dia]['nday'] %}
                         {% else %}
-                            {# la cel·la es queda buida, no es correspon amb cap dia representable al calendari #}
-                            <td>
+                            {% set day = daysMatrix[(semana*7)+dia]['nday'] %}
                         {% endif %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        {% else %}
-            {% for semana in 0..maxWeek %}
-                <tr>
-                    {% for dia in 0..6 %}
-                        <td class="{{ dia == 5 or dia == 6 ? 'weekend ' : '' }}">
-                            {% if daysMatrix[(semana*7)+dia] is defined %}
-                                {{ daysMatrix[(semana*7)+dia]['nday'] }}
-                            {% endif %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        {% endif %}
+                        {% if mes < '10' %}
+                            {% set mes2 = '0' ~ mes %}
+                        {% else %}
+                            {% set mes2 = mes %}
+                        {% endif %}
+                        {% set dayComplete = any ~ '-' ~ mes2 ~ '-' ~ day %}
+                        {% if hitsMatrix[day] is defined and (dia == workingDay1 or dia == workingDay2) %} {# NOMES MARCA DIVENDRES I DISSABTE (canviar-ho a l'estiu, veure app/config/config.yml) #}
+                            {# a mes s'ha detectat un esdevenint dins d'aquella data #}
+                            <td class="{{ hitsMatrix[day] }}">
+                                <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
+                        {% else %}
+                            {# NO hi ha cap esdevenint, per tant pintar només el número de dia #}
+                            <td>
+                                    {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                        {% endif %}
+                    {% else %}
+                        {# la cel·la es queda buida, no es correspon amb cap dia representable al calendari #}
+                        <td>
+                    {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </tbody>
 </table>

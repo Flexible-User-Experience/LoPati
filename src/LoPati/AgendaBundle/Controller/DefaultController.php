@@ -122,6 +122,8 @@ class DefaultController extends Controller
             'mes1' => $mes1,
             'any1' => $any1,
             'hitsMatrix' => $hitsMatrix,
+            'workingDay1' => $this->container->getParameter('workingDay1'),
+            'workingDay2' => $this->container->getParameter('workingDay2'),
         ));
     }
 }

@@ -270,3 +270,13 @@ foq_elastica:
                         listener:
                         finder:         
 
+# Configuracio dies laborals a l'agenda
+# Estos son els dies que el Centre obre al public
+# 0 = dilluns, 6 = diumenge
+# Si s'han d'afegir mes de 2 dies laborals ves al codi
+#  src/LoPati/AgendaBundle/Controller/DefaultController.php
+#  src/LoPati/AgendaBundle/Resources/views/Default/calendari.html.twig
+#  src/LoPati/AgendaBundle/Resources/views/Calendar/month.html.twig (linea 34)
+parameters:
+  workingDay1: 4
+  workingDay2: 5
