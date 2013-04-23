@@ -31,7 +31,6 @@ class DefaultController extends Controller
     public function calendariAction($fletxa=null)
     {
         $em = $this->getDoctrine()->getManager();
-      //  $pagina = $em->getRepository('ASBAEPageBundle:Page')->findOneBy(array('code' => '003-001'));
         $pagina = null;
         $session = $this->getRequest()->getSession();
 
@@ -75,21 +74,31 @@ class DefaultController extends Controller
             }
         }
 
-        /* Calcula els dos mesos posteriors
-        $mes2 = $mes1 + 1; $any2 = $any1;
-        if ($mes2 == 13) {
-            $mes2 = 1; $any2++;
-        }
-        $mes3 = $mes2 + 1; $any3 = $any2;
-        if ($mes3 == 13) {
-            $mes3 = 1; $any3++;
-        }*/
-
-        // Obte tots els items continguts dins del mes i any seleccionat junt amb els dos mesos anteriors
+        // Marca els hits d'esdeveniments de periodes de dates i esdeveniments d'una sola data
         $items1 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes1, $any1);
-        /*$items2 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes2, $any2);
-        $items3 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes3, $any3);
-        $itemsNextMonthAndForever = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromNextMonthAndYearForever($mes1, $any1);*/
+        $hitsMatrix = array();
+        $mesHit = strval($mes1);
+        if ($mesHit < 10) $mesHit = '0'.$mesHit;
+        $totalDays = cal_days_in_month(CAL_GREGORIAN, $mes1, $any1);
+        foreach ($items1 as $item1) {
+            for ($i = 1; $i < $totalDays+1; $i++) {
+                $dayHit = strval($i);
+                if ($dayHit < 10) $dayHit = '0'.$dayHit;
+                $currentDayString = $any1 . '-' . $mesHit . '-' . $dayHit;
+                if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d')) {
+                    if ($item1->getStartDate() == $item1->getEndDate()) {
+                        $hitsMatrix[$i] = 'hit-single';
+                    }
+                    if (isset($hitsMatrix[$i])) {
+                        if ($hitsMatrix[$i] != 'hit-single') {
+                            $hitsMatrix[$i] = 'hit-period';
+                        }
+                    } else {
+                        $hitsMatrix[$i] = 'hit-period';
+                    }
+                }
+            }
+        }
 
         // Calcula la matriu de dies per al mes 1
         $daysMatrix1 = array();
@@ -104,32 +113,6 @@ class DefaultController extends Controller
         }
         $maxWeeks1 = self::getMaxWeeks($daysMatrix1);
 
-        /* Calcula la matriu de dies per al mes 2
-        $daysMatrix2 = array();
-        $init2 = getDate(mktime(0, 0, 0, $mes2, 1, $any2));
-        $initWday2 = $init2['wday'];
-        $totalDays2 = cal_days_in_month(CAL_GREGORIAN, $mes2, $any2);
-        if ($initWday2 == 0) $initWday2 = 7; $initWday2--; // Reajuste del dia inicial de la setmana (lunes=0, domingo=6)
-        $num = 1;
-        for ($index = $initWday2; $index < ($totalDays2 + $initWday2); $index++) {
-            $daysMatrix2[$index] = array('nday' => $num);
-            $num++;
-        }
-        $maxWeeks2 = self::getMaxWeeks($daysMatrix2);*/
-
-        /* Calcula la matriu de dies per al mes 3
-        $daysMatrix3 = array();
-        $init3 = getDate(mktime(0, 0, 0, $mes3, 1, $any3));
-        $initWday3 = $init3['wday'];
-        $totalDays3 = cal_days_in_month(CAL_GREGORIAN, $mes3, $any3);
-        if ($initWday3 == 0) $initWday3 = 7; $initWday3--; // Reajuste del dia inicial de la setmana (lunes=0, domingo=6)
-        $num = 1;
-        for ($index = $initWday3; $index < ($totalDays3 + $initWday3); $index++) {
-            $daysMatrix3[$index] = array('nday' => $num);
-            $num++;
-        }
-        $maxWeeks3 = self::getMaxWeeks($daysMatrix3);*/
-
        return $this->render('AgendaBundle:Default:calendari.html.twig', array(
             'pagina' => $pagina,
             'items1' => $items1,
@@ -138,19 +121,7 @@ class DefaultController extends Controller
             'mes1String' => Utils::getStringMonth($mes1),
             'mes1' => $mes1,
             'any1' => $any1,
-            /*'items2' => $items2,
-            'maxWeek2' => $maxWeeks2,
-            'daysMatrix2' => $daysMatrix2,
-            'mes2String' => $this->get('translator')->trans(Utils::getStringMonth($mes2)),
-            'mes2' => $mes2,
-            'any2' => $any2,
-            'items3' => $items3,
-            'maxWeek3' => $maxWeeks3,
-            'daysMatrix3' => $daysMatrix3,
-            'mes3String' => $this->get('translator')->trans(Utils::getStringMonth($mes3)),
-            'mes3' => $mes3,
-            'any3' => $any3,
-            'itemsNextMonthAndForever' => $itemsNextMonthAndForever,*/
+            'hitsMatrix' => $hitsMatrix,
         ));
     }
 }
