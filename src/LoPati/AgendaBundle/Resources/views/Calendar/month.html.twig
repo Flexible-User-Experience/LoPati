@@ -1,90 +1,70 @@
-
-
-
-        <div class="calendar-header-title">{{ mesString | trans}} {{ any }}</div>
-
-
-
-    <table class="calendari">
-        {% if weekDayNameEnabled %}
-            <thead>
+<div class="calendar-header-title">{{ mesString | trans}} {{ any }}</div>
+<table class="calendari">
+    {% if weekDayNameEnabled %}
+        <thead>
+            <tr>
+                <!-- <th class="centre">Setmana</th> -->
+                <th>{% trans %}calendar.day.monday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.tuesday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.wednesday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.thursday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.friday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.saturday{% endtrans %}</th>
+                <th>{% trans %}calendar.day.sunday{% endtrans %}</th>
+            </tr>
+        </thead>
+    {% endif %}
+    <tbody>
+        {% set itemsIndex = 0 %}
+        {% if items[itemsIndex] is defined %}
+            {% set currentItem = items[itemsIndex] %}
+            {% for semana in 0..maxWeek %}
                 <tr>
-                    <!-- <th class="centre">Setmana</th> -->
-                    <th>{% trans %}calendar.day.monday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.tuesday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.wednesday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.thursday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.friday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.saturday{% endtrans %}</th>
-                    <th>{% trans %}calendar.day.sunday{% endtrans %}</th>
-                </tr>
-            </thead>
-        {% endif %}
-        <tbody>
-            {% set itemsIndex = 0 %}
-            {% if items[itemsIndex] is defined %}
-
-                {% set currentItem = items[itemsIndex] %}
-                {% for semana in 0..maxWeek %}
-                    <tr>
-                        {% for dia in 0..6 %}
-
-                                {% if daysMatrix[(semana*7)+dia] is defined %}
-
-                                    {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
-
-                                        {% set day= '0'~daysMatrix[(semana*7)+dia]['nday'] %}
-
-                                    {% else %}
-                                        {% set day=daysMatrix[(semana*7)+dia]['nday'] %}
-                                     {% endif %}
-
-                                    {% if mes < '10' %}
-
-                                        {% set mes2= '0'~mes %}
-
-                                    {% else %}
-                                        {% set mes2=mes %}
-                                    {% endif %}
-                                    {% set dayComplete= any ~'-'~ mes2 ~'-'~ day %}
-
-
-                                    {% if dayComplete >= currentItem.startDate | date('Y-m-d') and  dayComplete <= currentItem.endDate | date('Y-m-d') %}
-                                        <td class="{{ dia == 5 or dia == 6 ? 'weekend hit' : 'hit' }}">
-                                            <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : mes, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
-                                       {% if  dayComplete == currentItem.endDate | date('Y-m-d') %}
+                    {% for dia in 0..6 %}
+                        {% if daysMatrix[(semana*7)+dia] is defined %}
+                            {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
+                                {% set day = '0' ~ daysMatrix[(semana*7)+dia]['nday'] %}
+                            {% else %}
+                                {% set day = daysMatrix[(semana*7)+dia]['nday'] %}
+                            {% endif %}
+                            {% if mes < '10' %}
+                                {% set mes2 = '0' ~ mes %}
+                            {% else %}
+                                {% set mes2 = mes %}
+                            {% endif %}
+                            {% set dayComplete = any ~ '-' ~ mes2 ~ '-' ~ day %}
+                            {% if dayComplete >= currentItem.startDate | date('Y-m-d') and  dayComplete <= currentItem.endDate | date('Y-m-d') %}
+                                <td class="{{ dia == 5 or dia == 6 ? 'weekend hit' : 'hit' }}">
+                                    <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : currentItem.startDate | date('Y'), 'month' : mes, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
+                                    {% if  dayComplete == currentItem.endDate | date('Y-m-d') %}
                                         {% if itemsIndex < items | length - 1 %}
                                             {% set itemsIndex = itemsIndex + 1 %}
                                             {% set currentItem = items[itemsIndex] %}
                                         {% endif %}
-                                        {% endif %}
-                                    {% else %}
-                                        <td class="{{ dia == 5 or dia == 6 ? 'weekend' : '' }}">
-                                            {{ daysMatrix[(semana*7)+dia]['nday'] }}
                                     {% endif %}
-                                {% else %}
-                                    <td>
-                                {% endif %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-
-            {% else %}
-
-                {% for semana in 0..maxWeek %}
-                    <tr>
-                        {% for dia in 0..6 %}
-                            <td class="{{ dia == 5 or dia == 6 ? 'weekend ' : '' }}">
-                                {% if daysMatrix[(semana*7)+dia] is defined %}
-                                    {{ daysMatrix[(semana*7)+dia]['nday'] }}
-                                {% endif %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-
-            {% endif %}
-
-        </tbody>
-    </table>
+                            {% else %}
+                                <td class="{{ dia == 5 or dia == 6 ? 'weekend' : '' }}">
+                                        {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                            {% endif %}
+                        {% else %}
+                            <td>
+                        {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            {% for semana in 0..maxWeek %}
+                <tr>
+                    {% for dia in 0..6 %}
+                        <td class="{{ dia == 5 or dia == 6 ? 'weekend ' : '' }}">
+                            {% if daysMatrix[(semana*7)+dia] is defined %}
+                                {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>

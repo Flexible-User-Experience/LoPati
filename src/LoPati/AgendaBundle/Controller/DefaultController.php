@@ -8,11 +8,6 @@ use LoPati\Utilities\Utils;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('AgendaBundle:Default:index.html.twig', array('name' => $name));
-    }
-
     // Retorna la quantitat de setmanes necessaries (5 o 6) per a representar un mes segons la matriu de dies pasada per parametre
     protected static function getMaxWeeks($daysMatrix)
     {
@@ -80,7 +75,7 @@ class DefaultController extends Controller
             }
         }
 
-        // Calcula els dos mesos posteriors
+        /* Calcula els dos mesos posteriors
         $mes2 = $mes1 + 1; $any2 = $any1;
         if ($mes2 == 13) {
             $mes2 = 1; $any2++;
@@ -88,13 +83,13 @@ class DefaultController extends Controller
         $mes3 = $mes2 + 1; $any3 = $any2;
         if ($mes3 == 13) {
             $mes3 = 1; $any3++;
-        }
+        }*/
 
         // Obte tots els items continguts dins del mes i any seleccionat junt amb els dos mesos anteriors
         $items1 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes1, $any1);
-        $items2 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes2, $any2);
+        /*$items2 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes2, $any2);
         $items3 = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromMonthAndYear($mes3, $any3);
-        $itemsNextMonthAndForever = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromNextMonthAndYearForever($mes1, $any1);
+        $itemsNextMonthAndForever = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromNextMonthAndYearForever($mes1, $any1);*/
 
         // Calcula la matriu de dies per al mes 1
         $daysMatrix1 = array();
@@ -109,7 +104,7 @@ class DefaultController extends Controller
         }
         $maxWeeks1 = self::getMaxWeeks($daysMatrix1);
 
-        // Calcula la matriu de dies per al mes 2
+        /* Calcula la matriu de dies per al mes 2
         $daysMatrix2 = array();
         $init2 = getDate(mktime(0, 0, 0, $mes2, 1, $any2));
         $initWday2 = $init2['wday'];
@@ -120,9 +115,9 @@ class DefaultController extends Controller
             $daysMatrix2[$index] = array('nday' => $num);
             $num++;
         }
-        $maxWeeks2 = self::getMaxWeeks($daysMatrix2);
+        $maxWeeks2 = self::getMaxWeeks($daysMatrix2);*/
 
-        // Calcula la matriu de dies per al mes 3
+        /* Calcula la matriu de dies per al mes 3
         $daysMatrix3 = array();
         $init3 = getDate(mktime(0, 0, 0, $mes3, 1, $any3));
         $initWday3 = $init3['wday'];
@@ -133,7 +128,7 @@ class DefaultController extends Controller
             $daysMatrix3[$index] = array('nday' => $num);
             $num++;
         }
-        $maxWeeks3 = self::getMaxWeeks($daysMatrix3);
+        $maxWeeks3 = self::getMaxWeeks($daysMatrix3);*/
 
        return $this->render('AgendaBundle:Default:calendari.html.twig', array(
             'pagina' => $pagina,
@@ -143,7 +138,7 @@ class DefaultController extends Controller
             'mes1String' => Utils::getStringMonth($mes1),
             'mes1' => $mes1,
             'any1' => $any1,
-            'items2' => $items2,
+            /*'items2' => $items2,
             'maxWeek2' => $maxWeeks2,
             'daysMatrix2' => $daysMatrix2,
             'mes2String' => $this->get('translator')->trans(Utils::getStringMonth($mes2)),
@@ -155,7 +150,7 @@ class DefaultController extends Controller
             'mes3String' => $this->get('translator')->trans(Utils::getStringMonth($mes3)),
             'mes3' => $mes3,
             'any3' => $any3,
-            'itemsNextMonthAndForever' => $itemsNextMonthAndForever,
+            'itemsNextMonthAndForever' => $itemsNextMonthAndForever,*/
         ));
     }
 }

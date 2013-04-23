@@ -1,15 +1,9 @@
-agenda_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AgendaBundle:Default:index }
-
-
 calendari:
     pattern:        /{_locale}/calendari/{fletxa}/
     defaults:       { _controller: AgendaBundle:Default:calendari }
     requirements:
         fletxa: dreta|esquerra
         _locale: ca|es|en
-
 
 agenda_ca:
     pattern:        /{_locale}/agenda/{year}/{month}/{day}/
