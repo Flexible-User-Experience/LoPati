@@ -115,7 +115,6 @@ class DefaultController extends Controller
 
        return $this->render('AgendaBundle:Default:calendari.html.twig', array(
             'pagina' => $pagina,
-            'items1' => $items1,
             'maxWeek1' => $maxWeeks1,
             'daysMatrix1' => $daysMatrix1,
             'mes1String' => Utils::getStringMonth($mes1),
