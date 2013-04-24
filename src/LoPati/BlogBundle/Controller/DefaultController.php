@@ -77,7 +77,7 @@ class DefaultController extends Controller {
 		$this->get('session')->get('_locale');
 		$this->get('session')->set('_locale', $_locale);
 		
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$consulta = $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
 			WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC');
 		
@@ -123,7 +123,7 @@ class DefaultController extends Controller {
 
 	public function paginaAction($id) {
 		
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
 		
 		$tipus_video=null;
@@ -137,7 +137,7 @@ class DefaultController extends Controller {
 	
 
 	public function arbre_de_contingutAction(){
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$query = $em->createQuery('SELECT c FROM MenuBundle:Categoria c WHERE c.actiu = true ORDER BY c.ordre');
 		$categories = $query->getResult();
 		return $this->render('BlogBundle:Default:arbre_de_contingut.html.twig', array('categories' => $categories));
@@ -145,7 +145,7 @@ class DefaultController extends Controller {
 	
 	public function peuAction(){
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		//$categories = $em->getRepository('MenuBundle:Categoria')->findAll();
 		$query = $em->createQuery('SELECT c FROM BlogBundle:Configuracio c WHERE c.id =1');
 		
@@ -155,7 +155,7 @@ class DefaultController extends Controller {
 	
 	public function llistaAction($categoria, $subcategoria, $categoria_id, $subcategoria_id	){
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 	/*
 		$consulta= $em->createQuery('SELECT p FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu 
 				AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND p.data_caducitat >= :data ORDER BY p.data_publicacio DESC');*/
@@ -188,7 +188,7 @@ class DefaultController extends Controller {
 	
 	public function articleAction($id){
 	
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
 		
 		$tipus_video=null;
@@ -201,7 +201,7 @@ class DefaultController extends Controller {
 	
 	public function arxiuAction($categoria_id, $arxiu){
 		
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL
 				AND  ar.imagePetitaName IS NOT NULL 	ORDER BY ar.any DESC ');
 		$consulta->setParameter('actiu','1');
@@ -216,7 +216,7 @@ class DefaultController extends Controller {
 	
 	public function arxiuLlistaAnyAction($any,$categoria_id, $arxiu){
 	
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 	/*	$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu
 				ORDER BY ar.any DESC ');
 		$consulta->setParameter('actiu','1');
@@ -245,7 +245,7 @@ class DefaultController extends Controller {
 	}
 	
 	public function arxiuArticleAction($id){
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
 		
 		$tipus_video=null;
@@ -258,7 +258,7 @@ class DefaultController extends Controller {
 	}
 	
 	public function menuDretaArxiuAction($any_current=null, $categoria_id, $arxiu){
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL
 				AND ar.imagePetitaName IS NOT NULL ORDER BY ar.any DESC');
 		$consulta->setParameter('actiu','1');

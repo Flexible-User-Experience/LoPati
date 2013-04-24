@@ -11,7 +11,7 @@ class AdminController extends Controller {
 	
 	public function enviarAction($id)
 	{
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 	
 	
 		$news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
@@ -76,7 +76,7 @@ class AdminController extends Controller {
 		$colabora="Col·labora";
 		$butlleti="Butlletí";
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
 
@@ -114,7 +114,7 @@ class AdminController extends Controller {
 		->getRepository('ApplicationSonataUserBundle:User')
 		->findOneByUsername($userName);
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
 		
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
@@ -141,7 +141,7 @@ class AdminController extends Controller {
 		;
 		$this->get('mailer')->send($message);
 		
-		$em = $this->getDoctrine()->getEntityManager(); //per  poder fer fer consultes a la base de dades
+		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
 		$news->setTest('1');
 		$em->flush();

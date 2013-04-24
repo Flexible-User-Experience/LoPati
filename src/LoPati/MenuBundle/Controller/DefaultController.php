@@ -15,9 +15,9 @@ class DefaultController extends Controller {
 
 	public function pintaMenuAction($id=null, $pagina=null)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		if ($id) {
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$pagina = $em->getRepository('BlogBundle:Pagina')->find($id);
 		}
 		$categories = $em->getRepository('MenuBundle:Categoria')->findCategories();
@@ -29,7 +29,7 @@ class DefaultController extends Controller {
 		if ($llista == 1) {
 			$pagina=null;
 		} else {
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$pagina = $em->getRepository('BlogBundle:Pagina')->find($idPagina);
 			$logger = $this->get('logger');
 			$logger->info('id val:'.$idPagina);
@@ -39,7 +39,7 @@ class DefaultController extends Controller {
 	
 	public function subCategoriesAction($idPagina)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $idPagina));
 		$categoria = $pagina->getCategoria();
 		
@@ -53,10 +53,10 @@ class DefaultController extends Controller {
 	
 	public function pintaMenuLlistaAction($categoria_id, $subcategoria_id=null, $onlycategories=null)
     {
-		$em = $this->getDoctrine()->getEntityManager();		
+		$em = $this->getDoctrine()->getManager();
 		$categories = $em->getRepository('MenuBundle:Categoria')->findCategories();
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$subcategories = $em->getRepository('MenuBundle:SubCategoria')->findSubCategories($categoria_id);
 
 		return $this->render('MenuBundle:Default:menuLlista.html.twig', array('categories' => $categories, 'categoria_id' => $categoria_id,'subcategoria_id' => $subcategoria_id, 'subcategories' => $subcategories, 'onlycategories' => $onlycategories));

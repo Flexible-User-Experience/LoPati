@@ -41,7 +41,7 @@ class DefaultController extends Controller
         $request->setLocale($this->get('session')->get('_locale'));
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($newsletterUser);
             $em->flush();
             
@@ -87,7 +87,7 @@ class DefaultController extends Controller
      */
     public function confirmationAction(Request $request, $token)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
 		
         $request->setLocale($this->get('session')->get('_locale'));
@@ -130,7 +130,7 @@ class DefaultController extends Controller
 		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
 		: 'http://lopati.cat';
 		$newDate = date("Y-m-d", strtotime($data));
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterByData($newDate);
 		$visualitzar_correctament="Clica aquí per visualitzar correctament";
 		
@@ -197,7 +197,7 @@ class DefaultController extends Controller
 	{
 		$request->setLocale($this->get('session')->get('_locale'));
 		//return array('token' => $token);
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
 		 
 		if ($user) {
