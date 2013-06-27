@@ -23,8 +23,8 @@ class DefaultController extends Controller
     public function agendaAction($year,$month,$day)
     {
         $em = $this->getDoctrine()->getManager();
-        $pagines = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromDayAndMonthAndYear($day,$month,$year);
-           $dia=date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
+        $pagines = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromDayAndMonthAndYear($day, $month, $year);
+        $dia = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
         return $this->render('AgendaBundle:Default:agenda.html.twig', array('pagines'=>$pagines,'dia'=>$dia));
     }
 
@@ -123,6 +123,7 @@ class DefaultController extends Controller
             'hitsMatrix' => $hitsMatrix,
             'workingDay1' => $this->container->getParameter('workingDay1'),
             'workingDay2' => $this->container->getParameter('workingDay2'),
+            'workingDay3' => $this->container->getParameter('workingDay3'),
         ));
     }
 }

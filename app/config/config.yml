@@ -280,3 +280,4 @@ foq_elastica:
 parameters:
   workingDay1: 4
   workingDay2: 5
+  workingDay3: 6
