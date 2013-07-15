@@ -1,122 +1,80 @@
 <div class="contenidor">
-		<div class="continguts">
-		
-			<!-- situacio -->
-{% if (pagina.categoria.actiu ) and pagina.actiu %}
-	
-			<div class="registre">
-
-				
-				
-				
-			{% if pagina.video %}
-				
-						{{ tipus_video | raw }}
-						
-			{% else %}
-				{% if pagina.imageGran1Name  %}
-				<img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}' alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" class='imatgeprincipal'>
-			
-				{% endif %}
-				<p style="font-size: 85%; margin: 0px 0px 18px 0px; padding: 0px;">{{ pagina.peuImageGran1 }}</p>
-		{% endif %}
+    <div class="continguts">
+        <!-- situacio -->
+        {% if (pagina.categoria.actiu ) and pagina.actiu %}
+            <div class="registre">
+                {% if pagina.video %}
+                    {{ tipus_video | raw }}
+                {% else %}
+                    {% if pagina.imageGran1Name  %}
+                        <img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}' alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" class='imatgeprincipal'>
+                    {% endif %}
+                    <p style="font-size: 85%; margin: 0px 0px 18px 0px; padding: 0px;">{{ pagina.peuImageGran1 }}</p>
+		        {% endif %}
 				<div class="separador"></div>
-
-				<div class="titol">
-						
-						<h1>{{ pagina.titol }}</h1>
-						
-				</div>
-
-				<div class="contingutregistre1">
-					{% if pagina.lloc %}
-					<p><span class='textresaltat'>{% trans %}tr.lloc {% endtrans %}</span><br>{{ pagina.lloc}}</p>
-					
+                <div class="titol">
+                    <h1>{{ pagina.titol }}</h1>
+                </div>
+                <div class="contingutregistre1">
+                    {% if pagina.id == 124 %}
+                        hitme!
+                    {% endif %}
+                    {% if pagina.lloc %}
+                        <p><span class='textresaltat'>{% trans %}tr.lloc {% endtrans %}</span><br>{{ pagina.lloc}}</p>
 					{% endif %}
-					
 					{% if pagina.dataRealitzacio %}
-					<p><span class='textresaltat'>{% trans %}tr.data{% endtrans %}</span><br>{{ pagina.dataRealitzacio }}</p>
+					    <p><span class='textresaltat'>{% trans %}tr.data{% endtrans %}</span><br>{{ pagina.dataRealitzacio }}</p>
 					{% endif %}
-					
 					{%  if pagina.links %}
-					<div class='links'><br><span class='textresaltat'>{{ "tr.links" | trans }}</span><br>
-
-							{{ pagina.links | raw }}
-
-
+					    <div class='links'><br><span class='textresaltat'>{{ "tr.links" | trans }}</span><br>
+						{{ pagina.links | raw }}
 						</div>
-						
-						{% endif %}
+					{% endif %}
 					{% if pagina.titolDocument1 and pagina.document1Name  %}
-					<p class='boto01'><a rel='external' href='{{ vich_uploader_asset(pagina, 'document1')  }}'><span>{{ pagina.titolDocument1 }}</span></a></p>
+					    <p class='boto01'><a rel='external' href='{{ vich_uploader_asset(pagina, 'document1')  }}'><span>{{ pagina.titolDocument1 }}</span></a></p>
 					{% endif %}
-					
-						{% if pagina.titolDocument2 and pagina.document2Name  %}
-					<p class='boto01'><a rel='external' href='{{ vich_uploader_asset(pagina, 'document2')  }}'><span>{{ pagina.titolDocument2 }}</span></a></p>
+					{% if pagina.titolDocument2 and pagina.document2Name  %}
+					    <p class='boto01'><a rel='external' href='{{ vich_uploader_asset(pagina, 'document2')  }}'><span>{{ pagina.titolDocument2 }}</span></a></p>
 					{% endif %}
-					
-					
-				
 					<div class="subbotons1">
-						{% if pagina.urlFlickr %}
-						<a rel='external' href='{{ pagina.urlFlickr }}' target="_blank"><img src='/images/xarxa_flickr_color.gif' alt='logotip flickr' title='logotip flickr'></a>
-						{% endif %}
-						
+                        {% if pagina.urlFlickr %}
+						    <a rel='external' href='{{ pagina.urlFlickr }}' target="_blank"><img src='/images/xarxa_flickr_color.gif' alt='logotip flickr' title='logotip flickr'></a>
+                        {% endif %}
 						{% if pagina.urlVimeo %}
-						
-						<a rel='external' href='{{ pagina.urlVimeo }}' target="_blank"><img src='/images/xarxa_vimeo_color.gif' alt='logitp vimeo' title='logotip vimeo'></a>
-						
+						    <a rel='external' href='{{ pagina.urlVimeo }}' target="_blank"><img src='/images/xarxa_vimeo_color.gif' alt='logitp vimeo' title='logotip vimeo'></a>
 						{% endif %}
-					
 					</div>
 					{% if pagina.datavisible %}
-					<p style="clear: both; color: #999;"><br>{{ "tr.publicat" | trans }}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
-					
+					    <p style="clear: both; color: #999;"><br>{{ "tr.publicat" | trans }}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
 					{% endif %}
-					
-				</div> <!-- contingutregistre1 -->
-
-					<div class="contingutregistre2">
-						
-
-
-
-
-<div>
-{% if pagina.resum %}
-<p class="resum">
-
-
-{{ pagina.resum }}
-
-</p>
-{% endif %}
-<div style="text-align: justify">{{ pagina.descripcio | raw }}
-</div>
-<div><span style="color: rgb(255,0,102)"><strong><br />
-</strong></span>
-</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; 
-</div>
-</div>
+				</div>
+				<div class="contingutregistre2">
+                    <div>
+                        {% if pagina.resum %}
+                            <p class="resum">{{ pagina.resum }}</p>
+                        {% endif %}
+                        <div style="text-align: justify">{{ pagina.descripcio | raw }}</div>
+                        <div>
+                            <span style="color: rgb(255,0,102)"><strong><br/></strong></span>
+                        </div>
+                        <div>&nbsp; &nbsp; &nbsp; &nbsp;
+                        </div>
+                    </div>
 					{% if pagina.compartir %}
-
-							  <div class="addthis_toolbox addthis_default_style " style="height: 30px; width: 140px; margin: 20px 0px 0px 0px; float: right; clear: both;">
-							  <a class="addthis_button_preferred_1"></a>
-							  <a class="addthis_button_preferred_2"></a>
-							  <a class="addthis_button_preferred_3"></a>
-							  <a class="addthis_button_preferred_4"></a>
-							  <a class="addthis_button_compact"></a>
-							  <a class="addthis_counter addthis_bubble_style"></a>
-							  </div>
-							  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f6eca0475f4ec0a"></script>
-						{% endif %}
-
-					</div> <!-- contingutregistre2 -->
-
-			</div> <!-- registre -->
-{% else %}
-<p>La pàgina no està activa</p>		 
-{% endif %}
-		</div> <!-- continguts -->
+                        <div class="addthis_toolbox addthis_default_style " style="height: 30px; width: 140px; margin: 20px 0px 0px 0px; float: right; clear: both;">
+                            <a class="addthis_button_preferred_1"></a>
+                            <a class="addthis_button_preferred_2"></a>
+							<a class="addthis_button_preferred_3"></a>
+							<a class="addthis_button_preferred_4"></a>
+							<a class="addthis_button_compact"></a>
+							<a class="addthis_counter addthis_bubble_style"></a>
+						</div>
+                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f6eca0475f4ec0a"></script>
+					{% endif %}
+				</div>
+            </div>
+        {% else %}
+            <p>La pàgina no està activa</p>
+        {% endif %}
+	</div>
 </div>

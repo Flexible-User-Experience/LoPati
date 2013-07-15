@@ -36,15 +36,10 @@ class DefaultController extends Controller {
 
 
     public function provaAction() {
-
         $em = $this->getDoctrine()->getManager();
         $pagina = $em->getRepository('BlogBundle:Pagina')->find(1);
 
-
-
         return $this->render('BlogBundle:Default:prova.html.twig',array('pagina'=>$pagina));
-
-
     }
 
 
