@@ -245,30 +245,14 @@ liip_imagine:
             filters:
                 thumbnail: { size: [578,null], mode: outbound }
                 
- 
-#app/config/config.yml
 foq_elastica:
     clients:
         default: { host: localhost, port: %port_elastica% }
-        
+
     indexes:
         website:
             client: default
-            types:
-                pagines:
-                    mappings:
-                        titol: { boost: 5 }
-                        descripcio: { boost: 3 }
-                        translatedTitleEs: { boost: 5 }
-                        translatedDescripcioEs: { boost: 3 }
-                        translatedTitleEn: { boost: 5 }
-                        translatedDescripcioEn: { boost: 3 }
-                    persistence:
-                        driver: orm # orm, mongodb, propel are available
-                        model: LoPati\BlogBundle\Entity\Pagina
-                        provider:
-                        listener:
-                        finder:         
+            
 
 # Configuracio dies laborals a l'agenda
 # Estos son els dies que el Centre obre al public
