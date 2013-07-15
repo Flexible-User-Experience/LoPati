@@ -28,6 +28,21 @@ class Artista {
      */
 	protected $name;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $year;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $category;
+
 	/** 
 	 * @ORM\Column(type="string", length=255, nullable=true)
 	 * @Gedmo\Translatable
@@ -499,6 +514,54 @@ class Artista {
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $year
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
+    {
+        return $this->year;
     }
 
 	public function __toString() {
