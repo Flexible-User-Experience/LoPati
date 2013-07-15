@@ -1,3 +1,7 @@
+artista:
+    resource: "@ArtistaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 agenda:
     resource: "@AgendaBundle/Resources/config/routing.yml"
     prefix:   /

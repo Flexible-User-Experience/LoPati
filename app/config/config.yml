@@ -244,7 +244,8 @@ liip_imagine:
             quality: 80
             filters:
                 thumbnail: { size: [578,null], mode: outbound }
-                
+
+# Moved to config_prod.yml to avoid Elastica on devel environments
 foq_elastica:
     clients:
         default: { host: localhost, port: %port_elastica% }
@@ -252,7 +253,6 @@ foq_elastica:
     indexes:
         website:
             client: default
-            
 
 # Configuracio dies laborals a l'agenda
 # Estos son els dies que el Centre obre al public
