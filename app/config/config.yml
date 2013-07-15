@@ -96,6 +96,7 @@ sonata_admin:
       Arxiu:
       Peu de pàgina:
       Newsletters:
+      Artistes:
 
 # Sonata Block Bundle
 sonata_block:
@@ -103,7 +104,6 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
-
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
@@ -123,8 +123,6 @@ sonata_user:
                 class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
                 controller:     SonataAdminBundle:CRUD
                 translation:    SonataUserBundle
-
-
 
 # Friends Of Symfony Bundle (FOS)      
 fos_user:
@@ -208,10 +206,14 @@ vich_uploader:
             upload_destination: %kernel.root_dir%/../web/uploads/images
             inject_on_load: false
             delete_on_remove: true
-            
         pdf:
             uri_prefix: /uploads/documents
             upload_destination: %kernel.root_dir%/../web/uploads/documents
+            inject_on_load: false
+            delete_on_remove: true
+        artista:
+            uri_prefix: /uploads/artists
+            upload_destination: %kernel.root_dir%/../web/uploads/artists
             inject_on_load: false
             delete_on_remove: true
             
@@ -223,23 +225,18 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [710,null], mode: outbound }
-                
         portada:
             quality: 90
             filters:
                 thumbnail: { size: [155,155], mode: outbound }
-                
-                
         thumb_imatge_pagina:
             quality: 70
             filters:
                 thumbnail: { size: [155,null], mode: outbound }
-
         thumb_imatge_pagina_arbre_continguts:
             quality: 70
             filters:
                 thumbnail: { size: [50,null], mode: outbound }
-     
         imatge_pagina_newsletter:
             quality: 80
             filters:

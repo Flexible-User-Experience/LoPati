@@ -63,7 +63,15 @@ services:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
       - NewsletterBundle:Admin
-      
+
+  sonata.lopati.admin.artista:
+    class: LoPati\ArtistaBundle\Admin\ArtistaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Artistes', label: artista }
+    arguments:
+      - null
+      - LoPati\ArtistaBundle\Entity\Artista
+      - ArtistaBundle:Admin
 
       
 

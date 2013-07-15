@@ -128,6 +128,18 @@ class Artista {
     protected $image5;
 
     /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
 	 * @ORM\OneToMany(
 	 * 	targetEntity="LoPati\ArtistaBundle\Entity\Translation\ArtistaTranslation",
 	 * 	mappedBy="object",
@@ -229,6 +241,7 @@ class Artista {
     public function setImage1($image1)
     {
         $this->image1 = $image1;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -245,6 +258,7 @@ class Artista {
     public function setImage1File($image1File)
     {
         $this->image1File = $image1File;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -261,6 +275,7 @@ class Artista {
     public function setImage2($image2)
     {
         $this->image2 = $image2;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -277,6 +292,7 @@ class Artista {
     public function setImage2File($image2File)
     {
         $this->image2File = $image2File;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -293,6 +309,7 @@ class Artista {
     public function setImage3($image3)
     {
         $this->image3 = $image3;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -309,6 +326,7 @@ class Artista {
     public function setImage3File($image3File)
     {
         $this->image3File = $image3File;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -325,6 +343,7 @@ class Artista {
     public function setImage4($image4)
     {
         $this->image4 = $image4;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -341,6 +360,7 @@ class Artista {
     public function setImage4File($image4File)
     {
         $this->image4File = $image4File;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -357,6 +377,7 @@ class Artista {
     public function setImage5($image5)
     {
         $this->image5 = $image5;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -373,6 +394,7 @@ class Artista {
     public function setImage5File($image5File)
     {
         $this->image5File = $image5File;
+        $this->updated  = new \DateTime();
     }
 
     /**
@@ -447,7 +469,37 @@ class Artista {
         return $this->summary;
     }
 
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 
 	public function __toString() {
 		return $this->getSlug();
