@@ -105,8 +105,8 @@ class Pagina {
 	protected $categoria;
 
 	/** 
-	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria")	
-	 * @ORM\JoinColumn(name="subCategoria_id", referencedColumnName="id", nullable=true) 
+	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria", inversedBy="pagines")
+	 * @ORM\JoinColumn(name="subCategoria_id", referencedColumnName="id", nullable=true)
 	 */
 	protected $subCategoria;
 	

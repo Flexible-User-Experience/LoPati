@@ -170,7 +170,7 @@ class Artista {
 	}
 	
 	public function getSlug() {
-		return Util::getSlug($this->titol);
+		return Util::getSlug($this->name);
 	}
 	
 	/**
