@@ -2191,7 +2191,8 @@ color: #000;
 
 }
  table.calendari tbody tr td {
-    padding: 3px 5px;
+     padding: 3px 5px;
+     cursor: default;
      font-size: 0.9em;
      text-align: right;
 }

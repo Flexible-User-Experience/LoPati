@@ -1,1 +1,23 @@
+irradiador_detail_ca:
+    pattern:        /{_locale}/projectes/irradiador/{artista}/{id}
+    defaults:       { _controller: ArtistaBundle:Default:detail }
+    requirements:
+        _locale: ca
+        artista: "[a-zA-Z]+"
+        id: \d+
 
+irradiador_detail_es:
+    pattern:        /{_locale}/proyectos/irradiador/{artista}/{id}
+    defaults:       { _controller: ArtistaBundle:Default:detail }
+    requirements:
+        _locale: es
+        artista: "[a-zA-Z]+"
+        id: \d+
+
+irradiador_detail_en:
+    pattern:        /{_locale}/projects/irradiador/{artista}/{id}
+    defaults:       { _controller: ArtistaBundle:Default:detail }
+    requirements:
+        _locale: en
+        artista: "[a-zA-Z]+"
+        id: \d+

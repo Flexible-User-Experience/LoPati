@@ -3,10 +3,6 @@ Frontend:
     type:     annotation
     prefix:   /
 
-newsletter_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: NewsletterBundle:Default:index }
-
 newsletter_user:
     pattern:  /newsletter/suscribe
     defaults: { _controller: NewsletterBundle:Default:suscribe}
