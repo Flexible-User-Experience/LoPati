@@ -28,7 +28,6 @@ monolog:
 foq_elastica:
     clients:
         default: { host: localhost, port: %port_elastica% }
-
     indexes:
         website:
             client: default

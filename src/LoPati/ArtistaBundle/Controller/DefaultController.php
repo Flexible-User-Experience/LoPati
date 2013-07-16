@@ -9,7 +9,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $pagina = $em->getRepository('BlogBundle:Pagina')->find(123);
+        $pagina = $em->getRepository('BlogBundle:Pagina')->find($this->container->getParameter('id_page_item_irradiador'));
         $artistes = $em->getRepository('ArtistaBundle:Artista')->getActiveItemsSortedByPosition();
         return $this->render('ArtistaBundle:Default:index.html.twig', array(
             'pagina' => $pagina,
@@ -20,7 +20,7 @@ class DefaultController extends Controller
     public function detailAction($artista)
     {
         $em = $this->getDoctrine()->getManager();
-        $pagina = $em->getRepository('BlogBundle:Pagina')->find(123);
+        $pagina = $em->getRepository('BlogBundle:Pagina')->find($this->container->getParameter('id_page_item_irradiador'));
         $artistes = $em->getRepository('ArtistaBundle:Artista')->getActiveItemsSortedByPosition();
         foreach ($artistes as $art) {
             if ($art->getSlug() == $artista) {
