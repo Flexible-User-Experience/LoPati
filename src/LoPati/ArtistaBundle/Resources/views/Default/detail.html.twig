@@ -23,14 +23,32 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="contingutregistre2">
+                    <div class="contingutregistre2" style="margin-bottom:40px">
+                        {% if artista.image1 %}
+                            <div id="slides" style="margin-bottom:40px">
+                                <img src="{{ vich_uploader_asset(artista, 'image1File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                                {% if artista.image2 %}
+                                    <img src="{{ vich_uploader_asset(artista, 'image2File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                                {% endif %}
+                                {% if artista.image3 %}
+                                    <img src="{{ vich_uploader_asset(artista, 'image3File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                                {% endif %}
+                                {% if artista.image4 %}
+                                    <img src="{{ vich_uploader_asset(artista, 'image4File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                                {% endif %}
+                                {% if artista.image5 %}
+                                    <img src="{{ vich_uploader_asset(artista, 'image5File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                         <div class="titol" style="margin:0">
                             <h1>{{ artista.name }}</h1>
                         </div>
                         <div>
                             {{ artista.city }}, {{ artista.year }}<br/>
-                            {{ artista.summary }}<br/>
-                            {{ artista.description }}
+                            {{ artista.category }}<br/>
+                            <p class="resum">{{ artista.summary }}</p>
+                            {{ artista.description | raw }}
                         </div>
                     </div>
                 </div>
@@ -39,4 +57,19 @@
             {% endif %}
         </div>
     </div>
+
+    <script type="text/javascript" src="{{ asset('/bundles/artista/js/jquery.slides.min.js') }}"></script>
+    {% if artista.image1 and artista.image2 %}
+        <script>
+            $(function(){
+                $("#slides").slidesjs({
+                    width: 460,
+                    height: 300,
+                    navigation: { active: false },
+                    pagination: { active: false },
+                    play: { auto: true}
+                });
+            });
+        </script>
+    {% endif %}
 {%  endblock %}

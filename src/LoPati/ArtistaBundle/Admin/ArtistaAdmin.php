@@ -30,8 +30,8 @@ class ArtistaAdmin extends Admin
 				'style' => 'width: 600px; height: 400px;'),'label' => 'Descripció'))
 
 		->with('Imatges')
-		->add('image1File', 'file', array('label' => 'Imatge 1', 'required'=>false))
-		->add('image1', null, array('label' => 'Nom imatge 1', 'required'=>false, 'read_only'=>true,))
+            ->add('image1File', 'file', array('label' => 'Imatge 1', 'required'=>false))
+            ->add('image1', null, array('label' => 'Nom imatge 1', 'required'=>false, 'read_only'=>true,))
             ->add('image2File', 'file', array('label' => 'Imatge 2', 'required'=>false))
             ->add('image2', null, array('label' => 'Nom imatge 2', 'required'=>false, 'read_only'=>true,))
             ->add('image3File', 'file', array('label' => 'Imatge 3', 'required'=>false))

@@ -29,3 +29,7 @@ div.registre div.contingutregistre1 ul.menu-artistes li a:hover {
 div.registre div.contingutregistre1 ul.menu-artistes li a.current {
     color: #E31853;
 }
+
+#slides {
+    display: none;
+}

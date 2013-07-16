@@ -91,7 +91,7 @@ class Artista {
      *     maxSize="10M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="artista", fileNameProperty="image1")
+     * @Vich\UploadableField(mapping="artista", fileNameProperty="image2")
      */
     protected $image2File;
 
@@ -105,7 +105,7 @@ class Artista {
      *     maxSize="10M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="artista", fileNameProperty="image1")
+     * @Vich\UploadableField(mapping="artista", fileNameProperty="image3")
      */
     protected $image3File;
 
@@ -119,7 +119,7 @@ class Artista {
      *     maxSize="10M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="artista", fileNameProperty="image1")
+     * @Vich\UploadableField(mapping="artista", fileNameProperty="image4")
      */
     protected $image4File;
 
@@ -133,7 +133,7 @@ class Artista {
      *     maxSize="10M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="artista", fileNameProperty="image1")
+     * @Vich\UploadableField(mapping="artista", fileNameProperty="image5")
      */
     protected $image5File;
 

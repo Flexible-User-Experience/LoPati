@@ -241,6 +241,10 @@ liip_imagine:
             quality: 80
             filters:
                 thumbnail: { size: [578,null], mode: outbound }
+        imatge460x300:
+            quality: 90
+            filters:
+                thumbnail: { size: [460,300], mode: outbound }
 
 # Moved to config_prod.yml to avoid Elastica on devel environments
 foq_elastica:

@@ -9,6 +9,7 @@ app/config/parameters.yml
 vendor/*
 web/bundles/*
 web/uploads/cache/*
+web/uploads
 composer.phar
 *~
 *.sublime-project
