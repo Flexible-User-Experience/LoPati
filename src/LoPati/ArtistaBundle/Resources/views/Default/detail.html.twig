@@ -2,6 +2,8 @@
 
 {% block title %}: {{ pagina.titol }}{% endblock %}
 
+{% block estils %}<link href="{{ asset('/bundles/artista/css/artista.css') }}" rel="stylesheet" type="text/css"/>{% endblock %}
+
 {% block menu %}
     {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id: pagina.categoria.id, subcategoria_id: pagina.subcategoria.id } %}
 {% endblock %}

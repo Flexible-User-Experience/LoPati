@@ -1,0 +1,27 @@
+div.registre div.contingutregistre1 ul.menu-artistes {
+    margin: 0;
+    padding: 0;
+}
+
+div.registre div.contingutregistre1 ul.menu-artistes li {
+    border-bottom: solid 1px #666;
+}
+
+div.registre div.contingutregistre1 ul.menu-artistes li:first-child {
+    border-top: solid 1px #666;
+}
+
+div.registre div.contingutregistre1 ul.menu-artistes li a {
+    padding: 5px 0;
+    display: block;
+    color: #666;
+    font-size: 100%;
+    transition: color 0.25s;
+    -moz-transition: color 0.25s; /* Firefox >= 4 */
+    -webkit-transition: color 0.25s; /* Safari and Chrome */
+    -o-transition: color 0.25s; /* Opera */
+}
+
+div.registre div.contingutregistre1 ul.menu-artistes li a:hover {
+    color: #E31853;
+}

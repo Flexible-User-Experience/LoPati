@@ -2,6 +2,8 @@
 
 {% block title %}: {{ pagina.titol }}{% endblock %}
 
+{% block estils %}<link href="{{ asset('/bundles/artista/css/artista.css') }}" rel="stylesheet" type="text/css"/>{% endblock %}
+
 {% block menu %}
     {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id: pagina.categoria.id, subcategoria_id: pagina.subcategoria.id } %}
 {% endblock %}
@@ -12,12 +14,8 @@
             <!-- situacio -->
             {% if (pagina.categoria.actiu ) and pagina.actiu %}
                 <div class="registre">
-                    <div class="separador"></div>
-                    <div class="titol">
-                        <h1>{{ pagina.titol }}</h1>
-                    </div>
                     <div class="contingutregistre1">
-                        <ul>
+                        <ul class="menu-artistes">
                             {% for artista in artistes %}
                                 <li>
                                     <a href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artista.slug } ) }}">{{ artista.name }}<br/></a>
@@ -26,6 +24,9 @@
                         </ul>
                     </div>
                     <div class="contingutregistre2">
+                        <div class="titol" style="margin:0">
+                            <h1>{{ pagina.titol }}</h1>
+                        </div>
                         <div>
                             {% if pagina.resum %}
                                 <p class="resum">{{ pagina.resum }}</p>

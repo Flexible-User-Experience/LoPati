@@ -2,15 +2,14 @@
 <html>
 	<head>
 	    <meta charset="UTF-8" />
-	    <META NAME="keywords" CONTENT="art contemporani,xarxa centres arts visuals catalunya,amposta,terres de l'ebre,mergent,residencia artsites,paissatge,art urba,street,art,poesia,experimental,video,art digital,cultura contemprania,pensament,pedagogia,arte contemporaneo,coleccion,col·leccio,arxiu,archivo,mediateca,soriano montagut,carles santos">
+	    <META NAME="keywords" CONTENT="art contemporani, xarxa centres arts visuals catalunya, amposta, terres de l'ebre, emergent, residencia artsites, paissatge, art urba, street,art, poesia, experimental, video, art digital, cultura contemprania, pensament, pedagogia, arte contemporaneo, coleccion, col·leccio, arxiu, archivo, mediateca, soriano montagut, carles santos">
 		<META NAME="description" CONTENT="Centre d'Art de les Terres de l'Ebre, amb seu a Amposta. Difusió, formació, producció, col·lecció i arxiu. Forma part de la Xarxa de Centres d'Arts Visuals de Catalunya.">
-		
 		<title>Lo Pati | Centre d'Art - Terres de l'Ebre{% block title %}{% endblock %}</title>
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
+        {% block estils %}{% endblock %}
         <script type="text/javascript" src="{{ asset('/bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
-
     </head>
 	<body>
 		<div class="pagina">
@@ -70,37 +69,31 @@
 		{% render 'BlogBundle:Default:peu' %}
 
 
-<script type="text/javascript">
- $(document).ready(function(){
-
-        $('#agenda_boto_esquerre').click(function(){
-            console.log("entra esquerre");
-
-            $.ajax({
-                type: "GET",
-                url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
-                success: function(data){
-                  $('#calendari').html(data);
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#agenda_boto_esquerre').click(function(){
+                console.log("entra esquerre");
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
+                    success: function(data){
+                      $('#calendari').html(data);
 
 
-                }
+                    }
+                });
             });
-        });
-        $('#agenda_boto_dret').click(function(){
+            $('#agenda_boto_dret').click(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
+                    success: function(data){ //En data.items pasas el listado de eventos de ese mes
 
-            $.ajax({
-                type: "GET",
-                url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
-                success: function(data){ //En data.items pasas el listado de eventos de ese mes
-
-                    $('#calendari').html(data);
-                }
+                        $('#calendari').html(data);
+                    }
+                });
             });
-        });
-
-
-
- })
- </script>
+        })
+        </script>
 	</body>
 </html>
