@@ -17,22 +17,19 @@ irradiador_en:
         _locale: en
 
 irradiador_detail_ca:
-    pattern:        /{_locale}/projectes/irradiador/{artista}/{id}
+    pattern:        /{_locale}/projectes/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: ca
-        id: \d+
 
 irradiador_detail_es:
-    pattern:        /{_locale}/proyectos/irradiador/{artista}/{id}
+    pattern:        /{_locale}/proyectos/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: es
-        id: \d+
 
 irradiador_detail_en:
-    pattern:        /{_locale}/projects/irradiador/{artista}/{id}
+    pattern:        /{_locale}/projects/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: en
-        id: \d+

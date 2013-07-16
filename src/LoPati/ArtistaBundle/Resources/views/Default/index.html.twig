@@ -20,7 +20,7 @@
                         <ul>
                             {% for artista in artistes %}
                                 <li>
-                                    <a href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artista.slug, 'id' : artista.id} ) }}">{{ artista.name }}<br/></a>
+                                    <a href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artista.slug } ) }}">{{ artista.name }}<br/></a>
                                 </li>
                             {% endfor %}
                         </ul>

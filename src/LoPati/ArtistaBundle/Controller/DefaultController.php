@@ -17,17 +17,21 @@ class DefaultController extends Controller
         ));
     }
 
-    public function detailAction($artista, $id)
+    public function detailAction($artista)
     {
         $em = $this->getDoctrine()->getManager();
         $pagina = $em->getRepository('BlogBundle:Pagina')->find(124);
-        $artista = $em->getRepository('ArtistaBundle:Artista')->find($id);
         $artistes = $em->getRepository('ArtistaBundle:Artista')->getActiveItemsSortedByPosition();
+        foreach ($artistes as $art) {
+            if ($art->getSlug() == $artista) {
+                $artistaEscollit = $art;
+                break;
+            }
+        }
         return $this->render('ArtistaBundle:Default:detail.html.twig', array(
             'pagina' => $pagina,
-            'artista' => $artista,
+            'artista' => $artistaEscollit,
             'artistes' => $artistes,
-            'id' => $id,
         ));
     }
 }
