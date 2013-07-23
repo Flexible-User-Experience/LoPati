@@ -9,7 +9,6 @@
     font-style: normal;
 }
 
-
 body {
 	font-family: arial, sans-serif;
 	font-size: 0.9em;
@@ -18,14 +17,17 @@ body {
 	margin: 0px;
 	padding: 0px;
 }
-A {
+
+a {
 	color: #666;
 	text-decoration: underline;
 }
-A:Hover {
+
+a:hover {
 	color: #E31853;
 	text-decoration: underline;
 }
+
 a:focus {
 	outline:none;
 }
@@ -33,27 +35,33 @@ a:focus {
 .registre form {
 	margin: 0px;
 }
+
 .registre form .camp {
 	width: 150px;
 	float: left;
 }
+
 .registre form p {
 	padding: 2px;
 }
+
 .registre form input {
 	background-color: #ffffff;
 	border: 1px solid #999999;
 	padding: 2px;
 }
+
 .registre form textarea {
 	background-color: #ffffff;
 	border: 1px solid #999999;
 	padding: 2px;
 }
+
 .registre form .obligatori {
 	background-color: #b6abab;
 	border: 1px solid #999999;
 }
+
 :focus { outline: 0; }
 
 h1 {
@@ -64,47 +72,55 @@ h1 {
 	font-weight: normal;
 	font-family: BrauerPatiBol;
 }
+
 h2 {
 	font-size: 160%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 h3 {
 	font-size: 130%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 h4 {
 	font-size: 110%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 h5 {
 	font-size: 100%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 h6 {
 	font-size: 90%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 h7 {
 	font-size: 80%;
 	color: #5A7986;
 	margin: 10px 0px 5px 5px;
 	padding: 0px 0px 5px 0px;
 }
+
 img {
 	padding: 0px;
 	margin: 0px;
 	border: 0px;
 }
+
 img.dta {
 	float: right;
 	padding: 5px;
@@ -112,13 +128,15 @@ img.dta {
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
 }
+
 img.esq {
 	float: left;
 	padding: 5px;
 	margin: 5px 5px 5px 0px;
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
-	}
+}
+
 img.mig {
 	text-align: center;
 	display: block;
@@ -127,6 +145,7 @@ img.mig {
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
 }
+
 .contenidor {
 	width: 756px;
 	margin: 0;
@@ -134,13 +153,12 @@ img.mig {
 	padding: 0;
 	float: left;
 }
+
 .continguts {
 	width: 100%;
 	min-height: 300px; height: auto !important; height: 300px;
-	/* height:100%; */
 	margin: 30px 0px 0px 0px;
 	padding:0;
-
 }
 
 .esquerra {
@@ -149,6 +167,7 @@ img.mig {
 	height: 100%;
 	background-color: #ffffff;
 }
+
 .esquerra p {
 	margin: 5px 10px 0 10px;
 }
@@ -157,9 +176,10 @@ img.mig {
 	width: 180px;
 	float:right;
 	height: 100%;
-	margin: 30px 0 0 0;
+	margin: 30px 0;
 	background-color: #fff;
 }
+
 .dreta p {
 	margin: 0;
 }
@@ -176,6 +196,7 @@ img.mig {
 	clear: both;
 	background-color: #fff;
 }
+
 .situacio ul {
     width: 95%;
     height: 20px;
