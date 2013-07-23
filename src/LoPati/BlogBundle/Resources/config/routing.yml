@@ -1,13 +1,38 @@
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
 inici:
   pattern: /
   defaults: { _controller: BlogBundle:Default:index}
 
+search:
+  pattern: /{_locale}/search/
+  defaults: { _controller: BlogBundle:Default:search}
+  requirements:
+        _locale: ca|es|en
+      
 portada:
   pattern: /{_locale}/
   defaults: { _controller: BlogBundle:Default:portada}
   requirements:
         _locale: ca|es|en
-
+prova:
+  pattern: /{_locale}/prova
+  defaults: { _controller: BlogBundle:Default:prova}
+  requirements:
+        _locale: ca|es|en
+  
 categoriaenenllas:
   pattern: /{_locale}/{categoria}/{id}/
   defaults: { _controller: BlogBundle:Default:pagina}
@@ -16,27 +41,6 @@ categoriaenenllas:
     _method:  GET
     _locale: ca|es|en
 
-categoriasenseenllas:
-  pattern: /{_locale}/{categoria}/{subcategoria}/{id}/
-  defaults: { _controller: BlogBundle:Default:pagina}
-  requirements:
-    id:  \d+
-    _method:  GET
-    _locale: ca|es|en
-
-pagina:
-  pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
-  defaults: { _controller: BlogBundle:Default:article}
-  requirements:
-    id:  \d+
-    _method:  GET
-    _locale: ca|es|en
-
-search:
-  pattern: /{_locale}/search/
-  defaults: { _controller: BlogBundle:Default:search}
-  requirements:
-        _locale: ca|es|en
 
 arxiuarticle:
   pattern: /{_locale}/{arxiu}/{any}/{titol}/{id}/
@@ -47,6 +51,7 @@ arxiuarticle:
     any: \d+
     _method:  GET
 
+
 llista:
   pattern: /{_locale}/{categoria}/{subcategoria}/{categoria_id}/{subcategoria_id}/
   defaults: { _controller: BlogBundle:Default:llista}
@@ -56,6 +61,8 @@ llista:
     _method:  GET
     _locale: ca|es|en
 
+
+
 arxiullistaany:
   pattern: /{_locale}/{arxiu}/{any}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiuLlistaAny}
@@ -64,7 +71,9 @@ arxiullistaany:
     any:  \d+
     categoria_id: \d+
     _method:  GET
+    
 
+    
 arxiu:
   pattern: /{_locale}/{arxiu}/{categoria}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiu}
@@ -75,15 +84,29 @@ arxiu:
         categoria_id: \d+
         id: \d+
 
-admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
 
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
 
-sonata_user:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
+categoriasenseenllas:
+  pattern: /{_locale}/{categoria}/{subcategoria}/{id}/
+  defaults: { _controller: BlogBundle:Default:pagina}
+  requirements:
+    id:  \d+
+    _method:  GET
+    _locale: ca|es|en
+   
+pagina:
+  pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
+  defaults: { _controller: BlogBundle:Default:article}
+  requirements:
+    id:  \d+
+    _method:  GET
+    _locale: ca|es|en
+
+prova:
+  pattern: /{_locale}/prova/
+  defaults: { _controller: BlogBundle:Default:prova}
+  requirements:
+    _locale: ca|es|en
+
+
+    
