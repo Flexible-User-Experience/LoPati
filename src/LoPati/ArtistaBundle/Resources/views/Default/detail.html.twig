@@ -11,50 +11,45 @@
 {% block contenidor %}
     <div class="contenidor">
         <div class="continguts">
-            <!-- situacio -->
-            {% if (pagina.categoria.actiu ) and pagina.actiu %}
-                <div class="registre">
-                    <div class="contingutregistre1">
-                        <ul class="menu-artistes">
-                            {% for artist in artistes %}
-                                <li>
-                                    <a {% if artist.slug == artista.slug%}class="current"{% endif %} href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artist.slug } ) }}">{{ artist.name }}<br/></a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+            <div class="registre">
+                <div class="contingutregistre1">
+                    <ul class="menu-artistes">
+                        {% for artist in artistes %}
+                            <li>
+                                <a {% if artist.slug == artista.slug%}class="current"{% endif %} href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artist.slug } ) }}">{{ artist.name }}<br/></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="contingutregistre2" style="margin-bottom:40px">
+                    {% if artista.image1 %}
+                        <div id="slides" style="margin-bottom:40px">
+                            <img src="{{ vich_uploader_asset(artista, 'image1File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                            {% if artista.image2 %}
+                                <img src="{{ vich_uploader_asset(artista, 'image2File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                            {% endif %}
+                            {% if artista.image3 %}
+                                <img src="{{ vich_uploader_asset(artista, 'image3File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                            {% endif %}
+                            {% if artista.image4 %}
+                                <img src="{{ vich_uploader_asset(artista, 'image4File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                            {% endif %}
+                            {% if artista.image5 %}
+                                <img src="{{ vich_uploader_asset(artista, 'image5File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="titol" style="margin:0">
+                        <h1>{{ artista.name }}</h1>
                     </div>
-                    <div class="contingutregistre2" style="margin-bottom:40px">
-                        {% if artista.image1 %}
-                            <div id="slides" style="margin-bottom:40px">
-                                <img src="{{ vich_uploader_asset(artista, 'image1File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
-                                {% if artista.image2 %}
-                                    <img src="{{ vich_uploader_asset(artista, 'image2File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
-                                {% endif %}
-                                {% if artista.image3 %}
-                                    <img src="{{ vich_uploader_asset(artista, 'image3File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
-                                {% endif %}
-                                {% if artista.image4 %}
-                                    <img src="{{ vich_uploader_asset(artista, 'image4File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
-                                {% endif %}
-                                {% if artista.image5 %}
-                                    <img src="{{ vich_uploader_asset(artista, 'image5File') | imagine_filter('imatge460x300') }}" alt="" title=""/>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        <div class="titol" style="margin:0">
-                            <h1>{{ artista.name }}</h1>
-                        </div>
-                        <div>
-                            {{ artista.city }}, {{ artista.year }}<br/>
-                            {{ artista.category }}<br/>
-                            <p class="resum">{{ artista.summary }}</p>
-                            {{ artista.description | raw }}
-                        </div>
+                    <div>
+                        {{ artista.city }}, {{ artista.year }}<br/>
+                        {{ artista.category }}<br/>
+                        <p class="resum">{{ artista.summary }}</p>
+                        {{ artista.description | raw }}
                     </div>
                 </div>
-            {% else %}
-                <p>La pàgina no està activa</p>
-            {% endif %}
+            </div>
         </div>
     </div>
 

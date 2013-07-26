@@ -48,6 +48,7 @@ class ArtistaAdmin extends Admin
 				'fields' => array(                          // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
 						'summary'=>array(
 								 'type' => 'textarea',
+                                'label' => 'Resum',
 								'attr'=>array(
 										'style'=>'height:90px;width:480px;')),
 						'description' => array(

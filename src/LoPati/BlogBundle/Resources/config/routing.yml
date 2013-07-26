@@ -1,4 +1,3 @@
-
 inici:
   pattern: /
   defaults: { _controller: BlogBundle:Default:index}
