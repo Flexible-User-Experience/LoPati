@@ -62,8 +62,13 @@ class Artista {
 
     /**
      * @ORM\Column(type="integer")
+     *
+    protected $position;*/
+
+    /**
+     * @ORM\Column(type="string", length=1024, nullable=true)
      */
-    protected $position;
+    protected $webpage;
 	
 	/**
 	 * @Gedmo\Locale
@@ -454,19 +459,19 @@ class Artista {
 
     /**
      * @param mixed $position
-     */
+     *
     public function setPosition($position)
     {
         $this->position = $position;
-    }
+    }*/
 
     /**
      * @return mixed
-     */
+     *
     public function getPosition()
     {
         return $this->position;
-    }
+    }*/
 
     /**
      * @param mixed $summary
@@ -564,8 +569,23 @@ class Artista {
         return $this->year;
     }
 
+    /**
+     * @param mixed $webpage
+     */
+    public function setWebpage($webpage)
+    {
+        $this->webpage = $webpage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWebpage()
+    {
+        return $this->webpage;
+    }
+
 	public function __toString() {
 		return $this->getSlug();
 	}
-
 }

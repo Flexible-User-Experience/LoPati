@@ -22,8 +22,9 @@ class ArtistaAdmin extends Admin
             ->add('category', null, array('label' => 'Especialitat'))
             ->add('city', null, array('label' => 'Ciutat'))
             ->add('year', null, array('label' => 'Any'))
+            ->add('webpage', null, array('label' => 'Web'))
             ->add('active', null, array('label' => 'Activat'))
-            ->add('position', null, array('label' => 'Posició'))
+            //->add('position', null, array('label' => 'Posició'))
 		->add('summary', 'textarea', array('label' => 'Resum', 'required'  => false, 'attr'=>(array('style'=>'height:90px;'))))
 		->add('description', 'textarea', array('attr' => array('class' => 'tinymce',
 				 'data-theme'=>'simple',
@@ -71,8 +72,10 @@ class ArtistaAdmin extends Admin
 		->add('category', null, array('label' => 'Especialitat'))
         ->add('city', null, array('label' => 'Ciutat'))
         ->add('year', null, array('label' => 'Any'))
-		->add('active', null, array('label' => 'Activat'))
-        ->add('position', null, array('label' => 'Posició'));
+        ->add('webpage', null, array('label' => 'Web'))
+		->add('active', null, array('label' => 'Actiu'))
+        //->add('position', null, array('label' => 'Posició'))
+        ;
 	}
 	
 
