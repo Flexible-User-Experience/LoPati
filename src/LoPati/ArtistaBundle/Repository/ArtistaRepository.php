@@ -10,7 +10,7 @@ class ArtistaRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('SELECT a FROM ArtistaBundle:Artista a
                             WHERE a.active = 1
-                            ORDER BY a.position, a.name');
+                            ORDER BY a.name');
         return $query->getResult();
     }
 

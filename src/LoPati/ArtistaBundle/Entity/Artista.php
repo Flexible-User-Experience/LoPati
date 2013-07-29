@@ -585,6 +585,11 @@ class Artista {
         return $this->webpage;
     }
 
+    public function getCleanWebpage()
+    {
+        return str_ireplace('http://', '', $this->webpage);
+    }
+
 	public function __toString() {
 		return $this->getSlug();
 	}

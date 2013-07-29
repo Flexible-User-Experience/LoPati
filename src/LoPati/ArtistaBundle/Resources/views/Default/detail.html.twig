@@ -47,6 +47,9 @@
                         {{ artista.category }}<br/>
                         <p class="resum">{{ artista.summary }}</p>
                         {{ artista.description | raw }}
+                        {% if artista.webpage %}
+                            <a style="color:#E31853" target="_blank" href="http://{{ artista.cleanWebpage }}">{{ artista.cleanWebpage }}</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
