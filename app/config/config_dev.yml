@@ -10,7 +10,7 @@ swiftmailer:
     transport: %mailer_transport%
     username: %mailer_user%
     password:   %mailer_password%
-    delivery_address:   metalrockero@gmail.com
+    delivery_address:   %swiftmailer_delivery_address_dev_environment%
     host:       %mailer_host%
     encryption: %encryption%
     auth_mode:  %auth_mode%
@@ -31,6 +31,3 @@ monolog:
 
 assetic:
     use_controller: true
-
-#swiftmailer:
-#    delivery_address: me@example.com

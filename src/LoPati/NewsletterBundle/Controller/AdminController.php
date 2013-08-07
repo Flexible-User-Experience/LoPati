@@ -93,62 +93,58 @@ class AdminController extends Controller {
 	
 	public function testAction($id)
 	{
-		
-		$visualitzar_correctament="Clica aquí per visualitzar correctament";
-		$baixa="Clica aquí per donar-te de baixa";
-		$lloc="Lloc";
-		$data="Data";
-		$publicat="Publicat";
-		$links="Enllaços";
-		$organitza="Organitza";
-		$suport="Amb el suport de";
-		$follow="Segueix-nos a";
-		$colabora="Col·labora";
-		$butlleti="Butlletí";
-		
-		$userName = $this->container->get('security.context')
-		->getToken()
-		->getUser()
-		->getUsername();
-		$user = $this->getDoctrine()
-		->getRepository('ApplicationSonataUserBundle:User')
-		->findOneByUsername($userName);
-		
-		$em = $this->getDoctrine()->getManager();
+        $visualitzar_correctament = "Clica aquí per visualitzar correctament";
+		$baixa = "Clica aquí per donar-te de baixa";
+		$lloc = "Lloc";
+		$data = "Data";
+		$publicat = "Publicat";
+		$links = "Enllaços";
+		$organitza = "Organitza";
+		$suport = "Amb el suport de";
+		$follow = "Segueix-nos a";
+		$colabora = "Col·labora";
+		$butlleti = "Butlletí";
+
+        $em = $this->getDoctrine()->getManager();
+		//$userName = $this->container->get('security.context')->getToken()->getUser()->getUsername();
+		//$user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneByUsername($userName);
 		$newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
-		
 		$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
 		
-		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
-		: 'http://lopati.cat';
-		
+		$host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
 
-		$contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', array('host'=>$host,'pagines'=>$pagines, 
-				'idioma'=>'ca','visualitzar_correctament' => $visualitzar_correctament, 
-				'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
-				'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
-				 		'colabora'=>$colabora,'butlleti'=>$butlleti));
-		
+		$contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', array(
+            'host' => $host,
+            'pagines' => $pagines,
+            'idioma' => 'ca',
+            'visualitzar_correctament' => $visualitzar_correctament,
+            'baixa' => $baixa,
+            'lloc' => $lloc,
+            'data' => $data,
+            'publicat' => $publicat,
+            'links' => $links,
+            'organitza' => $organitza,
+            'suport' => $suport,
+            'follow' => $follow,
+            'colabora' => $colabora,
+            'butlleti' => $butlleti
+            )
+        );
 		
 		$message = \Swift_Message::newInstance()
-		//->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
-		->setSubject('Butlletí nº ' .$newsletter2->getNumero())
-		
-		//->setFrom($config->getEmail())
-		->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati" ))
-		->setTo($user->getEmail())
-		->setBody($contenido,'text/html')
-		;
+            //->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
+		    ->setSubject('Butlletí nº ' .$newsletter2->getNumero())
+            //->setFrom($config->getEmail())
+            ->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati"))
+            //->setTo($user->getEmail())
+            ->setTo(array($this->container->getParameter('newsleterEmailDestination1'), $this->container->getParameter('newsleterEmailDestination2'), $this->container->getParameter('newsleterEmailDestination3')))
+            ->setBody($contenido,'text/html');
 		$this->get('mailer')->send($message);
 		
-		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
 		$news->setTest('1');
 		$em->flush();
 		
 		return $this->redirect('../list');
-		
-		
-	
 	}
 }

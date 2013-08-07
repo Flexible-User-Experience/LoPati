@@ -267,3 +267,7 @@ parameters:
   workingDay2: 4
   workingDay3: 5
   workingDay4: 6
+
+  newsleterEmailDestination1: direccio@lopati.cat
+  newsleterEmailDestination2: butlleti@lopati.cat
+  newsleterEmailDestination3: david@flux.cat
