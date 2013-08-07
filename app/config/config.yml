@@ -263,6 +263,7 @@ foq_elastica:
 #  src/LoPati/AgendaBundle/Resources/views/Default/calendari.html.twig
 #  src/LoPati/AgendaBundle/Resources/views/Calendar/month.html.twig (linea 34)
 parameters:
-  workingDay1: 4
-  workingDay2: 5
-  workingDay3: 6
+  workingDay1: 3
+  workingDay2: 4
+  workingDay3: 5
+  workingDay4: 6
