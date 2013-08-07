@@ -133,7 +133,7 @@ class AdminController extends Controller {
 		
 		$message = \Swift_Message::newInstance()
             //->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
-		    ->setSubject('Test del Butlletí nº ' .$newsletter2->getNumero())
+		    ->setSubject('[TEST] Butlletí nº ' .$newsletter2->getNumero())
             //->setFrom($config->getEmail())
             ->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati"))
             //->setTo($user->getEmail())
