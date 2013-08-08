@@ -30,11 +30,6 @@
         "sonata-project/user-bundle" : "dev-master",
         "sonata-project/intl-bundle" : "dev-master",
         "exercise/elastica-bundle": "dev-master"
-
-
-        
-        
-        
            },
     "scripts": {
         "post-install-cmd": [
@@ -56,6 +51,7 @@
     "minimum-stability": "dev",
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web"
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink"
     }
 }
