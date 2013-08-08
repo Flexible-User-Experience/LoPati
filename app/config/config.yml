@@ -263,11 +263,12 @@ foq_elastica:
 #  src/LoPati/AgendaBundle/Resources/views/Default/calendari.html.twig
 #  src/LoPati/AgendaBundle/Resources/views/Calendar/month.html.twig (linea 34)
 parameters:
-  workingDay1: 3
-  workingDay2: 4
-  workingDay3: 5
-  workingDay4: 6
+  workingDay1: 2
+  workingDay2: 3
+  workingDay3: 4
+  workingDay4: 5
+  workingDay5: 6
 
-  newsleterEmailDestination1: direccio@lopati.cat
-  newsleterEmailDestination2: comunicacio@lopati.cat
-  newsleterEmailDestination3: david@flux.cat
+  newsleterEmailDestination1: %newsleterTestEmailDestination1%
+  newsleterEmailDestination2: %newsleterTestEmailDestination2%
+  newsleterEmailDestination3: %newsleterTestEmailDestination3%

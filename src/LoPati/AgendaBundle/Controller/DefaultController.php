@@ -125,6 +125,7 @@ class DefaultController extends Controller
             'workingDay2' => $this->container->getParameter('workingDay2'),
             'workingDay3' => $this->container->getParameter('workingDay3'),
             'workingDay4' => $this->container->getParameter('workingDay4'),
+            'workingDay5' => $this->container->getParameter('workingDay5'),
         ));
     }
 }

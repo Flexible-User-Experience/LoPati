@@ -17,4 +17,8 @@ parameters:
   
     id_page_item_irradiador: 124   #change this
 
-    swiftmailer_delivery_address_dev_environment: me@me.com #change this
+    swiftmailer_delivery_address_dev_environment: me@me.com     #change this
+
+    newsleterTestEmailDestination1: you1@you.com    #change this
+    newsleterTestEmailDestination2: you2@you.com    #change this
+    newsleterTestEmailDestination3: you3@you.com    #change this

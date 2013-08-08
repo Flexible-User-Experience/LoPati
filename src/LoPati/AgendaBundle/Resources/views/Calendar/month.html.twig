@@ -31,7 +31,7 @@
                             {% set mes2 = mes %}
                         {% endif %}
                         {% set dayComplete = any ~ '-' ~ mes2 ~ '-' ~ day %}
-                        {% if hitsMatrix[day] is defined and (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4) %} {# NOMES MARCA DIVENDRES, DISSABTE I DIUMENGE (canviar-ho a l'estiu, veure app/config/config.yml) #}
+                        {% if hitsMatrix[day] is defined and (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %} {# NOMES MARCA DIES CONFIGURATS (per canviar-ho veure app/config/config.yml) #}
                             {# a mes s'ha detectat un esdevenint dins d'aquella data #}
                             <td class="{{ hitsMatrix[day] }}">
                                 <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
