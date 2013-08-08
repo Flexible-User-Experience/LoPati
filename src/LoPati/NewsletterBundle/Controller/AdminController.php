@@ -137,9 +137,13 @@ class AdminController extends Controller {
             //->setFrom($config->getEmail())
             ->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati"))
             //->setTo($user->getEmail())
-            ->setTo(array($this->container->getParameter('newsleterEmailDestination1'), $this->container->getParameter('newsleterEmailDestination2'), $this->container->getParameter('newsleterEmailDestination3')))
+            ->setTo(array($this->container->getParameter('newsleterEmailDestination1')))
+            ->setCc(array($this->container->getParameter('newsleterEmailDestination2'), $this->container->getParameter('newsleterEmailDestination3')))
             ->setBody($contenido,'text/html');
 		$this->get('mailer')->send($message);
+        $this->get('session')->getFlashBag()->add(
+            'sonata_flash_success', 'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter('newsleterEmailDestination1') . ', ' . $this->container->getParameter('newsleterEmailDestination2'). ' i ' . $this->container->getParameter('newsleterEmailDestination3')
+        );
 		
 		$news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
 		$news->setTest('1');

@@ -1,15 +1,15 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field%}
-{% if object.estat == 'Waiting' %}
+{% if object.estat == 'Esperant' %}
     <div>
         {{ object.estat }}
     </div>
-    {% elseif object.estat == 'Sending' %}
+    {% elseif object.estat == 'Enviant' %}
         <div style="color:red;">
         {{ object.estat }}
     </div>
-    {% elseif object.estat == 'Sended' %}
+    {% elseif object.estat == 'Enviat' %}
         <div style="color:green;">
         {{ object.estat }}
     </div>
