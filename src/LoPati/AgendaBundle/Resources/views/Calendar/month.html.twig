@@ -25,20 +25,26 @@
                         {% else %}
                             {% set day = daysMatrix[(semana*7)+dia]['nday'] %}
                         {% endif %}
+                        {% set day2 = daysMatrix[(semana*7)+dia]['nday'] %}
                         {% if mes < '10' %}
                             {% set mes2 = '0' ~ mes %}
                         {% else %}
                             {% set mes2 = mes %}
                         {% endif %}
                         {% set dayComplete = any ~ '-' ~ mes2 ~ '-' ~ day %}
-                        {% if hitsMatrix[day] is defined and (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %} {# NOMES MARCA DIES CONFIGURATS (per canviar-ho veure app/config/config.yml) #}
+                        {% if hitsMatrix[day2] is defined and (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %} {# NOMES MARCA DIES CONFIGURATS (per canviar-ho veure app/config/config.yml) #}
                             {# a mes s'ha detectat un esdevenint dins d'aquella data #}
-                            <td class="{{ hitsMatrix[day] }}">
+                            <td class="{{ hitsMatrix[day2] }}">
                                 <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
                         {% else %}
                             {# NO hi ha cap esdevenint, per tant pintar només el número de dia #}
-                            <td>
+                            {% if (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %}
+                                <td class="hit-period">
                                     {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                            {% else %}
+                                <td>
+                                    {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         {# la cel·la es queda buida, no es correspon amb cap dia representable al calendari #}

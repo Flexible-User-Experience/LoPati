@@ -20,15 +20,18 @@ class DefaultController extends Controller
         return $maxWeeks;
     }
 
-    public function agendaAction($year,$month,$day)
+    public function agendaAction($year, $month, $day)
     {
         $em = $this->getDoctrine()->getManager();
         $pagines = $em->getRepository('BlogBundle:Pagina')->getActiveItemsFromDayAndMonthAndYear($day, $month, $year);
         $dia = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
-        return $this->render('AgendaBundle:Default:agenda.html.twig', array('pagines'=>$pagines,'dia'=>$dia));
+        return $this->render('AgendaBundle:Default:agenda.html.twig', array(
+            'pagines'=>$pagines,
+            'dia'=>$dia,
+        ));
     }
 
-    public function calendariAction($fletxa=null)
+    public function calendariAction($fletxa = null)
     {
         $em = $this->getDoctrine()->getManager();
         $pagina = null;
@@ -100,7 +103,7 @@ class DefaultController extends Controller
             }
         }
 
-        // Calcula la matriu de dies per al mes 1
+        // Calcula la matriu de dies per al mes1
         $daysMatrix1 = array();
         $init1 = getDate(mktime(0, 0, 0, $mes1, 1, $any1));
         $initWday1 = $init1['wday'];
