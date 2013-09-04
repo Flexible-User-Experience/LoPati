@@ -495,7 +495,7 @@ class Pagina {
 	}
 
 	public function __toString() {
-		return $this->getTitol();
+		return $this->getId() . ' · ' . $this->getDataPublicacio()->format('d/m/Y') . ' · ' .$this->getTitol();
 	}
 
 	/**
