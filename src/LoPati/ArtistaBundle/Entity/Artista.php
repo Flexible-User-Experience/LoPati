@@ -148,6 +148,21 @@ class Artista {
     protected $image5;
 
     /**
+     * @Assert\File(maxSize="16M")
+     * @Vich\UploadableField(mapping="artistapdf", fileNameProperty="document1Name")
+     *
+     * @var File $document1
+     */
+    private $document1;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="document1_name", nullable=true)
+     *
+     * @var string $document1Name
+     */
+    protected $document1Name;
+
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -423,6 +438,40 @@ class Artista {
     public function getImage5File()
     {
         return $this->image5File;
+    }
+
+    /**
+     * @param \LoPati\ArtistaBundle\Entity\File $document1
+     */
+    public function setDocument1($document1)
+    {
+        $this->document1 = $document1;
+        $this->updated  = new \DateTime();
+    }
+
+    /**
+     * @return \LoPati\ArtistaBundle\Entity\File
+     */
+    public function getDocument1()
+    {
+        return $this->document1;
+    }
+
+    /**
+     * @param string $document1Name
+     */
+    public function setDocument1Name($document1Name)
+    {
+        $this->document1Name = $document1Name;
+        $this->updated  = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocument1Name()
+    {
+        return $this->document1Name;
     }
 
     /**
