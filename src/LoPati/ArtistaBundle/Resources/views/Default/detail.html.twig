@@ -50,6 +50,9 @@
                         {% if artista.webpage %}
                             <a style="color:#E31853" target="_blank" href="http://{{ artista.cleanWebpage }}">{{ artista.cleanWebpage }}</a>
                         {% endif %}
+                        {% if artista.document1Name  %}
+                            <p class='boto01'><a rel='external' href='{{ vich_uploader_asset(artista, 'document1')  }}'><span>{% trans %}irradiador.download{% endtrans %}</span></a></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
