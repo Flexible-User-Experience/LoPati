@@ -42,6 +42,10 @@ class ArtistaAdmin extends Admin
             ->add('image5File', 'file', array('label' => 'Imatge 5', 'required'=>false))
             ->add('image5', null, array('label' => 'Nom imatge 5', 'required'=>false, 'read_only'=>true,))
 
+        ->with('Documents')
+            ->add('document1', 'file', array('label' => 'CV', 'required'=>false))
+            ->add('document1Name', null, array('label' => 'Nom CV', 'required'=>false, 'read_only'=>true,))
+
 		->with('Traduccions')
 		->add('translations', 'a2lix_translations',array(
 				'label'=> ' ',
