@@ -18,14 +18,14 @@
         {% for semana in 0..maxWeek %}
             <tr>
                 {% for dia in 0..6 %}
-                    {% if daysMatrix[(semana*7)+dia] is defined %}
+                    {% if daysMatrix[(semana * 7) + dia] is defined %}
                         {# el dia existeix al calendari, per tant s'ha de pintar la cel·la amb el número del dia corresponent #}
-                        {% if daysMatrix[(semana*7)+dia]['nday'] < '10' %}
-                            {% set day = '0' ~ daysMatrix[(semana*7)+dia]['nday'] %}
+                        {% if daysMatrix[(semana * 7) + dia]['nday'] < '10' %}
+                            {% set day = '0' ~ daysMatrix[(semana * 7) + dia]['nday'] %}
                         {% else %}
-                            {% set day = daysMatrix[(semana*7)+dia]['nday'] %}
+                            {% set day = daysMatrix[(semana * 7) + dia]['nday'] %}
                         {% endif %}
-                        {% set day2 = daysMatrix[(semana*7)+dia]['nday'] %}
+                        {% set day2 = daysMatrix[(semana * 7) + dia]['nday'] %}
                         {% if mes < '10' %}
                             {% set mes2 = '0' ~ mes %}
                         {% else %}
@@ -35,15 +35,15 @@
                         {% if hitsMatrix[day2] is defined and (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %} {# NOMES MARCA DIES CONFIGURATS (per canviar-ho veure app/config/config.yml) #}
                             {# a mes s'ha detectat un esdevenint dins d'aquella data #}
                             <td class="{{ hitsMatrix[day2] }}">
-                                <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana*7)+dia]['nday'] }}</a>
+                                <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana * 7) + dia]['nday'] }}</a>
                         {% else %}
                             {# NO hi ha cap esdevenint, per tant pintar només el número de dia #}
                             {% if (dia == workingDay1 or dia == workingDay2 or dia == workingDay3 or dia == workingDay4 or dia == workingDay5) %}
                                 <td class="hit-period">
-                                    {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                                    {{ daysMatrix[(semana * 7) + dia]['nday'] }}
                             {% else %}
                                 <td>
-                                    {{ daysMatrix[(semana*7)+dia]['nday'] }}
+                                    {{ daysMatrix[(semana * 7) + dia]['nday'] }}
                             {% endif %}
                         {% endif %}
                     {% else %}

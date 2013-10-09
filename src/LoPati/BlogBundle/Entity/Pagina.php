@@ -8,16 +8,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-
-
-
 /**
  * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\PaginaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\PaginaTranslation")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-
 class Pagina {
 
 	/**
@@ -48,9 +44,7 @@ class Pagina {
 	 */
 	protected $descripcio;
 	
-	/**
-	 * @ORM\Column(type="text", nullable=true)
-	  */
+	/** @ORM\Column(type="text", nullable=true) */
 	protected $links;
 	
 	/** @ORM\Column(type="boolean", nullable=true) */
@@ -71,14 +65,10 @@ class Pagina {
 	/** @ORM\Column(type="date", nullable=true) */
 	protected $data_caducitat = null;
 
-    /**
-     * @ORM\Column(type="date",nullable=true)
-     */
+    /** @ORM\Column(type="date",nullable=true) */
     protected $startDate;
 
-    /**
-     * @ORM\Column(type="date",nullable=true)
-     */
+    /** @ORM\Column(type="date",nullable=true) */
     protected $endDate;
 
 	/** 
@@ -99,9 +89,8 @@ class Pagina {
 	 * this is not a mapped field of entity metadata, just a simple property
 	 */
 	private $locale;
-	/** 
-	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria") 
-	 */
+
+	/** @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria") */
 	protected $categoria;
 
 	/** 
@@ -110,19 +99,13 @@ class Pagina {
 	 */
 	protected $subCategoria;
 	
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true )
-	 */
+	/** @ORM\Column(type="string", length=255, nullable=true) */
 	protected $video = NULL;
 	
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true )
-	 */
+	/** @ORM\Column(type="string", length=255, nullable=true) */
 	protected $urlVimeo = NULL;
 	
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true )
-	 */
+	/** @ORM\Column(type="string", length=255, nullable=true) */
 	protected $urlFlickr = NULL;
 	
 	/**
@@ -184,6 +167,7 @@ class Pagina {
 	 * @Gedmo\Translatable
 	 */
 	protected $peuImageGran1;
+
 	/////////////////////////////
 	
 	/**
@@ -215,12 +199,47 @@ class Pagina {
 	 * @Assert\Valid(deep = true)
 	 */
 	private $translations;
+
+    /**
+     * @Assert\File(maxSize="16M")
+     * @Vich\UploadableField(mapping="pdf", fileNameProperty="document2Name")
+     *
+     * @var File $document2
+     */
+    private $document2;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="document2_name", nullable=true)
+     *
+     * @var string $document2Name
+     */
+    protected $document2Name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $titolDocument2;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated;
+
+
 	
 	public function getVideo() {
 		return $this->video;
 	}
 	
 	public function setVideo($filename) {
+        $this->updated  = new \DateTime();
 		$this->video=$filename;
 	}
 	
@@ -245,6 +264,7 @@ class Pagina {
 	}
 	
 	public function setDocument1($filename) {
+        $this->updated  = new \DateTime();
 		$this->document1=$filename;
 	}
 	
@@ -253,6 +273,7 @@ class Pagina {
 	}
 	
 	public function setDocument1Name($file) {
+        $this->updated  = new \DateTime();
 		$this->document1Name=$file;
 	}
 	
@@ -261,6 +282,7 @@ class Pagina {
 	}
 	
 	public function setTitolDocument1($file) {
+        $this->updated  = new \DateTime();
 		$this->titolDocument1=$file;
 	}
 
@@ -274,40 +296,22 @@ class Pagina {
 		$this->links=$file;
 	}
 	
-	/**
-	 * @Assert\File(maxSize="16M")
-	 * @Vich\UploadableField(mapping="pdf", fileNameProperty="document2Name")
-	 *
-	 * @var File $document2
-	 */
-	private $document2;
-	
-	/**
-	 * @ORM\Column(type="string", length=255, name="document2_name", nullable=true)
-	 *
-	 * @var string $document2Name
-	 */
-	protected $document2Name;
-	
-	/**
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	protected $titolDocument2;
-	
-	
 	public function getDocument2() {
 		return $this->document2;
 	}
 	
 	public function setDocument2($filename) {
+        $this->updated  = new \DateTime();
 		$this->document2=$filename;
 	}
 	
 	public function getDocument2Name() {
+        $this->updated  = new \DateTime();
 		return $this->document2Name;
 	}
 	
 	public function setDocument2Name($file) {
+        $this->updated  = new \DateTime();
 		$this->document2Name=$file;
 	}
 	
@@ -334,6 +338,7 @@ class Pagina {
 	}
 	
 	public function setImageGran1Name($filename) {
+        $this->updated  = new \DateTime();
 		$this->imageGran1Name=$filename;
 	}
 	
@@ -342,6 +347,7 @@ class Pagina {
 	}
 	
 	public function setImageGran1($file) {
+        $this->updated  = new \DateTime();
 		$this->imageGran1=$file;
 	}
 	
@@ -350,6 +356,7 @@ class Pagina {
 	}
 	
 	public function setImagePetitaName($filename) {
+        $this->updated  = new \DateTime();
 		$this->imagePetitaName=$filename;
 	}
 	
@@ -358,15 +365,16 @@ class Pagina {
 	}
 
 	public function setImagePetita($file) {
+        $this->updated  = new \DateTime();
 		$this->imagePetita=$file;
 	}
-	
 	
 	public function getImagePetita2() {
 		return $this->imagePetita2;
 	}
 	
 	public function setImagePetita2($file) {
+        $this->updated  = new \DateTime();
 		$this->imagePetita2=$file;
 	}
 	
@@ -375,6 +383,7 @@ class Pagina {
 	}
 	
 	public function setImagePetita2Name($filename) {
+        $this->updated  = new \DateTime();
 		$this->imagePetita2Name=$filename;
 	}
 	public function __construct() {
@@ -446,13 +455,10 @@ class Pagina {
 	public function getTipus() {
 		return $this->tipus;
 	}
-	
-	
 
 	public function setArxiu($tipus) {
 		$this->arxiu = $tipus;
 	}
-	
 
 	public function getArxiu() {
 		return $this->arxiu;
@@ -503,8 +509,7 @@ class Pagina {
 	 *
 	 * @param LoPati\MenuBundle\Entity\Categoria $categoria
 	 */
-	public function setCategoria(
-			\LoPati\MenuBundle\Entity\Categoria $categoria=null	) {
+	public function setCategoria(\LoPati\MenuBundle\Entity\Categoria $categoria=null) {
 		$this->categoria = $categoria;
 	}
 
@@ -522,8 +527,7 @@ class Pagina {
 	 *
 	 * @param LoPati\MenuBundle\Entity\SubCategoria $SubCategoria
 	 */
-	public function setSubCategoria(
-			\LoPati\MenuBundle\Entity\SubCategoria $subCategoria=null) {
+	public function setSubCategoria(\LoPati\MenuBundle\Entity\SubCategoria $subCategoria=null) {
 		$this->subCategoria = $subCategoria;
 	}
 
@@ -643,9 +647,6 @@ class Pagina {
 		return $this->data_caducitat;
 	}
 
-
-
-
     /**
 	 * Set data_realitzacio
 	 *
@@ -713,7 +714,6 @@ class Pagina {
 	
 	public function setLocale($locale) {
 		$this->locale = $locale;
-		
 	}
 	
 	/**
@@ -728,7 +728,6 @@ class Pagina {
     public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
-
         return $this;
     }
 
@@ -751,7 +750,6 @@ class Pagina {
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
-
         return $this;
     }
 
@@ -764,13 +762,11 @@ class Pagina {
     {
         return $this->endDate;
     }
+
     public function getTranslatedTitleEs(){
-
         $i=0;
-
        while ($i<count($this->translations)){
                if ($this->translations[$i]->getLocale()=='es' && $this->translations[$i]->getField()=='titol'){
-
                    return $this->translations[$i]->getContent();
                }else{
                    $i++;
@@ -778,13 +774,12 @@ class Pagina {
        }
         return null;
     }
-    public function getTranslatedDescripcioEs(){
 
+    public function getTranslatedDescripcioEs()
+    {
         $i=0;
-
         while ($i<count($this->translations)){
             if ($this->translations[$i]->getLocale()=='es' && $this->translations[$i]->getField()=='descripcio'){
-
                 return $this->translations[$i]->getContent();
             }else{
                 $i++;
@@ -792,13 +787,12 @@ class Pagina {
         }
         return null;
     }
-    public function getTranslatedDescripcioEn(){
 
+    public function getTranslatedDescripcioEn()
+    {
         $i=0;
-
         while ($i<count($this->translations)){
             if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='descripcio'){
-
                 return $this->translations[$i]->getContent();
             }else{
                 $i++;
@@ -806,20 +800,49 @@ class Pagina {
         }
         return null;
     }
-    public function getTranslatedTitleEn(){
 
+    public function getTranslatedTitleEn()
+    {
         $i=0;
-
-        while ($i<count($this->translations)){
-
-            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='titol'){
-
+        while ($i<count($this->translations)) {
+            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='titol') {
                 return $this->translations[$i]->getContent();
-
-            }else{
+            } else {
                 $i++;
             }
         }
         return null;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
