@@ -45,6 +45,15 @@ services:
       - LoPati\BlogBundle\Entity\Configuracio
       - BlogBundle:Admin
 
+  sonata.lopati.admin.configuracio.dies.laborals.agenda:
+    class: LoPati\BlogBundle\Admin\ConfiguracioDiesLaboralsAgendaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: dies laborals agenda }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
+      - BlogBundle:Admin
+
   sonata.lopati.admin.newsletteruser:
     class: LoPati\NewsletterBundle\Admin\NewsletterUserAdmin
     tags:
