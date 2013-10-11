@@ -98,59 +98,57 @@ margin:0 ;
   <tr height="5">
     <td>&nbsp;</td>
     <td width="40">&nbsp;</td>
-    
   </tr>
   <tr>
     <td valign="top" class="bfa">
-     {% if  pagina.lloc%}
-    <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{{ lloc }}</p>
-    <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
-    {% endif %}
-    {% if  pagina.dataRealitzacio%}
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ data }}</p>
-    <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
-    {% endif %}
-    {% if pagina.links %}
-    <div class="links">
-    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ links}}</p>
-	
-		{{ pagina.links|raw }}
-		</div>
-{% endif %}
-
-{% if pagina.titolDocument1 and pagina.document1Name  %}
-
-
-<p style="font-weight:bold; display:block; margin-top:20px;">
-<a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document1')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;"><img src="{{ host ~ '/images/icona-doc01.gif'}}">
-<span style="padding: 0px 0px 0px 3px; color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument1 }}</span></a></p>
-{% endif %}
-
-{% if pagina.titolDocument2 and pagina.document2Name  %}
-<p style="font-weight:bold; display:block; margin-top:-15px;">
-<a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document2')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;"><img src="{{ host ~ '/images/icona-doc01.gif'}}">
-<span style="padding: 0px 0px 0px 3px;color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument2 }}</span></a></p>
-{% endif %}
-
-{% if pagina.urlFlickr %}
-<a rel='external' href='{{ pagina.urlFlickr }}' target="_blank"><img width=18 src="{{ host ~ '/images/xarxa_flickr_color.gif'}}" alt='logotip flickr' title='logotip flickr'></a>
-												
-{% endif %}	
-		
-	{% if pagina.urlVimeo %}									
-						<a rel='external' href='{{ pagina.urlVimeo }}' target="_blank"><img width=18 src="{{ host ~ '/images/xarxa_vimeo_color.gif'}}" alt='logitp vimeo' title='logotip vimeo'></a>
-    {% endif %}
-    
-    		{% if pagina.datavisible %}
-
-    <p style="clear: both; color: #999;"><br>{{ publicat}}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
-    {% endif %}
+      {% if pagina.lloc %}
+        <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{{ lloc }}</p>
+        <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
+      {% endif %}
+      {% if pagina.dataRealitzacio %}
+        <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ data }}</p>
+        <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
+      {% endif %}
+      {% if pagina.links %}
+        <div class="links">
+          <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ links}}</p>{{ pagina.links|raw }}
+        </div>
+      {% endif %}
+      {% if pagina.titolDocument1 and pagina.document1Name %}
+        <p style="font-weight:bold; display:block; margin-top:20px;">
+          <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document1')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;">
+            <img src="{{ host ~ '/images/icona-doc01.gif'}}">
+            <span style="padding: 0px 0px 0px 3px; color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument1 }}</span>
+          </a>
+        </p>
+      {% endif %}
+      {% if pagina.titolDocument2 and pagina.document2Name %}
+        <p style="font-weight:bold; display:block; margin-top:-15px;">
+          <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document2')  }}' style="padding: 0px 0px 0px 0px; text-decoration:none;">
+            <img src="{{ host ~ '/images/icona-doc01.gif'}}">
+            <span style="padding: 0px 0px 0px 3px;color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument2 }}
+            </span>
+          </a>
+        </p>
+      {% endif %}
+      {% if pagina.urlFlickr %}
+        <a rel='external' href='{{ pagina.urlFlickr }}' target="_blank"><img width=18 src="{{ host ~ '/images/xarxa_flickr_color.gif'}}" alt='logotip flickr' title='logotip flickr'></a>					
+      {% endif %}	
+		  {% if pagina.urlVimeo %}									
+        <a rel='external' href='{{ pagina.urlVimeo }}' target="_blank"><img width=18 src="{{ host ~ '/images/xarxa_vimeo_color.gif'}}" alt='logitp vimeo' title='logotip vimeo'></a>
+      {% endif %}
+      {% if pagina.datavisible %}
+        <p style="clear: both; color: #999;"><br>{{ publicat}}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
+      {% endif %}
     </td>
-    
     <td width="40" rowspan="2">&nbsp;</td>
-    <td colspan="3" rowspan="2" align="justify" valign="top" style="color: #666;">{{ pagina.descripcio | raw }}   <br /></td>
+    <td colspan="3" rowspan="2" align="justify" valign="top" style="color: #666;">
+      {% if pagina.resum %}
+        <span style="color:#E31853;">{{ pagina.resum }}</span><br/>
+      {% endif %}
+      {{ pagina.descripcio | raw }}<br/>
+    </td>
   </tr>
-  
   <tr>
     <td width="174" valign="top">&nbsp;</td>
     <td width="4">&nbsp;</td>
