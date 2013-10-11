@@ -24,6 +24,7 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
 		$collection
 		->remove('create')
 		->remove('delete')
+		->remove('edit')
 		;
 	}
 	
@@ -81,11 +82,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-		->addIdentifier('id')
-		->add('adresa', null, array('label' => 'Adreça'))
-		->add('horari')
-		->add('organitza')
-		->add('colabora', null, array('label' => 'Col·labora'))
+		//->addIdentifier('id')
+		->add('name', null, array('label' => 'Dia'))
+		->add('active', null, array('label' => 'És laboral?', 'editable' => true))
 		->add('_action', 'actions', array(
 				'actions' => array(
 						//'view' => array(),

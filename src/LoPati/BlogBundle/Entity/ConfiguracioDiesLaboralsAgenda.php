@@ -24,105 +24,88 @@ class ConfiguracioDiesLaboralsAgenda {
      */
     private $workingDay1;
 
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay2;
+    /** @ORM\Column(type="string", length=25, nullable=false) */
+    protected $name;
 
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay3;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay4;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay5;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay6;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    private $workingDay7;
+    /** @ORM\Column(type="boolean", nullable=false) */
+    protected $active = FALSE;
 
     /**
      * Get id
+     *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getWorkingDay1() {
+    /**
+     * Set workingDay1
+     *
+     * @param integer $workingDay1
+     * @return ConfiguracioDiesLaboralsAgenda
+     */
+    public function setWorkingDay1($workingDay1)
+    {
+        $this->workingDay1 = $workingDay1;
+    
+        return $this;
+    }
+
+    /**
+     * Get workingDay1
+     *
+     * @return integer 
+     */
+    public function getWorkingDay1()
+    {
         return $this->workingDay1;
     }
 
-    public function getWorkingDay2() {
-        return $this->workingDay2;
-    }
-
-    public function getWorkingDay3() {
-        return $this->workingDay3;
-    }
-
-    public function getWorkingDay4() {
-        return $this->workingDay4;
-    }
-
-    public function getWorkingDay5() {
-        return $this->workingDay5;
-    }
-
-    public function getWorkingDay6() {
-        return $this->workingDay6;
-    }
-
-    public function getWorkingDay7() {
-        return $this->workingDay7;
-    }
-
-    public function setWorkingDay1($day) {
-        $this->workingDay1 = $day;
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return ConfiguracioDiesLaboralsAgenda
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
         return $this;
     }
 
-    public function setWorkingDay2($day) {
-        $this->workingDay2 = $day;
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return ConfiguracioDiesLaboralsAgenda
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
         return $this;
     }
 
-    public function setWorkingDay3($day) {
-        $this->workingDay3 = $day;
-        return $this;
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
-
-    public function setWorkingDay4($day) {
-        $this->workingDay4 = $day;
-        return $this;
-    }
-
-    public function setWorkingDay5($day) {
-        $this->workingDay5 = $day;
-        return $this;
-    }
-
-    public function setWorkingDay6($day) {
-        $this->workingDay6 = $day;
-        return $this;
-    }
-
-    public function setWorkingDay7($day) {
-        $this->workingDay7 = $day;
-        return $this;
-    }
-
 }

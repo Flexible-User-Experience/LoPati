@@ -81,7 +81,7 @@ class ConfiguracioAdmin extends Admin
 	protected function configureListFields(ListMapper $mapper)
 	{
 		$mapper
-		->addIdentifier('id')
+		//->addIdentifier('id')
 		->add('adresa', null, array('label' => 'Adreça'))
 		->add('horari')
 		->add('organitza')
