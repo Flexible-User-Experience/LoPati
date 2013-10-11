@@ -26,6 +26,9 @@
                         <h1>{{ pagina.titol }}</h1>
                     </div>
                     <div>
+                        {% if pagina.imageGran1Name  %}
+                            <img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina_irradiador') }}' alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}">
+                        {% endif %}
                         {% if pagina.resum %}
                             <p class="resum">{{ pagina.resum }}</p>
                         {% endif %}
@@ -33,8 +36,7 @@
                         <div>
                             <span style="color: rgb(255,0,102)"><strong><br/></strong></span>
                         </div>
-                        <div>&nbsp; &nbsp; &nbsp; &nbsp;
-                        </div>
+                        <div>&nbsp; &nbsp; &nbsp; &nbsp;</div>
                     </div>
                 </div>
             </div>

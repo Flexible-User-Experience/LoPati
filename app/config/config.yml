@@ -228,27 +228,31 @@ liip_imagine:
         imatge_pagina:
             quality: 90
             filters:
-                thumbnail: { size: [710,null], mode: outbound }
+                thumbnail: { size: [710, null], mode: outbound }
+        imatge_pagina_irradiador:
+            quality: 90
+            filters:
+                thumbnail: { size: [460, null], mode: outbound }
         portada:
             quality: 90
             filters:
-                thumbnail: { size: [155,155], mode: outbound }
+                thumbnail: { size: [155, 155], mode: outbound }
         thumb_imatge_pagina:
             quality: 70
             filters:
-                thumbnail: { size: [155,null], mode: outbound }
+                thumbnail: { size: [155, null], mode: outbound }
         thumb_imatge_pagina_arbre_continguts:
             quality: 70
             filters:
-                thumbnail: { size: [50,null], mode: outbound }
+                thumbnail: { size: [50, null], mode: outbound }
         imatge_pagina_newsletter:
             quality: 80
             filters:
-                thumbnail: { size: [578,null], mode: outbound }
+                thumbnail: { size: [578, null], mode: outbound }
         imatge460x300:
             quality: 90
             filters:
-                thumbnail: { size: [460,300], mode: outbound }
+                thumbnail: { size: [460, 300], mode: outbound }
 
 # Moved to config_prod.yml to avoid Elastica on devel environments
 foq_elastica:
@@ -259,20 +263,7 @@ foq_elastica:
         website:
             client: default
 
-# Configuracio dies laborals a l'agenda
-# Estos son els dies que el Centre obre al public
-# 0=diumenge, 1=dilluns, 2=dimarts, 3=dimecres, 4=dijous, 5=divendres, 6=dissabte
-# Si s'han d'afegir mes de 2 dies laborals ves al codi
-#  src/LoPati/AgendaBundle/Controller/DefaultController.php
-#  src/LoPati/AgendaBundle/Resources/views/Default/calendari.html.twig
-#  src/LoPati/AgendaBundle/Resources/views/Calendar/month.html.twig (linea 34)
 parameters:
-  workingDay1: 5
-  workingDay2: 5
-  workingDay3: 5
-  workingDay4: 5
-  workingDay5: 6
-
   newsleterEmailDestination1: %newsleterTestEmailDestination1%
   newsleterEmailDestination2: %newsleterTestEmailDestination2%
   newsleterEmailDestination3: %newsleterTestEmailDestination3%
