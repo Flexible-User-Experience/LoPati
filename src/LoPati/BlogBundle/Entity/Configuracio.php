@@ -21,26 +21,25 @@ class Configuracio {
 	 * @ORM\Column(type="integer")
 	 * @ORM\GeneratedValue
 	 */
-	
 	protected $id;
 	
 	/** @ORM\Column(type="text", nullable=true) */
 	protected $adresa;
-	
-
-	
-	/** @ORM\Column(type="text", nullable=true) 
-	 *  @Gedmo\Translatable
+		
+	/** 
+     * @ORM\Column(type="text", nullable=true) 
+	 * @Gedmo\Translatable
 	 */
 	protected $horari;
 		
-	/** @ORM\Column(type="text", nullable=true) 
-	 *  @Gedmo\Translatable
+	/** 
+     * @ORM\Column(type="text", nullable=true) 
+	 * @Gedmo\Translatable
 	 */
 	protected $organitza;
 
-		
-	/** @ORM\Column(type="text", nullable=true)
+	/** 
+     * @ORM\Column(type="text", nullable=true)
 	 * @Gedmo\Translatable
 	 */
 	protected $colabora;

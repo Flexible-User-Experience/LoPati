@@ -93,9 +93,9 @@ sonata_admin:
       Menú:
       Pàgines:
       Arxiu:
-      Peu de pàgina:
       Newsletters:
       Artistes:
+      Configuracions:
 
 # Sonata Block Bundle
 sonata_block:
