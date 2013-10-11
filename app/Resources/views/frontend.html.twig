@@ -35,20 +35,14 @@
 						</form>
 					</div>
 					<div class="idiomes">
-						{% render 'BlogBundle:Default:menuIdioma'  %}
+						{% render 'BlogBundle:Default:menuIdioma' %}
 					</div>
-
                     <div class="agenda">
                         <div class="calendar-header">
                             <div id="agenda_boto_esquerre">&#60;</div>
                             <div id="agenda_boto_dret">&#62;</div>
-
-
                         </div>
-                        <div class="calendar" id="calendari">
-
-                        {% render 'AgendaBundle:Default:calendari'  %}
-                            </div>
+                        <div class="calendar" id="calendari">{% render 'AgendaBundle:Default:calendari' %}</div>
                     </div>
 					{% block menuArxiu %}{% endblock %}
 					<div id="newsletter" class="xarxes">
@@ -57,43 +51,54 @@
 					</div>
 					<div class="xarxes">			
 						<p>{% trans %}tr.follow{% endtrans %}:</p>
-						<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external" onmouseover="document.facebook.src='/images/xarxa_fb_color.gif';" onmouseout="document.facebook.src='/images/xarxa_fb.gif';"><img style="width: 18px;"  src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
-						<a href="http://www.vimeo.com/lopati" rel="external" onmouseover="document.vimeo.src='/images/xarxa_vimeo_color.gif';" onmouseout="document.vimeo.src='/images/xarxa_vimeo.gif';"><img style="width: 18px;"  src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
-						<a href="http://www.flickr.com/lopati" rel="external" onmouseover="document.flickr.src='/images/xarxa_flickr_color.gif';" onmouseout="document.flickr.src='/images/xarxa_flickr.gif';"><img style="width: 18px;"  src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
+						<a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
+						<a href="http://www.vimeo.com/lopati" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
+						<a href="http://www.flickr.com/lopati" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
 					</div>
-					
+                    <div class="xarxes">
+                        <p>{% trans %}tr.links{% endtrans %}:</p>
+                    </div>
 				</div>
 			</div>
 		</div>
-		
+	
 		{% render 'BlogBundle:Default:peu' %}
 
-
         <script type="text/javascript">
-        $(document).ready(function(){
-            $('#agenda_boto_esquerre').click(function(){
-                console.log("entra esquerre");
-                $.ajax({
-                    type: "GET",
-                    url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
-                    success: function(data){
-                      $('#calendari').html(data);
+            $(document).ready(function(){
+                $('#agenda_boto_esquerre').click(function(){
+                    console.log("entra esquerre");
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
+                        success: function(data){
+                          $('#calendari').html(data);
 
 
-                    }
+                        }
+                    });
                 });
-            });
-            $('#agenda_boto_dret').click(function(){
-                $.ajax({
-                    type: "GET",
-                    url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
-                    success: function(data){ //En data.items pasas el listado de eventos de ese mes
+                $('#agenda_boto_dret').click(function(){
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
+                        success: function(data){ //En data.items pasas el listado de eventos de ese mes
 
-                        $('#calendari').html(data);
-                    }
+                            $('#calendari').html(data);
+                        }
+                    });
                 });
-            });
-        })
+            })
+            function mouseOverImgIcon(ev) {
+                str = ev.src;
+                str = str.replace('.gif', '_color.gif')
+                ev.src = str;
+            }
+            function mouseOutImgIcon(ev) {
+                str = ev.src;
+                str = str.replace('_color.gif', '.gif')
+                ev.src = str;
+            }
         </script>
 	</body>
 </html>
