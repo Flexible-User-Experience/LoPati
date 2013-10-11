@@ -65,11 +65,14 @@ class Pagina {
 	/** @ORM\Column(type="date", nullable=true) */
 	protected $data_caducitat = null;
 
-    /** @ORM\Column(type="date",nullable=true) */
+    /** @ORM\Column(type="date", nullable=true) */
     protected $startDate;
 
-    /** @ORM\Column(type="date",nullable=true) */
+    /** @ORM\Column(type="date", nullable=true) */
     protected $endDate;
+
+    /** @ORM\Column(type="boolean", nullable=true) */
+	protected $alwaysShowOnCalendar = FALSE;
 
 	/** 
 	 * @ORM\Column(type="string", length=255, nullable=true )
@@ -573,6 +576,24 @@ class Pagina {
 	 */
 	public function getActiu() {
 		return $this->actiu;
+	}
+
+	/**
+	 * Set alwaysShowOnCalendar
+	 *
+	 * @param boolean $alwaysShowOnCalendar
+	 */
+	public function setAlwaysShowOnCalendar($alwaysShowOnCalendar) {
+		$this->alwaysShowOnCalendar = $alwaysShowOnCalendar;
+	}
+
+	/**
+	 * Get alwaysShowOnCalendar
+	 *
+	 * @return boolean 
+	 */
+	public function getAlwaysShowOnCalendar() {
+		return $this->alwaysShowOnCalendar;
 	}
 
 	/**

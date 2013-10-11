@@ -26,7 +26,7 @@ class PaginaAdmin extends Admin
 				 'data-theme'=>'simple',
 				'style' => 'width: 600px; height: 400px;'),'label' => 'Descripció'))
 				
-				->add('actiu', null, array('label' => 'Actiu ?','required'  => false))
+		->add('actiu', null, array('label' => 'Actiu ?','required'  => false))
 		//->add('imgPetitaGris',null,array('required'  => false))
 		//->add('imgPetitaMagenta',null,array('required'  => false))
 		->add('categoria','sonata_type_model', array('label' => 'Menú primer nivell'), array())
@@ -37,8 +37,7 @@ class PaginaAdmin extends Admin
 		->add('data_realitzacio', null, array('label' => 'Data realització'))
 		->add('lloc', null, array('label' => 'Lloc'))
 		->add('video','url', array('required'=> FALSE))
-		->add('actiu', null, array('label' => 'Actiu ?','required'  => false))
-		->add('compartir',null,array('label' => 'Compartir ?','required'  => false))
+		->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
 
 		/*->add('images', 'collection', array(
 				'type' => 'lo_pati_image',
@@ -80,8 +79,9 @@ class PaginaAdmin extends Admin
 		->add('urlFlickr',null, array('required'=> FALSE,'label'=> 'URL galeria Flickr'))
 
         ->with('Agenda')
-            ->add('startDate','date', array('label' => 'Data inici', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
-            ->add('endDate','date', array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
+        ->add('startDate', 'date', array('label' => 'Data inici', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
+        ->add('endDate', 'date', array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy','required'  => false))
+        ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
 
 		->with('Traduccions')
 		->add('translations', 'a2lix_translations',array(
@@ -110,13 +110,15 @@ class PaginaAdmin extends Admin
 						)
 			
 		))
-				->setHelps(array('tipus'=>'tria el tipus'))
-				->setHelps(array('compartir'=>'Mostrar botos per compartir xarxes socials'))
-				->setHelps(array('urlVimeo'=>'Ex: https://vimeo.com/38489316'))
-				->setHelps(array('urlFlickr'=>'Ex: http://www.flickr.com/photos/lopati/..'))
-				->setHelps(array('resum'=>'Max: 300 caràcters'))
-		->setHelps(array('data_publicacio'=>'Format: dd-MM-yyyy'))
-		->setHelps(array('data_caducitat'=>'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy '))
+		->setHelps(array(
+			'tipus' => 'tria el tipus',
+			'compartir' => 'Mostrar botos per compartir xarxes socials',
+			'urlFlickr' => 'Ex: http://www.flickr.com/photos/lopati/..',
+			'resum' => 'Max: 300 caràcters',
+			'data_publicacio' => 'Format: dd-MM-yyyy',
+			'data_caducitat' => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy',
+			'alwaysShowOnCalendar' => "Marcat es mostrarà sempre al calendari l'event, encara que sigui fora de l'horari del centre",
+		))
 		;
 	}
 
