@@ -90,21 +90,13 @@ class DefaultController extends Controller
         $totalDays = cal_days_in_month(CAL_GREGORIAN, $mes1, $any1);
         foreach ($items1 as $item1) {
             for ($i = 1; $i < $totalDays + 1; $i++) {
-                //$iMod6 = date_format($item1->getStartDate(), 'w'); // get the day number of week (0=monday .. 6=sunday)
-                //if ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) {
-                //    $logger->debug(__METHOD__ . ' :: hit i=' . $i . ' iMod6=' . $iMod6);
-                //}
                 $dayHit = strval($i);
                 if ($dayHit < 10) $dayHit = '0' . $dayHit;
                 $currentDayString = $any1 . '-' . $mesHit . '-' . $dayHit;
-                if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') 
-                    && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d') 
-                    //&& ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5)
-                    ) {
-                    $iMod6 = date_format(date_create_from_format('Y-m-d', $currentDayString), 'w'); // get the day number of week (0=sunday .. 7=sunday)
-                    //if ($iMod6 == -1) $iMod6 = 6;
+                if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d')) {
+                    $iMod6 = date_format(date_create_from_format('Y-m-d', $currentDayString), 'w'); // get the day number of week (0=sunday, 1=monday .. 6=saturday)
                     $logger->debug(__METHOD__ . ' :: hit i=' . $i . ' iMod6=' . $iMod6);
-                    if ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) {
+                    if (!$item1->getAlwaysShowOnCalendar() && ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) || $item1->getAlwaysShowOnCalendar()) {
                         if ($item1->getStartDate() == $item1->getEndDate()) {
                             $hitsMatrix[$i] = 'hit-single';
                         }
