@@ -9,6 +9,7 @@ use LoPati\MenuBundle\Util\Util;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\ConfiguracioDiesLaboralsAgendaRepository")
  */
 class ConfiguracioDiesLaboralsAgenda {
 
@@ -38,6 +39,19 @@ class ConfiguracioDiesLaboralsAgenda {
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return ConfiguracioDiesLaboralsAgenda
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

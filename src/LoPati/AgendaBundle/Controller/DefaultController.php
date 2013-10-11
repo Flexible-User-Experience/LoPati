@@ -36,12 +36,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $pagina = null;
         $session = $this->getRequest()->getSession();
-
-        $workingDay1 = $this->container->getParameter('workingDay1');
-        $workingDay2 = $this->container->getParameter('workingDay2');
-        $workingDay3 = $this->container->getParameter('workingDay3');
-        $workingDay4 = $this->container->getParameter('workingDay4');
-        $workingDay5 = $this->container->getParameter('workingDay5');
+        $workingDays = $em->getRepository('BlogBundle:ConfiguracioDiesLaboralsAgenda')->getActiveWorkingDaysItems();
 
        // if ($this->getRequest()->getMethod() == 'POST' || ) {
         $logger = $this->get('logger');
@@ -94,9 +89,15 @@ class DefaultController extends Controller
                 if ($dayHit < 10) $dayHit = '0' . $dayHit;
                 $currentDayString = $any1 . '-' . $mesHit . '-' . $dayHit;
                 if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d')) {
-                    $iMod6 = date_format(date_create_from_format('Y-m-d', $currentDayString), 'w'); // get the day number of week (0=sunday, 1=monday .. 6=saturday)
-                    $logger->debug(__METHOD__ . ' :: hit i=' . $i . ' iMod6=' . $iMod6);
-                    if (!$item1->getAlwaysShowOnCalendar() && ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) || $item1->getAlwaysShowOnCalendar()) {
+                    $iMod6 = date_format(date_create_from_format('Y-m-d', $currentDayString), 'w'); // get the number day of week (0=sunday, 1=monday .. 6=saturday)
+                    $found = false;
+                    foreach ($workingDays as $workingDay) {
+                        if ($workingDay->getId() == $iMod6) {
+                            $found = true;
+                            break;
+                        }
+                    }
+                    if ((!$item1->getAlwaysShowOnCalendar() && $found) || $item1->getAlwaysShowOnCalendar()) {
                         if ($item1->getStartDate() == $item1->getEndDate()) {
                             $hitsMatrix[$i] = 'hit-single';
                         }
@@ -133,11 +134,6 @@ class DefaultController extends Controller
             'mes1' => $mes1,
             'any1' => $any1,
             'hitsMatrix' => $hitsMatrix,
-            'workingDay1' => $workingDay1,
-            'workingDay2' => $workingDay2,
-            'workingDay3' => $workingDay3,
-            'workingDay4' => $workingDay4,
-            'workingDay5' => $workingDay5,
         ));
     }
 }
