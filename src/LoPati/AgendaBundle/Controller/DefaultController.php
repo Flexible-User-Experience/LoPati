@@ -37,12 +37,17 @@ class DefaultController extends Controller
         $pagina = null;
         $session = $this->getRequest()->getSession();
 
+        $workingDay1 = $this->container->getParameter('workingDay1');
+        $workingDay2 = $this->container->getParameter('workingDay2');
+        $workingDay3 = $this->container->getParameter('workingDay3');
+        $workingDay4 = $this->container->getParameter('workingDay4');
+        $workingDay5 = $this->container->getParameter('workingDay5');
+
        // if ($this->getRequest()->getMethod() == 'POST' || ) {
         $logger = $this->get('logger');
-        $logger->debug('fora xmlRequest');
+        //$logger->debug('fora xmlRequest');
          if ($this->getRequest()->isXmlHttpRequest()){
-            $logger = $this->get('logger');
-            $logger->debug('[formacion] Valid POST form! submit=');
+            //$logger->debug('[formacion] Valid POST form! submit=');
             $mes1 = $session->get('estatMes');
             $any1 = $session->get('estatAny');
             if ($fletxa == 'esquerra') {
@@ -84,20 +89,32 @@ class DefaultController extends Controller
         if ($mesHit < 10) $mesHit = '0'.$mesHit;
         $totalDays = cal_days_in_month(CAL_GREGORIAN, $mes1, $any1);
         foreach ($items1 as $item1) {
-            for ($i = 1; $i < $totalDays+1; $i++) {
+            for ($i = 1; $i < $totalDays + 1; $i++) {
+                //$iMod6 = date_format($item1->getStartDate(), 'w'); // get the day number of week (0=monday .. 6=sunday)
+                //if ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) {
+                //    $logger->debug(__METHOD__ . ' :: hit i=' . $i . ' iMod6=' . $iMod6);
+                //}
                 $dayHit = strval($i);
-                if ($dayHit < 10) $dayHit = '0'.$dayHit;
+                if ($dayHit < 10) $dayHit = '0' . $dayHit;
                 $currentDayString = $any1 . '-' . $mesHit . '-' . $dayHit;
-                if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d')) {
-                    if ($item1->getStartDate() == $item1->getEndDate()) {
-                        $hitsMatrix[$i] = 'hit-single';
-                    }
-                    if (isset($hitsMatrix[$i])) {
-                        if ($hitsMatrix[$i] != 'hit-single') {
+                if ($currentDayString >= date_format($item1->getStartDate(), 'Y-m-d') 
+                    && $currentDayString <= date_format($item1->getEndDate(), 'Y-m-d') 
+                    //&& ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5)
+                    ) {
+                    $iMod6 = date_format(date_create_from_format('Y-m-d', $currentDayString), 'w'); // get the day number of week (0=sunday .. 7=sunday)
+                    //if ($iMod6 == -1) $iMod6 = 6;
+                    $logger->debug(__METHOD__ . ' :: hit i=' . $i . ' iMod6=' . $iMod6);
+                    if ($iMod6 == $workingDay1 || $iMod6 == $workingDay2 || $iMod6 == $workingDay3 || $iMod6 == $workingDay4 || $iMod6 == $workingDay5) {
+                        if ($item1->getStartDate() == $item1->getEndDate()) {
+                            $hitsMatrix[$i] = 'hit-single';
+                        }
+                        if (isset($hitsMatrix[$i])) {
+                            if ($hitsMatrix[$i] != 'hit-single') {
+                                $hitsMatrix[$i] = 'hit-period';
+                            }
+                        } else {
                             $hitsMatrix[$i] = 'hit-period';
                         }
-                    } else {
-                        $hitsMatrix[$i] = 'hit-period';
                     }
                 }
             }
@@ -124,11 +141,11 @@ class DefaultController extends Controller
             'mes1' => $mes1,
             'any1' => $any1,
             'hitsMatrix' => $hitsMatrix,
-            'workingDay1' => $this->container->getParameter('workingDay1'),
-            'workingDay2' => $this->container->getParameter('workingDay2'),
-            'workingDay3' => $this->container->getParameter('workingDay3'),
-            'workingDay4' => $this->container->getParameter('workingDay4'),
-            'workingDay5' => $this->container->getParameter('workingDay5'),
+            'workingDay1' => $workingDay1,
+            'workingDay2' => $workingDay2,
+            'workingDay3' => $workingDay3,
+            'workingDay4' => $workingDay4,
+            'workingDay5' => $workingDay5,
         ));
     }
 }
