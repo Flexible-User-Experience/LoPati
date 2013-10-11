@@ -5,6 +5,7 @@ tr:
     lloc: Lugar
     data: Fecha
     links: Enlaces
+    linkslowercase: enlaces
     publicat: Publicado
 
 resultat_cerca: páginas con el texto

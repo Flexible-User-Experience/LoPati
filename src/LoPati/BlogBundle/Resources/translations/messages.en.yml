@@ -4,6 +4,7 @@ tr:
     newsletter: subscribe to newsletter
     data: Date
     links: Links
+    linkslowercase: links
     publicat: Published
 
 resultat_cerca: pages with text
