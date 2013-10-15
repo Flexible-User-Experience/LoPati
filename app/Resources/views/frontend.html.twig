@@ -59,8 +59,8 @@
 					</div>
                     <div class="xarxes">
                         <p>{% trans %}tr.linkslowercase{% endtrans %}:</p>
-                        <a href="http://aula.lopati.cat">aula.lopati.cat</a>
-                        <a href="http://www.bellescosesfalses.lopati.cat">bellescosesfalses.lopati.cat</a>
+                        <a href="http://aula.lopati.cat">l'aula al pati</a>
+                        <a href="http://www.bellescosesfalses.lopati.cat">relat de belles coses falses</a>
                     </div>
 				</div>
 			</div>
@@ -77,8 +77,6 @@
                         url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
                         success: function(data){
                           $('#calendari').html(data);
-
-
                         }
                     });
                 });
@@ -87,7 +85,6 @@
                         type: "GET",
                         url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
                         success: function(data){ //En data.items pasas el listado de eventos de ese mes
-
                             $('#calendari').html(data);
                         }
                     });

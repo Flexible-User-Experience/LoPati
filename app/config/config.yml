@@ -128,7 +128,6 @@ fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  main
     user_class:     Application\Sonata\UserBundle\Entity\User
-
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
 
@@ -258,7 +257,6 @@ liip_imagine:
 foq_elastica:
     clients:
         default: { host: localhost, port: %port_elastica% }
-
     indexes:
         website:
             client: default
