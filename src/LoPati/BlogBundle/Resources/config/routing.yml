@@ -7,13 +7,13 @@ search:
   defaults: { _controller: BlogBundle:Default:search}
   requirements:
         _locale: ca|es|en
-      
+
 portada:
   pattern: /{_locale}/
   defaults: { _controller: BlogBundle:Default:portada}
   requirements:
         _locale: ca|es|en
-  
+
 categoriaenenllas:
   pattern: /{_locale}/{categoria}/{id}/
   defaults: { _controller: BlogBundle:Default:pagina}
@@ -66,7 +66,7 @@ categoriasenseenllas:
     id:  \d+
     _method:  GET
     _locale: ca|es|en
-   
+
 pagina:
   pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
   defaults: { _controller: BlogBundle:Default:article}
