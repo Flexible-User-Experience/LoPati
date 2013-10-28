@@ -1,53 +1,36 @@
 {% if onlycategories == 1 %}
-
-{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'categoria_id':categoria_id, 'arxiu': 1} %}
+    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'categoria_id': categoria_id, 'arxiu': 1} %}
 {% else %}
-
-{% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'arxiu': 0} %}
-
-
-{% if subcategories is not empty %}
-
-<div id='menu1' class='subcat'>
-		<ul>
-{%  for subcategoria in subcategories %}
-
-	{% if subcategoria.link is not none %}
-
-				{% if ( subcategoria_id == subcategoria.id) %}
-					
-							{% if subcategoria.llista == 1 %}
-							<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 1, titol: subcategoria, llista: 1} %}</span></li>
-						
-							{% else %}
-							<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4, actiu : 1, titol: subcategoria, llista: 0} %}</span></li>
-							{% endif %}
-				{% else %}	
-				
-								{% if subcategoria.llista == 1 %}
-						<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
-						
-							{% else %}
-							<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4 , actiu : 0, titol: subcategoria, llista: 0} %}</span></li>
-							{% endif %}
-				
-				{% endif %}
-	{% else %}
-
-			{% if subcategoria.llista == 1 %}
-		
-										{% if ( subcategoria_id == subcategoria.id) %}	
-								
-								<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 1, titol: subcategoria, llista: 1} %}</span></li>
-					{% else %}
-											<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
-					
-					{% endif %}
-			{% endif %}
-	
-	{% endif %}
-{% endfor %}
-	</ul></div>
-{% endif %}
-
+    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'arxiu': 0} %}
+    {% if subcategories is not empty %}
+        <div id='menu1' class='subcat'>
+            <ul>
+                {% for subcategoria in subcategories %}
+                    {% if subcategoria.link is not none %}
+                        {% if ( subcategoria_id == subcategoria.id) %}
+                            {% if subcategoria.llista == 1 %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 1, titol: subcategoria, llista: 1} %}</span></li>
+                            {% else %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4, actiu : 1, titol: subcategoria, llista: 0} %}</span></li>
+                            {% endif %}
+                        {% else %}
+                            {% if subcategoria.llista == 1 %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
+                            {% else %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4 , actiu : 0, titol: subcategoria, llista: 0} %}</span></li>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if subcategoria.llista == 1 %}
+                            {% if ( subcategoria_id == subcategoria.id) %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 1, titol: subcategoria, llista: 1} %}</span></li>
+                            {% else %}
+                                <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 {% endif %}
