@@ -15,7 +15,9 @@ parameters:
     database_path: null
     port_elastica: 80
   
-    id_page_item_irradiador: 124   #change this
+    id_categoria_projectes: 3       #change this
+    id_page_item_projectes: 18      #change this
+    id_page_item_irradiador: 124    #change this
 
     swiftmailer_delivery_address_dev_environment: me@me.com     #change this
 

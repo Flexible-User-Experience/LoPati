@@ -28,6 +28,9 @@
                                 <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
                             {% endif %}
                         {% endif %}
+                        {% if subcategoria.ordre == 123 %} {# PROJECTE IRRADIADOR #}
+                            <li><span><a class="actiu" href="{{ path( 'irradiador_' ~ apprequestlocale ) }}">{{ subcategoria.nom }}</a></span></li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </ul>

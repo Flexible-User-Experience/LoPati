@@ -1,6 +1,7 @@
 <?php
 
 namespace LoPati\MenuBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use LoPati\BlogBundle\Entity;
@@ -13,7 +14,7 @@ class DefaultController extends Controller {
 		return $this->render('MenuBundle:Default:index.html.twig',	array('name' => $name));
 	}
 
-	public function pintaMenuAction($id=null, $pagina=null)
+	public function pintaMenuAction($id = null, $pagina = null)
     {
 		$em = $this->getDoctrine()->getManager();
 		if ($id) {
@@ -66,7 +67,6 @@ class DefaultController extends Controller {
                 $irradiadorSubcategoria = new SubCategoria();
                 $irradiadorSubcategoria->setNom('Irradiadior');
                 $irradiadorSubcategoria->setOrdre(123);
-                //$irradiadorSubcategoria->setNom('Irradiadior');
                 array_push($subcategories2, $irradiadorSubcategoria);
             }
         }
@@ -86,12 +86,23 @@ class DefaultController extends Controller {
 		$em = $this->getDoctrine()->getManager();
 		$subcategories = $em->getRepository('MenuBundle:SubCategoria')->findSubCategories($categoria_id);
 
+        if ($categoria_id == $this->container->getParameter('id_categoria_projectes')) {
+            if (count($subcategories) > 0) {
+                /** @var SubCategoria $irradiadorSubcategoria */
+                $irradiadorSubcategoria = new SubCategoria();
+                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setOrdre(123);
+                array_push($subcategories, $irradiadorSubcategoria);
+            }
+        }
+
 		return $this->render('MenuBundle:Default:menuLlista.html.twig', array(
             'categories' => $categories,
             'categoria_id' => $categoria_id,
             'subcategoria_id' => $subcategoria_id,
             'subcategories' => $subcategories,
             'onlycategories' => $onlycategories,
+            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 
