@@ -4,6 +4,7 @@ namespace LoPati\MenuBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use LoPati\BlogBundle\Entity;
+use LoPati\MenuBundle\Entity\SubCategoria;
 
 class DefaultController extends Controller {
 
@@ -57,10 +58,23 @@ class DefaultController extends Controller {
 		/*$logger = $this->get('logger');
 		$logger->info('id val:'.$categoria);*/
 		$subcategories2 = $em->getRepository('MenuBundle:SubCategoria')->findSubCategories($categoria);
+
+        if ($idPagina == $this->container->getParameter('id_page_item_projectes') ||
+            $categoria->getId() == $this->container->getParameter('id_categoria_projectes')) {
+            if (count($subcategories2) > 0) {
+                /** @var SubCategoria $irradiadorSubcategoria */
+                $irradiadorSubcategoria = new SubCategoria();
+                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setOrdre(123);
+                //$irradiadorSubcategoria->setNom('Irradiadior');
+                array_push($subcategories2, $irradiadorSubcategoria);
+            }
+        }
 		
 		return $this->render('MenuBundle:Default:subCategories.html.twig', array(
             'subcategories' => $subcategories2,
             'id' => $idPagina,
+            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 	
