@@ -1,22 +1,19 @@
-		
-		
-		<p>
-		
-		{% if idioma == 'ca' %}
-		<a href="/ca"><strong>català</strong></a>
-		 {% else %}
-		 <a href="/ca">català</a>
-		 {% endif %}
+<p>
+    {% if idioma == 'ca' %}
+	    <a href="{{ path('portada', {_locale : 'ca'}) }}"><strong>català</strong></a>
+	{% else %}
+        <a href="{{ path('portada', {_locale : 'ca'}) }}">català</a>
+	{% endif %}
 		 | 
-			{% if idioma == 'es' %}
-		<a href="/es"><strong>español</strong></a>
-		 {% else %}
-		 <a href="/es">español</a>
-		 {% endif %}
+	{% if idioma == 'es' %}
+		<a href="{{ path('portada', {_locale : 'es'}) }}"><strong>español</strong></a>
+    {% else %}
+	    <a href="{{ path('portada', {_locale : 'es'}) }}">español</a>
+	{% endif %}
 		 | 
-			{% if idioma == 'en' %}
-		<a href="/en"><strong>english</strong></a>
-		 {% else %}
-		 <a href="/en">english</a>
-		 {% endif %}
-		</p>
+	{% if idioma == 'en' %}
+		<a href="{{ path('portada', {_locale : 'en'}) }}"><strong>english</strong></a>
+	{% else %}
+	    <a href="{{ path('portada', {_locale : 'en'}) }}">english</a>
+	{% endif %}
+</p>

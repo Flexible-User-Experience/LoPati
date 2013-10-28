@@ -176,17 +176,18 @@ class DefaultController extends Controller {
 				));
 	}
 	
-	public function menuIdiomaAction(){
+	public function menuIdiomaAction()
+    {
 		$idioma = $this->getRequest()->getLocale();
-		return $this->render('BlogBundle:Default:menuIdioma.html.twig', array('idioma'=>$idioma));
+
+		return $this->render('BlogBundle:Default:menuIdioma.html.twig', array('idioma' => $idioma));
 	}
 	
-	public function articleAction($id){
-	
+	public function articleAction($id)
+    {
 		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
-		
-		$tipus_video=null;
+		$tipus_video = null;
 		if ($pagina->getVideo()){
 			$tipus_video= Util::getVideo($pagina->getVideo());
 		}
