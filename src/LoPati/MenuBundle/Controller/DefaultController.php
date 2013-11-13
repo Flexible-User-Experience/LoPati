@@ -59,7 +59,6 @@ class DefaultController extends Controller {
 		/*$logger = $this->get('logger');
 		$logger->info('id val:'.$categoria);*/
 		$subcategories2 = $em->getRepository('MenuBundle:SubCategoria')->findSubCategories($categoria);
-
         if ($idPagina == $this->container->getParameter('id_page_item_projectes') ||
             $categoria->getId() == $this->container->getParameter('id_categoria_projectes')) {
             if (count($subcategories2) > 0) {
@@ -82,10 +81,7 @@ class DefaultController extends Controller {
     {
 		$em = $this->getDoctrine()->getManager();
 		$categories = $em->getRepository('MenuBundle:Categoria')->findCategories();
-		
-		$em = $this->getDoctrine()->getManager();
 		$subcategories = $em->getRepository('MenuBundle:SubCategoria')->findSubCategories($categoria_id);
-
         if ($categoria_id == $this->container->getParameter('id_categoria_projectes')) {
             if (count($subcategories) > 0) {
                 /** @var SubCategoria $irradiadorSubcategoria */
@@ -105,5 +101,4 @@ class DefaultController extends Controller {
             'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
-
 }

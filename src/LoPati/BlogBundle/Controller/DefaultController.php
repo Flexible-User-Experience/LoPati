@@ -210,8 +210,8 @@ class DefaultController extends Controller {
 		
 	}
 	
-	public function arxiuLlistaAnyAction($any,$categoria_id, $arxiu){
-	
+	public function arxiuLlistaAnyAction($any, $categoria_id, $arxiu)
+    {
 		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
 	/*	$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu
 				ORDER BY ar.any DESC ');
@@ -240,31 +240,36 @@ class DefaultController extends Controller {
 	
 	}
 	
-	public function arxiuArticleAction($id){
-		$em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
+	public function arxiuArticleAction($id)
+    {
+		$em = $this->getDoctrine()->getManager();
 		$pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
-		
-		$tipus_video=null;
-		if ($pagina->getVideo()){
-			$tipus_video= Util::getVideo($pagina->getVideo());
-		}
-		return $this->render('BlogBundle:Default:articleArxiu.html.twig', array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video));
-		
-		
+		$tipus_video = null;
+		if ($pagina->getVideo()) $tipus_video = Util::getVideo($pagina->getVideo());
+
+		return $this->render('BlogBundle:Default:articleArxiu.html.twig', array(
+            'pagina' => $pagina,
+            'id' => $id,
+            'tipus_video' => $tipus_video
+        ));
 	}
 	
-	public function menuDretaArxiuAction($any_current=null, $categoria_id, $arxiu){
+	public function menuDretaArxiuAction($any_current = null, $categoria_id, $arxiu)
+    {
 		$em = $this->getDoctrine()->getManager();
-		$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL
-				AND ar.imagePetitaName IS NOT NULL ORDER BY ar.any DESC');
-		$consulta->setParameter('actiu','1');
+		$consulta = $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL AND ar.imagePetitaName IS NOT NULL ORDER BY ar.any DESC');
+		$consulta->setParameter('actiu', '1');
 		$anys = $consulta->getResult();
-		
 		/*$consulta2= $em->createQuery('SELECT cat FROM MenuBundle:Categoria cat WHERE cat.id = : categoria');
 		$consulta2->setParameter('categoria',$categoria_id);
 		$categoria = $consulta2->getSingleResult();
 		*/
-		return $this->render('BlogBundle:Default:menuDretaArxiu.html.twig', array( 'any_current'=> $any_current, 'anys'=>$anys, 'categoria_id' => $categoria_id, 'arxiu' => $arxiu));
-		
+
+		return $this->render('BlogBundle:Default:menuDretaArxiu.html.twig', array(
+            'any_current' => $any_current,
+            'anys' => $anys,
+            'categoria_id' => $categoria_id,
+            'arxiu' => $arxiu
+        ));
 	}
 }

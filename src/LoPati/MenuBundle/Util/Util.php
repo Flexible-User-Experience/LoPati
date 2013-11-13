@@ -1,6 +1,6 @@
 <?php
-// src/LoPati/MenuBundle/Util/Util.php
 namespace LoPati\MenuBundle\Util;
+
 class Util {
 	static public function getSlug($cadena, $separador = '-') {
 		// reemplaça vocals amb accents per vocals sense accent
@@ -57,47 +57,34 @@ class Util {
 		$slug = preg_replace("/[\/_|+ -]+/", $separador, $slug);
 		return $slug;
 	}
+
 	static public function getVideo($video) {
-
 		$tipus_video = parse_url($video);
-
-		if (($tipus_video["host"] == "vimeo.com")
-				|| ($tipus_video["host"] == "www.vimeo.com")) {
-
+		if (($tipus_video["host"] == "vimeo.com") || ($tipus_video["host"] == "www.vimeo.com")) {
 			$tipus_video["path"];
-			$video = str_replace("https://vimeo.com/",
-					"http://player.vimeo.com/video/", $video);
+			//$video = str_replace("https://vimeo.com/", "http://player.vimeo.com/video/", $video);
+			$video2 = '<br><iframe class="videovimeo" src="http://player.vimeo.com/video' . $tipus_video["path"] . '"?title=0&amp;byline=0&amp;portrait=0" frameborder="0"></iframe><br>';
 
-			$video2 = '<br><iframe class="videovimeo" src="http://player.vimeo.com/video'
-					. $tipus_video["path"]
-					. '"?title=0&amp;byline=0&amp;portrait=0" frameborder="0"></iframe><br>';
-			return $video2;
+            return $video2;
 
-		} elseif (($tipus_video["host"] == "youtube.com")
-				|| ($tipus_video["host"] == "www.youtube.com") || ($tipus_video["host"] == "youtu.be" )) {
-
+		} elseif (($tipus_video["host"] == "youtube.com") || ($tipus_video["host"] == "www.youtube.com") || ($tipus_video["host"] == "youtu.be" )) {
 			//$video=str_replace("youtu.be","youtube.com/embed/",$video);
 			if ($tipus_video["host"] == "youtu.be" ){
-				
 				$out = $tipus_video["path"];
-				
-				$video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'
-				. $out . '" frameborder="0" allowfullscreen></iframe><br>';
+				$video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'	. $out . '" frameborder="0" allowfullscreen></iframe><br>';
 				
 				return $video2;
 				
-			}else{
-			parse_str($tipus_video["query"], $output);
-			$out = $output['v'];
-
-			$video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'
-					. $out . '" frameborder="0" allowfullscreen></iframe><br>';
+			} else {
+                parse_str($tipus_video["query"], $output);
+                $out = $output['v'];
+                $video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'	. $out . '" frameborder="0" allowfullscreen></iframe><br>';
 
 			return $video2;
 			}
-
 		}
 
+        return null;
 	}
 
 }
