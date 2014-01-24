@@ -3,18 +3,26 @@ namespace LoPati\NewsletterBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterAdmin extends Admin
 {
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction
         '_sort_by'    => 'numero' // field name
     );
+
+    /**
+     * Configure export formats
+     *
+     * @return array
+     */
+    public function getExportFormats()
+    {
+        return array('xls', 'csv');
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -31,8 +39,6 @@ class NewsletterAdmin extends Admin
                 array('label' => 'Pàgines', 'attr' => array('style' => 'width:500px; height:500px;'))
             )
             //->add('estat')
-
-
             ->setHelps(array('dataNewsletter' => 'Format: dd-MM-yyyy'));
     }
 
@@ -94,16 +100,6 @@ class NewsletterAdmin extends Admin
             );
     }
 
-    /**
-     * Configure export formats
-     *
-     * @return array
-     */
-    public function getExportFormats()
-    {
-        return array('xls', 'csv');
-    }
-
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add(
@@ -118,5 +114,6 @@ class NewsletterAdmin extends Admin
             'test',
             $this->getRouterIdParameter() . '/test'
         );
+        $collection->remove('delete');
     }
 }
