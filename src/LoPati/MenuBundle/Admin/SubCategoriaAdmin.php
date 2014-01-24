@@ -21,7 +21,7 @@ class SubCategoriaAdmin extends Admin
      */
     public function getExportFormats()
     {
-        return array('xls', 'csv');
+        return array();
     }
 
     /**
