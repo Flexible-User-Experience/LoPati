@@ -28,6 +28,7 @@ class NewsletterUserAdminController extends Controller
             'idioma',
             'active',
             'fail',
+            'createdString'
         );
         $format = $request->get('format');
         $allowedExportFormats = (array)$this->admin->getExportFormats();

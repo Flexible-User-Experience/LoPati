@@ -3,12 +3,11 @@
 namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * LoPati\NewsletterBundle\Entity\NewsletterUser
- *
  * @ORM\Table(name="newsletter_users")
  * @ORM\Entity
  * @UniqueEntity("email")
@@ -17,7 +16,6 @@ class NewsletterUser
 {
     /**
      * @var integer $id
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,46 +24,40 @@ class NewsletterUser
 
     /**
      * @var string $email
-     *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\Email()
      */
     private $email;
-    
+
     /**
      * @var string $idioma
-     *
      * @ORM\Column(name="idioma", type="string", length=2)
      */
     private $idioma;
 
     /**
      * @var string $token
-     *
      * @ORM\Column(name="token", type="string", length=255)
      */
     private $token;
-    
+
     /**
      * @var string $created
-     *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
      * @var boolean $active
-     *
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
-    
+
     /**
      * @var boolean $active
-     *
      * @ORM\Column(name="fail", type="integer")
      */
-    private $fail=0;
+    private $fail = 0;
 
     public function __construct()
     {
@@ -73,11 +65,11 @@ class NewsletterUser
         $this->active = false;
         $this->created = new \DateTime();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -97,19 +89,19 @@ class NewsletterUser
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
-	
-    
+
+
     public function setIdioma($idioma)
     {
-    	$this->idioma = $idioma;
+        $this->idioma = $idioma;
     }
-    
+
     /**
      * Get email
      *
@@ -117,8 +109,9 @@ class NewsletterUser
      */
     public function getIdioma()
     {
-    	return $this->idioma;
+        return $this->idioma;
     }
+
     /**
      * Set token
      *
@@ -132,7 +125,7 @@ class NewsletterUser
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
     public function getToken()
     {
@@ -152,7 +145,7 @@ class NewsletterUser
     /**
      * Get active
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getActive()
     {
@@ -172,18 +165,28 @@ class NewsletterUser
     /**
      * Get created
      *
-     * @return date 
+     * @return date
      */
     public function getCreated()
     {
         return $this->created;
     }
-    
+
+    /**
+     * Get created string format
+     *
+     * @return string
+     */
+    public function getCreatedString()
+    {
+        return $this->created->format('d/m/Y H:i:s');
+    }
+
     public function setFail($fail)
     {
-    	$this->fail = $fail;
+        $this->fail = $fail;
     }
-    
+
     /**
      * Get created
      *
@@ -191,10 +194,12 @@ class NewsletterUser
      */
     public function getFail()
     {
-    	return $this->fail;
+        return $this->fail;
     }
-    public function __toString(){
-    	
-    	return $this->email;
+
+    public function __toString()
+    {
+
+        return $this->email;
     }
 }
