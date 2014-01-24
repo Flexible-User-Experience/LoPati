@@ -74,7 +74,7 @@ stof_doctrine_extensions:
 
 # a2lix Bundle
 a2lix_translation_form:
-    default_locale: ca                  # [Optionnal] Default to 'en'
+    default_locale: ca
     locales: [en,es]
 
 # Sonata Admin Bundle             
@@ -126,7 +126,7 @@ sonata_user:
 # Friends Of Symfony Bundle (FOS)      
 fos_user:
     db_driver:      orm # can be orm or odm
-    firewall_name:  main
+    firewall_name:  admin
     user_class:     Application\Sonata\UserBundle\Entity\User
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
@@ -222,7 +222,7 @@ vich_uploader:
 
 # Liip Imagine Bundle            
 liip_imagine:
-    cache_prefix:         /uploads/cache
+    cache_prefix: /uploads/cache
     filter_sets:
         imatge_pagina:
             quality: 90
