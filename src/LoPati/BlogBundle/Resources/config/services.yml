@@ -61,7 +61,7 @@ services:
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterUser
-      - BlogBundle:Admin
+      - NewsletterBundle:NewsletterUserAdmin
 
   sonata.lopati.admin.newsletter:
     class: LoPati\NewsletterBundle\Admin\NewsletterAdmin
