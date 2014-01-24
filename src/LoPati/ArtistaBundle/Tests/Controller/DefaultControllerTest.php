@@ -6,12 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIrradiadorCa()
     {
         $client = static::createClient();
+        $client->request('GET', '/ca/projectes/irradiador/');
 
-        $crawler = $client->request('GET', '/hello/Fabien');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 
-        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);
+    // TODO: test artista detail
+    public function testIrradiadorDetail()
+    {
+        /*$client = static::createClient();
+        $client->request('GET', '/ca/projectes/irradiador/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());*/
     }
 }
