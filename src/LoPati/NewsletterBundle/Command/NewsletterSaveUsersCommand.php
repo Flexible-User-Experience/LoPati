@@ -19,7 +19,7 @@ class NewsletterSaveUsersCommand extends ContainerAwareCommand {
 				->setDescription('Arxiu amb correus')
 				->setHelp(
 <<<EOT
-La comanda <info>newsltter:ssave:users</info> importa usuaris a la base de dades. El format del fitxer ha de contenir una adreça de correu electrònic per linea.
+La comanda <info>newsltter:ssave:users</info> importa usuaris a la base de dades. El format del fitxer ha de contenir una adreça de correu electrònic per linea (separador = salt de linea).
 EOT
 				);
 	}
@@ -28,7 +28,7 @@ EOT
     {	
         $output->writeln('Guardant mails....');
 		$contenedor = $this->getContainer();
-		$em = $contenedor->get('doctrine')->getEntityManager();
+        $em = $contenedor->get('doctrine')->getManager();
 		
 		$max = $input->getArgument('fitxer');
 		$filas = file($max);	
@@ -66,6 +66,7 @@ EOT
                     $output->writeln("<info>S'ha afegit un registre nou a la base de dades amb el email " . $sql . "</info>");
                     $i++;
                     $em->flush();
+                    $em->clear();
                 }
             }
             $numero_fila++;
