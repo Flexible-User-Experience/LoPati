@@ -16,3 +16,5 @@ composer.phar
 *.sublime-workspace
 .DS_Store
 mailinglopati.txt
+app/config/deploy.rb
+Capfile
