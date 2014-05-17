@@ -52,9 +52,10 @@
 					<div class="xarxes">			
 						<p>{% trans %}tr.follow{% endtrans %}:</p>
 						<div style="width:180px;height:22px;">
-                          <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
-						  <a href="http://www.vimeo.com/lopati" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
-						  <a href="http://www.flickr.com/lopati" rel="external"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
+                          <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
+                          <a href="https://twitter.com/centreartlopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_tw.gif" alt="twitter" title="twitter"></a>
+						  <a href="http://www.vimeo.com/lopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
+						  <a href="http://www.flickr.com/lopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
                         </div>
 					</div>
                     <div class="xarxes">
@@ -76,7 +77,7 @@
                     console.log("entra esquerre");
                     $.ajax({
                         type: "GET",
-                        url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
+                        url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
                         success: function(data){
                           $('#calendari').html(data);
                         }
@@ -85,21 +86,21 @@
                 $('#agenda_boto_dret').click(function(){
                     $.ajax({
                         type: "GET",
-                        url: "{{ path('calendari',{'fletxa':'dreta'}) }}", //Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"
-                        success: function(data){ //En data.items pasas el listado de eventos de ese mes
+                        url: "{{ path('calendari',{'fletxa':'dreta'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
+                        success: function(data){ {#En data.items pasas el listado de eventos de ese mes#}
                             $('#calendari').html(data);
                         }
                     });
                 });
-            })
+            });
             function mouseOverImgIcon(ev) {
-                str = ev.src;
-                str = str.replace('.gif', '_color.gif')
+                var str = ev.src;
+                str = str.replace('.gif', '_color.gif');
                 ev.src = str;
             }
             function mouseOutImgIcon(ev) {
-                str = ev.src;
-                str = str.replace('_color.gif', '.gif')
+                var str = ev.src;
+                str = str.replace('_color.gif', '.gif');
                 ev.src = str;
             }
         </script>
