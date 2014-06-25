@@ -36,7 +36,7 @@ EOT
 		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
 
 		$contenedor = $this->getContainer();
-		$em = $contenedor->get('doctrine')->getEntityManager();
+		$em = $contenedor->get('doctrine')->getManager();
 
 		$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE NOT EXISTS (SELECT n2 FROM NewsletterBundle:Newsletter n2 WHERE n2.estat = :sending ) AND n.estat = :estat ORDER BY n.id ASC');
 		$query->setParameter('estat', 'Waiting');
@@ -141,19 +141,29 @@ EOT
                     }
 
                     $output->writeln('nem a renderitzar mail.html.twig');
-                    $contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig',
-                     array('host'=>$host,'pagines'=>$pagines, 'idioma'=>$idioma, 'token'=>$user->getUser()->getToken(),
+                    $contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig', array(
+                            'host' => $host,
+                            'pagines' => $pagines,
+                            'idioma' => $idioma,
+                            'token' => $user->getUser()->getToken(),
                             'visualitzar_correctament' => $visualitzar_correctament,
-                             'baixa'=>$baixa, 'lloc'=>$lloc, 'data'=>$data, 'publicat'=>$publicat,
-                            'links'=>$links, 'organitza'=>$organitza, 'suport'=>$suport, 'follow'=>$follow,
-                            'colabora'=>$colabora,'butlleti'=>$butlleti));
+                            'baixa' => $baixa,
+                            'lloc' => $lloc,
+                            'data' => $data,
+                            'publicat' => $publicat,
+                            'links' => $links,
+                            'organitza' => $organitza,
+                            'suport' => $suport,
+                            'follow' => $follow,
+                            'colabora' => $colabora,
+                            'butlleti' => $butlleti));
                     $output->writeln('hem renderitzat');
 
                     $to = $user->getUser()->getEmail();
                     $message = \Swift_Message::newInstance()
                         ->setSubject('Butlletí nº ' .$newsletter2->getNumero())
-                        ->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati"))
-                        ->setBody($contenido,'text/html');
+                        ->setFrom(array('butlleti@lopati.cat' => "Centre d'Art Lo Pati"))
+                        ->setBody($contenido, 'text/html');
 
                     $num=0;
                     try {
