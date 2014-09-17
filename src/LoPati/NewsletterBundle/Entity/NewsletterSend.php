@@ -4,7 +4,6 @@ namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\ORM\Mapping\Index;
 
 /**
  * LoPati\NewsletterBundle\Entity\NewsletterSend
@@ -13,51 +12,89 @@ use Doctrine\ORM\Mapping\Index;
  * @ORM\Entity
  * @UniqueEntity({"user","newsletter"})
  */
-
 class NewsletterSend
 {
 	/**
-	 * @var integer $id
+	 * @var integer
 	 *
 	 * @ORM\Column(name="id", type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="AUTO")
-	 * 
 	 */
 	private $id;
 	
 	
-	/** @ORM\ManyToOne(targetEntity="NewsletterUser")
+	/**
+     * @var NewsletterUser
+     *
+     * @ORM\ManyToOne(targetEntity="NewsletterUser")
 	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $user;
 	
-	/** @ORM\ManyToOne(targetEntity="Newsletter")
+	/**
+     * @var Newsletter
+     *
+     * @ORM\ManyToOne(targetEntity="Newsletter")
 	 * @ORM\JoinColumn(onDelete="SET NULL")
 	 */
 	protected $newsletter;
-	
-	public function getId()
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
 	{
 		return $this->id;
 	}
-	
-	public function getUser()
+
+    /**
+     * Get user
+     *
+     * @return NewsletterUser
+     */
+    public function getUser()
 	{
 		return $this->user;
 	}
-	public function setUser($user)
+
+    /**
+     * Set user
+     *
+     * @param $user
+     *
+     * @return $this
+     */
+    public function setUser($user)
 	{
 		$this->user = $user;
+
+        return $this;
 	}
-	
-	public function getNewsletter()
+
+    /**
+     * Get newsletter
+     *
+     * @return Newsletter
+     */
+    public function getNewsletter()
 	{
 		return $this->newsletter;
 	}
-	
-	public function setNewsletter($newsletter)
+
+    /**
+     * Set newsletter
+     *
+     * @param $newsletter
+     *
+     * @return $this
+     */
+    public function setNewsletter($newsletter)
 	{
 		$this->newsletter = $newsletter;
+
+        return $this;
 	}
 }
