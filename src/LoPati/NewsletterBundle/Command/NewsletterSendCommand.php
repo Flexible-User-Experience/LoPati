@@ -1,6 +1,8 @@
 <?php
 namespace LoPati\NewsletterBundle\Command;
 
+use LoPati\NewsletterBundle\Entity\NewsletterSend;
+use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -53,37 +55,38 @@ EOT
 		$newsletter2 = $query->getOneOrNullResult();
 		if ($newsletter2) {
 			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
-			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s   WHERE s.newsletter = :newsletter');
+			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s WHERE s.newsletter = :newsletter');
 			$query->setParameter('newsletter', $newsletter2);
 			$query->setMaxResults($max);
 			$users = $query->getResult();
 			
 			if ($users) {
-                $output->writeln('users per enviar correu:' . count($users));
+                $output->writeln('users per enviar correu: ' . count($users));
                 $enviats = 0;
                 $fallats = 0;
-                $idioma="ca";
-                //$output->writeln(count($users));
+                $idioma = 'ca';
+                /** @var NewsletterSend $user */
                 foreach ($users as $user) {
                     $output->writeln('llista correus a enviar');
-                    $to=$user->getUser()->getEmail();
+                    if (!$user->getUser() instanceof NewsletterUser) {
+                        $em->remove($user);
+                        $em->flush();
+                        continue;
+                    }
+                    $to = $user->getUser()->getEmail();
                     $output->write(' .. ' . $to .' .. ');
-
-                }
-                foreach ($users as $user) {
                     $output->writeln('entra usuari ' .$user->getUser()->getEmail() );
-                    $visualitzar_correctament="Clica aquí per visualitzar correctament";
-                    $baixa="Clica aquí per donar-te de baixa";
-                    $lloc="Lloc";
-                    $data="Data";
-                    $links="Enllaços";
-                    $publicat="Publicat";
-
-                    $organitza="Organitza";
-                    $suport="Amb el suport de";
-                    $follow="Segueix-nos a";
-                    $colabora="Col·labora";
-                    $butlleti="Butlletí";
+                    $visualitzar_correctament = 'Clica aquí per visualitzar correctament';
+                    $baixa = 'Clica aquí per donar-te de baixa';
+                    $lloc = 'Lloc';
+                    $data = 'Data';
+                    $links = 'Enllaços';
+                    $publicat = 'Publicat';
+                    $organitza = 'Organitza';
+                    $suport = 'Amb el suport de';
+                    $follow = 'Segueix-nos a';
+                    $colabora = 'Col·labora';
+                    $butlleti = 'Butlletí';
 
                     $output->writeln('if idioma es');
                     if ($user->getUser()->getIdioma()=='es'){
@@ -165,7 +168,7 @@ EOT
                         ->setFrom(array('butlleti@lopati.cat' => "Centre d'Art Lo Pati"))
                         ->setBody($contenido, 'text/html');
 
-                    $num=0;
+                    $num = 0;
                     try {
                         $message->setTo($to);
                         $output->write('enviant a' . $to .'.. ');
@@ -195,7 +198,6 @@ EOT
                     }
 
                     $em->remove($user);
-                    //$output->writeln('shan enviat:' . $num);
                     $em->flush();
                 }
 
