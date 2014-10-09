@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+# Symfony
 framework:
     translator:      { fallback: %locale% }
     secret:          %secret%
@@ -13,13 +14,12 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
-    trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:
         name:       lopati_session
         handler_id: session.handler.native_file
         save_path:  "%kernel.root_dir%/sessions"
 
-# Twig Configuration
+# Twig
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
@@ -27,7 +27,7 @@ twig:
         resources:
             - 'MenuBundle:Default:form.html.twig'
 
-# Assetic Configuration
+# Assetic
 assetic:
     debug:          %kernel.debug%
     use_controller: false
@@ -36,7 +36,7 @@ assetic:
     filters:
         cssrewrite: ~
 
-# Doctrine Configuration
+# Doctrine
 doctrine:
     dbal:
         driver:   %database_driver%
@@ -61,7 +61,7 @@ doctrine:
             SonataUserBundle: ~
             FOSUserBundle: ~ 
 
-# Doctrine Extensions Bundle
+# Doctrine Extensions
 stof_doctrine_extensions:
     default_locale: ca
     translation_fallback: true
@@ -70,12 +70,12 @@ stof_doctrine_extensions:
             translatable: true
             sluggable: true
 
-# a2lix Bundle
+# A2lix
 a2lix_translation_form:
     default_locale: ca
     locales: [ en, es ]
 
-# Sonata Admin Bundle             
+# Sonata Admin
 sonata_admin:
     title:  'Administrador de continguts'
     title_logo: /images/logo_lopati_inverted.png
@@ -95,7 +95,7 @@ sonata_admin:
             Artistes:
             Configuracions:
 
-# Sonata Block Bundle
+# Sonata Block
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -105,7 +105,7 @@ sonata_block:
         sonata.block.service.action:
         sonata.block.service.rss:
 
-# Sonata FOS User Bundle
+# Sonata User
 sonata_user:
     security_acl: true
     class:                  # Entity Classes
@@ -121,7 +121,7 @@ sonata_user:
             controller:     SonataAdminBundle:CRUD
             translation:    SonataUserBundle
 
-# Friends Of Symfony Bundle (FOS)      
+# FOS User
 fos_user:
     db_driver:      orm # can be orm or odm
     firewall_name:  admin
@@ -129,11 +129,11 @@ fos_user:
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
 
-# TinyMCE Bundle 
+# TinyMCE
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
-    textarea_class: "tinymce"
+#    textarea_class: "tinymce"
     language: ca
     theme:
         simple:
@@ -193,7 +193,7 @@ stfalcon_tinymce:
             inline_styles: false
             convert_fonts_to_spans: false  
 
-# Vich Uploader Bundle
+# Vich
 vich_uploader:
     db_driver: orm
     mappings:
@@ -218,7 +218,7 @@ vich_uploader:
             inject_on_load: false
             delete_on_remove: true
 
-# Liip Imagine Bundle            
+# Liip Imagine
 liip_imagine:
     cache_prefix: /uploads/cache
     filter_sets:
@@ -252,12 +252,12 @@ liip_imagine:
                 thumbnail: { size: [460, 300], mode: outbound }
 
 # Moved to config_prod.yml to avoid Elastica on devel environments
-foq_elastica:
-    clients:
-        default: { host: localhost, port: %port_elastica% }
-    indexes:
-        website:
-            client: default
+#foq_elastica:
+#    clients:
+#        default: { host: localhost, port: %port_elastica% }
+#    indexes:
+#        website:
+#            client: default
 
 parameters:
     newsleterEmailDestination1: "%newsleterTestEmailDestination1%"

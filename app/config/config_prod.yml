@@ -1,11 +1,6 @@
 imports:
     - { resource: config.yml }
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
 swiftmailer:
     transport: %mailer_transport%
     username: %mailer_user%
@@ -25,24 +20,24 @@ monolog:
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
 
-foq_elastica:
-    clients:
-        default: { host: localhost, port: %port_elastica% }
-    indexes:
-        website:
-            client: default
-            types:
-                pagines:
-                    mappings:
-                        titol: { boost: 5 }
-                        descripcio: { boost: 3 }
-                        translatedTitleEs: { boost: 5 }
-                        translatedDescripcioEs: { boost: 3 }
-                        translatedTitleEn: { boost: 5 }
-                        translatedDescripcioEn: { boost: 3 }
-                    persistence:
-                        driver: orm # orm, mongodb, propel are available
-                        model: LoPati\BlogBundle\Entity\Pagina
-                        provider:
-                        listener:
-                        finder:
+#foq_elastica:
+#    clients:
+#        default: { host: localhost, port: %port_elastica% }
+#    indexes:
+#        website:
+#            client: default
+#            types:
+#                pagines:
+#                    mappings:
+#                        titol: { boost: 5 }
+#                        descripcio: { boost: 3 }
+#                        translatedTitleEs: { boost: 5 }
+#                        translatedDescripcioEs: { boost: 3 }
+#                        translatedTitleEn: { boost: 5 }
+#                        translatedDescripcioEn: { boost: 3 }
+#                    persistence:
+#                        driver: orm # orm, mongodb, propel are available
+#                        model: LoPati\BlogBundle\Entity\Pagina
+#                        provider:
+#                        listener:
+#                        finder:
