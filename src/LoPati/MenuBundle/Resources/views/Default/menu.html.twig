@@ -1,10 +1,10 @@
 <div class="categories">
-    {% if id is none %}
-        {# Entrem a portada #}
-        {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id, 'pagina': pagina} %}
-	{% else %}
-        {# 	(id no es none) pagina, implica imprimir subcategories mes currents #}
-        {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id} %}
-        </div>
-        {% render "MenuBundle:Default:subCategories" with {idPagina: id} %}
-	{%  endif %}
+{% if id is none %}
+    {# Entrem a portada #}
+    {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id, 'pagina': pagina} %}
+{% else %}
+    {# (id no es none) pagina, implica imprimir subcategories mes currents #}
+    {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id} %}
+</div>
+    {% render controller("MenuBundle:Default:subCategories", {idPagina: id}) %}
+{% endif %}
