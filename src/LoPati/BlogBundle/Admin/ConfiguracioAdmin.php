@@ -1,4 +1,5 @@
 <?php
+
 namespace LoPati\BlogBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -83,15 +84,14 @@ class ConfiguracioAdmin extends Admin
             ->with('Traduccions')
             ->add(
                 'translations',
-                'a2lix_translations',
+                'a2lix_translations_gedmo',
                 array(
                     'label'        => ' ',
-                    'by_reference' => false,
                     'required'     => false,
+                    'translatable_class' => 'LoPati\BlogBundle\Entity\Configuracio',
                     'fields'       => array(
-                        // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
                         'horari'    => array(
-                            'label' => 'Horari', // Custom label
+                            'label' => 'Horari',
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
@@ -99,7 +99,7 @@ class ConfiguracioAdmin extends Admin
                             ),
                         ),
                         'organitza' => array(
-                            'label' => 'Administracions', // Custom label
+                            'label' => 'Administracions',
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
@@ -107,7 +107,7 @@ class ConfiguracioAdmin extends Admin
                             ),
                         ),
                         'colabora'  => array(
-                            'label' => 'Col·labora', // Custom label
+                            'label' => 'Col·labora',
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
@@ -140,7 +140,6 @@ class ConfiguracioAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        //'view' => array(),
                         'edit'   => array(),
                         'delete' => array(),
                     ),
@@ -148,4 +147,4 @@ class ConfiguracioAdmin extends Admin
                 )
             );
     }
-}	
+}
