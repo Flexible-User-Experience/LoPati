@@ -46,7 +46,6 @@ class ArtistaAdmin extends Admin
             ->add('year', null, array('label' => 'Any'))
             ->add('webpage', null, array('label' => 'Web'))
             ->add('active', null, array('label' => 'Activat'))
-            //->add('position', null, array('label' => 'Posició'))
             ->add(
                 'summary',
                 'textarea',
@@ -84,20 +83,20 @@ class ArtistaAdmin extends Admin
             ->with('Traduccions')
             ->add(
                 'translations',
-                'a2lix_translations',
+                'a2lix_translations_gedmo',
                 array(
-                    'label'    => ' ',
-                    'required' => false,
-                    'fields'   => array( // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
+                    'label'        => ' ',
+                    'required'     => false,
+                    'translatable_class' => 'LoPati\ArtistaBundle\Entity\Artista',
+                    'fields'   => array(
                         'summary'     => array(
-                            'type'  => 'textarea',
                             'label' => 'Resum',
                             'attr'  => array(
                                 'style' => 'height:90px;width:480px;'
                             )
                         ),
                         'description' => array(
-                            'label' => 'Descripció', // Custom label
+                            'label' => 'Descripció',
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
@@ -105,7 +104,6 @@ class ArtistaAdmin extends Admin
                             )
                         ),
                     )
-
                 )
             );
     }
@@ -119,7 +117,6 @@ class ArtistaAdmin extends Admin
             ->add('city', null, array('label' => 'Ciutat'))
             ->add('year', null, array('label' => 'Any'))
             ->add('webpage', null, array('label' => 'Web'))
-            ->add('active', null, array('label' => 'Actiu'))//->add('position', null, array('label' => 'Posició'))
-        ;
+            ->add('active', null, array('label' => 'Actiu'));
     }
 }
