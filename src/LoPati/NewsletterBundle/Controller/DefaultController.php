@@ -13,14 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-
     /**
      * @Template()
      */
     public function formAction(Request $request)
     {
         $newsletterUser = new NewsletterUser();
-
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
 
         return array('form' => $form->createView());
@@ -35,18 +33,13 @@ class DefaultController extends Controller
     {
         $newsletterUser = new NewsletterUser();
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
-
-        $form->bindRequest($request);
-
+        $form->handleRequest($request);
         $request->setLocale($this->get('session')->get('_locale'));
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletterUser);
             $em->flush();
-
             // $config = $em->getRepository('MegapointCmsBundle:Configuration')->config();
-            $config = 'metalrockero@gmail.com';
             $message = \Swift_Message::newInstance()
                 ->setSubject(
                     $this->renderView(
@@ -69,25 +62,11 @@ class DefaultController extends Controller
                     'text/html'
                 );
             $this->get('mailer')->send($message);
-
             $flash = $this->get('translator')->trans('suscribe.register');
-            $this->get('session')->setFlash('notice', $flash);
-
-
-            /*  // ...
-              $mensaje = \Swift_Message::newInstance()
-              ->setSubject('Oferta del día')
-              ->setFrom('mailing@cupon.com')
-              ->setTo('usuario1@localhost')
-              ->setBody('prova')
-              ;
-              $this->get('mailer')->send($mensaje);*/
+            $this->get('session')->getFlashBag()->add('notice', $flash);
         } else {
-            $this->get('session')->setFlash('notice', $this->get('translator')->trans('suscribe.error'));
+            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
         }
-
-        /*   $request = $this->getRequest();
-           $request->setLocale($request->getLocale());*/
 
         return $this->redirect(
             $this->generateUrl('portada', array('_locale' => $this->get('session')->get('_locale')))
@@ -103,22 +82,14 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-
         $request->setLocale($this->get('session')->get('_locale'));
-
         if ($user) {
             $user->setActive(true);
             $em->flush();
-
-            //	$request->setLocale($user->getIdioma());
-
-
             $logger = $this->get('logger');
             $logger->info('user idioma:' . $user->getIdioma());
             $logger->info('get idioma:' . $request->getLocale());
             $logger->info('session idioma:' . $this->get('session')->get('_locale'));
-
-
             $message = \Swift_Message::newInstance()
                 ->setSubject(
                     $this->renderView(
@@ -138,8 +109,6 @@ class DefaultController extends Controller
                     ),
                     'text/html'
                 );
-
-
             $this->get('mailer')->send($message);
             $this->get('session')->setFlash(
                 'notice',
@@ -159,7 +128,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterByData($newDate);
         $visualitzar_correctament = "Clica aquí per visualitzar correctament";
-
         if ($_locale == 'ca') {
             $visualitzar_correctament = "Clica aquí per visualitzar correctament";
             $baixa = "Clica aquí per donar-te de baixa";
@@ -246,7 +214,6 @@ class DefaultController extends Controller
         //return array('token' => $token);
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-
         if ($user) {
             $em->remove($user);
             $em->flush();
