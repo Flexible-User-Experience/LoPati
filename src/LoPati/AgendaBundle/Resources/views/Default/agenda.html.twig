@@ -11,9 +11,9 @@
 {% block contenidor %}
     <div style="width: 100%; height: 29px; background: none;"></div>
     <div class="contenidor">
-        {% if app.session.hasFlash('notice') %}
+        {% if app.session.flashbag.has('notice') %}
             <div class="flash success">
-                {{ app.session.flash('notice') }}
+                {{ app.session.flashbag.get('notice') }}
             </div>
         {% endif %}
         <div class="continguts">
