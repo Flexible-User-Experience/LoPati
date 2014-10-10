@@ -1,16 +1,21 @@
 <?php
+
 namespace LoPati\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use LoPati\MenuBundle\Entity\Translation\SubCategoriaTranslation;
 use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use LoPati\BlogBundle\Entity\Pagina;
+use LoPati\MenuBundle\Entity\Categoria;
+
 /**
  * @ORM\Entity
  * @Gedmo\TranslationEntity(class="LoPati\MenuBundle\Entity\Translation\SubCategoriaTranslation")
  * @ORM\Entity(repositoryClass="LoPati\MenuBundle\Repository\SubCategoriaRepository")
  */
-
 class SubCategoria {
 
 	/**
@@ -25,14 +30,16 @@ class SubCategoria {
 	 */
 	protected $nom;
 
+    protected $slug;
+
 	/** @ORM\Column(type="decimal", precision=3, scale=0) */
 	protected $ordre;
 	
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $actiu=FALSE;	
+	protected $actiu=false;
 	
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $llista=FALSE;
+	protected $llista=false;
 	
 	/** @ORM\ManyToOne(targetEntity="Categoria", inversedBy="subCategoria") */
 	protected $categoria;
@@ -64,15 +71,15 @@ class SubCategoria {
 	
 	public function __construct()
 	{
-		$this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->translations = new ArrayCollection();
 	}
 	
 	/**
 	 * Set link
 	 *
-	 * @param LoPati\BlogBundle\Entity\Pagina $link
+	 * @param Pagina $link
 	 */
-	public function setLink(\LoPati\BlogBundle\Entity\Pagina $link=null)
+	public function setLink(Pagina $link = null)
 	{
 		$this->link = $link;
 	}
@@ -80,14 +87,13 @@ class SubCategoria {
 	/**
 	 * Get link
 	 *
-	 * @return LoPati\BlogBundle\Entity\Pagina
+	 * @return Pagina
 	 */
 	public function getLink()
 	{
 		return $this->link;
 	}
-	
-	
+
     /**
      * Get id
      *
@@ -122,9 +128,9 @@ class SubCategoria {
     /**
      * Set categoria
      *
-     * @param LoPati\MenuBundle\Entity\Categoria $categoria
+     * @param Categoria $categoria
      */
-    public function setCategoria(\LoPati\MenuBundle\Entity\Categoria $categoria = null)
+    public function setCategoria(Categoria $categoria = null)
     {
         $this->categoria = $categoria;
     }
@@ -132,7 +138,7 @@ class SubCategoria {
     /**
      * Get categoria
      *
-     * @return LoPati\MenuBundle\Entity\Categoria 
+     * @return Categoria
      */
     public function getCategoria()
     {
@@ -142,7 +148,7 @@ class SubCategoria {
     /**
      * Set ordre
      *
-     * @param decimal $ordre
+     * @param int $ordre
      */
     public function setOrdre($ordre)
     {
@@ -152,7 +158,7 @@ class SubCategoria {
     /**
      * Get ordre
      *
-     * @return decimal 
+     * @return int
      */
     public function getOrdre()
     {
@@ -181,7 +187,7 @@ class SubCategoria {
     
     public function __toString()
     {
-    	return $this->getNom()." -> ".$this->getCategoria()->getNom();
+    	return $this->getNom() . ' -> ' . $this->getCategoria()->getNom();
     }
 
     /**
@@ -213,11 +219,13 @@ class SubCategoria {
      * Set translations
      *
      * @param ArrayCollection $translations
-     * @return Product
+     *
+     * @return $this
      */
     public function setTranslations($translations)
     {
     	$this->translations = $translations;
+
     	return $this;
     }
     
@@ -234,9 +242,9 @@ class SubCategoria {
     /**
      * Add translation
      *
-     * @param ProductTranslation
+     * @param SubCategoriaTranslation $translation
      */
-    public function addTranslation($translation)
+    public function addTranslation(SubCategoriaTranslation $translation)
     {
     	if ($translation->getContent()) {
     		$translation->setObject($this);
@@ -256,28 +264,30 @@ class SubCategoria {
     
     /**
      * Add pagines
-     * @param LoPati\BlogBundle\Entity\Pagine $pagines
+     *
+     * @param Pagina $pagina
      */
-    public function addPagines(\LoPati\BlogBundle\Entity\Pagina $pagines)
+    public function addPagines(Pagina $pagina)
     {
-    	$this->pagines[] = $pagines;
+    	$this->pagines[] = $pagina;
     }
     
     /**
      * Get pagines
-     * @return Doctrine\Common\Collections\Collection
+     *
+     * @return ArrayCollection
      */
     public function getPagines()
     {
     	return $this->pagines;
     }
+
     public function setLocale($locale) {
     	$this->locale = $locale;
-    
     }
     
     /**
-     * Get compartir
+     * Get locale
      *
      * @return boolean
      */

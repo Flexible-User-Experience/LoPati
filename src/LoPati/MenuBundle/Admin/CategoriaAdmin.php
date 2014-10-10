@@ -51,16 +51,7 @@ class CategoriaAdmin extends Admin
                 'a2lix_translations_gedmo',
                 array(
                     'label'        => ' ',
-//                    'by_reference' => false,
                     'required'     => false,
-//                    'fields'       => array( // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
-//                        'nom' => array(
-//                            'label' => 'Nom', // Custom label
-//                            'attr'  => array(
-//                                'class' => 'input_translation_tab_content'
-//                            )
-//                        )
-//                    )
                     'translatable_class' => 'LoPati\MenuBundle\Entity\Categoria',
                 )
             );
@@ -80,9 +71,7 @@ class CategoriaAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        //'view' => array(),
                         'edit' => array(),
-                        //'delete' => array(),
                     ),
                     'label'   => 'Accions'
                 )

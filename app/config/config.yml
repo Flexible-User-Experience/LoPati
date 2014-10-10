@@ -72,7 +72,7 @@ stof_doctrine_extensions:
 
 # A2lix
 a2lix_translation_form:
-    default_required: false
+    default_required: true
     locales: [ en, es ]
 
 # Sonata Admin

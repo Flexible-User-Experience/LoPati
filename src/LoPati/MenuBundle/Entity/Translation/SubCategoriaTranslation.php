@@ -20,6 +20,4 @@ class SubCategoriaTranslation extends AbstractPersonalTranslation
 	 * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $object;
-
-
 }
