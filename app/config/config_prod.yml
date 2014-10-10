@@ -36,7 +36,7 @@ fos_elastica:
                         translatedTitleEn: { boost: 5 }
                         translatedDescripcioEn: { boost: 3 }
                     persistence:
-                        driver: orm # orm, mongodb, propel are available
+                        driver: orm
                         model: LoPati\BlogBundle\Entity\Pagina
                         provider:
                         listener:
