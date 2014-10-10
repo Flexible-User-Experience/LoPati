@@ -187,7 +187,7 @@ class SubCategoria {
     
     public function __toString()
     {
-    	return $this->getNom() . ' -> ' . $this->getCategoria()->getNom();
+    	return $this->nom ? $this->nom : '---' . ($this->getCategoria() ? $this->getCategoria()->getNom() ? ' -> ' . $this->getCategoria()->getNom() : '' : '');
     }
 
     /**
