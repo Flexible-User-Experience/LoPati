@@ -1,11 +1,6 @@
 imports:
     - { resource: config.yml }
 
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
 swiftmailer:
     transport: %mailer_transport%
     username: %mailer_user%
@@ -25,7 +20,7 @@ monolog:
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
 
-foq_elastica:
+fos_elastica:
     clients:
         default: { host: localhost, port: %port_elastica% }
     indexes:
@@ -41,7 +36,7 @@ foq_elastica:
                         translatedTitleEn: { boost: 5 }
                         translatedDescripcioEn: { boost: 3 }
                     persistence:
-                        driver: orm # orm, mongodb, propel are available
+                        driver: orm
                         model: LoPati\BlogBundle\Entity\Pagina
                         provider:
                         listener:

@@ -10,9 +10,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class ArxiuAdmin extends Admin
 {
     protected $datagridValues = array(
-        '_page'       => 1,
+        '_page' => 1,
         '_sort_order' => 'DESC', // sort direction
-        '_sort_by'    => 'any' // field name
+        '_sort_by' => 'any' // field name
     );
 
     /**
@@ -46,7 +46,6 @@ class ArxiuAdmin extends Admin
             ->add('imagePetitaName', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required' => false))
             ->add('imagePetita2Name', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-
             ->setHelps(array('any' => 'Ex: 2012'));
     }
 
@@ -55,8 +54,16 @@ class ArxiuAdmin extends Admin
         $mapper
             //->addIdentifier('id')
             ->addIdentifier('any')
-            ->add('imagePetitaName', null, array('label' => 'Imatge any'))
-            ->add('imagePetita2Name', null, array('label' => 'Imatge any vermell'))
+            ->add(
+                'imagePetitaName',
+                null,
+                array('label' => 'Imatge any', 'template' => 'BlogBundle:Admin:customarxiuimglistfield.html.twig')
+            )
+            ->add(
+                'imagePetita2Name',
+                null,
+                array('label' => 'Imatge any vermell', 'template' => 'BlogBundle:Admin:customarxiuredimglistfield.html.twig')
+            )
             ->add(
                 '_action',
                 'actions',

@@ -1,18 +1,21 @@
 <?php
+
 namespace LoPati\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use LoPati\MenuBundle\Entity\Translation\CategoriaTranslation;
 use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\EventDispatcher\Event;
+use LoPati\BlogBundle\Entity\Pagina;
+use LoPati\MenuBundle\Entity\SubCategoria;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @Gedmo\TranslationEntity(class="LoPati\MenuBundle\Entity\Translation\CategoriaTranslation")
  * @ORM\Entity(repositoryClass="LoPati\MenuBundle\Repository\CategoriaRepository")
  */
-
 class Categoria {
 	
 	/**
@@ -49,9 +52,9 @@ class Categoria {
 	/**
 	 * Set link
 	 *
-	 * @param LoPati\BlogBundle\Entity\Pagina $link
-	 */
-	public function setLink(\LoPati\BlogBundle\Entity\Pagina $link=null)
+     * @param Pagina $link
+     */
+    public function setLink(Pagina $link=null)
 	{
 		$this->link = $link;
 	}
@@ -68,14 +71,14 @@ class Categoria {
 	
 	public function __construct()
 	{
-		$this->subCategoria = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->subCategoria = new ArrayCollection();
+		$this->translations = new ArrayCollection();
 	}
 	
 	/**
 	 * Get link
 	 *
-	 * @return LoPati\BlogBundle\Entity\Pagina
+	 * @return Pagina
 	 */
 	public function getLink()
 	{
@@ -121,7 +124,7 @@ class Categoria {
     /**
      * Set ordre
      *
-     * @param decimal $ordre
+     * @param int $ordre
      */
     public function setOrdre($ordre)
     {
@@ -131,7 +134,7 @@ class Categoria {
     /**
      * Get ordre
      *
-     * @return decimal 
+     * @return int
      */
     public function getOrdre()
     {
@@ -173,15 +176,15 @@ class Categoria {
     
     public function __toString()
     {
-    	return $this->nom;
+    	return $this->nom ? $this->nom : '---';
     }
     
     /**
      * Add subCategoria
      *
-     * @param LoPati\MenuBundle\Entity\SubCategoria $subCategoria
+     * @param SubCategoria $subCategoria
      */
-    public function addsubCategoria(\LoPati\MenuBundle\Entity\SubCategoria $subCategoria)
+    public function addsubCategoria(SubCategoria $subCategoria)
     {
         $this->subCategoria[] = $subCategoria;
     }
@@ -189,7 +192,7 @@ class Categoria {
     /**
      * Get subCategoria
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getSubCategoria()
     {
@@ -200,11 +203,13 @@ class Categoria {
      * Set translations
      *
      * @param ArrayCollection $translations
-     * @return Product
+     *
+     * @return $this
      */
     public function setTranslations($translations)
     {
     	$this->translations = $translations;
+
     	return $this;
     }
     
@@ -221,9 +226,9 @@ class Categoria {
     /**
      * Add translation
      *
-     * @param ProductTranslation
+     * @param CategoriaTranslation $translation
      */
-    public function addTranslation($translation)
+    public function addTranslation(CategoriaTranslation $translation)
     {
     	if ($translation->getContent()) {
     		$translation->setObject($this);
@@ -240,5 +245,4 @@ class Categoria {
     {
     	$this->translations->removeElement($translation);
     }
-
 }

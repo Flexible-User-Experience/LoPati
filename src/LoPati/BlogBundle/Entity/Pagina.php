@@ -1,12 +1,17 @@
 <?php
+
 namespace LoPati\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use LoPati\BlogBundle\Entity\Translation\PaginaTranslation;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
+use LoPati\MenuBundle\Entity\Categoria;
+use LoPati\MenuBundle\Entity\SubCategoria;
 
 /**
  * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\PaginaRepository")
@@ -48,19 +53,19 @@ class Pagina {
 	protected $links;
 	
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $actiu = FALSE;
+	protected $actiu = false;
 	
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $portada = FALSE;
+	protected $portada = false;
 
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $compartir = FALSE;
+	protected $compartir = false;
 
 	/** @ORM\Column(type="date") */
 	protected $data_publicacio;
 
 	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $data_visible = FALSE;
+	protected $data_visible = false;
 
 	/** @ORM\Column(type="date", nullable=true) */
 	protected $data_caducitat = null;
@@ -72,7 +77,7 @@ class Pagina {
     protected $endDate;
 
     /** @ORM\Column(type="boolean", nullable=true) */
-	protected $alwaysShowOnCalendar = FALSE;
+	protected $alwaysShowOnCalendar = false;
 
 	/** 
 	 * @ORM\Column(type="string", length=255, nullable=true )
@@ -409,6 +414,7 @@ class Pagina {
 	
 	/**
 	 * Get translations
+     *
 	 * @return ArrayCollection
 	 */
 	public function getTranslations() {
@@ -417,9 +423,10 @@ class Pagina {
 	
 	/**
 	 * Add translation
-	 * @param ProductTranslation
+     *
+	 * @param PaginaTranslation $translation
 	 */
-	public function addTranslation($translation) {
+	public function addTranslation(PaginaTranslation $translation) {
 		if ($translation->getContent()) {
 			$translation->setObject($this);
 			$this->translations->add($translation);
@@ -428,9 +435,10 @@ class Pagina {
 	
 	/**
 	 * Remove translation
-	 * @param ProductTranslation
+     *
+	 * @param PaginaTranslation $translation
 	 */
-	public function removeTranslation($translation) {
+	public function removeTranslation(PaginaTranslation $translation) {
 		$this->translations->removeElement($translation);
 	}
 	
@@ -488,7 +496,7 @@ class Pagina {
 	/**
 	 * Set resum
 	 *
-	 * @param text $resum
+	 * @param string $resum
 	 */
 	public function setResum($resum) {
 		$this->resum = $resum;
@@ -497,29 +505,29 @@ class Pagina {
 	/**
 	 * Get resum
 	 *
-	 * @return text 
+	 * @return string
 	 */
 	public function getResum() {
 		return $this->resum;
 	}
 
 	public function __toString() {
-		return $this->getId() . ' · ' . $this->getDataPublicacio()->format('d/m/Y') . ' · ' .$this->getTitol();
+		return $this->titol ? $this->getId() . ' · ' . $this->getDataPublicacio()->format('d/m/Y') . ' · ' .$this->getTitol() : '---';
 	}
 
 	/**
 	 * Set categoria
 	 *
-	 * @param LoPati\MenuBundle\Entity\Categoria $categoria
+	 * @param Categoria $categoria
 	 */
-	public function setCategoria(\LoPati\MenuBundle\Entity\Categoria $categoria=null) {
+	public function setCategoria(Categoria $categoria=null) {
 		$this->categoria = $categoria;
 	}
 
 	/**
 	 * Get categoria
 	 *
-	 * @return LoPati\MenuBundle\Entity\Categoria 
+	 * @return Categoria
 	 */
 	public function getCategoria() {
 		return $this->categoria;
@@ -528,9 +536,9 @@ class Pagina {
 	/**
 	 * Set subCategoria
 	 *
-	 * @param LoPati\MenuBundle\Entity\SubCategoria $SubCategoria
+	 * @param SubCategoria $subCategoria
 	 */
-	public function setSubCategoria(\LoPati\MenuBundle\Entity\SubCategoria $subCategoria=null) {
+	public function setSubCategoria(SubCategoria $subCategoria=null) {
 		$this->subCategoria = $subCategoria;
 	}
 
@@ -545,7 +553,7 @@ class Pagina {
 	/**
 	 * Set descripcio
 	 *
-	 * @param text $descripcio
+	 * @param string $descripcio
 	 */
 	public function setDescripcio($descripcio) {
 		$this->descripcio = $descripcio;
@@ -554,7 +562,7 @@ class Pagina {
 	/**
 	 * Get descripcio
 	 *
-	 * @return text 
+	 * @return string
 	 */
 	public function getDescripcio() {
 		return $this->descripcio;
@@ -617,7 +625,7 @@ class Pagina {
 	/**
 	 * Set data_publicacio
 	 *
-	 * @param date $dataPublicacio
+	 * @param \DateTime $dataPublicacio
 	 */
 	public function setDataPublicacio($dataPublicacio) {
 		$this->data_publicacio = $dataPublicacio;
@@ -626,7 +634,7 @@ class Pagina {
 	/**
 	 * Get data_publicacio
 	 *
-	 * @return date 
+	 * @return \DateTime
 	 */
 	public function getDataPublicacio() {
 		return $this->data_publicacio;
@@ -653,7 +661,7 @@ class Pagina {
 	/**
 	 * Set data_caducitat
 	 *
-	 * @param date $dataCaducitat
+	 * @param \DateTime $dataCaducitat
 	 */
 	public function setDataCaducitat($dataCaducitat) {
 		$this->data_caducitat = $dataCaducitat;
@@ -662,7 +670,7 @@ class Pagina {
 	/**
 	 * Get data_caducitat
 	 *
-	 * @return date 
+	 * @return \DateTime
 	 */
 	public function getDataCaducitat() {
 		return $this->data_caducitat;
@@ -671,7 +679,7 @@ class Pagina {
     /**
 	 * Set data_realitzacio
 	 *
-	 * @param string $dataRealitzacio
+	 * @param \DateTime $dataRealitzacio
 	 */
 	public function setDataRealitzacio($dataRealitzacio) {
 		$this->data_realitzacio = $dataRealitzacio;
@@ -680,7 +688,7 @@ class Pagina {
 	/**
 	 * Get data_realitzacio
 	 *
-	 * @return string 
+	 * @return \DateTime
 	 */
 	public function getDataRealitzacio() {
 		return $this->data_realitzacio;
@@ -707,10 +715,10 @@ class Pagina {
 	/**
 	 * Set data_caducita
 	 *
-	 * @param date $dataCaducita
+	 * @param \DateTime $dataCaducitat
 	 */
-	public function setDataCaducita($dataCaducita) {
-		$this->data_caducita = $dataCaducita;
+	public function setDataCaducita($dataCaducitat) {
+		$this->data_caducitat = $dataCaducitat;
 	}
 
 	/**
@@ -766,11 +774,13 @@ class Pagina {
      * Set endDate
      *
      * @param \DateTime $endDate
-     * @return Training
+     *
+     * @return $this
      */
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
+
         return $this;
     }
 

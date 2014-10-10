@@ -44,29 +44,16 @@ class SubCategoriaAdmin extends Admin
             ->add('ordre', null, array('label' => 'Ordre'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->add('llista', null, array('label' => 'És llista?'))
-            //->add('categoria', null, array('label' => 'Menú primer nivell', 'required' => true) )
-            /*->add('categoria', 'entity', array(
-                    'class' => 'MenuBundle:Categoria',
-                    'property' => 'nom'
-            ))*/
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
             ->add('categoria', 'sonata_type_model', array('expanded' => false, 'label' => 'Menú primer nivell'))
             ->with('Traduccions')
             ->add(
                 'translations',
-                'a2lix_translations',
+                'a2lix_translations_gedmo',
                 array(
                     'label'        => ' ',
-                    'by_reference' => false,
                     'required'     => false,
-                    'fields'       => array( // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
-                        'nom' => array(
-                            'label' => 'Nom', // Custom label
-                            'attr'  => array(
-                                'class' => 'input_translation_tab_content'
-                            )
-                        )
-                    )
+                    'translatable_class' => 'LoPati\MenuBundle\Entity\SubCategoria',
                 )
             );
     }
@@ -86,9 +73,7 @@ class SubCategoriaAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        //'view' => array(),
                         'edit' => array(),
-                        //'delete' => array(),
                     ),
                     'label'   => 'Accions'
                 )

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace LoPati\BlogBundle\Entity\Translation;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +20,4 @@ class ConfiguracioTranslation extends AbstractPersonalTranslation
 	 * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $object;
-
-
 }

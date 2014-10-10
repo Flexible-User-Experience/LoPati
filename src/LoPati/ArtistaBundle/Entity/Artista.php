@@ -1,9 +1,12 @@
 <?php
+
 namespace LoPati\ArtistaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use LoPati\ArtistaBundle\Entity\Translation\ArtistaTranslation;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -58,12 +61,7 @@ class Artista {
 	/**
      * @ORM\Column(type="boolean")
      */
-	protected $active = TRUE;
-
-    /**
-     * @ORM\Column(type="integer")
-     *
-    protected $position;*/
+	protected $active = true;
 
     /**
      * @ORM\Column(type="string", length=1024, nullable=true)
@@ -181,12 +179,13 @@ class Artista {
 	 * 	cascade={"persist", "remove"}
 	 * )
 	 * @Assert\Valid(deep = true)
+     * @var ArrayCollection
 	 */
 	private $translations;
 	
 
 	public function __construct() {
-		$this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->translations = new ArrayCollection();
 	}
 	
 	public function getSlug() {
@@ -195,16 +194,20 @@ class Artista {
 	
 	/**
 	 * Set translations
+     *
 	 * @param ArrayCollection $translations
-	 * @return Product
+     *
+	 * @return $this
 	 */
 	public function setTranslations($translations) {
 		$this->translations = $translations;
+
 		return $this;
 	}
 	
 	/**
 	 * Get translations
+     *
 	 * @return ArrayCollection
 	 */
 	public function getTranslations() {
@@ -213,9 +216,10 @@ class Artista {
 	
 	/**
 	 * Add translation
-	 * @param ProductTranslation
+     *
+	 * @param ArtistaTranslation $translation
 	 */
-	public function addTranslation($translation) {
+	public function addTranslation(ArtistaTranslation $translation) {
 		if ($translation->getContent()) {
 			$translation->setObject($this);
 			$this->translations->add($translation);
@@ -224,14 +228,16 @@ class Artista {
 	
 	/**
 	 * Remove translation
-	 * @param ProductTranslation
+     *
+	 * @param ArtistaTranslation $translation
 	 */
-	public function removeTranslation($translation) {
+	public function removeTranslation(ArtistaTranslation $translation) {
 		$this->translations->removeElement($translation);
 	}
 	
 	/**
 	 * Get id
+     *
 	 * @return integer 
 	 */
 	public function getId() {
@@ -441,7 +447,7 @@ class Artista {
     }
 
     /**
-     * @param \LoPati\ArtistaBundle\Entity\File $document1
+     * @param File $document1
      */
     public function setDocument1($document1)
     {
@@ -450,7 +456,7 @@ class Artista {
     }
 
     /**
-     * @return \LoPati\ArtistaBundle\Entity\File
+     * @return File
      */
     public function getDocument1()
     {
@@ -640,6 +646,6 @@ class Artista {
     }
 
 	public function __toString() {
-		return $this->getSlug();
+		return $this->id ? $this->getSlug() : '---';
 	}
 }

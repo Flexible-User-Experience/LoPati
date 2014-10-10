@@ -5,23 +5,35 @@
                 {% if subcategoria.link is not none %}
                     {% if ( id == subcategoria.link or id == subcategoria.link.id ) %}
                         {% if subcategoria.llista == 1 %}
-                            <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 1, titol: subcategoria, llista: 1} %}</span></li>
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 3, actiu: 1, titol: subcategoria, llista: 1}) %}</span>
+                            </li>
                         {% else %}
-							<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4, actiu : 1, titol: subcategoria, llista: 0} %}</span></li>
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: subcategoria.link.id, tipus: 4, actiu: 1, titol: subcategoria, llista: 0}) %}</span>
+                            </li>
                         {% endif %}
-				    {% else %}
+                    {% else %}
                         {% if subcategoria.llista == 1 %}
-                            <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 3, actiu: 0, titol: subcategoria, llista: 1}) %}</span>
+                            </li>
                         {% else %}
-                            <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: subcategoria.link.id, tipus: 4 , actiu : 0, titol: subcategoria, llista: 0} %}</span></li>
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: subcategoria.link.id, tipus: 4 , actiu: 0, titol: subcategoria, llista: 0}) %}</span>
+                            </li>
                         {% endif %}
-				    {% endif %}
+                    {% endif %}
                 {% else %}
                     {% if subcategoria.llista == 1 %}
-                        <li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 3, actiu : 0, titol: subcategoria, llista: 1} %}</span></li>
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 3, actiu: 0, titol: subcategoria, llista: 1}) %}</span>
+                        </li>
                     {% endif %}
                     {% if subcategoria.ordre == 123 %} {# PROJECTE IRRADIADOR #}
-                        <li><span><a href="{{ path( 'irradiador_' ~ apprequestlocale ) }}">{{ subcategoria.nom }}</a></span></li>
+                        <li>
+                            <span><a href="{{ path( 'irradiador_' ~ apprequestlocale ) }}">{{ subcategoria.nom }}</a></span>
+                        </li>
                     {% endif %}
                 {% endif %}
             {% endfor %}

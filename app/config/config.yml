@@ -2,9 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+# Symfony
 framework:
-    #esi:             ~
-    translator:      { fallback: %locale% }
+    translator:      { fallback: "%locale%" }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -12,12 +12,14 @@ framework:
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    default_locale:  %locale%
-    trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
-    session:         ~
+    templating:      { engines: ['twig'] }
+    default_locale:  "%locale%"
+    session:
+        name:       lopati_session
+        handler_id: session.handler.native_file
+        save_path:  "%kernel.root_dir%/sessions"
 
-# Twig Configuration
+# Twig
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
@@ -25,7 +27,7 @@ twig:
         resources:
             - 'MenuBundle:Default:form.html.twig'
 
-# Assetic Configuration
+# Assetic
 assetic:
     debug:          %kernel.debug%
     use_controller: false
@@ -33,12 +35,8 @@ assetic:
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
-        #closure:
-        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
-        #yui_css:
-        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
-# Doctrine Configuration
+# Doctrine
 doctrine:
     dbal:
         driver:   %database_driver%
@@ -63,7 +61,7 @@ doctrine:
             SonataUserBundle: ~
             FOSUserBundle: ~ 
 
-# Doctrine Extensions Bundle
+# Doctrine Extensions
 stof_doctrine_extensions:
     default_locale: ca
     translation_fallback: true
@@ -72,32 +70,29 @@ stof_doctrine_extensions:
             translatable: true
             sluggable: true
 
-# a2lix Bundle
+# A2lix
 a2lix_translation_form:
-    default_locale: ca
-    locales: [en,es]
+    default_required: true
+    locales: [ en, es ]
 
-# Sonata Admin Bundle             
+# Sonata Admin
 sonata_admin:
-  title:  'Administrador de continguts'
-  title_logo: /images/logo_lopati_inverted.png
-  templates:
-    layout: BlogBundle:Default:my_standard_layout.html.twig
-    dashboard: BlogBundle:Default:my_dashboard.html.twig
-    ajax: SonataAdminBundle::ajax_layout.html.twig
-    list: SonataAdminBundle:CRUD:list.html.twig
-    show: SonataAdminBundle:CRUD:show.html.twig
-    edit: SonataAdminBundle:CRUD:edit.html.twig
-  dashboard:  
-    groups:
-      Menú:
-      Pàgines:
-      Arxiu:
-      Newsletters:
-      Artistes:
-      Configuracions:
+    title:  'Administrador de continguts'
+    title_logo: /images/logo_lopati_inverted.png
+    templates:
+        layout: BlogBundle:Admin:my_standard_layout.html.twig
+        dashboard: BlogBundle:Admin:my_dashboard.html.twig
+        user_block: BlogBundle:Admin:my_user_block.html.twig
+    dashboard:
+        groups:
+            Menús:
+            Pàgines:
+            Arxius:
+            Newsletters:
+            Artistes:
+            Configuracions:
 
-# Sonata Block Bundle
+# Sonata Block
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -107,35 +102,35 @@ sonata_block:
         sonata.block.service.action:
         sonata.block.service.rss:
 
-# Sonata FOS User Bundle
+# Sonata User
 sonata_user:
     security_acl: true
-    class:                  # Entity Classes
-            user:               Application\Sonata\UserBundle\Entity\User
-            group:              Application\Sonata\UserBundle\Entity\Group
-    admin:                  # Admin Classes
-            user:
-                class:          Sonata\UserBundle\Admin\Entity\UserAdmin
-                controller:     SonataAdminBundle:CRUD
-                translation:    SonataUserBundle
-            group:           
-                class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
-                controller:     SonataAdminBundle:CRUD
-                translation:    SonataUserBundle
+    class:
+        user:               Application\Sonata\UserBundle\Entity\User
+        group:              Application\Sonata\UserBundle\Entity\Group
+    admin:
+        user:
+            class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+        group:
+            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
 
-# Friends Of Symfony Bundle (FOS)      
+# FOS User
 fos_user:
-    db_driver:      orm # can be orm or odm
+    db_driver:      orm
     firewall_name:  admin
     user_class:     Application\Sonata\UserBundle\Entity\User
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
 
-# TinyMCE Bundle 
+# TinyMCE
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
-    textarea_class: "tinymce"
+#    textarea_class: "tinymce"
     language: ca
     theme:
         simple:
@@ -195,7 +190,7 @@ stfalcon_tinymce:
             inline_styles: false
             convert_fonts_to_spans: false  
 
-# Vich Uploader Bundle
+# Vich
 vich_uploader:
     db_driver: orm
     mappings:
@@ -220,7 +215,7 @@ vich_uploader:
             inject_on_load: false
             delete_on_remove: true
 
-# Liip Imagine Bundle            
+# Liip Imagine
 liip_imagine:
     cache_prefix: /uploads/cache
     filter_sets:
@@ -244,6 +239,10 @@ liip_imagine:
             quality: 70
             filters:
                 thumbnail: { size: [50, null], mode: outbound }
+        thumb_imatge_admin_list_view:
+            quality: 70
+            filters:
+                thumbnail: { size: [100, null], mode: outbound }
         imatge_pagina_newsletter:
             quality: 80
             filters:
@@ -254,14 +253,14 @@ liip_imagine:
                 thumbnail: { size: [460, 300], mode: outbound }
 
 # Moved to config_prod.yml to avoid Elastica on devel environments
-foq_elastica:
-    clients:
-        default: { host: localhost, port: %port_elastica% }
-    indexes:
-        website:
-            client: default
+#fos_elastica:
+#    clients:
+#        default: { host: localhost, port: %port_elastica% }
+#    indexes:
+#        website:
+#            client: default
 
 parameters:
-    newsleterEmailDestination1: %newsleterTestEmailDestination1%
-    newsleterEmailDestination2: %newsleterTestEmailDestination2%
-    newsleterEmailDestination3: %newsleterTestEmailDestination3%
+    newsleterEmailDestination1: "%newsleterTestEmailDestination1%"
+    newsleterEmailDestination2: "%newsleterTestEmailDestination2%"
+    newsleterEmailDestination3: "%newsleterTestEmailDestination3%"

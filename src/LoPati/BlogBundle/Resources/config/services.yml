@@ -3,7 +3,7 @@ services:
   sonata.lopati.admin.categoria:
     class: LoPati\MenuBundle\Admin\CategoriaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Menú', label: primer nivell }
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: primer nivell }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\Categoria
@@ -12,7 +12,7 @@ services:
   sonata.lopati.admin.subcategoria:
     class: LoPati\MenuBundle\Admin\SubCategoriaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Menú', label: segon nivell }
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: segon nivell }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\SubCategoria
@@ -30,7 +30,7 @@ services:
   sonata.lopati.admin.arxiu:
     class: LoPati\BlogBundle\Admin\ArxiuAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Arxiu', label: arxiu }
+      - { name: sonata.admin, manager_type: orm, group: 'Arxius', label: arxiu }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\Arxiu
@@ -80,4 +80,3 @@ services:
       - null
       - LoPati\ArtistaBundle\Entity\Artista
       - ArtistaBundle:Admin
-

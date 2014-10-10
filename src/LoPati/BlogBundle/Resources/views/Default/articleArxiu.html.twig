@@ -3,7 +3,7 @@
 {% block title %}: {% endblock %}
 
 {% block menu %}
-    {% render 'MenuBundle:Default:pintaMenuLlista' with {categoria_id : pagina.categoria.id, onlycategories : 1, arxiu : 1 } %}
+    {% render controller('MenuBundle:Default:pintaMenuLlista', {categoria_id: pagina.categoria.id, onlycategories: 1, arxiu: 1}) %}
 {% endblock %}
 
 {% block contenidor %}
@@ -11,5 +11,5 @@
 {% endblock %}
 
 {% block menuArxiu %}
-    {% render 'BlogBundle:Default:menuDretaArxiu' with {any_current : null, categoria_id : pagina.categoria.id, arxiu : pagina.categoria.slug } %}
+    {% render controller('BlogBundle:Default:menuDretaArxiu', {any_current: null, categoria_id: pagina.categoria.id, arxiu: pagina.categoria.slug }) %}
 {% endblock %}

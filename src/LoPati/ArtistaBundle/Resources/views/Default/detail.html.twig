@@ -5,7 +5,7 @@
 {% block estils %}<link href="{{ asset('/bundles/artista/css/artista.css') }}" rel="stylesheet" type="text/css"/>{% endblock %}
 
 {% block menu %}
-    {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id: pagina.categoria.id, subcategoria_id: pagina.subcategoria.id } %}
+    {% render controller("MenuBundle:Default:pintaMenuLlista", {categoria_id: pagina.categoria.id, subcategoria_id: pagina.subcategoria.id }) %}
 {% endblock %}
 
 {% block contenidor %}

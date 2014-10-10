@@ -1,28 +1,26 @@
-
 {% extends '::frontend.html.twig' %}
 
-
 {% block title %}{% endblock %}
+
 {% block menu %}
-  {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %} 
- {% endblock %}
+    {% render controller("MenuBundle:Default:pintaMenu", {id: null, llista: 0}) %}
+{% endblock %}
+
 {% block contenidor %}
-       {% if app.session.hasFlash('notice') %}      
-                             
-                            <div class="flash success">
-                                {{ app.session.flash('notice') }}
-                
-                            </div>                            
-       {% endif %}
-<div style="width: 100%; height: 30px; background: none;"></div>
-<div class="contenidor">
-
-<div class="continguts">
-
-            
-    <h5>{% trans %}confirm.eliminar{% endtrans %}</h5>
-    <p>{% trans %}confirm.text{% endtrans %}<a href="{{ url('newsletter_unsuscribe', { 'token': token }) }}"></p>        
- <button id="mp_newsletter_button_confirm" type="submit" ONCLICK="window.location.href='{{ url('newsletter_unsuscribe', { 'token': token }) }}'">{% trans %}borrar{% endtrans %}</button>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <div style="width: 100%; height: 30px; background: none;"></div>
+    <div class="contenidor">
+        <div class="continguts">
+            <h5>{% trans %}confirm.eliminar{% endtrans %}</h5>
+            <p>{% trans %}confirm.text{% endtrans %}<a href="{{ url('newsletter_unsuscribe', { 'token': token }) }}">
+            </p>
+            <button id="mp_newsletter_button_confirm" type="submit"
+                    onclick="window.location.href='{{ url('newsletter_unsuscribe', { 'token': token }) }}'">{% trans %}
+                borrar{% endtrans %}</button>
+        </div>
     </div>
-</div>
 {% endblock %}

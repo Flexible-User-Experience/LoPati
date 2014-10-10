@@ -16,44 +16,28 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new JMS\AopBundle\JMSAopBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
-        		
-        		new FOS\UserBundle\FOSUserBundle(),
-        		new Sonata\BlockBundle\SonataBlockBundle(),
-        		new Sonata\CacheBundle\SonataCacheBundle(),
-        		new Sonata\jQueryBundle\SonatajQueryBundle(),
-        		new Sonata\AdminBundle\SonataAdminBundle(),
-        		new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-
-        		new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
-        		new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-        		new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
-        		
-        		
-        		new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-        		
-        		new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-        	
-        		new Vich\UploaderBundle\VichUploaderBundle(),
-        		new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-        		
-        		new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-        		new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
-        		new Liip\ImagineBundle\LiipImagineBundle(),
-        		new Sonata\IntlBundle\SonataIntlBundle(),
-        		new FOQ\ElasticaBundle\FOQElasticaBundle(),
-        	
-        		
-        		
-        	
-        		
-        		
-        	new LoPati\BlogBundle\BlogBundle(),
-        	new LoPati\MenuBundle\MenuBundle(),
-        	new LoPati\NewsletterBundle\NewsletterBundle(),
-
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            // Custom Bundles
+            new LoPati\BlogBundle\BlogBundle(),
+            new LoPati\MenuBundle\MenuBundle(),
+            new LoPati\NewsletterBundle\NewsletterBundle(),
             new LoPati\AgendaBundle\AgendaBundle(),
             new LoPati\ArtistaBundle\ArtistaBundle(),
         );
@@ -69,6 +53,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

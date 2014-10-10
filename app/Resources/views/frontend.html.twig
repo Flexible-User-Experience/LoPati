@@ -1,108 +1,135 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="UTF-8" />
-	    <META NAME="keywords" CONTENT="art contemporani, xarxa centres arts visuals catalunya, amposta, terres de l'ebre, emergent, residencia artsites, paissatge, art urba, street,art, poesia, experimental, video, art digital, cultura contemprania, pensament, pedagogia, arte contemporaneo, coleccion, col·leccio, arxiu, archivo, mediateca, soriano montagut, carles santos">
-		<META NAME="description" CONTENT="Centre d'Art de les Terres de l'Ebre, amb seu a Amposta. Difusió, formació, producció, col·lecció i arxiu. Forma part de la Xarxa de Centres d'Arts Visuals de Catalunya.">
-		<title>Lo Pati | Centre d'Art - Terres de l'Ebre{% block title %}{% endblock %}</title>
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
-        {% block estils %}{% endblock %}
-        <script type="text/javascript" src="{{ asset('/bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
-    </head>
-	<body>
-		<div class="pagina">
-			<div class="cap">
-				<div class="logo">
-					<a href="{{ path ('portada') }}"><img src="{{ asset('/images/logo_lopati.png') }}" alt="Lo Pati - Centre d'Art  - Terres de l'Ebre" title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
-				</div>
-				<div class="logo">
-					<a href="{{ path ('portada') }}"><img src="/images/logo_lopati_2.png" alt="Lo Pati - Centre d'Art - Terres de l'Ebre" title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
-				</div>
-				<div class="logo">
-					<a href="{{ path ('portada') }}"><img src="/images/logo_bucle.gif" alt="Lo Pati - Centre d'Art - Terres de l'Ebre" title="Lo Pati - Centre d'Art  - Terres de l'Ebre"></a>
-				</div>
-			</div>
-			{% block menu %}{% endblock %}
-			{% block contenidor %}{% endblock %}
-			<div class="dreta">
-				<div class="destacats">
-					<div class="buscador">
-						<form name="buscador1" action="{{ path('search') }}" method="post">
-							<p style="width: 159px; float: left;"><input name="textabuscar" type="text" style="width: 154px; height: 18px; border: 1px solid #666; margin: 0px; padding: 0 2px;" value=""></p>
-							<p style="width: 21px; float: left; "><input type="image" style="margin: 0px 0px 0px 0px;" title="buscar" src="/images/boto10ca.png" alt="boto lupa per buscar"></p>
-						</form>
-					</div>
-					<div class="idiomes">
-						{% render 'BlogBundle:Default:menuIdioma' %}
-					</div>
-                    <div class="agenda">
-                        <div class="calendar-header">
-                            <div id="agenda_boto_esquerre">&#60;</div>
-                            <div id="agenda_boto_dret">&#62;</div>
-                        </div>
-                        <div class="calendar" id="calendari">{% render 'AgendaBundle:Default:calendari' %}</div>
-                    </div>
-					{% block menuArxiu %}{% endblock %}
-					<div id="newsletter" class="xarxes">
-						<h5 onclick="newsletter(this)">{% trans %}tr.newsletter{% endtrans %} <img style="width: 18px;margin-top: 1px;" src="/images/envelop.gif" alt="newsletter"/></h5>
-						{% render "NewsletterBundle:Default:form" %}
-					</div>
-					<div class="xarxes">			
-						<p>{% trans %}tr.follow{% endtrans %}:</p>
-						<div style="width:180px;height:22px;">
-                          <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook" title="facebook"></a>
-                          <a href="https://twitter.com/centreartlopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_tw.gif" alt="twitter" title="twitter"></a>
-						  <a href="http://www.vimeo.com/lopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_vimeo.gif" alt="vimeo" title="vimeo"></a>
-						  <a href="http://www.flickr.com/lopati" target="_blank"><img style="width: 18px;" onmouseover="mouseOverImgIcon(this);" onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_flickr.gif" alt="flickr" title="flickr"></a>
-                        </div>
-					</div>
-                    <div class="xarxes">
-                        <p>{% trans %}tr.linkslowercase{% endtrans %}:</p>
-                        <a href="http://aula.lopati.cat">l'aula al pati</a>
-                        <a href="http://www.bellescosesfalses.lopati.cat">relat de belles coses falses</a>
-                        <a href={{ path('irradiador_' ~ app.request.locale) }}>l'irradiador</a>
-                        <a href="http://riure.lopati.cat/#/1">riure#1</a>
-                    </div>
-				</div>
-			</div>
-		</div>
-	
-		{% render 'BlogBundle:Default:peu' %}
-
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('#agenda_boto_esquerre').click(function(){
-                    console.log("entra esquerre");
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
-                        success: function(data){
-                          $('#calendari').html(data);
-                        }
-                    });
-                });
-                $('#agenda_boto_dret').click(function(){
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ path('calendari',{'fletxa':'dreta'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
-                        success: function(data){ {#En data.items pasas el listado de eventos de ese mes#}
-                            $('#calendari').html(data);
-                        }
-                    });
-                });
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords"
+          content="art contemporani, xarxa centres arts visuals catalunya, amposta, terres de l'ebre, emergent, residencia artsites, paissatge, art urba, street,art, poesia, experimental, video, art digital, cultura contemprania, pensament, pedagogia, arte contemporaneo, coleccion, col·leccio, arxiu, archivo, mediateca, soriano montagut, carles santos">
+    <meta name="description"
+          content="Centre d'Art de les Terres de l'Ebre, amb seu a Amposta. Difusió, formació, producció, col·lecció i arxiu. Forma part de la Xarxa de Centres d'Arts Visuals de Catalunya.">
+    <title>Lo Pati | Centre d'Art - Terres de l'Ebre{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
+    {% block estils %}{% endblock %}
+    <script type="text/javascript" src="{{ asset('/bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
+</head>
+<body>
+<div class="pagina">
+    <div class="cap">
+        <div class="logo">
+            <a href="{{ path ('portada') }}"><img src="{{ asset('/images/logo_lopati.png') }}"
+                                                  alt="Lo Pati - Centre d'Art  - Terres de l'Ebre"
+                                                  title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
+        </div>
+        <div class="logo">
+            <a href="{{ path ('portada') }}"><img src="/images/logo_lopati_2.png"
+                                                  alt="Lo Pati - Centre d'Art - Terres de l'Ebre"
+                                                  title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
+        </div>
+        <div class="logo">
+            <a href="{{ path ('portada') }}"><img src="/images/logo_bucle.gif"
+                                                  alt="Lo Pati - Centre d'Art - Terres de l'Ebre"
+                                                  title="Lo Pati - Centre d'Art  - Terres de l'Ebre"></a>
+        </div>
+    </div>
+    {% block menu %}{% endblock %}
+    {% block contenidor %}{% endblock %}
+    <div class="dreta">
+        <div class="destacats">
+            <div class="buscador">
+                <form name="buscador1" action="{{ path('search') }}" method="post">
+                    <p style="width: 159px; float: left;"><input name="textabuscar" type="text"
+                                                                 style="width: 154px; height: 18px; border: 1px solid #666; margin: 0px; padding: 0 2px;"
+                                                                 value=""></p>
+                    <p style="width: 21px; float: left; "><input type="image" style="margin: 0px 0px 0px 0px;"
+                                                                 title="buscar" src="/images/boto10ca.png"
+                                                                 alt="boto lupa per buscar"></p>
+                </form>
+            </div>
+            <div class="idiomes">
+                {% render controller('BlogBundle:Default:menuIdioma') %}
+            </div>
+            <div class="agenda">
+                <div class="calendar-header">
+                    <div id="agenda_boto_esquerre">&#60;</div>
+                    <div id="agenda_boto_dret">&#62;</div>
+                </div>
+                <div class="calendar" id="calendari">{% render controller('AgendaBundle:Default:calendari') %}</div>
+            </div>
+            {% block menuArxiu %}{% endblock %}
+            <div id="newsletter" class="xarxes">
+                <h5 onclick="newsletter(this)">{% trans %}tr.newsletter{% endtrans %} <img
+                            style="width: 18px;margin-top: 1px;" src="/images/envelop.gif" alt="newsletter"/></h5>
+                {% render controller("NewsletterBundle:Default:form") %}
+            </div>
+            <div class="xarxes">
+                <p>{% trans %}tr.follow{% endtrans %}:</p>
+                <div style="width:180px;height:22px;">
+                    <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" target="_blank"><img
+                                style="width: 18px;" onmouseover="mouseOverImgIcon(this);"
+                                onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook"
+                                title="facebook"></a>
+                    <a href="https://twitter.com/centreartlopati" target="_blank"><img style="width: 18px;"
+                                                                                       onmouseover="mouseOverImgIcon(this);"
+                                                                                       onmouseout="mouseOutImgIcon(this);"
+                                                                                       src="/images/xarxa_tw.gif"
+                                                                                       alt="twitter"
+                                                                                       title="twitter"></a>
+                    <a href="http://www.vimeo.com/lopati" target="_blank"><img style="width: 18px;"
+                                                                               onmouseover="mouseOverImgIcon(this);"
+                                                                               onmouseout="mouseOutImgIcon(this);"
+                                                                               src="/images/xarxa_vimeo.gif" alt="vimeo"
+                                                                               title="vimeo"></a>
+                    <a href="http://www.flickr.com/lopati" target="_blank"><img style="width: 18px;"
+                                                                                onmouseover="mouseOverImgIcon(this);"
+                                                                                onmouseout="mouseOutImgIcon(this);"
+                                                                                src="/images/xarxa_flickr.gif"
+                                                                                alt="flickr" title="flickr"></a>
+                </div>
+            </div>
+            <div class="xarxes">
+                <p>{% trans %}tr.linkslowercase{% endtrans %}:</p>
+                <a href="http://aula.lopati.cat">l'aula al pati</a>
+                <a href="http://www.bellescosesfalses.lopati.cat">relat de belles coses falses</a>
+                <a href={{ path('irradiador_' ~ app.request.locale) }}>l'irradiador</a>
+                <a href="http://riure.lopati.cat/#/1">riure#1</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% render controller('BlogBundle:Default:peu') %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#agenda_boto_esquerre').click(function () {
+            console.log("entra esquerre");
+            $.ajax({
+                type: "GET",
+                url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
+                success: function (data) {
+                    $('#calendari').html(data);
+                }
             });
-            function mouseOverImgIcon(ev) {
-                var str = ev.src;
-                str = str.replace('.gif', '_color.gif');
-                ev.src = str;
-            }
-            function mouseOutImgIcon(ev) {
-                var str = ev.src;
-                str = str.replace('_color.gif', '.gif');
-                ev.src = str;
-            }
-        </script>
-	</body>
+        });
+        $('#agenda_boto_dret').click(function () {
+            $.ajax({
+                type: "GET",
+                url: "{{ path('calendari',{'fletxa':'dreta'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
+                success: function (data) { {#En data.items pasas el listado de eventos de ese mes#}
+                    $('#calendari').html(data);
+                }
+            });
+        });
+    });
+    function mouseOverImgIcon(ev) {
+        var str = ev.src;
+        str = str.replace('.gif', '_color.gif');
+        ev.src = str;
+    }
+    function mouseOutImgIcon(ev) {
+        var str = ev.src;
+        str = str.replace('_color.gif', '.gif');
+        ev.src = str;
+    }
+</script>
+</body>
 </html>

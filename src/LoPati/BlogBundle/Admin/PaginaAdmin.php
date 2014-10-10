@@ -10,6 +10,12 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaginaAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_page'       => 1,
+        '_sort_order' => 'ASC', // sort direction
+        '_sort_by'    => 'titol' // field name
+    );
+
     /**
      * Configure export formats
      *
@@ -32,16 +38,9 @@ class PaginaAdmin extends Admin
         $collection->remove('delete');
     }
 
-    protected $datagridValues = array(
-        '_page'       => 1,
-        '_sort_order' => 'ASC', // sort direction
-        '_sort_by'    => 'titol' // field name
-    );
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-
             ->add('tipus', 'choice', array('choices' => array('w' => 'Web', 'b' => 'Bloc'), 'required' => true,))
             ->add('titol', null, array('label' => 'Títol'))
             ->add(
@@ -61,10 +60,7 @@ class PaginaAdmin extends Admin
                     'label' => 'Descripció'
                 )
             )
-
             ->add('actiu', null, array('label' => 'Actiu ?', 'required' => false))
-            //->add('imgPetitaGris',null,array('required'  => false))
-            //->add('imgPetitaMagenta',null,array('required'  => false))
             ->add('categoria', 'sonata_type_model', array('label' => 'Menú primer nivell'), array())
             ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú segon nivell', 'required' => false))
             ->add(
@@ -88,15 +84,6 @@ class PaginaAdmin extends Admin
             ->add('video', 'url', array('required' => false))
             ->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
 
-            /*->add('images', 'collection', array(
-                    'type' => 'lo_pati_image',
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false
-            ))*/
-            /*->add('imagePetita', 'file', array('data_class' => 'Symfony\Component\HttpFoundation\File\File',
-                        'property_path' => 'imagePetita','required' => false))
-            ->add('imagePetitaName',null,array('required' => false))*/
             ->with('Imatge principal')
             ->add('imageGran1', 'file', array('label' => 'Arxiu', 'required' => false))
             ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
@@ -113,8 +100,6 @@ class PaginaAdmin extends Admin
             ->add('document1', 'file', array('label' => 'Arxiu 1', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
             ->add('titolDocument1', null, array('label' => 'Títol 1', 'required' => false))
-            //->end()
-
             ->add('document2', 'file', array('label' => 'Arxiu 2', 'required' => false))
             ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
             ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
@@ -133,7 +118,6 @@ class PaginaAdmin extends Admin
                     'label'    => 'Enllaços'
                 )
             )
-
             ->add('urlVimeo', null, array('required' => false, 'label' => 'URL video Vimeo'))
             ->add('urlFlickr', null, array('required' => false, 'label' => 'URL galeria Flickr'))
 
@@ -153,14 +137,14 @@ class PaginaAdmin extends Admin
             ->with('Traduccions')
             ->add(
                 'translations',
-                'a2lix_translations',
+                'a2lix_translations_gedmo',
                 array(
-                    'label'    => ' ',
-                    'required' => false,
-                    'fields'   => array( // [Optionnal] Fields configurations. If not, auto detection from translatable annotations
+                    'label'        => ' ',
+                    'required'     => false,
+                    'translatable_class' => 'LoPati\BlogBundle\Entity\Pagina',
+                    'fields'   => array(
                         'titol'            => array('label' => 'Títol'),
                         'resum'            => array(
-                            'type' => 'textarea',
                             'attr' => array(
                                 'style' => 'height:90px;width:480px;'
                             )
@@ -181,7 +165,6 @@ class PaginaAdmin extends Admin
                             )
                         ),
                     )
-
                 )
             )
             ->setHelps(
@@ -192,7 +175,7 @@ class PaginaAdmin extends Admin
                     'resum'                => 'Max: 300 caràcters',
                     'data_publicacio'      => 'Format: dd-MM-yyyy',
                     'data_caducitat'       => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy',
-                    'alwaysShowOnCalendar' => "Marcat es mostrarà sempre al calendari l'event, encara que sigui fora de l'horari del centre",
+                    'alwaysShowOnCalendar' => 'Marcat es mostrarà sempre al calendari l\'event, encara que sigui fora de l\'horari del centre',
                 )
             );
     }

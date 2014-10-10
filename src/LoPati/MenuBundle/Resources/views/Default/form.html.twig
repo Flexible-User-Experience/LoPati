@@ -1,33 +1,28 @@
 {% block a2lix_translations_widget %}
-	<link href="{{ asset('bundles/menu/css/menu.css') }}" rel="stylesheet" type="text/css" />
-	{% set locales = form.vars.locales %}
-	{% if fields is defined %}
-		{% set locales = form.vars.default_locale|merge(locales) %}
-	{% endif %}
-
-  <div class="a2lix_translationsTabsContents">
- 
-  	<ul class="a2lix_translationsTabsLocales">
-  		{% for locale in locales %}
-  			<li class="li_translation_tab_content" data-lang="{{ locale }}">
-  				<span class="span_translation_tab_content"><strong>{{ locale|capitalize }}</strong></span><br/>
-                {# Natives fields for default locale #}
-                {% if (fields is defined) and (form.vars.locale[0] == locale) %}
-                    {% for field in fields %}
-                    <div class="prova1">
-                        {{ form_row(field) }}
-                    </div>
+    <link href="{{ asset('bundles/menu/css/menu.css') }}" rel="stylesheet" type="text/css"/>
+    {% set locales = form.vars.locales %}
+    {% if fields is defined %}
+        {% set locales = form.vars.default_locale|merge(locales) %}
+    {% endif %}
+    <div class="a2lix_translationsTabsContents">
+        <ul class="a2lix_translationsTabsLocales">
+            {% for locale in locales %}
+                <li class="li_translation_tab_content" data-lang="{{ locale }}">
+                    <span class="span_translation_tab_content"><strong>{{ locale|capitalize }}</strong></span><br/>
+                    {# Natives fields for default locale #}
+                    {% if (fields is defined) and (form.vars.locale[0] == locale) %}
+                        {% for field in fields %}
+                            <div class="prova1">
+                                {{ form_row(field) }}
+                            </div>
                         {% endfor %}
-                    
-                {# Translations fields #}
-                {% else %}
-                    {% for translationsLocale in form if (translationsLocale.name == locale) %}
-                   
-                        {{ form_widget(translationsLocale) }}
-                        
-                    {% endfor %}
-                {% endif %}
-            </li>
+                    {# Translations fields #}
+                    {% else %}
+                        {% for translationsLocale in form if (translationsLocale.name == locale) %}
+                            {{ form_widget(translationsLocale) }}
+                        {% endfor %}
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -36,10 +31,8 @@
 {% block translationsLocale_widget %}
     {% for field in form %}
         <div class="traduccio">
-        {{ form_label(field) }}
-        {{ form_widget(field) }}
+            {{ form_label(field) }}
+            {{ form_widget(field) }}
         </div>
     {% endfor %}
 {% endblock %}
-
-

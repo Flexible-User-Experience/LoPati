@@ -5,6 +5,8 @@ app/bootstrap_cache.php.cache
 app/config/parameters.ini
 app/cache/*
 app/logs/*
+app/sessions/*
+!app/sessions/.gitkeep
 app/config/parameters.yml
 vendor/*
 web/bundles/*

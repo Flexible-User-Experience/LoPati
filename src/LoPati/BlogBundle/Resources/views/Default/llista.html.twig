@@ -2,59 +2,51 @@
 
 {% set categoria=null %}
 {% set subcategoria=null %}
+
 {% if pagines[0] %}
-	{% set categoria=pagines[0].categoria %}
-	{% set subcategoria=pagines[0].subcategoria.nom %}
+    {% set categoria=pagines[0].categoria %}
+    {% set subcategoria=pagines[0].subcategoria.nom %}
 {% endif %}
 
 {% block title %}: {{ categoria }} / {{ subcategoria }} {% endblock %}
 
-
 {% block menu %}
+    {% render controller("MenuBundle:Default:pintaMenuLlista", {categoria_id: categoria_id, subcategoria_id: subcategoria_id, onlycategories: 0, arxiu: 0}) %}
+{% endblock %}
 
-
- {% render "MenuBundle:Default:pintaMenuLlista" with {categoria_id:categoria_id, subcategoria_id:subcategoria_id,  onlycategories: 0, arxiu: 0 } %} 
- {% endblock %}
 {% block contenidor %}
-<div class="contenidor">
-       {% if app.session.hasFlash('notice') %}      
-                             
-                            <div class="flash success">
-                                {{ app.session.flash('notice') }}
-                            </div>                            
-       {% endif %}
-<div class="continguts">
-
-<div class="subopcions">
-<div class="contingut">
-
-{% if pagines %}
-<div class="separadorcontingutreg" ></div>
-{% endif %}
-
-
-{% for pagina in pagines %}
-
-<div class="contingutreg">
-				<a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>
-		
-			{% if pagina.imagePetitaName  %}
-				<img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width: 150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}' title='{{ pagina.titol }}'></a>
-			{% endif %}
-				
-				<p class="titol"><a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>{{ pagina.titol }}</a></p>
-			
-				{% if pagina.resum  %}
-				<p style='color: #000;'>{{ pagina.resum }}...</p>
-				{% endif %}
-							
-				<p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
-</div>  <!--  contingutreg -->
-					<div class="separadorcontingutreg"></div>
-
-{% endfor %}
-</div>
-</div>
-</div>
-</div>
-{%  endblock %}
+    <div class="contenidor">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <div class="continguts">
+            <div class="subopcions">
+                <div class="contingut">
+                    {% if pagines %}
+                        <div class="separadorcontingutreg"></div>
+                    {% endif %}
+                    {% for pagina in pagines %}
+                        <div class="contingutreg">
+                            <a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>
+                                {% if pagina.imagePetitaName %}
+                                <img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width:
+                                150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}'
+                                title='{{ pagina.titol }}'></a>
+                            {% endif %}
+                            <p class="titol"><a
+                                        href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>{{ pagina.titol }}</a>
+                            </p>
+                            {% if pagina.resum %}
+                                <p style='color: #000;'>{{ pagina.resum }}...</p>
+                            {% endif %}
+                            <p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
+                        </div>  <!--  contingutreg -->
+                        <div class="separadorcontingutreg"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

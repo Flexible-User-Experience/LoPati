@@ -1,114 +1,99 @@
 {% if arxiu == 1 %}
-<div class="categories"> 
-		
-		
-	<ul>
-
-
-		{% for categoria in categories %}
-
-	
-				{% if  categoria.link == null %} {# categoria no te enllaç #}
-					
-					{% if categoria.arxiu == 0 %}
-					
-						{% if categoria.subcategoria[0].llista == 0 %}
-									{% if categoria_id is sameas(categoria.subcategoria[0].link) %}
-																<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu : 1, titol: categoria, llista: 0} %} </span></li>
-								
-									{% else %}	
-																<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0 } %} </span></li>
-									{% endif %}
-						{% else %}
-						
-									{% if categoria.id == categoria_id %}
-											<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu : 1, titol: categoria, llista: 1} %}</span></li>
-									{% else %}
-											<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu : 0, titol: categoria, llista: 1} %}</span></li>
-									
-									{% endif %}			
-						{% endif %}
-						
-					{% else %}
-					
-									
-									
-											<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 6, actiu : 1, titol: categoria, llista: 1} %} </span></li>
-								
-					{% endif %}
-				{% else %}
-
-		
-						{% if categoria.arxiu == 1%}
-			
-							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0} %} </span></li>
-						{% else %}	
-					
-					<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0} %} </span></li>
-						{% endif %}
-				{%  endif %}
-		{% endfor %}		
-
-			
-	</ul>
-</div>
-
+    <div class="categories">
+        <ul>
+            {% for categoria in categories %}
+                {% if  categoria.link == null %} {# categoria no te enllaç #}
+                    {% if categoria.arxiu == 0 %}
+                        {% if categoria.subcategoria[0].llista == 0 %}
+                            {% if categoria_id is sameas(categoria.subcategoria[0].link) %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 1, titol: categoria, llista: 0}) %}</span>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0}) %}</span>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            {% if categoria.id == categoria_id %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 5, actiu: 1, titol: categoria, llista: 1}) %}</span>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 5, actiu: 0, titol: categoria, llista: 1}) %}</span>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 6, actiu: 1, titol: categoria, llista: 1}) %}</span>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% if categoria.arxiu == 1 %}
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0}) %}</span>
+                        </li>
+                    {% else %}
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0}) %}</span>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 {% else %}
-
-<div class="categories"> 
-		
-		
-	<ul>
-
-
-		{% for categoria in categories %}
-
-	
-				{% if  categoria.link == null %} {# categoria no te enllaç #}
-					
-					{% if categoria.arxiu == 0 %}
-					
-						{% if categoria.subcategoria[0].llista == 0 %}
-									{% if categoria_id is sameas(categoria.subcategoria[0].link) %}
-																<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu : 1, titol: categoria, llista: 0} %} </span></li>
-								
-									{% else %}	
-																<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0 } %} </span></li>
-									{% endif %}
-						{% else %}
-						
-									{% if categoria.id == categoria_id %}
-											<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu : 1, titol: categoria, llista: 1} %}</span></li>
-									{% else %}
-											<li><span>{% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 5, actiu : 0, titol: categoria, llista: 1} %}</span></li>
-									
-									{% endif %}			
-						{% endif %}
-						
-					{% else %}
-					
-									{% if categoria.id == categoria_id %}
-									
-											<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 6, actiu : 1, titol: categoria, llista: 1} %} </span></li>
-									{% else %}
-											<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: null, tipus: 6, actiu : 0, titol: categoria, llista: 1} %} </span></li>
-									
-									{% endif %}
-					{% endif %}
-				{% else %}
-
-		
-						{% if categoria_id == categoria.id %}
-			
-							<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0} %} </span></li>
-						{% else %}	
-					
-					<li><span> {% render "MenuBundle:Default:creaLink" with {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0} %} </span></li>
-						{% endif %}
-				{%  endif %}
-		{% endfor %}		
-
-			
-	</ul>
-</div>
+    <div class="categories">
+        <ul>
+            {% for categoria in categories %}
+                {% if  categoria.link == null %} {# categoria no te enllaç #}
+                    {% if categoria.arxiu == 0 %}
+                        {% if categoria.subcategoria[0].llista == 0 %}
+                            {% if categoria_id is sameas(categoria.subcategoria[0].link) %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 1, titol: categoria, llista: 0}) %}</span>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.subcategoria[0].link.id, tipus: 1, actiu: 0, titol: categoria, llista: 0}) %}</span>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            {% if categoria.id == categoria_id %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 5, actiu: 1, titol: categoria, llista: 1}) %}</span>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 5, actiu: 0, titol: categoria, llista: 1}) %}</span>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if categoria.id == categoria_id %}
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 6, actiu: 1, titol: categoria, llista: 1}) %}</span>
+                            </li>
+                        {% else %}
+                            <li>
+                                <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 6, actiu: 0, titol: categoria, llista: 1}) %}</span>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {% if categoria_id == categoria.id %}
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.link.id, tipus: 2, actiu: 1, titol: categoria, llista: 0}) %}</span>
+                        </li>
+                    {% else %}
+                        <li>
+                            <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: categoria.link.id, tipus: 2, actiu: 0, titol: categoria, llista: 0}) %}</span>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}

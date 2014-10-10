@@ -23,7 +23,6 @@ class NewsletterSend
 	 */
 	private $id;
 	
-	
 	/**
      * @var NewsletterUser
      *

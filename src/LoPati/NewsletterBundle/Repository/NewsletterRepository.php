@@ -22,5 +22,3 @@ class NewsletterRepository extends EntityRepository
 		return $query->getSingleResult();
 	}
 }
-
-
