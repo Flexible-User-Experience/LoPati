@@ -16,13 +16,10 @@
                                 {{ form_row(field) }}
                             </div>
                         {% endfor %}
-
-                        {# Translations fields #}
+                    {# Translations fields #}
                     {% else %}
                         {% for translationsLocale in form if (translationsLocale.name == locale) %}
-
                             {{ form_widget(translationsLocale) }}
-
                         {% endfor %}
                     {% endif %}
                 </li>

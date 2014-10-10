@@ -4,7 +4,7 @@ imports:
 
 # Symfony
 framework:
-    translator:      { fallback: %locale% }
+    translator:      { fallback: "%locale%" }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -13,7 +13,7 @@ framework:
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
-    default_locale:  %locale%
+    default_locale:  "%locale%"
     session:
         name:       lopati_session
         handler_id: session.handler.native_file
@@ -72,7 +72,7 @@ stof_doctrine_extensions:
 
 # A2lix
 a2lix_translation_form:
-    default_locale: ca
+    default_required: false
     locales: [ en, es ]
 
 # Sonata Admin
@@ -83,10 +83,6 @@ sonata_admin:
         layout: BlogBundle:Admin:my_standard_layout.html.twig
         dashboard: BlogBundle:Admin:my_dashboard.html.twig
         user_block: BlogBundle:Admin:my_user_block.html.twig
-#        ajax: SonataAdminBundle::ajax_layout.html.twig
-#        list: SonataAdminBundle:CRUD:list.html.twig
-#        show: SonataAdminBundle:CRUD:show.html.twig
-#        edit: SonataAdminBundle:CRUD:edit.html.twig
     dashboard:
         groups:
             Menús:

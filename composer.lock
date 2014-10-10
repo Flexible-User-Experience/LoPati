@@ -4,54 +4,69 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fea0d34e81dabd3ecab1d84ca07b5a75",
+    "hash": "7bf5dcbc5a8f94c14329fc36f6771ca3",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
-            "version": "0.3.9",
+            "version": "1.3",
             "target-dir": "A2lix/TranslationFormBundle",
             "source": {
                 "type": "git",
-                "url": "http://github.com/a2lix/TranslationFormBundle",
-                "reference": "0.3.9"
+                "url": "https://github.com/a2lix/TranslationFormBundle.git",
+                "reference": "7f0f33af0863275791c96b18f7c1d78bf5a290c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/a2lix/TranslationFormBundle/zipball/0.3.9",
-                "reference": "0.3.9",
+                "url": "https://api.github.com/repos/a2lix/TranslationFormBundle/zipball/7f0f33af0863275791c96b18f7c1d78bf5a290c0",
+                "reference": "7f0f33af0863275791c96b18f7c1d78bf5a290c0",
                 "shasum": ""
             },
             "require": {
-                "stof/doctrine-extensions-bundle": "dev-master"
+                "symfony/symfony": ">=2.3"
+            },
+            "suggest": {
+                "a2lix/i18n-doctrine-bundle": "For A2lix strategy",
+                "knplabs/doctrine-behaviors": "For Knp strategy",
+                "stof/doctrine-extensions-bundle": "For Gedmo strategy"
             },
             "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "A2lix\\TranslationFormBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "A2lix",
-                    "homepage": "http://www.a2lix.fr"
+                    "homepage": "http://a2lix.fr"
                 },
                 {
                     "name": "David ALLIX"
                 }
             ],
-            "description": "Translation field to use with Translatable Doctrine extension",
+            "description": "Translate your doctrine objects easily with a custom form field",
             "homepage": "https://github.com/a2lix/TranslationFormBundle",
             "keywords": [
+                "Symfony2",
                 "doctrine2",
                 "form",
                 "gedmo",
+                "i18n",
+                "internationalization",
+                "knplabs",
                 "translatable",
                 "translation"
             ],
-            "time": "2012-09-26 05:03:25"
+            "time": "2013-12-17 18:40:49"
         },
         {
             "name": "doctrine/annotations",
@@ -2743,20 +2758,21 @@
         },
         {
             "name": "stof/doctrine-extensions-bundle",
-            "version": "dev-master",
+            "version": "v1.1.0",
+            "target-dir": "Stof/DoctrineExtensionsBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "2ff8473e33e224af87dc00d48a552a35a75115af"
+                "reference": "0aa21137bcae43241ffa047946bbdd46b91a2b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/2ff8473e33e224af87dc00d48a552a35a75115af",
-                "reference": "2ff8473e33e224af87dc00d48a552a35a75115af",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/0aa21137bcae43241ffa047946bbdd46b91a2b0a",
+                "reference": "0aa21137bcae43241ffa047946bbdd46b91a2b0a",
                 "shasum": ""
             },
             "require": {
-                "gedmo/doctrine-extensions": "~2.3.1",
+                "gedmo/doctrine-extensions": "2.3.*",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.1"
             },
@@ -2767,12 +2783,12 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Stof\\DoctrineExtensionsBundle\\": ""
+                "psr-0": {
+                    "Stof\\DoctrineExtensionsBundle": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2800,7 +2816,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-09-30 08:24:40"
+            "time": "2013-06-23 16:53:41"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3447,9 +3463,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "stof/doctrine-extensions-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"
