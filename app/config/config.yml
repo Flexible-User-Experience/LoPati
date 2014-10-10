@@ -89,9 +89,9 @@ sonata_admin:
 #        edit: SonataAdminBundle:CRUD:edit.html.twig
     dashboard:
         groups:
-            Menú:
+            Menús:
             Pàgines:
-            Arxiu:
+            Arxius:
             Newsletters:
             Artistes:
             Configuracions:
@@ -243,6 +243,10 @@ liip_imagine:
             quality: 70
             filters:
                 thumbnail: { size: [50, null], mode: outbound }
+        thumb_imatge_admin_list_view:
+            quality: 70
+            filters:
+                thumbnail: { size: [100, null], mode: outbound }
         imatge_pagina_newsletter:
             quality: 80
             filters:
