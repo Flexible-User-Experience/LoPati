@@ -27,7 +27,7 @@ class NewsletterAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('numero', null, array('label' => 'Nº newsletter'))
+            ->add('numero', null, array('label' => 'Núm. newsletter'))
             ->add(
                 'dataNewsletter',
                 'date',
@@ -45,7 +45,7 @@ class NewsletterAdmin extends Admin
     protected function configureListFields(ListMapper $mapper)
     {
         $mapper
-            ->addIdentifier('numero', null, array('label' => 'nº newsletter'))
+            ->addIdentifier('numero', null, array('label' => 'Núm. newsletter'))
             ->addIdentifier(
                 'dataNewsletter',
                 null,
@@ -78,7 +78,6 @@ class NewsletterAdmin extends Admin
                     'template' => 'NewsletterBundle:Admin:list_custom_fiEnviament_field.html.twig'
                 )
             )
-
             ->add(
                 '_action',
                 'actions',

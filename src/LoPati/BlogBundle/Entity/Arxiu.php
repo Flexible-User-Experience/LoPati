@@ -1,11 +1,11 @@
 <?php
+
 namespace LoPati\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -136,7 +136,7 @@ class Arxiu
 
     public function __toString()
     {
-        return $this->getAny();
+        return $this->id ? $this->getAny() : '---';
     }
 
     /**

@@ -155,7 +155,7 @@ class NewsletterUser
     /**
      * Set created
      *
-     * @param date $created
+     * @param \DateTime $created
      */
     public function setCreated($created)
     {
@@ -165,7 +165,7 @@ class NewsletterUser
     /**
      * Get created
      *
-     * @return date
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -188,9 +188,9 @@ class NewsletterUser
     }
 
     /**
-     * Get created
+     * Get fail
      *
-     * @return date
+     * @return \DateTime
      */
     public function getFail()
     {
@@ -199,7 +199,6 @@ class NewsletterUser
 
     public function __toString()
     {
-
-        return $this->email;
+        return $this->email ? $this->email : '---';
     }
 }
