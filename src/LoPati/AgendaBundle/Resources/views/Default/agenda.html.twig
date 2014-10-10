@@ -4,7 +4,7 @@
 
 
 {% block menu %}
-    {% render "MenuBundle:Default:pintaMenu" with {id: null, llista: 0} %}
+    {% render controller("MenuBundle:Default:pintaMenu", {id: null, llista: 0}) %}
 </div>
 {% endblock %}
 

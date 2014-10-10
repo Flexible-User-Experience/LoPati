@@ -1,12 +1,11 @@
 {% extends '::frontend.html.twig' %}
 
 {% block title %}: {{ pagina.titol }}{% endblock %}
+
 {% block menu %}
- {% render "MenuBundle:Default:pintaMenu" with {id: id} %} 
- {% endblock %}
+    {% render controller("MenuBundle:Default:pintaMenu", {id: id}) %}
+{% endblock %}
+
 {% block contenidor %}
-	
-
-{% include 'BlogBundle:Default:blog.html.twig' with {'pagina': pagina} %}
-
-{%  endblock %}
+    {% include 'BlogBundle:Default:blog.html.twig' with {'pagina': pagina} %}
+{% endblock %}
