@@ -16,11 +16,11 @@
 
 {% block contenidor %}
     <div class="contenidor">
-        {% if app.session.flashbag.has('notice') %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
             <div class="flash success">
-                {{ app.session.flashbag.get('notice') }}
+                {{ flashMessage }}
             </div>
-        {% endif %}
+        {% endfor %}
         <div class="continguts">
             <div class="subopcions">
                 <div class="contingut">

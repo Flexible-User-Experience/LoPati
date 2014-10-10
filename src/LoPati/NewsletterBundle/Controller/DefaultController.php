@@ -110,7 +110,7 @@ class DefaultController extends Controller
                     'text/html'
                 );
             $this->get('mailer')->send($message);
-            $this->get('session')->setFlash(
+            $this->get('session')->getFlashBag()->add(
                 'notice',
                 $this->get('translator')->trans('suscribe.confirmation.enhorabona')
             );
@@ -218,7 +218,7 @@ class DefaultController extends Controller
             $em->remove($user);
             $em->flush();
 
-            $this->get('session')->setFlash(
+            $this->get('session')->getFlashBag()->add(
                 'notice',
                 $this->get('translator')->trans('unsuscribe.confirmation.enhorabona')
             );
