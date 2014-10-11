@@ -1,0 +1,7 @@
+parameters:
+#    lo_pati_admin.example.class: LoPati\AdminBundle\Example
+
+services:
+#    lo_pati_admin.example:
+#        class: %lo_pati_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new LoPati\NewsletterBundle\NewsletterBundle(),
             new LoPati\AgendaBundle\AgendaBundle(),
             new LoPati\ArtistaBundle\ArtistaBundle(),
+            new LoPati\AdminBundle\AdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
