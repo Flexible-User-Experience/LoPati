@@ -1,22 +1,22 @@
 services:
 
   sonata.lopati.admin.categoria:
-    class: LoPati\MenuBundle\Admin\CategoriaAdmin
+    class: LoPati\AdminBundle\Admin\CategoriaAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, group: 'Menús', label: primer nivell }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\Categoria
-      - MenuBundle:Admin
+      - AdminBundle:Admin
 
   sonata.lopati.admin.subcategoria:
-    class: LoPati\MenuBundle\Admin\SubCategoriaAdmin
+    class: LoPati\AdminBundle\Admin\SubCategoriaAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, group: 'Menús', label: segon nivell }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\SubCategoria
-      - MenuBundle:Admin
+      - AdminBundle:Admin
 
   sonata.lopati.admin.pagina:
     class: LoPati\AdminBundle\Admin\PaginaAdmin
