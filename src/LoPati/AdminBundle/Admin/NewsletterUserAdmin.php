@@ -51,7 +51,7 @@ class NewsletterUserAdmin extends Admin
                     'required' => true,
                 )
             )
-            ->add('active', null, array('label' => 'Actiu', 'required' => false))//->add('fail')
+            ->add('active', null, array('label' => 'Actiu', 'required' => false))
         ;
     }
 
