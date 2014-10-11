@@ -1,4 +1,5 @@
 <?php
+
 namespace LoPati\ArtistaBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -13,5 +14,4 @@ class ArtistaRepository extends EntityRepository
                             ORDER BY a.name');
         return $query->getResult();
     }
-
 }
