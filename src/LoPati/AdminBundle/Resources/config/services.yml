@@ -24,7 +24,7 @@ services:
       - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: pàgina }
     arguments:
       - null
-      - LoPati\AdminBundle\Entity\Pagina
+      - LoPati\BlogBundle\Entity\Pagina
       - AdminBundle:Admin
 
   sonata.lopati.admin.arxiu:
@@ -33,7 +33,7 @@ services:
       - { name: sonata.admin, manager_type: orm, group: 'Arxius', label: arxiu }
     arguments:
       - null
-      - LoPati\AdminBundle\Entity\Arxiu
+      - LoPati\BlogBundle\Entity\Arxiu
       - AdminBundle:Admin 
 
   sonata.lopati.admin.configuracio:
@@ -42,7 +42,7 @@ services:
       - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: peu de pàgina }
     arguments:
       - null
-      - LoPati\AdminBundle\Entity\Configuracio
+      - LoPati\BlogBundle\Entity\Configuracio
       - AdminBundle:Admin
 
   sonata.lopati.admin.configuracio.dies.laborals.agenda:
@@ -51,7 +51,7 @@ services:
       - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: dies laborals agenda }
     arguments:
       - null
-      - LoPati\AdminBundle\Entity\ConfiguracioDiesLaboralsAgenda
+      - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
       - AdminBundle:Admin
 
   sonata.lopati.admin.newsletteruser:
@@ -73,10 +73,10 @@ services:
       - NewsletterBundle:Admin
 
   sonata.lopati.admin.artista:
-    class: LoPati\ArtistaBundle\Admin\ArtistaAdmin
+    class: LoPati\AdminBundle\Admin\ArtistaAdmin
     tags:
       - { name: sonata.admin, manager_type: orm, group: 'Artistes', label: artista }
     arguments:
       - null
       - LoPati\ArtistaBundle\Entity\Artista
-      - ArtistaBundle:Admin
+      - AdminBundle:Admin
