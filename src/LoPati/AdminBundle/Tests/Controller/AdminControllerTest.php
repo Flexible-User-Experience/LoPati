@@ -1,6 +1,6 @@
 <?php
 
-namespace LoPati\BlogBundle\Tests\Controller;
+namespace LoPati\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -10,7 +10,6 @@ class AdminControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/admin/login');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }

@@ -2,8 +2,10 @@
 
 namespace LoPati\BlogBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use LoPati\BlogBundle\Entity\Pagina;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use LoPati\MenuBundle\Util\Util;
+use LoPati\Utilities\Utils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
 
@@ -56,7 +58,8 @@ class DefaultController extends Controller
         $this->getRequest()->setLocale($_locale);
         $this->get('session')->get('_locale');
         $this->get('session')->set('_locale', $_locale);
-        $em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery(
             'SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
                         WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC'
@@ -78,11 +81,12 @@ class DefaultController extends Controller
 
     public function paginaAction($id)
     {
-        $em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
+        $em = $this->getDoctrine()->getManager();
+        /** @var Pagina $pagina */
         $pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
         $tipus_video = null;
         if ($pagina->getVideo()) {
-            $tipus_video = Util::getVideo($pagina->getVideo());
+            $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
         return $this->render(
@@ -93,6 +97,7 @@ class DefaultController extends Controller
 
     public function arbre_de_contingutAction()
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT c FROM MenuBundle:Categoria c WHERE c.actiu = true ORDER BY c.ordre');
         $categories = $query->getResult();
@@ -102,8 +107,8 @@ class DefaultController extends Controller
 
     public function peuAction()
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        //$categories = $em->getRepository('MenuBundle:Categoria')->findAll();
         $query = $em->createQuery('SELECT c FROM BlogBundle:Configuracio c WHERE c.id =1');
         $configuracio = $query->getOneOrNullResult();
 
@@ -112,14 +117,8 @@ class DefaultController extends Controller
 
     public function llistaAction($categoria, $subcategoria, $categoria_id, $subcategoria_id)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        /*
-            $consulta= $em->createQuery('SELECT p FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu
-                    AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND p.data_caducitat >= :data ORDER BY p.data_publicacio DESC');*/
-
-
-        /*$consulta= $em->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN c.subCategoria sub WHERE p.actiu = :actiu
-                AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat >= :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC ');*/
         $consulta = $em->createQuery(
             'SELECT p, cat, sub FROM BlogBundle:Pagina p JOIN p.categoria cat JOIN p.subCategoria sub WHERE p.actiu = :actiu
                             AND p.categoria = :categoria AND p.subCategoria = :subCategoria AND ((p.data_caducitat > :data) OR (p.data_caducitat IS NULL)) ORDER BY p.data_publicacio DESC '
@@ -153,11 +152,12 @@ class DefaultController extends Controller
 
     public function articleAction($id)
     {
-        $em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
+        $em = $this->getDoctrine()->getManager();
+        /** @var Pagina $pagina */
         $pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
         $tipus_video = null;
         if ($pagina->getVideo()) {
-            $tipus_video = Util::getVideo($pagina->getVideo());
+            $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
         return $this->render(
@@ -168,7 +168,8 @@ class DefaultController extends Controller
 
     public function arxiuAction($categoria_id, $arxiu)
     {
-        $em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery(
             'SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL
                             AND  ar.imagePetitaName IS NOT NULL 	ORDER BY ar.any DESC '
@@ -188,11 +189,8 @@ class DefaultController extends Controller
 
     public function arxiuLlistaAnyAction($any, $categoria_id, $arxiu)
     {
-        $em = $this->getDoctrine()->getManager(); //per  poder fer fer consultes a la base de dades
-        /*	$consulta= $em->createQuery('SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu
-                    ORDER BY ar.any DESC ');
-            $consulta->setParameter('actiu','1');
-            $anys = $consulta->getResult();*/
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery(
             'SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu
                             AND ar.any = :any'
@@ -200,7 +198,6 @@ class DefaultController extends Controller
         $consulta->setParameter('actiu', '1');
         $consulta->setParameter('any', $any);
         $any = $consulta->getSingleResult();
-
         $consulta2 = $em->createQuery(
             'SELECT p FROM BlogBundle:Pagina p WHERE p.data_caducitat <= :avui
                             AND p.actiu = :actiu AND p.data_publicacio BETWEEN :data1 AND :data2 ORDER BY p.data_publicacio DESC'
@@ -229,10 +226,11 @@ class DefaultController extends Controller
     public function arxiuArticleAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var Pagina $pagina */
         $pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
         $tipus_video = null;
         if ($pagina->getVideo()) {
-            $tipus_video = Util::getVideo($pagina->getVideo());
+            $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
         return $this->render(
@@ -247,6 +245,7 @@ class DefaultController extends Controller
 
     public function menuDretaArxiuAction($any_current = null, $categoria_id, $arxiu)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $consulta = $em->createQuery(
             'SELECT ar FROM BlogBundle:Arxiu ar WHERE ar.actiu = :actiu AND ar.imagePetita2Name IS NOT NULL AND ar.imagePetitaName IS NOT NULL ORDER BY ar.any DESC'

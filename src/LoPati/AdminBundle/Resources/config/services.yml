@@ -1,0 +1,82 @@
+services:
+
+  sonata.lopati.admin.categoria:
+    class: LoPati\AdminBundle\Admin\CategoriaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: primer nivell }
+    arguments:
+      - null
+      - LoPati\MenuBundle\Entity\Categoria
+      - AdminBundle:Admin
+
+  sonata.lopati.admin.subcategoria:
+    class: LoPati\AdminBundle\Admin\SubCategoriaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: segon nivell }
+    arguments:
+      - null
+      - LoPati\MenuBundle\Entity\SubCategoria
+      - AdminBundle:Admin
+
+  sonata.lopati.admin.pagina:
+    class: LoPati\AdminBundle\Admin\PaginaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: pàgina }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Pagina
+      - AdminBundle:Admin
+
+  sonata.lopati.admin.arxiu:
+    class: LoPati\AdminBundle\Admin\ArxiuAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Arxius', label: arxiu }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Arxiu
+      - AdminBundle:Admin 
+
+  sonata.lopati.admin.configuracio:
+    class: LoPati\AdminBundle\Admin\ConfiguracioAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: peu de pàgina }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\Configuracio
+      - AdminBundle:Admin
+
+  sonata.lopati.admin.configuracio.dies.laborals.agenda:
+    class: LoPati\AdminBundle\Admin\ConfiguracioDiesLaboralsAgendaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: dies laborals agenda }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
+      - AdminBundle:Admin
+
+  sonata.lopati.admin.newsletteruser:
+    class: LoPati\AdminBundle\Admin\NewsletterUserAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: usuari }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\NewsletterUser
+      - AdminBundle:NewsletterUserAdmin
+
+  sonata.lopati.admin.newsletter:
+    class: LoPati\AdminBundle\Admin\NewsletterAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: butlletí }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\Newsletter
+      - AdminBundle:NewsletterAdmin
+
+  sonata.lopati.admin.artista:
+    class: LoPati\AdminBundle\Admin\ArtistaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Artistes', label: artista }
+    arguments:
+      - null
+      - LoPati\ArtistaBundle\Entity\Artista
+      - AdminBundle:Admin

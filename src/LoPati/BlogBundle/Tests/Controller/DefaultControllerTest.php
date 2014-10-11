@@ -6,19 +6,37 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testHomepage()
+    public function testInici()
     {
         $client = static::createClient();
         $client->request('GET', '/');
-
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testHomepageCa()
+    public function testPortada()
     {
         $client = static::createClient();
         $client->request('GET', '/ca/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $client->request('GET', '/es/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $client->request('GET', '/en/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $client->request('GET', '/xx/');
+        $this->assertTrue($client->getResponse()->isNotFound());
+    }
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    public function testCategoriaEnllas()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/ca/projectes/18/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+
+    public function testArxiuArticle()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/ca/arxiu/2013/fet-a-balada/136/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }

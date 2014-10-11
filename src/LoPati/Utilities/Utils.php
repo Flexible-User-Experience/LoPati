@@ -29,9 +29,9 @@ class Utils
             return 'noviembre';
         } else if ($monthValue == 12) {
             return 'diciembre';
-        } else {
-            return 'indefinido';
         }
+
+        return 'indefinido';
     }
 
     static public function getSlug($cadena, $separador = '-') 
@@ -88,6 +88,32 @@ class Utils
         $slug = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $slug);
         $slug = strtolower(trim($slug, $separador));
         $slug = preg_replace("/[\/_|+ -]+/", $separador, $slug);
+
         return $slug;
+    }
+
+    static public function getVideo($video) {
+        $tipus_video = parse_url($video);
+        if (($tipus_video["host"] == "vimeo.com") || ($tipus_video["host"] == "www.vimeo.com")) {
+            $tipus_video["path"];
+            $video2 = '<br><iframe class="videovimeo" src="http://player.vimeo.com/video' . $tipus_video["path"] . '"?title=0&amp;byline=0&amp;portrait=0" frameborder="0"></iframe><br>';
+
+            return $video2;
+        } elseif (($tipus_video["host"] == "youtube.com") || ($tipus_video["host"] == "www.youtube.com") || ($tipus_video["host"] == "youtu.be" )) {
+            if ($tipus_video["host"] == "youtu.be" ){
+                $out = $tipus_video["path"];
+                $video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'	. $out . '" frameborder="0" allowfullscreen></iframe><br>';
+
+                return $video2;
+            } else {
+                parse_str($tipus_video["query"], $output);
+                $out = $output['v'];
+                $video2 = '<br><iframe class="videoyoutube" src="http://www.youtube.com/embed/'	. $out . '" frameborder="0" allowfullscreen></iframe><br>';
+
+                return $video2;
+            }
+        }
+
+        return null;
     }
 }

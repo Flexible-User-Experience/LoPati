@@ -1,40 +1,44 @@
-div.translations_tabs { margin-left: 160px }
+div.translations_tabs {
+    margin-left: 160px
+}
 
-ul.translations_tabs_content { margin: 0 }
+ul.translations_tabs_content {
+    margin: 0
+}
 
 li.li_translation_tab_content {
-  list-style-type: none;
-  margin-bottom: 10px;
+    list-style-type: none;
+    margin-bottom: 10px;
 }
 
 li.li_translation_tab_content div {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 li.li_translation_tab_content div label.control-label {
-  margin-right: 20px;
+    margin-right: 20px;
 }
+
 span.span_translation_tab_content {
-  float: left;
-  padding-top: 5px;
-  margin: 0 0 5px 0;
+    float: left;
+    padding-top: 5px;
+    margin: 0 0 5px 0;
 }
 
 input[type="text"].input_translation_tab_content {
-  margin-left: 20px;
-  display:block;
-  margin-bottom:20px;
-}
-input[type="text"].input_translation_tab_content2 {
-	margin-top:20px;
-  margin-left: 20px;
-  display:block;
-  margin-bottom:20px;
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 20px;
 }
 
-.imatge_admin{
-	
-	margin-left: 200px;
-	margin-bottom: 35px;
-	
+input[type="text"].input_translation_tab_content2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.imatge_admin {
+    margin-left: 200px;
+    margin-bottom: 35px;
 }

@@ -8,7 +8,7 @@ use LoPati\ArtistaBundle\Entity\Translation\ArtistaTranslation;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use LoPati\MenuBundle\Util\Util;
+use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -189,7 +189,7 @@ class Artista {
 	}
 	
 	public function getSlug() {
-		return Util::getSlug($this->name);
+		return Utils::getSlug($this->name);
 	}
 	
 	/**

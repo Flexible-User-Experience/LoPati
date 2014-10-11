@@ -1,10 +1,9 @@
 <?php
+
 namespace LoPati\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use LoPati\MenuBundle\Util\Util;
 
 /**
  * @ORM\Entity
@@ -58,6 +57,7 @@ class ConfiguracioDiesLaboralsAgenda {
      * Set workingDay1
      *
      * @param integer $workingDay1
+     *
      * @return ConfiguracioDiesLaboralsAgenda
      */
     public function setWorkingDay1($workingDay1)
@@ -81,6 +81,7 @@ class ConfiguracioDiesLaboralsAgenda {
      * Set name
      *
      * @param string $name
+     *
      * @return ConfiguracioDiesLaboralsAgenda
      */
     public function setName($name)

@@ -1,8 +1,12 @@
-artista:
-    resource: "@ArtistaBundle/Resources/config/routing.yml"
+BlogBundle:
+    resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /
 
-agenda:
+MenuBundle:
+    resource: "@MenuBundle/Resources/config/routing.yml"
+    prefix:   /
+
+AgendaBundle:
     resource: "@AgendaBundle/Resources/config/routing.yml"
     prefix:   /
 
@@ -10,21 +14,14 @@ NewsletterBundle:
     resource: "@NewsletterBundle/Resources/config/routing.yml"
     prefix:   /
 
-    
-BlogBundle:
-    resource: "@BlogBundle/Resources/config/routing.yml"
+ArtistaBundle:
+    resource: "@ArtistaBundle/Resources/config/routing.yml"
     prefix:   /
-    
-MenuBundle:
-    resource: "@MenuBundle/Resources/config/routing.yml"
+
+AdminBundle:
+    resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /
 
 _imagine:
     resource: .
     type:     imagine
-    
-
-# Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
