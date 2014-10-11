@@ -1,6 +1,6 @@
 <?php
 
-namespace LoPati\BlogBundle\Admin;
+namespace LoPati\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
