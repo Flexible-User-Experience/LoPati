@@ -4,7 +4,7 @@ namespace LoPati\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use LoPati\MenuBundle\Entity\Translation\CategoriaTranslation;
-use LoPati\MenuBundle\Util\Util;
+use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use LoPati\BlogBundle\Entity\Pagina;
@@ -118,7 +118,7 @@ class Categoria {
 
     public function getSlug()
     {
-    	return Util::getSlug($this->nom);
+    	return Utils::getSlug($this->nom);
     }
     
     /**

@@ -1,11 +1,12 @@
 <?php
+
 namespace LoPati\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use LoPati\BlogBundle\Entity\Translation\ConfiguracioTranslation;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use LoPati\MenuBundle\Util\Util;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -162,16 +163,20 @@ class Configuracio {
     
     /**
      * Set translations
+     *
      * @param ArrayCollection $translations
-     * @return Product
+     *
+     * @return $this
      */
     public function setTranslations($translations) {
     	$this->translations = $translations;
+
     	return $this;
     }
     
     /**
      * Get translations
+     *
      * @return ArrayCollection
      */
     public function getTranslations() {
@@ -180,9 +185,10 @@ class Configuracio {
     
     /**
      * Add translation
-     * @param ProductTranslation
+     *
+     * @param ConfiguracioTranslation $translation
      */
-    public function addTranslation($translation) {
+    public function addTranslation(ConfiguracioTranslation $translation) {
     	if ($translation->getContent()) {
     		$translation->setObject($this);
     		$this->translations->add($translation);
@@ -196,6 +202,7 @@ class Configuracio {
     public function removeTranslation($translation) {
     	$this->translations->removeElement($translation);
     }
+
     public function __toString(){
     	return "Configuració";
     	

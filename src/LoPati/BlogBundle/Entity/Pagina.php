@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use LoPati\MenuBundle\Util\Util;
+use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 use LoPati\MenuBundle\Entity\Categoria;
 use LoPati\MenuBundle\Entity\SubCategoria;
@@ -240,8 +240,8 @@ class Pagina {
      */
     private $updated;
 
+    private $arxiu;
 
-	
 	public function getVideo() {
 		return $this->video;
 	}
@@ -395,17 +395,19 @@ class Pagina {
 		$this->imagePetita2Name=$filename;
 	}
 	public function __construct() {
-		$this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->translations = new ArrayCollection();
 	}
 	
 	public function getSlug() {
-		return Util::getSlug($this->titol);
+		return Utils::getSlug($this->titol);
 	}
 	
 	/**
 	 * Set translations
+     *
 	 * @param ArrayCollection $translations
-	 * @return Product
+     *
+	 * @return $this
 	 */
 	public function setTranslations($translations) {
 		$this->translations = $translations;

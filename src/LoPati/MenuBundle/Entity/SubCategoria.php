@@ -5,7 +5,7 @@ namespace LoPati\MenuBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use LoPati\MenuBundle\Entity\Translation\SubCategoriaTranslation;
-use LoPati\MenuBundle\Util\Util;
+use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use LoPati\BlogBundle\Entity\Pagina;
@@ -112,7 +112,7 @@ class SubCategoria {
     public function setNom($nom)
     {
         $this->nom = $nom;
-        $this->slug = Util::getSlug($nom);
+        $this->slug = Utils::getSlug($nom);
     }
 
     /**
@@ -212,7 +212,7 @@ class SubCategoria {
     
     public function getSlug()
     {
-    	return Util::getSlug($this->nom);
+    	return Utils::getSlug($this->nom);
     }
     
     /**
