@@ -25,4 +25,11 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET', '/xx/');
         $this->assertTrue($client->getResponse()->isNotFound());
     }
+
+    public function testCategoriaEnllas()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/ca/projectes/18');
+        $this->assertEquals(301, $client->getResponse()->getStatusCode());
+    }
 }
