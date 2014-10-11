@@ -1,9 +1,11 @@
 <?php
-namespace LoPati\NewsletterBundle\Controller;
+
+namespace LoPati\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class NewsletterUserAdminController extends Controller

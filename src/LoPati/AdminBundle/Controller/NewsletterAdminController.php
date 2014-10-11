@@ -1,16 +1,20 @@
 <?php
-namespace LoPati\NewsletterBundle\Controller;
+namespace LoPati\AdminBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdminController extends Controller
+class NewsletterAdminController extends Controller
 {
     public function enviarAction($id)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        /** @var Newsletter $news */
         $news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
         if ($news->getEstat() == null) {
             $news->setEstat('Waiting');
