@@ -57,12 +57,12 @@ class ArxiuAdmin extends Admin
             ->add(
                 'imagePetitaName',
                 null,
-                array('label' => 'Imatge any', 'template' => 'BlogBundle:Admin:customarxiuimglistfield.html.twig')
+                array('label' => 'Imatge any', 'template' => 'AdminBundle:Admin:customarxiuimglistfield.html.twig')
             )
             ->add(
                 'imagePetita2Name',
                 null,
-                array('label' => 'Imatge any vermell', 'template' => 'BlogBundle:Admin:customarxiuredimglistfield.html.twig')
+                array('label' => 'Imatge any vermell', 'template' => 'AdminBundle:Admin:customarxiuredimglistfield.html.twig')
             )
             ->add(
                 '_action',

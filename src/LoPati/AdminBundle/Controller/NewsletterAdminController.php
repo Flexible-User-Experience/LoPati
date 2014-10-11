@@ -68,7 +68,7 @@ class NewsletterAdminController extends Controller
 
         //$object->getId();
         return $this->render(
-            'NewsletterBundle:Admin:preview.html.twig',
+            'AdminBundle:Newsletter:preview.html.twig',
             array(
                 'id'                       => $id,
                 'host'                     => $host,

@@ -52,14 +52,14 @@ class NewsletterAdmin extends Admin
                 null,
                 array(
                     'label'    => 'Data newsletter',
-                    'template' => 'NewsletterBundle:Admin:list_custom_dataNewsletter_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_dataNewsletter_field.html.twig'
                 )
             )
             ->add('test')
             ->add(
                 'estat',
                 null,
-                array('label' => 'Estat', 'template' => 'NewsletterBundle:Admin:list_custom_estat_field.html.twig')
+                array('label' => 'Estat', 'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig')
             )
             ->add('enviats')
             ->add('subscrits')
@@ -68,7 +68,7 @@ class NewsletterAdmin extends Admin
                 null,
                 array(
                     'label'    => 'Inici enviament',
-                    'template' => 'NewsletterBundle:Admin:list_custom_iniciEnviament_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_iniciEnviament_field.html.twig'
                 )
             )
             ->add(
@@ -76,7 +76,7 @@ class NewsletterAdmin extends Admin
                 null,
                 array(
                     'label'    => 'Fi enviament',
-                    'template' => 'NewsletterBundle:Admin:list_custom_fiEnviament_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_fiEnviament_field.html.twig'
                 )
             )
             ->add(
@@ -85,13 +85,13 @@ class NewsletterAdmin extends Admin
                 array(
                     'actions' => array(
                         'preview' => array(
-                            'template' => 'NewsletterBundle:Admin:previewLink.html.twig'
+                            'template' => 'AdminBundle:Newsletter:previewLink.html.twig'
                         ),
                         'test'    => array(
-                            'template' => 'NewsletterBundle:Admin:testLink.html.twig'
+                            'template' => 'AdminBundle:Newsletter:testLink.html.twig'
                         ),
                         'enviar'  => array(
-                            'template' => 'NewsletterBundle:Admin:enviar.html.twig'
+                            'template' => 'AdminBundle:Newsletter:enviar.html.twig'
                         ),
 
                     ),
