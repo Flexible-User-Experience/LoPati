@@ -29,18 +29,14 @@ class DefaultControllerTest extends WebTestCase
     public function testCategoriaEnllas()
     {
         $client = static::createClient();
-        $client->request('GET', '/ca/projectes/18');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
-        $client->request('GET', '/ca/projectes/666');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/ca/projectes/18/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
     public function testArxiuArticle()
     {
         $client = static::createClient();
-        $client->request('GET', '/ca/arxiu/2013/fet-a-balada/136');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
-        $client->request('GET', '/ca/arxiu/2013/fet-a-balada/666');
-        $this->assertEquals(301, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/ca/arxiu/2013/fet-a-balada/136/');
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }
