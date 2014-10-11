@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4994e0f4c8bc8513395f66eafb25b95b",
+    "hash": "7bf5dcbc5a8f94c14329fc36f6771ca3",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",

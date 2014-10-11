@@ -19,25 +19,3 @@ monolog:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
             level: debug
-
-fos_elastica:
-    clients:
-        default: { host: localhost, port: %port_elastica% }
-    indexes:
-        website:
-            client: default
-            types:
-                pagines:
-                    mappings:
-                        titol: { boost: 5 }
-                        descripcio: { boost: 3 }
-                        translatedTitleEs: { boost: 5 }
-                        translatedDescripcioEs: { boost: 3 }
-                        translatedTitleEn: { boost: 5 }
-                        translatedDescripcioEn: { boost: 3 }
-                    persistence:
-                        driver: orm
-                        model: LoPati\BlogBundle\Entity\Pagina
-                        provider:
-                        listener:
-                        finder:
