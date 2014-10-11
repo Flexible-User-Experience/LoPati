@@ -28,7 +28,9 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
         "sonata-project/user-bundle" : "2.2.*",
         "sonata-project/intl-bundle" : "2.2.*",
-        "friendsofsymfony/elastica-bundle": "3.0.*"
+        "friendsofsymfony/elastica-bundle": "3.0.*",
+        "raulfraile/ladybug-bundle": "1.0.*",
+        "cypresslab/gitelephant-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -154,25 +154,21 @@ vich_uploader:
     db_driver: orm
     mappings:
         imatge:
-            uri_prefix: /uploads/images
+            uri_prefix:         /uploads/images
             upload_destination: %kernel.root_dir%/../web/uploads/images
-            inject_on_load: false
-            delete_on_remove: true
+            namer:              vich_uploader.namer_uniqid
         pdf:
-            uri_prefix: /uploads/documents
+            uri_prefix:         /uploads/documents
             upload_destination: %kernel.root_dir%/../web/uploads/documents
-            inject_on_load: false
-            delete_on_remove: true
+            namer:              vich_uploader.namer_origname
         artista:
-            uri_prefix: /uploads/artists
+            uri_prefix:         /uploads/artists
             upload_destination: %kernel.root_dir%/../web/uploads/artists
-            inject_on_load: false
-            delete_on_remove: true
+            namer:              vich_uploader.namer_uniqid
         artistapdf:
-            uri_prefix: /uploads/artists/cv
+            uri_prefix:         /uploads/artists/cv
             upload_destination: %kernel.root_dir%/../web/uploads/artists/cv
-            inject_on_load: false
-            delete_on_remove: true
+            namer:              vich_uploader.namer_origname
 
 # Liip Imagine
 liip_imagine:
