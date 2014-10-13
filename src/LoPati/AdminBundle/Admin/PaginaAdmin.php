@@ -85,7 +85,7 @@ class PaginaAdmin extends Admin
             ->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
 
             ->with('Imatge principal')
-            ->add('imageGran1', 'file', array('label' => 'Arxiu', 'required' => false))
+            ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false))
             ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('peuImageGran1', null, array('label' => 'Peu imatge', 'required' => false))
 
@@ -97,10 +97,10 @@ class PaginaAdmin extends Admin
             ->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
 
             ->with('Documents adjunts')
-            ->add('document1', 'file', array('label' => 'Arxiu 1', 'required' => false))
+            ->add('document1', 'file', array('label' => 'Document 1', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
             ->add('titolDocument1', null, array('label' => 'Títol 1', 'required' => false))
-            ->add('document2', 'file', array('label' => 'Arxiu 2', 'required' => false))
+            ->add('document2', 'file', array('label' => 'Document 2', 'required' => false))
             ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
             ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
 
