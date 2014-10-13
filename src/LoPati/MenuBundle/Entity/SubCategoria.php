@@ -12,7 +12,7 @@ use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\MenuBundle\Entity\Categoria;
 
 /**
- * @ORM\Table(name="subcategoria")
+ * @ORM\Table(name="SubCategoria")
  * @ORM\Entity(repositoryClass="LoPati\MenuBundle\Repository\SubCategoriaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\MenuBundle\Entity\Translation\SubCategoriaTranslation")
  */

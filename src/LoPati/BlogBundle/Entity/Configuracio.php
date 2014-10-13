@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="configuracio")
+ * @ORM\Table(name="Configuracio")
  * @ORM\Entity
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\ConfiguracioTranslation")
  * @ORM\HasLifecycleCallbacks

@@ -12,7 +12,7 @@ use LoPati\MenuBundle\Entity\SubCategoria;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Table(name="categoria")
+ * @ORM\Table(name="Categoria")
  * @ORM\Entity(repositoryClass="LoPati\MenuBundle\Repository\CategoriaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\MenuBundle\Entity\Translation\CategoriaTranslation")
  */

@@ -9,7 +9,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="arxiu")
+ * @ORM\Table(name="Arxiu")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
