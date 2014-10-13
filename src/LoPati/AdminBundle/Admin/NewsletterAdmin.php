@@ -62,7 +62,7 @@ class NewsletterAdmin extends Admin
                 array('label' => 'Estat', 'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig')
             )
             ->add('enviats')
-            ->add('subscrits')
+            ->add('subscrits', null, array('label' => 'Subscriptors'))
             ->add(
                 'iniciEnviament',
                 null,

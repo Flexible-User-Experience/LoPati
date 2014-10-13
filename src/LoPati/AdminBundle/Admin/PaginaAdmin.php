@@ -60,7 +60,7 @@ class PaginaAdmin extends Admin
                     'label' => 'Descripció'
                 )
             )
-            ->add('actiu', null, array('label' => 'Actiu ?', 'required' => false))
+            ->add('actiu', null, array('label' => 'Activa ?', 'required' => false))
             ->add('categoria', 'sonata_type_model', array('label' => 'Menú primer nivell'), array())
             ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú segon nivell', 'required' => false))
             ->add(
@@ -193,7 +193,7 @@ class PaginaAdmin extends Admin
             ->add('categoria', null, array('label' => 'Menú primer nivell'))
             ->add('subcategoria', null, array('label' => 'Menú segon nivell'))
             ->add('portada', 'boolean', array('label' => 'És portada', 'editable' => true))
-            ->add('actiu', 'boolean', array('editable' => true))
+            ->add('actiu', 'boolean', array('label' => 'Activa', 'editable' => true))
             ->add(
                 '_action',
                 'actions',
