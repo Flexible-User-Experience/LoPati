@@ -25,18 +25,6 @@ class SliderAdmin extends Admin
         return array();
     }
 
-    /**
-     * Configure route collection
-     *
-     * @param RouteCollection $collection collection
-     *
-     * @return mixed
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -68,6 +56,7 @@ class SliderAdmin extends Admin
                 array(
                     'actions' => array(
                         'edit' => array(),
+                        'delete' => array(),
                     ),
                     'label'   => 'Accions'
                 )
