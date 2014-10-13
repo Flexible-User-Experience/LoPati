@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * LoPati\NewsletterBundle\Entity\NewsletterSend
  *
- * @ORM\Table(name="newslettersend")
+ * @ORM\Table(name="newsletterSend")
  * @ORM\Entity
  * @UniqueEntity({"user","newsletter"})
  */
