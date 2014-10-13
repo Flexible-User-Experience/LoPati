@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field%}
+    <div style="text-align:center">
+        {% if object.created %}
+            {{ object.created | date("d/m/Y H:i:s") }}
+        {% else %}
+            ---
+        {% endif %}
+    </div>
+{% endblock %}

@@ -194,7 +194,16 @@ class PaginaAdmin extends Admin
             ->add('subcategoria', null, array('label' => 'Menú segon nivell'))
             ->add('portada', 'boolean', array('label' => 'És portada', 'editable' => true))
             ->add('actiu', 'boolean', array('editable' => true))
-        ;
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'edit' => array(),
+                    ),
+                    'label'   => 'Accions'
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

@@ -64,6 +64,7 @@ class ArxiuAdmin extends Admin
                 null,
                 array('label' => 'Imatge any vermell', 'template' => 'AdminBundle:Admin:customarxiuredimglistfield.html.twig')
             )
+            ->add('actiu', 'boolean', array('editable' => true))
             ->add(
                 '_action',
                 'actions',
