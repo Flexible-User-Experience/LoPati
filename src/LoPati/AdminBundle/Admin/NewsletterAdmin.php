@@ -93,7 +93,7 @@ class NewsletterAdmin extends Admin
                         'enviar'  => array(
                             'template' => 'AdminBundle:Newsletter:enviar.html.twig'
                         ),
-
+                        'edit' => array(),
                     ),
                     'label'   => 'Accions'
                 )
