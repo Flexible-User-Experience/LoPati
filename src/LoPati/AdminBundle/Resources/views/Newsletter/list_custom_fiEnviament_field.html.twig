@@ -1,10 +1,9 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
-{% block field%}
-
-        <div>
+{% block field %}
+    <div style="text-align:center">
         {% if object.fiEnviament %}
-        {{ object.fiEnviament | date('d/m/Y H:i:s') }}
+            {{ object.fiEnviament | date('d/m/Y H:i:s') }}
         {% endif %}
     </div>
 {% endblock %}

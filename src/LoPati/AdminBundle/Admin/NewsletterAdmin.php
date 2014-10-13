@@ -46,12 +46,12 @@ class NewsletterAdmin extends Admin
     protected function configureListFields(ListMapper $mapper)
     {
         $mapper
-            ->addIdentifier('numero', null, array('label' => 'Núm. newsletter'))
-            ->addIdentifier(
+            ->addIdentifier('numero', null, array('label' => 'Núm.'))
+            ->add(
                 'dataNewsletter',
                 null,
                 array(
-                    'label'    => 'Data newsletter',
+                    'label'    => 'Data',
                     'template' => 'AdminBundle:Newsletter:list_custom_dataNewsletter_field.html.twig'
                 )
             )

@@ -1,8 +1,11 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field%}
-
-        <div>
-        {{ object.dataNewsletter | date('d-m-Y') }}        	 
+    <div style="text-align:center">
+        {% if object.dataNewsletter %}
+            {{ object.dataNewsletter | date("d/m/Y") }}
+        {% else %}
+            ---
+        {% endif %}
     </div>
 {% endblock %}
