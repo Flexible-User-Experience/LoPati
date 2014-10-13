@@ -113,10 +113,20 @@ class ArtistaAdmin extends Admin
         $mapper
             ->add('id')
             ->addIdentifier('name', null, array('label' => 'Nom'))
-            ->add('category', null, array('label' => 'Especialitat'))
-            ->add('city', null, array('label' => 'Ciutat'))
-            ->add('year', null, array('label' => 'Any'))
-            ->add('webpage', null, array('label' => 'Web'))
-            ->add('active', null, array('label' => 'Actiu'));
+            ->add('category', null, array('label' => 'Especialitat', 'editable' => true))
+            ->add('city', null, array('label' => 'Ciutat', 'editable' => true))
+            ->add('year', null, array('label' => 'Any', 'editable' => true))
+            ->add('webpage', null, array('label' => 'Web', 'editable' => true))
+            ->add('active', 'boolean', array('label' => 'Actiu', 'editable' => true))
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'edit' => array(),
+                    ),
+                    'label'   => 'Accions'
+                )
+            );
     }
 }

@@ -70,9 +70,7 @@ class ArxiuAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        //'view' => array(),
                         'edit' => array(),
-                        //'delete' => array(),
                     ),
                     'label'   => 'Accions'
                 )
