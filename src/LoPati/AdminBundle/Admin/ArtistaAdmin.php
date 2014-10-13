@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -128,5 +129,16 @@ class ArtistaAdmin extends Admin
                     'label'   => 'Accions'
                 )
             );
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('category', null, array('label' => 'Especialitat'))
+            ->add('city', null, array('label' => 'Ciutat'))
+            ->add('year', null, array('label' => 'Any'))
+            ->add('webpage', null, array('label' => 'Web'))
+            ->add('active', null, array('label' => 'Actiu'));
     }
 }

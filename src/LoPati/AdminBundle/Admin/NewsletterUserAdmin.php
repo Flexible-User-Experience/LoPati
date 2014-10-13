@@ -74,7 +74,6 @@ class NewsletterUserAdmin extends Admin
             ->addIdentifier('email')
             ->add('groups', null, array('label' => 'Grups'))
             ->add('idioma')
-//            ->add('token')
             ->add('fail', null, array('label' => 'Enviaments erronis'))
             ->add('active', 'boolean', array('label' => 'Actiu', 'editable' => true))
             ->add(
@@ -94,6 +93,7 @@ class NewsletterUserAdmin extends Admin
     {
         $datagridMapper
             ->add('email')
+            ->add('groups', null, array('label' => 'Grup'))
             ->add('active', null, array('label' => 'Actiu'))
             ->add('created', null, array('label' => 'Data Alta'));
     }

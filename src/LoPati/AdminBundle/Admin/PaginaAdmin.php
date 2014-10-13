@@ -61,8 +61,8 @@ class PaginaAdmin extends Admin
                 )
             )
             ->add('actiu', null, array('label' => 'Activa ?', 'required' => false))
-            ->add('categoria', 'sonata_type_model', array('label' => 'Menú primer nivell'), array())
-            ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú segon nivell', 'required' => false))
+            ->add('categoria', 'sonata_type_model', array('label' => 'Menú 1er nivell'), array())
+            ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú 2on nivell', 'required' => false))
             ->add(
                 'data_publicacio',
                 'date',
@@ -190,8 +190,8 @@ class PaginaAdmin extends Admin
                 array('label' => 'Data publicació', 'template' => 'AdminBundle:Admin:list_custom_date_field.html.twig')
             )
             ->addIdentifier('titol', null, array('label' => 'Títol'))
-            ->add('categoria', null, array('label' => 'Menú primer nivell'))
-            ->add('subcategoria', null, array('label' => 'Menú segon nivell'))
+            ->add('categoria', null, array('label' => 'Menú 1er nivell'))
+            ->add('subcategoria', null, array('label' => 'Menú 2on nivell'))
             ->add('portada', 'boolean', array('label' => 'És portada', 'editable' => true))
             ->add('actiu', 'boolean', array('label' => 'Activa', 'editable' => true))
             ->add(
@@ -209,11 +209,11 @@ class PaginaAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('titol')
-            ->add('actiu')
-            ->add('portada')
-            ->add('data_publicacio')
-            ->add('categoria')
-            ->add('subCategoria');
+            ->add('titol', null, array('label' => 'Títol'))
+            ->add('actiu', null, array('label' => 'Activa'))
+            ->add('portada', null, array('label' => 'És portada'))
+            ->add('data_publicacio', null, array('label' => 'Data publicació'))
+            ->add('categoria', null, array('label' => 'Menú 1er nivell'))
+            ->add('subCategoria', null, array('label' => 'Menú 2on nivell'));
     }
 }
