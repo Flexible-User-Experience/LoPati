@@ -20,9 +20,8 @@ class Newsletter
 {
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina")
-     * @ORM\OrderBy({"id" = "DESC"})
+     * @ORM\OrderBy({"id"="DESC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
-     *
      */
     protected $pagines;
 
@@ -78,6 +77,12 @@ class Newsletter
      * @ORM\Column(name="test", type="boolean", nullable=true)
      */
     private $test = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterGroup", inversedBy="newsletters")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=true)
+     */
+    protected $group;
 
     /**
      * Constructor
@@ -206,6 +211,30 @@ class Newsletter
     public function setTest($created)
     {
         $this->test = $created;
+    }
+
+    /**
+     * Set Group
+     *
+     * @param mixed $group group
+     *
+     * @return $this
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get Group
+     *
+     * @return mixed
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 
     public function __toString()

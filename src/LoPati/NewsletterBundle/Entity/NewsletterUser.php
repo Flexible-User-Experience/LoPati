@@ -2,6 +2,7 @@
 
 namespace LoPati\NewsletterBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -59,11 +60,17 @@ class NewsletterUser
      */
     private $fail = 0;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterGroup", mappedBy="users")
+     */
+    protected $groups;
+
     public function __construct()
     {
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->active = false;
         $this->created = new \DateTime();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -195,6 +202,58 @@ class NewsletterUser
     public function getFail()
     {
         return $this->fail;
+    }
+
+    /**
+     * Set Groups
+     *
+     * @param mixed $groups groups
+     *
+     * @return $this
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Get Groups
+     *
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * Add group
+     *
+     * @param NewsletterGroup $group
+     *
+     * @return $this
+     */
+    public function addGroup(NewsletterGroup $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Remove group
+     *
+     * @param NewsletterGroup $group
+     *
+     * @return $this
+     */
+    public function removeGroup(NewsletterGroup $group)
+    {
+        $this->groups->removeElement($group);
+
+        return $this;
     }
 
     public function __toString()

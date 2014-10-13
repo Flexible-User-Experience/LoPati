@@ -54,6 +54,15 @@ services:
       - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
       - AdminBundle:Admin
 
+  sonata.lopati.admin.newslettergroup:
+    class: LoPati\AdminBundle\Admin\NewsletterGroupAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: grup }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\NewsletterGroup
+      - AdminBundle:Admin
+
   sonata.lopati.admin.newsletteruser:
     class: LoPati\AdminBundle\Admin\NewsletterUserAdmin
     tags:

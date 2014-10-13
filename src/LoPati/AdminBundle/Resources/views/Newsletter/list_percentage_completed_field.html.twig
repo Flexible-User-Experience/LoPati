@@ -1,0 +1,19 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field%}
+    <div>
+        {% if object.estat %}
+            {% set percentage = (object.enviats / object.subscrits) * 100 %}
+            {% if percentage < 33 %}
+                {% set color = 'danger' %}
+            {% elseif percentage >= 33 and percentage < 66 %}
+                {% set color = 'warning' %}
+            {% else %}
+                {% set color = 'success' %}
+            {% endif %}
+            <div class="progress">
+                <div class="bar bar-{{ color }}" style="width: {{ percentage }}%;">{{ percentage|round(0) }}%</div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
