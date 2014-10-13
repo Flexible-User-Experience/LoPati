@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="configuraciodieslaboralsagenda")
  * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\ConfiguracioDiesLaboralsAgendaRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class ConfiguracioDiesLaboralsAgenda {
 
