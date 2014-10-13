@@ -63,10 +63,10 @@ class CategoriaAdmin extends Admin
         $mapper
             //->add('id')
             ->addIdentifier('nom', null, array('label' => 'Nom'))
-            ->add('ordre')
             ->add('link', null, array('label' => 'Pàgina vinculada'))
-            ->add('actiu')
-            ->add('arxiu')
+            ->add('arxiu', 'boolean', array('editable' => true))
+            ->add('ordre', 'integer', array('editable' => true))
+            ->add('actiu', 'boolean', array('editable' => true))
             ->add(
                 '_action',
                 'actions',
