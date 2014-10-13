@@ -44,6 +44,17 @@ class NewsletterUserAdmin extends Admin
 
             ->add('email')
             ->add(
+                'groups',
+                'genemu_jqueryselect2_entity',
+                array(
+                    'label' => 'Grups',
+                    'class' => 'LoPati\NewsletterBundle\Entity\NewsletterGroup',
+                    'multiple' => true,
+                    'disabled' => true,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'idioma',
                 'choice',
                 array(
@@ -58,9 +69,10 @@ class NewsletterUserAdmin extends Admin
     protected function configureListFields(ListMapper $mapper)
     {
         $mapper
-            ->add('id')
+//            ->add('id')
             ->add('created', null, array('label' => 'Data alta', 'template' => 'AdminBundle:Admin:list_custom_created_datetime_field.html.twig'))
             ->addIdentifier('email')
+            ->add('groups', null, array('label' => 'Grups'))
             ->add('idioma')
 //            ->add('token')
             ->add('fail', null, array('label' => 'Enviaments erronis'))

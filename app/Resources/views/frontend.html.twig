@@ -104,7 +104,7 @@
             console.log("entra esquerre");
             $.ajax({
                 type: "GET",
-                url: "{{ path('calendari',{'fletxa':'esquerra'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
+                url: "{{ path('calendari',{'fletxa':'esquerra'}) }}",
                 success: function (data) {
                     $('#calendari').html(data);
                 }
@@ -113,8 +113,8 @@
         $('#agenda_boto_dret').click(function () {
             $.ajax({
                 type: "GET",
-                url: "{{ path('calendari',{'fletxa':'dreta'}) }}", {#Aqui genero la url con el bundle "friendsofsymfony/jsrouting-bundle"#}
-                success: function (data) { {#En data.items pasas el listado de eventos de ese mes#}
+                url: "{{ path('calendari',{'fletxa':'dreta'}) }}",
+                success: function (data) {
                     $('#calendari').html(data);
                 }
             });
