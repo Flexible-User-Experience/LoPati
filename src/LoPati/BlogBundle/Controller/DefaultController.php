@@ -102,7 +102,7 @@ class DefaultController extends Controller
         $query = $em->createQuery('SELECT c FROM MenuBundle:Categoria c WHERE c.actiu = true ORDER BY c.ordre');
         $categories = $query->getResult();
 
-        return $this->render('BlogBundle:Default:arbre_de_contingut.html.twig', array('categories' => $categories));
+        return $this->render('AdminBundle:Admin:arbre_de_contingut.html.twig', array('categories' => $categories));
     }
 
     public function peuAction()

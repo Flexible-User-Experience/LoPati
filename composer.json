@@ -30,6 +30,7 @@
         "sonata-project/intl-bundle" : "2.2.*",
         "friendsofsymfony/elastica-bundle": "3.0.*",
         "raulfraile/ladybug-bundle": "1.0.*",
+        "genemu/form-bundle": "2.2.*",
         "cypresslab/gitelephant-bundle": "dev-master"
     },
     "scripts": {

@@ -83,6 +83,7 @@ sonata_admin:
         layout:     AdminBundle:Admin:my_standard_layout.html.twig
         dashboard:  AdminBundle:Admin:my_dashboard.html.twig
         user_block: AdminBundle:Admin:my_user_block.html.twig
+        edit:       SonataAdminBundle:CRUD:edit.html.twig
     dashboard:
         groups:
             Menús:
@@ -230,6 +231,16 @@ fos_elastica:
                         provider:
                         listener:
                         finder:
+
+# Genemu
+genemu_form:
+    select2:
+        enabled: true
+        configs:
+            placeholder: Escull un valor
+            width: off
+            allowClear: true
+            minimumInputLength: 3
 
 parameters:
     newsleterEmailDestination1: "%newsleterTestEmailDestination1%"

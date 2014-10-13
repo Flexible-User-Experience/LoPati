@@ -42,6 +42,20 @@ class NewsletterGroupAdmin extends Admin
     {
         $formMapper
             ->add('name', null, array('label' => 'Nom'))
+            ->add('users', 'genemu_jqueryselect2_hidden', array(
+                    'configs' => array(
+                        'multiple' => true // Wether or not multiple values are allowed (default to false)
+                    )
+                ))
+//            ->add(
+//                'users',
+//                'genemu_jqueryselect2_entity',
+//                array(
+//                    'label' => 'Usuaris',
+//                    'class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser',
+//                    'multiple' => true,
+//                )
+//            )
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
         ;
     }

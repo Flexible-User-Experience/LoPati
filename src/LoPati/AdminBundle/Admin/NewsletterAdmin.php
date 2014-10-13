@@ -37,7 +37,7 @@ class NewsletterAdmin extends Admin
             ->add(
                 'pagines',
                 null,
-                array('label' => 'Pàgines', 'attr' => array('style' => 'width:500px; height:500px;'))
+                array('label' => 'Pàgines')
             )
             //->add('estat')
             ->setHelps(array('dataNewsletter' => 'Format: dd-MM-yyyy'));
