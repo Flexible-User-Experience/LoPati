@@ -65,6 +65,8 @@
                                                     <img class="imatge_admin" src="{{ vich_uploader_asset(object, 'image5File')| imagine_filter('thumb_imatge_pagina') }}"/>
                                                 {% elseif field_name == 'image6' and object.image6File is not empty %}
                                                     <img class="imatge_admin" src="{{ vich_uploader_asset(object, 'image6File')| imagine_filter('thumb_imatge_pagina') }}"/>
+                                                {% elseif field_name == 'image' and object.imageFile is not empty %}
+                                                    <img class="imatge_admin" src="{{ vich_uploader_asset(object, 'imageFile')| imagine_filter('thumb_imatge_pagina') }}"/>
                                                 {% endif %}
                                             {% endif %}
                                         {% endfor %}

@@ -64,8 +64,8 @@ class SliderImage
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
-     * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetitaName")
-     * @var File $imagePetita
+     * @Vich\UploadableField(mapping="slider", fileNameProperty="image")
+     * @var File $imageFile
      */
     protected $imageFile;
 

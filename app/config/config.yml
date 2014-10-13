@@ -87,6 +87,7 @@ sonata_admin:
     dashboard:
         groups:
             Menús:
+            Slider:
             Pàgines:
             Arxius:
             Newsletters:
@@ -170,6 +171,10 @@ vich_uploader:
             uri_prefix:         /uploads/artists/cv
             upload_destination: %kernel.root_dir%/../web/uploads/artists/cv
             namer:              vich_uploader.namer_origname
+        slider:
+            uri_prefix:         /uploads/slides
+            upload_destination: %kernel.root_dir%/../web/uploads/slides
+            namer:              vich_uploader.namer_uniqid
 
 # Liip Imagine
 liip_imagine:

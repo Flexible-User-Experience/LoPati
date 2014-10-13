@@ -89,3 +89,12 @@ services:
       - null
       - LoPati\ArtistaBundle\Entity\Artista
       - AdminBundle:Admin
+
+  sonata.lopati.admin.slider:
+    class: LoPati\AdminBundle\Admin\SliderAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Slider', label: slide }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\SliderImage
+      - AdminBundle:Admin
