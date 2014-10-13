@@ -20,9 +20,8 @@ class Newsletter
 {
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\BlogBundle\Entity\Pagina")
-     * @ORM\OrderBy({"id" = "DESC"})
+     * @ORM\OrderBy({"id"="DESC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
-     *
      */
     protected $pagines;
 
