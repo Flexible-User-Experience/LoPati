@@ -22,7 +22,7 @@ class NewsletterAdmin extends Admin
      */
     public function getExportFormats()
     {
-        return array('xls', 'csv');
+        return array();
     }
 
     protected function configureFormFields(FormMapper $formMapper)
