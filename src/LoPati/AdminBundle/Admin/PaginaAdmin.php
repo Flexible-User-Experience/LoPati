@@ -184,16 +184,17 @@ class PaginaAdmin extends Admin
     {
         $mapper
             ->add('id')
-            ->addIdentifier('titol', null, array('label' => 'Títol'))
-            ->add('portada', null, array('label' => 'És portada'))
-            ->add('actiu')
-            ->add('categoria', null, array('label' => 'Menú primer nivell'))
-            ->add('subcategoria', 'textarea', array('label' => 'Menú segon nivell'))
             ->add(
                 'data_publicacio',
                 null,
-                array('label' => 'Data publicació', 'template' => 'BlogBundle:Default:list_custom_date_field.html.twig')
-            );
+                array('label' => 'Data publicació', 'template' => 'AdminBundle:Admin:list_custom_date_field.html.twig')
+            )
+            ->addIdentifier('titol', null, array('label' => 'Títol'))
+            ->add('categoria', null, array('label' => 'Menú primer nivell'))
+            ->add('subcategoria', null, array('label' => 'Menú segon nivell'))
+            ->add('portada', 'boolean', array('label' => 'És portada', 'editable' => true))
+            ->add('actiu', 'boolean', array('editable' => true))
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
