@@ -34,6 +34,7 @@ class NewsletterAdmin extends Admin
                 'date',
                 array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
             )
+            ->add('group', null, array('label' => 'Grup'))
             ->add(
                 'pagines',
                 null,
@@ -55,14 +56,15 @@ class NewsletterAdmin extends Admin
                     'template' => 'AdminBundle:Newsletter:list_custom_dataNewsletter_field.html.twig'
                 )
             )
+            ->add('group', null, array('label' => 'Grup'))
             ->add('test')
             ->add(
                 'estat',
                 null,
                 array('label' => 'Estat', 'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig')
             )
-            ->add('enviats')
-            ->add('subscrits', null, array('label' => 'Subscriptors'))
+//            ->add('enviats')
+            ->add('subscrits', null, array('label' => 'Completat', 'template' => 'AdminBundle:Newsletter:list_percentage_completed_field.html.twig'))
             ->add(
                 'iniciEnviament',
                 null,

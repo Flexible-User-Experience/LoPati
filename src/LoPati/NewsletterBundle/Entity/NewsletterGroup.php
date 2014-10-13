@@ -42,11 +42,17 @@ class NewsletterGroup
     protected $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="LoPati\NewsletterBundle\Entity\Newsletter", mappedBy="group")
+     */
+    protected $newsletters;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->newsletters = new ArrayCollection();
     }
 
     /**
@@ -167,5 +173,57 @@ class NewsletterGroup
     public function __toString()
     {
         return $this->name ? $this->name : '---';
+    }
+
+    /**
+     * Set Newsletters
+     *
+     * @param mixed $newsletters newsletters
+     *
+     * @return $this
+     */
+    public function setNewsletters($newsletters)
+    {
+        $this->newsletters = $newsletters;
+
+        return $this;
+    }
+
+    /**
+     * Get Newsletters
+     *
+     * @return mixed
+     */
+    public function getNewsletters()
+    {
+        return $this->newsletters;
+    }
+
+    /**
+     * Add newsletter
+     *
+     * @param Newsletter $newsletter
+     *
+     * @return $this
+     */
+    public function addNewsletter(Newsletter $newsletter)
+    {
+        $this->newsletters[] = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Remove newsletter
+     *
+     * @param Newsletter $newsletter
+     *
+     * @return $this
+     */
+    public function removeNewsletter(Newsletter $newsletter)
+    {
+        $this->newsletters->removeElement($newsletter);
+
+        return $this;
     }
 }
