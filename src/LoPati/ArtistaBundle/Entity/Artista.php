@@ -12,6 +12,7 @@ use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ORM\Table(name="artista")
  * @ORM\Entity(repositoryClass="LoPati\ArtistaBundle\Repository\ArtistaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\ArtistaBundle\Entity\Translation\ArtistaTranslation")
  * @ORM\HasLifecycleCallbacks

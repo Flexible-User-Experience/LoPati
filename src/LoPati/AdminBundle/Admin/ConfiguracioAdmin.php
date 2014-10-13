@@ -123,18 +123,10 @@ class ConfiguracioAdmin extends Admin
     {
         $mapper
             //->addIdentifier('id')
-            ->add('adresa', null, array('label' => 'Adreça', 'template' => 'BlogBundle:Admin:customadresa.html.twig'))
-            ->add('horari', null, array('label' => 'Horari', 'template' => 'BlogBundle:Admin:customhorari.html.twig'))
-            ->add(
-                'organitza',
-                null,
-                array('label' => 'Organitza', 'template' => 'BlogBundle:Admin:customorganitza.html.twig')
-            )
-            ->add(
-                'colabora',
-                null,
-                array('label' => 'Col·labora', 'template' => 'BlogBundle:Admin:customcolabora.html.twig')
-            )
+            ->add('adresa', null, array('label' => 'Adreça', 'template' => 'AdminBundle:Admin:customadresa.html.twig'))
+            ->add('horari', null, array('label' => 'Horari', 'template' => 'AdminBundle:Admin:customhorari.html.twig'))
+            ->add('organitza', null, array('label' => 'Organitza', 'template' => 'AdminBundle:Admin:customorganitza.html.twig'))
+            ->add('colabora', null, array('label' => 'Col·labora', 'template' => 'AdminBundle:Admin:customcolabora.html.twig'))
             ->add(
                 '_action',
                 'actions',

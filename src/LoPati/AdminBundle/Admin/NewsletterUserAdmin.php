@@ -59,12 +59,23 @@ class NewsletterUserAdmin extends Admin
     {
         $mapper
             ->add('id')
+            ->add('created', null, array('label' => 'Data alta', 'template' => 'AdminBundle:Admin:list_custom_created_datetime_field.html.twig'))
             ->addIdentifier('email')
             ->add('idioma')
-            ->add('active', null, array('label' => 'Actiu'))
-            ->add('token')
-            ->add('fail')
-            ->add('created', null, array('label' => 'Data alta'));
+//            ->add('token')
+            ->add('fail', null, array('label' => 'Enviaments erronis'))
+            ->add('active', 'boolean', array('label' => 'Actiu', 'editable' => true))
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'edit' => array(),
+                    ),
+                    'label'   => 'Accions'
+                )
+            );
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

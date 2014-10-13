@@ -65,10 +65,10 @@ class SubCategoriaAdmin extends Admin
             //->addIdentifier('id')
             ->addIdentifier('nom', null, array('label' => 'Nom'))
             ->add('categoria', null, array('label' => 'Menú primer nivell'))
-            ->add('ordre')
-            ->add('actiu')
-            ->add('llista', null, array('label' => 'És llista'))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
+            ->add('llista', 'boolean', array('label' => 'És llista', 'editable' => true))
+            ->add('ordre', 'integer', array('editable' => true))
+            ->add('actiu', 'boolean', array('editable' => true))
             ->add(
                 '_action',
                 'actions',

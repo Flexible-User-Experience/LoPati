@@ -14,6 +14,7 @@ use LoPati\MenuBundle\Entity\Categoria;
 use LoPati\MenuBundle\Entity\SubCategoria;
 
 /**
+ * @ORM\Table(name="pagina")
  * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\PaginaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\PaginaTranslation")
  * @ORM\HasLifecycleCallbacks

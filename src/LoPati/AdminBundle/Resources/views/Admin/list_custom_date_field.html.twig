@@ -2,8 +2,8 @@
 
 {% block field%}
     <div style="text-align:center">
-        {% if object.dataNewsletter %}
-            {{ object.dataNewsletter | date("d/m/Y") }}
+        {% if object.dataPublicacio %}
+            {{ object.dataPublicacio | date("d/m/Y") }}
         {% else %}
             ---
         {% endif %}

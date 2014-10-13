@@ -37,19 +37,7 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
         $mapper
             ->add('id')
             ->add('name', null, array('label' => 'Dia'))
-            ->add('active', null, array('label' => 'És laboral?', 'editable' => true))
-            ->add(
-                '_action',
-                'actions',
-                array(
-                    'actions' => array(
-                        //'view' => array(),
-                        'edit'   => array(),
-                        'delete' => array(),
-                    ),
-                    'label'   => 'Accions'
-                )
-            );
+            ->add('active', null, array('label' => 'És laboral?', 'editable' => true));
     }
 
 }	
