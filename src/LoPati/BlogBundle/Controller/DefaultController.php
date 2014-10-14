@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller
 {
-    const THUMBNAILS_PER_PAGE = 8;
+    const THUMBNAILS_PER_PAGE = 10;
 
     public function searchAction()
     {

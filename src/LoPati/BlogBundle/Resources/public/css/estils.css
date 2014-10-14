@@ -154,6 +154,16 @@ img.mig {
 	float: left;
 }
 
+div.contenidor.extra { width: 950px; }
+
+div.contenidor.extra ol.bloc01 li {
+    margin: 0 43px 15px 0;
+}
+
+div.contenidor.extra ol.bloc01 li.end-row {
+    margin: 0 0 15px 0;
+}
+
 .continguts {
 	width: 100%;
 	min-height: 300px; height: auto !important; height: 300px;
