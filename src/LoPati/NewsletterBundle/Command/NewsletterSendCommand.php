@@ -1,6 +1,9 @@
 <?php
+
 namespace LoPati\NewsletterBundle\Command;
 
+use Doctrine\ORM\EntityManager;
+use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,11 +11,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Hip\MandrillBundle\Message;
+use Hip\MandrillBundle\Dispatcher;
 
-class NewsletterSendCommand extends ContainerAwareCommand {
-	protected function configure() {
+class NewsletterSendCommand extends ContainerAwareCommand
+{
+	protected function configure()
+    {
 		$this->setName('newsletter:send')
 				->setDefinition(
 						array(
@@ -28,23 +34,25 @@ EOT
 				);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        $dispatcher = $this->getContainer()->get('hip_mandrill.dispatcher');
+        $message = new Message();
 
 		$max = $input->getArgument('max');
-		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
-				: 'http://lopati.cat';
-
+		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local' : 'http://lopati.cat';
 		$hora = new \DateTime();
 		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
-
-		$contenedor = $this->getContainer();
-		$em = $contenedor->get('doctrine')->getManager();
 
 		$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE NOT EXISTS (SELECT n2 FROM NewsletterBundle:Newsletter n2 WHERE n2.estat = :sending ) AND n.estat = :estat ORDER BY n.id ASC');
 		$query->setParameter('estat', 'Waiting');
 		$query->setParameter('sending', 'Sending');
 		$query->setMaxResults('1');
 		$newsletter = $query->getOneOrNullResult();
+
 		if ($newsletter) {
             $newsletter->setEstat('Sending');
         }
@@ -53,6 +61,7 @@ EOT
 		$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE n.estat = :estat');
 		$query->setParameter('estat', 'Sending');
 		$newsletter2 = $query->getOneOrNullResult();
+
 		if ($newsletter2) {
 			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
 			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s WHERE s.newsletter = :newsletter');
@@ -105,11 +114,11 @@ EOT
                         $colabora="Colabora";
                         $butlleti="Boletín";
 
+                        /** @var Pagina $pagina */
                         foreach ($pagines->getPagines() as $pagina){
                             $pagina->setLocale('es');
-                            $subCategoria=$pagina->getSubCategoria();
+                            $subCategoria = $pagina->getSubCategoria();
                             $subCategoria->setlocale('es');
-                        //	$pagina->setSubCategoria($pagina->getSubCategoria())->setLocale('es');
                             $em->refresh($subCategoria);
                             $em->refresh($pagina);
                         }
@@ -132,11 +141,11 @@ EOT
                         $colabora="Collaborate";
                         $butlleti="Newsletter";
 
+                        /** @var Pagina $pagina */
                         foreach ($pagines->getPagines() as $pagina){
                             $pagina->setLocale('en');
-                            $subCategoria=$pagina->getSubCategoria();
+                            $subCategoria = $pagina->getSubCategoria();
                             $subCategoria->setlocale('en');
-                            //	$pagina->setSubCategoria($pagina->getSubCategoria())->setLocale('es');
                             $em->refresh($subCategoria);
                             $em->refresh($pagina);
                         }
@@ -144,7 +153,7 @@ EOT
                     }
 
                     $output->writeln('nem a renderitzar mail.html.twig');
-                    $contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig', array(
+                    $contenido = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', array(
                             'host' => $host,
                             'pagines' => $pagines,
                             'idioma' => $idioma,
@@ -163,31 +172,39 @@ EOT
                     $output->writeln('hem renderitzat');
 
                     $to = $user->getUser()->getEmail();
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Butlletí nº ' .$newsletter2->getNumero())
-                        ->setFrom(array('butlleti@lopati.cat' => "Centre d'Art Lo Pati"))
-                        ->setBody($contenido, 'text/html');
+
+                    $message
+                        ->setSubject('Butlletí nº ' . $newsletter2->getNumero())
+                        ->setFromName('Centre d\'Art Lo Pati')
+                        ->setFromEmail('butlleti@lopati.cat')
+                        ->addTo($to)
+                        ->setTrackClicks(true)
+                        ->setHtml($contenido)
+                    ;
+                    $dispatcher->send($message);
 
                     $num = 0;
-                    try {
-                        $message->setTo($to);
-                        $output->write('enviant a' . $to .'.. ');
-                        $num = $contenedor->get('mailer')->send($message);
 
-                    } catch (\Swift_TransportException $e) {
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
 
-                    } catch (\Swift_MimeException $e) {
-                        //Error handled here
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
-
-                    } catch (\Swift_RfcComplianceException $e) {
-                        //Error handled here
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
-                    }
+//                    try {
+//                        $message->setTo($to);
+//                        $output->write('enviant a' . $to .'.. ');
+//                        $num = $this->getContainer()->get('mailer')->send($message);
+//
+//                    } catch (\Swift_TransportException $e) {
+//                        $output->writeln(' ');
+//                        $output->writeln('ha fallat:' . $to);
+//
+//                    } catch (\Swift_MimeException $e) {
+//                        //Error handled here
+//                        $output->writeln(' ');
+//                        $output->writeln('ha fallat:' . $to);
+//
+//                    } catch (\Swift_RfcComplianceException $e) {
+//                        //Error handled here
+//                        $output->writeln(' ');
+//                        $output->writeln('ha fallat:' . $to);
+//                    }
 
                     if ($num) {
                         $enviats++;
