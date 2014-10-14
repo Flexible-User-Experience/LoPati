@@ -49,9 +49,8 @@ class DefaultController extends Controller
         $consulta = $em->getRepository('BlogBundle:Pagina')->getPortadaQueryOfCategory('Arxiu');
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), self::THUMBNAILS_PER_PAGE);
-        /** @var ArrayCollection $slides */
         $slides = $em->getRepository('BlogBundle:SliderImage')->getActiveSlidesSortByPosition();
-        if ($slides->count() > 0) {
+        if ($slides) {
             return $this->render('BlogBundle:Default:portada.slider.html.twig', array('portades' => $pagination, 'slides' => $slides));
         }
 
