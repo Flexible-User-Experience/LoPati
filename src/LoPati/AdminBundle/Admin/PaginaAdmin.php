@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaginaAdmin extends Admin
 {
+    protected $baseRoutePattern = 'page';
+
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction
