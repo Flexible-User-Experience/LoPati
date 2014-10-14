@@ -2,6 +2,7 @@
 
 namespace LoPati\BlogBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller
 {
+    const THUMBNAILS_PER_PAGE = 10;
 
     public function searchAction()
     {
@@ -21,22 +23,10 @@ class DefaultController extends Controller
             /** var array of Acme\UserBundle\Entity\User */
             $pagines = $finder->find($this->getRequest()->get('textabuscar'));
             /** var array of Acme\UserBundle\Entity\User limited to 10 results */
-            //$pagines = $finder->find('bob', 10);
             $textabuscar = $this->getRequest()->get('textabuscar');
         }
 
-        return $this->render(
-            'BlogBundle:Default:search.html.twig',
-            array('pagines' => $pagines, 'textabuscar' => $textabuscar)
-        );
-    }
-
-    public function provaAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $pagina = $em->getRepository('BlogBundle:Pagina')->find(1);
-
-        return $this->render('BlogBundle:Default:prova.html.twig', array('pagina' => $pagina));
+        return $this->render('BlogBundle:Default:search.html.twig', array('pagines' => $pagines, 'textabuscar' => $textabuscar));
     }
 
     public function indexAction()
@@ -45,7 +35,6 @@ class DefaultController extends Controller
         if ($this->get('session')->get('_locale')) {
             $culture = $this->get('session')->get('_locale');
         } else {
-            $session = $this->get('session');
             $culture = $req->getPreferredLanguage(array('ca', 'es', 'en'));
         }
 
@@ -54,27 +43,16 @@ class DefaultController extends Controller
 
     public function portadaAction($_locale)
     {
-        //$pagination= null;
         $this->getRequest()->setLocale($_locale);
-        $this->get('session')->get('_locale');
-        $this->get('session')->set('_locale', $_locale);
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $consulta = $em->createQuery(
-            'SELECT p, cat, sub FROM BlogBundle:Pagina p  JOIN p.categoria cat LEFT JOIN p.subCategoria sub
-                        WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria )ORDER BY p.data_publicacio DESC'
-        );
-        //$consulta->setParameter('avui', new \DateTime('today'));
-        $consulta->setParameter('categoria', 'Arxiu');
-        //$query = $em->createQuery($consulta);
-        //$pagination = $consulta->getResult();
+        $consulta = $em->getRepository('BlogBundle:Pagina')->getPortadaQueryOfCategory('Arxiu');
         $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $consulta,
-            $this->getRequest()->query->get('page', 1),
-            8
-        /*limit per page*/
-        );
+        $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), self::THUMBNAILS_PER_PAGE);
+        $slides = $em->getRepository('BlogBundle:SliderImage')->getActiveSlidesSortByPosition();
+        if ($slides) {
+            return $this->render('BlogBundle:Default:portada.slider.html.twig', array('portades' => $pagination, 'slides' => $slides));
+        }
 
         return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination));
     }
@@ -89,10 +67,7 @@ class DefaultController extends Controller
             $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
-        return $this->render(
-            'BlogBundle:Default:pagina.html.twig',
-            array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video)
-        );
+        return $this->render('BlogBundle:Default:pagina.html.twig', array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video));
     }
 
     public function arbre_de_contingutAction()

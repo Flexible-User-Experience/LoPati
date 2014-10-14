@@ -1,5 +1,37 @@
 {% extends '::frontend.html.twig' %}
 
+{% block estils %}
+    <link rel="stylesheet" href="{{ asset('nivo-slider/nivo-slider.css') }}" type="text/css" />
+    {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/default/default.css') }}" type="text/css" />#}
+    {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/light/light.css') }}" type="text/css" />#}
+    <link rel="stylesheet" href="{{ asset('nivo-slider/themes/dark/dark.css') }}" type="text/css" />
+    {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/bar/bar.css') }}" type="text/css" />#}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('nivo-slider/jquery.nivo.slider.pack.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(window).load(function() {
+            $('#slider').nivoSlider({
+                effect: 'random',               // Specify sets like: 'fold,fade,sliceDown'
+                slices: 15,                     // For slice animations
+                boxCols: 16,                    // For box animations
+                boxRows: 8,                     // For box animations
+                animSpeed: 500,                 // Slide transition speed
+                pauseTime: 3000,                // How long each slide will show
+                startSlide: 0,                  // Set starting Slide (0 index)
+                directionNav: true,             // Next & Prev navigation
+                controlNav: false,              // 1,2,3... navigation
+                controlNavThumbs: false,        // Use thumbnails for Control Nav
+                pauseOnHover: true,             // Stop animation while hovering
+                manualAdvance: false,           // Force manual transitions
+                prevText: '<',                  // Prev directionNav text
+                nextText: '>'                   // Next directionNav text
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block title %}{% endblock %}
 
 {% block menu %}
@@ -15,10 +47,28 @@
     <div style="width: 100%; height: 30px; background: none;"></div>
     <div class="contenidor">
         <div class="continguts">
+            <div class="slider-wrapper theme-dark">
+                <div id="slider" class="nivoSlider">
+                    {% for slide in slides %}
+                        {% if slide.link %}
+                            <a href="{{ slide.link }}"><img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}" title="{{ slide.name }}"/></a>
+                        {% else %}
+                            <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}" title="{{ slide.name }}"/>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenidorextra %}
+    <div class="contenidor extra">
+        <div class="continguts">
             <ol class="bloc01">
                 {% for portada in portades %}
-                    {% if (date(portada.dataCaducitat) >  date() and portada.subCategoria is not null) or (portada.datacaducitat is null and portada.subCategoria is not null) %}
-                        <li id="bloc{{ portada.id }}">
+                    {% if (date(portada.dataCaducitat) > date() and portada.subCategoria is not null) or (portada.datacaducitat is null and portada.subCategoria is not null) %}
+                        <li id="bloc{{ portada.id }}"{% if loop.index % 5 == 0 %} class="end-row"{% endif %}>
                             <div class="bloc01a">
                                 <div class="bloc01a-shot">
                                     {% if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null) %}
@@ -41,8 +91,8 @@
                             </div>
                         </li>
                     {% else %}
-                        {% if date(portada.dataCaducitat) <=  date() and portada.dataCaducitat is not null %}
-                            <li id="bloc{{ portada.id }}">
+                        {% if date(portada.dataCaducitat) <= date() and portada.dataCaducitat is not null %}
+                            <li id="bloc{{ portada.id }}"{% if loop.index % 5 == 0 %} class="end-row"{% endif %}>
                                 <div class="bloc01a">
                                     <div class="bloc01a-shot">
                                         {% if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null) %}
@@ -73,5 +123,4 @@
             {{ knp_pagination_render(portades) }}
         </div>
     </div>
-    {#</div>#}
 {% endblock %}

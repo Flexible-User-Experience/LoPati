@@ -96,6 +96,7 @@
             </div>
         </div>
     </div>
+    {% block contenidorextra %}{% endblock %}
 </div>
 {% render controller('BlogBundle:Default:peu') %}
 <script type="text/javascript">
@@ -131,5 +132,6 @@
         ev.src = str;
     }
 </script>
+{% block scripts %}{% endblock %}
 </body>
 </html>

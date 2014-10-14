@@ -1,4 +1,5 @@
 <?php
+
 namespace LoPati\BlogBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -15,6 +16,7 @@ class PaginaRepository extends EntityRepository
                             ORDER BY n.startDate ASC');
         $query->setParameter('inici', date('Y-m-d', mktime(0, 0, 0, $mes, 1, $any)));
         $query->setParameter('fi', date('Y-m-t', mktime(0, 0, 0, $mes, 28, $any)));    // la opcion -t devuelve la cantidad de dias que tiene el mes dado
+
         return $query->getResult();
     }
 
@@ -27,6 +29,7 @@ class PaginaRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('SELECT n FROM BlogBundle:Pagina n WHERE n.actiu = 1 AND n.startDate >= :inici ORDER BY n.endDate ASC');
         $query->setParameter('inici', date('Y-m-d', mktime(0, 0, 0, $mes, 1, $any)));
+
         return $query->getResult();
     }
 
@@ -36,7 +39,16 @@ class PaginaRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('SELECT n FROM BlogBundle:Pagina n WHERE n.actiu = 1 AND n.startDate <= :avui AND n.endDate >= :avui ORDER BY n.endDate ASC');
         $query->setParameter('avui', $newDate);
+
         return $query->getResult();
     }
 
+    public function getPortadaQueryOfCategory($category)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT p, cat, sub FROM BlogBundle:Pagina p JOIN p.categoria cat LEFT JOIN p.subCategoria sub WHERE p.portada = TRUE AND p.actiu = TRUE AND (p.subCategoria IS NOT NULL OR cat.nom = :categoria) ORDER BY p.data_publicacio DESC');
+        $query->setParameter('categoria', $category);
+
+        return $query;
+    }
 }
