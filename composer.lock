@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9544849b49b9764c08c173b4ac3c44ae",
+    "hash": "0a0961b052691dfaa72bcbc6773e86f6",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -119,22 +119,28 @@
         },
         {
             "name": "cypresslab/gitelephant-bundle",
-            "version": "dev-master",
+            "version": "dev-develop",
             "target-dir": "Cypress/GitElephantBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matteosister/GitElephantBundle.git",
-                "reference": "90b2f24a2f6c7d08b6092539a844e5db6d71a734"
+                "reference": "fbff2857e77178d4cff098763be468fb674c219c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matteosister/GitElephantBundle/zipball/90b2f24a2f6c7d08b6092539a844e5db6d71a734",
-                "reference": "90b2f24a2f6c7d08b6092539a844e5db6d71a734",
+                "url": "https://api.github.com/repos/matteosister/GitElephantBundle/zipball/fbff2857e77178d4cff098763be468fb674c219c",
+                "reference": "fbff2857e77178d4cff098763be468fb674c219c",
                 "shasum": ""
             },
             "require": {
                 "cypresslab/gitelephant": "*",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "symfony/config": "~2.3",
+                "symfony/console": "~2.3",
+                "symfony/dependency-injection": "~2.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/http-foundation": "~2.3",
+                "symfony/http-kernel": "~2.3"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -149,9 +155,7 @@
             "authors": [
                 {
                     "name": "Matteo Giachino",
-                    "email": "matteog@gmail.com",
-                    "homepage": "https://github.com/matteosister/CypressTreeBundle/tree/develop",
-                    "role": "Developer"
+                    "email": "matteog@gmail.com"
                 }
             ],
             "description": "GitElephant bundle for Symfony2",
@@ -159,7 +163,7 @@
             "keywords": [
                 "git"
             ],
-            "time": "2013-10-13 22:16:07"
+            "time": "2014-10-13 20:06:05"
         },
         {
             "name": "doctrine/annotations",

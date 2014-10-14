@@ -2,6 +2,7 @@
 
 namespace LoPati\BlogBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,9 +49,13 @@ class DefaultController extends Controller
         $consulta = $em->getRepository('BlogBundle:Pagina')->getPortadaQueryOfCategory('Arxiu');
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), self::THUMBNAILS_PER_PAGE);
+        /** @var ArrayCollection $slides */
         $slides = $em->getRepository('BlogBundle:SliderImage')->getActiveSlidesSortByPosition();
+        if ($slides->count() > 0) {
+            return $this->render('BlogBundle:Default:portada.slider.html.twig', array('portades' => $pagination, 'slides' => $slides));
+        }
 
-        return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination, 'slides' => $slides));
+        return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination));
     }
 
     public function paginaAction($id)

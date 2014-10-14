@@ -1,5 +1,9 @@
 {% extends '::frontend.html.twig' %}
 
+{% block estils %}{% endblock %}
+
+{% block scripts %}{% endblock %}
+
 {% block title %}{% endblock %}
 
 {% block menu %}
@@ -15,10 +19,22 @@
     <div style="width: 100%; height: 30px; background: none;"></div>
     <div class="contenidor">
         <div class="continguts">
+            {% for slide in slides %}
+                {{ slide.name }}
+            {% else %}
+                <img src="//lorempixel.com/756/450/abstract" alt="No slides"/>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenidorextra %}
+    <div class="contenidor extra">
+        <div class="continguts">
             <ol class="bloc01">
                 {% for portada in portades %}
-                    {% if (date(portada.dataCaducitat) >  date() and portada.subCategoria is not null) or (portada.datacaducitat is null and portada.subCategoria is not null) %}
-                        <li id="bloc{{ portada.id }}">
+                    {% if (date(portada.dataCaducitat) > date() and portada.subCategoria is not null) or (portada.datacaducitat is null and portada.subCategoria is not null) %}
+                        <li id="bloc{{ portada.id }}"{% if loop.index % 5 == 0 %} class="end-row"{% endif %}>
                             <div class="bloc01a">
                                 <div class="bloc01a-shot">
                                     {% if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null) %}
@@ -41,8 +57,8 @@
                             </div>
                         </li>
                     {% else %}
-                        {% if date(portada.dataCaducitat) <=  date() and portada.dataCaducitat is not null %}
-                            <li id="bloc{{ portada.id }}">
+                        {% if date(portada.dataCaducitat) <= date() and portada.dataCaducitat is not null %}
+                            <li id="bloc{{ portada.id }}"{% if loop.index % 5 == 0 %} class="end-row"{% endif %}>
                                 <div class="bloc01a">
                                     <div class="bloc01a-shot">
                                         {% if (portada.imagePetita2Name is not null) and (portada.imagePetitaName is not null) %}
