@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * LoPati\NewsletterBundle\Entity\NewsletterSend
- *
  * @ORM\Table(name="newsletterSend")
  * @ORM\Entity
  * @UniqueEntity({"user","newsletter"})

@@ -40,4 +40,4 @@ cypress_git_elephant:
 
 hip_mandrill:
     api_key: "%mandril_api_key_test%"
-    disable_delivery: true
+    disable_delivery: false

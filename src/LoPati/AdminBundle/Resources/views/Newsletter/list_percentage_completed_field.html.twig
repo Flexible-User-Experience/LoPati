@@ -3,7 +3,11 @@
 {% block field%}
     <div>
         {% if object.estat %}
-            {% set percentage = (object.enviats / object.subscrits) * 100 %}
+            {% if object.subscrits != 0 %}
+                {% set percentage = (object.enviats / object.subscrits) * 100 %}
+            {% else %}
+                {% set percentage = 0 %}
+            {% endif %}
             {% if percentage < 33 %}
                 {% set color = 'danger' %}
             {% elseif percentage >= 33 and percentage < 66 %}

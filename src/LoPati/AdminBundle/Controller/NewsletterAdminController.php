@@ -16,33 +16,25 @@ class NewsletterAdminController extends Controller
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        /** @var Newsletter $news */
-        $news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
-        if ($news->getEstat() == null) {
-            $news->setEstat('Waiting');
-            $news->setIniciEnviament(new \DateTime('now'));
-            $query = $em->createQuery(
-                'SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.fail >= :fail AND u.active = :actiu '
-            );
-            $query->setParameter('fail', '4');
-            $query->setParameter('actiu', '1');
-            $users = $query->getResult();
+        /** @var Newsletter $newsletter */
+        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
+
+        if ($newsletter->getEstat() == null) {
+            $newsletter->setEstat('Waiting');
+            $newsletter->setIniciEnviament(new \DateTime('now'));
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
             foreach ($users as $user) {
-
                 $em->remove($user);
-
             }
             $em->flush();
-            $query = $em->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.active = :actiu ');
-            $query->setParameter('actiu', '1');
-            $users = $query->getResult();
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersPlainArrayByGroup($newsletter->getGroup());
             foreach ($users as $user) {
                 $newsletterSend = new NewsletterSend();
                 $newsletterSend->setUser($user);
-                $newsletterSend->setNewsletter($news);
+                $newsletterSend->setNewsletter($newsletter);
                 $em->persist($newsletterSend);
             }
-            $news->setSubscrits(count($users));
+            $newsletter->setSubscrits(count($users));
             $em->flush();
         }
 
@@ -51,6 +43,8 @@ class NewsletterAdminController extends Controller
 
     public function previewAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $visualitzar_correctament = "Clica aquí per visualitzar correctament";
         $baixa = "Clica aquí per donar-te de baixa";
         $lloc = "Lloc";
@@ -63,12 +57,9 @@ class NewsletterAdminController extends Controller
         $colabora = "Col·labora";
         $butlleti = "Butlletí";
 
-        $em = $this->getDoctrine()->getManager();
         $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
-        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
-            : 'http://lopati.cat';
+        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
 
-        //$object->getId();
         return $this->render(
             'AdminBundle:Newsletter:preview.html.twig',
             array(
@@ -138,19 +129,19 @@ class NewsletterAdminController extends Controller
             ->setSubject('[TEST] Butlletí nº ' . $newsletter->getNumero())
             ->setFromName('Centre d\'Art Lo Pati')
             ->setFromEmail('butlleti@lopati.cat')
-            ->addTo(array($this->container->getParameter('newsleterEmailDestination1')))
-            ->addTo(array($this->container->getParameter('newsleterEmailDestination2')))
-            ->addTo(array($this->container->getParameter('newsleterEmailDestination3')))
+            ->addTo($this->container->getParameter('newsleterEmailDestination1'))
+            ->addTo($this->container->getParameter('newsleterEmailDestination2'))
+            ->addTo($this->container->getParameter('newsleterEmailDestination3'))
             ->setTrackClicks(true)
-            ->setHtml($contenido);
-
-        $result = $dispatcher->send($message);
+            ->setHtml($contenido)
+        ;
+        $dispatcher->send($message);
 
         $this->get('session')->getFlashBag()->add(
             'sonata_flash_success',
             'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter('newsleterEmailDestination1') .
             ', ' . $this->container->getParameter('newsleterEmailDestination2') .
-            ' i ' . $this->container->getParameter('newsleterEmailDestination3') . ' | (RESULT: ' . $result . ')'
+            ' i ' . $this->container->getParameter('newsleterEmailDestination3')
         );
 
         $newsletter->setTest('1');

@@ -8,9 +8,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * LoPati\NewsletterBundle\Entity\NewsletterUser
  * @ORM\Table(name="newsletter_users")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterUserRepository")
  * @UniqueEntity("email")
  */
 class NewsletterUser
