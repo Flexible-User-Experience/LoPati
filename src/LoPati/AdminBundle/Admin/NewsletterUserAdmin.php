@@ -94,6 +94,7 @@ class NewsletterUserAdmin extends Admin
         $datagridMapper
             ->add('email')
             ->add('groups', null, array('label' => 'Grup'))
+            ->add('idioma')
             ->add('active', null, array('label' => 'Actiu'))
             ->add('created', null, array('label' => 'Data Alta'));
     }
