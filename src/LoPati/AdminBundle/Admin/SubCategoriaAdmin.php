@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class SubCategoriaAdmin extends Admin
 {
+    protected $baseRoutePattern = 'menu/level/2';
+
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction

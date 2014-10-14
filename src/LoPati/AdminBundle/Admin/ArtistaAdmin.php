@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class ArtistaAdmin extends Admin
 {
+    protected $baseRoutePattern = 'artist';
+
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction

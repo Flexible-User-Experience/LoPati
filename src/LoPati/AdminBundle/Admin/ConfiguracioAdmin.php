@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ConfiguracioAdmin extends Admin
 {
+    protected $baseRoutePattern = 'configuration/footer';
+
     /**
      * Configure export formats
      *

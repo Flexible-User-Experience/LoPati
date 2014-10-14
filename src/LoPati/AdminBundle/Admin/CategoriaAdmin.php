@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class CategoriaAdmin extends Admin
 {
+    protected $baseRoutePattern = 'menu/level/1';
+
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction

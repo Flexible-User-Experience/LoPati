@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
 {
+    protected $baseRoutePattern = 'configuration/calendar';
+
     /**
      * Configure export formats
      *

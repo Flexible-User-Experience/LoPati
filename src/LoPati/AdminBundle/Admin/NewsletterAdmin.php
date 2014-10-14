@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterAdmin extends Admin
 {
+    protected $baseRoutePattern = 'newsletter';
+
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction
