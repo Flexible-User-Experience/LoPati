@@ -215,7 +215,7 @@ liip_imagine:
         imatge756x450:
             quality: 85
             filters:
-                thumbnail: { size: [756, 450], mode: outbound }
+                thumbnail: { size: [756, 450], mode: outbound, allow_upscale: true }
 
 # FOS Elasticsearch
 # Move to config_prod.yml if it's necessary to avoid Elasticasearch on devel environments
