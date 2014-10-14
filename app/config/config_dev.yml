@@ -37,3 +37,7 @@ cypress_git_elephant:
     profiler_repository_path: "%kernel.root_dir%/../"
     repositories:
         "LoPati": "%cypress_git_repository%"
+
+hip_mandrill:
+    api_key: "%mandril_api_key_test%"
+    disable_delivery: true

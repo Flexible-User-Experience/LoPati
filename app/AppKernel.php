@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Hip\MandrillBundle\HipMandrillBundle(),
             // Custom Bundles
             new LoPati\BlogBundle\BlogBundle(),
             new LoPati\MenuBundle\MenuBundle(),

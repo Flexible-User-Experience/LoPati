@@ -7,6 +7,8 @@ use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Hip\MandrillBundle\Message;
+use Hip\MandrillBundle\Dispatcher;
 
 class NewsletterAdminController extends Controller
 {
@@ -91,6 +93,10 @@ class NewsletterAdminController extends Controller
 
     public function testAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $dispatcher = $this->get('hip_mandrill.dispatcher');
+        $message = new Message();
+
         $visualitzar_correctament = "Clica aquí per visualitzar correctament";
         $baixa = "Clica aquí per donar-te de baixa";
         $lloc = "Lloc";
@@ -103,14 +109,10 @@ class NewsletterAdminController extends Controller
         $colabora = "Col·labora";
         $butlleti = "Butlletí";
 
-        $em = $this->getDoctrine()->getManager();
-        //$userName = $this->container->get('security.context')->getToken()->getUser()->getUsername();
-        //$user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneByUsername($userName);
-        $newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
+        /** @var Newsletter $newsletter */
+        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
         $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
-
-        $host = 'dev' == $this->container->get('kernel')->getEnvironment(
-        ) ? 'http://lopati.local' : 'http://lopati.cat';
+        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
 
         $contenido = $this->renderView(
             'NewsletterBundle:Default:mail.html.twig',
@@ -132,31 +134,26 @@ class NewsletterAdminController extends Controller
             )
         );
 
-        $message = \Swift_Message::newInstance()
-            //->setSubject('Lo Pati - Newsletter ' . $newsletter2->getDataNewsletter()->format('d-m-Y'))
-            ->setSubject('[TEST] Butlletí nº ' . $newsletter2->getNumero())
-            //->setFrom($config->getEmail())
-            ->setFrom(array("butlleti@lopati.cat" => "Centre d'Art Lo Pati"))
-            //->setTo($user->getEmail())
-            ->setTo(array($this->container->getParameter('newsleterEmailDestination1')))
-            ->setCc(
-                array(
-                    $this->container->getParameter('newsleterEmailDestination2'),
-                    $this->container->getParameter('newsleterEmailDestination3')
-                )
-            )
-            ->setBody($contenido, 'text/html');
-        $this->get('mailer')->send($message);
+        $message
+            ->setSubject('[TEST] Butlletí nº ' . $newsletter->getNumero())
+            ->setFromName('Centre d\'Art Lo Pati')
+            ->setFromEmail('butlleti@lopati.cat')
+            ->addTo(array($this->container->getParameter('newsleterEmailDestination1')))
+            ->addTo(array($this->container->getParameter('newsleterEmailDestination2')))
+            ->addTo(array($this->container->getParameter('newsleterEmailDestination3')))
+            ->setTrackClicks(true)
+            ->setHtml($contenido);
+
+        $result = $dispatcher->send($message);
+
         $this->get('session')->getFlashBag()->add(
             'sonata_flash_success',
-            'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter(
-                'newsleterEmailDestination1'
-            ) . ', ' . $this->container->getParameter(
-                'newsleterEmailDestination2'
-            ) . ' i ' . $this->container->getParameter('newsleterEmailDestination3')
+            'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter('newsleterEmailDestination1') .
+            ', ' . $this->container->getParameter('newsleterEmailDestination2') .
+            ' i ' . $this->container->getParameter('newsleterEmailDestination3') . ' | (RESULT: ' . $result . ')'
         );
-        $news = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
-        $news->setTest('1');
+
+        $newsletter->setTest('1');
         $em->flush();
 
         return $this->redirect('../list');

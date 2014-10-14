@@ -251,6 +251,13 @@ genemu_form:
             allowClear: true
             minimumInputLength: 3
 
+# Mandril
+hip_mandrill:
+    api_key: "%mandril_api_key%"
+    default:
+        sender: butlleti@lopati.cat
+        sender_name: Lo Pati
+
 parameters:
     newsleterEmailDestination1: "%newsleterTestEmailDestination1%"
     newsleterEmailDestination2: "%newsleterTestEmailDestination2%"

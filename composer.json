@@ -31,6 +31,7 @@
         "friendsofsymfony/elastica-bundle": "3.0.*",
         "raulfraile/ladybug-bundle": "1.0.*",
         "genemu/form-bundle": "2.2.*",
+        "hipaway-travel/mandrill-bundle": "1.*",
         "cypresslab/gitelephant-bundle": "dev-develop"
     },
     "scripts": {
