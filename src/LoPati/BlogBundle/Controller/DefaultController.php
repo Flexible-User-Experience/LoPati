@@ -22,14 +22,10 @@ class DefaultController extends Controller
             /** var array of Acme\UserBundle\Entity\User */
             $pagines = $finder->find($this->getRequest()->get('textabuscar'));
             /** var array of Acme\UserBundle\Entity\User limited to 10 results */
-            //$pagines = $finder->find('bob', 10);
             $textabuscar = $this->getRequest()->get('textabuscar');
         }
 
-        return $this->render(
-            'BlogBundle:Default:search.html.twig',
-            array('pagines' => $pagines, 'textabuscar' => $textabuscar)
-        );
+        return $this->render('BlogBundle:Default:search.html.twig', array('pagines' => $pagines, 'textabuscar' => $textabuscar));
     }
 
     public function indexAction()
@@ -52,8 +48,9 @@ class DefaultController extends Controller
         $consulta = $em->getRepository('BlogBundle:Pagina')->getPortadaQueryOfCategory('Arxiu');
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), self::THUMBNAILS_PER_PAGE);
+        $slides = $em->getRepository('BlogBundle:SliderImage')->getActiveSlidesSortByPosition();
 
-        return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination));
+        return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination, 'slides' => $slides));
     }
 
     public function paginaAction($id)
@@ -66,10 +63,7 @@ class DefaultController extends Controller
             $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
-        return $this->render(
-            'BlogBundle:Default:pagina.html.twig',
-            array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video)
-        );
+        return $this->render('BlogBundle:Default:pagina.html.twig', array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video));
     }
 
     public function arbre_de_contingutAction()

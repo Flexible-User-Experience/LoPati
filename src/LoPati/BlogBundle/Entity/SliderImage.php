@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="slider_image")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\SliderImageRepository")
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
