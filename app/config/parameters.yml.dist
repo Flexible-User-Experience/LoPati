@@ -24,3 +24,5 @@ parameters:
     newsleterTestEmailDestination1: you1@you.com    #change this
     newsleterTestEmailDestination2: you2@you.com    #change this
     newsleterTestEmailDestination3: you3@you.com    #change this
+
+    cypress_git_repository: "/path/to/git/repo"
