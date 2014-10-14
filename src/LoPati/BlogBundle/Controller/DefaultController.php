@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller
 {
-    const THUMBNAILS_PER_PAGE = 10;
+    const THUMBNAILS_PER_PAGE_SLIDER = 10;
+    const THUMBNAILS_PER_PAGE_NORMAL = 8;
 
     public function searchAction()
     {
@@ -47,14 +48,18 @@ class DefaultController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $consulta = $em->getRepository('BlogBundle:Pagina')->getPortadaQueryOfCategory('Arxiu');
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), self::THUMBNAILS_PER_PAGE);
         $slides = $em->getRepository('BlogBundle:SliderImage')->getActiveSlidesSortByPosition();
         if ($slides) {
-            return $this->render('BlogBundle:Default:portada.slider.html.twig', array('portades' => $pagination, 'slides' => $slides));
+            $itemsPerPage = self::THUMBNAILS_PER_PAGE_SLIDER;
+            $template = 'BlogBundle:Default:portada.slider.html.twig';
+        } else {
+            $itemsPerPage = self::THUMBNAILS_PER_PAGE_NORMAL;
+            $template = 'BlogBundle:Default:portada.html.twig';
         }
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($consulta, $this->getRequest()->query->get('page', 1), $itemsPerPage);
 
-        return $this->render('BlogBundle:Default:portada.html.twig', array('portades' => $pagination));
+        return $this->render($template, array('portades' => $pagination, 'slides' => $slides));
     }
 
     public function paginaAction($id)

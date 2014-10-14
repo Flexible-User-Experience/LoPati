@@ -31,3 +31,9 @@ monolog:
 
 assetic:
     use_controller: true
+
+cypress_git_elephant:
+    enable_profiler: true
+    profiler_repository_path: "%kernel.root_dir%/../"
+    repositories:
+        "LoPati": "%cypress_git_repository%"
