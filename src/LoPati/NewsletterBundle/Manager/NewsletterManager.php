@@ -66,7 +66,7 @@ class NewsletterManager {
             'idioma'                   => $lang,
             'visualitzar_correctament' => $this->getTrans('newsletter.visualitzar', $lang),
             'baixa'                    => $this->getTrans('newsletter.baixa', $lang),
-            'lloc'                     => $this->getTrans('newsletter.loc', $lang),
+            'lloc'                     => $this->getTrans('newsletter.lloc', $lang),
             'data'                     => $this->getTrans('newsletter.data', $lang),
             'publicat'                 => $this->getTrans('newsletter.publicat', $lang),
             'links'                    => $this->getTrans('newsletter.links', $lang),
