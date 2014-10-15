@@ -28,7 +28,7 @@ class NewsletterAdminController extends Controller
                 $em->remove($user);
             }
             $em->flush();
-            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersPlainArrayByGroup($newsletter->getGroup());
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
             foreach ($users as $user) {
                 $newsletterSend = new NewsletterSend();
                 $newsletterSend->setUser($user);

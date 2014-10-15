@@ -3,7 +3,6 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
-use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
@@ -13,8 +12,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Hip\MandrillBundle\Message;
-use Hip\MandrillBundle\Dispatcher;
 
 class NewsletterSendCommand extends ContainerAwareCommand
 {
@@ -30,7 +27,7 @@ class NewsletterSendCommand extends ContainerAwareCommand
 				->setDescription('Envia a cada subscrit el newsletter')
 				->setHelp(
 						<<<EOT
-La comanda <info>newsltter:send</info> envia un email a cada subscrit al newsletter.
+La comanda <info>newsletter:send</info> envia un email a cada subscrit al newsletter.
 EOT
 				);
 	}
@@ -45,7 +42,10 @@ EOT
 		$host = 'http://www.lopati.cat';
 		$hora = new \DateTime();
 
+        // Welcome
+        $output->writeln('<info>Welcome to LoPati newsltter:send command.</info>');
 		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
+        $dtStart = new \DateTime();
 
 		$newsletter = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
 		if ($newsletter) {
@@ -64,26 +64,23 @@ EOT
                 $fallats = 0;
                 /** @var NewsletterSend $newsletterSend */
                 foreach ($newsletterSends as $newsletterSend) {
-                    $output->writeln('llista correus a enviar');
+
                     if (!$newsletterSend->getUser() instanceof NewsletterUser) {
                         $em->remove($newsletterSend);
                         $em->flush();
                         continue;
                     }
                     $to = $newsletterSend->getUser()->getEmail();
-                    $output->write(' .. ' . $to .' .. ');
-                    $output->writeln('entra usuari ' . $newsletterSend->getUser()->getEmail());
-                    $output->writeln('renderitza template mail.html.twig');
+                    $output->write('get user ' . $newsletterSend->getUser()->getEmail() . '... rendering template... ');
 
                     $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter2->getId(), $pagines, $host, $newsletterSend->getUser()->getIdioma(), $newsletterSend->getUser()->getToken()));
 
-                    $output->writeln('render finalitzat');
+                    $output->write('sending mail... ');
 
-                    $subject = 'Butlletí nº ' . $newsletter->getNumero();
+                    $subject = 'Butlletí nº ' . $newsletter2->getNumero();
                     $edl = array($to);
 
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    $num = 0;
 
 //                    try {
 //                        $message->setTo($to);
@@ -105,13 +102,15 @@ EOT
 //                        $output->writeln('ha fallat:' . $to);
 //                    }
 
-                    if ($num) {
+                    if ($result[0]['status'] == 'sent' && is_null($result[0]['reject_reason'])) {
                         $enviats++;
-                        $output->write('enviat ');
+                        $output->writeln('done!');
                     } else {
                         $fallats++;
                         $newsletterSend->getUser()->setFail($newsletterSend->getUser()->getFail() + 1);
+                        $output->writeln('<error>error!</error>');
                     }
+
                     $em->remove($newsletterSend);
                     $em->flush();
                 }
@@ -128,5 +127,8 @@ EOT
 			}
 		}
 		$em->flush();
+
+        $dtEnd = new \DateTime();
+        $output->writeln('Total ellapsed time: ' . $dtStart->diff($dtEnd)->format('%H:%I:%S'));
 	}
 }
