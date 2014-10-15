@@ -1,14 +1,17 @@
 <?php
+
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
+use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Hip\MandrillBundle\Message;
 use Hip\MandrillBundle\Dispatcher;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class NewsletterAdminController extends Controller
 {
@@ -43,43 +46,16 @@ class NewsletterAdminController extends Controller
 
     public function previewAction($id)
     {
+        /** @var Router $router */
+        $router = $this->container->get('router');
+        /** @var NewsletterManager $nb */
+        $nb = $this->container->get('newsletter.build_content');
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
+        $host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
 
-        $visualitzar_correctament = "Clica aquí per visualitzar correctament";
-        $baixa = "Clica aquí per donar-te de baixa";
-        $lloc = "Lloc";
-        $data = "Data";
-        $publicat = "Publicat";
-        $links = "Enllaços";
-        $organitza = "Organitza";
-        $suport = "Amb el suport de";
-        $follow = "Segueix-nos a";
-        $colabora = "Col·labora";
-        $butlleti = "Butlletí";
-
-        $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
-        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
-
-        return $this->render(
-            'AdminBundle:Newsletter:preview.html.twig',
-            array(
-                'id'                       => $id,
-                'host'                     => $host,
-                'pagines'                  => $pagines,
-                'idioma'                   => 'ca',
-                'visualitzar_correctament' => $visualitzar_correctament,
-                'baixa'                    => $baixa,
-                'lloc'                     => $lloc,
-                'data'                     => $data,
-                'publicat'                 => $publicat,
-                'links'                    => $links,
-                'organitza'                => $organitza,
-                'suport'                   => $suport,
-                'follow'                   => $follow,
-                'colabora'                 => $colabora,
-                'butlleti'                 => $butlleti
-            )
-        );
+        return $this->render('AdminBundle:Newsletter:preview.html.twig', $nb->buildNewsletterContentArray($id, $newsletter, $host, 'ca'));
     }
 
     public function testAction($id)
