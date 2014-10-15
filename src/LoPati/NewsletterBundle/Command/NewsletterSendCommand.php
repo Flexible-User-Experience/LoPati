@@ -43,7 +43,7 @@ EOT
 		$hora = new \DateTime();
 
         // Welcome
-        $output->writeln('<info>Welcome to LoPati newsltter:send command.</info>');
+        $output->writeln('<info>Welcome to LoPati newsletter:send command.</info>');
 		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
         $dtStart = new \DateTime();
 
@@ -59,9 +59,10 @@ EOT
 			$newsletterSends = $em->getRepository('NewsletterBundle:NewsletterSend')->getItemsByNewsletter($newsletter2, $max);
 			
 			if ($newsletterSends) {
-                $output->writeln('users per enviar correu: ' . count($newsletterSends));
+                $output->writeln('Total emails to deliver: ' . count($newsletterSends)); $output->writeln(' ');
                 $enviats = 0;
                 $fallats = 0;
+                $subject = 'Butlletí nº ' . $newsletter2->getNumero();
                 /** @var NewsletterSend $newsletterSend */
                 foreach ($newsletterSends as $newsletterSend) {
 
@@ -71,36 +72,14 @@ EOT
                         continue;
                     }
                     $to = $newsletterSend->getUser()->getEmail();
-                    $output->write('get user ' . $newsletterSend->getUser()->getEmail() . '... rendering template... ');
+                    $edl = array($to);
+                    $output->write('get ' . $newsletterSend->getUser()->getEmail() . '... rendering template... ');
 
                     $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter2->getId(), $pagines, $host, $newsletterSend->getUser()->getIdioma(), $newsletterSend->getUser()->getToken()));
 
                     $output->write('sending mail... ');
 
-                    $subject = 'Butlletí nº ' . $newsletter2->getNumero();
-                    $edl = array($to);
-
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-
-//                    try {
-//                        $message->setTo($to);
-//                        $output->write('enviant a' . $to .'.. ');
-//                        $num = $this->getContainer()->get('mailer')->send($message);
-//
-//                    } catch (\Swift_TransportException $e) {
-//                        $output->writeln(' ');
-//                        $output->writeln('ha fallat:' . $to);
-//
-//                    } catch (\Swift_MimeException $e) {
-//                        //Error handled here
-//                        $output->writeln(' ');
-//                        $output->writeln('ha fallat:' . $to);
-//
-//                    } catch (\Swift_RfcComplianceException $e) {
-//                        //Error handled here
-//                        $output->writeln(' ');
-//                        $output->writeln('ha fallat:' . $to);
-//                    }
 
                     if ($result[0]['status'] == 'sent' && is_null($result[0]['reject_reason'])) {
                         $enviats++;
@@ -108,17 +87,16 @@ EOT
                     } else {
                         $fallats++;
                         $newsletterSend->getUser()->setFail($newsletterSend->getUser()->getFail() + 1);
-                        $output->writeln('<error>error!</error>');
+                        $output->writeln('<error>error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason'] . '</error>');
                     }
-
                     $em->remove($newsletterSend);
                     $em->flush();
                 }
 
                 $newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
                 $output->writeln(' ');
-                $output->writeln('shan enviat: ' . $enviats . ' mails correctament');
-                $output->writeln('han fallat: ' . $fallats . ' mails');
+                $output->writeln('Emails delivered: ' . $enviats);
+                $output->writeln('Wrong delivers: ' . $fallats);
 
 			} else {
 				//$output->writeln('entra else');
