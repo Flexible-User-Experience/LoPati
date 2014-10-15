@@ -46,72 +46,37 @@ class NewsletterAdminController extends Controller
 
     public function previewAction($id)
     {
-        /** @var Router $router */
-        $router = $this->container->get('router');
         /** @var NewsletterManager $nb */
         $nb = $this->container->get('newsletter.build_content');
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
-        $host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
+        $host = $this->getHostRoute();
 
         return $this->render('AdminBundle:Newsletter:preview.html.twig', $nb->buildNewsletterContentArray($id, $newsletter, $host, 'ca'));
     }
 
     public function testAction($id)
     {
+        /** @var NewsletterManager $nb */
+        $nb = $this->container->get('newsletter.build_content');
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $dispatcher = $this->get('hip_mandrill.dispatcher');
-        $message = new Message();
-
-        $visualitzar_correctament = "Clica aquí per visualitzar correctament";
-        $baixa = "Clica aquí per donar-te de baixa";
-        $lloc = "Lloc";
-        $data = "Data";
-        $publicat = "Publicat";
-        $links = "Enllaços";
-        $organitza = "Organitza";
-        $suport = "Amb el suport de";
-        $follow = "Segueix-nos a";
-        $colabora = "Col·labora";
-        $butlleti = "Butlletí";
 
         /** @var Newsletter $newsletter */
         $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
-        $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
-        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
-
-        $contenido = $this->renderView(
-            'NewsletterBundle:Default:mail.html.twig',
-            array(
-                'host'                     => $host,
-                'pagines'                  => $pagines,
-                'idioma'                   => 'ca',
-                'visualitzar_correctament' => $visualitzar_correctament,
-                'baixa'                    => $baixa,
-                'lloc'                     => $lloc,
-                'data'                     => $data,
-                'publicat'                 => $publicat,
-                'links'                    => $links,
-                'organitza'                => $organitza,
-                'suport'                   => $suport,
-                'follow'                   => $follow,
-                'colabora'                 => $colabora,
-                'butlleti'                 => $butlleti
-            )
+        /** @var Newsletter $newsletter2 */
+        $newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
+        $host = $this->getHostRoute();
+        $contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($id, $newsletter2, $host, 'ca'));
+        $subject = '[TEST] Butlletí nº ' . $newsletter->getNumero();
+        $edl = array(
+            $this->container->getParameter('newsleterEmailDestination1'),
+            $this->container->getParameter('newsleterEmailDestination2'),
+            $this->container->getParameter('newsleterEmailDestination3'),
         );
 
-        $message
-            ->setSubject('[TEST] Butlletí nº ' . $newsletter->getNumero())
-            ->setFromName('Centre d\'Art Lo Pati')
-            ->setFromEmail('butlleti@lopati.cat')
-            ->addTo($this->container->getParameter('newsleterEmailDestination1'))
-            ->addTo($this->container->getParameter('newsleterEmailDestination2'))
-            ->addTo($this->container->getParameter('newsleterEmailDestination3'))
-            ->setTrackClicks(true)
-            ->setHtml($contenido)
-        ;
-        $dispatcher->send($message);
+        $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
 
         $this->get('session')->getFlashBag()->add(
             'sonata_flash_success',
@@ -124,5 +89,13 @@ class NewsletterAdminController extends Controller
         $em->flush();
 
         return $this->redirect('../list');
+    }
+
+    private function getHostRoute()
+    {
+        /** @var Router $router */
+        $router = $this->container->get('router');
+
+        return $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
     }
 }

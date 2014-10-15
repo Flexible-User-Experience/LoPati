@@ -2,9 +2,11 @@
 
 namespace LoPati\NewsletterBundle\Manager;
 
+use Hip\MandrillBundle\Message;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Hip\MandrillBundle\Dispatcher;
 
 class NewsletterManager {
     /**
@@ -18,15 +20,22 @@ class NewsletterManager {
     protected $translator;
 
     /**
+     * @var Dispatcher
+     */
+    protected $mandrilDispatcher;
+
+    /**
      * Constructor
      *
      * @param EngineInterface $templatingEngine
      * @param Translator      $translator
+     * @param Dispatcher      $mandrilDispatcher
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
+        $this->mandrilDispatcher = $mandrilDispatcher;
     }
 
     /**
@@ -78,5 +87,37 @@ class NewsletterManager {
         );
 
         return $result;
+    }
+
+    /**
+     * Send Mandril message
+     *
+     * @param string $subject
+     * @param array  $emailDestinationList
+     * @param mixed  $content
+     *
+     * @return array|bool
+     * @throws \Exception
+     */
+    public function sendMandrilMessage($subject, array $emailDestinationList, $content)
+    {
+        if (count($emailDestinationList) == 0) {
+            throw new \Exception('Email destination list empty');
+        }
+
+        $message = new Message();
+        $message
+            ->setSubject($subject)
+            ->setFromName('Centre d\'Art Lo Pati')
+            ->setFromEmail('butlleti@lopati.cat')
+            ->setTrackClicks(true)
+            ->setHtml($content)
+        ;
+
+        foreach ($emailDestinationList as $email) {
+            $message->addTo($email);
+        }
+
+        return $this->mandrilDispatcher->send($message);
     }
 }
