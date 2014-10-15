@@ -81,7 +81,7 @@ EOT
 
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
 
-                    if ($result[0]['status'] == 'sent' && is_null($result[0]['reject_reason'])) {
+                    if ($result[0]['status'] == 'sent') {
                         $enviats++;
                         $output->writeln('done!');
                     } else {
