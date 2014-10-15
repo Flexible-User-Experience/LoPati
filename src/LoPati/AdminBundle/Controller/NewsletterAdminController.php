@@ -9,8 +9,6 @@ use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Hip\MandrillBundle\Message;
-use Hip\MandrillBundle\Dispatcher;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class NewsletterAdminController extends Controller

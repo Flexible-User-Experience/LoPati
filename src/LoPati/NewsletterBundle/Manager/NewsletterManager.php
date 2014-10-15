@@ -59,14 +59,15 @@ class NewsletterManager {
     /**
      * Build newsletter content
      *
-     * @param int        $id
-     * @param Newsletter $newsletter
-     * @param string     $host
-     * @param string     $lang
+     * @param int         $id
+     * @param Newsletter  $newsletter
+     * @param string      $host
+     * @param string      $lang
+     * @param string|null $token
      *
      * @return array
      */
-    public function buildNewsletterContentArray($id, $newsletter, $host, $lang)
+    public function buildNewsletterContentArray($id, $newsletter, $host, $lang, $token = null)
     {
         $result = array(
             'id'                       => $id,
@@ -84,6 +85,7 @@ class NewsletterManager {
             'follow'                   => $this->getTrans('newsletter.follow', $lang),
             'colabora'                 => $this->getTrans('newsletter.colabora', $lang),
             'butlleti'                 => $this->getTrans('newsletter.butlleti', $lang),
+            'token'                    => $token,
         );
 
         return $result;

@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="newsletterSend")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterSendRepository")
  * @UniqueEntity({"user","newsletter"})
  */
 class NewsletterSend

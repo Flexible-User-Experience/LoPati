@@ -21,4 +21,24 @@ class NewsletterRepository extends EntityRepository
 	
 		return $query->getSingleResult();
 	}
+
+    public function getWaitingNewsletter()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE NOT EXISTS (SELECT n2 FROM NewsletterBundle:Newsletter n2 WHERE n2.estat = :sending) AND n.estat = :estat ORDER BY n.id ASC');
+        $query->setParameter('estat', 'Waiting');
+        $query->setParameter('sending', 'Sending');
+        $query->setMaxResults('1');
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function getSendingNewsletter()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE n.estat = :estat');
+        $query->setParameter('estat', 'Sending');
+
+        return $query->getOneOrNullResult();
+    }
 }
