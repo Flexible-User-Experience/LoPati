@@ -1,1 +1,11 @@
-<a href="{{ admin.generateObjectUrl('enviar', object) }}" class="btn edit_link btn-small" title="Envia"><i class="icon-envelope"></i>&nbsp;Envia</a>
+{% if object.estat == 'Sending' or object.estat == 'Waiting' %}
+    <a href="#" class="btn edit_link btn-small disabled" title="Envia"><i class="icon-envelope"></i>&nbsp;Envia</a>
+{% else %}
+    <a href="{{ admin.generateObjectUrl('enviar', object) }}" class="btn edit_link btn-small" title="Envia">
+        {% if object.estat == 'Sended' %}
+            <i class="icon-forward"></i>&nbsp;Reenvia
+        {% else %}
+            <i class="icon-envelope"></i>&nbsp;Envia
+        {% endif %}
+    </a>
+{% endif %}

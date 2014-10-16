@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
@@ -12,18 +13,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Psr\Log\LoggerInterface;
 
 class NewsletterSendCommand extends ContainerAwareCommand
 {
 	protected function configure()
     {
 		$this->setName('newsletter:send')
-				->setDefinition(
-						array(
-								new InputArgument('max',
-										InputArgument::OPTIONAL,
-										'Número màxim de correus a enviar',
-										1000),))
 				->setDescription('Envia a cada subscrit el newsletter')
 				->setHelp(
 						<<<EOT
@@ -34,79 +31,65 @@ EOT
 
 	protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var Router $router */
+        $router = $this->getContainer()->get('router');
         /** @var NewsletterManager $nb */
         $nb = $this->getContainer()->get('newsletter.build_content');
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
-		$max = $input->getArgument('max');
-		$host = 'http://www.lopati.cat';
-		$hora = new \DateTime();
+		$host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
 
         // Welcome
-        $output->writeln('<info>Welcome to LoPati newsletter:send command.</info>');
-		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
+        $this->makeLog('Welcome to LoPati newsletter:send command.');
+        $this->makeLog('initializing... host = ' . $host);
         $dtStart = new \DateTime();
 
+        /** @var Newsletter $newsletter */
 		$newsletter = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
 		if ($newsletter) {
             $newsletter->setEstat('Sending');
+            $newsletter->setEnviats(0);
             $em->flush();
-        }
-
-		$newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->getSendingNewsletter();
-		if ($newsletter2) {
-			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
-			$newsletterSends = $em->getRepository('NewsletterBundle:NewsletterSend')->getItemsByNewsletter($newsletter2, $max);
-			
-			if ($newsletterSends) {
-                $output->writeln('Total emails to deliver: ' . count($newsletterSends)); $output->writeln(' ');
-                $enviats = 0;
-                $fallats = 0;
-                $subject = 'Butlletí nº ' . $newsletter2->getNumero();
-                /** @var NewsletterSend $newsletterSend */
-                foreach ($newsletterSends as $newsletterSend) {
-
-                    if (!$newsletterSend->getUser() instanceof NewsletterUser) {
-                        $em->remove($newsletterSend);
-                        $em->flush();
-                        continue;
-                    }
-                    $to = $newsletterSend->getUser()->getEmail();
-                    $edl = array($to);
-                    $output->write('get ' . $newsletterSend->getUser()->getEmail() . '... rendering template... ');
-
-                    $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter2->getId(), $pagines, $host, $newsletterSend->getUser()->getIdioma(), $newsletterSend->getUser()->getToken()));
-
-                    $output->write('sending mail... ');
-
-                    $result = $nb->sendMandrilMessage($subject, $edl, $content);
-
-                    if ($result[0]['status'] == 'sent') {
-                        $enviats++;
-                        $output->writeln('done!');
-                    } else {
-                        $fallats++;
-                        $newsletterSend->getUser()->setFail($newsletterSend->getUser()->getFail() + 1);
-                        $output->writeln('<error>error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason'] . '</error>');
-                    }
-                    $em->remove($newsletterSend);
-                    $em->flush();
+            $this->makeLog('Total emails to deliver: ' . $newsletter->getSubscrits());
+            $enviats = 0;
+            $fallats = 0;
+            $subject = 'Butlletí nº ' . $newsletter->getNumero();
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
+            /** @var NewsletterUser $user */
+            foreach ($users as $user) {
+                $to = $user->getEmail(); $edl = array($to);
+                $this->makeLog('get ' . $to . '... rendering template... ');
+                $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
+                $this->makeLog('sending mail... ');
+                $result = $nb->sendMandrilMessage($subject, $edl, $content);
+                if ($result[0]['status'] == 'sent') {
+                    $enviats++;
+                    $this->makeLog('done!');
+                    $newsletter->setEnviats($newsletter->getEnviats() + 1);
+                } else {
+                    $fallats++;
+                    $user->setFail($user->getFail() + 1);
+                    $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
                 }
-
-                $newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
-                $output->writeln(' ');
-                $output->writeln('Emails delivered: ' . $enviats);
-                $output->writeln('Wrong delivers: ' . $fallats);
-
-			} else {
-				//$output->writeln('entra else');
-				$newsletter2->setEstat('Sended');
-				$newsletter2->setFiEnviament(new \DateTime('now'));
-			}
-		}
-		$em->flush();
-
+                $em->flush();
+            }
+            $newsletter->setEstat('Sended');
+            $newsletter->setFiEnviament(new \DateTime('now'));
+            $em->flush();
+            $this->makeLog('Emails delivered: ' . $enviats);
+            $this->makeLog('Wrong delivers: ' . $fallats);
+        } else {
+            // log no delivery
+            $this->makeLog('ERROR: Nothing to deliver, no waiting newsletter found.');
+        }
         $dtEnd = new \DateTime();
-        $output->writeln('Total ellapsed time: ' . $dtStart->diff($dtEnd)->format('%H:%I:%S'));
+        $this->makeLog('Total ellapsed time: ' . $dtStart->diff($dtEnd)->format('%H:%I:%S'));
 	}
+
+    private function makeLog($msg)
+    {
+        /** @var $logger LoggerInterface */
+        $logger = $this->getContainer()->get('logger');
+        $logger->info($msg, array('internal-newsletter-command'));
+    }
 }

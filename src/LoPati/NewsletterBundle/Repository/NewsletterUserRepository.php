@@ -57,4 +57,24 @@ class NewsletterUserRepository extends EntityRepository
 
         return $query;
     }
+
+    /**
+     * Get active users by group amount
+     *
+     * @param NewsletterGroup|null $group
+     *
+     * @return integer
+     */
+    public function getActiveUsersByGroupAmount($group)
+    {
+        $em = $this->getEntityManager();
+        if (!is_null($group)) {
+            $query = $em->createQuery('SELECT u, g, COUNT(u) AS total FROM NewsletterBundle:NewsletterUser u JOIN u.groups g WHERE u.active = 1 AND g.id = :gid')->setParameter('gid', $group->getId());
+        } else {
+            $query = $em->createQuery('SELECT u, COUNT(u) AS total FROM NewsletterBundle:NewsletterUser u WHERE u.active = 1');
+        }
+        $result = $query->getResult();
+
+        return $result[0]['total'];
+    }
 }

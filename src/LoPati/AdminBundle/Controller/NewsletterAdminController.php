@@ -4,12 +4,12 @@ namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Process\Process;
 
 class NewsletterAdminController extends Controller
 {
@@ -19,24 +19,28 @@ class NewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var Newsletter $newsletter */
         $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
-
-        if ($newsletter->getEstat() == null) {
+        if ($newsletter->getEstat() == null || $newsletter->getEstat() == 'Sended') {
             $newsletter->setEstat('Waiting');
             $newsletter->setIniciEnviament(new \DateTime('now'));
+            $newsletter->setFiEnviament(null);
+            // Clean fail delivery users
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
             foreach ($users as $user) {
                 $em->remove($user);
             }
             $em->flush();
-            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
-            foreach ($users as $user) {
-                $newsletterSend = new NewsletterSend();
-                $newsletterSend->setUser($user);
-                $newsletterSend->setNewsletter($newsletter);
-                $em->persist($newsletterSend);
-            }
-            $newsletter->setSubscrits(count($users));
+            // Set total deliveries
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroupAmount($newsletter->getGroup());
+            $newsletter->setSubscrits($users);
             $em->flush();
+            // Start delivery process
+//            $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
+            $command = 'php ../app/console newsletter:send --env=dev';
+            $process = new Process($command);
+            $process->start();
+            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Iniciant enviament del newsletter núm. ' . $newsletter->getNumero());
+        } else {
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Impossible enviar el newsletter núm. ' . $newsletter->getNumero());
         }
 
         return $this->redirect('../list');
