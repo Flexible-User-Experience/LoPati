@@ -2,7 +2,7 @@
 
 {% block field%}
     <div>
-        {% if object.estat %}
+        {% if object.estat == 'Sending' or object.estat == 'Sended' %}
             {% if object.subscrits != 0 %}
                 {% set percentage = (object.enviats / object.subscrits) * 100 %}
             {% else %}

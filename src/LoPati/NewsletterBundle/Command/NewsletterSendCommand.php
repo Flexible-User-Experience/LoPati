@@ -62,7 +62,7 @@ EOT
                 $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
                 $this->makeLog('sending mail... ');
                 $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                if ($result[0]['status'] == 'sent') {
+                if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
                     $enviats++;
                     $this->makeLog('done!');
                     $newsletter->setEnviats($newsletter->getEnviats() + 1);

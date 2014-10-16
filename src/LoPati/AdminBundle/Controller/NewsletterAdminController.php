@@ -18,7 +18,7 @@ class NewsletterAdminController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var Newsletter $newsletter */
-        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id' => $id));
+        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
         if ($newsletter->getEstat() == null || $newsletter->getEstat() == 'Sended') {
             $newsletter->setEstat('Waiting');
             $newsletter->setIniciEnviament(new \DateTime('now'));
@@ -37,7 +37,11 @@ class NewsletterAdminController extends Controller
 //            $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
             $command = 'php ../app/console newsletter:send --env=dev';
             $process = new Process($command);
-            $process->start();
+            $process->run();
+            $logger = $this->container->get('logger');
+            $logger->info($process->getErrorOutput(), array('internal-newsletter-command-error-output'));
+            $logger->info($process->getOutput(), array('internal-newsletter-command-output'));
+
             $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Iniciant enviament del newsletter núm. ' . $newsletter->getNumero());
         } else {
             $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Impossible enviar el newsletter núm. ' . $newsletter->getNumero());
