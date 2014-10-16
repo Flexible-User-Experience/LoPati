@@ -34,8 +34,7 @@ class NewsletterAdminController extends Controller
             $newsletter->setSubscrits($users);
             $em->flush();
             // Start delivery process
-//            $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
-            $command = 'php ../app/console newsletter:send --env=dev';
+            $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
             $process = new Process($command);
             $process->run();
             $logger = $this->container->get('logger');
