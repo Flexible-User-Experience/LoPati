@@ -1,12 +1,13 @@
 <?php
+
 namespace LoPati\NewsletterBundle\Command;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 
@@ -28,6 +29,7 @@ EOT
     {	
         $output->writeln('Guardant mails....');
 		$contenedor = $this->getContainer();
+        /* @var EntityManager $em */
         $em = $contenedor->get('doctrine')->getManager();
 		
 		$max = $input->getArgument('fitxer');
@@ -37,9 +39,7 @@ EOT
 		$numero_fila = 0;
         $z = 0;
 
-		// mientras exista una fila
 		while (!feof($handle)) {
-
             $row = fgets($handle, 4096);
             //$row=stream_get_line($handle, 4096,'\r');
 			// genero array con por medio del separador "," que es el que tiene el archivo txt
@@ -77,4 +77,3 @@ EOT
         $output->writeln('TOTAL ' . $numero_fila . ' mails avaluats');
 	}
 }
-

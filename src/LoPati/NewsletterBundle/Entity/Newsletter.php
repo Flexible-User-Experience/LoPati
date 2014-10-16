@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use LoPati\BlogBundle\Entity\Pagina;
 
 /**
- * LoPati\NewsletterBundle\Entity\Newsletter
  * @ORM\Table(name="newsletters")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterRepository")
  * @UniqueEntity("numero")

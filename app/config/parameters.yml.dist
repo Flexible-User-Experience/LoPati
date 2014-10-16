@@ -26,3 +26,6 @@ parameters:
     newsleterTestEmailDestination3: you3@you.com    #change this
 
     cypress_git_repository: "/path/to/git/repo"
+
+    mandril_api_key_test: "secret-api-token-test"
+    mandril_api_key: "secret-api-token"

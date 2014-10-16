@@ -1,218 +1,95 @@
 <?php
+
 namespace LoPati\NewsletterBundle\Command;
 
+use Doctrine\ORM\EntityManager;
+use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
+use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Psr\Log\LoggerInterface;
 
-class NewsletterSendCommand extends ContainerAwareCommand {
-	protected function configure() {
+class NewsletterSendCommand extends ContainerAwareCommand
+{
+	protected function configure()
+    {
 		$this->setName('newsletter:send')
-				->setDefinition(
-						array(
-								new InputArgument('max',
-										InputArgument::OPTIONAL,
-										'Número màxim de correus a enviar',
-										100),))
 				->setDescription('Envia a cada subscrit el newsletter')
 				->setHelp(
 						<<<EOT
-La comanda <info>newsltter:send</info> envia un email a cada subscrit al newsletter.
+La comanda <info>newsletter:send</info> envia un email a cada subscrit al newsletter.
 EOT
 				);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        /** @var Router $router */
+        $router = $this->getContainer()->get('router');
+        /** @var NewsletterManager $nb */
+        $nb = $this->getContainer()->get('newsletter.build_content');
+        /** @var EntityManager $em */
+        $em = $this->getContainer()->get('doctrine')->getManager();
+		$host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
 
-		$max = $input->getArgument('max');
-		$host = 'dev' == $input->getOption('env') ? 'http://lopati.local'
-				: 'http://lopati.cat';
+        // Welcome
+        $this->makeLog('Welcome to LoPati newsletter:send command.');
+        $this->makeLog('initializing... host = ' . $host);
+        $dtStart = new \DateTime();
 
-		$hora = new \DateTime();
-		$output->writeln($hora->format('Y-m-d H:i:s'). ' · Host = ' . $host);
-
-		$contenedor = $this->getContainer();
-		$em = $contenedor->get('doctrine')->getManager();
-
-		$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE NOT EXISTS (SELECT n2 FROM NewsletterBundle:Newsletter n2 WHERE n2.estat = :sending ) AND n.estat = :estat ORDER BY n.id ASC');
-		$query->setParameter('estat', 'Waiting');
-		$query->setParameter('sending', 'Sending');
-		$query->setMaxResults('1');
-		$newsletter = $query->getOneOrNullResult();
+        /** @var Newsletter $newsletter */
+		$newsletter = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
 		if ($newsletter) {
             $newsletter->setEstat('Sending');
-        }
-		$em->flush();
-
-		$query = $em->createQuery('SELECT n FROM NewsletterBundle:Newsletter n WHERE n.estat = :estat');
-		$query->setParameter('estat', 'Sending');
-		$newsletter2 = $query->getOneOrNullResult();
-		if ($newsletter2) {
-			$pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($newsletter2->getId());
-			$query = $em->createQuery('SELECT s FROM NewsletterBundle:NewsletterSend s WHERE s.newsletter = :newsletter');
-			$query->setParameter('newsletter', $newsletter2);
-			$query->setMaxResults($max);
-			$users = $query->getResult();
-			
-			if ($users) {
-                $output->writeln('users per enviar correu: ' . count($users));
-                $enviats = 0;
-                $fallats = 0;
-                $idioma = 'ca';
-                /** @var NewsletterSend $user */
-                foreach ($users as $user) {
-                    $output->writeln('llista correus a enviar');
-                    if (!$user->getUser() instanceof NewsletterUser) {
-                        $em->remove($user);
-                        $em->flush();
-                        continue;
-                    }
-                    $to = $user->getUser()->getEmail();
-                    $output->write(' .. ' . $to .' .. ');
-                    $output->writeln('entra usuari ' .$user->getUser()->getEmail() );
-                    $visualitzar_correctament = 'Clica aquí per visualitzar correctament';
-                    $baixa = 'Clica aquí per donar-te de baixa';
-                    $lloc = 'Lloc';
-                    $data = 'Data';
-                    $links = 'Enllaços';
-                    $publicat = 'Publicat';
-                    $organitza = 'Organitza';
-                    $suport = 'Amb el suport de';
-                    $follow = 'Segueix-nos a';
-                    $colabora = 'Col·labora';
-                    $butlleti = 'Butlletí';
-
-                    $output->writeln('if idioma es');
-                    if ($user->getUser()->getIdioma()=='es'){
-                        $output->writeln('entra idioma es');
-
-                        $visualitzar_correctament="Pulsa aquí para visualizar correctamente";
-                        $baixa="Pulsa aquí para darte de baja";
-                        $lloc="Lugar";
-                        $data="Fecha";
-                        $publicat="Publicado";
-                        $links="Enlaces";
-
-                        $organitza="Organiza";
-                        $suport="Con el apoyo de";
-                        $follow="Siguenos en";
-                        $colabora="Colabora";
-                        $butlleti="Boletín";
-
-                        foreach ($pagines->getPagines() as $pagina){
-                            $pagina->setLocale('es');
-                            $subCategoria=$pagina->getSubCategoria();
-                            $subCategoria->setlocale('es');
-                        //	$pagina->setSubCategoria($pagina->getSubCategoria())->setLocale('es');
-                            $em->refresh($subCategoria);
-                            $em->refresh($pagina);
-                        }
-                        $idioma="es";
-
-                    } elseif ($user->getUser()->getIdioma()=='en') {
-                        $output->writeln('entra en');
-                        //$output->writeln('entra ingles');
-
-                        $visualitzar_correctament="Click here to visualize correctly";
-                        $baixa="Click here to provide you low";
-                        $lloc="Place";
-                        $data="Date";
-                        $publicat="Published";
-                        $links="Links";
-
-                        $organitza="Organizes";
-                        $suport="With de support of";
-                        $follow="Follow us";
-                        $colabora="Collaborate";
-                        $butlleti="Newsletter";
-
-                        foreach ($pagines->getPagines() as $pagina){
-                            $pagina->setLocale('en');
-                            $subCategoria=$pagina->getSubCategoria();
-                            $subCategoria->setlocale('en');
-                            //	$pagina->setSubCategoria($pagina->getSubCategoria())->setLocale('es');
-                            $em->refresh($subCategoria);
-                            $em->refresh($pagina);
-                        }
-                        $idioma="en";
-                    }
-
-                    $output->writeln('nem a renderitzar mail.html.twig');
-                    $contenido = $contenedor->get('templating')->render('NewsletterBundle:Default:mail.html.twig', array(
-                            'host' => $host,
-                            'pagines' => $pagines,
-                            'idioma' => $idioma,
-                            'token' => $user->getUser()->getToken(),
-                            'visualitzar_correctament' => $visualitzar_correctament,
-                            'baixa' => $baixa,
-                            'lloc' => $lloc,
-                            'data' => $data,
-                            'publicat' => $publicat,
-                            'links' => $links,
-                            'organitza' => $organitza,
-                            'suport' => $suport,
-                            'follow' => $follow,
-                            'colabora' => $colabora,
-                            'butlleti' => $butlleti));
-                    $output->writeln('hem renderitzat');
-
-                    $to = $user->getUser()->getEmail();
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Butlletí nº ' .$newsletter2->getNumero())
-                        ->setFrom(array('butlleti@lopati.cat' => "Centre d'Art Lo Pati"))
-                        ->setBody($contenido, 'text/html');
-
-                    $num = 0;
-                    try {
-                        $message->setTo($to);
-                        $output->write('enviant a' . $to .'.. ');
-                        $num = $contenedor->get('mailer')->send($message);
-
-                    } catch (\Swift_TransportException $e) {
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
-
-                    } catch (\Swift_MimeException $e) {
-                        //Error handled here
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
-
-                    } catch (\Swift_RfcComplianceException $e) {
-                        //Error handled here
-                        $output->writeln(' ');
-                        $output->writeln('ha fallat:' . $to);
-                    }
-
-                    if ($num) {
-                        $enviats++;
-                        $output->write('enviat ');
-                    } else {
-                        $fallats++;
-                        $user->getUser()->setFail($user->getUser()->getFail() + 1);
-                    }
-
-                    $em->remove($user);
-                    $em->flush();
+            $newsletter->setEnviats(0);
+            $em->flush();
+            $this->makeLog('Total emails to deliver: ' . $newsletter->getSubscrits());
+            $enviats = 0;
+            $fallats = 0;
+            $subject = 'Butlletí nº ' . $newsletter->getNumero();
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
+            /** @var NewsletterUser $user */
+            foreach ($users as $user) {
+                $to = $user->getEmail(); $edl = array($to);
+                $this->makeLog('get ' . $to . '... rendering template... ');
+                $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
+                $this->makeLog('sending mail... ');
+                $result = $nb->sendMandrilMessage($subject, $edl, $content);
+                if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
+                    $enviats++;
+                    $this->makeLog('done!');
+                    $newsletter->setEnviats($newsletter->getEnviats() + 1);
+                } else {
+                    $fallats++;
+                    $user->setFail($user->getFail() + 1);
+                    $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
                 }
-
-                $newsletter2->setEnviats($newsletter2->getEnviats() + $enviats);
-                $output->writeln(' ');
-                $output->writeln('shan enviat: ' . $enviats . ' mails correctament');
-                $output->writeln('han fallat: ' . $fallats . ' mails');
-
-			} else {
-				//$output->writeln('entra else');
-				$newsletter2->setEstat('Sended');
-				$newsletter2->setFiEnviament(new \DateTime('now'));
-			}
-		}
-		$em->flush();
+                $em->flush();
+            }
+            $newsletter->setEstat('Sended');
+            $newsletter->setFiEnviament(new \DateTime('now'));
+            $em->flush();
+            $this->makeLog('Emails delivered: ' . $enviats);
+            $this->makeLog('Wrong delivers: ' . $fallats);
+        } else {
+            // log no delivery
+            $this->makeLog('ERROR: Nothing to deliver, no waiting newsletter found.');
+        }
+        $dtEnd = new \DateTime();
+        $this->makeLog('Total ellapsed time: ' . $dtStart->diff($dtEnd)->format('%H:%I:%S'));
 	}
-}
 
+    private function makeLog($msg)
+    {
+        /** @var $logger LoggerInterface */
+        $logger = $this->getContainer()->get('logger');
+        $logger->info($msg, array('internal-newsletter-command'));
+    }
+}
