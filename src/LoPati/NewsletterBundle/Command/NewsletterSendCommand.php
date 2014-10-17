@@ -8,7 +8,6 @@ use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
-use Stof\DoctrineExtensionsBundle\EventListener\LocaleListener;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,8 +31,6 @@ EOT
 
 	protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var TranslatableListener $tl */
-        $tl = $this->getContainer()->get('stof_doctrine_extensions.event_listener.locale');
         /** @var NewsletterManager $nb */
         $nb = $this->getContainer()->get('newsletter.build_content');
         /** @var EntityManager $em */
@@ -47,12 +44,6 @@ EOT
 
         /** @var Newsletter $newsletter */
 		$newsletter = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
-        $tl->setTranslatableLocale('es');
-        /** @var Newsletter $newsletterEs */
-        $newsletterEs = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
-        $tl->setTranslatableLocale('en');
-        /** @var Newsletter $newsletterEn */
-        $newsletterEn = $em->getRepository('NewsletterBundle:Newsletter')->getWaitingNewsletter();
 		if ($newsletter) {
             $newsletter->setEstat('Sending');
             $newsletter->setEnviats(0);
@@ -64,27 +55,18 @@ EOT
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
             /** @var NewsletterUser $user */
             foreach ($users as $user) {
-//                $this->getContainer()->get('translator')->setLocale($user->getIdioma());
-//                /** @var Pagina $pagina */
-//                foreach ($newsletter->getPagines() as $pagina){
-//                    $pagina->setLocale($user->getIdioma());
-//                    $subCategoria = $pagina->getSubCategoria();
-//                    $subCategoria->setlocale($user->getIdioma());
-//                    $em->refresh($subCategoria);
-//                    $em->refresh($pagina);
-//                }
-                if ($user->getIdioma() == 'ca') {
-                    $localzedNewsletter = $newsletter;
-                } else if ($user->getIdioma() == 'es') {
-                    $localzedNewsletter = $newsletterEs;
-                } else if ($user->getIdioma() == 'en') {
-                    $localzedNewsletter = $newsletterEn;
-                } else {
-                    $localzedNewsletter = $newsletter;
+                $this->getContainer()->get('translator')->setLocale($user->getIdioma());
+                /** @var Pagina $pagina */
+                foreach ($newsletter->getPagines() as $pagina){
+                    $pagina->setLocale($user->getIdioma());
+                    $subCategoria = $pagina->getSubCategoria();
+                    $subCategoria->setlocale($user->getIdioma());
+                    $em->refresh($subCategoria);
+                    $em->refresh($pagina);
                 }
                 $to = $user->getEmail(); $edl = array($to);
                 $this->makeLog('get ' . $to . '... rendering template... ');
-                $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $localzedNewsletter, $host, $user->getIdioma(), $user->getToken()));
+                $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
                 $this->makeLog('sending mail... ');
                 $result = $nb->sendMandrilMessage($subject, $edl, $content);
                 if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
