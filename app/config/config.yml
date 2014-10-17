@@ -84,6 +84,10 @@ sonata_admin:
         dashboard:  AdminBundle:Admin:my_dashboard.html.twig
         user_block: AdminBundle:Admin:my_user_block.html.twig
         edit:       SonataAdminBundle:CRUD:edit.html.twig
+        batch:      SonataAdminBundle:CRUD:list__batch.html.twig
+        action:     SonataAdminBundle:CRUD:action.html.twig
+        select:     SonataAdminBundle:CRUD:list__select.html.twig
+        batch_confirmation: SonataAdminBundle:CRUD:batch_confirmation.html.twig
     dashboard:
         groups:
             Menús:

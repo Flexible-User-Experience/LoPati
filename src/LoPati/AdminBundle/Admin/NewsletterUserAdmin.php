@@ -2,6 +2,8 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
+use Lopati\NewsletterBundle\Entity\NewsletterGroup;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -37,7 +39,7 @@ class NewsletterUserAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
+//        $collection->remove('delete');
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -99,5 +101,15 @@ class NewsletterUserAdmin extends Admin
             ->add('idioma')
             ->add('active', null, array('label' => 'Actiu'))
             ->add('created', null, array('label' => 'Data Alta'));
+    }
+
+    public function getBatchActions()
+    {
+        $actions['group'] = [
+            'label'            => 'Asigna al grup',
+            'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+        ];
+
+        return $actions;
     }
 }

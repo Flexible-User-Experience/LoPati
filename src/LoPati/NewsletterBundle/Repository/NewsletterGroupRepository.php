@@ -3,13 +3,14 @@
 namespace Lopati\NewsletterBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 class NewsletterGroupRepository extends EntityRepository
 {
     /**
      * Get active items sort by name
      *
-     * @return array
+     * @return Query
      */
     public function getActiveItemsSortByNameQuery()
     {
