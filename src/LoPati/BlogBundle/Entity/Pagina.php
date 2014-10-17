@@ -99,12 +99,16 @@ class Pagina {
 	 */
 	private $locale;
 
-	/** @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria") */
-	protected $categoria;
+    /**
+     * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\Categoria")
+     * @var Categoria
+     */
+    protected $categoria;
 
 	/** 
 	 * @ORM\ManyToOne(targetEntity="LoPati\MenuBundle\Entity\SubCategoria", inversedBy="pagines")
 	 * @ORM\JoinColumn(name="subCategoria_id", referencedColumnName="id", nullable=true)
+     * @var SubCategoria
 	 */
 	protected $subCategoria;
 	
