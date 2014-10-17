@@ -53,6 +53,7 @@ EOT
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
             /** @var NewsletterUser $user */
             foreach ($users as $user) {
+                $this->getContainer()->get('translator')->setLocale($user->getIdioma());
                 $to = $user->getEmail(); $edl = array($to);
                 $this->makeLog('get ' . $to . '... rendering template... ');
                 $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
