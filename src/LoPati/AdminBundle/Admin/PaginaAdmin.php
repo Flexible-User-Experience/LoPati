@@ -14,8 +14,8 @@ class PaginaAdmin extends Admin
 
     protected $datagridValues = array(
         '_page'       => 1,
-        '_sort_order' => 'ASC', // sort direction
-        '_sort_by'    => 'titol' // field name
+        '_sort_order' => 'DESC', // sort direction
+        '_sort_by'    => 'id' // field name
     );
 
     /**
