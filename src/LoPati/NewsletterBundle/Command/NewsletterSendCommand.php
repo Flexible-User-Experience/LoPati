@@ -3,8 +3,8 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,7 +13,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Psr\Log\LoggerInterface;
 
 class NewsletterSendCommand extends ContainerAwareCommand
@@ -31,13 +30,11 @@ EOT
 
 	protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Router $router */
-        $router = $this->getContainer()->get('router');
         /** @var NewsletterManager $nb */
         $nb = $this->getContainer()->get('newsletter.build_content');
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
-		$host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
+		$host = $this->getContainer()->get('kernel')->getEnvironment() == 'prod' ? 'http://www.lopati.cat' : 'http://lopati2.local';
 
         // Welcome
         $this->makeLog('Welcome to LoPati newsletter:send command.');
@@ -57,6 +54,15 @@ EOT
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
             /** @var NewsletterUser $user */
             foreach ($users as $user) {
+                $this->getContainer()->get('translator')->setLocale($user->getIdioma());
+                /** @var Pagina $pagina */
+                foreach ($newsletter->getPagines() as $pagina){
+                    $pagina->setLocale($user->getIdioma());
+                    $subCategoria = $pagina->getSubCategoria();
+                    $subCategoria->setlocale($user->getIdioma());
+                    $em->refresh($subCategoria);
+                    $em->refresh($pagina);
+                }
                 $to = $user->getEmail(); $edl = array($to);
                 $this->makeLog('get ' . $to . '... rendering template... ');
                 $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
@@ -90,6 +96,6 @@ EOT
     {
         /** @var $logger LoggerInterface */
         $logger = $this->getContainer()->get('logger');
-        $logger->info($msg, array('internal-newsletter-command'));
+        $logger->debug($msg, array('internal-newsletter-command'));
     }
 }
