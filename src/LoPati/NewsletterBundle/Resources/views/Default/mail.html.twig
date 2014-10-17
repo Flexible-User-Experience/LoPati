@@ -10,10 +10,7 @@
             color: #666;
             text-decoration: none;
         }
-
-        .links p {
-            margin: 0;
-        }
+        .links p { margin: 0; }
     </style>
 </head>
 
@@ -23,10 +20,8 @@
     <td width="4" rowspan="2">&nbsp;</td>
     <td width="174" rowspan="2" valign="top" class="Titul">
         <h2 style="font-size:14px; margin:0; padding:0; color:#666 !important;">{{ pagines.dataNewsletter | format_datetime('dd MMMM Y', idioma, 'Europe/Paris') }} </h2>
-        {# <h2 style="font-size:14px; margin:0; padding:0; color:#666 !important;">{{butlleti}}: {{ pagines.id }}</h2></td> #}
-
     </td>
-    <td width="40">&nbsp;  </td>
+    <td width="40">&nbsp;</td>
     <td colspan="2" valign="top"><a
                 href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}"
                 style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">{{ visualitzar_correctament }}</a>
@@ -40,7 +35,6 @@
 <tr>
     <td></td>
 </tr>
-
 <tr>
     <td width="4">&nbsp;</td>
     <td colspan="5">&nbsp;</td>
@@ -52,8 +46,6 @@
                                                         alt="image header" title="image header"/></td>
     <td width="4">&nbsp;</td>
 </tr>
-
-
 {% for pagina in pagines.pagines %}
     <tr>
         <td width="4">&nbsp;</td>
@@ -73,8 +65,6 @@
     </tr>
     <tr>
         <td width="4">&nbsp;</td>
-
-
         <td colspan="5" align="center" valign="middle">
             {% if pagina.imageGran1Name() %}
                 <img src="{{ host ~ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}"
@@ -227,7 +217,6 @@
            style="text-decoration:none; color:#666; font-size:13px;">Diputació de Tarragona</a></td>
 </tr>
 <tr>
-
     <td width="174" align="left" valign="top" class="contring" id="cv">&nbsp;</td>
 </tr>
 <tr>
@@ -241,17 +230,17 @@
 </tr>
 <tr>
     <td align="left" valign="top" class="contring">
-        <a href="https://www.facebook.com/pages/Lo-Pati/339606589419890" style="color:#666; font-size:9px;" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_fb.gif' }}" alt="facebook" width="18" height="18"/>
+        <a href="https://www.facebook.com/pages/Lo-Pati/339606589419890" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
+            <img src="{{ host ~ '/images/xarxa_fb.gif' }}" alt="facebook" width="18" height="18" title="facebook"/>
         </a>
-        <a href="https://twitter.com/centreartlopati" target="_blank">
-            <img width="18" height="18" src="{{ host ~ '/images/xarxa_tw.gif' }}" alt="twitter" title="twitter">
+        <a href="https://twitter.com/centreartlopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
+            <img src="{{ host ~ '/images/xarxa_tw.gif' }}" alt="twitter" width="18" height="18" title="twitter">
         </a>
-        <a href="http://vimeo.com/lopati" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_vimeo.gif' }}" alt="vimeo" width="18" height="18"/>
+        <a href="http://vimeo.com/lopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
+            <img src="{{ host ~ '/images/xarxa_vimeo.gif' }}" alt="vimeo" width="18" height="18" title="vimeo"/>
         </a>
-        <a href="http://www.flickr.com/photos/lopati" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_flickr.gif' }}" alt="flickr" width="18" height="18"/>
+        <a href="http://www.flickr.com/photos/lopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
+            <img src="{{ host ~ '/images/xarxa_flickr.gif' }}" alt="flickr" width="18" height="18" title="flickr"/>
         </a>
     </td>
 </tr>
