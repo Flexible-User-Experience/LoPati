@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="newsletter_groups")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterGroupRepository")
  * @UniqueEntity("name")
  */
 class NewsletterGroup
