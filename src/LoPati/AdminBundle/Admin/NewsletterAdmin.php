@@ -39,6 +39,7 @@ class NewsletterAdmin extends Admin
                 'date',
                 array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
             )
+            ->add('name', null, array('label' => 'Nom'))
             ->add('group', 'sonata_type_model', array(
                     'required' => true,
                     'expanded' => false,
@@ -68,6 +69,7 @@ class NewsletterAdmin extends Admin
                     'template' => 'AdminBundle:Newsletter:list_custom_dataNewsletter_field.html.twig'
                 )
             )
+            ->add('name', null, array('label' => 'Nom'))
             ->add('group', null, array('label' => 'Grup'))
             ->add('test')
             ->add(

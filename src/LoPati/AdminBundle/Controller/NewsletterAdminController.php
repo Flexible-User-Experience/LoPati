@@ -36,11 +36,7 @@ class NewsletterAdminController extends Controller
             // Start delivery process asynchronous
             $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
             $process = new Process($command);
-            $process->run();
-            $logger = $this->container->get('logger');
-            $logger->info($process->getErrorOutput(), array('internal-newsletter-command-error-output'));
-            $logger->info($process->getOutput(), array('internal-newsletter-command-output'));
-
+            $process->start();
             $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Iniciant enviament del newsletter núm. ' . $newsletter->getNumero());
         } else {
             $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Impossible enviar el newsletter núm. ' . $newsletter->getNumero());
@@ -74,7 +70,7 @@ class NewsletterAdminController extends Controller
         $newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
         $host = $this->getHostRoute();
         $contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($id, $newsletter2, $host, 'ca'));
-        $subject = '[TEST] Butlletí nº ' . $newsletter->getNumero();
+        $subject = '[TEST] ' . $newsletter->getName();
         $edl = array(
             $this->container->getParameter('newsleterEmailDestination1'),
             $this->container->getParameter('newsleterEmailDestination2'),
@@ -82,13 +78,16 @@ class NewsletterAdminController extends Controller
         );
 
         $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
-
-        $this->get('session')->getFlashBag()->add(
-            'sonata_flash_success',
-            'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter('newsleterEmailDestination1') .
-            ', ' . $this->container->getParameter('newsleterEmailDestination2') .
-            ' i ' . $this->container->getParameter('newsleterEmailDestination3')
-        );
+        if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'Mail de test enviat correctament a les bústies: ' . $this->container->getParameter('newsleterEmailDestination1') .
+                ', ' . $this->container->getParameter('newsleterEmailDestination2') .
+                ' i ' . $this->container->getParameter('newsleterEmailDestination3')
+            );
+        } else {
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR: Status = "' . $result[0]['status'] . '" Reason: "' . $result[0]['reject_reason'] . '"');
+        }
 
         $newsletter->setTest('1');
         $em->flush();
