@@ -33,7 +33,7 @@ class NewsletterAdminController extends Controller
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroupAmount($newsletter->getGroup());
             $newsletter->setSubscrits($users);
             $em->flush();
-            // Start delivery process
+            // Start delivery process asynchronous
             $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
             $process = new Process($command);
             $process->run();

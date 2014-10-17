@@ -255,8 +255,9 @@ genemu_form:
 hip_mandrill:
     api_key: "%mandril_api_key%"
     default:
-        sender: butlleti@lopati.cat
-        sender_name: Lo Pati
+        sender:       "butlleti@lopati.cat"
+        sender_name:  "Lo Pati"
+        subaccount:   "lopati"
 
 parameters:
     newsleterEmailDestination1: "%newsleterTestEmailDestination1%"
