@@ -4,7 +4,6 @@ namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use LoPati\NewsletterBundle\Entity\NewsletterSend;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,7 +12,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Psr\Log\LoggerInterface;
 
 class NewsletterSendCommand extends ContainerAwareCommand
@@ -31,13 +29,11 @@ EOT
 
 	protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var Router $router */
-        $router = $this->getContainer()->get('router');
         /** @var NewsletterManager $nb */
         $nb = $this->getContainer()->get('newsletter.build_content');
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine')->getManager();
-		$host = $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
+		$host = $this->getContainer()->get('kernel')->getEnvironment() == 'prod' ? 'http://www.lopati.cat' : 'http://lopati2.local';
 
         // Welcome
         $this->makeLog('Welcome to LoPati newsletter:send command.');
@@ -90,6 +86,6 @@ EOT
     {
         /** @var $logger LoggerInterface */
         $logger = $this->getContainer()->get('logger');
-        $logger->info($msg, array('internal-newsletter-command'));
+        $logger->debug($msg, array('internal-newsletter-command'));
     }
 }
