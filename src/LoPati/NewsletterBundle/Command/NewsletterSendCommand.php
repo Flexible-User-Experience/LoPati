@@ -51,7 +51,6 @@ EOT
             $this->makeLog('Total emails to deliver: ' . $newsletter->getSubscrits());
             $enviats = 0;
             $fallats = 0;
-            $subject = 'Butlletí nº ' . $newsletter->getNumero();
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($newsletter->getGroup());
             /** @var NewsletterUser $user */
             foreach ($users as $user) {
@@ -68,7 +67,7 @@ EOT
                 $this->makeLog('get ' . $to . '... rendering template... ');
                 $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
                 $this->makeLog('sending mail... ');
-                $result = $nb->sendMandrilMessage($subject, $edl, $content);
+                $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
                 if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
                     $enviats++;
                     $this->makeLog('done!');

@@ -39,6 +39,12 @@ class Newsletter
     private $numero;
 
     /**
+     * @var string $name
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
      * @var string $dataNewsletter
      * @ORM\Column(name="dataNewsletter", type="date")
      */
@@ -115,6 +121,30 @@ class Newsletter
     public function setNumero($created)
     {
         $this->numero = $created;
+    }
+
+    /**
+     * Set Name
+     *
+     * @param string $name name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getDataNewsletter()
