@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use Gedmo\Translatable\TranslatableListener;
 use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;

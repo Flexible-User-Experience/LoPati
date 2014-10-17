@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -29,6 +30,8 @@ class NewsletterAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var NewsletterGroupRepository $ngr */
+        $ngr = $this->configurationPool->getContainer()->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterGroup');
         $formMapper
             ->add('numero', null, array('label' => 'Núm. newsletter'))
             ->add(
@@ -36,7 +39,14 @@ class NewsletterAdmin extends Admin
                 'date',
                 array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
             )
-            ->add('group', null, array('label' => 'Grup'))
+            ->add('group', 'sonata_type_model', array(
+                    'required' => true,
+                    'expanded' => false,
+                    'multiple' => false,
+                    'btn_add' => false,
+                    'label' => 'Grup',
+                    'query' => $ngr->getActiveItemsSortByNameQuery(),
+                ))
             ->add(
                 'pagines',
                 null,
