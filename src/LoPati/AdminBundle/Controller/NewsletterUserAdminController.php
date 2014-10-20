@@ -93,9 +93,13 @@ class NewsletterUserAdminController extends Controller
      * Pre set group action
      *
      * @return Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function groupAction()
     {
+        if ($this->admin->isGranted('EDIT') === false || $this->admin->isGranted('DELETE') === false) {
+            throw new AccessDeniedException();
+        }
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $groups = $em->getRepository('NewsletterBundle:NewsletterGroup')->getActiveItemsSortByNameQuery()->getResult();
@@ -117,10 +121,37 @@ class NewsletterUserAdminController extends Controller
     /**
      * Final set group action
      *
-     * @return Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function setgroupAction()
     {
+        if ($this->admin->isGranted('EDIT') === false || $this->admin->isGranted('DELETE') === false) {
+            throw new AccessDeniedException();
+        }
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var Request $request */
+        $request = $this->get('request');
+        $group = $request->get('group');
+        $users = $request->get('users');
+        if (is_null($group)) {
+            throw new AccessDeniedException();
+        }
+        $entityGroup = $em->getRepository('NewsletterBundle:NewsletterGroup')->find($group);
+        if ($entityGroup) {
+            foreach ($users as $user) {
+                $entityUser = $em->getRepository('NewsletterBundle:NewsletterUser')->find($user);
+                if ($entityUser) {
+                    $entityGroup->addUser($entityUser);
+                }
+            }
+            $em->persist($entityGroup);
+            $em->flush($entityGroup);
+            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'S\'ha assignat el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuaris correctament.');
+        } else {
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Error al assignar el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuaris.');
+        }
 
+        return $this->redirect('list');
     }
 }

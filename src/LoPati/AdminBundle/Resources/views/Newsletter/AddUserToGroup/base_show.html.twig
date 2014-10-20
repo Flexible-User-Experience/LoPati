@@ -6,9 +6,8 @@
     </div>
 {% endblock %}
 
-{% block side_menu %}{{ knp_menu_render(admin.sidemenu('setgroup'), {'currentClass' : 'active'}, 'list') }}{% endblock %}
-
-{% block show %}
+{% block form %}
+    <link href="/bundles/menu/css/menu.css" rel="stylesheet" type="text/css"/>
     <form class="form-horizontal" action="{{ path('admin_lopati_newsletter_newsletteruser_setgroup') }}" method="POST" {% if not admin_pool.getOption('html5_validate') %}novalidate="novalidate"{% endif %}>
         <div class="tabbable">
             <ul class="nav nav-tabs">
@@ -23,15 +22,15 @@
                             </div>
                             <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
                                 {% for group in groups %}
-                                    <input type="radio" name="group" value="{{ group.id }}">{{ group.name }}<br>
+                                    <input type="radio" name="group" value="{{ group.id }}" {% if loop.first %}checked="checked"{% endif %}>&nbsp;{{ group.name }}<br>
                                 {% endfor %}
                             </div>
                             <div class="control-group">
-                                <label class="control-label required">Usuaris seleccionats:</label>
+                                <label class="control-label">Usuaris seleccionats:</label>
                             </div>
-                            <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
+                            <div class="controls sonata-ba-field">
                                 {% for user in users %}
-                                    <input type="checkbox" name="users" value="{{ user.id }}">{{ user.email }}<br>
+                                    <input type="checkbox" name="users[{{ user.id }}]" value="{{ user.id }}" checked="checked">&nbsp;{{ user.email }}<br>
                                 {% endfor %}
                             </div>
                         </div>
