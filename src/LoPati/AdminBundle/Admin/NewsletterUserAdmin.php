@@ -39,7 +39,10 @@ class NewsletterUserAdmin extends Admin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-//        $collection->remove('delete');
+        $collection->add('group', 'setgroup');
+        $collection->add('setgroup', 'group');
+        $collection->remove('delete');
+        $collection->remove('show');
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -106,8 +109,8 @@ class NewsletterUserAdmin extends Admin
     public function getBatchActions()
     {
         $actions['group'] = [
-            'label'            => 'Asigna al grup',
-            'ask_confirmation' => true // If true, a confirmation will be asked before performing the action
+            'label'            => 'Asignar grup',
+            'ask_confirmation' => false
         ];
 
         return $actions;

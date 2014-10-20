@@ -38,6 +38,8 @@ class ArtistaAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
+        $collection->remove('batch');
+        $collection->remove('show');
     }
 
     protected function configureFormFields(FormMapper $formMapper)

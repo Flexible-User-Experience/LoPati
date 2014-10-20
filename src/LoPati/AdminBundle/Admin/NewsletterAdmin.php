@@ -131,5 +131,8 @@ class NewsletterAdmin extends Admin
             $this->getRouterIdParameter() . '/test'
         );
         $collection->remove('delete');
+        $collection->remove('batch');
+        $collection->remove('show');
+        $collection->remove('export');
     }
 }

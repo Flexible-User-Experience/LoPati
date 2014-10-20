@@ -1,0 +1,50 @@
+{% extends base_template %}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block form %}
+    <link href="/bundles/menu/css/menu.css" rel="stylesheet" type="text/css"/>
+    <form class="form-horizontal" action="{{ path('admin_lopati_newsletter_newsletteruser_setgroup') }}" method="POST" {% if not admin_pool.getOption('html5_validate') %}novalidate="novalidate"{% endif %}>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#" data-toggle="tab"><i class="icon-exclamation-sign has-errors hide"></i>Assignar grup a usuaris</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <fieldset>
+                        <div class="sonata-ba-collapsed-fields">
+                            <div class="control-group">
+                                <label class="control-label" style="width:230px;">Escull un grup per asignar:</label>
+                                <div class="controls sonata-ba-field sonata-ba-field-standard-natural" style="margin-left:240px;">
+                                    {% for group in groups %}
+                                        <label class="radio" for="{{ group.id }}">
+                                            <input type="radio" name="group" value="{{ group.id }}" {% if loop.first %}checked="checked"{% endif %}>{{ group.name }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" style="width: 230px;">Usuaris seleccionats:</label>
+                                <div class="controls sonata-ba-field" style="margin-left:240px;">
+                                    {% for user in users %}
+                                        <label class="checkbox" for="{{ user.id }}">
+                                            <input type="checkbox" name="users[{{ user.id }}]" value="{{ user.id }}" checked="checked">{{ user.email }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="well well-small form-actions">
+            <input type="submit" class="btn btn-primary" name="Assignar" value="Assignar">
+            <a class="btn btn-danger" href="{{ path('admin_lopati_newsletter_newsletteruser_list') }}">Cancel·lar</a>
+        </div>
+     </form>
+{% endblock %}
