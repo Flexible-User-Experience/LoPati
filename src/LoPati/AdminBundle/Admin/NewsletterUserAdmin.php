@@ -109,7 +109,7 @@ class NewsletterUserAdmin extends Admin
     public function getBatchActions()
     {
         $actions['group'] = [
-            'label'            => 'Asignar grup',
+            'label'            => 'Assignar grup',
             'ask_confirmation' => false
         ];
 
