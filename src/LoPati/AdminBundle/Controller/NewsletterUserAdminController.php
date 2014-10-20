@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Lopati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class NewsletterUserAdminController extends Controller
@@ -62,37 +64,55 @@ class NewsletterUserAdminController extends Controller
         return $this->get('sonata.admin.exporter')->getResponse($format, $filename, $flick);
     }
 
+    /**
+     * Batch pre set group action
+     *
+     * @param ProxyQueryInterface $selectedModelQuery
+     *
+     * @return RedirectResponse
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
     public function batchActionGroup(ProxyQueryInterface $selectedModelQuery)
     {
-        /** @var NewsletterUserRepository $nur */
-        $nur = $this->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterUser');
-
         if ($this->admin->isGranted('EDIT') === false || $this->admin->isGranted('DELETE') === false) {
             throw new AccessDeniedException();
         }
-        /** @var Request $request */
-        $request = $this->get('request');
-        /** @var Session $session */
-        $session = $this->get('session');
-        $modelManager = $this->admin->getModelManager();
-        $targets = $request->get('idx');
-//        if (count($targets) == 0) {
-//            $session->getFlashBag()->add('sonata_flash_info', 'Escull almenys 1 usuari per assignar al grup');
-//
-//            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
-//        }
-        // do group logic
-        foreach ($targets as $target) {
-            /** @var NewsletterUser $user */
-            $user = $nur->find($target);
-            if ($user) {
-//                    $user->addGroup()
-                $modelManager->update($user);
-            } else {
-                throw new AccessDeniedException('User ID:' . $target . ' not exists');
-            }
-        }
+        /** @var Router $router */
+        $router = $this->get('router');
+//        $modelManager = $this->admin->getModelManager();
+        $selectedModels = $selectedModelQuery->execute();
 
-        return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+        //$targets = $request->get('idx');
+        // do group logic
+//        foreach ($targets as $target) {
+//            /** @var NewsletterUser $user */
+//            $user = $nur->find($target);
+//            if ($user) {
+////                    $user->addGroup()
+//                $modelManager->update($user);
+//            } else {
+//                throw new AccessDeniedException('User ID:' . $target . ' not exists');
+//            }
+//        }
+
+        return new RedirectResponse($router->generate('admin_lopati_newsletter_newsletteruser_group'));
+    }
+
+    /**
+     * Pre set group action
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function groupAction(Request $request)
+    {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $availableGroups = $em->getRepository('NewsletterBundle:NewsletterGroup')->getActiveItemsSortByNameQuery()->getResult();
+
+        return $this->render('AdminBundle:Newsletter:preset.group.html.twig', array(
+                'groups' => $availableGroups,
+            ));
     }
 }
