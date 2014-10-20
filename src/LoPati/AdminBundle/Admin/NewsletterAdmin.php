@@ -41,7 +41,7 @@ class NewsletterAdmin extends Admin
             )
             ->add('name', null, array('label' => 'Nom'))
             ->add('group', 'sonata_type_model', array(
-                    'required' => true,
+                    'required' => false,
                     'expanded' => false,
                     'multiple' => false,
                     'btn_add' => false,
