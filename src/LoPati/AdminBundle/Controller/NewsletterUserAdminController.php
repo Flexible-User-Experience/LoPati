@@ -76,31 +76,22 @@ class NewsletterUserAdminController extends Controller
         $session = $this->get('session');
         $modelManager = $this->admin->getModelManager();
         $targets = $request->get('idx');
-        if (count($targets) == 0) {
-            $session->getFlashBag()->add('sonata_flash_info', 'Escull almenys 1 usuari per assignar al grup');
-
-            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
-        }
+//        if (count($targets) == 0) {
+//            $session->getFlashBag()->add('sonata_flash_info', 'Escull almenys 1 usuari per assignar al grup');
+//
+//            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
+//        }
         // do group logic
-        try {
-            foreach ($targets as $target) {
-                /** @var NewsletterUser $user */
-                $user = $nur->find($target);
-                if ($user) {
+        foreach ($targets as $target) {
+            /** @var NewsletterUser $user */
+            $user = $nur->find($target);
+            if ($user) {
 //                    $user->addGroup()
-                    $modelManager->update($user);
-                } else {
-                    throw new AccessDeniedException('User ID:' . $target . ' not exists');
-                }
+                $modelManager->update($user);
+            } else {
+                throw new AccessDeniedException('User ID:' . $target . ' not exists');
             }
-
-        } catch (\Exception $e) {
-            $session->getFlashBag()->add('sonata_flash_error', 'Error durant l\'asignació a grup');
-
-            return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
         }
-
-        $session->getFlashBag()->add('sonata_flash_success', 'Asignació a grup efectuada correctament');
 
         return new RedirectResponse($this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters())));
     }

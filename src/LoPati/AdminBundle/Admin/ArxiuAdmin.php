@@ -37,6 +37,9 @@ class ArxiuAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
+        $collection->remove('batch');
+        $collection->remove('show');
+        $collection->remove('export');
     }
 
     protected function configureFormFields(FormMapper $formMapper)

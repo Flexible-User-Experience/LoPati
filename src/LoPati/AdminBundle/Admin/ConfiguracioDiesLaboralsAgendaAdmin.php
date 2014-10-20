@@ -24,6 +24,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
+            ->remove('batch')
+            ->remove('export')
+            ->remove('show')
             ->remove('create')
             ->remove('delete')
             ->remove('edit');

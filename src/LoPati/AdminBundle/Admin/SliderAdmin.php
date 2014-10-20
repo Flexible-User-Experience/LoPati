@@ -64,4 +64,10 @@ class SliderAdmin extends Admin
                 )
             );
     }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('show');
+        $collection->remove('export');
+    }
 }

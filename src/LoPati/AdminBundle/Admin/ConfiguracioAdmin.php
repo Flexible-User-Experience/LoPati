@@ -25,6 +25,9 @@ class ConfiguracioAdmin extends Admin
     {
         $collection
             ->remove('create')
+            ->remove('batch')
+            ->remove('show')
+            ->remove('export')
             ->remove('delete');
     }
 

@@ -38,6 +38,8 @@ class PaginaAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
+        $collection->remove('show');
+        $collection->remove('batch');
     }
 
     protected function configureFormFields(FormMapper $formMapper)

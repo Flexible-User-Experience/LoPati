@@ -38,6 +38,9 @@ class NewsletterGroupAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
+        $collection->remove('batch');
+        $collection->remove('show');
+        $collection->remove('export');
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -49,7 +52,6 @@ class NewsletterGroupAdmin extends Admin
 //                        'multiple' => true // Wether or not multiple values are allowed (default to false)
 //                    )
 //                ))
-            // TODO: make this asynchronous (AJAX)
             ->add(
                 'users',
                 'genemu_jqueryselect2_entity',
