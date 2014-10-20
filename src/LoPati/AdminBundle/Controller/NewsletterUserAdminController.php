@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Lopati\NewsletterBundle\Repository\NewsletterUserRepository;
@@ -79,21 +80,11 @@ class NewsletterUserAdminController extends Controller
         }
         /** @var Router $router */
         $router = $this->get('router');
-//        $modelManager = $this->admin->getModelManager();
-        $selectedModels = $selectedModelQuery->execute();
-
-        //$targets = $request->get('idx');
-        // do group logic
-//        foreach ($targets as $target) {
-//            /** @var NewsletterUser $user */
-//            $user = $nur->find($target);
-//            if ($user) {
-////                    $user->addGroup()
-//                $modelManager->update($user);
-//            } else {
-//                throw new AccessDeniedException('User ID:' . $target . ' not exists');
-//            }
-//        }
+        /** @var Session $session */
+        $session = $this->get('session');
+        /** @var Request $request */
+        $request = $this->get('request');
+        $session->getFlashBag()->add('setgroupuids', $request->get('idx'));
 
         return new RedirectResponse($router->generate('admin_lopati_newsletter_newsletteruser_group'));
     }
@@ -101,18 +92,35 @@ class NewsletterUserAdminController extends Controller
     /**
      * Pre set group action
      *
-     * @param Request $request
-     *
      * @return Response
      */
-    public function groupAction(Request $request)
+    public function groupAction()
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $availableGroups = $em->getRepository('NewsletterBundle:NewsletterGroup')->getActiveItemsSortByNameQuery()->getResult();
+        $groups = $em->getRepository('NewsletterBundle:NewsletterGroup')->getActiveItemsSortByNameQuery()->getResult();
+        $setgroupuids = $this->get('session')->getFlashBag()->get('setgroupuids');
+        $users = new ArrayCollection();
+        foreach ($setgroupuids[0] as $uid) {
+            $user = $em->getRepository('NewsletterBundle:NewsletterUser')->find($uid);
+            if ($user) {
+                $users->add($user);
+            }
+        }
 
-        return $this->render('AdminBundle:Newsletter:preset.group.html.twig', array(
-                'groups' => $availableGroups,
+        return $this->render('AdminBundle:Newsletter:AddUserToGroup/preset_group_form.html.twig', array(
+                'users'  => $users,
+                'groups' => $groups,
             ));
+    }
+
+    /**
+     * Final set group action
+     *
+     * @return Response
+     */
+    public function setgroupAction()
+    {
+
     }
 }

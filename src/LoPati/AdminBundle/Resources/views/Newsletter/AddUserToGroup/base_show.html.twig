@@ -1,0 +1,47 @@
+{% extends base_template %}
+
+{% block actions %}
+    <div class="sonata-actions btn-group">
+        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block side_menu %}{{ knp_menu_render(admin.sidemenu('setgroup'), {'currentClass' : 'active'}, 'list') }}{% endblock %}
+
+{% block show %}
+    <form class="form-horizontal" action="{{ path('admin_lopati_newsletter_newsletteruser_setgroup') }}" method="POST" {% if not admin_pool.getOption('html5_validate') %}novalidate="novalidate"{% endif %}>
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#" data-toggle="tab"><i class="icon-exclamation-sign has-errors hide"></i>grups</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <fieldset>
+                        <div class="sonata-ba-collapsed-fields">
+                            <div class="control-group">
+                                <label class="control-label required">Escull un grup per asignar</label>
+                            </div>
+                            <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
+                                {% for group in groups %}
+                                    <input type="radio" name="group" value="{{ group.id }}">{{ group.name }}<br>
+                                {% endfor %}
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label required">Usuaris seleccionats:</label>
+                            </div>
+                            <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
+                                {% for user in users %}
+                                    <input type="checkbox" name="users" value="{{ user.id }}">{{ user.email }}<br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="well well-small form-actions">
+            <input type="submit" class="btn btn-primary" name="Assignar" value="Assignar">
+            <a class="btn btn-danger" href="{{ path('admin_lopati_newsletter_newsletteruser_list') }}">Cancel·lar</a>
+        </div>
+     </form>
+{% endblock %}

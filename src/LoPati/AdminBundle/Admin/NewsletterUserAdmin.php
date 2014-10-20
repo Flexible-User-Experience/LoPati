@@ -40,6 +40,7 @@ class NewsletterUserAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('group', 'setgroup');
+        $collection->add('setgroup', 'group');
         $collection->remove('delete');
         $collection->remove('show');
     }
