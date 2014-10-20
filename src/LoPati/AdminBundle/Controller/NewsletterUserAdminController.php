@@ -139,17 +139,21 @@ class NewsletterUserAdminController extends Controller
         }
         $entityGroup = $em->getRepository('NewsletterBundle:NewsletterGroup')->find($group);
         if ($entityGroup) {
-            foreach ($users as $user) {
-                $entityUser = $em->getRepository('NewsletterBundle:NewsletterUser')->find($user);
-                if ($entityUser && !$entityUser->getGroups()->contains($entityGroup)) {
-                    $entityGroup->addUser($entityUser);
+            if (count($users) > 0) {
+                foreach ($users as $user) {
+                    $entityUser = $em->getRepository('NewsletterBundle:NewsletterUser')->find($user);
+                    if ($entityUser && !$entityUser->getGroups()->contains($entityGroup)) {
+                        $entityGroup->addUser($entityUser);
+                    }
                 }
+                $em->persist($entityGroup);
+                $em->flush($entityGroup);
+                $this->get('session')->getFlashBag()->add('sonata_flash_success', 'S\'ha assignat el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuari' . (count($users) > 1 ? 's' : '') . ' correctament.');
+            } else {
+                $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Error al assignar el grup, no has escollit cap usuari.');
             }
-            $em->persist($entityGroup);
-            $em->flush($entityGroup);
-            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'S\'ha assignat el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuaris correctament.');
         } else {
-            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Error al assignar el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuaris.');
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'Error al assignar el grup ' . $entityGroup->getName() . ' a ' . count($users) . ' usuari' . (count($users) > 1 ? 's' : '') . '.');
         }
 
         return $this->redirect('list');
