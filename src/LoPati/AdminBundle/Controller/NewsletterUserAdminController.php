@@ -141,7 +141,7 @@ class NewsletterUserAdminController extends Controller
         if ($entityGroup) {
             foreach ($users as $user) {
                 $entityUser = $em->getRepository('NewsletterBundle:NewsletterUser')->find($user);
-                if ($entityUser) {
+                if ($entityUser && !$entityUser->getGroups()->contains($entityGroup)) {
                     $entityGroup->addUser($entityUser);
                 }
             }
