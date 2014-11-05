@@ -20,7 +20,7 @@
                 animSpeed: 500,                 // Slide transition speed
                 pauseTime: 3000,                // How long each slide will show
                 startSlide: 0,                  // Set starting Slide (0 index)
-                directionNav: true,             // Next & Prev navigation
+                directionNav: false,            // Next & Prev navigation
                 controlNav: false,              // 1,2,3... navigation
                 controlNavThumbs: false,        // Use thumbnails for Control Nav
                 pauseOnHover: true,             // Stop animation while hovering
@@ -50,11 +50,7 @@
             <div class="slider-wrapper theme-dark">
                 <div id="slider" class="nivoSlider">
                     {% for slide in slides %}
-                        {% if slide.link %}
-                            <a href="{{ slide.link }}"><img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}" title="{{ slide.name }}"/></a>
-                        {% else %}
-                            <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}" title="{{ slide.name }}"/>
-                        {% endif %}
+                        <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}"/>
                     {% endfor %}
                 </div>
             </div>
