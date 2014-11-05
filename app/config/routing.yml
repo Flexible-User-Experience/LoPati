@@ -1,3 +1,4 @@
+# Don't move routing priorities
 AgendaBundle:
     resource: "@AgendaBundle/Resources/config/routing.yml"
     prefix:   /

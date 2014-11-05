@@ -157,17 +157,27 @@ img.mig {
 div.contenidor.extra { width: 950px; }
 
 div.contenidor.extra ol.bloc01 li {
-    margin: 0 43px 15px 0;
+    margin: 0 20px 15px 0;
 }
 
 div.contenidor.extra ol.bloc01 li.end-row {
     margin: 0 0 15px 0;
 }
 
+div.contenidor.extra div.continguts ol.bloc01 li {
+    width: 174px;
+}
+
+div.contenidor.extra div.continguts ol.bloc01 li div.bloc01a div.bloc01a-shot div.bloc01-img a img {
+    width: 174px;
+}
+
 .continguts {
 	width: 100%;
-	min-height: 300px; height: auto !important; height: 300px;
-	margin: 30px 0px 0px 0px;
+	min-height: 300px;
+    height: auto !important;
+    height: 300px;
+	margin: 30px 0 0 0;
 	padding:0;
 }
 
@@ -183,8 +193,8 @@ div.contenidor.extra ol.bloc01 li.end-row {
 }
 
 .dreta {
-	width: 180px;
-	float:right;
+	width: 174px;
+	float: right;
 	height: 100%;
 	margin: 30px 0;
 	background-color: #fff;
@@ -313,11 +323,10 @@ table {
 	float: right;
 }
 .idiomes {
-	width: 180px;
+	width: 100%;
 	height: 20px;
 	font-size: 90%;
 	text-align: left;
-	margin-top:25px;
 }
 .idiomes a {
 	color: #666;
@@ -821,7 +830,7 @@ table {
 }
 
 .destacats {
-	width: 180px;
+	width: 100%;
 	min-height: 150px;
 	height: auto !important;
 	height: 150px;
@@ -2041,8 +2050,8 @@ ul.mapa4 a:hover {
 ol.bloc01 {
 	width: 100%;
 	list-style: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	font-size: 90%;
 }
 ol.bloc01 li {
@@ -2051,8 +2060,8 @@ ol.bloc01 li {
   height: 260px;
   background-color: #fff;
   float: left;
-  padding: 0px 0px 10px 0px;
-	margin: 0px 27px 15px 0px;
+  padding: 0 0 10px 0;
+  margin: 0 27px 15px 0;
 }
 ol.bloc01  h1 {
 	font-size: 100%;
@@ -2100,7 +2109,7 @@ ol.bloc01 li div.bloc01a p {
 	line-height: 15px;
 }
 ol.bloc01 li div.bloc01a div.bloc01a-shot {
-	padding: 0px;
+	padding: 0;
 	/*background: url(images/bloc01-check-sm.png) no-repeat top left; */
 }
 ol.bloc01 li div.bloc01a a.bloc01-over {
@@ -2113,7 +2122,9 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	left: 0px;
 	width: 217px;
 	height: 150px;
-	min-height: 50px; height: auto !important; height: 50px;
+	min-height: 50px;
+    height: auto !important;
+    height: 50px;
 	margin: 0;
 	padding: 5px 5px 10px 5px;
 	line-height: 2;
@@ -2170,10 +2181,9 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 
 }
 #form_newsletter #mp_newsletter_user_email{
-
-width: 175px;
-border: 1px solid #666;
-margin:3px 0px 10px 0;
+    width: 170px;
+    border: 1px solid #666;
+    margin:3px 0px 10px 0;
 }
 #newsletter h5{
 	margin:10px 0;
@@ -2181,12 +2191,9 @@ margin:3px 0px 10px 0;
 	font-weight:normal;
 	color: #666;
 	cursor:pointer;
-
-
 }
 #mp_newsletter_button_confirm{
 	cursor:pointer;
-
 }
 .agenda{
     width:100%;
@@ -2195,8 +2202,8 @@ margin:3px 0px 10px 0;
     padding-top: 10px;
 }
 .agenda table.calendari{
-    margin-top:7px;
-    width: 180px;
+    margin-top: 7px;
+    width: 100%;
 }
 .calendar-header-title{
 
@@ -2206,17 +2213,14 @@ margin:3px 0px 10px 0;
 }
 #agenda_boto_esquerre, #agenda_boto_dret{
     position:relative;
-    left:156px;
+    left:150px;
     float:left;
     width:15px;
     cursor: pointer;
 }
-#agenda_boto_esquerre:hover, #agenda_boto_dret:hover{
-color: #000;
-
-}
+#agenda_boto_esquerre:hover, #agenda_boto_dret:hover{ color: #000; }
  table.calendari tbody tr td {
-     padding: 3px 5px;
+     padding: 3px 4px;
      cursor: default;
      font-size: 0.9em;
      text-align: right;
