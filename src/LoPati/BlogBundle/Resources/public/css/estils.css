@@ -2182,10 +2182,9 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 
 }
 #form_newsletter #mp_newsletter_user_email{
-
-width: 175px;
-border: 1px solid #666;
-margin:3px 0px 10px 0;
+    width: 170px;
+    border: 1px solid #666;
+    margin:3px 0px 10px 0;
 }
 #newsletter h5{
 	margin:10px 0;
@@ -2193,12 +2192,9 @@ margin:3px 0px 10px 0;
 	font-weight:normal;
 	color: #666;
 	cursor:pointer;
-
-
 }
 #mp_newsletter_button_confirm{
 	cursor:pointer;
-
 }
 .agenda{
     width:100%;
@@ -2207,8 +2203,8 @@ margin:3px 0px 10px 0;
     padding-top: 10px;
 }
 .agenda table.calendari{
-    margin-top:7px;
-    width: 180px;
+    margin-top: 7px;
+    width: 100%;
 }
 .calendar-header-title{
 
@@ -2218,17 +2214,14 @@ margin:3px 0px 10px 0;
 }
 #agenda_boto_esquerre, #agenda_boto_dret{
     position:relative;
-    left:156px;
+    left:150px;
     float:left;
     width:15px;
     cursor: pointer;
 }
-#agenda_boto_esquerre:hover, #agenda_boto_dret:hover{
-color: #000;
-
-}
+#agenda_boto_esquerre:hover, #agenda_boto_dret:hover{ color: #000; }
  table.calendari tbody tr td {
-     padding: 3px 5px;
+     padding: 3px 4px;
      cursor: default;
      font-size: 0.9em;
      text-align: right;
