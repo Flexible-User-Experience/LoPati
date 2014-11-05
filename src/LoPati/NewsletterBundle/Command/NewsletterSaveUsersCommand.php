@@ -20,7 +20,7 @@ class NewsletterSaveUsersCommand extends ContainerAwareCommand {
 				->setDescription('Arxiu amb correus')
 				->setHelp(
 <<<EOT
-La comanda <info>newsltter:ssave:users</info> importa usuaris a la base de dades. El format del fitxer ha de contenir una adreça de correu electrònic per linea (separador = salt de linea).
+La comanda <info>newsltter:save:users</info> importa usuaris a la base de dades. El format del fitxer ha de contenir una adreça de correu electrònic per linea (separador = salt de linea).
 EOT
 				);
 	}

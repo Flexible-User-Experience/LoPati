@@ -6,6 +6,7 @@ app/config/parameters.ini
 app/cache/*
 app/logs/*
 app/sessions/*
+/app/Resources/imports/*
 !app/sessions/.gitkeep
 app/config/parameters.yml
 vendor/*
