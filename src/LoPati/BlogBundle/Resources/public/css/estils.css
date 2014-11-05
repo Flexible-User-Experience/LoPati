@@ -193,8 +193,8 @@ div.contenidor.extra div.continguts ol.bloc01 li div.bloc01a div.bloc01a-shot di
 }
 
 .dreta {
-	width: 180px;
-	float:right;
+	width: 174px;
+	float: right;
 	height: 100%;
 	margin: 30px 0;
 	background-color: #fff;
@@ -323,7 +323,7 @@ table {
 	float: right;
 }
 .idiomes {
-	width: 180px;
+	width: 100%;
 	height: 20px;
 	font-size: 90%;
 	text-align: left;
@@ -831,7 +831,7 @@ table {
 }
 
 .destacats {
-	width: 180px;
+	width: 100%;
 	min-height: 150px;
 	height: auto !important;
 	height: 150px;
