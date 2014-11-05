@@ -2,9 +2,9 @@
 
 {% block estils %}
     <link rel="stylesheet" href="{{ asset('nivo-slider/nivo-slider.css') }}" type="text/css" />
-    {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/default/default.css') }}" type="text/css" />#}
+    <link rel="stylesheet" href="{{ asset('nivo-slider/themes/default/default.css') }}" type="text/css" />
     {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/light/light.css') }}" type="text/css" />#}
-    <link rel="stylesheet" href="{{ asset('nivo-slider/themes/dark/dark.css') }}" type="text/css" />
+    {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/dark/dark.css') }}" type="text/css" />#}
     {#<link rel="stylesheet" href="{{ asset('nivo-slider/themes/bar/bar.css') }}" type="text/css" />#}
 {% endblock %}
 
@@ -47,7 +47,7 @@
     <div style="width: 100%; height: 30px; background: none;"></div>
     <div class="contenidor">
         <div class="continguts">
-            <div class="slider-wrapper theme-dark">
+            <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     {% for slide in slides %}
                         <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x450') }}" alt="{{ slide.altName }}"/>
