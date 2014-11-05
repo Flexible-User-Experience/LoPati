@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\NewsletterBundle\Entity\NewsletterGroup;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,18 +32,63 @@ EOT
 		$contenedor = $this->getContainer();
         /* @var EntityManager $em */
         $em = $contenedor->get('doctrine')->getManager();
-        $row = 1;
+        $row = 1; $errors = 0; $sets = 0;
 		$file = $input->getArgument('fitxer');
         if (($handle = fopen($file, 'r')) !== false) {
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                 $columns = count($data);
-                $output->write($columns . 'fields in line ' . $row . ' ---> ');
+                $output->write($columns . ' fields in line ' . $row . ' ---> ');
                 $row++;
                 if ($columns == 2) {
-                    $output->writeln($data[0] . ' · ' . $data[1]);
+                    $mail = $data[0];
+                    if (strlen($mail) == 0) {
+                        $output->writeln('<error>No mail found</error>');
+                        $errors++;
+                    } else {
+                        $group = $data[1];
+                        if (strlen($group) > 0) {
+                            $dbGroup = $em->getRepository('NewsletterBundle:NewsletterGroup')->findOneBy(array('name' => $group));
+                            if ($dbGroup) {
+                                $output->write(' (group ' . $group . ' already exists) ');
+                            } else {
+                                $output->writeln(' (create new group ' . $group . ') ');
+                                $dbGroup = new NewsletterGroup();
+                                $dbGroup->setName($group)->setActive(true);
+                                $em->persist($dbGroup);
+                                $em->flush();
+                                $em->clear();
+                            }
+                            $dbUser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $mail));
+                            if ($dbUser) {
+                                if ($dbGroup->getUsers()->contains($dbUser)) {
+
+                                } else {
+                                    $dbGroup->addUser($dbUser);
+//                                    $em->persist($dbGroup);
+                                    $em->flush();
+                                    $em->clear();
+                                    $output->writeln($mail . ' · ' . $group);
+                                    $sets++;
+                                }
+
+                            } else {
+                                $output->writeln('<error>No user found inside DB</error>');
+                                $errors++;
+                            }
+                        } else {
+                            $output->writeln('<info>No group found</info>');
+                        }
+                    }
+                } else {
+                    $errors++;
                 }
             }
             fclose($handle);
+            $output->writeln($errors . ' errors');
+		    $output->writeln($sets . ' mails asignats a grup');
+            $output->writeln('TOTAL ' . $row . ' mails avaluats');
+        } else {
+           $output->writeln('<error>Imposible to open file</error>');
         }
 
 
