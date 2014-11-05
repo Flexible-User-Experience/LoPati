@@ -157,17 +157,27 @@ img.mig {
 div.contenidor.extra { width: 950px; }
 
 div.contenidor.extra ol.bloc01 li {
-    margin: 0 43px 15px 0;
+    margin: 0 20px 15px 0;
 }
 
 div.contenidor.extra ol.bloc01 li.end-row {
     margin: 0 0 15px 0;
 }
 
+div.contenidor.extra div.continguts ol.bloc01 li {
+    width: 174px;
+}
+
+div.contenidor.extra div.continguts ol.bloc01 li div.bloc01a div.bloc01a-shot div.bloc01-img a img {
+    width: 174px;
+}
+
 .continguts {
 	width: 100%;
-	min-height: 300px; height: auto !important; height: 300px;
-	margin: 30px 0px 0px 0px;
+	min-height: 300px;
+    height: auto !important;
+    height: 300px;
+	margin: 30px 0 0 0;
 	padding:0;
 }
 
@@ -2041,8 +2051,8 @@ ul.mapa4 a:hover {
 ol.bloc01 {
 	width: 100%;
 	list-style: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	font-size: 90%;
 }
 ol.bloc01 li {
@@ -2051,8 +2061,8 @@ ol.bloc01 li {
   height: 260px;
   background-color: #fff;
   float: left;
-  padding: 0px 0px 10px 0px;
-	margin: 0px 27px 15px 0px;
+  padding: 0 0 10px 0;
+  margin: 0 27px 15px 0;
 }
 ol.bloc01  h1 {
 	font-size: 100%;
@@ -2100,7 +2110,7 @@ ol.bloc01 li div.bloc01a p {
 	line-height: 15px;
 }
 ol.bloc01 li div.bloc01a div.bloc01a-shot {
-	padding: 0px;
+	padding: 0;
 	/*background: url(images/bloc01-check-sm.png) no-repeat top left; */
 }
 ol.bloc01 li div.bloc01a a.bloc01-over {
@@ -2113,7 +2123,9 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	left: 0px;
 	width: 217px;
 	height: 150px;
-	min-height: 50px; height: auto !important; height: 50px;
+	min-height: 50px;
+    height: auto !important;
+    height: 50px;
 	margin: 0;
 	padding: 5px 5px 10px 5px;
 	line-height: 2;
