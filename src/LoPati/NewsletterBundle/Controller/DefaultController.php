@@ -70,7 +70,7 @@ class DefaultController extends Controller
         }
 
         return $this->redirect(
-            $this->generateUrl('portada', array('_locale' => $this->get('session')->get('_locale')))
+            $this->generateUrl('portada', array('_locale' => $request->getLocale()))
         );
     }
 
@@ -116,9 +116,8 @@ class DefaultController extends Controller
                 $this->get('translator')->trans('suscribe.confirmation.enhorabona')
             );
         }
-        $culture = $this->get('session')->get('_locale');
 
-        return $this->redirect($this->generateUrl('portada', array('_locale' => $culture)));
+        return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
     }
 
     public function visitAction($data, $_locale)
@@ -207,8 +206,6 @@ class DefaultController extends Controller
                 $nb = $this->container->get('newsletter.build_content');
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
-//                    $em->remove($user);
-//                    $em->flush();
                     $edl = array($user->getEmail());
                     $content = $this->get('templating')->render('NewsletterBundle:Default:finalEmailMessage.html.twig', array(
                             'user' => $user,

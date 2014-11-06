@@ -117,7 +117,7 @@ class NewsletterManager {
         ;
 
         foreach ($emailDestinationList as $email) {
-            $message->addTo($email, null, 'bcc');
+            $message->addTo($email, $email, 'bcc');
         }
 
         return $this->mandrilDispatcher->send($message);
