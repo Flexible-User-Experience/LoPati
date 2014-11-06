@@ -24,12 +24,34 @@ class NewsletterAdminController extends Controller
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        /** @var NewsletterManager $nb */
+        $nb = $this->get('newsletter.build_content');
         /** @var Newsletter $newsletter */
         $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
         if ($newsletter->getEstat() == null || $newsletter->getEstat() == 'Sended') {
             $newsletter->setEstat('Waiting');
             $newsletter->setIniciEnviament(new \DateTime('now'));
             $newsletter->setFiEnviament(null);
+
+            $rejects = $nb->getRejectList();
+            foreach ($rejects as $item) {
+                $email = $item['email'];
+                $reason = $item['reason'];
+                /** @var NewsletterUser $ruser */
+                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
+                if ($ruser) {
+                    if ($reason == 'soft-bounce') {
+                        // increment fail counter
+                        $ruser->setFail($ruser->getFail() + 1);
+                        $em->flush();
+                    } else {
+                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
+                        $em->remove($ruser);
+                        $em->flush();
+                    }
+                }
+            }
+
             // Clean fail delivery users
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
             foreach ($users as $user) {
@@ -49,8 +71,7 @@ class NewsletterAdminController extends Controller
 
             // Welcome
             $host = $this->get('kernel')->getEnvironment() == 'prod' ? 'http://www.lopati.cat' : 'http://lopati2.local';
-            /** @var NewsletterManager $nb */
-            $nb = $this->get('newsletter.build_content');
+
             $this->makeLog('Welcome to LoPati newsletter:send command.');
             $this->makeLog('initializing... host = ' . $host);
             $dtStart = new \DateTime();

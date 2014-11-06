@@ -54,7 +54,7 @@ class NewsletterUser
     private $active;
 
     /**
-     * @var boolean $active
+     * @var int $active
      * @ORM\Column(name="fail", type="integer")
      */
     private $fail = 0;
