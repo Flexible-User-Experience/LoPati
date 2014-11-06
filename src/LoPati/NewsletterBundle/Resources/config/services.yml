@@ -4,4 +4,4 @@ parameters:
 services:
     newsletter.build_content:
         class: LoPati\NewsletterBundle\Manager\NewsletterManager
-        arguments: [ @templating, @translator, @hip_mandrill.dispatcher ]
+        arguments: [ @templating, @translator, @hip_mandrill.dispatcher, @hip_mandrill.client ]

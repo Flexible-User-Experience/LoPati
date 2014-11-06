@@ -4,6 +4,7 @@ namespace LoPati\NewsletterBundle\Manager;
 
 use Hip\MandrillBundle\Message;
 use LoPati\NewsletterBundle\Entity\Newsletter;
+use Mandrill;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Hip\MandrillBundle\Dispatcher;
@@ -25,17 +26,24 @@ class NewsletterManager {
     protected $mandrilDispatcher;
 
     /**
+     * @var Mandrill
+     */
+    protected $mandrilClient;
+
+    /**
      * Constructor
      *
      * @param EngineInterface $templatingEngine
      * @param Translator      $translator
      * @param Dispatcher      $mandrilDispatcher
+     * @param Mandrill        $mandrilClient
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
         $this->mandrilDispatcher = $mandrilDispatcher;
+        $this->mandrilClient = $mandrilClient;
     }
 
     /**
@@ -121,5 +129,13 @@ class NewsletterManager {
         }
 
         return $this->mandrilDispatcher->send($message);
+    }
+
+    /**
+     * Get Mandrill rejects list and clear up local database
+     */
+    public function getRejectList()
+    {
+        return $this->mandrilClient->rejects->getList();
     }
 }

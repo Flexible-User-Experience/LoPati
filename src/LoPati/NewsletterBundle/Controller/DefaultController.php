@@ -204,6 +204,7 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 /** @var NewsletterManager $nb */
                 $nb = $this->container->get('newsletter.build_content');
+                /** @var NewsletterUser $user */
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
                     $edl = array($user->getEmail());
@@ -253,7 +254,6 @@ class DefaultController extends Controller
         if ($user) {
             $em->remove($user);
             $em->flush();
-
             $this->get('session')->getFlashBag()->add(
                 'notice',
                 $this->get('translator')->trans('unsuscribe.confirmation.enhorabona')
