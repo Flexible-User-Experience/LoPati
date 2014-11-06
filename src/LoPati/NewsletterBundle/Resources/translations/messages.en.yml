@@ -14,3 +14,5 @@ confirm:
 unsuscribe:
   confirmation:
     enhorabona: Removed the subscription correctly.
+    nouser: No address record found.
+    noemail: Error! Write an email address.

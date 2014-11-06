@@ -204,7 +204,12 @@ class DefaultController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
-                    
+                    $em->remove($user);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('unsuscribe.confirmation.enhorabona')
+                    );
                 } else {
                     $this->get('session')->getFlashBag()->add(
                         'notice',
@@ -220,7 +225,6 @@ class DefaultController extends Controller
         }
 
         return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig');
-
     }
 
     /**

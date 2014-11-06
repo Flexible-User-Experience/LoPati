@@ -14,3 +14,5 @@ confirm:
 unsuscribe:
   confirmation:
     enhorabona: Se ha eliminado su suscripción correctamente.
+    nouser: No se ha encontrado ningún registro con esta dirección.
+    noemail: Error! Escribe alguna dirección.
