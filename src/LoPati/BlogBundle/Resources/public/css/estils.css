@@ -510,7 +510,7 @@ table {
   border-right: solid 1px #666;
 }
 
-.categories ul li:last-child { border-right: none; }
+.categories ul li:nth-last-child(-n+2) { border-right: none; }
 
 .categories ul li img { margin: 0; }
 
