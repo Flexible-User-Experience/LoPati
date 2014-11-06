@@ -16,3 +16,5 @@ unsuscribe:
     enhorabona: Removed the subscription correctly.
     nouser: No address record found.
     noemail: Error! Write an email address.
+    emailsenderror: Error! Could not send the confirmation email, you're still registered. Send a message to centredart@lopati.cat for reporting this issue. Thank you.
+    finalemailmessage: Sent an email with a link to your email address. Click on the link to confirm your unsubscription permanently.

@@ -116,7 +116,7 @@ class NewsletterAdminController extends Controller
         );
 
         $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
-        if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
+        if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
                 'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
@@ -167,7 +167,6 @@ class NewsletterAdminController extends Controller
                 array_push($edl, $to);
                 $this->makeLog('add ' . $to . '... to rendering template <' . $locale . '>... ');
             }
-            //$this->makeLog('get ' . $to . '... rendering template... ');
             $content = $this->get('templating')->render('NewsletterBundle:Default:mail2.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $locale));
             $this->makeLog('sending mail... ');
             $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
@@ -175,8 +174,6 @@ class NewsletterAdminController extends Controller
                 $this->makeLog('done!');
                 $newsletter->setEnviats($newsletter->getEnviats() + count($users));
             } else {
-                //$fallats = $fallats + count($users);
-                //$user->setFail($user->getFail() + 1);
                 $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
             }
             $em->flush();
