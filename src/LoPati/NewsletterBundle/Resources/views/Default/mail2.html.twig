@@ -25,10 +25,8 @@
     <td colspan="2" valign="top"><a
                 href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date ('d-m-Y') }) }}"
                 style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">{{ visualitzar_correctament }}</a>
-        {#{% if token is defined %}#}
-            {#<a href="{{ host ~ path('newsletter_confirm_unsuscribe',  { 'token': token } ) }}"#}
-               {#style="font-size:10px; text-decoration:none; color:#666;">{{ baixa }}</a>#}
-        {#{% endif %}#}
+            <a href="{{ host ~ path('newsletter_confirm_unsuscribe') }}"
+               style="font-size:10px; text-decoration:none; color:#666;">{{ baixa }}</a>
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>
 </tr>

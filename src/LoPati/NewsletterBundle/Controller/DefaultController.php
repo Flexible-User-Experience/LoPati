@@ -195,11 +195,11 @@ class DefaultController extends Controller
 
     }
 
-    public function confirmUnsuscribeAction(Request $request, $token)
+    public function confirmUnsuscribeAction(Request $request)
     {
         $request->setLocale($this->get('session')->get('_locale'));
 
-        return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig', array('token' => $token));
+        return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig');
 
     }
 
