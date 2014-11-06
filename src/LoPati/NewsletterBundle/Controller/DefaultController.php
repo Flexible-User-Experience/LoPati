@@ -198,6 +198,26 @@ class DefaultController extends Controller
     public function confirmUnsuscribeAction(Request $request)
     {
         $request->setLocale($this->get('session')->get('_locale'));
+        if ($request->isMethod('POST')) {
+            $email = $request->get('email');
+            if (strlen($email) > 0) {
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
+                if ($user) {
+                    
+                } else {
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('unsuscribe.confirmation.nouser')
+                    );
+                }
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $this->get('translator')->trans('unsuscribe.confirmation.noemail')
+                );
+            }
+        }
 
         return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig');
 

@@ -47,8 +47,6 @@ class NewsletterAdminController extends Controller
 //            $process->start();
 //            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Iniciant enviament del newsletter núm. ' . $newsletter->getNumero());
 
-
-
             // Welcome
             $host = $this->get('kernel')->getEnvironment() == 'prod' ? 'http://www.lopati.cat' : 'http://lopati2.local';
             /** @var NewsletterManager $nb */
@@ -109,7 +107,7 @@ class NewsletterAdminController extends Controller
         /** @var Newsletter $newsletter2 */
         $newsletter2 = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
         $host = $this->getHostRoute();
-        $contenido = $this->renderView('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($id, $newsletter2, $host, 'ca'));
+        $contenido = $this->renderView('NewsletterBundle:Default:mail2.html.twig', $nb->buildNewsletterContentArray($id, $newsletter2, $host, 'ca'));
         $subject = '[TEST] ' . $newsletter->getName();
         $edl = array(
             self::testEmail1,
