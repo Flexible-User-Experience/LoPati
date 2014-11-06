@@ -9,7 +9,7 @@ newsletter_unsuscribe:
     defaults: { _controller: NewsletterBundle:Default:unsuscribe}
 
 newsletter_confirm_unsuscribe:
-    pattern:  /newsletter/confirm/unsuscribe/{token}
+    pattern:  /newsletter/confirm/unsuscribe/
     defaults: { _controller: NewsletterBundle:Default:confirmUnsuscribe}
 
 newsletter_unsuscribe:
