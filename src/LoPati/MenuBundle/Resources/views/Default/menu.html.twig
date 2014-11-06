@@ -3,7 +3,7 @@
     {# Entrem a portada #}
     {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id, 'pagina': pagina} %}
 {% else %}
-    {# (id no es none) pagina, implica imprimir subcategories mes currents #}
+    {# Entrem a pagina. Imprimir subcategories + currents #}
     {% include 'MenuBundle:Default:categories.html.twig' with {'categories': categories, 'id': id} %}
 </div>
     {% render controller("MenuBundle:Default:subCategories", {idPagina: id}) %}

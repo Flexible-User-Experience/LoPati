@@ -2,7 +2,7 @@
     <div class="categories">
         <ul>
             {% for categoria in categories %}
-                {% if  categoria.link == null %} {# categoria no te enllaç #}
+                {% if categoria.link == null %} {# categoria no te enllaç #}
                     {% if categoria.arxiu == 0 %}
                         {% if categoria.subcategoria[0].llista == 0 %}
                             {% if categoria_id is sameas(categoria.subcategoria[0].link) %}
@@ -42,6 +42,7 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
+            {% include 'MenuBundle:Default:search-bar-from.fragment.html.twig' %}
         </ul>
     </div>
 {% else %}
@@ -94,6 +95,7 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
+            {% include 'MenuBundle:Default:search-bar-from.fragment.html.twig' %}
         </ul>
     </div>
 {% endif %}
