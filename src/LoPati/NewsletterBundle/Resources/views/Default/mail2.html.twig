@@ -84,15 +84,14 @@
         <td width="174" rowspan="2">&nbsp;</td>
         <td width="40" rowspan="2">&nbsp;</td>
         <td colspan="3" class="vds">
-            {% if  pagina.subCategoria %}
+            {% if pagina.subCategoria %}
                 <p style="color:#E31853; margin-top:10px; margin-bottom:0px;">{{ pagina.subCategoria.nom }}  </p>
             {% endif %}
         </td>
         <td width="4" rowspan="6">&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="3" class="vds"><h3
-                    style="margin-top:5px;margin-bottom:0px; padding:0; font-size:25px; color: black !important;">{{ pagina.titol }}</h3>
+        <td colspan="3" class="vds"><h3 style="margin-top:5px;margin-bottom:0;padding:0;font-size:25px;color:black !important;"><a style="padding: 0 0 0 0; text-decoration:none;color:black !important;" href="{{ host ~ path('pagina', {'_locale': idioma, categoria: pagina.categoria.slug, subcategoria: pagina.subCategoria.slug, titol: pagina.slug, id: pagina.id}) }}">{{ pagina.titol }}</a></h3>
         </td>
     </tr>
     <tr height="5">
@@ -117,7 +116,7 @@
             {% if pagina.titolDocument1 and pagina.document1Name %}
                 <p style="font-weight:bold; display:block; margin-top:20px;">
                     <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document1') }}'
-                       style="padding: 0px 0px 0px 0px; text-decoration:none;">
+                       style="padding: 0 0 0 0; text-decoration:none;">
                         <img src="{{ host ~ '/images/icona-doc01.gif' }}">
                         <span style="padding: 0px 0px 0px 3px; color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument1 }}</span>
                     </a>

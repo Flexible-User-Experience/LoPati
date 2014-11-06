@@ -16,12 +16,14 @@
     <div class="contenidor">
         <div class="continguts">
             <h5>{% trans %}confirm.eliminar{% endtrans %}</h5>
-            {# TODO #}
-            {#<p>{% trans %}confirm.text{% endtrans %}<a href="{{ url('newsletter_unsuscribe', { 'token': token }) }}">#}
-            {#</p>#}
-            {#<button id="mp_newsletter_button_confirm" type="submit"#}
-                    {#onclick="window.location.href='{{ url('newsletter_unsuscribe', { 'token': token }) }}'">{% trans %}#}
-                {#borrar{% endtrans %}</button>#}
+            <br>
+            <form action="{{ path('newsletter_confirm_unsuscribe') }}" method="POST">
+                <label for="email">
+                    Email<br>
+                    <input type="text" name="email"/>
+                </label>
+                <input type="submit"/>
+            </form>
         </div>
     </div>
 {% endblock %}

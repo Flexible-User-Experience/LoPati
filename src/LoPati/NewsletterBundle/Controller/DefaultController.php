@@ -4,6 +4,7 @@ namespace LoPati\NewsletterBundle\Controller;
 
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
+use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -198,9 +199,47 @@ class DefaultController extends Controller
     public function confirmUnsuscribeAction(Request $request)
     {
         $request->setLocale($this->get('session')->get('_locale'));
+        if ($request->isMethod('POST')) {
+            $email = $request->get('email');
+            if (strlen($email) > 0) {
+                $em = $this->getDoctrine()->getManager();
+                /** @var NewsletterManager $nb */
+                $nb = $this->container->get('newsletter.build_content');
+                $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
+                if ($user) {
+//                    $em->remove($user);
+//                    $em->flush();
+                    $edl = array($user->getEmail());
+                    $content = $this->get('templating')->render('NewsletterBundle:Default:finalEmailMessage.html.twig', array(
+                            'user' => $user,
+                        ));
+                    $result = $nb->sendMandrilMessage('', $edl, $content);
+                    if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')
+                        );
+                    } else {
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            $this->get('translator')->trans('unsuscribe.confirmation.emailsenderror')
+                        );
+                    }
+                } else {
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('unsuscribe.confirmation.nouser')
+                    );
+                }
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $this->get('translator')->trans('unsuscribe.confirmation.noemail')
+                );
+            }
+        }
 
         return $this->render('NewsletterBundle:Default:confirmUnsuscribe.html.twig');
-
     }
 
     /**
