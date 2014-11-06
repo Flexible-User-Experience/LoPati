@@ -28,6 +28,29 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
+     * Get active users plain array by group & locale
+     *
+     * @param NewsletterGroup|null $group
+     * @param string $locale
+     *
+     * @return \Doctrine\ORM\AbstractQuery|\Doctrine\ORM\Query
+     */
+    public function getActiveUsersByGroupAndLocale($group, $locale = 'ca')
+    {
+        $em = $this->getEntityManager();
+        if (!is_null($group)) {
+            $query = $em->createQuery('SELECT u, g FROM NewsletterBundle:NewsletterUser u JOIN u.groups g WHERE u.active = 1 AND g.id = :gid AND u.idioma = :locale')->setParameters(array(
+                    'gid' => $group->getId(),
+                    'locale' => $locale,
+                ));
+        } else {
+            $query = $em->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.active = 1 AND u.idioma = :locale')->setParameter('locale', $locale);
+        }
+
+        return $query->getArrayResult();
+    }
+
+    /**
      * Get active users plain array by group
      *
      * @param NewsletterGroup|null $group

@@ -261,9 +261,3 @@ hip_mandrill:
     default:
         sender:       "butlleti@lopati.cat"
         sender_name:  "Lo Pati"
-        subaccount:   "lopati"
-
-parameters:
-    newsleterEmailDestination1: "%newsleterTestEmailDestination1%"
-    newsleterEmailDestination2: "%newsleterTestEmailDestination2%"
-    newsleterEmailDestination3: "%newsleterTestEmailDestination3%"
