@@ -84,14 +84,5 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-    <div class="menu-buscador">
-        <form name="buscador1" action="{{ path('search') }}" method="post">
-            <p class="menu-buscador-p">
-                <input class="menu-buscador-p-input" name="textabuscar" type="text">
-            </p>
-            <p class="menu-buscador-picon">
-                <input class="menu-buscador-picon-input" type="image" title="buscar" src="/images/boto10ca.png" alt="boto lupa per buscar">
-            </p>
-        </form>
-    </div>
+    {% include 'MenuBundle:Default:search-bar-from.fragment.html.twig' %}
 </ul>

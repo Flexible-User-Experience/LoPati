@@ -9,11 +9,6 @@ use LoPati\MenuBundle\Entity\SubCategoria;
 
 class DefaultController extends Controller {
 
-	public function indexAction($name)
-    {
-		return $this->render('MenuBundle:Default:index.html.twig',	array('name' => $name));
-	}
-
 	public function pintaMenuAction($id = null, $pagina = null)
     {
 		$em = $this->getDoctrine()->getManager();
