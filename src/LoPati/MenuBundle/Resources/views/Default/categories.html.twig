@@ -1,7 +1,7 @@
 <ul>
     {% if pagina is not none %}
         {% for categoria in categories %}
-            {% if  categoria.link == null %} {# categoria no te enllaç #}
+            {% if categoria.link == null %} {# categoria no te enllaç #}
                 {% if categoria.arxiu == 0 %}
                     {% if categoria.subcategoria[0].llista == 0 %}
                         {% if (id  == categoria.subcategoria[0].link ) or (pagina.categoria == categoria) %}
@@ -18,7 +18,7 @@
                             {% endif %}
                         {% endif %}
                     {% else %}
-                        {% if (id  == categoria.subcategoria[0].link ) or (pagina.categoria == categoria) %}
+                        {% if (id == categoria.subcategoria[0].link ) or (pagina.categoria == categoria) %}
                             <li>
                                 <span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 5, actiu: 1, titol: categoria, llista: 1}) %}</span>
                             </li>
@@ -47,7 +47,7 @@
         {% endfor %}
     {% else %}
         {% for categoria in categories %}
-            {% if  categoria.link == null %} {# categoria no te enllaç #}
+            {% if categoria.link == null %} {# categoria no te enllaç #}
                 {% if categoria.arxiu == 0 %}
                     {% if categoria.subcategoria[0].llista == 0 %}
                         {% if categoria.subcategoria[0].link  is not empty %}
@@ -84,4 +84,14 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+    <div class="menu-buscador">
+        <form name="buscador1" action="{{ path('search') }}" method="post">
+            <p class="menu-buscador-p">
+                <input class="menu-buscador-p-input" name="textabuscar" type="text">
+            </p>
+            <p class="menu-buscador-picon">
+                <input class="menu-buscador-picon-input" type="image" title="buscar" src="/images/boto10ca.png" alt="boto lupa per buscar">
+            </p>
+        </form>
+    </div>
 </ul>

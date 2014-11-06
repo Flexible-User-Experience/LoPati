@@ -542,6 +542,37 @@ table {
   cursor: pointer;
 }
 
+div.categories ul div.menu-buscador { float: right; }
+
+div.categories ul div.menu-buscador form { margin-top: 4px; }
+
+div.categories ul div.menu-buscador form p.menu-buscador-p {
+    width: 159px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+div.categories ul div.menu-buscador form p.menu-buscador-p input.menu-buscador-p-input {
+    width: 154px;
+    height: 18px;
+    border: 1px solid #666;
+    margin: 0;
+    padding: 0 2px;
+}
+
+div.categories ul div.menu-buscador form p.menu-buscador-picon {
+    width: 21px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+div.categories ul div.menu-buscador form p.menu-buscador-picon input.menu-buscador-picon-input {
+    margin: 0;
+    width: 20px;
+}
+
 .subcat {
 	width: 100%;
   height: 28px;
