@@ -84,26 +84,20 @@ class DefaultController extends Controller
             $logger->info('user idioma:' . $user->getIdioma());
             $logger->info('get idioma:' . $request->getLocale());
             $logger->info('session idioma:' . $this->get('session')->get('_locale'));
-            $message = \Swift_Message::newInstance()
-                ->setSubject(
-                    $this->renderView(
-                        'NewsletterBundle:Default:confirmationTrueSubject.html.twig',
-                        array('idioma' => $user->getIdioma())
-                    ),
-                    'text/html'
-                )
-                ->setFrom('butlleti@lopati.cat')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'NewsletterBundle:Default:activated.html.twig',
-                        array(
-                            'user' => $user
-                        )
-                    ),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
+            $subject = 'La seva adreça de correu electrònic ha estat activada correctament';
+            if ($user->getIdioma() == 'es') {
+                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
+            } else if ($user->getIdioma() == 'es') {
+                $subject = 'Your email address has been activated';
+            }
+            /** @var NewsletterManager $nb */
+            $nb = $this->container->get('newsletter.build_content');
+            $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
+                    'NewsletterBundle:Default:activated.html.twig',
+                    array(
+                        'user' => $user
+                    )
+                ));
             $this->get('session')->getFlashBag()->add(
                 'notice',
                 $this->get('translator')->trans('suscribe.confirmation.enhorabona')
@@ -115,9 +109,8 @@ class DefaultController extends Controller
 
     public function visitAction($data, $_locale)
     {
-        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local'
-            : 'http://lopati.cat';
-        $newDate = date("Y-m-d", strtotime($data));
+        $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
+        $newDate = date('Y-m-d', strtotime($data));
         $em = $this->getDoctrine()->getManager();
         $pagines = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterByData($newDate);
         $visualitzar_correctament = 'Clica aquí per visualitzar correctament';
@@ -236,7 +229,6 @@ class DefaultController extends Controller
     public function unsuscribeAction(Request $request, $token)
     {
         $request->setLocale($this->get('session')->get('_locale'));
-        //return array('token' => $token);
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
         if ($user) {
