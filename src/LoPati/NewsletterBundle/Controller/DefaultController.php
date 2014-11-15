@@ -42,7 +42,7 @@ class DefaultController extends Controller
             $subject = 'Confirmació per rebre el newsletter de LO PATI';
             if ($newsletterUser->getIdioma() == 'es') {
                 $subject = 'Confirmación para recibir el newsletter de LO PATI';
-            } else if ($newsletterUser->getIdioma() == 'es') {
+            } else if ($newsletterUser->getIdioma() == 'en') {
                 $subject = 'Confirmation to receive newsletter LO PATI';
             }
             /** @var NewsletterManager $nb */
@@ -87,7 +87,7 @@ class DefaultController extends Controller
             $subject = 'La seva adreça de correu electrònic ha estat activada correctament';
             if ($user->getIdioma() == 'es') {
                 $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
-            } else if ($user->getIdioma() == 'es') {
+            } else if ($user->getIdioma() == 'en') {
                 $subject = 'Your email address has been activated';
             }
             /** @var NewsletterManager $nb */
