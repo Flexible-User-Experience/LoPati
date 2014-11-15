@@ -17,7 +17,7 @@ class DefaultController extends Controller
     /**
      * @Template()
      */
-    public function formAction(Request $request)
+    public function formAction()
     {
         $newsletterUser = new NewsletterUser();
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
@@ -39,31 +39,24 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletterUser);
             $em->flush();
-            // $config = $em->getRepository('MegapointCmsBundle:Configuration')->config();
-            $message = \Swift_Message::newInstance()
-                ->setSubject(
-                    $this->renderView(
-                        'NewsletterBundle:Default:confirmationSubject.html.twig',
-                        array('idioma' => $newsletterUser->getIdioma())
-                    ),
-                    'text/html'
-                )
-                //->setFrom($config->getEmail())
-                ->setFrom('butlleti@lopati.cat')
-                ->setTo($newsletterUser->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'NewsletterBundle:Default:confirmation.html.twig',
-                        array(
-                            'token' => $newsletterUser->getToken(),
-                            'user'  => $newsletterUser
-                        )
-                    ),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
+            $subject = 'Confirmació per rebre el newsletter de LO PATI';
+            if ($newsletterUser->getIdioma() == 'es') {
+                $subject = 'Confirmación para recibir el newsletter de LO PATI';
+            } else if ($newsletterUser->getIdioma() == 'es') {
+                $subject = 'Confirmation to receive newsletter LO PATI';
+            }
+            /** @var NewsletterManager $nb */
+            $nb = $this->container->get('newsletter.build_content');
+            $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
+                    'NewsletterBundle:Default:confirmation.html.twig',
+                    array(
+                        'token' => $newsletterUser->getToken(),
+                        'user'  => $newsletterUser,
+                    )
+                ));
             $flash = $this->get('translator')->trans('suscribe.register');
             $this->get('session')->getFlashBag()->add('notice', $flash);
+
         } else {
             $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
         }
