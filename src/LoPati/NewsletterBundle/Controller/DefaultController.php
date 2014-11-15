@@ -238,6 +238,11 @@ class DefaultController extends Controller
                 'notice',
                 $this->get('translator')->trans('unsuscribe.confirmation.enhorabona')
             );
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('unsuscribe.confirmation.actionerror')
+            );
         }
 
         return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
