@@ -174,7 +174,6 @@ class DefaultController extends Controller
 
     public function confirmUnsuscribeAction(Request $request)
     {
-        $request->setLocale($this->get('session')->get('_locale'));
         if ($request->isMethod('POST')) {
             $email = $request->get('email');
             if (strlen($email) > 0) {
@@ -191,7 +190,7 @@ class DefaultController extends Controller
                     $subject = 'Confirmació per NO rebre el newsletter de LO PATI';
                     if ($user->getIdioma() == 'es') {
                         $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
-                    } else if ($user->getIdioma() == 'es') {
+                    } else if ($user->getIdioma() == 'en') {
                         $subject = 'Confirmation to NOT receive newsletter LO PATI';
                     }
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
@@ -224,7 +223,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_confirm_unsuscribe")
+     * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_unsuscribe")
      */
     public function unsuscribeAction(Request $request, $token)
     {
