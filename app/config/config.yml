@@ -56,7 +56,7 @@ doctrine:
                 type:   annotation
                 prefix: Gedmo\Translatable\Entity
                 dir:    "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-                alias:  GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                alias:  GedmoTranslatable
             ApplicationSonataUserBundle: ~
             SonataUserBundle: ~
             FOSUserBundle: ~ 
@@ -67,6 +67,7 @@ stof_doctrine_extensions:
     translation_fallback: true
     orm:
         default:
+            timestampable: true
             translatable: true
             sluggable:    true
 
@@ -83,11 +84,6 @@ sonata_admin:
         layout:     AdminBundle:Admin:my_standard_layout.html.twig
         dashboard:  AdminBundle:Admin:my_dashboard.html.twig
         user_block: AdminBundle:Admin:my_user_block.html.twig
-        edit:       SonataAdminBundle:CRUD:edit.html.twig
-        batch:      SonataAdminBundle:CRUD:list__batch.html.twig
-        action:     SonataAdminBundle:CRUD:action.html.twig
-        select:     SonataAdminBundle:CRUD:list__select.html.twig
-        batch_confirmation: SonataAdminBundle:CRUD:batch_confirmation.html.twig
     dashboard:
         groups:
             Menús:
@@ -147,7 +143,7 @@ stfalcon_tinymce:
             theme_advanced_toolbar_location: "top"
             theme_advanced_toolbar_align: "left"
             theme_advanced_statusbar_location: "bottom"
-            plugins: "paste"
+            plugins: "paste link"
             paste_auto_cleanup_on_paste : true
             paste_remove_styles: true
             paste_remove_styles_if_webkit: true
