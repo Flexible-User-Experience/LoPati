@@ -50,7 +50,11 @@
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
                     {% for slide in slides %}
-                        <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x400') }}" alt="{{ slide.altName }}"/>
+                        {% if slide.link %}
+                            <a href="{{ slide.link }}"><img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x400') }}" alt="{{ slide.altName }}"/></a>
+                        {% else %}
+                            <img src="{{ vich_uploader_asset(slide, 'imageFile') | imagine_filter('imatge756x400') }}" alt="{{ slide.altName }}"/>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
