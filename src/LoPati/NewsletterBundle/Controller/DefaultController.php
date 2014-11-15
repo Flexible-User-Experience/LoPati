@@ -195,7 +195,13 @@ class DefaultController extends Controller
                     $content = $this->get('templating')->render('NewsletterBundle:Default:finalEmailMessage.html.twig', array(
                             'user' => $user,
                         ));
-                    $result = $nb->sendMandrilMessage('', $edl, $content);
+                    $subject = 'Confirmació per NO rebre el newsletter de LO PATI';
+                    if ($user->getIdioma() == 'es') {
+                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
+                    } else if ($user->getIdioma() == 'es') {
+                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
+                    }
+                    $result = $nb->sendMandrilMessage($subject, $edl, $content);
                     if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
