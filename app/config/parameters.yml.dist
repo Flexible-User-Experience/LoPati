@@ -25,3 +25,6 @@ parameters:
 
     mandril_api_key_test: "secret-api-token-test"
     mandril_api_key: "secret-api-token"
+
+    admin_user_test: test   #change it
+    admin_pass_test: test   #change it
