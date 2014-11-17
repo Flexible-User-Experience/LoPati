@@ -21,3 +21,11 @@ newsletter:
     defaults: { _controller: NewsletterBundle:Default:visit }
     requirements:
        _locale: ca|es|en
+
+admin_lopati_newsletter_newsletteruser_async_search:
+    pattern: /admin/newsletter/user/async/search-users-by-email/
+    defaults: { _controller: NewsletterBundle:NewsletterUser:searchUsersByEmailAsync }
+
+admin_lopati_newsletter_newsletteruser_async_get:
+    pattern: /admin/newsletter/user/async/get-users/
+    defaults: { _controller: NewsletterBundle:NewsletterUser:getUsersAsync }

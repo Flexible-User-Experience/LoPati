@@ -1,0 +1,91 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log('hitme! {{ admin.uniqId }}');
+
+            {#var primaryTag = $("#{{ admin.uniqId }}_primaryTag");#}
+            {#primaryTag.change(updateCategories()); // Bind the function to updateCategories#}
+            {#primaryTag.change(); // Manual trigger to update categories in Document load.#}
+            {#function updateCategories(){#}
+            {#return function () {#}
+            {#var tagId = $("#{{ admin.uniqId }}_primaryTag option:selected").val();#}
+            {#var primaryCategory = $("#{{ admin.uniqId }}_primaryCategory");#}
+            {#primaryCategory.empty();#}
+            {#primaryCategory.trigger("liszt:updated");#}
+            {#var locale = '{{ app.request.get('_locale') }}';#}
+            {#var objectId = '{{ admin.id(object) }}'#}
+            {#var url = Routing.generate('get_categories_from_tag', { '_locale': locale, 'tagId': tagId, _sonata_admin: 'gd_admin.merchant', id: objectId });#}
+            {#$.post(url, { tagId: tagId }, function(data){#}
+            {#primaryCategory.empty().append(data);#}
+            {#primaryCategory.trigger("liszt:updated");#}
+            {#},"text");#}
+            {#primaryCategory.val("option:first").attr("selected", true);#}
+            {#};#}
+            {#}#}
+//        });
+
+
+            jQuery('#{{ admin.uniqId }}_users').select2({
+                placeholder: 'Escriu un email',
+                minimumInputLength: 3,
+//                multiple: true,
+                ajax: {
+                    url: '{{ path('admin_lopati_newsletter_newsletteruser_async_search') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: function (term) {
+                        return {
+                            q: term, // search term
+                            limit: 200
+                        };
+                    },
+                    results: function (data) {
+                        return { results: data.users };
+                    }
+                },
+                initSelection: function (element, callback) {
+                    var id = jQuery(element).val();
+                    console.log('id ' + id);
+                    if (id !== '') {
+                        {#console.log('twig json {{ entity|json_encode(constant("JSON_PRETTY_PRINT"))|raw }}');#}
+                        jQuery.ajax('{{ path('admin_lopati_newsletter_newsletteruser_async_get', {id: admin.id(object) }) }}', {
+                            dataType: 'json',
+                            type: 'GET'
+                        }).done(function (data) {
+                                    console.log(data);
+                                    callback(data);
+                                });
+                    }
+                },
+                formatResult: userFormatResult,
+                formatSelection: userFormatSelection,
+                dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            }
+            );
+        });
+
+        function userFormatResult(user) {
+            console.log('userFormatResult ' + user);
+            var markup = "<table><tr>";
+            if (user.id !== undefined) {
+                markup += "<td>" + user.email + "</td>";
+            }
+            markup += "</tr></table>";
+
+            return markup;
+        }
+
+        function userFormatSelection(user) {
+            console.log('userFormatSelection ' + user);
+
+            return user.email;
+        }
+
+    </script>
+{% endblock %}
