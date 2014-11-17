@@ -2,6 +2,7 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
+use LoPati\NewsletterBundle\Entity\NewsletterGroup;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,5 +45,40 @@ class NewsletterUserController extends Controller
         return new JsonResponse(array(
             'users' => $result,
         ));
+    }
+
+    /**
+     * Get users (AJAX)
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function getUsersAsyncAction(Request $request)
+    {
+        $id = $request->get('id');
+        if ($id == null) {
+            throw $this->createNotFoundException('Unable to find post parameter ID');
+        }
+
+        /** @var NewsletterGroup $group */
+        $group = $this->getDoctrine()
+            ->getRepository('NewsletterBundle:NewsletterGroup')
+            ->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException('Unable to find NewsletterGroup entity GID:' . $id);
+        }
+
+        $result = array();
+        /** @var NewsletterUser $user */
+        foreach ($group->getUsers() as $user) {
+            $result[] = array(
+                'id' => $user->getId(),
+                'email' => $user->getEmail(),
+            );
+        }
+
+        return new JsonResponse($result);
     }
 }

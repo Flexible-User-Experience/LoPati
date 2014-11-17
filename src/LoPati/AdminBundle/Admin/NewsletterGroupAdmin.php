@@ -52,16 +52,13 @@ class NewsletterGroupAdmin extends Admin
                 'genemu_jqueryselect2_hidden',
                 array(
                     'label' => 'Usuaris',
-//                    'class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser',
-//                    'choices' => array(),
+                    'by_reference' => false,
+                    'data' => array(1), // don't remove this, mandatory to trigger client-side select2JS initiallize event
+                    'transformer' => 'LoPati\NewsletterBundle\Form\DataTransformer\NewsletterUserTransformer',
                     'required' => false,
-//                    'expanded' => false,
-//                    'multiple' => true,
                     'configs' => array(
-                        'multiple' => true // Wether or not multiple values are allowed (default to false)
+                        'multiple' => true
                     ),
-//                    'btn_add' => false,
-//                    'by_reference' => false,
                 )
             )
             ->add('active', null, array('label' => 'Actiu', 'required' => false))

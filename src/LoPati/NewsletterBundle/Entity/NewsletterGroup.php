@@ -36,7 +36,7 @@ class NewsletterGroup
 
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterUser", inversedBy="groups")
-     * @ORM\OrderBy({"id"="DESC"})
+     * @ORM\OrderBy({"email"="ASC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $users;
