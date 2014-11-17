@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use LoPati\NewsletterBundle\Form\DataTransformer\NewsletterUserTransformer;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -52,15 +53,18 @@ class NewsletterGroupAdmin extends Admin
                 'genemu_jqueryselect2_hidden',
                 array(
                     'label' => 'Usuaris',
-                    'by_reference' => false,
-                    'data' => array(1), // don't remove this, mandatory to trigger client-side select2JS initiallize event
-                    'transformer' => 'LoPati\NewsletterBundle\Form\DataTransformer\NewsletterUserTransformer',
+                    'by_reference' => true,
+                    'compound' => false,
+                    'data' => array(0), // don't remove this, mandatory to trigger client-side Select2 initializer event
+//                    'transformer' => 'LoPati\NewsletterBundle\Form\DataTransformerNewsletterUserTransformer',
+                    'transformer' => 'ModelToIdTransformater',
                     'required' => false,
                     'configs' => array(
                         'multiple' => true
                     ),
                 )
             )
+//            ->add($formMapper->create('users', 'genemu_jqueryselect2_hidden')->addModelTransformer(new NewsletterUserTransformer($this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager'))))
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
         ;
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');

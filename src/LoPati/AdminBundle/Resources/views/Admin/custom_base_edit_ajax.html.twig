@@ -3,8 +3,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $(document).ready(function () {
-            {#console.log('hitme! {{ admin.uniqId }}');#}
+        $(document).ready(function() {
             jQuery('#{{ admin.uniqId }}_users').select2({
                 placeholder: 'Escriu un email',
                 minimumInputLength: 3,
@@ -14,35 +13,30 @@
                     url: '{{ path('admin_lopati_newsletter_newsletteruser_async_search') }}',
                     type: 'POST',
                     dataType: 'json',
-                    data: function (term) {
+                    data: function(term) {
                         return {
                             q: term, // search term
                             limit: 200
                         };
                     },
-                    results: function (data) {
+                    results: function(data) {
                         return { results: data.users };
                     }
                 },
-                initSelection: function (element, callback) {
-                    var id = jQuery(element).val();
-                    if (id !== '') {
-                        {#console.log('twig json {{ entity|json_encode(constant("JSON_PRETTY_PRINT"))|raw }}');#}
-                        jQuery.ajax('{{ path('admin_lopati_newsletter_newsletteruser_async_get', {id: admin.id(object) }) }}', {
-                            dataType: 'json',
-                            type: 'GET'
-                        }).done(function (data) {
-                                    console.log(data);
-                                    callback(data);
-                                });
-                    }
+                initSelection: function(element, callback) {
+                    jQuery(element).val(''); // don't remove this
+                    jQuery.ajax('{{ path('admin_lopati_newsletter_newsletteruser_async_get', {id: admin.id(object) }) }}', {
+                        dataType: 'json',
+                        type: 'GET'
+                    }).done(function(data) {
+                                console.log(data);
+                                callback(data);
+                            });
                 },
                 formatResult: userFormatResult,
                 formatSelection: userFormatSelection,
-                dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-                escapeMarkup: function (m) {
-                    return m;
-                }
+                dropdownCssClass: "bigdrop",
+                escapeMarkup: function(m) { return m; }
             }
             );
         });

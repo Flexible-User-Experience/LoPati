@@ -2,11 +2,26 @@
 
 namespace LoPati\NewsletterBundle\Form\DataTransformer;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Form\DataTransformerInterface;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class NewsletterUserTransformer extends AbstractTransformer
+class NewsletterUserTransformer implements DataTransformerInterface//extends AbstractTransformer
 {
+    /**
+     * @var ObjectManager
+     */
+    private $om;
+
+    /**
+     * @param ObjectManager $om
+     */
+    public function __construct(ObjectManager $om)
+    {
+        $this->om = $om;
+    }
+
     /**
      * Transforms NewsletterUser object to a string (UID)
      *
@@ -37,7 +52,7 @@ class NewsletterUserTransformer extends AbstractTransformer
             return null;
         }
 
-        $user = $this->getOm()
+        $user = $this->em
             ->getRepository('NewsletterBundle:NewsletterUser')
             ->find($uid);
 
