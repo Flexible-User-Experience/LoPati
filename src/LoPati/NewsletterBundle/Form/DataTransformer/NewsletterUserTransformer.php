@@ -7,7 +7,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class NewsletterUserTransformer implements DataTransformerInterface//extends AbstractTransformer
+class NewsletterUserTransformer implements DataTransformerInterface
 {
     /**
      * @var ObjectManager
@@ -52,7 +52,7 @@ class NewsletterUserTransformer implements DataTransformerInterface//extends Abs
             return null;
         }
 
-        $user = $this->em
+        $user = $this->om
             ->getRepository('NewsletterBundle:NewsletterUser')
             ->find($uid);
 

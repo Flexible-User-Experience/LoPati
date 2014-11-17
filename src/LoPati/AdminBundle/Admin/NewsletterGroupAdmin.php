@@ -2,7 +2,6 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use LoPati\NewsletterBundle\Form\DataTransformer\NewsletterUserTransformer;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -64,7 +63,6 @@ class NewsletterGroupAdmin extends Admin
                     ),
                 )
             )
-//            ->add($formMapper->create('users', 'genemu_jqueryselect2_hidden')->addModelTransformer(new NewsletterUserTransformer($this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager'))))
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
         ;
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');
