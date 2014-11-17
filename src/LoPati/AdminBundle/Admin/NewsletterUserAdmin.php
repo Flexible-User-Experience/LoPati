@@ -104,8 +104,8 @@ class NewsletterUserAdmin extends Admin
             ->add('email')
             ->add('groups', null, array('label' => 'Grup'))
             ->add('idioma')
-            ->add('active', null, array('label' => 'Actiu'))
-            ->add('created', null, array('label' => 'Data Alta'));
+            ->add('created', 'doctrine_orm_date', array('label' => 'Data Alta'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
+            ->add('active', null, array('label' => 'Actiu'));
     }
 
     public function getBatchActions()
