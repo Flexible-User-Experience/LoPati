@@ -36,7 +36,7 @@ class NewsletterGroup
 
     /**
      * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterUser", inversedBy="groups")
-     * @ORM\OrderBy({"id"="DESC"})
+     * @ORM\OrderBy({"email"="ASC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $users;
@@ -140,12 +140,20 @@ class NewsletterGroup
     /**
      * Add user
      *
-     * @param NewsletterUser $user
+     * @param string|NewsletterUser $user
      *
      * @return $this
      */
-    public function addUser(NewsletterUser $user)
+    public function addUser($user)
     {
+        // TODO: Bad practice! Avoid this with datatransformer (not working with sonata admin)
+        if (!$user instanceof NewsletterUser) {
+            global $kernel;
+            if ('AppCache' == get_class($kernel)) {
+                $kernel = $kernel->getKernel();
+            }
+            $user = $kernel->getContainer()->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterUser')->find($user);
+        }
         $this->users[] = $user;
 
         return $this;

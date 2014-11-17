@@ -244,12 +244,6 @@ fos_elastica:
 # Genemu
 genemu_form:
     select2:
-        enabled: true
-        configs:
-            placeholder: Escull un valor
-            width: off
-            allowClear: true
-            minimumInputLength: 3
 
 # Mandril
 hip_mandrill:

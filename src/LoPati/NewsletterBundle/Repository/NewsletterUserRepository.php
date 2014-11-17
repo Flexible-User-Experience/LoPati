@@ -100,4 +100,23 @@ class NewsletterUserRepository extends EntityRepository
 
         return $result[0]['total'];
     }
+
+    /**
+     * Get users by email
+     *
+     * @param string $email
+     * @param int    $limit
+     *
+     * @return array
+     */
+    public function getUsersByEmail($email, $limit = 20)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.email LIKE :email ORDER BY u.email ASC')
+            ->setParameters(array(
+                    'email' => '%' .$email . '%',
+                ));
+
+        return $query->getArrayResult();
+    }
 }

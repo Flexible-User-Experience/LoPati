@@ -14,8 +14,8 @@ class NewsletterGroupAdmin extends Admin
 
     protected $datagridValues = array(
         '_page'       => 1,
-        '_sort_order' => 'ASC', // sort direction
-        '_sort_by'    => 'name' // field name
+        '_sort_order' => 'ASC',
+        '_sort_by'    => 'name',
     );
 
     /**
@@ -47,23 +47,25 @@ class NewsletterGroupAdmin extends Admin
     {
         $formMapper
             ->add('name', null, array('label' => 'Nom'))
-//            ->add('users', 'genemu_jqueryselect2_hidden', array(
-//                    'configs' => array(
-//                        'multiple' => true // Wether or not multiple values are allowed (default to false)
-//                    )
-//                ))
             ->add(
                 'users',
-                'genemu_jqueryselect2_entity',
+                'genemu_jqueryselect2_hidden',
                 array(
                     'label' => 'Usuaris',
-                    'class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser',
-                    'multiple' => true,
+                    'by_reference' => true,
+                    'compound' => false,
+                    'data' => array(0), // don't remove this, mandatory to trigger client-side Select2 initializer event
+//                    'transformer' => 'LoPati\NewsletterBundle\Form\DataTransformerNewsletterUserTransformer',
+                    'transformer' => 'ModelToIdTransformater',
                     'required' => false,
+                    'configs' => array(
+                        'multiple' => true
+                    ),
                 )
             )
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
         ;
+        $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');
     }
 
     protected function configureListFields(ListMapper $mapper)
