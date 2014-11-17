@@ -52,13 +52,15 @@ class NewsletterUserAdmin extends Admin
             ->add('email')
             ->add(
                 'groups',
-                'genemu_jqueryselect2_entity',
+                'sonata_type_model',
                 array(
                     'label' => 'Grups',
                     'class' => 'LoPati\NewsletterBundle\Entity\NewsletterGroup',
-                    'multiple' => true,
-                    'disabled' => true,
                     'required' => false,
+                    'expanded' => false,
+                    'multiple' => true,
+                    'btn_add' => false,
+                    'by_reference' => false,
                 )
             )
             ->add(

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="newsletter_users")
@@ -42,8 +43,9 @@ class NewsletterUser
     private $token;
 
     /**
-     * @var string $created
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
+     * @var \DateTime
      */
     private $created;
 
@@ -68,7 +70,6 @@ class NewsletterUser
     {
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->active = false;
-        $this->created = new \DateTime();
         $this->groups = new ArrayCollection();
     }
 
@@ -237,6 +238,7 @@ class NewsletterUser
     public function addGroup(NewsletterGroup $group)
     {
         $this->groups[] = $group;
+        $group->addUser($this);
 
         return $this;
     }
@@ -250,6 +252,7 @@ class NewsletterUser
      */
     public function removeGroup(NewsletterGroup $group)
     {
+        $group->removeUser($this);
         $this->groups->removeElement($group);
 
         return $this;
