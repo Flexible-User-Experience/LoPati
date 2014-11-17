@@ -243,7 +243,8 @@ fos_elastica:
 
 # Genemu
 genemu_form:
-    select2:
+    select2: ~
+    date: ~
 
 # Mandril
 hip_mandrill:

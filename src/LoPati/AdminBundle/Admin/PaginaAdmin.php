@@ -216,7 +216,8 @@ class PaginaAdmin extends Admin
             ->add('titol', null, array('label' => 'Títol'))
             ->add('actiu', null, array('label' => 'Activa'))
             ->add('portada', null, array('label' => 'És portada'))
-            ->add('data_publicacio', null, array('label' => 'Data publicació'))
+//            ->add('data_publicacio', null, array('label' => 'Data publicació'))
+            ->add('data_publicacio', 'doctrine_orm_date', array('label' => 'Data publicació'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
             ->add('categoria', null, array('label' => 'Menú 1er nivell'))
             ->add('subCategoria', null, array('label' => 'Menú 2on nivell'));
     }
