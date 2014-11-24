@@ -124,12 +124,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/matteosister/GitElephantBundle.git",
-                "reference": "fbff2857e77178d4cff098763be468fb674c219c"
+                "reference": "cf5cf6a6b66d67bc0a0e41c64435fe5545aa6deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matteosister/GitElephantBundle/zipball/fbff2857e77178d4cff098763be468fb674c219c",
-                "reference": "fbff2857e77178d4cff098763be468fb674c219c",
+                "url": "https://api.github.com/repos/matteosister/GitElephantBundle/zipball/cf5cf6a6b66d67bc0a0e41c64435fe5545aa6deb",
+                "reference": "cf5cf6a6b66d67bc0a0e41c64435fe5545aa6deb",
                 "shasum": ""
             },
             "require": {
@@ -163,7 +163,7 @@
             "keywords": [
                 "git"
             ],
-            "time": "2014-10-13 20:06:05"
+            "time": "2014-11-17 19:50:16"
         },
         {
             "name": "doctrine/annotations",
@@ -3752,16 +3752,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.3.21",
+            "version": "v2.3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "0a6e90e0918d273ac451fc77c4887beffbeb368d"
+                "reference": "2f59c8df55b2273565e8898373ebc38457c10c32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/0a6e90e0918d273ac451fc77c4887beffbeb368d",
-                "reference": "0a6e90e0918d273ac451fc77c4887beffbeb368d",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2f59c8df55b2273565e8898373ebc38457c10c32",
+                "reference": "2f59c8df55b2273565e8898373ebc38457c10c32",
                 "shasum": ""
             },
             "require": {
@@ -3816,7 +3816,7 @@
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
                 "ocramius/proxy-manager": ">=0.3.1,<0.4-dev",
-                "propel/propel1": "1.6.*"
+                "propel/propel1": "~1.6"
             },
             "type": "library",
             "extra": {
@@ -3855,7 +3855,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-24 05:54:08"
+            "time": "2014-11-20 13:51:29"
         },
         {
             "name": "twig/extensions",
