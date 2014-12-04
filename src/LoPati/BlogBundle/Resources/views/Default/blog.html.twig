@@ -6,7 +6,7 @@
                 {% if tipus_video %}
                     {{ tipus_video | raw }}
                 {% else %}
-                    {% if pagina.imageGran1Name  %}
+                    {% if pagina.imageGran1Name %}
                         <img src='{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}' alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" class='imatgeprincipal'>
                     {% endif %}
                     <p style="font-size: 85%; margin: 0 0 18px 0; padding: 0;">{{ pagina.peuImageGran1 }}</p>
