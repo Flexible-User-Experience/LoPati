@@ -174,8 +174,10 @@ class NewsletterAdminController extends Controller
         foreach ($newsletter->getPagines() as $pagina){
             $pagina->setLocale($locale);
             $subCategoria = $pagina->getSubCategoria();
-            $subCategoria->setlocale($locale);
-            $em->refresh($subCategoria);
+            if ($subCategoria) {
+                $subCategoria->setlocale($locale);
+                $em->refresh($subCategoria);
+            }
             $em->refresh($pagina);
         }
         /** @var array $users */
