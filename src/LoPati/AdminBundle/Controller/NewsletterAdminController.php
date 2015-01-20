@@ -27,7 +27,8 @@ class NewsletterAdminController extends Controller
         /** @var NewsletterManager $nb */
         $nb = $this->get('newsletter.build_content');
         /** @var Newsletter $newsletter */
-        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
+//        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->find($id);
+        $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
         if ($newsletter->getEstat() == null || $newsletter->getEstat() == 'Sended') {
             $newsletter->setEstat('Waiting');
             $newsletter->setIniciEnviament(new \DateTime('now'));
