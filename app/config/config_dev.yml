@@ -33,7 +33,7 @@ assetic:
     use_controller: true
 
 cypress_git_elephant:
-    enable_profiler: true
+    enable_profiler: false
     profiler_repository_path: "%kernel.root_dir%/../"
     repositories:
         "LoPati": "%kernel.root_dir%/../"

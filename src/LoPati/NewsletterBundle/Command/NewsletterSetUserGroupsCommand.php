@@ -19,6 +19,7 @@ class NewsletterSetUserGroupsCommand extends ContainerAwareCommand {
 		$this->setName('newsletter:set:user:groups')
 				->setDefinition(array(new InputArgument('fitxer', InputArgument::REQUIRED, 'fitxer')))
 				->setDescription('Arxiu amb correus i grups')
+                ->addOption('force', null, InputOption::VALUE_NONE, 'If set, the task will persist records to database')
 				->setHelp(
 <<<EOT
 La comanda <info>newsltter:set:user:groups</info> asigna grup als usuaris. El format del fitxer ha de ser CSV amb camps email i grup.
@@ -27,7 +28,10 @@ EOT
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) 
-    {	
+    {
+        if ($input->getOption('force')) {
+            $output->writeln('<comment>--force option enabled (this option will persist changes to database)</comment>');
+        }
         $output->writeln('Obrint fitxer de mails....');
 		$contenedor = $this->getContainer();
         /* @var EntityManager $em */
@@ -54,9 +58,11 @@ EOT
                                 $output->writeln(' (create new group ' . $group . ') ');
                                 $dbGroup = new NewsletterGroup();
                                 $dbGroup->setName($group)->setActive(true);
-                                $em->persist($dbGroup);
-                                $em->flush();
-                                $em->clear();
+                                if ($input->getOption('force')) {
+                                    $em->persist($dbGroup);
+                                    $em->flush();
+                                    $em->clear();
+                                }
                             }
                             $dbUser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $mail));
                             if ($dbUser) {
@@ -64,8 +70,10 @@ EOT
 
                                 } else {
                                     $dbGroup->addUser($dbUser);
-                                    $em->flush();
-                                    $em->clear();
+                                    if ($input->getOption('force')) {
+                                        $em->flush();
+                                        $em->clear();
+                                    }
                                     $output->writeln($mail . ' · ' . $group);
                                     $sets++;
                                 }
