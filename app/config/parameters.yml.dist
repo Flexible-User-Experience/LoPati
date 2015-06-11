@@ -21,8 +21,6 @@ parameters:
 
     swiftmailer_delivery_address_dev_environment: me@me.com     #change this
 
-    cypress_git_repository: "/path/to/git/repo"
-
     mandril_api_key_test: "secret-api-token-test"
     mandril_api_key: "secret-api-token"
 
