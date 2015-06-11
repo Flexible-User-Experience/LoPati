@@ -18,6 +18,7 @@ class NewsletterSaveUsersCommand extends ContainerAwareCommand {
 		$this->setName('newsletter:save:users')
 				->setDefinition(array(new InputArgument('fitxer', InputArgument::REQUIRED, 'fitxer')))
 				->setDescription('Arxiu amb correus')
+                ->addOption('force', null, InputOption::VALUE_NONE, 'If set, the task will persist records to database')
 				->setHelp(
 <<<EOT
 La comanda <info>newsltter:save:users</info> importa usuaris a la base de dades. El format del fitxer ha de contenir una adreça de correu electrònic per linea (separador = salt de linea).
@@ -26,7 +27,10 @@ EOT
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) 
-    {	
+    {
+        if ($input->getOption('force')) {
+            $output->writeln('<comment>--force option enabled (this option will persist changes to database)</comment>');
+        }
         $output->writeln('Guardant mails....');
 		$contenedor = $this->getContainer();
         /* @var EntityManager $em */
@@ -62,11 +66,13 @@ EOT
                     $user->setEmail($sql);
                     $user->setActive('1');
                     $user->setIdioma('ca');
-                    $em->persist($user);
+                    if ($input->getOption('force')) {
+                        $em->persist($user);
+                        $em->flush();
+                        $em->clear();
+                    }
                     $output->writeln("<info>S'ha afegit un registre nou a la base de dades amb el email " . $sql . "</info>");
                     $i++;
-                    $em->flush();
-                    $em->clear();
                 }
             }
             $numero_fila++;
