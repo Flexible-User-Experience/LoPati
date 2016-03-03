@@ -45,12 +45,14 @@ class ArxiuAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add('any', 'integer', array('label' => 'Any'))
             ->add('actiu', 'checkbox', array('required' => false))
             ->add('imagePetita', 'file', array('label' => 'Imatge any', 'required' => false))
             ->add('imagePetitaName', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required' => false))
             ->add('imagePetita2Name', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
+            ->end()
             ->setHelps(array('any' => 'Ex: 2012'));
     }
 

@@ -45,12 +45,13 @@ class CategoriaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
+            ->with('General')
             ->add('nom', null, array('label' => 'Nom'))
             ->add('ordre', null, array('label' => 'Ordre'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->add('arxiu', 'checkbox', array('label' => 'És Arxiu ?', 'required' => false))
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',
@@ -60,7 +61,8 @@ class CategoriaAdmin extends Admin
                     'required'     => false,
                     'translatable_class' => 'LoPati\MenuBundle\Entity\Categoria',
                 )
-            );
+            )
+            ->end();
     }
 
     protected function configureListFields(ListMapper $mapper)

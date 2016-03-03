@@ -45,6 +45,7 @@ class ArtistaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add('name', null, array('label' => 'Nom'))
             ->add('category', null, array('label' => 'Especialitat'))
             ->add('city', null, array('label' => 'Ciutat'))
@@ -68,7 +69,7 @@ class ArtistaAdmin extends Admin
                     'label' => 'Descripció'
                 )
             )
-
+            ->end()
             ->with('Imatges')
             ->add('image1File', 'file', array('label' => 'Imatge 1', 'required' => false))
             ->add('image1', null, array('label' => 'Nom imatge 1', 'required' => false, 'read_only' => true,))
@@ -80,11 +81,11 @@ class ArtistaAdmin extends Admin
             ->add('image4', null, array('label' => 'Nom imatge 4', 'required' => false, 'read_only' => true,))
             ->add('image5File', 'file', array('label' => 'Imatge 5', 'required' => false))
             ->add('image5', null, array('label' => 'Nom imatge 5', 'required' => false, 'read_only' => true,))
-
+            ->end()
             ->with('Documents')
             ->add('document1', 'file', array('label' => 'CV', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom CV', 'required' => false, 'read_only' => true,))
-
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',

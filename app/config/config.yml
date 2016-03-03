@@ -85,7 +85,7 @@ sonata_admin:
     title:  'Administrador de continguts'
     title_logo: "/images/logo_lopati_inverted.png"
     templates:
-        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
+#        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
         dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
         user_block: "AdminBundle:Admin:my_user_block.html.twig"
     dashboard:

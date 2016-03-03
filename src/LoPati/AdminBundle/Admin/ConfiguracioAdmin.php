@@ -34,6 +34,7 @@ class ConfiguracioAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add(
                 'adresa',
                 null,
@@ -86,6 +87,7 @@ class ConfiguracioAdmin extends Admin
                     )
                 )
             )
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',
@@ -121,7 +123,8 @@ class ConfiguracioAdmin extends Admin
                         )
                     )
                 )
-            );
+            )
+            ->end();
     }
 
     protected function configureListFields(ListMapper $mapper)
