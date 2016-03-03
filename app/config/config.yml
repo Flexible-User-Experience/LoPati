@@ -30,7 +30,7 @@ twig:
             - "bootstrap_3_layout.html.twig"
             - "MenuBundle:Default:form.html.twig"
     globals:
-        admin_tag_version: "1.6.5"
+        admin_tag_version: "2.0.1"
 
 # Assetic
 assetic:
