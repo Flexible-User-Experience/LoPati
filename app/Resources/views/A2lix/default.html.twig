@@ -5,7 +5,16 @@
                 {% set locale = translationsFields.vars.name %}
                 <li {% if loop.first %}class="active"{% endif %}>
                     <a href="javascript:void(0)" data-toggle="tab" data-target=".a2lix_translationsFields-{{ locale }}">
-                        {{ locale|capitalize }}
+                        {% if locale == 'oc' %}
+                            {% set status = 'success' %}
+                        {% elseif locale == 'es' %}
+                            {% set status = 'warning' %}
+                        {% elseif locale == 'en' %}
+                            {% set status = 'danger' %}
+                        {% elseif locale == 'fr' %}
+                            {% set status = 'primary' %}
+                        {% endif %}
+                        <span class="text-{{ status }}">{{ locale | upper }}</span>
                     </a>
                 </li>
             {% endfor %}
@@ -13,7 +22,7 @@
         <div class="a2lix_translationsFields tab-content">
             {% for translationsFields in form %}
                 {% set locale = translationsFields.vars.name %}
-                <div class="a2lix_translationsFields-{{ locale }} tab-pane {% if loop.first %}active{% endif %}" style="margin-top:15px">
+                <div class="a2lix_translationsFields-{{ locale }} tab-pane{% if loop.first %} active{% endif %}" style="margin-top:15px">
                     {{ form_widget(translationsFields) }}
                 </div>
             {% endfor %}
@@ -31,9 +40,9 @@
                     {% set isDefaultLocale = 'defaultLocale' == translationsLocales.vars.name %}
                     {% for translationsFields in translationsLocales %}
                         {% set locale = translationsFields.vars.name %}
-                        <li{% if app.request.locale == locale %} class="active"{% endif %}>
+                        <li {% if app.request.locale == locale %}class="active"{% endif %}>
                             <a href="javascript:void(0)" data-toggle="tab" data-target=".a2lix_translationsFields-{{ locale }}">
-                                {{ locale|capitalize }} {% if isDefaultLocale %}[Default]{% endif %}
+                                {{ locale | capitalize }} {% if isDefaultLocale %}[Default]{% endif %}
                             </a>
                         </li>
                     {% endfor %}

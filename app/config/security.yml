@@ -1,43 +1,43 @@
 security:
-    encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+    acl:
+        connection: default
     role_hierarchy:
         ROLE_ADMIN:       [ ROLE_USER, ROLE_SONATA_ADMIN ]
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
         SONATA:           [ ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT ]
+    access_decision_manager:
+        strategy: unanimous
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            switch_user:        true
-            context:            user
-            pattern:            /admin(.*)
+            pattern: /admin(.*)
+            context: user
             form_login:
                 provider:                       fos_userbundle
-                default_target_path:            /admin/dashboard
                 login_path:                     /admin/login
+                use_forward:                    false
                 check_path:                     /admin/login_check
+                failure_path:                   /admin/login
+                default_target_path:            /admin/dashboard
                 always_use_default_target_path: true
+                use_referer:                    true
             logout:
-                path:           /admin/logout
-                target:         /admin/login
-            anonymous:    true
-    acl:
-        connection: default
+                path:   /admin/logout
+                target: /admin/login
+            anonymous: true
+        frontend:
+            pattern: ^/(.*)
+            context: user
+            anonymous: true
     access_control:
-        # Public devel environment
-        - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # URL of FOSUserBundle which need to be available to anonymous users
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # Secured part of the site
-        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        # Public
+        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_USER }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
