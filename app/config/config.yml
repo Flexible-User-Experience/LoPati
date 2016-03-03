@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sonata.yml }
 
 # Symfony
 framework:
@@ -32,7 +33,7 @@ twig:
         - "MenuBundle:Default:form.html.twig"
     globals:
         main_brand_title:  "Lo Pati"
-        admin_tag_version: "2.0.1"
+        admin_tag_version: "2.0.2"
 
 # Assetic
 assetic:
@@ -80,51 +81,6 @@ a2lix_translation_form:
     manager_registry: doctrine
     templating:       "::A2lix/default.html.twig"
 
-# Sonata Admin
-sonata_admin:
-    title: "CMS"
-    title_logo: "/images/logo_lopati_inverted.png"
-    options:
-        html5_validate: true
-        confirm_exit:   true
-        use_select2:    true
-        pager_links:    10
-    persist_filters: true
-    templates:
-        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
-#        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
-#        user_block: "AdminBundle:Admin:my_user_block.html.twig"
-    dashboard:
-        groups:
-            Menús:
-            Slider:
-            Pàgines:
-            Arxius:
-            Newsletters:
-            Irradiador:
-            Configuracions:
-
-# Sonata Block
-sonata_block:
-    default_contexts: [ cms ]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [ admin ]
-        sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
-
-# Sonata Doctrine ORM Admin
-sonata_doctrine_orm_admin:
-    templates:
-        form:
-            - "::Admin/custom_form_admin_fields_checkbox_hack.html.twig"
-
-# Sonata User
-sonata_user:
-    security_acl: true
-    manager_type: orm
-
 # FOS User
 fos_user:
     db_driver:      orm
@@ -140,7 +96,8 @@ fos_user:
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
-    language: ca
+    selector: ".tinymce"
+    language: "%locale%"
     theme:
         simple:
             mode: "textareas"

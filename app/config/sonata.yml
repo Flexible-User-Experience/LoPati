@@ -1,0 +1,77 @@
+# Sonata Admin
+sonata_admin:
+    title: "CMS"
+    title_logo: "/images/logo_lopati_inverted.png"
+    options:
+        html5_validate: true
+        confirm_exit:   true
+        use_select2:    true
+        pager_links:    10
+    persist_filters: true
+    templates:
+        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
+#        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
+#        user_block: "AdminBundle:Admin:my_user_block.html.twig"
+    dashboard:
+        groups:
+            Menús:
+                icon: "<i class='fa fa-bars'></i>"
+            Slider:
+                icon: "<i class='fa fa-picture-o'></i>"
+            Pàgines:
+                icon: "<i class='fa fa-file-o'></i>"
+            Arxius:
+                icon: "<i class='fa fa-archive'></i>"
+            Newsletters:
+                icon: "<i class='fa fa-rss'></i>"
+            Irradiador:
+                icon: "<i class='fa fa-street-view'></i>"
+            Configuracions:
+                icon: "<i class='fa fa-cogs'></i>"
+        blocks:
+            -
+                position: top
+                type: sonata.block.service.text
+                class: col-md-12
+                settings:
+                    content: >
+                        <h1 style="margin: -20px 0 10px 0">Lo Pati CMS</h1>
+                        <h5 style="margin-bottom: 40px">Benvingut a l'administrador de continguts de l'aplicació <a href="http://www.lopati.cat" target="_blank">www.lopati.cat</a></h5>
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [ Menús, Slider, Pàgines, Arxius ]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [ Newsletters, Irradiador, Configuracions ]
+            -
+                position: bottom
+                type: sonata.block.service.text
+                class: col-md-12
+                settings:
+                    content: >
+                        <div><hr style="margin-top:40px;border-top:solid 1px #d2d6de"><p><i class="fa fa-info-circle"></i> Per rebre assistència tècnica envieu un missatge a <a href="mailto:suport@flux.cat?subject=Ajuda Lo Pati CMS" style="color:#000">suport@flux.cat</a></p></div>
+
+# Sonata Block
+sonata_block:
+    default_contexts: [ cms ]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [ admin ]
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:
+
+# Sonata Doctrine ORM Admin
+sonata_doctrine_orm_admin:
+    templates:
+        form:
+            - "::Admin/custom_form_admin_fields_checkbox_hack.html.twig"
+
+# Sonata User
+sonata_user:
+    security_acl: true
+    manager_type: orm
