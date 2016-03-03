@@ -5,19 +5,21 @@ imports:
 # Symfony
 framework:
     translator:      { fallback: "%locale%" }
-    secret:          %secret%
+    secret:          "%secret%"
     router:
         resource:             "%kernel.root_dir%/config/routing.yml"
-        strict_requirements:  %kernel.debug%
+        strict_requirements:  "%kernel.debug%"
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] }
+    templating:      { engines: [ "twig" ] }
     default_locale:  "%locale%"
     session:
         name:       lopati_session
         handler_id: session.handler.native_file
         save_path:  "%kernel.root_dir%/sessions"
+    fragments:       ~
+    http_method_override: true
 
 # Twig
 twig:
@@ -25,7 +27,10 @@ twig:
     strict_variables: %kernel.debug%
     form:
         resources:
-            - 'MenuBundle:Default:form.html.twig'
+            - "bootstrap_3_layout.html.twig"
+            - "MenuBundle:Default:form.html.twig"
+    globals:
+        admin_tag_version: "2.0.1"
 
 # Assetic
 assetic:
@@ -39,51 +44,50 @@ assetic:
 # Doctrine
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
         charset:  UTF8
         types:
             json: Sonata\Doctrine\Types\JsonType
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        mappings:
-            gedmo_translatable:
-                type:   annotation
-                prefix: Gedmo\Translatable\Entity
-                dir:    "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-                alias:  GedmoTranslatable
-            ApplicationSonataUserBundle: ~
-            SonataUserBundle: ~
-            FOSUserBundle: ~ 
 
 # Doctrine Extensions
 stof_doctrine_extensions:
-    default_locale: ca
+    default_locale: "%locale%"
     translation_fallback: true
     orm:
         default:
             timestampable: true
-            translatable: true
-            sluggable:    true
+            translatable:  true
+            sluggable:     true
 
 # A2lix
 a2lix_translation_form:
     default_required: true
     locales: [ en, es ]
+    manager_registry: doctrine
+    templating:       "::A2lix/default.html.twig"
 
 # Sonata Admin
 sonata_admin:
-    title:  'Administrador de continguts'
-    title_logo: /images/logo_lopati_inverted.png
+    title: "CMS"
+    title_logo: "/images/logo_lopati_inverted.png"
+    options:
+        html5_validate: true
+        confirm_exit:   true
+        use_select2:    true
+        pager_links:    10
+    persist_filters: true
     templates:
-        layout:     AdminBundle:Admin:my_standard_layout.html.twig
-        dashboard:  AdminBundle:Admin:my_dashboard.html.twig
-        user_block: AdminBundle:Admin:my_user_block.html.twig
+        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
+        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
+        user_block: "AdminBundle:Admin:my_user_block.html.twig"
     dashboard:
         groups:
             Menús:
@@ -96,20 +100,26 @@ sonata_admin:
 
 # Sonata Block
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [ cms ]
     blocks:
         sonata.admin.block.admin_list:
-            contexts:   [admin]
+            contexts:   [ admin ]
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
+
+# Sonata Doctrine ORM Admin
+sonata_doctrine_orm_admin:
+    templates:
+        form:
+            - "::Admin/custom_form_admin_fields_checkbox_hack.html.twig"
 
 # Sonata User
 sonata_user:
     security_acl: true
     class:
-        user:   Application\Sonata\UserBundle\Entity\User
-        group:  Application\Sonata\UserBundle\Entity\Group
+        user:   LoPati\UserBundle\Entity\User
+        group:  LoPati\UserBundle\Entity\Group
     admin:
         user:
             class:        Sonata\UserBundle\Admin\Entity\UserAdmin
@@ -124,9 +134,9 @@ sonata_user:
 fos_user:
     db_driver:      orm
     firewall_name:  admin
-    user_class:     Application\Sonata\UserBundle\Entity\User
+    user_class:     LoPati\UserBundle\Entity\User
     group:
-        group_class: Application\Sonata\UserBundle\Entity\Group
+        group_class: LoPati\UserBundle\Entity\Group
 
 # TinyMCE
 stfalcon_tinymce:
@@ -178,8 +188,11 @@ vich_uploader:
 
 # Liip Imagine
 liip_imagine:
-    cache_prefix: /uploads/cache
+    resolvers:
+       default:
+          web_path: ~
     filter_sets:
+        cache: ~
         imatge_pagina:
             quality: 90
             filters:

@@ -46,6 +46,7 @@ class NewsletterGroupAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add('name', null, array('label' => 'Nom'))
             ->add(
                 'users',
@@ -64,6 +65,7 @@ class NewsletterGroupAdmin extends Admin
                 )
             )
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
+            ->end()
         ;
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');
     }

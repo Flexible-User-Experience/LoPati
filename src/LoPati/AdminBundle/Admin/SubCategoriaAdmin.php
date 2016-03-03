@@ -45,13 +45,14 @@ class SubCategoriaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            //->add('id')
+            ->with('General')
             ->add('nom', null, array('label' => 'Nom'))
             ->add('ordre', null, array('label' => 'Ordre'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->add('llista', null, array('label' => 'És llista?'))
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
             ->add('categoria', 'sonata_type_model', array('expanded' => false, 'label' => 'Menú primer nivell'))
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',
@@ -61,7 +62,8 @@ class SubCategoriaAdmin extends Admin
                     'required'     => false,
                     'translatable_class' => 'LoPati\MenuBundle\Entity\SubCategoria',
                 )
-            );
+            )
+            ->end();
     }
 
     protected function configureListFields(ListMapper $mapper)

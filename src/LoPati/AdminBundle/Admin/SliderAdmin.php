@@ -30,6 +30,7 @@ class SliderAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add('name', null, array('label' => 'Nom'))
             ->add('imageFile', 'file', array('label' => 'Arxiu imatge', 'required' => false))
             ->add('image', 'text', array('label' => 'Imatge', 'required' => false, 'read_only' => true))
@@ -37,6 +38,7 @@ class SliderAdmin extends Admin
             ->add('altName', null, array('label' => 'Alt (SEO)'))
             ->add('position', 'integer', array('label' => 'Posició'))
             ->add('active', 'checkbox', array('label' => 'Actiu', 'required' => false))
+            ->end()
         ;
     }
 

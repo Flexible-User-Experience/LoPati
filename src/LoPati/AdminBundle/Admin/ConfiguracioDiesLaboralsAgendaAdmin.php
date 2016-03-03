@@ -34,7 +34,10 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('id', null, array('required' => true));
+        $formMapper
+            ->with('General')
+            ->add('id', null, array('required' => true))
+            ->end();
     }
 
     protected function configureListFields(ListMapper $mapper)
