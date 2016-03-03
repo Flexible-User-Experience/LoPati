@@ -4,15 +4,15 @@
 {% block sonata_sidebar_search %}{% endblock %}
 
 {# custom footer #}
-{% block footer %}
-    <div class="row-fluid">
-        <div class="well">
-            <div class="span6"><a href="//www.lopati.cat">&copy; {{ 'now'|date('Y') }} Lo Pati</a></div>
-            <div class="span6" style="text-align:right;"><a href="mailto:david@flux.cat?subject=Ajuda administrador Lo Pati">ajuda i suport tècnic</a></div>
-        </div>
-    </div>
-	{{ tinymce_init() }}
-{% endblock %}
+{#{% block footer %}#}
+    {#<div class="row-fluid">#}
+        {#<div class="well">#}
+            {#<div class="span6"><a href="//www.lopati.cat">&copy; {{ 'now'|date('Y') }} Lo Pati</a></div>#}
+            {#<div class="span6" style="text-align:right;"><a href="mailto:david@flux.cat?subject=Ajuda administrador Lo Pati">ajuda i suport tècnic</a></div>#}
+        {#</div>#}
+    {#</div>#}
+	{#{{ tinymce_init() }}#}
+{#{% endblock %}#}
 
 {# custom sidebar footer #}
 {% block side_bar_after_nav %}
@@ -21,6 +21,7 @@
         Desenvolupat per <a href="http://www.flux.cat" rel="noreferrer" target="_blank">Flux</a><br>
         &copy;{{ 'now' | date('Y') }} Lo Pati
     </p>
+    {{ tinymce_init() }}
 {% endblock %}
 
 {# custom top menu #}
