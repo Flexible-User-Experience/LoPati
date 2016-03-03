@@ -16,7 +16,11 @@
 
 {# custom sidebar footer #}
 {% block side_bar_after_nav %}
-    <p class="text-left small" style="border-top: 1px solid #444444;padding:50px 0 0 20px;color:#EEE;">Desenvolupat per <a href="http://www.flux.cat" rel="noreferrer" target="_blank">Flux</a><br>&copy;{{ 'now' | date('Y') }} Lo Pati</p>
+    <p class="text-left small" style="border-top: 1px solid #444444;padding:50px 0 0 20px;color:#EEE;">
+        v{{ admin_tag_version }}<br>
+        Desenvolupat per <a href="http://www.flux.cat" rel="noreferrer" target="_blank">Flux</a><br>
+        &copy;{{ 'now' | date('Y') }} Lo Pati
+    </p>
 {% endblock %}
 
 {# custom top menu #}
