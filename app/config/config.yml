@@ -28,6 +28,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - "bootstrap_3_layout.html.twig"
+        - "SonataCoreBundle:Form:datepicker.html.twig"
         - "MenuBundle:Default:form.html.twig"
     globals:
         main_brand_title:  "Lo Pati"
@@ -90,9 +91,9 @@ sonata_admin:
         pager_links:    10
     persist_filters: true
     templates:
-#        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
-        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
-        user_block: "AdminBundle:Admin:my_user_block.html.twig"
+        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
+#        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
+#        user_block: "AdminBundle:Admin:my_user_block.html.twig"
     dashboard:
         groups:
             Menús:
