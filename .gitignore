@@ -22,3 +22,5 @@ mailinglopati.txt
 app/config/deploy.rb
 Capfile
 backups/*
+/web/media/*
+!/web/media/.gitkeep

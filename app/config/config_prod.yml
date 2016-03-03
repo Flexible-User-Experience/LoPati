@@ -1,14 +1,6 @@
 imports:
     - { resource: config.yml }
 
-swiftmailer:
-    transport: %mailer_transport%
-    username: %mailer_user%
-    password:   %mailer_password%
-    host:       %mailer_host%
-    encryption: %encryption%
-    auth_mode:  %auth_mode%
-
 monolog:
     handlers:
         main:
@@ -17,5 +9,7 @@ monolog:
             handler:      nested
         nested:
             type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        console:
+            type:  console
