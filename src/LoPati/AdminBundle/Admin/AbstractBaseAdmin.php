@@ -64,12 +64,12 @@ abstract class AbstractBaseAdmin extends Admin
         $lis = $this->getConfigurationPool()->getContainer()->get('liip_imagine.cache.manager');
         /** @var UploaderHelper $vus */
         $vus = $this->getConfigurationPool()->getContainer()->get('vich_uploader.templating.helper.uploader_helper');
-        $getImagenEnum = 'getImagen' . $enum;
+        $getEnum = 'get' . $enum;
 
-        return ($this->getSubject()->$getImagenEnum() ? '<img src="' . $lis->getBrowserPath(
-                $vus->asset($this->getSubject(), 'imagen' . $enum . 'File'),
+        return ($this->getSubject()->$getEnum() ? '<img src="' . $lis->getBrowserPath(
+                $vus->asset($this->getSubject(), 'imageFile'),
                 '480xY'
-            ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '') . '<span style="width:100%;display:block;">Mámimo 10MB con formato PNG, JPG o GIF. Ancho mínimo 1200px.</span>';
+            ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '') . '<span style="width:100%;display:block;">màmim 5MB amb format PNG, JPG o GIF</span>';
     }
 
     /**
