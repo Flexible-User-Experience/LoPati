@@ -6,6 +6,13 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+/**
+ * Class CategoriaAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ * @author   David Romaní <david@flux.cat>
+ */
 class CategoriaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'menu/level/1';
@@ -49,8 +56,8 @@ class CategoriaAdmin extends AbstractBaseAdmin
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
             ->end()
             ->with('Controls', $this->getFormMdSuccessBoxArray(4))
-            ->add('ordre', null, array('label' => 'Posició'))
             ->add('arxiu', 'checkbox', array('label' => 'És Arxiu ?', 'required' => false))
+            ->add('ordre', null, array('label' => 'Posició'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->end()
             ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
@@ -70,7 +77,6 @@ class CategoriaAdmin extends AbstractBaseAdmin
     {
         unset($this->listModes['mosaic']);
         $mapper
-            //->add('id')
             ->add('nom', null, array('label' => 'Nom', 'editable' => true))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
             ->add('arxiu', 'boolean', array('editable' => true))

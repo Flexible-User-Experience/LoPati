@@ -2,12 +2,18 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class SubCategoriaAdmin extends Admin
+/**
+ * Class SubCategoriaAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ * @author   David Romaní <david@flux.cat>
+ */
+class SubCategoriaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'menu/level/2';
 
@@ -45,15 +51,17 @@ class SubCategoriaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(8))
             ->add('nom', null, array('label' => 'Nom'))
+            ->add('categoria', 'sonata_type_model', array('expanded' => false, 'label' => 'Menú primer nivell'))
+            ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add('llista', null, array('label' => 'És llista?'))
             ->add('ordre', null, array('label' => 'Ordre'))
             ->add('actiu', null, array('label' => 'Actiu'))
-            ->add('llista', null, array('label' => 'És llista?'))
-            ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
-            ->add('categoria', 'sonata_type_model', array('expanded' => false, 'label' => 'Menú primer nivell'))
             ->end()
-            ->with('Traduccions')
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',
@@ -68,9 +76,9 @@ class SubCategoriaAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
-            //->addIdentifier('id')
-            ->addIdentifier('nom', null, array('label' => 'Nom'))
+            ->add('nom', null, array('label' => 'Nom', 'editable' => true))
             ->add('categoria', null, array('label' => 'Menú primer nivell'))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
             ->add('llista', 'boolean', array('label' => 'És llista', 'editable' => true))
