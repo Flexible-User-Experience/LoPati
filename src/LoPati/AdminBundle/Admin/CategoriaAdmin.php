@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -22,31 +23,6 @@ class CategoriaAdmin extends AbstractBaseAdmin
         '_sort_order' => 'ASC', // sort direction
         '_sort_by'    => 'ordre' // field name
     );
-
-    /**
-     * Configure export formats
-     *
-     * @return array
-     */
-    public function getExportFormats()
-    {
-        return array();
-    }
-
-    /**
-     * Configure route collection
-     *
-     * @param RouteCollection $collection collection
-     *
-     * @return mixed
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
-        $collection->remove('batch');
-        $collection->remove('show');
-        $collection->remove('export');
-    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -80,7 +56,7 @@ class CategoriaAdmin extends AbstractBaseAdmin
             ->add('nom', null, array('label' => 'Nom', 'editable' => true))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
             ->add('arxiu', 'boolean', array('editable' => true))
-            ->add('ordre', 'integer', array('editable' => true))
+            ->add('ordre', 'integer', array('label' => 'Posició', 'editable' => true))
             ->add('actiu', 'boolean', array('editable' => true))
             ->add(
                 '_action',
@@ -92,5 +68,15 @@ class CategoriaAdmin extends AbstractBaseAdmin
                     'label'   => 'Accions'
                 )
             );
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $mapper)
+    {
+        $mapper
+            ->add('nom')
+            ->add('link', null, array('label' => 'Pàgina vinculada'))
+            ->add('arxiu')
+            ->add('ordre', null, array('label' => 'Posició'))
+            ->add('actiu');
     }
 }
