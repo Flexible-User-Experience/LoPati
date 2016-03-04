@@ -62,7 +62,7 @@ class SliderImage
     /**
      * @Assert\File(
      *     maxSize="5M",
-     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="slider", fileNameProperty="image")
      * @var File $imageFile
