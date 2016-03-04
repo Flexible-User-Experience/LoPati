@@ -3,7 +3,7 @@
 namespace LoPati\MenuBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use LoPati\BlogBundle\Entity;
 use LoPati\MenuBundle\Entity\SubCategoria;
 
@@ -68,7 +68,6 @@ class DefaultController extends Controller {
 		return $this->render('MenuBundle:Default:subCategories.html.twig', array(
             'subcategories' => $subcategories2,
             'id' => $idPagina,
-            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 	

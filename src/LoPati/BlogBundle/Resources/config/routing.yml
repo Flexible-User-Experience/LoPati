@@ -59,7 +59,6 @@ categoriasenseenllas:
   requirements:
     id:  \d+
     _method:  GET
-    _locale: ca|es|en
 
 pagina:
   pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/

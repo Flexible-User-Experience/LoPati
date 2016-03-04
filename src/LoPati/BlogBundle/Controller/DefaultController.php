@@ -2,12 +2,10 @@
 
 namespace LoPati\BlogBundle\Controller;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LoPati\Utilities\Utils;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller
@@ -125,9 +123,7 @@ class DefaultController extends Controller
 
     public function menuIdiomaAction()
     {
-        $idioma = $this->getRequest()->getLocale();
-
-        return $this->render('BlogBundle:Default:menuIdioma.html.twig', array('idioma' => $idioma));
+        return $this->render('BlogBundle:Default:menuIdioma.html.twig');
     }
 
     public function articleAction($id)

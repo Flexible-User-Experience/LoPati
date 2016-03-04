@@ -14,9 +14,8 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
-        engines: ["twig"]
+        engines: [ "twig" ]
     default_locale:  "%locale%"
-    trusted_hosts:   ~
     trusted_proxies: ~
     session:
         handler_id:  ~
@@ -76,8 +75,8 @@ stof_doctrine_extensions:
 
 # A2lix
 a2lix_translation_form:
-    default_required: true
     locales: [ en, es ]
+    default_required: true
     manager_registry: doctrine
     templating:       "::A2lix/default.html.twig"
 
