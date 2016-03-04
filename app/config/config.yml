@@ -33,7 +33,7 @@ twig:
         - "MenuBundle:Default:form.html.twig"
     globals:
         main_brand_title:  "Lo Pati"
-        admin_tag_version: "2.0.3"
+        admin_tag_version: "2.0.4"
 
 # Assetic
 assetic:
