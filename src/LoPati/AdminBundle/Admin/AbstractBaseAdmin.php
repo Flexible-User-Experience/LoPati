@@ -54,20 +54,21 @@ abstract class AbstractBaseAdmin extends Admin
     /**
      * Get image helper form mapper with thumbnail
      *
-     * @param string $enum
+     * @param string $image
+     * @param string $file
      *
      * @return string
      */
-    protected function getImageHelperFormMapperWithThumbnail($enum = '1')
+    protected function getImageHelperFormMapperWithThumbnail($image = 'Image', $file = 'imageFile')
     {
         /** @var CacheManager $lis */
         $lis = $this->getConfigurationPool()->getContainer()->get('liip_imagine.cache.manager');
         /** @var UploaderHelper $vus */
         $vus = $this->getConfigurationPool()->getContainer()->get('vich_uploader.templating.helper.uploader_helper');
-        $getEnum = 'get' . $enum;
+        $getImage = 'get' . $image;
 
-        return ($this->getSubject()->$getEnum() ? '<img src="' . $lis->getBrowserPath(
-                $vus->asset($this->getSubject(), 'imageFile'),
+        return ($this->getSubject()->$getImage() ? '<img src="' . $lis->getBrowserPath(
+                $vus->asset($this->getSubject(), $file),
                 '480xY'
             ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '') . '<span style="width:100%;display:block;">màmim 5MB amb format PNG, JPG o GIF</span>';
     }

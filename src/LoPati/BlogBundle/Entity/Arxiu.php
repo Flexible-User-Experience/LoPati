@@ -26,15 +26,15 @@ class Arxiu
     /**
      * @ORM\Column(type="decimal", precision=4, unique=true)
      */
-    protected $any = null;
+    protected $any;
 
     /** @ORM\Column(type="boolean", nullable=true) */
     protected $actiu = false;
 
     /**
      * @Assert\File(
-     *     maxSize="2M",
-     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetitaName")
      *
@@ -50,8 +50,8 @@ class Arxiu
 
     /**
      * @Assert\File(
-     *     maxSize="1M",
-     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetita2Name")
      *
