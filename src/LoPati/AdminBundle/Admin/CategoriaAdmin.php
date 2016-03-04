@@ -2,12 +2,11 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class CategoriaAdmin extends Admin
+class CategoriaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'menu/level/1';
 
@@ -45,14 +44,16 @@ class CategoriaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(8))
             ->add('nom', null, array('label' => 'Nom'))
-            ->add('ordre', null, array('label' => 'Ordre'))
-            ->add('actiu', null, array('label' => 'Actiu'))
-            ->add('arxiu', 'checkbox', array('label' => 'És Arxiu ?', 'required' => false))
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
             ->end()
-            ->with('Traduccions')
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add('ordre', null, array('label' => 'Posició'))
+            ->add('arxiu', 'checkbox', array('label' => 'És Arxiu ?', 'required' => false))
+            ->add('actiu', null, array('label' => 'Actiu'))
+            ->end()
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',
@@ -67,9 +68,10 @@ class CategoriaAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             //->add('id')
-            ->addIdentifier('nom', null, array('label' => 'Nom'))
+            ->add('nom', null, array('label' => 'Nom', 'editable' => true))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
             ->add('arxiu', 'boolean', array('editable' => true))
             ->add('ordre', 'integer', array('editable' => true))
