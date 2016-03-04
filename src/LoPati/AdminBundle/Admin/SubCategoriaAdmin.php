@@ -3,7 +3,7 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /**
@@ -23,31 +23,6 @@ class SubCategoriaAdmin extends AbstractBaseAdmin
         '_sort_by'    => 'nom' // field name
     );
 
-    /**
-     * Configure export formats
-     *
-     * @return array
-     */
-    public function getExportFormats()
-    {
-        return array();
-    }
-
-    /**
-     * Configure route collection
-     *
-     * @param RouteCollection $collection collection
-     *
-     * @return mixed
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
-        $collection->remove('batch');
-        $collection->remove('show');
-        $collection->remove('export');
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -58,7 +33,7 @@ class SubCategoriaAdmin extends AbstractBaseAdmin
             ->end()
             ->with('Controls', $this->getFormMdSuccessBoxArray(4))
             ->add('llista', null, array('label' => 'És llista?'))
-            ->add('ordre', null, array('label' => 'Ordre'))
+            ->add('ordre', null, array('label' => 'Posició'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->end()
             ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
@@ -82,7 +57,7 @@ class SubCategoriaAdmin extends AbstractBaseAdmin
             ->add('categoria', null, array('label' => 'Menú primer nivell'))
             ->add('link', null, array('label' => 'Pàgina vinculada'))
             ->add('llista', 'boolean', array('label' => 'És llista', 'editable' => true))
-            ->add('ordre', 'integer', array('editable' => true))
+            ->add('ordre', 'integer', array('label' => 'Posició', 'editable' => true))
             ->add('actiu', 'boolean', array('editable' => true))
             ->add(
                 '_action',
@@ -94,5 +69,16 @@ class SubCategoriaAdmin extends AbstractBaseAdmin
                     'label'   => 'Accions'
                 )
             );
+    }
+
+    protected function configureDatagridFilters(DatagridMapper $mapper)
+    {
+        $mapper
+            ->add('nom')
+            ->add('categoria', null, array('label' => 'Menú primer nivell'))
+            ->add('link', null, array('label' => 'Pàgina vinculada'))
+            ->add('llista')
+            ->add('ordre', null, array('label' => 'Posició'))
+            ->add('actiu');
     }
 }
