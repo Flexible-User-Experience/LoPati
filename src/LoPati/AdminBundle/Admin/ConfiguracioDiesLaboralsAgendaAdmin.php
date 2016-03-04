@@ -42,6 +42,7 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->add('id')
             ->add('name', null, array('label' => 'Dia'))

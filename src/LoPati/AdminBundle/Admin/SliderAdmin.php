@@ -5,6 +5,13 @@ namespace LoPati\AdminBundle\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
+/**
+ * Class SliderAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ * @author   David Romaní <david@flux.cat>
+ */
 class SliderAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'slider';
@@ -19,7 +26,7 @@ class SliderAdmin extends AbstractBaseAdmin
     {
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(8))
-            ->add('imageFile', 'file', array('label' => 'Arxiu imatge', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('Image')))
+            ->add('imageFile', 'file', array('label' => 'Arxiu imatge', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail()))
             ->add('name', null, array('label' => 'Nom'))
             ->add('link', null, array('label' => 'Enllaç'))
             ->add('altName', null, array('label' => 'Alt (SEO)'))

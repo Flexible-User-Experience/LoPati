@@ -2,13 +2,18 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class ArtistaAdmin extends Admin
+/**
+ * Class ArtistaAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ * @author   David Romaní <david@flux.cat>
+ */
+class ArtistaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'artist';
 
@@ -18,40 +23,11 @@ class ArtistaAdmin extends Admin
         '_sort_by'    => 'name' // field name
     );
 
-    /**
-     * Configure export formats
-     *
-     * @return array
-     */
-    public function getExportFormats()
-    {
-        return array('xls', 'csv');
-    }
-
-    /**
-     * Configure route collection
-     *
-     * @param RouteCollection $collection collection
-     *
-     * @return mixed
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
-        $collection->remove('batch');
-        $collection->remove('show');
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(8))
             ->add('name', null, array('label' => 'Nom'))
-            ->add('category', null, array('label' => 'Especialitat'))
-            ->add('city', null, array('label' => 'Ciutat'))
-            ->add('year', null, array('label' => 'Any'))
-            ->add('webpage', null, array('label' => 'Web'))
-            ->add('active', null, array('label' => 'Activat'))
             ->add(
                 'summary',
                 'textarea',
@@ -70,7 +46,14 @@ class ArtistaAdmin extends Admin
                 )
             )
             ->end()
-            ->with('Imatges')
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add('category', null, array('label' => 'Especialitat'))
+            ->add('city', null, array('label' => 'Ciutat'))
+            ->add('year', null, array('label' => 'Any'))
+            ->add('webpage', null, array('label' => 'Web'))
+            ->add('active', null, array('label' => 'Activat'))
+            ->end()
+            ->with('Imatges', $this->getFormMdSuccessBoxArray(6))
             ->add('image1File', 'file', array('label' => 'Imatge 1', 'required' => false))
             ->add('image1', null, array('label' => 'Nom imatge 1', 'required' => false, 'read_only' => true,))
             ->add('image2File', 'file', array('label' => 'Imatge 2', 'required' => false))
@@ -116,9 +99,9 @@ class ArtistaAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
-//            ->add('id')
-            ->addIdentifier('name', null, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom', 'editable' => true))
             ->add('category', null, array('label' => 'Especialitat', 'editable' => true))
             ->add('city', null, array('label' => 'Ciutat', 'editable' => true))
             ->add('year', null, array('label' => 'Any', 'editable' => true))
@@ -144,6 +127,8 @@ class ArtistaAdmin extends Admin
             ->add('city', null, array('label' => 'Ciutat'))
             ->add('year', null, array('label' => 'Any'))
             ->add('webpage', null, array('label' => 'Web'))
+            ->add('summary', null, array('label' => 'Resum'))
+            ->add('description', null, array('label' => 'Descripció'))
             ->add('active', null, array('label' => 'Actiu'));
     }
 }
