@@ -22,6 +22,7 @@ class ArxiuAdmin extends AbstractBaseAdmin
         '_sort_by' => 'any' // field name
     );
 
+    // TODO fix edit error
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

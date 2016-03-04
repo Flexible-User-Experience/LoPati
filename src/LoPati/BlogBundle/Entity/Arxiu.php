@@ -24,7 +24,8 @@ class Arxiu
     protected $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, unique=true)
+     * @var integer
+     * @ORM\Column(type="integer", unique=true)
      */
     protected $any;
 
@@ -135,6 +136,9 @@ class Arxiu
         $this->actiu = $actiu;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->id ? $this->getAny() : '---';
@@ -143,7 +147,7 @@ class Arxiu
     /**
      * Get data_caducitat
      *
-     * @return \DateTime
+     * @return string
      */
     public function getAny()
     {
