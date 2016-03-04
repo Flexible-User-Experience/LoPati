@@ -59,7 +59,7 @@ class DefaultController extends Controller {
             if (count($subcategories2) > 0) {
                 /** @var SubCategoria $irradiadorSubcategoria */
                 $irradiadorSubcategoria = new SubCategoria();
-                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setNom('Irradiador');
                 $irradiadorSubcategoria->setOrdre(123);
                 array_push($subcategories2, $irradiadorSubcategoria);
             }
@@ -81,7 +81,7 @@ class DefaultController extends Controller {
             if (count($subcategories) > 0) {
                 /** @var SubCategoria $irradiadorSubcategoria */
                 $irradiadorSubcategoria = new SubCategoria();
-                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setNom('Irradiador');
                 $irradiadorSubcategoria->setOrdre(123);
                 array_push($subcategories, $irradiadorSubcategoria);
             }
