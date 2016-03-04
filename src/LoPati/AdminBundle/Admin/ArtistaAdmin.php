@@ -116,9 +116,9 @@ class ArtistaAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
-//            ->add('id')
-            ->addIdentifier('name', null, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom', 'editable' => true))
             ->add('category', null, array('label' => 'Especialitat', 'editable' => true))
             ->add('city', null, array('label' => 'Ciutat', 'editable' => true))
             ->add('year', null, array('label' => 'Any', 'editable' => true))
