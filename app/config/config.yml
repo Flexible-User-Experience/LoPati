@@ -27,6 +27,14 @@ twig:
         resources:
             - 'MenuBundle:Default:form.html.twig'
 
+swiftmailer:
+    transport:  "%mailer_transport%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    host:       "%mailer_host%"
+    encryption: "%encryption%"
+    auth_mode:  "%auth_mode%"
+
 # Assetic
 assetic:
     debug:          %kernel.debug%
