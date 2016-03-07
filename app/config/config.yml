@@ -32,8 +32,8 @@ swiftmailer:
     username:   "%mailer_user%"
     password:   "%mailer_password%"
     host:       "%mailer_host%"
-    encryption: "%encryption%"
-    auth_mode:  "%auth_mode%"
+#    encryption: "%encryption%"
+#    auth_mode:  "%auth_mode%"
 
 # Assetic
 assetic:
