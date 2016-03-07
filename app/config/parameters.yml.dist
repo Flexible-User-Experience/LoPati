@@ -10,6 +10,8 @@ parameters:
     mailer_host: localhost
     mailer_user: null
     mailer_password: null
+    encryption: ssl
+    auth_mode: login
     locale: ca
     secret: 9118197c01dddcc43752b3136f2f10de8
     database_path: null
