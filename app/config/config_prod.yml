@@ -1,14 +1,6 @@
 imports:
     - { resource: config.yml }
 
-swiftmailer:
-    transport: %mailer_transport%
-    username: %mailer_user%
-    password:   %mailer_password%
-    host:       %mailer_host%
-    encryption: %encryption%
-    auth_mode:  %auth_mode%
-
 monolog:
     handlers:
         main:
