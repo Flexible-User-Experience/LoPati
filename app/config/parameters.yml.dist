@@ -28,6 +28,7 @@ parameters:
 
     sendgrip_username: "sendgrip_username"
     sendgrip_password: "sendgrip_password"
+    sendgrip_api_key:  "sendgrip_api_key"
 
     admin_user_test: test   #change it
     admin_pass_test: test   #change it

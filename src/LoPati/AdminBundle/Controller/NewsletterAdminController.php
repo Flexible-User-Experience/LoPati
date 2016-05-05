@@ -8,6 +8,7 @@ use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Psr\Log\LoggerInterface;
+use SendGrid\Response;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
@@ -133,8 +134,9 @@ class NewsletterAdminController extends Controller
             self::testEmail3,
         );
 
+        /** @var Response $result */
         $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
-        if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+        if ($result->getCode() == 200) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
                 'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
@@ -189,8 +191,9 @@ class NewsletterAdminController extends Controller
             }
             $content = $this->get('templating')->render('NewsletterBundle:Default:mail2.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $locale));
             $this->makeLog('sending mail... ');
+            /** @var Response $result */
             $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
-            if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+            if ($result->getCode() == 200) {
                 $this->makeLog('done!');
                 $newsletter->setEnviats($newsletter->getEnviats() + count($users));
             } else {

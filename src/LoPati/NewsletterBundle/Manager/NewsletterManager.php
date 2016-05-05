@@ -35,6 +35,9 @@ class NewsletterManager {
      */
     protected $sendgridClient;
 
+    /** @var string */
+    protected $sgApiKey;
+
     /**
      * Constructor
      *
@@ -43,14 +46,16 @@ class NewsletterManager {
      * @param Dispatcher      $mandrilDispatcher
      * @param Mandrill        $mandrilClient
      * @param SendGrid        $sendgripClient
+     * @param string          $sgApiKey
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient, SendGrid $sendgripClient)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient, SendGrid $sendgripClient, $sgApiKey)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
         $this->mandrilDispatcher = $mandrilDispatcher;
         $this->mandrilClient = $mandrilClient;
         $this->sendgripClient = $sendgripClient;
+        $this->sgApiKey = $sgApiKey;
     }
 
     /**
@@ -122,8 +127,10 @@ class NewsletterManager {
             throw new \Exception('Email destination list empty');
         }
 
+        $sg = new SendGrid($this->sgApiKey);
         $message = new SendGrid\Email();
         $message
+            ->addTo('butlleti@lopati.cat')
             ->setSubject($subject)
             ->setFromName('Centre d\'Art Lo Pati')
             ->setFrom('butlleti@lopati.cat')
@@ -134,7 +141,7 @@ class NewsletterManager {
             $message->addBcc($email);
         }
 
-        return $this->sendgridClient->send($message);
+        return $sg->send($message);
     }
 
     /**
