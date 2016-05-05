@@ -32,7 +32,8 @@
         "raulfraile/ladybug-bundle": "1.0.*",
         "genemu/form-bundle": "2.2.*",
         "hipaway-travel/mandrill-bundle": "1.*",
-        "cypresslab/gitelephant-bundle": "dev-develop"
+        "cypresslab/gitelephant-bundle": "dev-develop",
+        "tystr/sendgrid-bundle": "^0.1.1"
     },
     "scripts": {
         "post-install-cmd": [

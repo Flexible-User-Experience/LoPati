@@ -9,10 +9,7 @@ use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Process\Process;
 
 class NewsletterAdminController extends Controller
 {

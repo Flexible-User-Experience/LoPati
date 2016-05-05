@@ -2,9 +2,9 @@
 
 namespace LoPati\NewsletterBundle\Manager;
 
-use Hip\MandrillBundle\Message;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use Mandrill;
+use SendGrid;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Hip\MandrillBundle\Dispatcher;
@@ -31,19 +31,26 @@ class NewsletterManager {
     protected $mandrilClient;
 
     /**
+     * @var SendGrid
+     */
+    protected $sendgridClient;
+
+    /**
      * Constructor
      *
      * @param EngineInterface $templatingEngine
      * @param Translator      $translator
      * @param Dispatcher      $mandrilDispatcher
      * @param Mandrill        $mandrilClient
+     * @param SendGrid        $sendgripClient
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient, SendGrid $sendgripClient)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
         $this->mandrilDispatcher = $mandrilDispatcher;
         $this->mandrilClient = $mandrilClient;
+        $this->sendgripClient = $sendgripClient;
     }
 
     /**
@@ -115,20 +122,19 @@ class NewsletterManager {
             throw new \Exception('Email destination list empty');
         }
 
-        $message = new Message();
+        $message = new SendGrid\Email();
         $message
             ->setSubject($subject)
             ->setFromName('Centre d\'Art Lo Pati')
-            ->setFromEmail('butlleti@lopati.cat')
-            ->setTrackClicks(true)
+            ->setFrom('butlleti@lopati.cat')
             ->setHtml($content)
         ;
 
         foreach ($emailDestinationList as $email) {
-            $message->addTo($email, $email, 'bcc');
+            $message->addBcc($email);
         }
 
-        return $this->mandrilDispatcher->send($message);
+        return $this->sendgridClient->send($message);
     }
 
     /**

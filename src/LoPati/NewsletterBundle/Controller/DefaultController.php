@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends Controller
 {
@@ -28,6 +29,10 @@ class DefaultController extends Controller
     /**
      * @Route("/newsletter/suscribe", name="newsletter_user")
      * @Method({"POST"})
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function suscribeAction(Request $request)
     {
@@ -68,8 +73,13 @@ class DefaultController extends Controller
 
     /**
      * @Route("/newsletter/confirmation/{token}", name="newsletter_confirmation")
-     *
      * @Template
+     *
+     * @param Request $request
+     * @param string  $token
+     *
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function confirmationAction(Request $request, $token)
     {
@@ -107,6 +117,12 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
     }
 
+    /**
+     * @param $data
+     * @param $_locale
+     *
+     * @return Response
+     */
     public function visitAction($data, $_locale)
     {
         $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
@@ -172,6 +188,12 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Exception
+     */
     public function confirmUnsuscribeAction(Request $request)
     {
         if ($request->isMethod('POST')) {
@@ -224,6 +246,10 @@ class DefaultController extends Controller
 
     /**
      * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_unsuscribe")
+     * @param Request $request
+     * @param string  $token
+     *
+     * @return RedirectResponse
      */
     public function unsuscribeAction(Request $request, $token)
     {

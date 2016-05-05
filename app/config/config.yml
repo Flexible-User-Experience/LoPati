@@ -27,6 +27,7 @@ twig:
         resources:
             - 'MenuBundle:Default:form.html.twig'
 
+# Swiftmailer
 swiftmailer:
     transport:  "%mailer_transport%"
     username:   "%mailer_user%"
@@ -260,3 +261,8 @@ hip_mandrill:
     default:
         sender:       "butlleti@lopati.cat"
         sender_name:  "Lo Pati"
+
+# Sendgrid
+tystr_sendgrid:
+    username: "%sendgrip_username%"
+    password: "%sendgrip_password%"

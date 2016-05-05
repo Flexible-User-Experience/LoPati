@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
+            new Tystr\Bundle\SendgridBundle\TystrSendgridBundle(),
             // Custom Bundles
             new LoPati\BlogBundle\BlogBundle(),
             new LoPati\MenuBundle\MenuBundle(),
