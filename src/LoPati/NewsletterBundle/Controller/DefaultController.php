@@ -215,8 +215,9 @@ class DefaultController extends Controller
                     } else if ($user->getIdioma() == 'en') {
                         $subject = 'Confirmation to NOT receive newsletter LO PATI';
                     }
+                    /** @var \SendGrid\Response $result */
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+                    if ($result->getCode() == 200) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')
