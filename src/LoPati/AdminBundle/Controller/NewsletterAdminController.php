@@ -31,24 +31,24 @@ class NewsletterAdminController extends Controller
             $newsletter->setIniciEnviament(new \DateTime('now'));
             $newsletter->setFiEnviament(null);
 
-            $rejects = $nb->getRejectList();
-            foreach ($rejects as $item) {
-                $email = $item['email'];
-                $reason = $item['reason'];
-                /** @var NewsletterUser $ruser */
-                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
-                if ($ruser) {
-                    if ($reason == 'soft-bounce') {
-                        // increment fail counter
-                        $ruser->setFail($ruser->getFail() + 1);
-                        $em->flush();
-                    } else {
-                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
-                        $em->remove($ruser);
-                        $em->flush();
-                    }
-                }
-            }
+//            $rejects = $nb->getRejectList();
+//            foreach ($rejects as $item) {
+//                $email = $item['email'];
+//                $reason = $item['reason'];
+//                /** @var NewsletterUser $ruser */
+//                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
+//                if ($ruser) {
+//                    if ($reason == 'soft-bounce') {
+//                        // increment fail counter
+//                        $ruser->setFail($ruser->getFail() + 1);
+//                        $em->flush();
+//                    } else {
+//                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
+//                        $em->remove($ruser);
+//                        $em->flush();
+//                    }
+//                }
+//            }
 
             // Clean fail delivery users
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
@@ -142,7 +142,7 @@ class NewsletterAdminController extends Controller
                 'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
             );
         } else {
-            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR: Status = "' . $result[0]['status'] . '" Reason: "' . $result[0]['reject_reason'] . '"');
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR: Status = "' . $result->getCode() . '" Reason: "' . $result->getBody() . '"');
         }
 
         $newsletter->setTest('1');
@@ -197,7 +197,7 @@ class NewsletterAdminController extends Controller
                 $this->makeLog('done!');
                 $newsletter->setEnviats($newsletter->getEnviats() + count($users));
             } else {
-                $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
+                $this->makeLog('error! ' . $result->getCode() . ': ' . $result->getBody());
             }
             $em->flush();
         }

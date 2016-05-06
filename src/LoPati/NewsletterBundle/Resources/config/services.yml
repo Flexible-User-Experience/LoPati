@@ -4,7 +4,4 @@ services:
         arguments:
             - "@templating"
             - "@translator"
-            - "@hip_mandrill.dispatcher"
-            - "@hip_mandrill.client"
-            - "@tystr_sendgrid.sendgrid"
             - "%sendgrip_api_key%"

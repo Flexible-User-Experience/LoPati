@@ -3,11 +3,9 @@
 namespace LoPati\NewsletterBundle\Manager;
 
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use Mandrill;
 use SendGrid;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
-use Hip\MandrillBundle\Dispatcher;
 
 class NewsletterManager {
     /**
@@ -20,21 +18,6 @@ class NewsletterManager {
      */
     protected $translator;
 
-    /**
-     * @var Dispatcher
-     */
-    protected $mandrilDispatcher;
-
-    /**
-     * @var Mandrill
-     */
-    protected $mandrilClient;
-
-    /**
-     * @var SendGrid
-     */
-    protected $sendgridClient;
-
     /** @var string */
     protected $sgApiKey;
 
@@ -43,18 +26,12 @@ class NewsletterManager {
      *
      * @param EngineInterface $templatingEngine
      * @param Translator      $translator
-     * @param Dispatcher      $mandrilDispatcher
-     * @param Mandrill        $mandrilClient
-     * @param SendGrid        $sendgripClient
      * @param string          $sgApiKey
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient, SendGrid $sendgripClient, $sgApiKey)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, $sgApiKey)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
-        $this->mandrilDispatcher = $mandrilDispatcher;
-        $this->mandrilClient = $mandrilClient;
-        $this->sendgripClient = $sendgripClient;
         $this->sgApiKey = $sgApiKey;
     }
 
@@ -142,13 +119,5 @@ class NewsletterManager {
         }
 
         return $sg->send($message);
-    }
-
-    /**
-     * Get Mandrill rejects list and clear up local database
-     */
-    public function getRejectList()
-    {
-        return $this->mandrilClient->rejects->getList();
     }
 }
