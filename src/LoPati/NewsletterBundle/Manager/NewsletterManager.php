@@ -104,10 +104,10 @@ class NewsletterManager {
             throw new \Exception('Email destination list empty');
         }
 
-        $sg = new SendGrid($this->sgApiKey);
+        $sg = new SendGrid($this->sgApiKey, array('turn_off_ssl_verification' => true));
         $message = new SendGrid\Email();
         $message
-            ->addTo('butlleti@lopati.cat')
+//            ->addTo('butlleti@lopati.cat')
             ->setSubject($subject)
             ->setFromName('Centre d\'Art Lo Pati')
             ->setFrom('butlleti@lopati.cat')
@@ -115,7 +115,8 @@ class NewsletterManager {
         ;
 
         foreach ($emailDestinationList as $email) {
-            $message->addBcc($email);
+//            $message->addBcc($email);
+            $message->addSmtpapiTo($email);
         }
 
         return $sg->send($message);
