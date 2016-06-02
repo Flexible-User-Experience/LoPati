@@ -23,6 +23,9 @@ AdminBundle:
     resource: "@AdminBundle/Resources/config/routing.yml"
     prefix:   /
 
+sendgrid_hooks:
+    resource: "@TystrSendgridBundle/Resources/config/routing.xml"
+
 _imagine:
     resource: .
     type:     imagine

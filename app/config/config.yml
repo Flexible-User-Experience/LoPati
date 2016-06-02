@@ -80,6 +80,15 @@ stof_doctrine_extensions:
             translatable: true
             sluggable:    true
 
+# Monolog
+monolog:
+    handlers:
+        sendgrid:
+            type:     stream
+            level:    info
+            path:     "%kernel.logs_dir%/sendgrid.log"
+            channels: [ sendgrid ]
+
 # A2lix
 a2lix_translation_form:
     default_required: true

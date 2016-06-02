@@ -5,3 +5,14 @@ services:
             - "@templating"
             - "@translator"
             - "%sendgrip_api_key%"
+    newsletter.sendgrid.hooks:
+        class: LoPati\NewsletterBundle\Listener\SendgridListener
+        tags:
+            - { name: monolog.logger, channel: sendgrid }
+            - { name: kernel.event_listener, event: sendgrid.processed, method: onEmailProcessed }
+            - { name: kernel.event_listener, event: sendgrid.dropped, method: onEmailDropped }
+            - { name: kernel.event_listener, event: sendgrid.delivered, method: onEmailDelivered }
+            - { name: kernel.event_listener, event: sendgrid.bounce, method: onEmailBounce }
+            - { name: kernel.event_listener, event: sendgrid.spamreport, method: onEmailSpam }
+            - { name: kernel.event_listener, event: sendgrid.unsubscribe, method: onEmailUnsubscribe }
+        arguments: [ "@logger" ]
