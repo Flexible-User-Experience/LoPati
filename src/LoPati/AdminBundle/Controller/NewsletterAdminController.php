@@ -136,13 +136,13 @@ class NewsletterAdminController extends Controller
 
         /** @var Response $result */
         $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
-        if ($result->getCode() == 200) {
+        if ($result == true) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
                 'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
             );
         } else {
-            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR: Status = "' . $result->getCode() . '" Reason: "' . $result->getBody() . '"');
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR al enviar el test');
         }
 
         $newsletter->setTest('1');
@@ -193,11 +193,11 @@ class NewsletterAdminController extends Controller
             $this->makeLog('sending mail... ');
             /** @var Response $result */
             $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
-            if ($result->getCode() == 200) {
+            if ($result == true) {
                 $this->makeLog('done!');
                 $newsletter->setEnviats($newsletter->getEnviats() + count($users));
             } else {
-                $this->makeLog('error! ' . $result->getCode() . ': ' . $result->getBody());
+                $this->makeLog('error!');
             }
             $em->flush();
         }
