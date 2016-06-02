@@ -1,9 +1,13 @@
 services:
     newsletter.build_content:
         class: LoPati\NewsletterBundle\Manager\NewsletterManager
+        tags:
+            - { name: monolog.logger, channel: sendgrid }
         arguments:
             - "@templating"
             - "@translator"
+            - "@sendgrid"
+            - "@logger"
             - "%sendgrip_api_key%"
     newsletter.sendgrid.hooks:
         class: LoPati\NewsletterBundle\Listener\SendgridListener
