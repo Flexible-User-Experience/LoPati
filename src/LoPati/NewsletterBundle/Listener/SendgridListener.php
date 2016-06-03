@@ -50,7 +50,7 @@ class SendgridListener
      */
     public function onEmailDropped(WebHookEvent $event)
     {
-        $this->logger->info('[SDL] Email dropped: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
+        $this->logger->warning('[SDL] Email dropped: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
     }
 
     /**
@@ -66,7 +66,7 @@ class SendgridListener
      */
     public function onEmailBounce(WebHookEvent $event)
     {
-        $this->logger->info('[SDL] Address bounced: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
+        $this->logger->warning('[SDL] Address bounced: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
     }
 
     /**
@@ -74,7 +74,7 @@ class SendgridListener
      */
     public function onEmailSpam(WebHookEvent $event)
     {
-        $this->logger->info('[SDL] Address spammed: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
+        $this->logger->error('[SDL] Address spammed: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
     }
 
     /**
@@ -82,6 +82,6 @@ class SendgridListener
      */
     public function onEmailUnsubscribe(WebHookEvent $event)
     {
-        $this->logger->info('[SDL] Address unsubscribed: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
+        $this->logger->error('[SDL] Address unsubscribed: ' . $event->getEmail()->getOrElse('!!! unknown email !!!'));
     }
 }
