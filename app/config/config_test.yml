@@ -3,8 +3,14 @@ imports:
 
 security:
     firewalls:
+#        admin:
+#            http_basic: ~
         admin:
-            http_basic: ~
+            pattern: /admin(.*)
+            context: user
+            pattern:  ^/
+            security: false
+            anonymous: true
 
 framework:
     test: ~
@@ -26,7 +32,7 @@ liip_functional_test:
         username: "%private_admin_test_user%"
         password: "%private_admin_test_pass%"
 
-doctrine:
-    dbal:
-        driver: pdo_sqlite
-        path:   "%kernel.root_dir%/database/test.db3"
+#doctrine:
+#    dbal:
+#        driver: pdo_sqlite
+#        path:   "%kernel.root_dir%/database/test.db3"

@@ -2,41 +2,35 @@
 
 namespace LoPati\AdminBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
 
 class AdminControllerTest extends WebTestCase
 {
     /**
-     * Test page is successful
-     *
-     * @dataProvider provideUrls
+     * Test admin login request is successful
      */
-    public function testAdminPagesAreSuccessful($url)
+    public function testAdminLoginPageIsSuccessful()
     {
-        $client = $this->getAdminClient();
-        $client->request('GET', $url);
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $client = $this->createClient();           // anonymous user
+        $client->request('GET', '/admin/login');
+
+        $this->assertStatusCode(200, $client);
     }
 
     /**
-     * Get admin client
+     * Test page is successful
      *
-     * @return Client
+     * @dataProvider provideUrls
+     *
+     * @param $url
      */
-    private function getAdminClient()
+    public function testAdminPagesAreSuccessful($url)
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/admin/login');
-        $form = $crawler->selectButton('_submit')->form(
-            array(
-                '_username' => static::$kernel->getContainer()->getParameter('admin_user_test'),
-                '_password' => static::$kernel->getContainer()->getParameter('admin_pass_test'),
-            )
-        );
-        $client->submit($form);
+        $client = $this->makeClient(true);         // authenticated user
+        $client->request('GET', $url);
 
-        return $client;
+        $this->assertStatusCode(200, $client);
     }
 
     /**
