@@ -1,0 +1,27 @@
+## Menu level 1
+LoPati\MenuBundle\Entity\Categoria:
+    menulevelone{1..5}:
+        nom: <word()>
+        ordre: <current()>
+        actiu: true
+
+## Users
+LoPati\UserBundle\Entity\User:
+    admin:
+        username: <{private_admin_test_user}>
+        plainPassword: <{private_admin_test_pass}>
+        email: <safeEmail()>
+        firstname: <name()>
+        lastname: <lastname()>
+        enabled: true
+        roles:
+            - ROLE_SUPER_ADMIN
+    editor:
+        username: <{private_editor_test_user}>
+        plainPassword: <{private_editor_test_pass}>
+        email: <safeEmail()>
+        firstname: <name()>
+        lastname: <lastname()>
+        enabled: true
+        roles:
+            - ROLE_CMS

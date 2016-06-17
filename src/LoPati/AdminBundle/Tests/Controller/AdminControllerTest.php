@@ -3,7 +3,6 @@
 namespace LoPati\AdminBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 class AdminControllerTest extends WebTestCase
 {
@@ -73,7 +72,6 @@ class AdminControllerTest extends WebTestCase
             array('/admin/slider/list'),
             array('/admin/slider/create'),
             array('/admin/slider/1/edit'),
-            array('/admin/slider/1/delete'),
         );
     }
 }

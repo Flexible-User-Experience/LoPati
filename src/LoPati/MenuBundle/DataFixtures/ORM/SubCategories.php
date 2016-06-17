@@ -1,13 +1,13 @@
 <?php
 namespace LoPati\MenuBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use LoPati\MenuBundle\Entity\SubCategoria;
-use Symfony\Component\HttpFoundation\Response;
 
-class SubCategories extends AbstractFixture implements OrderedFixtureInterface {
-	
+class SubCategories extends AbstractFixture implements OrderedFixtureInterface 
+{
 	public function getOrder()
 	{
 		return 2;

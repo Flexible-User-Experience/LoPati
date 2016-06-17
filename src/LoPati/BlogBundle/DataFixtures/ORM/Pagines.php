@@ -1,12 +1,14 @@
 <?php
 
 namespace LoPati\MenuBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use LoPati\BlogBundle\Entity\Pagina;
 
-class Pagines extends AbstractFixture implements OrderedFixtureInterface {
+class Pagines extends AbstractFixture implements OrderedFixtureInterface 
+{
 	public function getOrder()
 	{
 		return 3;
