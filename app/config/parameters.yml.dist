@@ -23,9 +23,6 @@ parameters:
 
     swiftmailer_delivery_address_dev_environment: me@me.com     #change this
 
-    mandril_api_key_test: "secret-api-token-test"
-    mandril_api_key: "secret-api-token"
-
     sendgrip_username: "sendgrip_username"
     sendgrip_password: "sendgrip_password"
     sendgrip_api_key:  "sendgrip_api_key"

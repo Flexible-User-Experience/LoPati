@@ -165,13 +165,6 @@ genemu_form:
     select2: ~
     date:    ~
 
-# Mandril
-hip_mandrill:
-    api_key: "%mandril_api_key%"
-    default:
-        sender:       "butlleti@lopati.cat"
-        sender_name:  "Lo Pati"
-
 # Sendgrid
 tystr_sendgrid:
     username: "%sendgrip_username%"
