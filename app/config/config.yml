@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: media.yml }
     - { resource: sonata.yml }
 
 # Symfony
@@ -16,6 +17,7 @@ framework:
     templating:
         engines: [ "twig" ]
     default_locale:  "%locale%"
+    trusted_hosts:   ~
     trusted_proxies: ~
     session:
         handler_id:  ~
@@ -73,6 +75,7 @@ doctrine_migrations:
 # Stof Doctrine Extensions
 stof_doctrine_extensions:
     default_locale:       "%locale%"
+    translation_fallback: true
     orm:
         default:
             softdeleteable: true
@@ -132,79 +135,6 @@ stfalcon_tinymce:
             paste_strip_class_attributes: true
             paste_retain_style_properties: "strong,p,color"
             theme_advanced_buttons1_add: "fullscreen"
-
-# Vich
-vich_uploader:
-    db_driver: orm
-    mappings:
-        imatge:
-            uri_prefix:         /uploads/images
-            upload_destination: %kernel.root_dir%/../web/uploads/images
-            namer:              vich_uploader.namer_uniqid
-        pdf:
-            uri_prefix:         /uploads/documents
-            upload_destination: %kernel.root_dir%/../web/uploads/documents
-            namer:              vich_uploader.namer_origname
-        artista:
-            uri_prefix:         /uploads/artists
-            upload_destination: %kernel.root_dir%/../web/uploads/artists
-            namer:              vich_uploader.namer_uniqid
-        artistapdf:
-            uri_prefix:         /uploads/artists/cv
-            upload_destination: %kernel.root_dir%/../web/uploads/artists/cv
-            namer:              vich_uploader.namer_origname
-        slider:
-            uri_prefix:         /uploads/slides
-            upload_destination: %kernel.root_dir%/../web/uploads/slides
-            namer:              vich_uploader.namer_uniqid
-
-# Liip Imagine
-liip_imagine:
-    resolvers:
-       default:
-          web_path: ~
-    filter_sets:
-        cache: ~
-        imatge_pagina:
-            quality: 90
-            filters:
-                thumbnail: { size: [710, null], mode: outbound }
-        imatge_pagina_irradiador:
-            quality: 90
-            filters:
-                thumbnail: { size: [460, null], mode: outbound }
-        portada:
-            quality: 90
-            filters:
-                thumbnail: { size: [174, 174], mode: outbound }
-        thumb_imatge_pagina:
-            quality: 70
-            filters:
-                thumbnail: { size: [155, null], mode: outbound }
-        thumb_imatge_pagina_arbre_continguts:
-            quality: 70
-            filters:
-                thumbnail: { size: [50, null], mode: outbound }
-        thumb_imatge_admin_list_view:
-            quality: 70
-            filters:
-                thumbnail: { size: [100, null], mode: outbound }
-        imatge_pagina_newsletter:
-            quality: 80
-            filters:
-                thumbnail: { size: [578, null], mode: outbound }
-        imatge460x300:
-            quality: 90
-            filters:
-                thumbnail: { size: [460, 300], mode: outbound }
-        480xY:
-            quality: 90
-            filters:
-                thumbnail: { size: [480, null], mode: outbound }
-        imatge756x400:
-            quality: 85
-            filters:
-                thumbnail: { size: [756, 400], mode: outbound, allow_upscale: true }
 
 # FOS Elasticsearch
 # Move to config_prod.yml if it's necessary to avoid Elasticasearch on devel environments
