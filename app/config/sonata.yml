@@ -65,12 +65,6 @@ sonata_block:
         sonata.block.service.action:
         sonata.block.service.rss:
 
-# Sonata Doctrine ORM Admin
-sonata_doctrine_orm_admin:
-    templates:
-        form:
-            - "::Admin/custom_form_admin_fields_checkbox_hack.html.twig"
-
 # Sonata User
 sonata_user:
     security_acl: true
