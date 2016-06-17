@@ -13,6 +13,37 @@ LoPati\MenuBundle\Entity\SubCategoria:
         categoria: @menulevelone<numberBetween(1, 3)>
         actiu: true
 
+## Pages
+LoPati\BlogBundle\Entity\Pagina:
+    page{1..10}:
+        tipus: 'w'
+        titol: <title()>
+        descripcio: <sentence()>
+        actiu: true
+        portada: false
+        dataPublicacio: <dateTimeBetween('-2 months', '-1 months')>
+        categoria: @menulevelone<numberBetween(1, 3)>
+        subCategoria: @menuleveltwo<numberBetween(1, 7)>
+
+# Slider
+LoPati\BlogBundle\Entity\SliderImage:
+    slide:
+        name: <word()>
+        altName: <word()>
+        description: <sentence()>
+        link: <url()>
+        position: 1
+        active: true
+        image: <word()>
+
+# Footer
+LoPati\BlogBundle\Entity\Configuracio:
+    footer:
+        adresa: <word()>
+        horari: <word()>
+        organitza: <word()>
+        colabora: <word()>
+
 ## Users
 LoPati\UserBundle\Entity\User:
     admin:
