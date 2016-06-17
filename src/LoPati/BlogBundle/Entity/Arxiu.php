@@ -141,7 +141,7 @@ class Arxiu
      */
     public function __toString()
     {
-        return $this->id ? $this->getAny() : '---';
+        return $this->id ? (string) $this->getAny() : '---';
     }
 
     /**

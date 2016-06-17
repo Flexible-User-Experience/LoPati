@@ -13,7 +13,7 @@ LoPati\MenuBundle\Entity\SubCategoria:
         categoria: @menulevelone<numberBetween(1, 3)>
         actiu: true
 
-## Pages
+## Page
 LoPati\BlogBundle\Entity\Pagina:
     page{1..10}:
         tipus: 'w'
@@ -24,6 +24,12 @@ LoPati\BlogBundle\Entity\Pagina:
         dataPublicacio: <dateTimeBetween('-2 months', '-1 months')>
         categoria: @menulevelone<numberBetween(1, 3)>
         subCategoria: @menuleveltwo<numberBetween(1, 7)>
+
+## Arxive
+LoPati\BlogBundle\Entity\Arxiu:
+    arxiu:
+        any: 2000
+        actiu: true
 
 # Newsletter User
 LoPati\NewsletterBundle\Entity\NewsletterUser:
@@ -73,7 +79,7 @@ LoPati\BlogBundle\Entity\Configuracio:
         organitza: <word()>
         colabora: <word()>
 
-## Users
+## User
 LoPati\UserBundle\Entity\User:
     admin:
         username: <{private_admin_test_user}>

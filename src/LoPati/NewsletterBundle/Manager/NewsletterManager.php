@@ -7,8 +7,8 @@ use SendGrid;
 use SendGrid\Email;
 use SendGrid\Exception as SendgridException;
 use Symfony\Component\Templating\EngineInterface;
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class NewsletterManager
 {
@@ -18,7 +18,7 @@ class NewsletterManager
     private $templatingEngine;
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     private $translator;
 
@@ -40,14 +40,19 @@ class NewsletterManager
     /**
      * Constructor
      *
-     * @param EngineInterface $templatingEngine
-     * @param Translator      $translator
-     * @param SendGrid        $sendgrid
-     * @param Logger          $logger
-     * @param string          $sgApiKey
+     * @param EngineInterface     $templatingEngine
+     * @param TranslatorInterface $translator
+     * @param SendGrid            $sendgrid
+     * @param Logger              $logger
+     * @param string              $sgApiKey
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, SendGrid $sendgrid, Logger $logger, $sgApiKey)
-    {
+    public function __construct(
+        EngineInterface $templatingEngine,
+        TranslatorInterface $translator,
+        SendGrid $sendgrid,
+        Logger $logger,
+        $sgApiKey
+    ) {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
         $this->sendgrid = $sendgrid;
@@ -150,15 +155,14 @@ class NewsletterManager
                     ->setFromName('Centre d\'Art Lo Pati')
                     ->setSubject($subject)
                     ->setSmtpapiTos($chunk)
-                    ->setHtml($content)
-                ;
+                    ->setHtml($content);
                 $this->sendgrid->send($email); // => $result = is possible to read the result
             }
 
             return true;
         } catch (SendgridException $e) {
             $this->logger->error('Error ' . $e->getCode() . ' al enviar el test.');
-            foreach($e->getErrors() as $er) {
+            foreach ($e->getErrors() as $er) {
                 $this->logger->error('Error ' . $er);
             }
         }
