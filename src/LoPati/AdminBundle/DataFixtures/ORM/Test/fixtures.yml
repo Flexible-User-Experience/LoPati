@@ -1,8 +1,16 @@
 ## Menu level 1
 LoPati\MenuBundle\Entity\Categoria:
-    menulevelone{1..5}:
+    menulevelone{1..3}:
         nom: <word()>
         ordre: <current()>
+        actiu: true
+
+## Menu level 2
+LoPati\MenuBundle\Entity\SubCategoria:
+    menuleveltwo{1..7}:
+        nom: <word()>
+        ordre: <current()>
+        categoria: @menulevelone<numberBetween(1, 3)>
         actiu: true
 
 ## Users
