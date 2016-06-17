@@ -25,6 +25,35 @@ LoPati\BlogBundle\Entity\Pagina:
         categoria: @menulevelone<numberBetween(1, 3)>
         subCategoria: @menuleveltwo<numberBetween(1, 7)>
 
+# Newsletter User
+LoPati\NewsletterBundle\Entity\NewsletterUser:
+    newsuser:
+        email: <safeEmail()>
+        idioma: 'ca'
+        token: <word()>
+        active: true
+
+# Newsletter Group
+LoPati\NewsletterBundle\Entity\NewsletterGroup:
+    newslettergroup:
+        name: <word()>
+        active: true
+        newsletters: [ @newsletter ]
+
+# Newsletter
+LoPati\NewsletterBundle\Entity\Newsletter:
+    newsletter:
+        pagines: [ @page1 ]
+        numero: 1
+        name: <word()>
+        dataNewsletter: <dateTimeBetween('-2 months', '-1 months')>
+
+# Artist
+LoPati\ArtistaBundle\Entity\Artista:
+    artist:
+        name: <name()>
+        active: true
+
 # Slider
 LoPati\BlogBundle\Entity\SliderImage:
     slide:

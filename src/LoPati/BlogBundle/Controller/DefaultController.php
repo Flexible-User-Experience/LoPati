@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LoPati\Utilities\Utils;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session;
 
 class DefaultController extends Controller
@@ -13,28 +16,37 @@ class DefaultController extends Controller
     const THUMBNAILS_PER_PAGE_SLIDER = 10;
     const THUMBNAILS_PER_PAGE_NORMAL = 8;
 
-    public function searchAction()
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function searchAction(Request $request)
     {
         $pagines = null;
         $textabuscar = null;
-        if ($this->getRequest()->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST') {
             $finder = $this->container->get('fos_elastica.finder.website.pagines');
             /** var array of Acme\UserBundle\Entity\User */
-            $pagines = $finder->find($this->getRequest()->get('textabuscar'));
+            $pagines = $finder->find($request->get('textabuscar'));
             /** var array of Acme\UserBundle\Entity\User limited to 10 results */
-            $textabuscar = $this->getRequest()->get('textabuscar');
+            $textabuscar = $request->get('textabuscar');
         }
 
         return $this->render('BlogBundle:Default:search.html.twig', array('pagines' => $pagines, 'textabuscar' => $textabuscar));
     }
 
-    public function indexAction()
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function indexAction(Request $request)
     {
-        $req = $this->getRequest();
         if ($this->get('session')->get('_locale')) {
             $culture = $this->get('session')->get('_locale');
         } else {
-            $culture = $req->getPreferredLanguage(array('ca', 'es', 'en'));
+            $culture = $request->getPreferredLanguage(array('ca', 'es', 'en'));
         }
 
         return $this->redirect($this->generateUrl('portada', array('_locale' => $culture)));
@@ -66,7 +78,7 @@ class DefaultController extends Controller
         /** @var Pagina $pagina */
         $pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
         $tipus_video = null;
-        if ($pagina->getVideo()) {
+        if ($pagina && $pagina->getVideo()) {
             $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
@@ -205,7 +217,7 @@ class DefaultController extends Controller
         /** @var Pagina $pagina */
         $pagina = $em->getRepository('BlogBundle:Pagina')->findOneBy(array('id' => $id));
         $tipus_video = null;
-        if ($pagina->getVideo()) {
+        if ($pagina && $pagina->getVideo()) {
             $tipus_video = Utils::getVideo($pagina->getVideo());
         }
 
