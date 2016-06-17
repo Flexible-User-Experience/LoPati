@@ -25,8 +25,8 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            new Sonata\IntlBundle\SonataIntlBundle(),
-            new Sonata\SeoBundle\SonataSeoBundle(),
+//            new Sonata\IntlBundle\SonataIntlBundle(),
+//            new Sonata\SeoBundle\SonataSeoBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             // Vendors
             new FOS\UserBundle\FOSUserBundle(),
@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
+            new Tystr\Bundle\SendgridBundle\TystrSendgridBundle(),
             // App
             new LoPati\BlogBundle\BlogBundle(),
             new LoPati\MenuBundle\MenuBundle(),

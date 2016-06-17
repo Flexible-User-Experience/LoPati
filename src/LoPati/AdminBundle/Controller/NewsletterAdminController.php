@@ -8,11 +8,9 @@ use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Psr\Log\LoggerInterface;
+use SendGrid\Response;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Process\Process;
 
 class NewsletterAdminController extends Controller
 {
@@ -33,24 +31,24 @@ class NewsletterAdminController extends Controller
             $newsletter->setIniciEnviament(new \DateTime('now'));
             $newsletter->setFiEnviament(null);
 
-            $rejects = $nb->getRejectList();
-            foreach ($rejects as $item) {
-                $email = $item['email'];
-                $reason = $item['reason'];
-                /** @var NewsletterUser $ruser */
-                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
-                if ($ruser) {
-                    if ($reason == 'soft-bounce') {
-                        // increment fail counter
-                        $ruser->setFail($ruser->getFail() + 1);
-                        $em->flush();
-                    } else {
-                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
-                        $em->remove($ruser);
-                        $em->flush();
-                    }
-                }
-            }
+//            $rejects = $nb->getRejectList();
+//            foreach ($rejects as $item) {
+//                $email = $item['email'];
+//                $reason = $item['reason'];
+//                /** @var NewsletterUser $ruser */
+//                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
+//                if ($ruser) {
+//                    if ($reason == 'soft-bounce') {
+//                        // increment fail counter
+//                        $ruser->setFail($ruser->getFail() + 1);
+//                        $em->flush();
+//                    } else {
+//                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
+//                        $em->remove($ruser);
+//                        $em->flush();
+//                    }
+//                }
+//            }
 
             // Clean fail delivery users
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
@@ -136,14 +134,15 @@ class NewsletterAdminController extends Controller
             self::testEmail3,
         );
 
+        /** @var Response $result */
         $result = $nb->sendMandrilMessage($subject, $edl, $contenido);
-        if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+        if ($result == true) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
                 'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
             );
         } else {
-            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR: Status = "' . $result[0]['status'] . '" Reason: "' . $result[0]['reject_reason'] . '"');
+            $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR al enviar el test');
         }
 
         $newsletter->setTest('1');
@@ -192,12 +191,13 @@ class NewsletterAdminController extends Controller
             }
             $content = $this->get('templating')->render('NewsletterBundle:Default:mail2.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $locale));
             $this->makeLog('sending mail... ');
+            /** @var Response $result */
             $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
-            if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+            if ($result == true) {
                 $this->makeLog('done!');
                 $newsletter->setEnviats($newsletter->getEnviats() + count($users));
             } else {
-                $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
+                $this->makeLog('error!');
             }
             $em->flush();
         }

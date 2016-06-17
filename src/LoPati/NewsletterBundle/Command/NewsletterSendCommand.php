@@ -8,6 +8,7 @@ use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
+use SendGrid\Response;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -67,15 +68,16 @@ EOT
                 $this->makeLog('get ' . $to . '... rendering template... ');
                 $content = $this->getContainer()->get('templating')->render('NewsletterBundle:Default:mail.html.twig', $nb->buildNewsletterContentArray($newsletter->getId(), $newsletter, $host, $user->getIdioma(), $user->getToken()));
                 $this->makeLog('sending mail... ');
+                /** @var Response $result */
                 $result = $nb->sendMandrilMessage($newsletter->getName(), $edl, $content);
-                if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit') {
+                if ($result->getCode() == 200) {
                     $enviats++;
                     $this->makeLog('done!');
                     $newsletter->setEnviats($newsletter->getEnviats() + 1);
                 } else {
                     $fallats++;
                     $user->setFail($user->getFail() + 1);
-                    $this->makeLog('error! ' . $result[0]['status'] . ': ' . $result[0]['reject_reason']);
+                    $this->makeLog('error! ' . $result->getCode() . ': ' . $result->getBody());
                 }
                 $em->flush();
             }

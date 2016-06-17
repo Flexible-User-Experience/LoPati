@@ -34,6 +34,15 @@ twig:
         main_brand_title:  "Lo Pati"
         admin_tag_version: "2.0.4"
 
+# Swiftmailer
+swiftmailer:
+    transport:  "%mailer_transport%"
+    username:   "%mailer_user%"
+    password:   "%mailer_password%"
+    host:       "%mailer_host%"
+    encryption: "%encryption%"
+    auth_mode:  "%auth_mode%"
+
 # Assetic
 assetic:
     debug:          "%kernel.debug%"
@@ -72,6 +81,15 @@ stof_doctrine_extensions:
             translatable:   false
             sortable:       false
             tree:           false
+
+# Monolog
+monolog:
+    handlers:
+        sendgrid:
+            type:     stream
+            level:    info
+            path:     "%kernel.logs_dir%/sendgrid.log"
+            channels: [ sendgrid ]
 
 # A2lix
 a2lix_translation_form:
@@ -223,3 +241,8 @@ hip_mandrill:
     default:
         sender:       "butlleti@lopati.cat"
         sender_name:  "Lo Pati"
+
+# Sendgrid
+tystr_sendgrid:
+    username: "%sendgrip_username%"
+    password: "%sendgrip_password%"

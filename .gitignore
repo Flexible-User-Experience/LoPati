@@ -13,6 +13,7 @@ vendor/*
 web/bundles/*
 web/uploads/cache/*
 web/uploads
+/web/media/
 composer.phar
 *~
 *.sublime-project

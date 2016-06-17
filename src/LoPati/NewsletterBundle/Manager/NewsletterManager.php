@@ -2,48 +2,57 @@
 
 namespace LoPati\NewsletterBundle\Manager;
 
-use Hip\MandrillBundle\Message;
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use Mandrill;
+use SendGrid;
+use SendGrid\Email;
+use SendGrid\Exception as SendgridException;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
-use Hip\MandrillBundle\Dispatcher;
+use Symfony\Bridge\Monolog\Logger;
 
-class NewsletterManager {
+class NewsletterManager
+{
     /**
      * @var EngineInterface
      */
-    protected $templatingEngine;
+    private $templatingEngine;
 
     /**
      * @var Translator
      */
-    protected $translator;
+    private $translator;
 
     /**
-     * @var Dispatcher
+     * @var SendGrid
      */
-    protected $mandrilDispatcher;
+    private $sendgrid;
 
     /**
-     * @var Mandrill
+     * @var Logger
      */
-    protected $mandrilClient;
+    private $logger;
+
+    /**
+     * @var string
+     */
+    private $sgApiKey;
 
     /**
      * Constructor
      *
      * @param EngineInterface $templatingEngine
      * @param Translator      $translator
-     * @param Dispatcher      $mandrilDispatcher
-     * @param Mandrill        $mandrilClient
+     * @param SendGrid        $sendgrid
+     * @param Logger          $logger
+     * @param string          $sgApiKey
      */
-    public function __construct(EngineInterface $templatingEngine, Translator $translator, Dispatcher $mandrilDispatcher, Mandrill $mandrilClient)
+    public function __construct(EngineInterface $templatingEngine, Translator $translator, SendGrid $sendgrid, Logger $logger, $sgApiKey)
     {
         $this->templatingEngine = $templatingEngine;
         $this->translator = $translator;
-        $this->mandrilDispatcher = $mandrilDispatcher;
-        $this->mandrilClient = $mandrilClient;
+        $this->sendgrid = $sendgrid;
+        $this->logger = $logger;
+        $this->sgApiKey = $sgApiKey;
     }
 
     /**
@@ -115,27 +124,45 @@ class NewsletterManager {
             throw new \Exception('Email destination list empty');
         }
 
-        $message = new Message();
-        $message
-            ->setSubject($subject)
-            ->setFromName('Centre d\'Art Lo Pati')
-            ->setFromEmail('butlleti@lopati.cat')
-            ->setTrackClicks(true)
-            ->setHtml($content)
-        ;
+//        $sg = new SendGrid($this->sgApiKey, array('turn_off_ssl_verification' => true));
+//        $message = new SendGrid\Email();
+//        $message
+//            ->addTo('butlleti@lopati.cat')
+//            ->setSubject($subject)
+//            ->setFromName('Centre d\'Art Lo Pati')
+//            ->setFrom('butlleti@lopati.cat')
+//            ->setHtml($content)
+//        ;
 
-        foreach ($emailDestinationList as $email) {
-            $message->addTo($email, $email, 'bcc');
+//        foreach ($emailDestinationList as $email) {
+//            $message->addBcc($email);
+//            $message->addSmtpapiTo($email);
+//        }
+
+        try {
+            // slice recipients in portions of 100 items
+            //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
+            $chunks = array_chunk($emailDestinationList, 500);
+            foreach ($chunks as $chunk) {
+                $email = new Email();
+                $email
+                    ->setFrom('butlleti@lopati.cat')
+                    ->setFromName('Centre d\'Art Lo Pati')
+                    ->setSubject($subject)
+                    ->setSmtpapiTos($chunk)
+                    ->setHtml($content)
+                ;
+                $this->sendgrid->send($email); // => $result = is possible to read the result
+            }
+
+            return true;
+        } catch (SendgridException $e) {
+            $this->logger->error('Error ' . $e->getCode() . ' al enviar el test.');
+            foreach($e->getErrors() as $er) {
+                $this->logger->error('Error ' . $er);
+            }
         }
 
-        return $this->mandrilDispatcher->send($message);
-    }
-
-    /**
-     * Get Mandrill rejects list and clear up local database
-     */
-    public function getRejectList()
-    {
-        return $this->mandrilClient->rejects->getList();
+        return false;
     }
 }
