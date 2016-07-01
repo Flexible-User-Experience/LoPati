@@ -34,7 +34,7 @@ twig:
         - "MenuBundle:Default:form.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "2.0.5"
+        admin_tag_version:       "2.0.6"
         id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
