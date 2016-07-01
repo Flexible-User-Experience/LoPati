@@ -1,31 +1,31 @@
 newsletter_user:
-    pattern:  /newsletter/suscribe
+    path:  /newsletter/suscribe
     defaults: { _controller: NewsletterBundle:Default:suscribe }
     requirements:
-      _method:  POST
+      method:  POST
 
 newsletter_confirmation:
-    pattern:  /newsletter/confirmation/{token}
+    path:  /newsletter/confirmation/{token}
     defaults: { _controller: NewsletterBundle:Default:confirmation }
 
 newsletter_unsuscribe:
-    pattern:  /newsletter/unsuscribe/{token}
+    path:  /newsletter/unsuscribe/{token}
     defaults: { _controller: NewsletterBundle:Default:unsuscribe }
 
 newsletter_confirm_unsuscribe:
-    pattern:  /newsletter/confirm/unsuscribe/
+    path:  /newsletter/confirm/unsuscribe/
     defaults: { _controller: NewsletterBundle:Default:confirmUnsuscribe }
 
 newsletter:
-    pattern: /{_locale}/newsletter/{data}/
+    path: /{_locale}/newsletter/{data}/
     defaults: { _controller: NewsletterBundle:Default:visit }
     requirements:
        _locale: ca|es|en
 
 admin_lopati_newsletter_newsletteruser_async_search:
-    pattern: /admin/newsletter/user/async/search-users-by-email/
+    path: /admin/newsletter/user/async/search-users-by-email/
     defaults: { _controller: NewsletterBundle:NewsletterUser:searchUsersByEmailAsync }
 
 admin_lopati_newsletter_newsletteruser_async_get:
-    pattern: /admin/newsletter/user/async/get-users/
+    path: /admin/newsletter/user/async/get-users/
     defaults: { _controller: NewsletterBundle:NewsletterUser:getUsersAsync }

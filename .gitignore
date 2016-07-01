@@ -6,6 +6,7 @@ app/config/parameters.ini
 app/cache/*
 app/logs/*
 app/sessions/*
+app/database/
 /app/Resources/imports/*
 !app/sessions/.gitkeep
 app/config/parameters.yml
@@ -23,3 +24,5 @@ mailinglopati.txt
 app/config/deploy.rb
 Capfile
 backups/*
+/web/media/*
+!/web/media/.gitkeep

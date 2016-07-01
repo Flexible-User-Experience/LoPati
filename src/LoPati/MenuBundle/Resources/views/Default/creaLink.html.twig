@@ -1,62 +1,62 @@
 {% if tipus is sameas(1) %}
     {% if actiu is sameas(1) %}
         <a class="actiu"
-           href="{{ path('categoriasenseenllas',{'id': pagina.id,'categoria' : titol.slug, 'subcategoria': titol.subcategoria[0].slug }) }}">{{ titol }}</a>
+           href="{{ path('categoriasenseenllas', {id: pagina.id, categoria: titol.slug, subcategoria: titol.subcategoria[0].slug }) }}">{{ titol }}</a>
     {% else %}
-        <a href="{{ path('categoriasenseenllas',{'id': pagina.id, 'categoria' : titol.slug, 'subcategoria': titol.subcategoria[0].slug }) }}">{{ titol }}</a>
+        <a href="{{ path('categoriasenseenllas', {id: pagina.id, categoria: titol.slug, subcategoria: titol.subcategoria[0].slug }) }}">{{ titol }}</a>
     {% endif %}
 {% elseif tipus is sameas(2) %}
     {% if actiu is sameas(1) %}
         <a class="actiu"
-           href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : titol.slug }) }}">{{ titol.nom }}</a>
+           href="{{ path('categoriaenenllas', {id: pagina.id, categoria: titol.slug }) }}">{{ titol.nom }}</a>
     {% else %}
-        <a href="{{ path('categoriaenenllas', { 'id': pagina.id,'categoria' : titol.slug }) }}">{{ titol.nom }}</a>
+        <a href="{{ path('categoriaenenllas', {id: pagina.id, categoria: titol.slug }) }}">{{ titol.nom }}</a>
     {% endif %}
 {% elseif tipus is sameas(3) %}
     {% if llista is sameas(0) %}
         {% if actiu is sameas(1) %}
             <a class="actiu"
-               href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : titol.categoria.slug }) }}">{{ titol.nom }}</a>
+               href="{{ path('categoriaenenllas', {id: pagina.id, categoria: titol.categoria.slug }) }}">{{ titol.nom }}</a>
         {% else %}
-            <a href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : titol.categoria.slug }) }}">{{ titol.nom }}</a>
+            <a href="{{ path('categoriaenenllas', {id: pagina.id, categoria: titol.categoria.slug }) }}">{{ titol.nom }}</a>
         {% endif %}
     {% else %}
         {% if actiu is sameas(1) %}
             <a class="actiu"
-               href="{{ path('llista', {'categoria_id': titol.categoria.id, 'categoria' : titol.categoria.slug, 'subcategoria_id' : titol.id,  'subcategoria': titol.slug }) }}">{{ titol.nom }}</a>
+               href="{{ path('llista', {categoria_id: titol.categoria.id, categoria: titol.categoria.slug, subcategoria_id: titol.id, subcategoria: titol.slug }) }}">{{ titol.nom }}</a>
         {% else %}
-            <a href="{{ path('llista', {'categoria_id': titol.categoria.id, 'categoria' : titol.categoria.slug, 'subcategoria_id' : titol.id,  'subcategoria': titol.slug }) }}">{{ titol.nom }}</a>
+            <a href="{{ path('llista', {categoria_id: titol.categoria.id, categoria: titol.categoria.slug, subcategoria_id: titol.id,  subcategoria: titol.slug }) }}">{{ titol.nom }}</a>
         {% endif %}
     {% endif %}
 {% elseif tipus is sameas(4) %}
     {% if actiu is sameas(1) %}
         <a class="actiu"
-           href="{{ path('categoriasenseenllas',{'id': pagina.id,'categoria' : titol.categoria.slug, 'subcategoria': titol.slug }) }}">{{ titol.nom }}</a>
+           href="{{ path('categoriasenseenllas', {id: pagina.id, categoria: titol.categoria.slug, subcategoria: titol.slug }) }}">{{ titol.nom }}</a>
     {% else %}
-        <a href="{{ path('categoriasenseenllas',{'id': pagina.id,'categoria' : titol.categoria.slug, 'subcategoria': titol.slug }) }}">{{ titol.nom }}</a>
+        <a href="{{ path('categoriasenseenllas', {id: pagina.id, categoria: titol.categoria.slug, subcategoria: titol.slug }) }}">{{ titol.nom }}</a>
     {% endif %}
 {% elseif tipus is sameas(5) %}
     {# Aqui entrem quan categoria no te link, i la sub categoria primera es llista #}
     {% if llista is sameas(0) %}
         {% if actiu is sameas(1) %}
             <a class="actiu"
-               href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : pagina.categoria.slug }) }}">{{ titol.nom }}</a>
+               href="{{ path('categoriaenenllas', {id: pagina.id, categoria: pagina.categoria.slug }) }}">{{ titol.nom }}</a>
         {% else %}
-            <a href="{{ path('categoriaenenllas', {'id': pagina.id,'categoria' : pagina.categoria.slug }) }}">{{ titol.nom }}</a>
+            <a href="{{ path('categoriaenenllas', {id: pagina.id, categoria: pagina.categoria.slug }) }}">{{ titol.nom }}</a>
         {% endif %}
     {% else %}
         {% if actiu is sameas(1) %}
             <a class="actiu"
-               href="{{ path('llista', {'categoria_id': titol.id, 'categoria' : titol.slug, 'subcategoria_id' : titol.subcategoria[0].id,  'subcategoria': titol.subcategoria[0].slug }) }}">{{ titol.nom }}</a>
+               href="{{ path('llista', {categoria_id: titol.id, categoria: titol.slug, subcategoria_id: titol.subcategoria[0].id, subcategoria: titol.subcategoria[0].slug }) }}">{{ titol.nom }}</a>
         {% else %}
-            <a href="{{ path('llista', {'categoria_id': titol.id, 'categoria' : titol.slug, 'subcategoria_id' : titol.subcategoria[0].id,  'subcategoria': titol.subcategoria[0].slug }) }}">{{ titol.nom }}</a>
+            <a href="{{ path('llista', {categoria_id: titol.id, categoria: titol.slug, subcategoria_id: titol.subcategoria[0].id, subcategoria: titol.subcategoria[0].slug }) }}">{{ titol.nom }}</a>
         {% endif %}
     {% endif %}
 {% elseif tipus is sameas(6) %}
     {% if actiu is sameas(1) %}
         <a class="actiu"
-           href="{{ path('arxiu', {'categoria_id': titol.id,'categoria' : titol.slug, 'arxiu': titol.arxiu }) }}">{{ titol.nom }}</a>
+           href="{{ path('arxiu', {categoria_id: titol.id, categoria: titol.slug, arxiu: titol.arxiu }) }}">{{ titol.nom }}</a>
     {% else %}
-        <a href="{{ path('arxiu', {'categoria_id': titol.id,'categoria' : titol.slug, 'arxiu': titol.arxiu }) }}">{{ titol.nom }}</a>
+        <a href="{{ path('arxiu', {categoria_id: titol.id, categoria: titol.slug, arxiu: titol.arxiu }) }}">{{ titol.nom }}</a>
     {% endif %}
 {% endif %}

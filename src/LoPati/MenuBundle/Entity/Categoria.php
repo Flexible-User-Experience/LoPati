@@ -8,7 +8,6 @@ use LoPati\Utilities\Utils;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use LoPati\BlogBundle\Entity\Pagina;
-use LoPati\MenuBundle\Entity\SubCategoria;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**

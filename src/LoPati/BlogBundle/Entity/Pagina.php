@@ -17,11 +17,10 @@ use LoPati\MenuBundle\Entity\SubCategoria;
  * @ORM\Table(name="Pagina")
  * @ORM\Entity(repositoryClass="LoPati\BlogBundle\Repository\PaginaRepository")
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\PaginaTranslation")
- * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-class Pagina {
-
+class Pagina 
+{
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
@@ -427,26 +426,34 @@ class Pagina {
 	public function getTranslations() {
 		return $this->translations;
 	}
-	
-	/**
-	 * Add translation
+
+    /**
+     * Add translation
      *
-	 * @param PaginaTranslation $translation
-	 */
+     * @param PaginaTranslation $translation
+     *
+     * @return $this
+     */
 	public function addTranslation(PaginaTranslation $translation) {
 		if ($translation->getContent()) {
 			$translation->setObject($this);
 			$this->translations->add($translation);
 		}
+
+        return $this;
 	}
-	
-	/**
-	 * Remove translation
+
+    /**
+     * Remove translation
      *
-	 * @param PaginaTranslation $translation
-	 */
+     * @param PaginaTranslation $translation
+     *
+     * @return $this
+     */
 	public function removeTranslation(PaginaTranslation $translation) {
 		$this->translations->removeElement($translation);
+
+        return $this;
 	}
 	
 	/**

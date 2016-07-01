@@ -1,31 +1,41 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: media.yml }
+    - { resource: sonata.yml }
 
 # Symfony
 framework:
-    translator:      { fallback: "%locale%" }
-    secret:          %secret%
+    translator:      { fallbacks: [ "%locale%" ] }
+    secret:          "%secret%"
     router:
-        resource:             "%kernel.root_dir%/config/routing.yml"
-        strict_requirements:  %kernel.debug%
-    form:            true
-    csrf_protection: true
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] }
+    templating:
+        engines: [ "twig" ]
     default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
     session:
-        name:       lopati_session
-        handler_id: session.handler.native_file
-        save_path:  "%kernel.root_dir%/sessions"
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
 
 # Twig
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
-    form:
-        resources:
-            - 'MenuBundle:Default:form.html.twig'
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - "bootstrap_3_layout.html.twig"
+        - "SonataCoreBundle:Form:datepicker.html.twig"
+        - "MenuBundle:Default:form.html.twig"
+    globals:
+        main_brand_title:        "Lo Pati"
+        admin_tag_version:       "2.0.5"
+        id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
 swiftmailer:
@@ -38,47 +48,43 @@ swiftmailer:
 
 # Assetic
 assetic:
-    debug:          %kernel.debug%
+    debug:          "%kernel.debug%"
     use_controller: false
-    #bundles:        [ ]
-    #java: /usr/bin/java
     filters:
         cssrewrite: ~
 
 # Doctrine
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
         charset:  UTF8
         types:
             json: Sonata\Doctrine\Types\JsonType
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        mappings:
-            gedmo_translatable:
-                type:   annotation
-                prefix: Gedmo\Translatable\Entity
-                dir:    "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-                alias:  GedmoTranslatable
-            ApplicationSonataUserBundle: ~
-            SonataUserBundle: ~
-            FOSUserBundle: ~ 
 
-# Doctrine Extensions
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/../src/AppBundle/DoctrineMigrations"
+    namespace: AppBundle\DoctrineMigrations
+
+# Stof Doctrine Extensions
 stof_doctrine_extensions:
-    default_locale: ca
+    default_locale:       "%locale%"
     translation_fallback: true
     orm:
         default:
-            timestampable: true
-            translatable: true
-            sluggable:    true
+            softdeleteable: true
+            timestampable:  true
+            sluggable:      true
+            translatable:   true
+            sortable:       false
+            tree:           false
 
 # Monolog
 monolog:
@@ -91,66 +97,28 @@ monolog:
 
 # A2lix
 a2lix_translation_form:
-    default_required: true
     locales: [ en, es ]
-
-# Sonata Admin
-sonata_admin:
-    title:  'Administrador de continguts'
-    title_logo: /images/logo_lopati_inverted.png
-    templates:
-        layout:     AdminBundle:Admin:my_standard_layout.html.twig
-        dashboard:  AdminBundle:Admin:my_dashboard.html.twig
-        user_block: AdminBundle:Admin:my_user_block.html.twig
-    dashboard:
-        groups:
-            Menús:
-            Slider:
-            Pàgines:
-            Arxius:
-            Newsletters:
-            Irradiador:
-            Configuracions:
-
-# Sonata Block
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-        sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
-
-# Sonata User
-sonata_user:
-    security_acl: true
-    class:
-        user:   Application\Sonata\UserBundle\Entity\User
-        group:  Application\Sonata\UserBundle\Entity\Group
-    admin:
-        user:
-            class:        Sonata\UserBundle\Admin\Entity\UserAdmin
-            controller:   SonataAdminBundle:CRUD
-            translation:  SonataUserBundle
-        group:
-            class:        Sonata\UserBundle\Admin\Entity\GroupAdmin
-            controller:   SonataAdminBundle:CRUD
-            translation:  SonataUserBundle
+    default_required: true
+    manager_registry: doctrine
+    templating:       "::A2lix/default.html.twig"
 
 # FOS User
 fos_user:
     db_driver:      orm
     firewall_name:  admin
-    user_class:     Application\Sonata\UserBundle\Entity\User
+    user_class:     LoPati\UserBundle\Entity\User
     group:
-        group_class: Application\Sonata\UserBundle\Entity\Group
+        group_class:   LoPati\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: sonata.user.orm.user_manager
 
 # TinyMCE
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
-    language: ca
+    selector: ".tinymce"
+    language: "%locale%"
     theme:
         simple:
             mode: "textareas"
@@ -168,72 +136,6 @@ stfalcon_tinymce:
             paste_strip_class_attributes: true
             paste_retain_style_properties: "strong,p,color"
             theme_advanced_buttons1_add: "fullscreen"
-
-# Vich
-vich_uploader:
-    db_driver: orm
-    mappings:
-        imatge:
-            uri_prefix:         /uploads/images
-            upload_destination: %kernel.root_dir%/../web/uploads/images
-            namer:              vich_uploader.namer_uniqid
-        pdf:
-            uri_prefix:         /uploads/documents
-            upload_destination: %kernel.root_dir%/../web/uploads/documents
-            namer:              vich_uploader.namer_origname
-        artista:
-            uri_prefix:         /uploads/artists
-            upload_destination: %kernel.root_dir%/../web/uploads/artists
-            namer:              vich_uploader.namer_uniqid
-        artistapdf:
-            uri_prefix:         /uploads/artists/cv
-            upload_destination: %kernel.root_dir%/../web/uploads/artists/cv
-            namer:              vich_uploader.namer_origname
-        slider:
-            uri_prefix:         /uploads/slides
-            upload_destination: %kernel.root_dir%/../web/uploads/slides
-            namer:              vich_uploader.namer_uniqid
-
-# Liip Imagine
-liip_imagine:
-    cache_prefix: /uploads/cache
-    filter_sets:
-        imatge_pagina:
-            quality: 90
-            filters:
-                thumbnail: { size: [710, null], mode: outbound }
-        imatge_pagina_irradiador:
-            quality: 90
-            filters:
-                thumbnail: { size: [460, null], mode: outbound }
-        portada:
-            quality: 90
-            filters:
-                thumbnail: { size: [174, 174], mode: outbound }
-        thumb_imatge_pagina:
-            quality: 70
-            filters:
-                thumbnail: { size: [155, null], mode: outbound }
-        thumb_imatge_pagina_arbre_continguts:
-            quality: 70
-            filters:
-                thumbnail: { size: [50, null], mode: outbound }
-        thumb_imatge_admin_list_view:
-            quality: 70
-            filters:
-                thumbnail: { size: [100, null], mode: outbound }
-        imatge_pagina_newsletter:
-            quality: 80
-            filters:
-                thumbnail: { size: [578, null], mode: outbound }
-        imatge460x300:
-            quality: 90
-            filters:
-                thumbnail: { size: [460, 300], mode: outbound }
-        imatge756x400:
-            quality: 85
-            filters:
-                thumbnail: { size: [756, 400], mode: outbound, allow_upscale: true }
 
 # FOS Elasticsearch
 # Move to config_prod.yml if it's necessary to avoid Elasticasearch on devel environments
@@ -262,14 +164,7 @@ fos_elastica:
 # Genemu
 genemu_form:
     select2: ~
-    date: ~
-
-# Mandril
-hip_mandrill:
-    api_key: "%mandril_api_key%"
-    default:
-        sender:       "butlleti@lopati.cat"
-        sender_name:  "Lo Pati"
+    date:    ~
 
 # Sendgrid
 tystr_sendgrid:

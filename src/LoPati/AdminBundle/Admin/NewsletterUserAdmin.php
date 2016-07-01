@@ -48,7 +48,7 @@ class NewsletterUserAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-
+            ->with('General')
             ->add('email')
             ->add(
                 'groups',
@@ -72,6 +72,7 @@ class NewsletterUserAdmin extends Admin
                 )
             )
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
+            ->end()
         ;
     }
 

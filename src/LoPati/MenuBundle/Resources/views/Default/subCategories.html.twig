@@ -32,7 +32,7 @@
                     {% endif %}
                     {% if subcategoria.ordre == 123 %} {# PROJECTE IRRADIADOR #}
                         <li>
-                            <span><a href="{{ path( 'irradiador_' ~ apprequestlocale ) }}">{{ subcategoria.nom }}</a></span>
+                            <span><a href="{{ path( 'irradiador_' ~ app.request.locale ) }}">{{ subcategoria.nom }}</a></span>
                         </li>
                     {% endif %}
                 {% endif %}

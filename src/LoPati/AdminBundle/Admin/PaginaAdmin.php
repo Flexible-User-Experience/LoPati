@@ -45,6 +45,7 @@ class PaginaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add('tipus', 'choice', array('choices' => array('w' => 'Web', 'b' => 'Bloc'), 'required' => true,))
             ->add('titol', null, array('label' => 'Títol'))
             ->add(
@@ -87,19 +88,19 @@ class PaginaAdmin extends Admin
             ->add('lloc', null, array('label' => 'Lloc'))
             ->add('video', 'url', array('required' => false))
             ->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
-
+            ->end()
             ->with('Imatge principal')
             ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false))
             ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('peuImageGran1', null, array('label' => 'Peu imatge', 'required' => false))
-
+            ->end()
             ->with('Portada')
             ->add('portada', null, array('label' => 'És portada ?', 'required' => false))
             ->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required' => false))
             ->add('imagePetitaName', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('imagePetita2', 'file', array('label' => 'Imatge petita vermell', 'required' => false))
             ->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-
+            ->end()
             ->with('Documents adjunts')
             ->add('document1', 'file', array('label' => 'Document 1', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
@@ -107,7 +108,7 @@ class PaginaAdmin extends Admin
             ->add('document2', 'file', array('label' => 'Document 2', 'required' => false))
             ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
             ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
-
+            ->end()
             ->with('Enllaços')
             ->add(
                 'links',
@@ -124,7 +125,7 @@ class PaginaAdmin extends Admin
             )
             ->add('urlVimeo', null, array('required' => false, 'label' => 'URL video Vimeo'))
             ->add('urlFlickr', null, array('required' => false, 'label' => 'URL galeria Flickr'))
-
+            ->end()
             ->with('Agenda')
             ->add(
                 'startDate',
@@ -137,7 +138,7 @@ class PaginaAdmin extends Admin
                 array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
             )
             ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
-
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',
@@ -171,6 +172,7 @@ class PaginaAdmin extends Admin
                     )
                 )
             )
+            ->end()
             ->setHelps(
                 array(
                     'tipus'                => 'tria el tipus',

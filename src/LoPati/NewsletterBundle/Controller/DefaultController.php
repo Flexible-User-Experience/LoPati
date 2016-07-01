@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use SendGrid\Response as SendGridResponse;
 
 class DefaultController extends Controller
 {
@@ -167,7 +168,7 @@ class DefaultController extends Controller
         }
 
         return $this->render(
-            'NewsletterBundle:Default:mail.html.twig',
+            'NewsletterBundle:Default:mail2.html.twig',
             array(
                 'host'                     => $host,
                 'pagines'                  => $pagines,
@@ -185,7 +186,6 @@ class DefaultController extends Controller
                 'butlleti'                 => $butlleti
             )
         );
-
     }
 
     /**
@@ -215,9 +215,9 @@ class DefaultController extends Controller
                     } else if ($user->getIdioma() == 'en') {
                         $subject = 'Confirmation to NOT receive newsletter LO PATI';
                     }
-                    /** @var \SendGrid\Response $result */
+                    /** @var SendGridResponse $result */
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    if ($result->getCode() == 200) {
+                    if ($result->statusCode() == 200) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')

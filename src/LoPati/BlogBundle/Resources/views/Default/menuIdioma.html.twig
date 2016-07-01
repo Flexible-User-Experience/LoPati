@@ -1,17 +1,17 @@
 <p>
-    {% if idioma == 'ca' %}
+    {% if app.request.locale == 'ca' %}
 	    <a href="{{ path('portada', {_locale : 'ca'}) }}"><strong>català</strong></a>
 	{% else %}
         <a href="{{ path('portada', {_locale : 'ca'}) }}">català</a>
 	{% endif %}
 		 | 
-	{% if idioma == 'es' %}
+	{% if app.request.locale == 'es' %}
 		<a href="{{ path('portada', {_locale : 'es'}) }}"><strong>español</strong></a>
     {% else %}
 	    <a href="{{ path('portada', {_locale : 'es'}) }}">español</a>
 	{% endif %}
 		 | 
-	{% if idioma == 'en' %}
+	{% if app.request.locale == 'en' %}
 		<a href="{{ path('portada', {_locale : 'en'}) }}"><strong>english</strong></a>
 	{% else %}
 	    <a href="{{ path('portada', {_locale : 'en'}) }}">english</a>
