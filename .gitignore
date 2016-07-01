@@ -12,7 +12,6 @@ app/database/
 app/config/parameters.yml
 vendor/*
 web/bundles/*
-web/uploads/cache/*
 web/uploads
 /web/media/
 composer.phar
@@ -24,5 +23,5 @@ mailinglopati.txt
 app/config/deploy.rb
 Capfile
 backups/*
-/web/media/*
 !/web/media/.gitkeep
+!.travis.yml
