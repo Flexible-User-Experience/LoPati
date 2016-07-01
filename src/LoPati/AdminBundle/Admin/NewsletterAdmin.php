@@ -33,6 +33,7 @@ class NewsletterAdmin extends Admin
         /** @var NewsletterGroupRepository $ngr */
         $ngr = $this->configurationPool->getContainer()->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterGroup');
         $formMapper
+            ->with('General')
             ->add('numero', null, array('label' => 'Núm. newsletter'))
             ->add(
                 'dataNewsletter',
@@ -53,6 +54,7 @@ class NewsletterAdmin extends Admin
                 null,
                 array('label' => 'Pàgines')
             )
+            ->end()
             //->add('estat')
             ->setHelps(array('dataNewsletter' => 'Format: dd-MM-yyyy'));
     }

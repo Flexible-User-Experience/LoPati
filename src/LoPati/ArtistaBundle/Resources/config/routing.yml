@@ -1,35 +1,35 @@
 irradiador_ca:
-    pattern:        /{_locale}/projectes/irradiador/
+    path:           /{_locale}/projectes/irradiador/
     defaults:       { _controller: ArtistaBundle:Default:index }
     requirements:
         _locale: ca
 
 irradiador_es:
-    pattern:        /{_locale}/proyectos/irradiador/
+    path:           /{_locale}/proyectos/irradiador/
     defaults:       { _controller: ArtistaBundle:Default:index }
     requirements:
         _locale: es
 
 irradiador_en:
-    pattern:        /{_locale}/projects/irradiador/
+    path:           /{_locale}/projects/irradiador/
     defaults:       { _controller: ArtistaBundle:Default:index }
     requirements:
         _locale: en
 
 irradiador_detail_ca:
-    pattern:        /{_locale}/projectes/irradiador/{artista}/
+    path:           /{_locale}/projectes/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: ca
 
 irradiador_detail_es:
-    pattern:        /{_locale}/proyectos/irradiador/{artista}/
+    path:           /{_locale}/proyectos/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: es
 
 irradiador_detail_en:
-    pattern:        /{_locale}/projects/irradiador/{artista}/
+    path:           /{_locale}/projects/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: en

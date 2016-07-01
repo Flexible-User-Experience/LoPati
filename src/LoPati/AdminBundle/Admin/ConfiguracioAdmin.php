@@ -34,6 +34,7 @@ class ConfiguracioAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General')
             ->add(
                 'adresa',
                 null,
@@ -86,6 +87,7 @@ class ConfiguracioAdmin extends Admin
                     )
                 )
             )
+            ->end()
             ->with('Traduccions')
             ->add(
                 'translations',
@@ -121,13 +123,14 @@ class ConfiguracioAdmin extends Admin
                         )
                     )
                 )
-            );
+            )
+            ->end();
     }
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
-            //->addIdentifier('id')
             ->add('adresa', null, array('label' => 'Adreça', 'template' => 'AdminBundle:Admin:customadresa.html.twig'))
             ->add('horari', null, array('label' => 'Horari', 'template' => 'AdminBundle:Admin:customhorari.html.twig'))
             ->add('organitza', null, array('label' => 'Organitza', 'template' => 'AdminBundle:Admin:customorganitza.html.twig'))

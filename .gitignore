@@ -6,6 +6,7 @@ app/config/parameters.ini
 app/cache/*
 app/logs/*
 app/sessions/*
+app/database/
 /app/Resources/imports/*
 !app/sessions/.gitkeep
 app/config/parameters.yml
@@ -13,6 +14,7 @@ vendor/*
 web/bundles/*
 web/uploads/cache/*
 web/uploads
+/web/media/
 composer.phar
 *~
 *.sublime-project
@@ -22,3 +24,5 @@ mailinglopati.txt
 app/config/deploy.rb
 Capfile
 backups/*
+/web/media/*
+!/web/media/.gitkeep

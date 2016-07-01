@@ -3,17 +3,15 @@
 namespace LoPati\MenuBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use LoPati\BlogBundle\Entity;
 use LoPati\MenuBundle\Entity\SubCategoria;
 
-class DefaultController extends Controller {
-
+class DefaultController extends Controller
+{
 	public function pintaMenuAction($id = null, $pagina = null)
     {
 		$em = $this->getDoctrine()->getManager();
 		if ($id) {
-			$em = $this->getDoctrine()->getManager();
 			$pagina = $em->getRepository('BlogBundle:Pagina')->find($id);
 		}
 		$categories = $em->getRepository('MenuBundle:Categoria')->findCategories();
@@ -32,16 +30,16 @@ class DefaultController extends Controller {
 		} else {
 			$em = $this->getDoctrine()->getManager();
 			$pagina = $em->getRepository('BlogBundle:Pagina')->find($idPagina);
-			$logger = $this->get('logger');
-			$logger->info('id val:'.$idPagina);
+//			$logger = $this->get('logger');
+//			$logger->info('id val:'.$idPagina);
 		}
 
 		return $this->render('MenuBundle:Default:creaLink.html.twig', array(
+            'id'     => $idPagina,
             'pagina' => $pagina,
-            'id' => $idPagina,
-            'tipus' => $tipus,
-            'actiu' => $actiu,
-            'titol' => $titol,
+            'tipus'  => $tipus,
+            'actiu'  => $actiu,
+            'titol'  => $titol,
             'llista' => $llista,
         ));
 	}
@@ -59,7 +57,7 @@ class DefaultController extends Controller {
             if (count($subcategories2) > 0) {
                 /** @var SubCategoria $irradiadorSubcategoria */
                 $irradiadorSubcategoria = new SubCategoria();
-                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setNom('Irradiador');
                 $irradiadorSubcategoria->setOrdre(123);
                 array_push($subcategories2, $irradiadorSubcategoria);
             }
@@ -68,7 +66,6 @@ class DefaultController extends Controller {
 		return $this->render('MenuBundle:Default:subCategories.html.twig', array(
             'subcategories' => $subcategories2,
             'id' => $idPagina,
-            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 	
@@ -81,7 +78,7 @@ class DefaultController extends Controller {
             if (count($subcategories) > 0) {
                 /** @var SubCategoria $irradiadorSubcategoria */
                 $irradiadorSubcategoria = new SubCategoria();
-                $irradiadorSubcategoria->setNom('Irradiadior');
+                $irradiadorSubcategoria->setNom('Irradiador');
                 $irradiadorSubcategoria->setOrdre(123);
                 array_push($subcategories, $irradiadorSubcategoria);
             }
@@ -93,7 +90,6 @@ class DefaultController extends Controller {
             'subcategoria_id' => $subcategoria_id,
             'subcategories' => $subcategories,
             'onlycategories' => $onlycategories,
-            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 }

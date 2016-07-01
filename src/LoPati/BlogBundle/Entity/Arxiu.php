@@ -24,17 +24,18 @@ class Arxiu
     protected $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, unique=true)
+     * @var integer
+     * @ORM\Column(type="integer", unique=true)
      */
-    protected $any = null;
+    protected $any;
 
     /** @ORM\Column(type="boolean", nullable=true) */
     protected $actiu = false;
 
     /**
      * @Assert\File(
-     *     maxSize="2M",
-     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetitaName")
      *
@@ -50,8 +51,8 @@ class Arxiu
 
     /**
      * @Assert\File(
-     *     maxSize="1M",
-     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetita2Name")
      *
@@ -135,15 +136,18 @@ class Arxiu
         $this->actiu = $actiu;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->id ? $this->getAny() : '---';
+        return $this->id ? (string) $this->getAny() : '---';
     }
 
     /**
      * Get data_caducitat
      *
-     * @return \DateTime
+     * @return string
      */
     public function getAny()
     {

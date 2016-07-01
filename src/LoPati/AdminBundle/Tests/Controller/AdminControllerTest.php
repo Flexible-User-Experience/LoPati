@@ -2,41 +2,34 @@
 
 namespace LoPati\AdminBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class AdminControllerTest extends WebTestCase
 {
     /**
-     * Test page is successful
-     *
-     * @dataProvider provideUrls
+     * Test admin login request is successful
      */
-    public function testAdminPagesAreSuccessful($url)
+    public function testAdminLoginPageIsSuccessful()
     {
-        $client = $this->getAdminClient();
-        $client->request('GET', $url);
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $client = $this->createClient();           // anonymous user
+        $client->request('GET', '/admin/login');
+
+        $this->assertStatusCode(200, $client);
     }
 
     /**
-     * Get admin client
+     * Test page is successful
      *
-     * @return Client
+     * @dataProvider provideUrls
+     *
+     * @param $url
      */
-    private function getAdminClient()
+    public function testAdminPagesAreSuccessful($url)
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/admin/login');
-        $form = $crawler->selectButton('_submit')->form(
-            array(
-                '_username' => static::$kernel->getContainer()->getParameter('admin_user_test'),
-                '_password' => static::$kernel->getContainer()->getParameter('admin_pass_test'),
-            )
-        );
-        $client->submit($form);
+        $client = $this->makeClient(true);         // authenticated user
+        $client->request('GET', $url);
 
-        return $client;
+        $this->assertStatusCode(200, $client);
     }
 
     /**
@@ -56,7 +49,7 @@ class AdminControllerTest extends WebTestCase
             array('/admin/menu/level/2/1/edit'),
             array('/admin/page/list'),
             array('/admin/page/create'),
-            array('/admin/page/2/edit'),
+            array('/admin/page/1/edit'),
             array('/admin/archive/list'),
             array('/admin/archive/create'),
             array('/admin/archive/1/edit'),
@@ -68,18 +61,17 @@ class AdminControllerTest extends WebTestCase
             array('/admin/newsletter/group/1/edit'),
             array('/admin/newsletter/user/list'),
             array('/admin/newsletter/user/create'),
-            array('/admin/newsletter/user/5/edit'),
+            array('/admin/newsletter/user/1/edit'),
             array('/admin/newsletter/list'),
             array('/admin/newsletter/create'),
-            array('/admin/newsletter/7/edit'),
-            array('/admin/newsletter/7/preview'),
+            array('/admin/newsletter/1/edit'),
+            array('/admin/newsletter/1/preview'),
             array('/admin/artist/list'),
             array('/admin/artist/create'),
             array('/admin/artist/1/edit'),
             array('/admin/slider/list'),
             array('/admin/slider/create'),
             array('/admin/slider/1/edit'),
-            array('/admin/slider/1/delete'),
         );
     }
 }

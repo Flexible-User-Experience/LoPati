@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use SendGrid\Response as SendGridResponse;
 
 class DefaultController extends Controller
 {
@@ -28,6 +30,10 @@ class DefaultController extends Controller
     /**
      * @Route("/newsletter/suscribe", name="newsletter_user")
      * @Method({"POST"})
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function suscribeAction(Request $request)
     {
@@ -68,8 +74,13 @@ class DefaultController extends Controller
 
     /**
      * @Route("/newsletter/confirmation/{token}", name="newsletter_confirmation")
-     *
      * @Template
+     *
+     * @param Request $request
+     * @param string  $token
+     *
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function confirmationAction(Request $request, $token)
     {
@@ -107,6 +118,12 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
     }
 
+    /**
+     * @param $data
+     * @param $_locale
+     *
+     * @return Response
+     */
     public function visitAction($data, $_locale)
     {
         $host = 'dev' == $this->container->get('kernel')->getEnvironment() ? 'http://lopati.local' : 'http://lopati.cat';
@@ -151,7 +168,7 @@ class DefaultController extends Controller
         }
 
         return $this->render(
-            'NewsletterBundle:Default:mail.html.twig',
+            'NewsletterBundle:Default:mail2.html.twig',
             array(
                 'host'                     => $host,
                 'pagines'                  => $pagines,
@@ -169,9 +186,14 @@ class DefaultController extends Controller
                 'butlleti'                 => $butlleti
             )
         );
-
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Exception
+     */
     public function confirmUnsuscribeAction(Request $request)
     {
         if ($request->isMethod('POST')) {
@@ -193,8 +215,9 @@ class DefaultController extends Controller
                     } else if ($user->getIdioma() == 'en') {
                         $subject = 'Confirmation to NOT receive newsletter LO PATI';
                     }
+                    /** @var SendGridResponse $result */
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    if ($result[0]['status'] == 'sent' || $result[0]['reject_reason'] == 'test-mode-limit' || $result[0]['status'] == 'queued') {
+                    if ($result->statusCode() == 200) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')
@@ -224,6 +247,10 @@ class DefaultController extends Controller
 
     /**
      * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_unsuscribe")
+     * @param Request $request
+     * @param string  $token
+     *
+     * @return RedirectResponse
      */
     public function unsuscribeAction(Request $request, $token)
     {

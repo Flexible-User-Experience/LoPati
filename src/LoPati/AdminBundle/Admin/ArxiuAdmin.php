@@ -2,12 +2,17 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
-class ArxiuAdmin extends Admin
+/**
+ * Class ArxiuAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ * @author   David Romaní <david@flux.cat>
+ */
+class ArxiuAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'archive';
 
@@ -17,57 +22,36 @@ class ArxiuAdmin extends Admin
         '_sort_by' => 'any' // field name
     );
 
-    /**
-     * Configure export formats
-     *
-     * @return array
-     */
-    public function getExportFormats()
-    {
-        return array();
-    }
-
-    /**
-     * Configure route collection
-     *
-     * @param RouteCollection $collection collection
-     *
-     * @return mixed
-     */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('delete');
-        $collection->remove('batch');
-        $collection->remove('show');
-        $collection->remove('export');
-    }
-
+    // TODO fix edit error
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('General', $this->getFormMdSuccessBoxArray(6))
             ->add('any', 'integer', array('label' => 'Any'))
+            ->add('imagePetita', 'file', array('label' => 'Imatge any', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('ImagePetitaName', 'imagePetita')))
+            ->add('imagePetita2', 'file', array('label' => 'Imatge any', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('ImagePetita2Name', 'imagePetita2')))
+//            ->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail()))
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(6))
             ->add('actiu', 'checkbox', array('required' => false))
-            ->add('imagePetita', 'file', array('label' => 'Imatge any', 'required' => false))
-            ->add('imagePetitaName', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-            ->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required' => false))
-            ->add('imagePetita2Name', 'text', array('label' => 'Nom', 'required' => false, 'read_only' => true,))
+            ->end()
             ->setHelps(array('any' => 'Ex: 2012'));
     }
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
-            //->addIdentifier('id')
-            ->addIdentifier('any')
+            ->add('any', null, array('editable' => true))
             ->add(
                 'imagePetitaName',
                 null,
-                array('label' => 'Imatge any', 'template' => 'AdminBundle:Admin:customarxiuimglistfield.html.twig')
+                array('label' => 'Imatge', 'template' => 'AdminBundle:Admin:customarxiuimglistfield.html.twig')
             )
             ->add(
                 'imagePetita2Name',
                 null,
-                array('label' => 'Imatge any vermell', 'template' => 'AdminBundle:Admin:customarxiuredimglistfield.html.twig')
+                array('label' => 'Imatge vermell', 'template' => 'AdminBundle:Admin:customarxiuredimglistfield.html.twig')
             )
             ->add('actiu', 'boolean', array('editable' => true))
             ->add(

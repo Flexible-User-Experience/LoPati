@@ -10,6 +10,8 @@ parameters:
     mailer_host: localhost
     mailer_user: null
     mailer_password: null
+    encryption: ssl
+    auth_mode: login
     locale: ca
     secret: 9118197c01dddcc43752b3136f2f10de8
     database_path: null
@@ -21,8 +23,14 @@ parameters:
 
     swiftmailer_delivery_address_dev_environment: me@me.com     #change this
 
-    mandril_api_key_test: "secret-api-token-test"
-    mandril_api_key: "secret-api-token"
+    sendgrip_username: "sendgrip_username"
+    sendgrip_password: "sendgrip_password"
+    sendgrip_api_key:  "sendgrip_api_key"
 
     admin_user_test: test   #change it
     admin_pass_test: test   #change it
+
+    private_admin_test_user: ~
+    private_admin_test_pass: ~
+    private_editor_test_user: ~
+    private_editor_test_pass: ~

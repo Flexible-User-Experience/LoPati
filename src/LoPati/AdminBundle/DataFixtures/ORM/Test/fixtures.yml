@@ -1,0 +1,107 @@
+## Menu level 1
+LoPati\MenuBundle\Entity\Categoria:
+    menulevelone{1..3}:
+        nom: <word()>
+        ordre: <current()>
+        actiu: true
+    menulevelone4:
+        nom: "Arxiu"
+        ordre: 4
+        actiu: true
+        arxiu: true
+
+## Menu level 2
+LoPati\MenuBundle\Entity\SubCategoria:
+    menuleveltwo{1..7}:
+        nom: <word()>
+        ordre: <current()>
+        categoria: @menulevelone<numberBetween(1, 3)>
+        actiu: true
+
+## Page
+LoPati\BlogBundle\Entity\Pagina:
+    page{1..10}:
+        tipus: 'w'
+        titol: <title()>
+        descripcio: <sentence()>
+        actiu: true
+        portada: false
+        dataPublicacio: <dateTimeBetween('-2 months', '-1 months')>
+        categoria: @menulevelone<numberBetween(1, 3)>
+        subCategoria: @menuleveltwo<numberBetween(1, 7)>
+
+## Arxive
+LoPati\BlogBundle\Entity\Arxiu:
+    arxiu:
+        any: 2000
+        actiu: true
+
+# Newsletter User
+LoPati\NewsletterBundle\Entity\NewsletterUser:
+    newsuser:
+        email: <safeEmail()>
+        idioma: 'ca'
+        token: <word()>
+        active: true
+
+# Newsletter Group
+LoPati\NewsletterBundle\Entity\NewsletterGroup:
+    newslettergroup:
+        name: <word()>
+        active: true
+        newsletters: [ @newsletter ]
+
+# Newsletter
+LoPati\NewsletterBundle\Entity\Newsletter:
+    newsletter:
+        pagines: [ @page1 ]
+        numero: 1
+        name: <word()>
+        dataNewsletter: <dateTimeBetween('-2 months', '-1 months')>
+
+# Artist
+LoPati\ArtistaBundle\Entity\Artista:
+    artist:
+        name: "Alba Sotorra"
+        city: <name()>
+        active: true
+
+# Slider
+LoPati\BlogBundle\Entity\SliderImage:
+    slide:
+        name: <word()>
+        altName: <word()>
+        description: <sentence()>
+        link: <url()>
+        position: 1
+        active: true
+        image: <word()>
+
+# Footer
+LoPati\BlogBundle\Entity\Configuracio:
+    footer:
+        adresa: <word()>
+        horari: <word()>
+        organitza: <word()>
+        colabora: <word()>
+
+## User
+LoPati\UserBundle\Entity\User:
+    admin:
+        username: <{private_admin_test_user}>
+        plainPassword: <{private_admin_test_pass}>
+        email: <safeEmail()>
+        firstname: <name()>
+        lastname: <lastname()>
+        enabled: true
+        roles:
+            - ROLE_SUPER_ADMIN
+    editor:
+        username: <{private_editor_test_user}>
+        plainPassword: <{private_editor_test_pass}>
+        email: <safeEmail()>
+        firstname: <name()>
+        lastname: <lastname()>
+        enabled: true
+        roles:
+            - ROLE_CMS
