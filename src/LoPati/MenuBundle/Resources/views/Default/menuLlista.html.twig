@@ -1,13 +1,13 @@
 {% if onlycategories == 1 %}
-    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'categoria_id': categoria_id, 'arxiu': 1} %}
+    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {categories: categories, categoria_id: categoria_id, arxiu: 1} %}
 {% else %}
-    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {'categories': categories, 'arxiu': 0} %}
+    {% include 'MenuBundle:Default:categoriesLlistaIArxiu.html.twig' with {categories: categories, arxiu: 0} %}
     {% if subcategories is not empty %}
         <div id='menu1' class='subcat'>
             <ul>
                 {% for subcategoria in subcategories %}
                     {% if subcategoria.link is not none %}
-                        {% if ( subcategoria_id == subcategoria.id) %}
+                        {% if subcategoria_id == subcategoria.id %}
                             {% if subcategoria.llista == 1 %}
                                 <li><span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 3, actiu: 1, titol: subcategoria, llista: 1}) %}</span></li>
                             {% else %}
@@ -28,7 +28,7 @@
                                 <li><span>{% render controller("MenuBundle:Default:creaLink", {idPagina: null, tipus: 3, actiu: 0, titol: subcategoria, llista: 1}) %}</span></li>
                             {% endif %}
                         {% endif %}
-                        {% if subcategoria.ordre == 123 %} {# PROJECTE IRRADIADOR #}
+                        {% if subcategoria.ordre == id_page_item_irradiador %}
                             <li><span><a class="actiu" href="{{ path( 'irradiador_' ~ app.request.locale ) }}">{{ subcategoria.nom }}</a></span></li>
                         {% endif %}
                     {% endif %}

@@ -33,8 +33,9 @@ twig:
         - "SonataCoreBundle:Form:datepicker.html.twig"
         - "MenuBundle:Default:form.html.twig"
     globals:
-        main_brand_title:  "Lo Pati"
-        admin_tag_version: "2.0.4"
+        main_brand_title:        "Lo Pati"
+        admin_tag_version:       "2.0.4"
+        id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
 swiftmailer:
