@@ -129,21 +129,6 @@ class NewsletterManager
             throw new \Exception('Email destination list empty');
         }
 
-//        $sg = new SendGrid($this->sgApiKey, array('turn_off_ssl_verification' => true));
-//        $message = new SendGrid\Email();
-//        $message
-//            ->addTo('butlleti@lopati.cat')
-//            ->setSubject($subject)
-//            ->setFromName('Centre d\'Art Lo Pati')
-//            ->setFrom('butlleti@lopati.cat')
-//            ->setHtml($content)
-//        ;
-
-//        foreach ($emailDestinationList as $email) {
-//            $message->addBcc($email);
-//            $message->addSmtpapiTo($email);
-//        }
-
         try {
             // slice recipients in portions of 100 items
             //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
