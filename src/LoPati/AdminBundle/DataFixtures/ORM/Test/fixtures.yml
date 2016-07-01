@@ -57,7 +57,8 @@ LoPati\NewsletterBundle\Entity\Newsletter:
 # Artist
 LoPati\ArtistaBundle\Entity\Artista:
     artist:
-        name: <name()>
+        name: "Alba Sotorra"
+        city: <name()>
         active: true
 
 # Slider
