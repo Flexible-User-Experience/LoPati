@@ -19,8 +19,8 @@ use LoPati\MenuBundle\Entity\SubCategoria;
  * @Gedmo\TranslationEntity(class="LoPati\BlogBundle\Entity\Translation\PaginaTranslation")
  * @Vich\Uploadable
  */
-class Pagina {
-
+class Pagina 
+{
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="integer")
