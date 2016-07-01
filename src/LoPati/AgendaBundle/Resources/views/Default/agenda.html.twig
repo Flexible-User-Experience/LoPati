@@ -1,6 +1,6 @@
 {% extends '::frontend.html.twig' %}
 
-{% block title %}: {% trans %}agenda{% endtrans %} {{ dia| format_datetime('dd MMMM Y',app.request.locale, 'Europe/Paris')}}  {% endblock %}
+{% block title %}: {% trans %}agenda{% endtrans %} {{ dia | date('dd MMMM Y')}}  {% endblock %}
 
 {% block menu %}
     {% render controller("MenuBundle:Default:pintaMenu", {id: null, llista: 0}) %}
