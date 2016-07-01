@@ -3,17 +3,15 @@
 namespace LoPati\MenuBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use LoPati\BlogBundle\Entity;
 use LoPati\MenuBundle\Entity\SubCategoria;
 
-class DefaultController extends Controller {
-
+class DefaultController extends Controller
+{
 	public function pintaMenuAction($id = null, $pagina = null)
     {
 		$em = $this->getDoctrine()->getManager();
 		if ($id) {
-			$em = $this->getDoctrine()->getManager();
 			$pagina = $em->getRepository('BlogBundle:Pagina')->find($id);
 		}
 		$categories = $em->getRepository('MenuBundle:Categoria')->findCategories();
@@ -92,7 +90,6 @@ class DefaultController extends Controller {
             'subcategoria_id' => $subcategoria_id,
             'subcategories' => $subcategories,
             'onlycategories' => $onlycategories,
-            'apprequestlocale' => $this->getRequest()->getLocale(),
         ));
 	}
 }
