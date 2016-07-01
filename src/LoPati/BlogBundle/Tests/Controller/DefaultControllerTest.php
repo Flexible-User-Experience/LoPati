@@ -29,14 +29,14 @@ class DefaultControllerTest extends WebTestCase
     public function testCategoriaEnllas()
     {
         $client = static::createClient();
-        $client->request('GET', '/ca/projectes/18/');
+        $client->request('GET', '/ca/projectes/1/');
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
     public function testArxiuArticle()
     {
         $client = static::createClient();
-        $client->request('GET', '/ca/arxiu/2013/fet-a-balada/136/');
+        $client->request('GET', '/ca/1/arxiu/4/');
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }

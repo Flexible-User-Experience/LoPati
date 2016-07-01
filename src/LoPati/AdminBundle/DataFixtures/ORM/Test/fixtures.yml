@@ -4,6 +4,11 @@ LoPati\MenuBundle\Entity\Categoria:
         nom: <word()>
         ordre: <current()>
         actiu: true
+    menulevelone4:
+        nom: "Arxiu"
+        ordre: 4
+        actiu: true
+        arxiu: true
 
 ## Menu level 2
 LoPati\MenuBundle\Entity\SubCategoria:

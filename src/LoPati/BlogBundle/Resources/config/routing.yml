@@ -1,50 +1,50 @@
 inici:
-  pattern: /
+  path: /
   defaults: { _controller: BlogBundle:Default:index}
 
 portada:
-  pattern: /{_locale}/
+  path: /{_locale}/
   defaults: { _controller: BlogBundle:Default:portada}
   requirements:
         _locale: ca|es|en
 
 categoriaenenllas:
-  pattern: /{_locale}/{categoria}/{id}/
+  path: /{_locale}/{categoria}/{id}/
   defaults: { _controller: BlogBundle:Default:pagina}
   requirements:
     id:  \d+
-    _method:  GET
+    method:  GET
     _locale: ca|es|en
 
 arxiuarticle:
-  pattern: /{_locale}/{arxiu}/{any}/{titol}/{id}/
+  path: /{_locale}/{arxiu}/{any}/{titol}/{id}/
   defaults: { _controller: BlogBundle:Default:arxiuArticle}
   requirements:
     _locale: ca|es|en
     id:  \d+
     any: \d+
-    _method:  GET
+    method:  GET
 
 llista:
-  pattern: /{_locale}/{categoria}/{subcategoria}/{categoria_id}/{subcategoria_id}/
+  path: /{_locale}/{categoria}/{subcategoria}/{categoria_id}/{subcategoria_id}/
   defaults: { _controller: BlogBundle:Default:llista}
   requirements:
     categoria_id: \d+
     subcategoria_id: \d+
-    _method:  GET
+    method:  GET
     _locale: ca|es|en
 
 arxiullistaany:
-  pattern: /{_locale}/{arxiu}/{any}/{categoria_id}/
+  path: /{_locale}/{arxiu}/{any}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiuLlistaAny}
   requirements:
     _locale: ca|es|en
     any:  \d+
     categoria_id: \d+
-    _method:  GET
+    method:  GET
 
 arxiu:
-  pattern: /{_locale}/{arxiu}/{categoria}/{categoria_id}/
+  path: /{_locale}/{arxiu}/{categoria}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiu}
   requirements:
         _locale: ca|es|en
@@ -54,22 +54,22 @@ arxiu:
         id: \d+
 
 categoriasenseenllas:
-  pattern: /{_locale}/{categoria}/{subcategoria}/{id}/
+  path: /{_locale}/{categoria}/{subcategoria}/{id}/
   defaults: { _controller: BlogBundle:Default:pagina}
   requirements:
     id:  \d+
-    _method:  GET
+    method:  GET
 
 pagina:
-  pattern: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
+  path: /{_locale}/{categoria}/{subcategoria}/{titol}/{id}/
   defaults: { _controller: BlogBundle:Default:article}
   requirements:
     id:  \d+
-    _method:  GET
+    method:  GET
     _locale: ca|es|en
 
 search:
-  pattern: /{_locale}/search/
+  path: /{_locale}/search/
   defaults: { _controller: BlogBundle:Default:search}
   requirements:
         _locale: ca|es|en
