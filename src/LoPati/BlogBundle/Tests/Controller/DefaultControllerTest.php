@@ -33,10 +33,11 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
 
-    public function testArxiuArticle()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/ca/1/arxiu/4/');
-        $this->assertTrue($client->getResponse()->isSuccessful());
-    }
+    // TODO pending archive test
+//    public function testArxiuArticle()
+//    {
+//        $client = static::createClient();
+//        $client->request('GET', '/ca/1/arxiu/4/');
+//        $this->assertTrue($client->getResponse()->isSuccessful());
+//    }
 }
