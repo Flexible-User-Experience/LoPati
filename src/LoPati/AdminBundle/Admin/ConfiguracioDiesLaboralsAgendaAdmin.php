@@ -2,12 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
+class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'configuration/calendar';
 
@@ -48,5 +48,4 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
             ->add('name', null, array('label' => 'Dia'))
             ->add('active', null, array('label' => 'És laboral?', 'editable' => true));
     }
-
-}	
+}

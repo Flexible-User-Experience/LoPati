@@ -3,12 +3,12 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterAdmin extends Admin
+class NewsletterAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'newsletter';
 
