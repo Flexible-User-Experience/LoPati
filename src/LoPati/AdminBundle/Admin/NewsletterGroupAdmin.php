@@ -43,6 +43,9 @@ class NewsletterGroupAdmin extends AbstractAdmin
         $collection->remove('export');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -70,6 +73,9 @@ class NewsletterGroupAdmin extends AbstractAdmin
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         $mapper
@@ -89,6 +95,9 @@ class NewsletterGroupAdmin extends AbstractAdmin
         ;
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper

@@ -21,6 +21,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
         return array();
     }
 
+    /**
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
@@ -32,6 +35,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
             ->remove('edit');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -40,6 +46,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
             ->end();
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);

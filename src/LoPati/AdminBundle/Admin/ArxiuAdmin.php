@@ -22,7 +22,9 @@ class ArxiuAdmin extends AbstractBaseAdmin
         '_sort_by' => 'any' // field name
     );
 
-    // TODO fix edit error
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -38,6 +40,9 @@ class ArxiuAdmin extends AbstractBaseAdmin
             ->setHelps(array('any' => 'Ex: 2012'));
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -59,7 +64,7 @@ class ArxiuAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

@@ -4,6 +4,7 @@ namespace LoPati\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 /**
  * Class SliderAdmin
@@ -21,6 +22,17 @@ class SliderAdmin extends AbstractBaseAdmin
         '_sort_order' => 'ASC', // sort direction
         '_sort_by' => 'position' // field name
     );
+
+    /**
+     * Configure route collection
+     *
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('show');
+        $collection->remove('batch');
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -56,8 +68,8 @@ class SliderAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
-                        'delete' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
+                        'delete' => array('template' => 'AdminBundle:Admin:list__action_delete_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

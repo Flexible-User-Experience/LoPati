@@ -23,6 +23,9 @@ class ArtistaAdmin extends AbstractBaseAdmin
         '_sort_by'    => 'name' // field name
     );
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -97,6 +100,9 @@ class ArtistaAdmin extends AbstractBaseAdmin
             );
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -119,6 +125,9 @@ class ArtistaAdmin extends AbstractBaseAdmin
             );
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
