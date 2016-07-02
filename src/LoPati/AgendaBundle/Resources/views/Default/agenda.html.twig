@@ -36,7 +36,7 @@
                             {% endif %}
                             <p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
                             {% else %}
-                                {% if pagina.imagePetitaName  %}
+                                {% if pagina.imagePetitaName %}
                                     <a href='{{ path('arxiuarticle', {'id': pagina.id,'arxiu' : pagina.categoria.slug,'titol' : pagina.slug, 'any': pagina.datapublicacio | date("Y"), }) }}'>
                                         <img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width: 150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}' title='{{ pagina.titol }}'></a>
                                 {% endif %}
