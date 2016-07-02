@@ -20,12 +20,12 @@
                 <div class="contingut">
                     {% if pagines %}
                         <h1>{% trans %}agenda{% endtrans %}</h1>
-                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia| format_datetime('dd MMMM Y',app.request.locale, 'Europe/Paris')}} </h2>
+                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia | date('dd MMMM Y')}} </h2>
                         <div class="separadorcontingutreg" ></div>
                     {% endif %}
                     {% for pagina in pagines %}
                         <div class="contingutreg">
-                        {% if (date(pagina.dataCaducitat) >  date() and pagina.subCategoria is not null) or (pagina.datacaducitat is null and pagina.subCategoria is not null) %}
+                        {% if (date(pagina.dataCaducitat) > date() and pagina.subCategoria is not null) or (pagina.datacaducitat is null and pagina.subCategoria is not null) %}
                                 {% if pagina.imagePetitaName  %}
                                     <a href='{{ path('pagina', {'id': pagina.id,'categoria' : pagina.categoria.slug, 'subcategoria' : pagina.subcategoria.slug,'titol' : pagina.slug }) }}'>
                                 <img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width: 150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}' title='{{ pagina.titol }}'></a>
@@ -36,12 +36,12 @@
                             {% endif %}
                             <p>{{ pagina.lloc }}<br>{{ pagina.datarealitzacio }}</p>
                             {% else %}
-                                {% if pagina.imagePetitaName  %}
-                                    <a href='{{ path('arxiuarticle', {'id': pagina.id,'arxiu' : pagina.categoria.slug,'titol' : pagina.slug, 'any': pagina.datapublicacio|date("Y"), }) }}'>
+                                {% if pagina.imagePetitaName %}
+                                    <a href='{{ path('arxiuarticle', {'id': pagina.id,'arxiu' : pagina.categoria.slug,'titol' : pagina.slug, 'any': pagina.datapublicacio | date("Y"), }) }}'>
                                         <img src={{ vich_uploader_asset(pagina, 'imagePetita') | imagine_filter('portada') }} style='max-width: 150px; float: left; margin: 0px 25px 0px 0px;' alt='{{ pagina.titol }}' title='{{ pagina.titol }}'></a>
                                 {% endif %}
 
-                                <p class="titol"><a href='{{ path('arxiuarticle', {'id': pagina.id,'arxiu' : pagina.categoria.slug,'titol' : pagina.slug, 'any': pagina.datapublicacio|date("Y"), }) }}'>{{ pagina.titol }}</a></p>
+                                <p class="titol"><a href='{{ path('arxiuarticle', {'id': pagina.id,'arxiu' : pagina.categoria.slug,'titol' : pagina.slug, 'any': pagina.datapublicacio | date("Y"), }) }}'>{{ pagina.titol }}</a></p>
                                 {% if pagina.resum  %}
                                     <p style='color: #000;'>{{ pagina.resum }}...</p>
                                 {% endif %}

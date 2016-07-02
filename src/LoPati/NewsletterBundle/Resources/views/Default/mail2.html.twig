@@ -19,14 +19,13 @@
 <tr>
     <td width="4" rowspan="2">&nbsp;</td>
     <td width="174" rowspan="2" valign="top" class="Titul">
-        <h2 style="font-size:14px; margin:0; padding:0; color:#666 !important;">{{ pagines.dataNewsletter | date('d/m/Y') }} </h2>
+        <h2 style="font-size:14px;margin:0;padding:0;color:#666 !important;">{{ pagines.dataNewsletter | date('d/m/Y') }}</h2>
     </td>
     <td width="40">&nbsp;</td>
     <td colspan="2" valign="top"><a
-                href="{{ host ~ path('newsletter', {'_locale': idioma,'data' : pagines.dataNewsletter | date('d-m-Y') }) }}"
+                href="{{ path('newsletter', {_locale: idioma, data: pagines.dataNewsletter | date('d-m-Y') }) }}"
                 style="display:block; line-height:8px; margin-top:2px; font-size:10px; text-decoration:none; color:#666;">{{ visualitzar_correctament }}</a>
-            <a href="{{ host ~ path('newsletter_confirm_unsuscribe') }}"
-               style="font-size:10px; text-decoration:none; color:#666;">{{ baixa }}</a>
+            <a href="{{ path('newsletter_confirm_unsuscribe') }}" style="font-size:10px;text-decoration:none;color:#666;">{{ baixa }}</a>
     <td width="171">&nbsp;</td>
     <td width="4" rowspan="2">&nbsp;</td>
 </tr>
@@ -40,8 +39,7 @@
 </tr>
 <tr>
     <td width="4">&nbsp;</td>
-    <td colspan="5" align="center" valign="middle"><img src="{{ host ~ '/images/cap570.jpg' }}" width="578" height="115"
-                                                        alt="image header" title="image header"/></td>
+    <td colspan="5" align="center" valign="middle"><img src="{{ asset('images/cap570.jpg') }}" width="578" height="115" alt="image header" title="image header"/></td>
     <td width="4">&nbsp;</td>
 </tr>
 {% for pagina in pagines.pagines %}
@@ -65,8 +63,8 @@
         <td width="4">&nbsp;</td>
         <td colspan="5" align="center" valign="middle">
             {% if pagina.imageGran1Name() %}
-                <img src="{{ host ~ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}"
-                     alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" width=578
+                <img src="{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}"
+                     alt="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}" width="578"
                      title="Lo Pati - Centre d'Art  - Terres de l'Ebre : {{ pagina.titol }}"/>
             {% endif %}
         </td>
@@ -75,7 +73,7 @@
     <tr>
         <td width="4">&nbsp;</td>
         <td colspan="5"><p
-                    style="margin-left:0px; margin-top:7px; margin-bottom:15px; font-size:11px; color:#666;">{{ pagina.peuImageGran1 }}</p>
+                    style="margin-left:0;margin-top:7px;margin-bottom:15px;font-size:11px;color:#666;">{{ pagina.peuImageGran1 }}</p>
         </td>
         <td width="4">&nbsp;</td>
     </tr>
@@ -85,13 +83,13 @@
         <td width="40" rowspan="2">&nbsp;</td>
         <td colspan="3" class="vds">
             {% if pagina.subCategoria %}
-                <p style="color:#E31853; margin-top:10px; margin-bottom:0px;">{{ pagina.subCategoria.nom }}  </p>
+                <p style="color:#E31853;margin-top:10px;margin-bottom:0;">{{ pagina.subCategoria.nom }}</p>
             {% endif %}
         </td>
         <td width="4" rowspan="6">&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="3" class="vds"><h3 style="margin-top:5px;margin-bottom:0;padding:0;font-size:25px;color:black !important;"><a style="padding:0;text-decoration:none;color:black !important;" href="{{ host ~ path('pagina', {'_locale': idioma, categoria: pagina.categoria.slug, subcategoria: pagina.subCategoria.slug, titol: pagina.slug, id: pagina.id}) }}">{{ pagina.titol }}</a></h3>
+        <td colspan="3" class="vds"><h3 style="margin-top:5px;margin-bottom:0;padding:0;font-size:25px;color:black !important;"><a style="padding:0;text-decoration:none;color:black !important;" href="{{ path('pagina', {_locale: idioma, categoria: pagina.categoria.slug, subcategoria: pagina.subCategoria.slug, titol: pagina.slug, id: pagina.id}) }}">{{ pagina.titol }}</a></h3>
         </td>
     </tr>
     <tr height="5">
@@ -101,55 +99,53 @@
     <tr>
         <td valign="top" class="bfa">
             {% if pagina.lloc %}
-                <p style="color:#E31853; margin-top:10px; margin-bottom:0px; font-weight:bold;">{{ lloc }}</p>
-                <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.lloc }}</p>
+                <p style="color:#E31853;margin-top:10px;margin-bottom:0;font-weight:bold;">{{ lloc }}</p>
+                <p style="color:#666;margin-top:10px;margin-bottom:20px;line-height:15px;">{{ pagina.lloc }}</p>
             {% endif %}
             {% if pagina.dataRealitzacio %}
-                <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ data }}</p>
-                <p style="color:#666; margin-top:10px; margin-bottom:20px; line-height:15px;">{{ pagina.dataRealitzacio }}</p>
+                <p style="color:#E31853;margin-top:0;margin-bottom:0;font-weight:bold;">{{ data }}</p>
+                <p style="color:#666;margin-top:10px;margin-bottom:20px;line-height:15px;">{{ pagina.dataRealitzacio }}</p>
             {% endif %}
             {% if pagina.links %}
                 <div class="links">
-                    <p style="color:#E31853; margin-top:0px; margin-bottom:0px; font-weight:bold;">{{ links }}</p>{{ pagina.links|raw }}
+                    <p style="color:#E31853;margin-top:0;margin-bottom:0;font-weight:bold;">{{ links }}</p>{{ pagina.links | raw }}
                 </div>
             {% endif %}
             {% if pagina.titolDocument1 and pagina.document1Name %}
-                <p style="font-weight:bold; display:block; margin-top:20px;">
-                    <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document1') }}'
-                       style="padding: 0 0 0 0; text-decoration:none;">
-                        <img src="{{ host ~ '/images/icona-doc01.gif' }}">
-                        <span style="padding: 0px 0px 0px 3px; color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument1 }}</span>
+                <p style="font-weight:bold;display:block;margin-top:20px;">
+                    <a rel="external" href="{{ vich_uploader_asset(pagina, 'document1') }}"
+                       style="padding: 0;text-decoration:none;">
+                        <img src="{{ asset('images/icona-doc01.gif') }}" alt="icon">
+                        <span style="padding:0 0 0 3px;color:#E31853;text-decoration:none;font-size:13px;">{{ pagina.titolDocument1 }}</span>
                     </a>
                 </p>
             {% endif %}
             {% if pagina.titolDocument2 and pagina.document2Name %}
-                <p style="font-weight:bold; display:block; margin-top:-15px;">
-                    <a rel='external' href='{{ host ~  vich_uploader_asset(pagina, 'document2') }}'
-                       style="padding: 0px 0px 0px 0px; text-decoration:none;">
-                        <img src="{{ host ~ '/images/icona-doc01.gif' }}">
-            <span style="padding: 0px 0px 0px 3px;color:#E31853; text-decoration:none; font-size: 13px;">{{ pagina.titolDocument2 }}
+                <p style="font-weight:bold;display:block;margin-top:-15px;">
+                    <a rel="external" href="{{ vich_uploader_asset(pagina, 'document2') }}"
+                       style="padding:0;text-decoration:none;">
+                        <img src="{{ asset('images/icona-doc01.gif') }}" alt="icon">
+            <span style="padding:0 0 0 3px;color:#E31853;text-decoration:none;font-size:13px;">{{ pagina.titolDocument2 }}
             </span>
                     </a>
                 </p>
             {% endif %}
             {% if pagina.urlFlickr %}
-                <a rel='external' href='{{ pagina.urlFlickr }}' target="_blank"><img width=18
-                                                                                     src="{{ host ~ '/images/xarxa_flickr_color.gif' }}"
-                                                                                     alt='logotip flickr'
-                                                                                     title='logotip flickr'></a>
+                <a rel="external" href="{{ pagina.urlFlickr }}" target="_blank">
+                    <img width="18" src="{{ asset('images/xarxa_flickr_color.gif') }}" alt="logotip flickr" title="logotip flickr">
+                </a>
             {% endif %}
             {% if pagina.urlVimeo %}
-                <a rel='external' href='{{ pagina.urlVimeo }}' target="_blank"><img width=18
-                                                                                    src="{{ host ~ '/images/xarxa_vimeo_color.gif' }}"
-                                                                                    alt='logitp vimeo'
-                                                                                    title='logotip vimeo'></a>
+                <a rel="external" href="{{ pagina.urlVimeo }}" target="_blank">
+                    <img width="18" src="{{ asset('images/xarxa_vimeo_color.gif') }}" alt="logitp vimeo" title="logotip vimeo">
+                </a>
             {% endif %}
             {% if pagina.datavisible %}
-                <p style="clear: both; color: #999;"><br>{{ publicat }}: {{ pagina.datapublicacio|date("d/m/Y") }}</p>
+                <p style="clear:both;color:#999;"><br>{{ publicat }}: {{ pagina.datapublicacio | date('d/m/Y') }}</p>
             {% endif %}
         </td>
         <td width="40" rowspan="2">&nbsp;</td>
-        <td colspan="3" rowspan="2" align="justify" valign="top" style="color: #666;">
+        <td colspan="3" rowspan="2" align="justify" valign="top" style="color:#666;">
             {% if pagina.resum %}
                 <span style="color:#E31853;">{{ pagina.resum }}</span><br/>
             {% endif %}
@@ -192,52 +188,51 @@
     <td width="4" rowspan="9">&nbsp;</td>
 </tr>
 <tr>
-    <td rowspan="5" valign="top"><a href="http://www.lopati.cat"><img src="{{ host ~ '/images/logo.jpg' }}" width="170"
-                                                                      height="107" alt="logotip lo pati"
-                                                                      title="logotip lo pati"/></a></td>
+    <td rowspan="5" valign="top">
+        <a href="http://www.lopati.cat"><img src="{{ asset('images/logo.jpg') }}" width="170" height="107" alt="logotip Lo Pati" title="logotip Lo Pati"/></a>
+    </td>
     <td width="40" rowspan="5">&nbsp;</td>
-    <td width="174" align="left" valign="top" class="contring"><strong
-                style="font-weight: bold; color: #666; font-size:14px;">Lo Pati</strong><br/>
-      <span style="color: #666; font-size:13px;"> Centre d'Art - Terres de l'Ebre<br/>
-      C/ Gran Capità, 38-40<br/>
-      Tel. 977 700 904<br/>
-    43870 Amposta</span></td>
+    <td width="174" align="left" valign="top" class="contring">
+        <strong style="font-weight:bold;color:#666;font-size:14px;">Lo Pati</strong><br/>
+        <span style="color:#666;font-size:13px;">
+            Centre d'Art - Terres de l'Ebre<br/>
+            C/ Gran Capità, 38-40<br/>
+            Tel. 977 700 904<br/>
+            43870 Amposta
+        </span>
+    </td>
     <td width="19" rowspan="5">&nbsp;</td>
-    <td width="171" align="left" valign="top" class="contring" id="cv"><strong
-                style="color: #666; font-weight: bold; font-size:13px;">{{ organitza }}:</strong><br/>
-        <a rel="external" href="http://www.amposta.cat/" target="_blank"
-           style="text-decoration:none; color:#666; font-size:13px;">Ajuntament d'Amposta</a><br/>
-        <br/> <strong style="font-weight: bold; color: #666; font-size:13px;">{{ suport }}:</strong><br/>
-        <a rel="external" href="http://www.gencat.cat/cultura" target="_blank"
-           style="text-decoration:none; color:#666; font-size:13px;">Generalitat de Catalunya</a><br/>
-        <a rel="external" href="http://www.diputaciodetarragona.cat/" target="_blank"
-           style="text-decoration:none; color:#666; font-size:13px;">Diputació de Tarragona</a></td>
+    <td width="171" align="left" valign="top" class="contring" id="cv">
+        <strong style="color:#666;font-weight:bold;font-size:13px;">{{ organitza }}:</strong><br/>
+        <a rel="external" href="http://www.amposta.cat/" target="_blank" style="text-decoration:none;color:#666;font-size:13px;">Ajuntament d'Amposta</a><br/><br/>
+        <strong style="font-weight:bold;color:#666;font-size:13px;">{{ suport }}:</strong><br/>
+        <a rel="external" href="http://www.gencat.cat/cultura" target="_blank" style="text-decoration:none;color:#666;font-size:13px;">Generalitat de Catalunya</a><br/>
+        <a rel="external" href="http://www.diputaciodetarragona.cat/" target="_blank" style="text-decoration:none;color:#666;font-size:13px;">Diputació de Tarragona</a>
+    </td>
 </tr>
 <tr>
     <td width="174" align="left" valign="top" class="contring" id="cv">&nbsp;</td>
 </tr>
 <tr>
-    <td height="18" align="left" valign="top" class="contring"
-        style="color: #666; font-weight: bold; font-size:13px;">{{ follow }}:
+    <td height="18" align="left" valign="top" class="contring" style="color:#666;font-weight:bold;font-size:13px;">{{ follow }}:</td>
+    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv">
+        <strong style="font-weight:bold;color:#666;font-size:13px;">{{ colabora }}:</strong><br/>
+        <a rel="external" href="http://www.museuterresebre.cat/" target="_blank" style="text-decoration:none;color:#666;font-size:13px;">Museu de les Terres de l'Ebre</a>
     </td>
-    <td width="171" rowspan="3" align="left" valign="top" class="contring" id="cv"><strong
-                style="font-weight: bold; color: #666; font-size:13px;">{{ colabora }}:</strong><br/>
-        <a rel="external" href="http://www.museuterresebre.cat/" target="_blank"
-           style="text-decoration:none; color:#666; font-size:13px;">Museu de les Terres de l'Ebre</a></td>
 </tr>
 <tr>
     <td align="left" valign="top" class="contring">
-        <a href="https://www.facebook.com/pages/Lo-Pati/339606589419890" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_fb.gif' }}" alt="facebook" width="18" height="18" title="facebook"/>
+        <a href="https://www.facebook.com/pages/Lo-Pati/339606589419890" style="color:#666;font-size:9px;text-decoration:none;" target="_blank">
+            <img src="{{ asset('images/xarxa_fb.gif') }}" alt="facebook" width="18" height="18" title="facebook"/>
         </a>
-        <a href="https://twitter.com/centreartlopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_tw.gif' }}" alt="twitter" width="18" height="18" title="twitter">
+        <a href="https://twitter.com/centreartlopati" style="color:#666;font-size:9px;text-decoration:none;" target="_blank">
+            <img src="{{ asset('images/xarxa_tw.gif') }}" alt="twitter" width="18" height="18" title="twitter">
         </a>
-        <a href="http://vimeo.com/lopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_vimeo.gif' }}" alt="vimeo" width="18" height="18" title="vimeo"/>
+        <a href="http://vimeo.com/lopati" style="color:#666;font-size:9px;text-decoration:none;" target="_blank">
+            <img src="{{ asset('images/xarxa_vimeo.gif') }}" alt="vimeo" width="18" height="18" title="vimeo"/>
         </a>
-        <a href="http://www.flickr.com/photos/lopati" style="color:#666; font-size:9px; text-decoration: none;" target="_blank">
-            <img src="{{ host ~ '/images/xarxa_flickr.gif' }}" alt="flickr" width="18" height="18" title="flickr"/>
+        <a href="http://www.flickr.com/photos/lopati" style="color:#666;font-size:9px;text-decoration:none;" target="_blank">
+            <img src="{{ asset('images/xarxa_flickr.gif') }}" alt="flickr" width="18" height="18" title="flickr"/>
         </a>
     </td>
 </tr>
