@@ -78,6 +78,7 @@ class NewsletterGroupAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->addIdentifier('name', null, array('label' => 'Nom'))
             ->add('users', null, array('label' => 'Usuaris'))
@@ -87,7 +88,7 @@ class NewsletterGroupAdmin extends AbstractAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

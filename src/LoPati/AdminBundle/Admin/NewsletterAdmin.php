@@ -61,6 +61,7 @@ class NewsletterAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->addIdentifier('numero', null, array('label' => 'Núm.'))
             ->add(
@@ -111,7 +112,9 @@ class NewsletterAdmin extends AbstractAdmin
                         'enviar'  => array(
                             'template' => 'AdminBundle:Newsletter:enviar.html.twig'
                         ),
-                        'edit' => array(),
+                        'edit' => array(
+                            'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'
+                        ),
                     ),
                     'label'   => 'Accions'
                 )

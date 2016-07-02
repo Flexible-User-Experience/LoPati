@@ -188,6 +188,7 @@ class PaginaAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->add('id')
             ->add(
