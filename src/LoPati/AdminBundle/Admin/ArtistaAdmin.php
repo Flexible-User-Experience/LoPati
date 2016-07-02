@@ -23,6 +23,9 @@ class ArtistaAdmin extends AbstractBaseAdmin
         '_sort_by'    => 'name' // field name
     );
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -97,6 +100,9 @@ class ArtistaAdmin extends AbstractBaseAdmin
             );
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -112,13 +118,16 @@ class ArtistaAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )
             );
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper

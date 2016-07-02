@@ -23,6 +23,9 @@ class CategoriaAdmin extends AbstractBaseAdmin
         '_sort_by'    => 'ordre' // field name
     );
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -48,6 +51,9 @@ class CategoriaAdmin extends AbstractBaseAdmin
             ->end();
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -62,13 +68,16 @@ class CategoriaAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )
             );
     }
 
+    /**
+     * @param DatagridMapper $mapper
+     */
     protected function configureDatagridFilters(DatagridMapper $mapper)
     {
         $mapper

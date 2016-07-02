@@ -21,6 +21,9 @@ class ConfiguracioAdmin extends Admin
         return array();
     }
 
+    /**
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
@@ -31,6 +34,9 @@ class ConfiguracioAdmin extends Admin
             ->remove('delete');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -127,6 +133,9 @@ class ConfiguracioAdmin extends Admin
             ->end();
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -140,8 +149,7 @@ class ConfiguracioAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit'   => array(),
-                        'delete' => array(),
+                        'edit'   => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

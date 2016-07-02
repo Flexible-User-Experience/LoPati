@@ -2,13 +2,13 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterGroupAdmin extends Admin
+class NewsletterGroupAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'newsletter/group';
 
@@ -43,6 +43,9 @@ class NewsletterGroupAdmin extends Admin
         $collection->remove('export');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -70,8 +73,12 @@ class NewsletterGroupAdmin extends Admin
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->addIdentifier('name', null, array('label' => 'Nom'))
             ->add('users', null, array('label' => 'Usuaris'))
@@ -81,7 +88,7 @@ class NewsletterGroupAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )
@@ -89,6 +96,9 @@ class NewsletterGroupAdmin extends Admin
         ;
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper

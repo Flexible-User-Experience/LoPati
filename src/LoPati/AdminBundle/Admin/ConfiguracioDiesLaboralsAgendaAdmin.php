@@ -2,12 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
+class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'configuration/calendar';
 
@@ -21,6 +21,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
         return array();
     }
 
+    /**
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
@@ -32,6 +35,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
             ->remove('edit');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -40,6 +46,9 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
             ->end();
     }
 
+    /**
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -48,5 +57,4 @@ class ConfiguracioDiesLaboralsAgendaAdmin extends Admin
             ->add('name', null, array('label' => 'Dia'))
             ->add('active', null, array('label' => 'És laboral?', 'editable' => true));
     }
-
-}	
+}

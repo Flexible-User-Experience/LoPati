@@ -2,15 +2,13 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
-use Lopati\NewsletterBundle\Entity\NewsletterGroup;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterUserAdmin extends Admin
+class NewsletterUserAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'newsletter/user';
 
@@ -78,6 +76,7 @@ class NewsletterUserAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
 //            ->add('id')
             ->add('created', null, array('label' => 'Data alta', 'template' => 'AdminBundle:Admin:list_custom_created_datetime_field.html.twig'))
@@ -91,7 +90,7 @@ class NewsletterUserAdmin extends Admin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array(),
+                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

@@ -1,5 +1,4 @@
 {% if not object.estat and object.test %}
-    <a href="{{ admin.generateObjectUrl('enviar', object) }}" class="btn edit_link btn-small" title="Envia">
-            <i class="icon-envelope"></i>&nbsp;Envia
-    </a>
+    <a href="{{ admin.generateObjectUrl('enviar', object) }}" class="btn btn-sm btn-default edit_link" title="Envia">
+            <i class="fa fa-envelope"></i></a>
 {% endif %}

@@ -3,12 +3,12 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterAdmin extends Admin
+class NewsletterAdmin extends AbstractAdmin
 {
     protected $baseRoutePattern = 'newsletter';
 
@@ -61,6 +61,7 @@ class NewsletterAdmin extends Admin
 
     protected function configureListFields(ListMapper $mapper)
     {
+        unset($this->listModes['mosaic']);
         $mapper
             ->addIdentifier('numero', null, array('label' => 'Núm.'))
             ->add(
@@ -111,7 +112,9 @@ class NewsletterAdmin extends Admin
                         'enviar'  => array(
                             'template' => 'AdminBundle:Newsletter:enviar.html.twig'
                         ),
-                        'edit' => array(),
+                        'edit' => array(
+                            'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'
+                        ),
                     ),
                     'label'   => 'Accions'
                 )

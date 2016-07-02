@@ -1,6 +1,6 @@
 <?php
 
-namespace Lopati\NewsletterBundle\Repository;
+namespace LoPati\NewsletterBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use LoPati\NewsletterBundle\Entity\NewsletterGroup;
