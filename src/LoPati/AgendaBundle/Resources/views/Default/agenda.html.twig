@@ -1,6 +1,6 @@
 {% extends '::frontend.html.twig' %}
 
-{% block title %}: {% trans %}agenda{% endtrans %} {{ dia | date('dd MMMM Y')}}  {% endblock %}
+{% block title %}: {% trans %}agenda{% endtrans %} {{ dia | date('d/m/Y')}}  {% endblock %}
 
 {% block menu %}
     {% render controller("MenuBundle:Default:pintaMenu", {id: null, llista: 0}) %}
@@ -20,7 +20,7 @@
                 <div class="contingut">
                     {% if pagines %}
                         <h1>{% trans %}agenda{% endtrans %}</h1>
-                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia | date('dd MMMM Y')}} </h2>
+                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia | date('d/m/Y')}} </h2>
                         <div class="separadorcontingutreg" ></div>
                     {% endif %}
                     {% for pagina in pagines %}
