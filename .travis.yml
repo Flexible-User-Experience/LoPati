@@ -9,6 +9,7 @@ services:
   - elasticsearch
 
 before_script:
+  - sleep 10
   - mysql -e 'create database IF NOT EXISTS symfony;'
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - composer selfupdate
