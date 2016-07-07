@@ -141,7 +141,7 @@ stfalcon_tinymce:
 # Move to config_prod.yml if it's necessary to avoid Elasticasearch on devel environments
 fos_elastica:
     clients:
-        default: { host: localhost, port: %port_elastica% }
+        default: { host: localhost, port: "%port_elastica%" }
     indexes:
         website:
             client: default
