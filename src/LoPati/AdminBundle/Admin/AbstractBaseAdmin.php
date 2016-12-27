@@ -39,6 +39,19 @@ abstract class AbstractBaseAdmin extends AbstractAdmin
     }
 
     /**
+     * Remove batch action list view first column
+     *
+     * @return array
+     */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
+    }
+
+    /**
      * Get export formats
      *
      * @return array

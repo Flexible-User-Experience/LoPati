@@ -50,6 +50,8 @@ class AdminControllerTest extends WebTestCase
             array('/admin/page/list'),
             array('/admin/page/create'),
             array('/admin/page/1/edit'),
+            array('/admin/page/1/delete'),
+            array('/admin/page/1/duplicate'),
             array('/admin/archive/list'),
             array('/admin/archive/create'),
             array('/admin/archive/1/edit'),
