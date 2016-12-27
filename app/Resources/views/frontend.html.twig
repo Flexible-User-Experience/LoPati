@@ -8,29 +8,29 @@
           content="Centre d'Art de les Terres de l'Ebre, amb seu a Amposta. Difusió, formació, producció, col·lecció i arxiu. Forma part de la Xarxa de Centres d'Arts Visuals de Catalunya.">
     {% block opengraph %}{% endblock %}
     <title>Lo Pati | Centre d'Art - Terres de l'Ebre{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link href="{{ asset('/bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link href="{{ asset('bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
     {% block estils %}{% endblock %}
-    <script type="text/javascript" src="{{ asset('/bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/bundles/blog/js/funcions.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/blog/js/funcions.js') }}"></script>
 </head>
 <body>
 <div class="pagina">
     <div class="cap">
         <div class="logo">
-            <a href="{{ path ('portada') }}"><img src="{{ asset('/images/logo_lopati.png') }}"
-                                                  alt="Lo Pati - Centre d'Art  - Terres de l'Ebre"
-                                                  title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
-        </div>
-        <div class="logo">
-            <a href="{{ path ('portada') }}"><img src="/images/logo_lopati_2.png"
+            <a href="{{ path ('portada') }}"><img src="{{ asset('images/logo_lopati.png') }}"
                                                   alt="Lo Pati - Centre d'Art - Terres de l'Ebre"
                                                   title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
         </div>
         <div class="logo">
-            <a href="{{ path ('portada') }}"><img src="/images/logo_bucle.gif"
+            <a href="{{ path ('portada') }}"><img src="{{ asset('images/logo_lopati_2.png') }}"
                                                   alt="Lo Pati - Centre d'Art - Terres de l'Ebre"
-                                                  title="Lo Pati - Centre d'Art  - Terres de l'Ebre"></a>
+                                                  title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
+        </div>
+        <div class="logo">
+            <a href="{{ path ('portada') }}"><img src="{{ asset('images/logo_bucle.gif') }}"
+                                                  alt="Lo Pati - Centre d'Art - Terres de l'Ebre"
+                                                  title="Lo Pati - Centre d'Art - Terres de l'Ebre"></a>
         </div>
     </div>
     {% block menu %}{% endblock %}
@@ -50,7 +50,7 @@
             {% block menuArxiu %}{% endblock %}
             <div id="newsletter" class="xarxes">
                 <h5 onclick="newsletter(this)">{% trans %}tr.newsletter{% endtrans %} <img
-                            style="width: 18px;margin-top: 1px;" src="/images/envelop.gif" alt="newsletter"/></h5>
+                            style="width: 18px;margin-top: 1px;" src="{{ asset('images/envelop.gif') }}" alt="newsletter"/></h5>
                 {% render controller("NewsletterBundle:Default:form") %}
             </div>
             <div class="xarxes">
@@ -58,33 +58,33 @@
                 <div style="width:180px;height:22px;">
                     <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890" target="_blank"><img
                                 style="width: 18px;" onmouseover="mouseOverImgIcon(this);"
-                                onmouseout="mouseOutImgIcon(this);" src="/images/xarxa_fb.gif" alt="facebook"
+                                onmouseout="mouseOutImgIcon(this);" src="{{ asset('images/xarxa_fb.gif') }}" alt="facebook"
                                 title="facebook"></a>
                     <a href="https://twitter.com/centreartlopati" target="_blank"><img style="width: 18px;"
                                                                                        onmouseover="mouseOverImgIcon(this);"
                                                                                        onmouseout="mouseOutImgIcon(this);"
-                                                                                       src="/images/xarxa_tw.gif"
+                                                                                       src="{{ asset('images/xarxa_tw.gif') }}"
                                                                                        alt="twitter"
                                                                                        title="twitter"></a>
                     <a href="http://www.vimeo.com/lopati" target="_blank"><img style="width: 18px;"
                                                                                onmouseover="mouseOverImgIcon(this);"
                                                                                onmouseout="mouseOutImgIcon(this);"
-                                                                               src="/images/xarxa_vimeo.gif" alt="vimeo"
+                                                                               src="{{ asset('images/xarxa_vimeo.gif') }}" alt="vimeo"
                                                                                title="vimeo"></a>
                     <a href="http://www.flickr.com/lopati" target="_blank"><img style="width: 18px;"
                                                                                 onmouseover="mouseOverImgIcon(this);"
                                                                                 onmouseout="mouseOutImgIcon(this);"
-                                                                                src="/images/xarxa_flickr.gif"
+                                                                                src="{{ asset('images/xarxa_flickr.gif') }}"
                                                                                 alt="flickr" title="flickr"></a>
                 </div>
             </div>
-            <div class="xarxes">
-                <p>{% trans %}tr.linkslowercase{% endtrans %}:</p>
-                <a href="http://aula.lopati.cat">l'aula al pati</a>
-                <a href="http://www.bellescosesfalses.lopati.cat">relat de belles coses falses</a>
-                <a href={{ path('irradiador_' ~ app.request.locale) }}>l'irradiador</a>
-                <a href="http://riure.lopati.cat/#/3">riure#3</a>
-            </div>
+            {#<div class="xarxes">#}
+                {#<p>{% trans %}tr.linkslowercase{% endtrans %}:</p>#}
+                {#<a href="http://aula.lopati.cat">l'aula al pati</a>#}
+                {#<a href="http://www.bellescosesfalses.lopati.cat">relat de belles coses falses</a>#}
+                {#<a href={{ path('irradiador_' ~ app.request.locale) }}>l'irradiador</a>#}
+                {#<a href="http://riure.lopati.cat/#/3">riure#3</a>#}
+            {#</div>#}
         </div>
     </div>
     {% block contenidorextra %}{% endblock %}
@@ -96,7 +96,7 @@
             console.log("entra esquerre");
             $.ajax({
                 type: "GET",
-                url: "{{ path('calendari',{'fletxa':'esquerra'}) }}",
+                url: "{{ path('calendari', {fletxa: 'esquerra'}) }}",
                 success: function (data) {
                     $('#calendari').html(data);
                 }
@@ -105,7 +105,7 @@
         $('#agenda_boto_dret').click(function () {
             $.ajax({
                 type: "GET",
-                url: "{{ path('calendari',{'fletxa':'dreta'}) }}",
+                url: "{{ path('calendari', {fletxa: 'dreta'}) }}",
                 success: function (data) {
                     $('#calendari').html(data);
                 }
