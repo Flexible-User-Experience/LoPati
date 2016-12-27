@@ -29,7 +29,7 @@ class CategoriaAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(8))
+            ->with('General', $this->getFormMdSuccessBoxArray(5))
             ->add('nom', null, array('label' => 'Nom'))
             ->add('link', null, array('label' => 'Pàgina vinculada', 'required' => false))
             ->end()
@@ -38,7 +38,7 @@ class CategoriaAdmin extends AbstractBaseAdmin
             ->add('ordre', null, array('label' => 'Posició'))
             ->add('actiu', null, array('label' => 'Actiu'))
             ->end()
-            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(5))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',

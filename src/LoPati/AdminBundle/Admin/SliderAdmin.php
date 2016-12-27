@@ -37,7 +37,7 @@ class SliderAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(8))
+            ->with('General', $this->getFormMdSuccessBoxArray(6))
             ->add('imageFile', 'file', array('label' => 'Arxiu imatge', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail()))
             ->add('name', null, array('label' => 'Nom'))
             ->add('link', null, array('label' => 'Enllaç'))

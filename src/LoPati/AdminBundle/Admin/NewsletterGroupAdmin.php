@@ -2,13 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterGroupAdmin extends AbstractAdmin
+class NewsletterGroupAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'newsletter/group';
 
@@ -49,8 +48,13 @@ class NewsletterGroupAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(4))
             ->add('name', null, array('label' => 'Nom'))
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add('active', null, array('label' => 'Actiu', 'required' => false))
+            ->end()
+            ->with('Usuaris', $this->getFormMdSuccessBoxArray(10))
             ->add(
                 'users',
                 'genemu_jqueryselect2_hidden',
@@ -67,7 +71,6 @@ class NewsletterGroupAdmin extends AbstractAdmin
                     ),
                 )
             )
-            ->add('active', null, array('label' => 'Actiu', 'required' => false))
             ->end()
         ;
         $this->setTemplate('edit', 'AdminBundle:Admin:custom_base_edit_ajax.html.twig');

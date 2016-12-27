@@ -2,12 +2,11 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ConfiguracioAdmin extends Admin
+class ConfiguracioAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'configuration/footer';
 
@@ -40,7 +39,7 @@ class ConfiguracioAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(6))
             ->add(
                 'adresa',
                 null,
@@ -94,7 +93,7 @@ class ConfiguracioAdmin extends Admin
                 )
             )
             ->end()
-            ->with('Traduccions')
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(6))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',

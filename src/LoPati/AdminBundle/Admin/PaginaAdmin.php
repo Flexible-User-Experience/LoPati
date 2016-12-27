@@ -2,13 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class PaginaAdmin extends AbstractAdmin
+class PaginaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'page';
 
@@ -45,7 +44,7 @@ class PaginaAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(8))
             ->add('tipus', 'choice', array('choices' => array('w' => 'Web', 'b' => 'Bloc'), 'required' => true,))
             ->add('titol', null, array('label' => 'Títol'))
             ->add(
@@ -60,27 +59,29 @@ class PaginaAdmin extends AbstractAdmin
                     'attr'  => array(
                         'class'      => 'tinymce',
                         'data-theme' => 'simple',
-                        'style'      => 'width: 600px; height: 400px;'
+                        'style'      => 'width:100%;height:400px;'
                     ),
                     'label' => 'Descripció'
                 )
             )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
             ->add('actiu', null, array('label' => 'Activa ?', 'required' => false))
             ->add('categoria', 'sonata_type_model', array('label' => 'Menú 1er nivell'), array())
             ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú 2on nivell', 'required' => false))
             ->add(
                 'data_publicacio',
-                'date',
-                array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
+                'sonata_type_date_picker',
+                array('label' => 'Data publicació', 'format' => 'd/M/y')
             )
             ->add('data_visible', null, array('label' => 'Data visible ?', 'required' => false))
             ->add(
                 'data_caducitat',
-                'date',
+                'sonata_type_date_picker',
                 array(
                     'label'    => 'Data caducitat',
                     'widget'   => 'single_text',
-                    'format'   => 'dd-MM-yyyy',
+                    'format'   => 'd/M/y',
                     'required' => false
                 )
             )
@@ -89,57 +90,7 @@ class PaginaAdmin extends AbstractAdmin
             ->add('video', 'url', array('required' => false))
             ->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
             ->end()
-            ->with('Imatge principal')
-            ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false))
-            ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-            ->add('peuImageGran1', null, array('label' => 'Peu imatge', 'required' => false))
-            ->end()
-            ->with('Portada')
-            ->add('portada', null, array('label' => 'És portada ?', 'required' => false))
-            ->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required' => false))
-            ->add('imagePetitaName', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-            ->add('imagePetita2', 'file', array('label' => 'Imatge petita vermell', 'required' => false))
-            ->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
-            ->end()
-            ->with('Documents adjunts')
-            ->add('document1', 'file', array('label' => 'Document 1', 'required' => false))
-            ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
-            ->add('titolDocument1', null, array('label' => 'Títol 1', 'required' => false))
-            ->add('document2', 'file', array('label' => 'Document 2', 'required' => false))
-            ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
-            ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
-            ->end()
-            ->with('Enllaços')
-            ->add(
-                'links',
-                'textarea',
-                array(
-                    'required' => false,
-                    'attr'     => array(
-                        'class'      => 'tinymce',
-                        'data-theme' => 'simple',
-                        'style'      => 'width: 600px; height: 400px;'
-                    ),
-                    'label'    => 'Enllaços'
-                )
-            )
-            ->add('urlVimeo', null, array('required' => false, 'label' => 'URL video Vimeo'))
-            ->add('urlFlickr', null, array('required' => false, 'label' => 'URL galeria Flickr'))
-            ->end()
-            ->with('Agenda')
-            ->add(
-                'startDate',
-                'date',
-                array('label' => 'Data inici', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
-            )
-            ->add(
-                'endDate',
-                'date',
-                array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
-            )
-            ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
-            ->end()
-            ->with('Traduccions')
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',
@@ -151,7 +102,7 @@ class PaginaAdmin extends AbstractAdmin
                         'titol'            => array('label' => 'Títol'),
                         'resum'            => array(
                             'attr' => array(
-                                'style' => 'height:90px;width:480px;'
+                                'style' => 'height:90px;width:100%;'
                             )
                         ),
                         'data_realitzacio' => array(
@@ -166,21 +117,70 @@ class PaginaAdmin extends AbstractAdmin
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
-                                'style'      => 'width: 600px; height: 400px; display: block;'
+                                'style'      => 'width:100%;height:400px;display:block;'
                             )
                         ),
                     )
                 )
             )
             ->end()
+            ->with('Portada', $this->getFormMdSuccessBoxArray(4))
+            ->add('portada', null, array('label' => 'És portada ?', 'required' => false))
+            ->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('imagePetitaName', 'imagePetita')))
+            ->add('imagePetitaName', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
+            ->add('imagePetita2', 'file', array('label' => 'Imatge petita vermell', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('imagePetita2Name', 'imagePetita2')))
+            ->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
+            ->end()
+            ->with('Imatge principal', $this->getFormMdSuccessBoxArray(4))
+            ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('imageGran1Name', 'imageGran1')))
+            ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
+            ->add('peuImageGran1', null, array('label' => 'Peu imatge', 'required' => false))
+            ->end()
+            ->with('Documents adjunts', $this->getFormMdSuccessBoxArray(4))
+            ->add('document1', 'file', array('label' => 'Document 1', 'required' => false))
+            ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
+            ->add('titolDocument1', null, array('label' => 'Títol 1', 'required' => false))
+            ->add('document2', 'file', array('label' => 'Document 2', 'required' => false))
+            ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
+            ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
+            ->end()
+            ->with('Enllaços', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'links',
+                'textarea',
+                array(
+                    'required' => false,
+                    'attr'     => array(
+                        'class'      => 'tinymce',
+                        'data-theme' => 'simple',
+                        'style'      => 'width:100%;height:400px;'
+                    ),
+                    'label'    => 'Enllaços'
+                )
+            )
+            ->add('urlVimeo', null, array('required' => false, 'label' => 'URL video Vimeo'))
+            ->add('urlFlickr', null, array('required' => false, 'label' => 'URL galeria Flickr'))
+            ->end()
+            ->with('Agenda', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'startDate',
+                'sonata_type_date_picker',
+                array('label' => 'Data inici', 'format' => 'd/M/y', 'required' => false)
+            )
+            ->add(
+                'endDate',
+                'sonata_type_date_picker',
+                array('label' => 'Data fi', 'format' => 'd/M/y', 'required' => false)
+            )
+            ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
+            ->end()
             ->setHelps(
                 array(
                     'tipus'                => 'tria el tipus',
                     'compartir'            => 'Mostrar botos per compartir xarxes socials',
-                    'urlFlickr'            => 'Ex: http://www.flickr.com/photos/lopati/..',
+                    'urlFlickr'            => 'http://www.exemple.com/(...)',
                     'resum'                => 'Max: 300 caràcters',
-                    'data_publicacio'      => 'Format: dd-MM-yyyy',
-                    'data_caducitat'       => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy',
+                    'data_caducitat'       => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar.',
                     'alwaysShowOnCalendar' => 'Marcat es mostrarà sempre al calendari l\'event, encara que sigui fora de l\'horari del centre',
                 )
             );
