@@ -2,13 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterUserAdmin extends AbstractAdmin
+class NewsletterUserAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'newsletter/user';
 
@@ -46,7 +45,7 @@ class NewsletterUserAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(4))
             ->add('email')
             ->add(
                 'groups',
@@ -69,6 +68,8 @@ class NewsletterUserAdmin extends AbstractAdmin
                     'required' => true,
                 )
             )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
             ->add('active', null, array('label' => 'Actiu', 'required' => false))
             ->end()
         ;

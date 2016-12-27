@@ -28,13 +28,13 @@ class ArxiuAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(6))
+            ->with('General', $this->getFormMdSuccessBoxArray(4))
             ->add('any', 'integer', array('label' => 'Any'))
             ->add('imagePetita', 'file', array('label' => 'Imatge any', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('ImagePetitaName', 'imagePetita')))
             ->add('imagePetita2', 'file', array('label' => 'Imatge any', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('ImagePetita2Name', 'imagePetita2')))
 //            ->add('imagePetita2', 'file', array('label' => 'Imatge any vermell', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail()))
             ->end()
-            ->with('Controls', $this->getFormMdSuccessBoxArray(6))
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
             ->add('actiu', 'checkbox', array('required' => false))
             ->end()
             ->setHelps(array('any' => 'Ex: 2012'));
