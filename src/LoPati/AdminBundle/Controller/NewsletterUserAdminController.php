@@ -4,11 +4,8 @@ namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
-use LoPati\NewsletterBundle\Entity\NewsletterUser;
-use Lopati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +13,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Class NewsletterUserAdminController
+ *
+ * @category AdminController
+ * @package  LoPati\AdminBundle\Controller
+ * @author   David Romaní <david@flux.cat>
+ */
 class NewsletterUserAdminController extends Controller
 {
     /**

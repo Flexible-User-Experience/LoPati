@@ -14,7 +14,7 @@ class PaginaAdmin extends AbstractBaseAdmin
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction
-        '_sort_by'    => 'id' // field name
+        '_sort_by'    => 'data_publicacio' // field name
     );
 
     /**
@@ -36,7 +36,7 @@ class PaginaAdmin extends AbstractBaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('delete');
+        $collection->add('duplicate', $this->getRouterIdParameter() . '/duplicate');
         $collection->remove('show');
         $collection->remove('batch');
     }
@@ -206,7 +206,9 @@ class PaginaAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
+                        'edit'      => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
+                        'duplicate' => array('template' => 'AdminBundle:Admin:list__action_duplicate_button.html.twig'),
+                        'delete'    => array('template' => 'AdminBundle:Admin:list__action_delete_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

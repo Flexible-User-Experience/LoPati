@@ -9,9 +9,8 @@ sonata_admin:
         pager_links:    10
     persist_filters: true
     templates:
-        layout:     "AdminBundle:Admin:my_standard_layout.html.twig"
-#        dashboard:  "AdminBundle:Admin:my_dashboard.html.twig"
-#        user_block: "AdminBundle:Admin:my_user_block.html.twig"
+        layout: "AdminBundle:Admin:my_standard_layout.html.twig"
+        edit:   "AdminBundle:Admin:my_edit.html.twig"
     dashboard:
         groups:
             Menús:

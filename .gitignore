@@ -25,4 +25,7 @@ app/config/deploy.rb
 Capfile
 backups/*
 !/web/media/.gitkeep
+!/web/css/.gitkeep
+!/web/js/.gitkeep
+!/web/images/.gitkeep
 !.travis.yml

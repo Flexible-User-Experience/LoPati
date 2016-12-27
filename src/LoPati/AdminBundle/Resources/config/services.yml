@@ -3,7 +3,7 @@ services:
   sonata.lopati.admin.categoria:
     class: LoPati\AdminBundle\Admin\CategoriaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: primer nivell }
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: 'primer nivell' }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\Categoria
@@ -12,7 +12,7 @@ services:
   sonata.lopati.admin.subcategoria:
     class: LoPati\AdminBundle\Admin\SubCategoriaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: segon nivell }
+      - { name: sonata.admin, manager_type: orm, group: 'Menús', label: 'segon nivell' }
     arguments:
       - null
       - LoPati\MenuBundle\Entity\SubCategoria
@@ -21,16 +21,16 @@ services:
   sonata.lopati.admin.pagina:
     class: LoPati\AdminBundle\Admin\PaginaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: pàgina }
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'pàgina' }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\Pagina
-      - AdminBundle:Admin
+      - AdminBundle:PaginaAdmin
 
   sonata.lopati.admin.arxiu:
     class: LoPati\AdminBundle\Admin\ArxiuAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Arxius', label: arxiu }
+      - { name: sonata.admin, manager_type: orm, group: 'Arxius', label: 'arxiu' }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\Arxiu
@@ -39,7 +39,7 @@ services:
   sonata.lopati.admin.configuracio:
     class: LoPati\AdminBundle\Admin\ConfiguracioAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: peu de pàgina }
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'peu de pàgina' }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\Configuracio
@@ -48,7 +48,7 @@ services:
   sonata.lopati.admin.configuracio.dies.laborals.agenda:
     class: LoPati\AdminBundle\Admin\ConfiguracioDiesLaboralsAgendaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: dies laborals agenda }
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'dies laborals agenda' }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
@@ -57,7 +57,7 @@ services:
   sonata.lopati.admin.newslettergroup:
     class: LoPati\AdminBundle\Admin\NewsletterGroupAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: grup }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'grup' }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterGroup
@@ -66,7 +66,7 @@ services:
   sonata.lopati.admin.newsletteruser:
     class: LoPati\AdminBundle\Admin\NewsletterUserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: usuari }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'usuari' }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterUser
@@ -75,7 +75,7 @@ services:
   sonata.lopati.admin.newsletter:
     class: LoPati\AdminBundle\Admin\NewsletterAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: newsletter }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter' }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
@@ -84,7 +84,7 @@ services:
   sonata.lopati.admin.artista:
     class: LoPati\AdminBundle\Admin\ArtistaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Irradiador', label: artista }
+      - { name: sonata.admin, manager_type: orm, group: 'Irradiador', label: 'artista' }
     arguments:
       - null
       - LoPati\ArtistaBundle\Entity\Artista
@@ -93,7 +93,7 @@ services:
   sonata.lopati.admin.slider:
     class: LoPati\AdminBundle\Admin\SliderAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Slider', label: slide }
+      - { name: sonata.admin, manager_type: orm, group: 'Slider', label: 'slide' }
     arguments:
       - null
       - LoPati\BlogBundle\Entity\SliderImage
