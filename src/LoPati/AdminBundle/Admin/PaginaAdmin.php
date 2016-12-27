@@ -206,8 +206,9 @@ class PaginaAdmin extends AbstractBaseAdmin
                 'actions',
                 array(
                     'actions' => array(
-                        'edit'   => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
-                        'delete' => array('template' => 'AdminBundle:Admin:list__action_delete_button.html.twig'),
+                        'edit'      => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
+                        'duplicate' => array('template' => 'AdminBundle:Admin:list__action_duplicate_button.html.twig'),
+                        'delete'    => array('template' => 'AdminBundle:Admin:list__action_delete_button.html.twig'),
                     ),
                     'label'   => 'Accions'
                 )

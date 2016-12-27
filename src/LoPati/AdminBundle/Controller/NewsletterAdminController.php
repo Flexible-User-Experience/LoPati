@@ -12,6 +12,13 @@ use SendGrid\Response;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
+/**
+ * Class NewsletterAdminController
+ *
+ * @category AdminController
+ * @package  LoPati\AdminBundle\Controller
+ * @author   David Romaní <david@flux.cat>
+ */
 class NewsletterAdminController extends Controller
 {
     const testEmail1 = 'direccio@lopati.cat';
