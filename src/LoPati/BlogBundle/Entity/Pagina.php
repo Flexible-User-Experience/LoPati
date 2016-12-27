@@ -28,7 +28,9 @@ class Pagina
 	 */
 	protected $id;
 
-	/** @ORM\Column(type="string", length=50) */
+	/**
+     * @ORM\Column(type="string", length=50)
+     */
 	protected $tipus;
 
 	/** 
@@ -49,34 +51,54 @@ class Pagina
 	 */
 	protected $descripcio;
 	
-	/** @ORM\Column(type="text", nullable=true) */
+	/**
+     * @ORM\Column(type="text", nullable=true)
+     */
 	protected $links;
 	
-	/** @ORM\Column(type="boolean", nullable=true) */
+	/**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
 	protected $actiu = false;
 	
-	/** @ORM\Column(type="boolean", nullable=true) */
+	/**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
 	protected $portada = false;
 
-	/** @ORM\Column(type="boolean", nullable=true) */
-	protected $compartir = false;
+	/**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+	protected $compartir = true;
 
-	/** @ORM\Column(type="date") */
+	/**
+     * @ORM\Column(type="date")
+     */
 	protected $data_publicacio;
 
-	/** @ORM\Column(type="boolean", nullable=true) */
+	/**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
 	protected $data_visible = false;
 
-	/** @ORM\Column(type="date", nullable=true) */
+	/**
+     * @ORM\Column(type="date", nullable=true)
+     */
 	protected $data_caducitat = null;
 
-    /** @ORM\Column(type="date", nullable=true) */
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
     protected $startDate;
 
-    /** @ORM\Column(type="date", nullable=true) */
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
     protected $endDate;
 
-    /** @ORM\Column(type="boolean", nullable=true) */
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
 	protected $alwaysShowOnCalendar = false;
 
 	/** 
@@ -111,13 +133,19 @@ class Pagina
 	 */
 	protected $subCategoria;
 	
-	/** @ORM\Column(type="string", length=255, nullable=true) */
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
 	protected $video = NULL;
 	
-	/** @ORM\Column(type="string", length=255, nullable=true) */
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
 	protected $urlVimeo = NULL;
 	
-	/** @ORM\Column(type="string", length=255, nullable=true) */
+	/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
 	protected $urlFlickr = NULL;
 	
 	/**
@@ -244,7 +272,18 @@ class Pagina
      */
     private $updated;
 
+    /**
+     * @var boolean
+     */
     private $arxiu;
+
+    /**
+     *
+     *
+     * Methods
+     *
+     *
+     */
 
 	public function getVideo() {
 		return $this->video;

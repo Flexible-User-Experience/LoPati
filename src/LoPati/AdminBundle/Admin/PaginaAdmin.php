@@ -2,13 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class PaginaAdmin extends AbstractAdmin
+class PaginaAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'page';
 
@@ -45,7 +44,7 @@ class PaginaAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('General', $this->getFormMdSuccessBoxArray(8))
             ->add('tipus', 'choice', array('choices' => array('w' => 'Web', 'b' => 'Bloc'), 'required' => true,))
             ->add('titol', null, array('label' => 'Títol'))
             ->add(
@@ -65,6 +64,8 @@ class PaginaAdmin extends AbstractAdmin
                     'label' => 'Descripció'
                 )
             )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
             ->add('actiu', null, array('label' => 'Activa ?', 'required' => false))
             ->add('categoria', 'sonata_type_model', array('label' => 'Menú 1er nivell'), array())
             ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú 2on nivell', 'required' => false))
@@ -89,19 +90,53 @@ class PaginaAdmin extends AbstractAdmin
             ->add('video', 'url', array('required' => false))
             ->add('compartir', null, array('label' => 'Compartir ?', 'required' => false))
             ->end()
-            ->with('Imatge principal')
-            ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false))
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
+            ->add(
+                'translations',
+                'a2lix_translations_gedmo',
+                array(
+                    'label'        => ' ',
+                    'required'     => false,
+                    'translatable_class' => 'LoPati\BlogBundle\Entity\Pagina',
+                    'fields'   => array(
+                        'titol'            => array('label' => 'Títol'),
+                        'resum'            => array(
+                            'attr' => array(
+                                'style' => 'height:90px;width:100%;'
+                            )
+                        ),
+                        'data_realitzacio' => array(
+                            'label' => 'Data realització',
+                        ),
+                        'lloc'             => array(),
+                        'peuImageGran1'    => array(
+                            'label' => 'Peu imatge principal',
+                        ),
+                        'descripcio'       => array(
+                            'label' => 'Descripció', // Custom label
+                            'attr'  => array(
+                                'class'      => 'tinymce',
+                                'data-theme' => 'simple',
+                                'style'      => 'width:100%;height:400px;display:block;'
+                            )
+                        ),
+                    )
+                )
+            )
+            ->end()
+            ->with('Imatge principal', $this->getFormMdSuccessBoxArray(4))
+            ->add('imageGran1', 'file', array('label' => 'Imatge principal', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('imageGran1', 'imageGran1File')))
             ->add('imageGran1Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('peuImageGran1', null, array('label' => 'Peu imatge', 'required' => false))
             ->end()
-            ->with('Portada')
+            ->with('Portada', $this->getFormMdSuccessBoxArray(4))
             ->add('portada', null, array('label' => 'És portada ?', 'required' => false))
-            ->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required' => false))
+            ->add('imagePetita', 'file', array('label' => 'Imatge petita gris', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('imagePetita', 'imagePetitaFile')))
             ->add('imagePetitaName', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->add('imagePetita2', 'file', array('label' => 'Imatge petita vermell', 'required' => false))
             ->add('imagePetita2Name', null, array('label' => 'Nom', 'required' => false, 'read_only' => true,))
             ->end()
-            ->with('Documents adjunts')
+            ->with('Documents adjunts', $this->getFormMdSuccessBoxArray(4))
             ->add('document1', 'file', array('label' => 'Document 1', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom 1', 'required' => false, 'read_only' => true,))
             ->add('titolDocument1', null, array('label' => 'Títol 1', 'required' => false))
@@ -109,7 +144,7 @@ class PaginaAdmin extends AbstractAdmin
             ->add('document2Name', null, array('label' => 'Nom 2', 'required' => false, 'read_only' => true,))
             ->add('titolDocument2', null, array('label' => 'Títol 2', 'required' => false))
             ->end()
-            ->with('Enllaços')
+            ->with('Enllaços', $this->getFormMdSuccessBoxArray(4))
             ->add(
                 'links',
                 'textarea',
@@ -126,7 +161,7 @@ class PaginaAdmin extends AbstractAdmin
             ->add('urlVimeo', null, array('required' => false, 'label' => 'URL video Vimeo'))
             ->add('urlFlickr', null, array('required' => false, 'label' => 'URL galeria Flickr'))
             ->end()
-            ->with('Agenda')
+            ->with('Agenda', $this->getFormMdSuccessBoxArray(4))
             ->add(
                 'startDate',
                 'date',
@@ -138,40 +173,6 @@ class PaginaAdmin extends AbstractAdmin
                 array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
             )
             ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
-            ->end()
-            ->with('Traduccions')
-            ->add(
-                'translations',
-                'a2lix_translations_gedmo',
-                array(
-                    'label'        => ' ',
-                    'required'     => false,
-                    'translatable_class' => 'LoPati\BlogBundle\Entity\Pagina',
-                    'fields'   => array(
-                        'titol'            => array('label' => 'Títol'),
-                        'resum'            => array(
-                            'attr' => array(
-                                'style' => 'height:90px;width:480px;'
-                            )
-                        ),
-                        'data_realitzacio' => array(
-                            'label' => 'Data realització',
-                        ),
-                        'lloc'             => array(),
-                        'peuImageGran1'    => array(
-                            'label' => 'Peu imatge principal',
-                        ),
-                        'descripcio'       => array(
-                            'label' => 'Descripció', // Custom label
-                            'attr'  => array(
-                                'class'      => 'tinymce',
-                                'data-theme' => 'simple',
-                                'style'      => 'width: 600px; height: 400px; display: block;'
-                            )
-                        ),
-                    )
-                )
-            )
             ->end()
             ->setHelps(
                 array(
