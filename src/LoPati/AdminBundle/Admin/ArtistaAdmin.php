@@ -56,23 +56,11 @@ class ArtistaAdmin extends AbstractBaseAdmin
             ->add('webpage', null, array('label' => 'Web'))
             ->add('active', null, array('label' => 'Activat'))
             ->end()
-            ->with('Imatges', $this->getFormMdSuccessBoxArray(6))
-            ->add('image1File', 'file', array('label' => 'Imatge 1', 'required' => false))
-            ->add('image1', null, array('label' => 'Nom imatge 1', 'required' => false, 'read_only' => true,))
-            ->add('image2File', 'file', array('label' => 'Imatge 2', 'required' => false))
-            ->add('image2', null, array('label' => 'Nom imatge 2', 'required' => false, 'read_only' => true,))
-            ->add('image3File', 'file', array('label' => 'Imatge 3', 'required' => false))
-            ->add('image3', null, array('label' => 'Nom imatge 3', 'required' => false, 'read_only' => true,))
-            ->add('image4File', 'file', array('label' => 'Imatge 4', 'required' => false))
-            ->add('image4', null, array('label' => 'Nom imatge 4', 'required' => false, 'read_only' => true,))
-            ->add('image5File', 'file', array('label' => 'Imatge 5', 'required' => false))
-            ->add('image5', null, array('label' => 'Nom imatge 5', 'required' => false, 'read_only' => true,))
-            ->end()
-            ->with('Documents')
+            ->with('Documents', $this->getFormMdSuccessBoxArray(4))
             ->add('document1', 'file', array('label' => 'CV', 'required' => false))
             ->add('document1Name', null, array('label' => 'Nom CV', 'required' => false, 'read_only' => true,))
             ->end()
-            ->with('Traduccions')
+            ->with('Traduccions', $this->getFormMdSuccessBoxArray(8))
             ->add(
                 'translations',
                 'a2lix_translations_gedmo',
@@ -84,7 +72,7 @@ class ArtistaAdmin extends AbstractBaseAdmin
                         'summary'     => array(
                             'label' => 'Resum',
                             'attr'  => array(
-                                'style' => 'height:90px;width:480px;'
+                                'style' => 'height:90px;width:100%;'
                             )
                         ),
                         'description' => array(
@@ -92,12 +80,26 @@ class ArtistaAdmin extends AbstractBaseAdmin
                             'attr'  => array(
                                 'class'      => 'tinymce',
                                 'data-theme' => 'simple',
-                                'style'      => 'width: 600px; height: 400px; display: block;'
+                                'style'      => 'width:100%;height:400px;display:block;'
                             )
                         ),
                     )
                 )
-            );
+            )
+            ->end()
+            ->with('Imatges', $this->getFormMdSuccessBoxArray(4))
+            ->add('image1File', 'file', array('label' => 'Imatge 1', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('image1', 'image1File')))
+            ->add('image1', null, array('label' => 'Nom imatge 1', 'required' => false, 'read_only' => true,))
+            ->add('image2File', 'file', array('label' => 'Imatge 2', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('image2', 'image2File')))
+            ->add('image2', null, array('label' => 'Nom imatge 2', 'required' => false, 'read_only' => true,))
+            ->add('image3File', 'file', array('label' => 'Imatge 3', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('image3', 'image3File')))
+            ->add('image3', null, array('label' => 'Nom imatge 3', 'required' => false, 'read_only' => true,))
+            ->add('image4File', 'file', array('label' => 'Imatge 4', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('image4', 'image4File')))
+            ->add('image4', null, array('label' => 'Nom imatge 4', 'required' => false, 'read_only' => true,))
+            ->add('image5File', 'file', array('label' => 'Imatge 5', 'required' => false, 'help' => $this->getImageHelperFormMapperWithThumbnail('image5', 'image5File')))
+            ->add('image5', null, array('label' => 'Nom imatge 5', 'required' => false, 'read_only' => true,))
+            ->end()
+        ;
     }
 
     /**
