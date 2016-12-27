@@ -59,7 +59,7 @@ class PaginaAdmin extends AbstractBaseAdmin
                     'attr'  => array(
                         'class'      => 'tinymce',
                         'data-theme' => 'simple',
-                        'style'      => 'width: 600px; height: 400px;'
+                        'style'      => 'width:100%;height:400px;'
                     ),
                     'label' => 'Descripció'
                 )
@@ -71,17 +71,17 @@ class PaginaAdmin extends AbstractBaseAdmin
             ->add('subCategoria', 'sonata_type_model', array('label' => 'Menú 2on nivell', 'required' => false))
             ->add(
                 'data_publicacio',
-                'date',
-                array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
+                'sonata_type_date_picker',
+                array('label' => 'Data publicació', 'format' => 'd/M/y')
             )
             ->add('data_visible', null, array('label' => 'Data visible ?', 'required' => false))
             ->add(
                 'data_caducitat',
-                'date',
+                'sonata_type_date_picker',
                 array(
                     'label'    => 'Data caducitat',
                     'widget'   => 'single_text',
-                    'format'   => 'dd-MM-yyyy',
+                    'format'   => 'd/M/y',
                     'required' => false
                 )
             )
@@ -153,7 +153,7 @@ class PaginaAdmin extends AbstractBaseAdmin
                     'attr'     => array(
                         'class'      => 'tinymce',
                         'data-theme' => 'simple',
-                        'style'      => 'width: 600px; height: 400px;'
+                        'style'      => 'width:100%;height:400px;'
                     ),
                     'label'    => 'Enllaços'
                 )
@@ -164,13 +164,13 @@ class PaginaAdmin extends AbstractBaseAdmin
             ->with('Agenda', $this->getFormMdSuccessBoxArray(4))
             ->add(
                 'startDate',
-                'date',
-                array('label' => 'Data inici', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
+                'sonata_type_date_picker',
+                array('label' => 'Data inici', 'format' => 'd/M/y', 'required' => false)
             )
             ->add(
                 'endDate',
-                'date',
-                array('label' => 'Data fi', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy', 'required' => false)
+                'sonata_type_date_picker',
+                array('label' => 'Data fi', 'format' => 'd/M/y', 'required' => false)
             )
             ->add('alwaysShowOnCalendar', null, array('label' => 'Mostrar sempre al calendari ?', 'required' => false))
             ->end()
@@ -178,10 +178,9 @@ class PaginaAdmin extends AbstractBaseAdmin
                 array(
                     'tipus'                => 'tria el tipus',
                     'compartir'            => 'Mostrar botos per compartir xarxes socials',
-                    'urlFlickr'            => 'Ex: http://www.flickr.com/photos/lopati/..',
+                    'urlFlickr'            => 'http://www.exemple.com/(...)',
                     'resum'                => 'Max: 300 caràcters',
-                    'data_publicacio'      => 'Format: dd-MM-yyyy',
-                    'data_caducitat'       => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar. Format: dd-MM-yyyy',
+                    'data_caducitat'       => 'Data fins quan sera visible la pàgina -> Automaticament serà Arxiu. Deixar en blanc per no caducar.',
                     'alwaysShowOnCalendar' => 'Marcat es mostrarà sempre al calendari l\'event, encara que sigui fora de l\'horari del centre',
                 )
             );
