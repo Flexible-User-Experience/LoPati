@@ -21,24 +21,39 @@ class PaginaAdminController extends Controller
     /**
      * Custom show action redirect to public frontend view
      *
-     * @param int|string|null $id
-     * @param Request         $request
+     * @param Request $request
      *
      * @return Response
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
      */
-    public function duplicateAction($id = null, Request $request = null)
+    public function duplicateAction(Request $request = null)
     {
         $request = $this->resolveRequest($request);
         $id = $request->get($this->admin->getIdParameter());
 
         /** @var Pagina $object */
         $object = $this->admin->getObject($id);
-
         if (!$object) {
             throw $this->createNotFoundException(sprintf('Unable to find page object with ID = %s', $id));
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $newPage = clone $object;
+        $newPage
+            ->setDocument1Name(null)
+            ->setDocument2Name(null)
+            ->setImageGran1Name(null)
+            ->setImagePetitaName(null)
+            ->setImagePetita2Name(null)
+        ;
+        $em->persist($newPage);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'sonata_flash_success',
+            'La pàgina s\'ha duplicat correctament.'
+        );
 
         return $this->redirect('../list');
     }

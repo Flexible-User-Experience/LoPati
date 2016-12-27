@@ -53,6 +53,8 @@ class Pagina
 	
 	/**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @var string
      */
 	protected $links;
 	
@@ -135,16 +137,22 @@ class Pagina
 	
 	/**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
      */
 	protected $video = NULL;
 	
 	/**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
      */
 	protected $urlVimeo = NULL;
 	
 	/**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
      */
 	protected $urlFlickr = NULL;
 	
@@ -285,162 +293,340 @@ class Pagina
      *
      */
 
+    /**
+     * Pagina constructor
+     */
+    public function __construct() {
+        $this->translations = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
 	public function getVideo() {
 		return $this->video;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setVideo($filename) {
         $this->updated  = new \DateTime();
-		$this->video=$filename;
-	}
-	
+		$this->video = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
 	public function getUrlVimeo() {
 		return $this->urlVimeo;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setUrlVimeo($filename) {
-		$this->urlVimeo=$filename;
-	}
-	
+		$this->urlVimeo = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
 	public function getUrlFlickr() {
 		return $this->urlFlickr;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setUrlFlickr($filename) {
 		$this->urlFlickr=$filename;
-	}
-	
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
 	public function getDocument1() {
 		return $this->document1;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setDocument1($filename) {
         $this->updated  = new \DateTime();
-		$this->document1=$filename;
+		$this->document1 = $filename;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getDocument1Name() {
 		return $this->document1Name;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setDocument1Name($file) {
         $this->updated  = new \DateTime();
 		$this->document1Name=$file;
+
+		return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getTitolDocument1() {
 		return $this->titolDocument1;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setTitolDocument1($file) {
         $this->updated  = new \DateTime();
-		$this->titolDocument1=$file;
-	}
+		$this->titolDocument1 = $file;
+
+        return $this;
+    }
 
 	////////////////////////////////
-	
+
+    /**
+     * @return string
+     */
 	public function getLinks() {
 		return $this->links;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setLinks($file) {
-		$this->links=$file;
-	}
-	
+		$this->links = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
 	public function getDocument2() {
 		return $this->document2;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setDocument2($filename) {
         $this->updated  = new \DateTime();
-		$this->document2=$filename;
+		$this->document2 = $filename;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getDocument2Name() {
         $this->updated  = new \DateTime();
+
 		return $this->document2Name;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setDocument2Name($file) {
         $this->updated  = new \DateTime();
-		$this->document2Name=$file;
-	}
-	
+		$this->document2Name = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
 	public function getTitolDocument2() {
 		return $this->titolDocument2;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setTitolDocument2($file) {
-		$this->titolDocument2=$file;
+		$this->titolDocument2 = $file;
+
+        return $this;
 	}
 	
 	/////////////////////
-	
+
+    /**
+     * @return string
+     */
 	public function getPeuImageGran1() {
 		return $this->peuImageGran1;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setPeuImageGran1($file) {
-		$this->peuImageGran1=$file;
+		$this->peuImageGran1 = $file;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getImageGran1Name() {
 		return $this->imageGran1Name;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setImageGran1Name($filename) {
         $this->updated  = new \DateTime();
-		$this->imageGran1Name=$filename;
+		$this->imageGran1Name = $filename;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return File
+     */
 	public function getImageGran1() {
 		return $this->imageGran1;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setImageGran1($file) {
         $this->updated  = new \DateTime();
-		$this->imageGran1=$file;
+		$this->imageGran1 = $file;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getImagePetitaName() {
 		return $this->imagePetitaName;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setImagePetitaName($filename) {
         $this->updated  = new \DateTime();
-		$this->imagePetitaName=$filename;
+		$this->imagePetitaName = $filename;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return File
+     */
 	public function getImagePetita() {
 		return $this->imagePetita;
 	}
 
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setImagePetita($file) {
         $this->updated  = new \DateTime();
-		$this->imagePetita=$file;
+		$this->imagePetita = $file;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return File
+     */
 	public function getImagePetita2() {
 		return $this->imagePetita2;
 	}
-	
+
+    /**
+     * @param $file
+     *
+     * @return $this
+     */
 	public function setImagePetita2($file) {
         $this->updated  = new \DateTime();
-		$this->imagePetita2=$file;
+		$this->imagePetita2 = $file;
+
+        return $this;
 	}
-	
+
+    /**
+     * @return string
+     */
 	public function getImagePetita2Name() {
 		return $this->imagePetita2Name;
 	}
-	
+
+    /**
+     * @param $filename
+     *
+     * @return $this
+     */
 	public function setImagePetita2Name($filename) {
         $this->updated  = new \DateTime();
-		$this->imagePetita2Name=$filename;
+		$this->imagePetita2Name = $filename;
+
+        return $this;
 	}
-	public function __construct() {
-		$this->translations = new ArrayCollection();
-	}
-	
+
+    /**
+     * @return string
+     */
 	public function getSlug() {
 		return Utils::getSlug($this->titol);
 	}
