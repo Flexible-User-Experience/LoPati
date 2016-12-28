@@ -44,14 +44,14 @@ class IsolatedNewsletter
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=false, options={"default"=0})
      */
     private $state = 0;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, options={"default"=0})
      */
     private $tested = false;
 
@@ -71,6 +71,8 @@ class IsolatedNewsletter
 
     /**
      * @var array|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="IsolatedNewsletterPost", mappedBy="newsletter")
      */
     private $posts;
 
@@ -88,6 +90,14 @@ class IsolatedNewsletter
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -154,6 +164,14 @@ class IsolatedNewsletter
      * @return bool
      */
     public function isTested()
+    {
+        return $this->tested;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTested()
     {
         return $this->tested;
     }
@@ -226,6 +244,31 @@ class IsolatedNewsletter
     public function setPosts($posts)
     {
         $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * @param IsolatedNewsletterPost $post
+     *
+     * @return $this
+     */
+    public function addPost($post)
+    {
+        $this->posts->add($post);
+        $post->setNewsletter($this);
+
+        return $this;
+    }
+
+    /**
+     * @param IsolatedNewsletterPost $post
+     *
+     * @return $this
+     */
+    public function removePost($post)
+    {
+        $this->posts->removeElement($post);
 
         return $this;
     }
