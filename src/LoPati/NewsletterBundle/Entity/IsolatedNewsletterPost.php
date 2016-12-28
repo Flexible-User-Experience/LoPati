@@ -3,7 +3,10 @@
 namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class IsolatedNewsletterPost
@@ -14,6 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="isolated_newsletter_post")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\IsolatedNewsletterPostRepository")
+ * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class IsolatedNewsletterPost
 {
@@ -32,6 +37,24 @@ class IsolatedNewsletterPost
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $title;
+
+    /**
+     * @var File
+     *
+     * @Assert\File(
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
+     * )
+     * @Vich\UploadableField(mapping="slider", fileNameProperty="image")
+     */
+    protected $imageFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, name="image", nullable=false)
+     */
+    protected $image;
 
     /**
      * @var string
@@ -58,6 +81,7 @@ class IsolatedNewsletterPost
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(checkDNS=true)
      */
     private $link;
 
@@ -68,6 +92,22 @@ class IsolatedNewsletterPost
      * @ORM\JoinColumn(name="isolated_newsletter_id", referencedColumnName="id")
      */
     private $newsletter;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $updated;
 
     /**
      *
@@ -103,6 +143,56 @@ class IsolatedNewsletterPost
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * Set Image
+     *
+     * @param string $image
+     *
+     * @return $this
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        $this->updated = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get Image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set ImageFile
+     *
+     * @param File $imageFile
+     *
+     * @return $this
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        $this->updated = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get ImageFile
+     *
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
     /**
@@ -201,6 +291,46 @@ class IsolatedNewsletterPost
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     *
+     * @return $this
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param \DateTime $updated
+     *
+     * @return $this
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
 
         return $this;
     }
