@@ -8,6 +8,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @category Entity
+ * @package  LoPati\NewsletterBundle\Entity
+ * @author   David Romaní <david@flux.cat>
+ *
  * @ORM\Table(name="newsletter_groups")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterGroupRepository")
  * @UniqueEntity("name")
@@ -16,6 +20,7 @@ class NewsletterGroup
 {
     /**
      * @var integer $id
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,17 +29,21 @@ class NewsletterGroup
 
     /**
      * @var string $name
+     *
      * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
     private $name;
 
     /**
      * @var boolean $active
+     *
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
 
     /**
+     * @var array
+     *
      * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterUser", inversedBy="groups")
      * @ORM\OrderBy({"email"="ASC"})
      * @ORM\JoinColumn(onDelete="SET NULL")
@@ -42,9 +51,19 @@ class NewsletterGroup
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="LoPati\NewsletterBundle\Entity\Newsletter", mappedBy="group")
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterPage", mappedBy="group")
      */
     protected $newsletters;
+
+    /**
+     *
+     *
+     * Methods
+     *
+     *
+     */
 
     /**
      * Constructor
@@ -174,16 +193,6 @@ class NewsletterGroup
     }
 
     /**
-     * To string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name ? $this->name : '---';
-    }
-
-    /**
      * Set Newsletters
      *
      * @param mixed $newsletters newsletters
@@ -210,11 +219,11 @@ class NewsletterGroup
     /**
      * Add newsletter
      *
-     * @param Newsletter $newsletter
+     * @param NewsletterPage $newsletter
      *
      * @return $this
      */
-    public function addNewsletter(Newsletter $newsletter)
+    public function addNewsletter(NewsletterPage $newsletter)
     {
         $this->newsletters[] = $newsletter;
 
@@ -224,14 +233,24 @@ class NewsletterGroup
     /**
      * Remove newsletter
      *
-     * @param Newsletter $newsletter
+     * @param NewsletterPage $newsletter
      *
      * @return $this
      */
-    public function removeNewsletter(Newsletter $newsletter)
+    public function removeNewsletter(NewsletterPage $newsletter)
     {
         $this->newsletters->removeElement($newsletter);
 
         return $this;
+    }
+
+    /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name ? $this->name : '---';
     }
 }

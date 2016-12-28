@@ -9,12 +9,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use LoPati\BlogBundle\Entity\Pagina;
 
 /**
+ * @category Entity
+ * @package  LoPati\NewsletterBundle\Entity
+ * @author   David Romaní <david@flux.cat>
+ *
  * @ORM\Table(name="newsletters")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\NewsletterPageRepository")
  * @UniqueEntity("numero")
  * @UniqueEntity("dataNewsletter")
  */
-class Newsletter
+class NewsletterPage
 {
     /**
      * @var array
