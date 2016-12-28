@@ -7,9 +7,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterAdmin extends AbstractBaseAdmin
+class NewsletterPaginaAdmin extends AbstractBaseAdmin
 {
-    protected $baseRoutePattern = 'newsletter';
+    protected $baseRoutePattern = 'pages/newsletter';
 
     protected $datagridValues = array(
         '_page'       => 1,

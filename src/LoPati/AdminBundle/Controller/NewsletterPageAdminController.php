@@ -13,13 +13,13 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Class NewsletterAdminController
+ * Class NewsletterPageAdminController
  *
  * @category AdminController
  * @package  LoPati\AdminBundle\Controller
  * @author   David Romaní <david@flux.cat>
  */
-class NewsletterAdminController extends Controller
+class NewsletterPageAdminController extends Controller
 {
     const testEmail1 = 'direccio@lopati.cat';
     const testEmail2 = 'comunicacio@lopati.cat';

@@ -4,7 +4,12 @@ namespace LoPati\NewsletterBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class NewsletterRepository extends EntityRepository
+/**
+ * Class NewsletterPageRepository
+ *
+ * @package LoPati\NewsletterBundle\Repository
+ */
+class NewsletterPageRepository extends EntityRepository
 {
 	public function findPaginesNewsletterById($id) {
 		$em = $this->getEntityManager();
