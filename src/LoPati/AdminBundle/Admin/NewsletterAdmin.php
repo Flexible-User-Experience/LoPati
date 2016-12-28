@@ -3,12 +3,11 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class NewsletterAdmin extends AbstractAdmin
+class NewsletterAdmin extends AbstractBaseAdmin
 {
     protected $baseRoutePattern = 'newsletter';
 
@@ -33,30 +32,32 @@ class NewsletterAdmin extends AbstractAdmin
         /** @var NewsletterGroupRepository $ngr */
         $ngr = $this->configurationPool->getContainer()->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterGroup');
         $formMapper
-            ->with('General')
-            ->add('numero', null, array('label' => 'Núm. newsletter'))
-            ->add(
-                'dataNewsletter',
-                'date',
-                array('label' => 'Data publicació', 'widget' => 'single_text', 'format' => 'dd-MM-yyyy')
-            )
+            ->with('General', $this->getFormMdSuccessBoxArray(6))
+
             ->add('name', null, array('label' => 'Nom'))
-            ->add('group', 'sonata_type_model', array(
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'btn_add' => false,
-                    'label' => 'Grup',
-                    'query' => $ngr->getActiveItemsSortByNameQuery(),
-                ))
             ->add(
                 'pagines',
                 null,
                 array('label' => 'Pàgines')
             )
             ->end()
-            //->add('estat')
-            ->setHelps(array('dataNewsletter' => 'Format: dd-MM-yyyy'));
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'dataNewsletter',
+                'sonata_type_date_picker',
+                array('label' => 'Data publicació', 'format' => 'd/M/y')
+            )
+            ->add('numero', null, array('label' => 'Núm. newsletter'))
+            ->add('group', 'sonata_type_model', array(
+                'required' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'btn_add' => false,
+                'label' => 'Grup',
+                'query' => $ngr->getActiveItemsSortByNameQuery(),
+            ))
+            ->end()
+        ;
     }
 
     protected function configureListFields(ListMapper $mapper)
