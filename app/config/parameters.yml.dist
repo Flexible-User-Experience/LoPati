@@ -17,7 +17,7 @@ parameters:
     locale: ca
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    port_elastica: 80
+    port_elastica: 9200
   
     id_categoria_projectes: 3       #change this
     id_page_item_projectes: 18      #change this

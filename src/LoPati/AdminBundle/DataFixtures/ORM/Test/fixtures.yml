@@ -30,7 +30,7 @@ LoPati\BlogBundle\Entity\Pagina:
         categoria: @menulevelone<numberBetween(1, 3)>
         subCategoria: @menuleveltwo<numberBetween(1, 7)>
 
-## Arxive
+## Archive
 LoPati\BlogBundle\Entity\Arxiu:
     arxiu:
         any: 2000
@@ -58,6 +58,22 @@ LoPati\NewsletterBundle\Entity\Newsletter:
         numero: 1
         name: <word()>
         dataNewsletter: <dateTimeBetween('-2 months', '-1 months')>
+
+# Isolated Newsletter
+LoPati\NewsletterBundle\Entity\IsolatedNewsletter:
+    isolatednewsletter:
+        subject: <sentence()>
+        date: <dateTimeBetween('-2 months', '-1 months')>
+        state: 0
+        tested: 0
+
+# Isolated Newsletter Post
+LoPati\NewsletterBundle\Entity\IsolatedNewsletterPost:
+    isolatednewsletterpost:
+        newsletter: @isolatednewsletter
+        title: <sentence()>
+        shortDescription: <sentence()>
+        image: <word()>
 
 # Artist
 LoPati\ArtistaBundle\Entity\Artista:

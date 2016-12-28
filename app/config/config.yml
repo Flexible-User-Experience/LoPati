@@ -69,6 +69,7 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
+# Doctrine Migrations
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/../src/AppBundle/DoctrineMigrations"
     namespace: AppBundle\DoctrineMigrations

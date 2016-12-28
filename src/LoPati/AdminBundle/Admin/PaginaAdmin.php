@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaginaAdmin extends AbstractBaseAdmin
 {
-    protected $baseRoutePattern = 'page';
+    protected $baseRoutePattern = 'pages/page';
 
     protected $datagridValues = array(
         '_page'       => 1,

@@ -1,5 +1,5 @@
 services:
-
+  # Menus
   sonata.lopati.admin.categoria:
     class: LoPati\AdminBundle\Admin\CategoriaAdmin
     tags:
@@ -8,7 +8,6 @@ services:
       - null
       - LoPati\MenuBundle\Entity\Categoria
       - AdminBundle:Admin
-
   sonata.lopati.admin.subcategoria:
     class: LoPati\AdminBundle\Admin\SubCategoriaAdmin
     tags:
@@ -17,7 +16,16 @@ services:
       - null
       - LoPati\MenuBundle\Entity\SubCategoria
       - AdminBundle:Admin
-
+  # Sliders
+  sonata.lopati.admin.slider:
+    class: LoPati\AdminBundle\Admin\SliderAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Slider', label: 'slide' }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\SliderImage
+      - AdminBundle:Admin
+  # Pages
   sonata.lopati.admin.pagina:
     class: LoPati\AdminBundle\Admin\PaginaAdmin
     tags:
@@ -26,7 +34,15 @@ services:
       - null
       - LoPati\BlogBundle\Entity\Pagina
       - AdminBundle:PaginaAdmin
-
+  sonata.lopati.admin.page_newsletter:
+    class: LoPati\AdminBundle\Admin\NewsletterPaginaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'newsletter' }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\Newsletter
+      - AdminBundle:NewsletterPageAdmin
+  # Archives
   sonata.lopati.admin.arxiu:
     class: LoPati\AdminBundle\Admin\ArxiuAdmin
     tags:
@@ -35,25 +51,7 @@ services:
       - null
       - LoPati\BlogBundle\Entity\Arxiu
       - AdminBundle:Admin 
-
-  sonata.lopati.admin.configuracio:
-    class: LoPati\AdminBundle\Admin\ConfiguracioAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'peu de pàgina' }
-    arguments:
-      - null
-      - LoPati\BlogBundle\Entity\Configuracio
-      - AdminBundle:Admin
-
-  sonata.lopati.admin.configuracio.dies.laborals.agenda:
-    class: LoPati\AdminBundle\Admin\ConfiguracioDiesLaboralsAgendaAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'dies laborals agenda' }
-    arguments:
-      - null
-      - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
-      - AdminBundle:Admin
-
+  # Newsletters
   sonata.lopati.admin.newslettergroup:
     class: LoPati\AdminBundle\Admin\NewsletterGroupAdmin
     tags:
@@ -62,7 +60,6 @@ services:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterGroup
       - AdminBundle:Admin
-
   sonata.lopati.admin.newsletteruser:
     class: LoPati\AdminBundle\Admin\NewsletterUserAdmin
     tags:
@@ -71,16 +68,7 @@ services:
       - null
       - LoPati\NewsletterBundle\Entity\NewsletterUser
       - AdminBundle:NewsletterUserAdmin
-
-  sonata.lopati.admin.newsletter:
-    class: LoPati\AdminBundle\Admin\NewsletterAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter' }
-    arguments:
-      - null
-      - LoPati\NewsletterBundle\Entity\Newsletter
-      - AdminBundle:NewsletterAdmin
-
+  # Artist
   sonata.lopati.admin.artista:
     class: LoPati\AdminBundle\Admin\ArtistaAdmin
     tags:
@@ -89,12 +77,20 @@ services:
       - null
       - LoPati\ArtistaBundle\Entity\Artista
       - AdminBundle:Admin
-
-  sonata.lopati.admin.slider:
-    class: LoPati\AdminBundle\Admin\SliderAdmin
+  # Configs
+  sonata.lopati.admin.configuracio:
+    class: LoPati\AdminBundle\Admin\ConfiguracioAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Slider', label: 'slide' }
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'peu de pàgina' }
     arguments:
       - null
-      - LoPati\BlogBundle\Entity\SliderImage
+      - LoPati\BlogBundle\Entity\Configuracio
+      - AdminBundle:Admin
+  sonata.lopati.admin.configuracio.dies.laborals.agenda:
+    class: LoPati\AdminBundle\Admin\ConfiguracioDiesLaboralsAgendaAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Configuracions', label: 'dies laborals agenda' }
+    arguments:
+      - null
+      - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
       - AdminBundle:Admin
