@@ -73,6 +73,7 @@ LoPati\NewsletterBundle\Entity\IsolatedNewsletterPost:
         newsletter: @isolatednewsletter
         title: <sentence()>
         shortDescription: <sentence()>
+        image: <word()>
 
 # Artist
 LoPati\ArtistaBundle\Entity\Artista:

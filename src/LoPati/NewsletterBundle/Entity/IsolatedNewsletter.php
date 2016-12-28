@@ -77,6 +77,14 @@ class IsolatedNewsletter
     private $posts;
 
     /**
+     * @var NewsletterGroup
+     *
+     * @ORM\ManyToOne(targetEntity="NewsletterGroup")
+     * @ORM\JoinColumn(name="newsletter_group_id", referencedColumnName="id", nullable=true)
+     */
+    private $group;
+
+    /**
      *
      *
      * Methods
@@ -269,6 +277,26 @@ class IsolatedNewsletter
     public function removePost($post)
     {
         $this->posts->removeElement($post);
+
+        return $this;
+    }
+
+    /**
+     * @return NewsletterGroup
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param NewsletterGroup $group
+     *
+     * @return $this
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
 
         return $this;
     }
