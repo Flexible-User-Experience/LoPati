@@ -18,7 +18,7 @@ use LoPati\BlogBundle\Entity\Pagina;
  * @UniqueEntity("numero")
  * @UniqueEntity("dataNewsletter")
  */
-class NewsletterPage
+class Newsletter
 {
     /**
      * @var array

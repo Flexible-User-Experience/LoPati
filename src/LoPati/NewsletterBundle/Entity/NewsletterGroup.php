@@ -53,7 +53,7 @@ class NewsletterGroup
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterPage", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="LoPati\NewsletterBundle\Entity\Newsletter", mappedBy="group")
      */
     protected $newsletters;
 
@@ -219,11 +219,11 @@ class NewsletterGroup
     /**
      * Add newsletter
      *
-     * @param NewsletterPage $newsletter
+     * @param Newsletter $newsletter
      *
      * @return $this
      */
-    public function addNewsletter(NewsletterPage $newsletter)
+    public function addNewsletter(Newsletter $newsletter)
     {
         $this->newsletters[] = $newsletter;
 
@@ -233,11 +233,11 @@ class NewsletterGroup
     /**
      * Remove newsletter
      *
-     * @param NewsletterPage $newsletter
+     * @param Newsletter $newsletter
      *
      * @return $this
      */
-    public function removeNewsletter(NewsletterPage $newsletter)
+    public function removeNewsletter(Newsletter $newsletter)
     {
         $this->newsletters->removeElement($newsletter);
 
