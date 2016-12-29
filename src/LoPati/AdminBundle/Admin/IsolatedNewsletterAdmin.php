@@ -54,18 +54,13 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'label' => 'Títol'
                 )
             )
-//            ->add(
-//                'pagines',
-//                null,
-//                array('label' => 'Pàgines')
-//            )
             ->end()
             ->with('Controls', $this->getFormMdSuccessBoxArray(3))
             ->add(
                 'date',
                 'sonata_type_date_picker',
                 array(
-                    'label' => 'Data',
+                    'label'  => 'Data',
                     'format' => 'd/M/y',
                 )
             )
@@ -84,6 +79,15 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
             ->end()
             ->with('Informació', $this->getFormMdSuccessBoxArray(3))
             ->add(
+                'tested',
+                null,
+                array(
+                    'label'    => 'Test',
+                    'disabled' => true,
+                    'required' => false,
+                )
+            )
+            ->add(
                 'state',
                 ChoiceType::class,
                 array(
@@ -91,8 +95,28 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'choices'  => NewsletterStatusEnum::getEnumArray(),
                     'multiple' => false,
                     'expanded' => false,
-                    'required' => true,
+                    'required' => false,
                     'disabled' => true,
+                )
+            )
+            ->add(
+                'beginSend',
+                'sonata_type_date_picker',
+                array(
+                    'label'    => 'Inici enviament',
+                    'format'   => 'd/M/y',
+                    'disabled' => true,
+                    'required' => false,
+                )
+            )
+            ->add(
+                'endSend',
+                'sonata_type_date_picker',
+                array(
+                    'label'    => 'Fi enviament',
+                    'format'   => 'd/M/y',
+                    'disabled' => true,
+                    'required' => false,
                 )
             )
             ->end()
@@ -132,7 +156,13 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'label' => 'Grup',
                 )
             )
-            ->add('tested')
+            ->add(
+                'tested',
+                null,
+                array(
+                    'label' => 'Test'
+                )
+            )
             ->add(
                 'state',
                 null,
