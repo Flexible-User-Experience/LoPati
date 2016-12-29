@@ -306,6 +306,6 @@ class IsolatedNewsletter
      */
     public function __toString()
     {
-        return $this->id ? $this->getBeginSend()->format('d/m/Y') . ' · ' . $this->subject : '---';
+        return $this->id ? $this->getDate()->format('d/m/Y') . ' · ' . $this->subject : '---';
     }
 }

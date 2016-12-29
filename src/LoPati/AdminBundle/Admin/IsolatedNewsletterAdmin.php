@@ -2,10 +2,12 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Class IsolatedNewsletterAdmin
@@ -34,39 +36,74 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
         return array();
     }
 
+    /**
+     * Create & edit view
+     *
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var NewsletterGroupRepository $ngr */
         $ngr = $this->configurationPool->getContainer()->get('doctrine.orm.entity_manager')->getRepository('NewsletterBundle:NewsletterGroup');
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(6))
-
-            ->add('name', null, array('label' => 'Nom'))
             ->add(
-                'pagines',
+                'subject',
                 null,
-                array('label' => 'Pàgines')
+                array(
+                    'label' => 'Títol'
+                )
+            )
+//            ->add(
+//                'pagines',
+//                null,
+//                array('label' => 'Pàgines')
+//            )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+            ->add(
+                'date',
+                'sonata_type_date_picker',
+                array(
+                    'label' => 'Data',
+                    'format' => 'd/M/y',
+                )
+            )
+            ->add(
+                'group',
+                'sonata_type_model',
+                array(
+                    'label'    => 'Grup',
+                    'query'    => $ngr->getActiveItemsSortByNameQuery(),
+                    'required' => false,
+                    'expanded' => false,
+                    'multiple' => false,
+                    'btn_add'  => false,
+                )
             )
             ->end()
-            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->with('Informació', $this->getFormMdSuccessBoxArray(3))
             ->add(
-                'dataNewsletter',
-                'sonata_type_date_picker',
-                array('label' => 'Data publicació', 'format' => 'd/M/y')
+                'state',
+                ChoiceType::class,
+                array(
+                    'label'    => 'Estat',
+                    'choices'  => NewsletterStatusEnum::getEnumArray(),
+                    'multiple' => false,
+                    'expanded' => false,
+                    'required' => true,
+                    'disabled' => true,
+                )
             )
-            ->add('numero', null, array('label' => 'Núm. newsletter'))
-            ->add('group', 'sonata_type_model', array(
-                'required' => false,
-                'expanded' => false,
-                'multiple' => false,
-                'btn_add' => false,
-                'label' => 'Grup',
-                'query' => $ngr->getActiveItemsSortByNameQuery(),
-            ))
             ->end()
         ;
     }
 
+    /**
+     * List view
+     *
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
@@ -76,23 +113,38 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Data',
-                    'template' => 'AdminBundle:Newsletter:list_custom_dataNewsletter_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_date_field.html.twig',
                 )
             )
-            ->add('subject', null, array('label' => 'Nom'))
-            ->add('group', null, array('label' => 'Grup'))
+            ->add(
+                'subject',
+                null,
+                array(
+                    'label' => 'Nom',
+                )
+            )
+            ->add(
+                'group',
+                null,
+                array(
+                    'label' => 'Grup',
+                )
+            )
             ->add('tested')
             ->add(
                 'state',
                 null,
-                array('label' => 'Estat', 'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig')
+                array(
+                    'label'    => 'Estat',
+                    'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig',
+                )
             )
             ->add(
                 'beginSend',
                 null,
                 array(
                     'label'    => 'Inici enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_iniciEnviament_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_iniciEnviament_field.html.twig',
                 )
             )
             ->add(
@@ -100,7 +152,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Fi enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_fiEnviament_field.html.twig'
+                    'template' => 'AdminBundle:Newsletter:list_custom_fiEnviament_field.html.twig',
                 )
             )
             ->add(
@@ -111,17 +163,17 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                         'preview' => array(
                             'template' => 'AdminBundle:Newsletter:previewLink.html.twig'
                         ),
-                        'test'    => array(
+                        'test' => array(
                             'template' => 'AdminBundle:Newsletter:testLink.html.twig'
                         ),
-                        'send'  => array(
+                        'send' => array(
                             'template' => 'AdminBundle:Newsletter:enviar.html.twig'
                         ),
                         'edit' => array(
                             'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'
                         ),
                     ),
-                    'label'   => 'Accions'
+                    'label' => 'Accions',
                 )
             );
     }
