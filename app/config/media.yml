@@ -70,6 +70,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [480, null], mode: outbound }
+        240xY:
+            quality: 90
+            filters:
+                thumbnail: { size: [240, null], mode: outbound }
         imatge756x400:
             quality: 85
             filters:

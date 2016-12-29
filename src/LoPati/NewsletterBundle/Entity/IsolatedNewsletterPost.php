@@ -59,9 +59,9 @@ class IsolatedNewsletterPost
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false, options={"default"="."})
      */
-    private $shortDescription;
+    private $shortDescription = '.';
 
     /**
      * @var string

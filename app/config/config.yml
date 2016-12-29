@@ -32,6 +32,7 @@ twig:
         - "bootstrap_3_layout.html.twig"
         - "SonataCoreBundle:Form:datepicker.html.twig"
         - "MenuBundle:Default:form.html.twig"
+        - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
         admin_tag_version:       "2.1.3"

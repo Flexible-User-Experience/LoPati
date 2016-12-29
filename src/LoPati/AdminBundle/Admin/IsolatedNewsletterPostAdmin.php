@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+use LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType;
 
 /**
  * Class IsolatedNewsletterPostAdmin
@@ -43,66 +44,125 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $imageHelp = $this->getCustomImageHelperFormMapperWithThumbnail();
-        $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(6))
-            ->add(
-                'newsletter',
-                null,
-                array(
-                    'attr' => array(
-                        'hidden' => true,
+        if ($this->getRootCode() != $this->getCode()) {
+            // is edit mode, disable on new subjects and is children
+            $formMapper
+                ->with('General', $this->getFormMdSuccessBoxArray(6))
+                ->add(
+                    'newsletter',
+                    null,
+                    array(
+                        'attr' => array(
+                            'hidden' => true,
+                        )
                     )
                 )
-            )
-            ->add(
-                'imageFile',
-                'file',
-                array(
-                    'label'       => 'Imatge',
-                    'required'    => false,
-                    'sonata_help' => $imageHelp,
-                    'help'        => $imageHelp,
+                ->add(
+                    'imageFile',
+                    'file',
+                    array(
+                        'label'       => 'Imatge',
+                        'required'    => false,
+                        'sonata_help' => $imageHelp,
+                        'help'        => $imageHelp,
+                    )
                 )
-            )
-            ->add(
-                'title',
-                null,
-                array(
-                    'label'    => 'Títol',
-                    'required' => true,
+                ->add(
+                    'title',
+                    null,
+                    array(
+                        'label'    => 'Títol de l\'article',
+                        'required' => true,
+                    )
                 )
-            )
-            ->add(
-                'shortDescription',
-                'textarea',
-                array(
-                    'label'    => 'Descripció',
-                    'required' => false,
-                    'attr'     => array(
-                        'class'      => 'tinymce',
-                        'data-theme' => 'simple',
-                        'style'      => 'width:100%;height:300px;'
-                    ),
+                ->add(
+                    'position',
+                    null,
+                    array(
+                        'label'    => 'Posició',
+                        'required' => false,
+                    )
                 )
-            )
-            ->add(
-                'link',
-                null,
-                array(
-                    'label'    => 'Enllaç',
-                    'required' => false,
+            ;
+            if ($this->id($this->getSubject())) {
+                $formMapper
+                    ->add(
+                        'fakeAction',
+                        EditIsolatedNewsletterPostActionButtonFormType::class,
+                        array(
+                            'text'     => 'Editar article',
+                            'url'      => $this->generateObjectUrl('edit', $this->getSubject()),
+                            'label'    => 'Accions',
+                            'mapped'   => false,
+                            'required' => false,
+                        )
+                    );
+            }
+            $formMapper->end();
+        } else {
+            // else is normal admin view
+            $formMapper
+                ->with('General', $this->getFormMdSuccessBoxArray(6))
+                ->add(
+                    'newsletter',
+                    null,
+                    array(
+                        'attr' => array(
+                            'hidden' => true,
+                        )
+                    )
                 )
-            )
-            ->add(
-                'position',
-                null,
-                array(
-                    'label'    => 'Posició',
-                    'required' => false,
+                ->add(
+                    'imageFile',
+                    'file',
+                    array(
+                        'label'       => 'Imatge',
+                        'required'    => false,
+                        'sonata_help' => $imageHelp,
+                        'help'        => $imageHelp,
+                    )
                 )
-            )
-            ->end()
-        ;
+                ->add(
+                    'title',
+                    null,
+                    array(
+                        'label'    => 'Títol de l\'article',
+                        'required' => true,
+                    )
+                )
+                ->add(
+                    'shortDescription',
+                    'textarea',
+                    array(
+                        'label'    => 'Descripció',
+                        'required' => false,
+                        'attr'     => array(
+                            'class'      => 'tinymce',
+                            'data-theme' => 'simple',
+                            'style'      => 'width:100%;height:300px;'
+                        ),
+                    )
+                )
+                ->add(
+                    'link',
+                    null,
+                    array(
+                        'label'    => 'Enllaç',
+                        'required' => false,
+                    )
+                )
+                ->add(
+                    'position',
+                    null,
+                    array(
+                        'label'    => 'Posició',
+                        'required' => false,
+                    )
+                )
+                ->end()
+            ;
+        }
+
     }
 
     /**
@@ -163,7 +223,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
 
         return ($this->getSubject() ? $this->getSubject()->$getImage() ? '<img src="' . $lis->getBrowserPath(
                     $vus->asset($this->getSubject(), $file),
-                    '480xY'
+                    '240xY'
                 ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '' : '');
     }
 }

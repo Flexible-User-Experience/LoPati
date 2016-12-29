@@ -51,7 +51,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'subject',
                 null,
                 array(
-                    'label' => 'Títol'
+                    'label' => 'Títol del missatge'
                 )
             )
             ->end()
@@ -164,7 +164,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'subject',
                 null,
                 array(
-                    'label'    => 'Nom',
+                    'label'    => 'Títol del missatge',
                     'editable' => true,
                 )
             )

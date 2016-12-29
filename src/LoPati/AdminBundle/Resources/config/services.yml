@@ -110,3 +110,8 @@ services:
       - null
       - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
       - AdminBundle:Admin
+  # Form types
+  app.form_type_action_button:
+    class: LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType
+    tags:
+      - { name: form.type, alias: action_button }
