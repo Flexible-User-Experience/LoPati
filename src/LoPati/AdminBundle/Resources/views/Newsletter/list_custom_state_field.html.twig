@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% if object.state %}
+            {% if object.state == 0 %}
+                <span class="label label-info">no enviat</span>
+            {% elseif object.state == 1 %}
+                <span class="label label-warning">enviant</span>
+            {% elseif object.state == 2 %}
+                <span class="label label-success">enviat</span>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div style="text-align:center">
+        {% if object.beginSend %}
+            {{ object.beginSend | date('d/m/Y H:i:s') }}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -21,7 +21,7 @@ class NewsletterStatusEnum
     public static function getEnumArray()
     {
         return array(
-            self::WAITING => 'esperant',
+            self::WAITING => 'pendent',
             self::SENDING => 'enviant',
             self::SENDED  => 'enviat',
         );

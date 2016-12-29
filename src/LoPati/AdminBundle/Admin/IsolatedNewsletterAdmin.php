@@ -110,17 +110,19 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
         $mapper
             ->add(
                 'date',
-                null,
+                'date',
                 array(
                     'label'    => 'Data',
-                    'template' => 'AdminBundle:Newsletter:list_custom_date_field.html.twig',
+                    'editable' => true,
+                    'format'   => 'd/m/Y',
                 )
             )
             ->add(
                 'subject',
                 null,
                 array(
-                    'label' => 'Nom',
+                    'label'    => 'Nom',
+                    'editable' => true,
                 )
             )
             ->add(
@@ -136,7 +138,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Estat',
-                    'template' => 'AdminBundle:Newsletter:list_custom_estat_field.html.twig',
+                    'template' => 'AdminBundle:Newsletter:list_custom_state_field.html.twig',
                 )
             )
             ->add(
@@ -144,7 +146,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Inici enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_iniciEnviament_field.html.twig',
+                    'template' => 'AdminBundle:Newsletter:list_custom_begin_send_field.html.twig',
                 )
             )
             ->add(
@@ -152,7 +154,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Fi enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_fiEnviament_field.html.twig',
+                    'template' => 'AdminBundle:Newsletter:list_custom_end_send_field.html.twig',
                 )
             )
             ->add(
@@ -167,7 +169,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                             'template' => 'AdminBundle:Newsletter:testLink.html.twig'
                         ),
                         'send' => array(
-                            'template' => 'AdminBundle:Newsletter:enviar.html.twig'
+                            'template' => 'AdminBundle:Newsletter:send.html.twig'
                         ),
                         'edit' => array(
                             'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'
