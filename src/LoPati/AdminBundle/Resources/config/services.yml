@@ -79,11 +79,11 @@ services:
   sonata.lopati.admin.isolatednewsletterpost:
     class: LoPati\AdminBundle\Admin\IsolatedNewsletterPostAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter-post' }
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter-post', show_in_dashboard: false }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\IsolatedNewsletterPost
-      - null
+      - AdminBundle:IsolatedNewsletterPostAdmin
   # Artist
   sonata.lopati.admin.artista:
     class: LoPati\AdminBundle\Admin\ArtistaAdmin
