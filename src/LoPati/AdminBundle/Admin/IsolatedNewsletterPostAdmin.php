@@ -48,7 +48,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'attr' => array(
-                        'hidden' => false,
+                        'hidden' => true,
                     )
                 )
             )
@@ -91,7 +91,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Posició',
-                    'required' => true,
+                    'required' => false,
                 )
             )
             ->end()

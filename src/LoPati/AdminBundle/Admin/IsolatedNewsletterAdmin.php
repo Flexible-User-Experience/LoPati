@@ -121,6 +121,20 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
             )
             ->end()
         ;
+        if ($this->id($this->getSubject())) {
+            // is edit mode, disable on new subjects
+            $formMapper
+                ->with('Articles', array('class' => 'col-md-12'))
+                ->add('posts', 'sonata_type_collection', array(
+                    'cascade_validation' => true,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable'  => 'position',
+                ))
+                ->end();
+            $formMapper->setHelps(array('images' => 'Màxim 10MB amb format PNG, JPG o GIF. Imatge amb amplada mínima de 1.200px'));
+        }
     }
 
     /**
