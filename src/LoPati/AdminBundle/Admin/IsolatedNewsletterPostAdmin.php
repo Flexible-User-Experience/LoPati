@@ -2,9 +2,11 @@
 
 namespace LoPati\AdminBundle\Admin;
 
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
  * Class IsolatedNewsletterPostAdmin
@@ -40,7 +42,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $imageHelp = $this->getImageHelperFormMapperWithThumbnail();
+        $imageHelp = $this->getCustomImageHelperFormMapperWithThumbnail();
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(6))
             ->add(
@@ -72,10 +74,15 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
             )
             ->add(
                 'shortDescription',
-                null,
+                'textarea',
                 array(
                     'label'    => 'Descripció',
                     'required' => false,
+                    'attr'     => array(
+                        'class'      => 'tinymce',
+                        'data-theme' => 'simple',
+                        'style'      => 'width:100%;height:300px;'
+                    ),
                 )
             )
             ->add(
@@ -136,5 +143,27 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
         $collection->remove('batch');
         $collection->remove('show');
         $collection->remove('export');
+    }
+
+    /**
+     * Get image helper form mapper with thumbnail
+     *
+     * @param string $image
+     * @param string $file
+     *
+     * @return string
+     */
+    private function getCustomImageHelperFormMapperWithThumbnail($image = 'Image', $file = 'imageFile')
+    {
+        /** @var CacheManager $lis */
+        $lis = $this->getConfigurationPool()->getContainer()->get('liip_imagine.cache.manager');
+        /** @var UploaderHelper $vus */
+        $vus = $this->getConfigurationPool()->getContainer()->get('vich_uploader.templating.helper.uploader_helper');
+        $getImage = 'get' . $image;
+
+        return ($this->getSubject() ? $this->getSubject()->$getImage() ? '<img src="' . $lis->getBrowserPath(
+                    $vus->asset($this->getSubject(), $file),
+                    '480xY'
+                ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '' : '');
     }
 }

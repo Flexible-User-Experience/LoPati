@@ -72,7 +72,8 @@ class IsolatedNewsletter
     /**
      * @var array|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="IsolatedNewsletterPost", mappedBy="newsletter")
+     * @ORM\OneToMany(targetEntity="IsolatedNewsletterPost", mappedBy="newsletter", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $posts;
 
