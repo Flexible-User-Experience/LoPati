@@ -37,7 +37,7 @@ services:
   sonata.lopati.admin.page_newsletter:
     class: LoPati\AdminBundle\Admin\NewsletterPaginaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'newsletter' }
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'newsletter de pàgina' }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
@@ -75,6 +75,14 @@ services:
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\IsolatedNewsletter
+      - null
+  sonata.lopati.admin.isolatednewsletterpost:
+    class: LoPati\AdminBundle\Admin\IsolatedNewsletterPostAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter-post' }
+    arguments:
+      - null
+      - LoPati\NewsletterBundle\Entity\IsolatedNewsletterPost
       - null
   # Artist
   sonata.lopati.admin.artista:
