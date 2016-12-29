@@ -3,25 +3,29 @@ vich_uploader:
     db_driver: orm
     mappings:
         imatge:
-            uri_prefix:         /uploads/images
-            upload_destination: %kernel.root_dir%/../web/uploads/images
-            namer:              vich_uploader.namer_uniqid
+            uri_prefix:         "/uploads/images"
+            upload_destination: "%kernel.root_dir%/../web/uploads/images"
+            namer:              "vich_uploader.namer_uniqid"
         pdf:
-            uri_prefix:         /uploads/documents
-            upload_destination: %kernel.root_dir%/../web/uploads/documents
-            namer:              vich_uploader.namer_origname
+            uri_prefix:         "/uploads/documents"
+            upload_destination: "%kernel.root_dir%/../web/uploads/documents"
+            namer:              "vich_uploader.namer_origname"
         artista:
-            uri_prefix:         /uploads/artists
-            upload_destination: %kernel.root_dir%/../web/uploads/artists
-            namer:              vich_uploader.namer_uniqid
+            uri_prefix:         "/uploads/artists"
+            upload_destination: "%kernel.root_dir%/../web/uploads/artists"
+            namer:              "vich_uploader.namer_uniqid"
         artistapdf:
-            uri_prefix:         /uploads/artists/cv
-            upload_destination: %kernel.root_dir%/../web/uploads/artists/cv
-            namer:              vich_uploader.namer_origname
+            uri_prefix:         "/uploads/artists/cv"
+            upload_destination: "%kernel.root_dir%/../web/uploads/artists/cv"
+            namer:              "vich_uploader.namer_origname"
         slider:
-            uri_prefix:         /uploads/slides
-            upload_destination: %kernel.root_dir%/../web/uploads/slides
-            namer:              vich_uploader.namer_uniqid
+            uri_prefix:         "/uploads/slides"
+            upload_destination: "%kernel.root_dir%/../web/uploads/slides"
+            namer:              "vich_uploader.namer_uniqid"
+        isolated_newsletter:
+            uri_prefix:         "/uploads/isolated-newsletter"
+            upload_destination: "%kernel.root_dir%/../web/uploads/isolated-newsletter"
+            namer:              "vich_uploader.namer_uniqid"
 
 # Liip Imagine
 liip_imagine:

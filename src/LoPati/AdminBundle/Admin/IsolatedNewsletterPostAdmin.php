@@ -40,17 +40,60 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $imageHelp = $this->getImageHelperFormMapperWithThumbnail();
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(6))
+            ->add(
+                'newsletter',
+                null,
+                array(
+                    'attr' => array(
+                        'hidden' => false,
+                    )
+                )
+            )
+            ->add(
+                'imageFile',
+                'file',
+                array(
+                    'label'       => 'Imatge',
+                    'required'    => false,
+                    'sonata_help' => $imageHelp,
+                    'help'        => $imageHelp,
+                )
+            )
             ->add(
                 'title',
                 null,
                 array(
-                    'label' => 'Títol'
+                    'label'    => 'Títol',
+                    'required' => true,
                 )
             )
-            ->end()
-            ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+            ->add(
+                'shortDescription',
+                null,
+                array(
+                    'label'    => 'Descripció',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'link',
+                null,
+                array(
+                    'label'    => 'Enllaç',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'position',
+                null,
+                array(
+                    'label'    => 'Posició',
+                    'required' => true,
+                )
+            )
             ->end()
         ;
     }

@@ -45,7 +45,7 @@ class IsolatedNewsletterPost
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
-     * @Vich\UploadableField(mapping="slider", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="isolated_newsletter", fileNameProperty="image")
      */
     protected $imageFile;
 
