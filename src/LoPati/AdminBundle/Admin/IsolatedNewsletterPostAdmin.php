@@ -102,26 +102,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
         } else {
             // else is normal admin view
             $formMapper
-                ->with('General', $this->getFormMdSuccessBoxArray(6))
-                ->add(
-                    'newsletter',
-                    null,
-                    array(
-                        'attr' => array(
-                            'hidden' => true,
-                        )
-                    )
-                )
-                ->add(
-                    'imageFile',
-                    'file',
-                    array(
-                        'label'       => 'Imatge',
-                        'required'    => false,
-                        'sonata_help' => $imageHelp,
-                        'help'        => $imageHelp,
-                    )
-                )
+                ->with('General', $this->getFormMdSuccessBoxArray(8))
                 ->add(
                     'title',
                     null,
@@ -141,6 +122,24 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                             'data-theme' => 'simple',
                             'style'      => 'width:100%;height:300px;'
                         ),
+                    )
+                )
+                ->end()
+                ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+                ->add(
+                    'newsletter',
+                    null,
+                    array(
+                        'disabled' => true,
+                    )
+                )
+                ->add(
+                    'imageFile',
+                    'file',
+                    array(
+                        'label'       => 'Imatge',
+                        'required'    => false,
+                        'help'        => $imageHelp,
                     )
                 )
                 ->add(

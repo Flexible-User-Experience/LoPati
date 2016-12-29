@@ -35,7 +35,7 @@ class EditIsolatedNewsletterPostActionButtonFormType extends AbstractType
                     'text' => 'hack',
                     'url'  => '#',
                     'css'  => 'btn btn-primary',
-                    'icon' => 'fa fa-plus-square',
+                    'icon' => 'fa fa-edit',
                 )
             );
     }
