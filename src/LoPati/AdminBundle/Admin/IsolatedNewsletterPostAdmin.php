@@ -115,6 +115,17 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'shortDescription',
                     'textarea',
                     array(
+                        'label'    => 'Descripció breu',
+                        'required' => false,
+                        'attr'     => array(
+                            'rows' => 5,
+                        ),
+                    )
+                )
+                ->add(
+                    'description',
+                    'textarea',
+                    array(
                         'label'    => 'Descripció',
                         'required' => false,
                         'attr'     => array(
@@ -126,6 +137,15 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                 )
                 ->end()
                 ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+                ->add(
+                    'date',
+                    'sonata_type_date_picker',
+                    array(
+                        'label'    => 'Data',
+                        'format'   => 'd/M/y',
+                        'required' => false,
+                    )
+                )
                 ->add(
                     'newsletter',
                     null,

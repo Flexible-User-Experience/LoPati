@@ -96,10 +96,17 @@ class IsolatedNewsletterPost
     /**
      * @var \DateTime
      *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $created;
+    private $created;
 
     /**
      * @var \DateTime
@@ -107,7 +114,7 @@ class IsolatedNewsletterPost
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $updated;
+    private $updated;
 
     /**
      *
@@ -291,6 +298,26 @@ class IsolatedNewsletterPost
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }
