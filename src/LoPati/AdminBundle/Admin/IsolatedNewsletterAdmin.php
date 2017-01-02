@@ -124,16 +124,6 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'required' => false,
                 )
             )
-            ->add(
-                'endSend',
-                'sonata_type_date_picker',
-                array(
-                    'label'    => 'Fi enviament',
-                    'format'   => 'd/M/y',
-                    'disabled' => true,
-                    'required' => false,
-                )
-            )
             ->end()
         ;
         if ($this->id($this->getSubject())) {
@@ -286,14 +276,6 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'label'    => 'Inici enviament',
                     'template' => 'AdminBundle:Newsletter:list_custom_begin_send_field.html.twig',
-                )
-            )
-            ->add(
-                'endSend',
-                null,
-                array(
-                    'label'    => 'Fi enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_end_send_field.html.twig',
                 )
             )
             ->add(

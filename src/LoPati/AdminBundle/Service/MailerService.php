@@ -41,7 +41,7 @@ class MailerService
     public function __construct(SendGrid $sendgrid, Logger $logger, $sgApiKey)
     {
         $this->sendgrid = $sendgrid;
-        $this->logger = $logger;
+        $this->logger   = $logger;
         $this->sgApiKey = $sgApiKey;
     }
 

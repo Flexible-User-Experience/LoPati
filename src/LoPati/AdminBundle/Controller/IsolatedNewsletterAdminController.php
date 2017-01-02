@@ -3,13 +3,14 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\AdminBundle\Service\MailerService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
-use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class IsolatedNewsletterAdminController
@@ -20,8 +21,49 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class IsolatedNewsletterAdminController extends Controller
 {
-    public function sendAction($id)
+    /**
+     * @param Request|null $request
+     *
+     * @return Response
+     * @throws NotFoundHttpException If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     */
+    public function sendAction(Request $request = null)
     {
+        $request = $this->resolveRequest($request);
+        $id = $request->get($this->admin->getIdParameter());
+
+        /** @var IsolatedNewsletter $object */
+        $object = $this->admin->getObject($id);
+        if (!$object) {
+            throw $this->createNotFoundException(sprintf('Unable to find isolated newsletter record with ID:%s', $id));
+        }
+
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var MailerService $ms */
+        $ms = $this->container->get('app.mailer.service');
+
+        /** @var array $edl email destinations list */
+        $edl = $this->getEdl();
+        /** @var string $content message content */
+        $content = 'hola';
+
+        $result = $ms->delivery($object->getSubject(), $edl, $content);
+        if ($result == true) {
+            $object->setBeginSend(new \DateTime());
+            $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'El newsletter s \'ha enviat correctament a totes les bústies.');
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S \'ha produït un ERROR en enviar el newsletter.'
+            );
+        }
+
+        return $this->redirect('../list');
     }
 
     public function previewAction($id)
@@ -48,14 +90,11 @@ class IsolatedNewsletterAdminController extends Controller
 
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        /** @var NewsletterManager $ms */
+        /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
-        /** @var array $edl email destinations list  */
-        $edl = array(
-            NewsletterPageAdminController::testEmail1,
-            NewsletterPageAdminController::testEmail2,
-            NewsletterPageAdminController::testEmail3,
-        );
+
+        /** @var array $edl email destinations list */
+        $edl = $this->getEdl();
         /** @var string $content message content */
         $content = 'hola';
 
@@ -89,5 +128,30 @@ class IsolatedNewsletterAdminController extends Controller
         }
 
         return $request;
+    }
+
+    /**
+     * @return array
+     */
+    private function getEdl()
+    {
+        /** @var KernelInterface $ki */
+        $ki = $this->container->get('kernel');
+
+        if ($ki->getEnvironment() === 'prod') {
+            /** @var array $edl email destinations list */
+            $edl = array(
+                NewsletterPageAdminController::testEmail1,
+                NewsletterPageAdminController::testEmail2,
+                NewsletterPageAdminController::testEmail3,
+            );
+        } else {
+            /** @var array $edl email destinations list only for developer */
+            $edl = array(
+                NewsletterPageAdminController::testEmail3,
+            );
+        }
+
+        return $edl;
     }
 }
