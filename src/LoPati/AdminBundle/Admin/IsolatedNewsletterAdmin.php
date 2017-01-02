@@ -5,6 +5,7 @@ namespace LoPati\AdminBundle\Admin;
 use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
 use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -73,7 +74,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'choices'  => NewsletterTypeEnum::getEnumArray(),
                     'multiple' => false,
                     'expanded' => false,
-                    'required' => false,
+                    'required' => true,
                     'disabled' => false,
                 )
             )
@@ -154,6 +155,72 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 )
                 ->end();
         }
+    }
+
+    /**
+     * Filter view
+     *
+     * @param DatagridMapper $datagridMapper
+     */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add(
+                'date',
+                'doctrine_orm_date',
+                array(
+                    'label'      => 'Data',
+                    'field_type' => 'sonata_type_date_picker',
+                )
+            )
+            ->add(
+                'type',
+                null,
+                array(
+                    'label' => 'Tipus',
+                ),
+                'choice',
+                array(
+                    'expanded' => false,
+                    'multiple' => false,
+                    'choices' => NewsletterTypeEnum::getEnumArray(),
+                )
+            )
+            ->add(
+                'subject',
+                null,
+                array(
+                    'label' => 'Títol del missatge',
+                )
+            )
+            ->add(
+                'group',
+                null,
+                array(
+                    'label' => 'Grup',
+                )
+            )
+            ->add(
+                'tested',
+                null,
+                array(
+                    'label' => 'Test',
+                )
+            )
+            ->add(
+                'state',
+                null,
+                array(
+                    'label' => 'Estat',
+                ),
+                'choice',
+                array(
+                    'expanded' => false,
+                    'multiple' => false,
+                    'choices' => NewsletterStatusEnum::getEnumArray(),
+                )
+            )
+        ;
     }
 
     /**

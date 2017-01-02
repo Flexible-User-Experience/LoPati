@@ -2,11 +2,11 @@
 
 {% block field %}
     <div style="text-align:left">
-        {% if object.state == 0 %}
+        {% if object.type == 0 %}
             <span class="label label-info">notícies</span>
-        {% elseif object.state == 1 %}
+        {% elseif object.type == 1 %}
             <span class="label label-warning">esdeveniments</span>
-        {% elseif object.state == 2 %}
+        {% elseif object.type == 2 %}
             <span class="label label-success">exposicions</span>
         {% else %}
             <span class="label label-info">???</span>
