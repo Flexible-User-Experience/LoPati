@@ -75,7 +75,7 @@ services:
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\IsolatedNewsletter
-      - null
+      - AdminBundle:IsolatedNewsletterAdmin
   sonata.lopati.admin.isolatednewsletterpost:
     class: LoPati\AdminBundle\Admin\IsolatedNewsletterPostAdmin
     tags:
@@ -115,3 +115,10 @@ services:
     class: LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType
     tags:
       - { name: form.type, alias: action_button }
+  # Mailer
+  app.mailer.service:
+    class: LoPati\AdminBundle\Service\MailerService
+    arguments:
+      - "@sendgrid"
+      - "@logger"
+      - "%sendgrip_api_key%"
