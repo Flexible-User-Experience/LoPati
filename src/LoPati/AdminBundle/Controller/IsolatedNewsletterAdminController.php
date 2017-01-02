@@ -66,8 +66,24 @@ class IsolatedNewsletterAdminController extends Controller
         return $this->redirect('../list');
     }
 
-    public function previewAction($id)
+    /**
+     * @param Request|null $request
+     *
+     * @return Response
+     * @throws NotFoundHttpException If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     */
+    public function previewAction(Request $request = null)
     {
+        $request = $this->resolveRequest($request);
+        $id = $request->get($this->admin->getIdParameter());
+
+        /** @var IsolatedNewsletter $object */
+        $object = $this->admin->getObject($id);
+        if (!$object) {
+            throw $this->createNotFoundException(sprintf('Unable to find isolated newsletter record with ID:%s', $id));
+        }
+
     }
 
     /**

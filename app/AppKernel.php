@@ -18,28 +18,28 @@ class AppKernel extends Kernel
             // Doctrine
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            // Sensio
+            // SensioLabs
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             // Sonata
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-//            new Sonata\IntlBundle\SonataIntlBundle(),
-//            new Sonata\SeoBundle\SonataSeoBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             // Vendors
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Hampe\Bundle\ZurbInkBundle\HampeZurbInkBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            new Vich\UploaderBundle\VichUploaderBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new FOS\ElasticaBundle\FOSElasticaBundle(),
-            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Tystr\Bundle\SendgridBundle\TystrSendgridBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            // A2lix (exception, leave this bundle here)
+            new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             // App
             new LoPati\BlogBundle\BlogBundle(),
             new LoPati\MenuBundle\MenuBundle(),
@@ -64,6 +64,6 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+        $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ac6de720dc681e93aaaf4e2551ed506e",
-    "content-hash": "097347c170f2215010d4c03a970199f0",
+    "hash": "fb414bc30424b1cae625e080f50f31c3",
+    "content-hash": "77a005654b5c3b146d0cd05d5e4ecf91",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -2124,6 +2124,95 @@
             "time": "2015-03-18 18:23:50"
         },
         {
+            "name": "hampe/inky",
+            "version": "1.3.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thampe/inky.git",
+                "reference": "257396bb8ea45d970ee352333f4a8716e953d13c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thampe/inky/zipball/257396bb8ea45d970ee352333f4a8716e953d13c",
+                "reference": "257396bb8ea45d970ee352333f4a8716e953d13c",
+                "shasum": ""
+            },
+            "require": {
+                "paquettg/php-html-parser": "^1.7",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hampe\\Inky\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Hampe",
+                    "email": "github@hampe.co"
+                }
+            ],
+            "description": "PHP Implementation of ZURB's Foundation for Email parser (Inky)",
+            "time": "2016-08-30 20:22:09"
+        },
+        {
+            "name": "hampe/zurb-ink-bundle",
+            "version": "2.2.2",
+            "target-dir": "Hampe/Bundle/ZurbInkBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thampe/ZurbInkBundle.git",
+                "reference": "d7d1a4b02e21f67958f070ce6d6f67e06f17a587"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thampe/ZurbInkBundle/zipball/d7d1a4b02e21f67958f070ce6d6f67e06f17a587",
+                "reference": "d7d1a4b02e21f67958f070ce6d6f67e06f17a587",
+                "shasum": ""
+            },
+            "require": {
+                "hampe/inky": "^1.3.6",
+                "php": "^5.3.2 || ^7.0",
+                "symfony/framework-bundle": "^2.0.0 || ^3.0.0",
+                "tijsverkoyen/css-to-inline-styles": "^1.0",
+                "twig/twig": "^1.23.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Hampe\\Bundle\\ZurbInkBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Hampe",
+                    "email": "github@hampe.co",
+                    "homepage": "http://github.com/thampe"
+                }
+            ],
+            "description": "Creating email templates is hard. This Bundle provides help.",
+            "homepage": "http://github.com/thampe/ZurbInkBundle",
+            "keywords": [
+                "email",
+                "ink",
+                "template",
+                "zurb"
+            ],
+            "time": "2016-12-27 12:07:42"
+        },
+        {
             "name": "hautelook/alice-bundle",
             "version": "v1.4.1",
             "source": {
@@ -3194,6 +3283,101 @@
                 "service proxies"
             ],
             "time": "2015-08-09 04:28:19"
+        },
+        {
+            "name": "paquettg/php-html-parser",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paquettg/php-html-parser.git",
+                "reference": "18845e09831dd0772b88b51e788a4f74c701224c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paquettg/php-html-parser/zipball/18845e09831dd0772b88b51e788a4f74c701224c",
+                "reference": "18845e09831dd0772b88b51e788a4f74c701224c",
+                "shasum": ""
+            },
+            "require": {
+                "paquettg/string-encode": "~0.1.0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.0",
+                "phpunit/phpunit": "~4.8.0",
+                "satooshi/php-coveralls": "~0.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPHtmlParser": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gilles Paquette",
+                    "email": "paquettg@gmail.com",
+                    "homepage": "http://gillespaquette.ca"
+                }
+            ],
+            "description": "An HTML DOM parser. It allows you to manipulate HTML. Find tags on an HTML page with selectors just like jQuery.",
+            "homepage": "https://github.com/paquettg/php-html-parser",
+            "keywords": [
+                "dom",
+                "html",
+                "parser"
+            ],
+            "time": "2016-04-06 15:24:40"
+        },
+        {
+            "name": "paquettg/string-encode",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paquettg/string-encoder.git",
+                "reference": "cf08343649701979f581c1601d01247fa3782439"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paquettg/string-encoder/zipball/cf08343649701979f581c1601d01247fa3782439",
+                "reference": "cf08343649701979f581c1601d01247fa3782439",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "stringEncode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gilles Paquette",
+                    "email": "paquettg@gmail.com",
+                    "homepage": "http://gillespaquette.ca"
+                }
+            ],
+            "description": "Facilitating the process of altering string encoding in PHP.",
+            "homepage": "https://github.com/paquettg/string-encoder",
+            "keywords": [
+                "charset",
+                "encoding",
+                "string"
+            ],
+            "time": "2014-05-29 18:38:09"
         },
         {
             "name": "paragonie/random_compat",
@@ -5520,6 +5704,53 @@
                 "framework"
             ],
             "time": "2016-12-13 12:16:34"
+        },
+        {
+            "name": "tijsverkoyen/css-to-inline-styles",
+            "version": "1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
+                "reference": "9753fc340726e327e4d48b7c0604f85475ae0bc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/9753fc340726e327e4d48b7c0604f85475ae0bc3",
+                "reference": "9753fc340726e327e4d48b7c0604f85475ae0bc3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/css-selector": "~2.1|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TijsVerkoyen\\CssToInlineStyles\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Tijs Verkoyen",
+                    "email": "css_to_inline_styles@verkoyen.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
+            "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
+            "time": "2015-12-08 16:14:14"
         },
         {
             "name": "twbs/bootstrap",
