@@ -84,7 +84,13 @@ class IsolatedNewsletterAdminController extends Controller
             throw $this->createNotFoundException(sprintf('Unable to find isolated newsletter record with ID:%s', $id));
         }
 
-        return $this->render('AdminBundle:IsolatedNewsletter:preview.html.twig', array('newsletter' => $object));
+        return $this->render(
+            'AdminBundle:IsolatedNewsletter:preview.html.twig',
+            array(
+                'newsletter'   => $object,
+                'show_top_bar' => true,
+            )
+        );
     }
 
     /**

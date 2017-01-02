@@ -12,7 +12,7 @@
             {% autoescape false %}
             {{ includeStyles(zurb_ink_styles) }}
             {% block aditionalStyles %}
-            {#{{ zurb_ink_styles.add("@AppBundle/Resources/public/css/mail.css") }}#}
+                {{ zurb_ink_styles.add("@AdminBundle/Resources/public/css/isolated_newsletter_mail.css") }}
             {% endblock %}
             {% endautoescape %}
         </style>
@@ -21,22 +21,52 @@
 {% inky %}
 <body>
 {% block body %}
+    {% if show_top_bar %}
+        <table class="body">
+            <tr class="black-background">
+                <td class="center" align="center" valign="top">
+                    <center>
+                        <table class="container">
+                            <tbody>
+                            <tr class="white-color">
+                                <td>
+                                    {# Header #}
+                                    <table class="row black-background">
+                                        <tbody>
+                                        <tr>
+                                            <th class="small-12 large-12 first last columns white-color padding-bottom">
+                                                <a href="{{ path('admin_lopati_newsletter_isolatednewsletter_list') }}">Tornar al CMS</a>
+
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
     <table class="body">
-        <tr class="green-background">
+        <tr class="light-grey-background">
             <td class="center" align="center" valign="top">
                 <center>
                     <table class="container">
                         <tbody>
-                        <tr class="white-color">
+                        <tr class="black-color">
                             <td>
                                 {# Header #}
-                                <table class="row black-background">
+                                <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-12 large-6 first columns white-color padding-bottom">
+                                        <th class="small-12 large-6 first columns padding-bottom">
                                             {{ newsletter.subject }}
                                         </th>
-                                        <th class="small-12 large-6 last columns white-color vertical-padding">
+                                        <th class="small-12 large-6 last columns vertical-padding">
                                             <h2 class="text-right">{% block subject %}Lo Pati{% endblock %}</h2>
                                         </th>
                                         <th class="expander"></th>

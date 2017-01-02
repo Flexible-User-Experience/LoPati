@@ -1,0 +1,27 @@
+/* Colors */
+.black-background      { background-color: #000000; }
+.green-background      { background-color: #A1C548; }
+.white-background      { background-color: #FFFFFF; }
+.light-grey-background { background-color: #EDEDED; }
+.black-color      { color: #000000; }
+.white-color      { color: #FFFFFF; }
+.green-color      { color: #A1C548; }
+.grey-color       { color: #8B8B8B; }
+
+/* Margins */
+.vertical-padding { padding: 20px 0; }
+.padding-bottom   { padding: 16px 0; }
+.vertical-margin { margin: 20px 0; }
+.margin-bottom   { margin: 16px 0; }
+
+/* Custom main container */
+.container-main {
+    min-height: 400px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* Custom margins */
+.left-margin-negative {
+    margin-left: 15px;
+}
