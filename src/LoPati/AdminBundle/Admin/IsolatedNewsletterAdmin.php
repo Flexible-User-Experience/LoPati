@@ -173,7 +173,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'expanded' => false,
                     'multiple' => false,
-                    'choices' => NewsletterTypeEnum::getEnumArray(),
+                    'choices'  => NewsletterTypeEnum::getEnumArray(),
                 )
             )
             ->add(
@@ -207,7 +207,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'expanded' => false,
                     'multiple' => false,
-                    'choices' => NewsletterStatusEnum::getEnumArray(),
+                    'choices'  => NewsletterStatusEnum::getEnumArray(),
                 )
             )
         ;
@@ -236,7 +236,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Tipus',
-                    'template' => 'AdminBundle:Newsletter:list_custom_type_field.html.twig',
+                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_type_field.html.twig',
                     'editable' => false,
                 )
             )
@@ -267,7 +267,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Estat',
-                    'template' => 'AdminBundle:Newsletter:list_custom_state_field.html.twig',
+                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_state_field.html.twig',
                 )
             )
             ->add(
@@ -275,7 +275,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label'    => 'Inici enviament',
-                    'template' => 'AdminBundle:Newsletter:list_custom_begin_send_field.html.twig',
+                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_begin_send_field.html.twig',
                 )
             )
             ->add(
@@ -284,13 +284,13 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'actions' => array(
                         'preview' => array(
-                            'template' => 'AdminBundle:Newsletter:previewLink.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_preview_button.html.twig'
                         ),
                         'test' => array(
-                            'template' => 'AdminBundle:Newsletter:testLink.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_test_button.html.twig'
                         ),
                         'send' => array(
-                            'template' => 'AdminBundle:Newsletter:send.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_send_button.html.twig'
                         ),
                         'edit' => array(
                             'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'

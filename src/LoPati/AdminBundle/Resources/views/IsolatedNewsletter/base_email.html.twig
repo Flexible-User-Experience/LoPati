@@ -1,0 +1,92 @@
+{% spaceless %}
+{{ zurb_ink_styles.add("@HampeZurbInkBundle/Resources/public/css/foundation-for-emails/2/foundation.min.css") }}
+{% block preHtml %}{% endblock %}
+{% inlinestyle %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    {% block headStyles %}
+        <style type="text/css">
+            {% autoescape false %}
+            {{ includeStyles(zurb_ink_styles) }}
+            {% block aditionalStyles %}
+            {#{{ zurb_ink_styles.add("@AppBundle/Resources/public/css/mail.css") }}#}
+            {% endblock %}
+            {% endautoescape %}
+        </style>
+    {% endblock %}
+</head>
+{% inky %}
+<body>
+{% block body %}
+    <table class="body">
+        <tr class="green-background">
+            <td class="center" align="center" valign="top">
+                <center>
+                    <table class="container">
+                        <tbody>
+                        <tr class="white-color">
+                            <td>
+                                {# Header #}
+                                <table class="row black-background">
+                                    <tbody>
+                                    <tr>
+                                        <th class="small-12 large-6 first columns white-color padding-bottom">
+                                            {{ newsletter.subject }}
+                                        </th>
+                                        <th class="small-12 large-6 last columns white-color vertical-padding">
+                                            <h2 class="text-right">{% block subject %}Lo Pati{% endblock %}</h2>
+                                        </th>
+                                        <th class="expander"></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {# Body #}
+                                {% block content %}{% endblock %}
+                                {# Footer #}
+                                {% block footer %}
+                                    <table class="row black-background">
+                                        <tr>
+                                            <th class="small-6 large-6 first columns vertical-padding">
+                                                <a href="{{ url('inici') }}">LO PATI</a>
+                                            </th>
+                                            <th class="small-6 large-6 last columns vertical-padding">
+                                                <p class="white-color text-right">
+                                                    logos
+                                                </p>
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                    <table class="row black-background">
+                                        <tr>
+                                            <th class="small-6 large-8 first columns vertical-padding">
+                                                <p class="white-color">
+                                                    C. Gran Capità, 38-40 | 43870 Amposta | Tel. 977 709 400
+                                                </p>
+                                            </th>
+                                            <th class="small-6 large-4 last columns vertical-padding ">
+                                                <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890">facebook</a>
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                {% endblock %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </td>
+        </tr>
+    </table>
+    {#<!-- prevent Gmail on iOS font size manipulation -->#}
+    <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+{% endblock %}
+</body>
+{% endinky %}
+</html>
+{% endinlinestyle %}
+{% endspaceless %}
