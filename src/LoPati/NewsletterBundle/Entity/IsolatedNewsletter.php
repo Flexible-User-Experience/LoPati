@@ -49,6 +49,13 @@ class IsolatedNewsletter
     private $state = 0;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=false, options={"default"=0})
+     */
+    private $type = 0;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default"=0})
@@ -165,6 +172,26 @@ class IsolatedNewsletter
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }

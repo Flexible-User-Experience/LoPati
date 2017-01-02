@@ -1,0 +1,15 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <div style="text-align:left">
+        {% if object.state == 0 %}
+            <span class="label label-info">notícies</span>
+        {% elseif object.state == 1 %}
+            <span class="label label-warning">esdeveniments</span>
+        {% elseif object.state == 2 %}
+            <span class="label label-success">exposicions</span>
+        {% else %}
+            <span class="label label-info">???</span>
+        {% endif %}
+    </div>
+{% endblock %}

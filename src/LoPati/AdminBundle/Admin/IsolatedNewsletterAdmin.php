@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Admin;
 
 use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -65,12 +66,25 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 )
             )
             ->add(
+                'type',
+                ChoiceType::class,
+                array(
+                    'label'    => 'Tipus',
+                    'choices'  => NewsletterTypeEnum::getEnumArray(),
+                    'multiple' => false,
+                    'expanded' => false,
+                    'required' => false,
+                    'disabled' => false,
+                )
+            )
+
+            ->add(
                 'group',
                 'sonata_type_model',
                 array(
                     'label'    => 'Grup',
                     'query'    => $ngr->getActiveItemsSortByNameQuery(),
-                    'required' => false,
+                    'required' => true,
                     'expanded' => false,
                     'multiple' => false,
                     'btn_add'  => false,
@@ -158,6 +172,15 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'label'    => 'Data',
                     'editable' => true,
                     'format'   => 'd/m/Y',
+                )
+            )
+            ->add(
+                'type',
+                null,
+                array(
+                    'label'    => 'Tipus',
+                    'template' => 'AdminBundle:Newsletter:list_custom_type_field.html.twig',
+                    'editable' => false,
                 )
             )
             ->add(
