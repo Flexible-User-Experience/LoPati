@@ -122,3 +122,9 @@ services:
       - "@sendgrid"
       - "@logger"
       - "%sendgrip_api_key%"
+  # Twig
+  app.twig_extension:
+    class: LoPati\AdminBundle\Twig\AdminExtensionTwig
+    public: false
+    tags:
+      - { name: twig.extension }

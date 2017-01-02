@@ -4,6 +4,7 @@ namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -182,6 +183,14 @@ class IsolatedNewsletter
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeString()
+    {
+        return NewsletterTypeEnum::getEnumArray()[$this->type];
     }
 
     /**
