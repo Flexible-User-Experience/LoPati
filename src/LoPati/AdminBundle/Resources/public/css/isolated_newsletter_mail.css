@@ -48,13 +48,17 @@ p.post-short-description {
     font-size: 10px;
 }
 
-p.footer-bottom {
-    color: #8B8B8B;
+p.footer-right {
     font-size: 10px;
 }
 
-p.text-right {
-    text-align: right;
+p.footer-right a {
+    color: #8B8B8B;
+}
+
+p.footer-bottom {
+    color: #8B8B8B;
+    font-size: 10px;
 }
 
 a.footer-bottom-icon {
