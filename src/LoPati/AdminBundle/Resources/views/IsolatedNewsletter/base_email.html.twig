@@ -66,10 +66,10 @@
                                 <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-12 large-6 first columns padding-bottom">
-                                            <h1>{{ newsletter | draw_type }}</h1>
+                                        <th class="small-12 large-8 first columns padding-bottom">
+                                            <h1 style="font-weight:bolder;font-size:3.5em">{{ newsletter | draw_type }}</h1>
                                         </th>
-                                        <th class="small-12 large-6 last columns vertical-padding grey-color">
+                                        <th class="small-12 large-4 last columns vertical-padding grey-color">
                                             <h6 class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
                                             <p class="heading-date">
                                                 {% if show_top_bar %}
@@ -111,25 +111,22 @@
                                                     C. Gran Capità, 38-40 | 43870 Amposta | Tel. 977 709 400
                                                 </p>
                                             </th>
-                                            <th class="small-6 large-4 last columns">
-                                                <p class="text-right">
-                                                    <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
-                                                        <img src="{{ absolute_url(asset('images/xarxa_fb.png')) }}" alt="Facebook logo">
-                                                    </a>
-                                                    <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
-                                                        <img src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
-                                                    </a>
-                                                    {#<a href="" class="footer-bottom-icon">#}
-                                                    {#<img src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">#}
-                                                    {#</a>#}
-                                                    <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
-                                                        <img src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
-                                                    </a>
-                                                    <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon-last">
-                                                        <img src="{{ absolute_url(asset('images/xarxa_flickr.png')) }}" alt="Flickr logo">
-                                                    </a>
-                                                </p>
-
+                                            <th class="small-6 large-4 last columns text-right">
+                                                <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon">
+                                                    <img class="float-right" src="{{ absolute_url(asset('images/xarxa_flickr.png')) }}" alt="Flickr logo">
+                                                </a>
+                                                <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
+                                                    <img class="float-right" src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
+                                                </a>
+                                                {#<a href="#" class="footer-bottom-icon" class="footer-bottom-icon">#}
+                                                    {#<img class="float-right" src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">#}
+                                                {#</a>#}
+                                                <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
+                                                    <img class="float-right" src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
+                                                </a>
+                                                <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
+                                                    <img class="float-right" src="{{ absolute_url(asset('images/xarxa_fb.png')) }}" alt="Facebook logo">
+                                                </a>
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
