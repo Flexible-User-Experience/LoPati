@@ -66,10 +66,10 @@
                                 <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-12 large-8 first columns padding-top">
+                                        <th class="small-12 large-8 first columns extra-padding-top">
                                             <h1 style="font-weight:bolder;font-size:3.5em">{{ newsletter | draw_type }}</h1>
                                         </th>
-                                        <th class="small-12 large-4 last columns padding-top grey-color">
+                                        <th class="small-12 large-4 last columns extra-padding-top grey-color">
                                             <h6 style="font-weight:bolder" class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
                                             <p class="heading-date">
                                                 {% if show_top_bar == false %}
