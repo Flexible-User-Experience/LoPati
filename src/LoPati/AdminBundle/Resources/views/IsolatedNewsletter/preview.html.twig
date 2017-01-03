@@ -23,12 +23,14 @@
                         </p>
                     {% endif %}
                     <h5 style="font-weight:bolder">{{ post.title }}</h5>
-                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}
-                    <p class="post-short-description">
-                        {{ post.shortDescription }}
-                    </p>
-                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                    {% if post.shortDescription %}
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}
+                        <p class="post-short-description">
+                            {{ post.shortDescription }}
+                        </p>
+                    {% endif %}
                     {% if post.link %}
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
                         <a href="{{ post.link }}">
                             <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
                         </a>
