@@ -45,21 +45,24 @@ class IsolatedNewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
-        /** @var NewsletterGroup $group */
-        $group = $object->getGroup();
-        if ($group) {
-            /** @var NewsletterUser $user */
-            foreach ($group->getUsers() as $user) {
-                $content = $this->renderView(
-                    'AdminBundle:IsolatedNewsletter:preview.html.twig',
-                    array(
-                        'newsletter'   => $object,
-                        'user_token'   => $user->getToken(),
-                        'show_top_bar' => false,
-                    )
-                );
-                $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
-            }
+
+        if ($object->getGroup()) {
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($object->getGroup());
+        } else {
+            $users = $em->getRepository('NewsletterBundle:NewsletterUser')->findAllEnabled();
+        }
+
+        /** @var NewsletterUser $user */
+        foreach ($users as $user) {
+            $content = $this->renderView(
+                'AdminBundle:IsolatedNewsletter:preview.html.twig',
+                array(
+                    'newsletter'   => $object,
+                    'user_token'   => $user->getToken(),
+                    'show_top_bar' => false,
+                )
+            );
+            $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
         }
         $this->get('session')->getFlashBag()->add('sonata_flash_success', 'El newsletter s\'ha enviat a totes les bústies.');
 
