@@ -21,7 +21,7 @@
 {% inky %}
 <body>
 {% block body %}
-    {% if show_top_bar %}
+    {% if show_top_bar == true %}
         {# Preview mode #}
         <table class="body">
             <tr class="black-background">
@@ -72,12 +72,10 @@
                                         <th class="small-12 large-4 last columns vertical-padding grey-color">
                                             <h6 style="font-weight:bolder" class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
                                             <p class="heading-date">
-                                                {% if show_top_bar %}
-                                                    {# Preview mode #}
-                                                {% else %}
+                                                {% if show_top_bar != false %}
                                                     {# Production mode #}
                                                     Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>
-                                                    Clic <a href="{{ url('newsletter_unsuscribe', {token: 'token'}) }}{# TODO fetch unsubscribe absolute path admin outside #}">aquí</a> per donar-te de baixa
+                                                    Clic <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa
                                                 {% endif %}
                                             </p>
                                         </th>
@@ -118,9 +116,9 @@
                                                 <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
                                                     <img class="float-right" src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
                                                 </a>
-                                                {#<a href="#" class="footer-bottom-icon" class="footer-bottom-icon">#}
-                                                    {#<img class="float-right" src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">#}
-                                                {#</a>#}
+                                                <a href="https://www.instagram.com/centreartlopati/" class="footer-bottom-icon">
+                                                    <img class="float-right" src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">
+                                                </a>
                                                 <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
                                                     <img class="float-right" src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
                                                 </a>

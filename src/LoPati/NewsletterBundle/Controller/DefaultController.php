@@ -137,6 +137,7 @@ class DefaultController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter'   => $object,
+                'user_token'   => 'undefined',
                 'show_top_bar' => false,
             )
         );
