@@ -72,7 +72,7 @@
                                         <th class="small-12 large-4 last columns vertical-padding grey-color">
                                             <h6 style="font-weight:bolder" class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
                                             <p class="heading-date">
-                                                {% if show_top_bar != false %}
+                                                {% if show_top_bar == false %}
                                                     {# Production mode #}
                                                     Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>
                                                     Clic <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa
