@@ -37,7 +37,7 @@ services:
   sonata.lopati.admin.page_newsletter:
     class: LoPati\AdminBundle\Admin\NewsletterPaginaAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'newsletter' }
+      - { name: sonata.admin, manager_type: orm, group: 'Pàgines', label: 'newsletter de pàgina' }
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\Newsletter
@@ -75,7 +75,15 @@ services:
     arguments:
       - null
       - LoPati\NewsletterBundle\Entity\IsolatedNewsletter
+      - AdminBundle:IsolatedNewsletterAdmin
+  sonata.lopati.admin.isolatednewsletterpost:
+    class: LoPati\AdminBundle\Admin\IsolatedNewsletterPostAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'Newsletters', label: 'newsletter-post', show_in_dashboard: false }
+    arguments:
       - null
+      - LoPati\NewsletterBundle\Entity\IsolatedNewsletterPost
+      - AdminBundle:IsolatedNewsletterPostAdmin
   # Artist
   sonata.lopati.admin.artista:
     class: LoPati\AdminBundle\Admin\ArtistaAdmin
@@ -102,3 +110,21 @@ services:
       - null
       - LoPati\BlogBundle\Entity\ConfiguracioDiesLaboralsAgenda
       - AdminBundle:Admin
+  # Form types
+  app.form_type_action_button:
+    class: LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType
+    tags:
+      - { name: form.type, alias: action_button }
+  # Mailer
+  app.mailer.service:
+    class: LoPati\AdminBundle\Service\MailerService
+    arguments:
+      - "@sendgrid"
+      - "@logger"
+      - "%sendgrip_api_key%"
+  # Twig
+  app.twig_extension:
+    class: LoPati\AdminBundle\Twig\AdminExtensionTwig
+    public: false
+    tags:
+      - { name: twig.extension }

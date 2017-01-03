@@ -80,10 +80,10 @@ abstract class AbstractBaseAdmin extends AbstractAdmin
         $vus = $this->getConfigurationPool()->getContainer()->get('vich_uploader.templating.helper.uploader_helper');
         $getImage = 'get' . $image;
 
-        return ($this->getSubject()->$getImage() ? '<img src="' . $lis->getBrowserPath(
+        return ($this->getSubject() ? $this->getSubject()->$getImage() ? '<img src="' . $lis->getBrowserPath(
                 $vus->asset($this->getSubject(), $file),
                 '480xY'
-            ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '') . '<span style="width:100%;display:block;">màmim 5MB amb format PNG, JPG o GIF</span>';
+            ) . '" class="admin-preview" style="width:100%;" alt=""/>' : '' : '') . '<span style="width:100%;display:block;">màmim 5MB amb format PNG, JPG o GIF</span>';
     }
 
     /**

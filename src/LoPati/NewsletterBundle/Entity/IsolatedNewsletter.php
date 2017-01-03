@@ -4,6 +4,7 @@ namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -49,6 +50,13 @@ class IsolatedNewsletter
     private $state = 0;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=false, options={"default"=0})
+     */
+    private $type = 0;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(type="boolean", nullable=false, options={"default"=0})
@@ -72,7 +80,8 @@ class IsolatedNewsletter
     /**
      * @var array|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="IsolatedNewsletterPost", mappedBy="newsletter")
+     * @ORM\OneToMany(targetEntity="IsolatedNewsletterPost", mappedBy="newsletter", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $posts;
 
@@ -164,6 +173,34 @@ class IsolatedNewsletter
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeString()
+    {
+        return NewsletterTypeEnum::getEnumArray()[$this->type];
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -306,6 +343,6 @@ class IsolatedNewsletter
      */
     public function __toString()
     {
-        return $this->id ? $this->getBeginSend()->format('d/m/Y') . ' · ' . $this->subject : '---';
+        return $this->id ? $this->getDate()->format('d/m/Y') . ' · ' . $this->subject : '---';
     }
 }

@@ -1,0 +1,147 @@
+{% spaceless %}
+{{ zurb_ink_styles.add("@HampeZurbInkBundle/Resources/public/css/foundation-for-emails/2/foundation.min.css") }}
+{% block preHtml %}{% endblock %}
+{% inlinestyle %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    {% block headStyles %}
+        <style type="text/css">
+            {% autoescape false %}
+            {{ includeStyles(zurb_ink_styles) }}
+            {% block aditionalStyles %}
+                {{ zurb_ink_styles.add("@AdminBundle/Resources/public/css/isolated_newsletter_mail.css") }}
+            {% endblock %}
+            {% endautoescape %}
+        </style>
+    {% endblock %}
+</head>
+{% inky %}
+<body>
+{% block body %}
+    {% if show_top_bar %}
+        <table class="body">
+            <tr class="black-background">
+                <td class="center" align="center" valign="top">
+                    <center>
+                        <table class="container">
+                            <tbody>
+                            <tr class="white-color">
+                                <td>
+                                    {# Header #}
+                                    <table class="row black-background">
+                                        <tbody>
+                                        <tr>
+                                            <th class="small-6 large-6 first columns white-color padding-bottom">
+                                                <a href="{{ path('admin_lopati_newsletter_isolatednewsletter_list') }}">&laquo; tornar al CMS</a>
+                                            </th>
+                                            <th class="small-6 large-6 last columns white-color padding-bottom text-right">
+                                                mode previsualització
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+    <table class="body">
+        <tr class="light-grey-background">
+            <td class="center" align="center" valign="top">
+                <center>
+                    <table class="container">
+                        <tbody>
+                        <tr class="black-color">
+                            <td>
+                                {# Header #}
+                                <table class="row white-background">
+                                    <tbody>
+                                    <tr>
+                                        <th class="small-12 large-6 first columns padding-bottom">
+                                            <h1>{{ newsletter | draw_type }}</h1>
+                                        </th>
+                                        <th class="small-12 large-6 last columns vertical-padding grey-color">
+                                            <h6 class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
+                                            <p class="heading-date">
+                                                Clic <a href="{% if show_top_bar %}#{% else %}{# TODO fetch show preview absolute path admin outside #}{% endif %}">aquí</a> per visualitzar correctament<br>
+                                                Clic <a href="#{# TODO fetch unsubscribe absolute path admin outside #}">aquí</a> per donar-te de baixa
+                                            </p>
+                                        </th>
+                                        <th class="expander"></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                {# Body #}
+                                {% block content %}{% endblock %}
+                                {# Footer #}
+                                {% block footer %}
+                                    <table class="row white-background">
+                                        <tr>
+                                            <th class="small-6 large-6 first columns vertical-padding">
+                                                <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati.png')) }}" alt="LO PATI logo"></a>
+                                            </th>
+                                            <th class="small-6 large-6 last columns vertical-padding">
+                                                <p class="grey-color text-right footer-right">
+                                                    <a href="http://www.amposta.cat">Ajuntament d'Amposta</a> | <a href="http://www.diputaciodetarragona.cat">Diputació de Tarragona</a> | <a href="http://cultura.gencat.cat/ca/inici/">Generalitat de Catalunya</a>
+                                                </p>
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                    <table class="row white-background">
+                                        <tr>
+                                            <th class="small-6 large-8 first columns">
+                                                <p class="footer-bottom">
+                                                    C. Gran Capità, 38-40 | 43870 Amposta | Tel. 977 709 400
+                                                </p>
+                                            </th>
+                                            <th class="small-6 large-4 last columns">
+                                                <p class="text-right">
+                                                    <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_fb.png')) }}" alt="Facebook logo">
+                                                    </a>
+                                                    <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
+                                                    </a>
+                                                    {#<a href="" class="footer-bottom-icon">#}
+                                                    {#<img src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">#}
+                                                    {#</a>#}
+                                                    <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
+                                                    </a>
+                                                    <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon-last">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_flickr.png')) }}" alt="Flickr logo">
+                                                    </a>
+                                                </p>
+
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                {% endblock %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </td>
+        </tr>
+    </table>
+    {#<!-- prevent Gmail on iOS font size manipulation -->#}
+    <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+{% endblock %}
+</body>
+{% endinky %}
+</html>
+{% endinlinestyle %}
+{% endspaceless %}

@@ -1,0 +1,35 @@
+{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+
+{% block subject %}Resposta{% endblock %}
+
+{% block content %}
+    {% for post in newsletter.posts %}
+        <table class="row">
+            <tbody>
+            <tr>
+                <th class="small-12 large-7 columns first vertical-padding">
+                    <a href="#{# TODO fetch show detail post info absolute path admin outside #}">
+                        <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                    </a>
+                </th>
+                <th class="small-12 large-5 columns last vertical-padding">
+                    {% if post.date %}
+                        <p class="post-heading">
+                            {{ post.date | date('j') }} de {{ post.date | date('F') }} de {{ post.date | date('Y') }}
+                        </p>
+                    {% endif %}
+                    <h5>{{ post.title }}</h5>
+                    <p class="post-short-description">
+                        {{ post.shortDescription }}
+                    </p>
+                    <p class="post-show-detail">
+                        <a href="#{# TODO fetch show detail post info absolute path admin outside #}">INFO</a>
+                    </p>
+                </th>
+                <th class="expander"></th>
+            </tr>
+            </tbody>
+        </table>
+        {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+    {% endfor %}
+{% endblock %}

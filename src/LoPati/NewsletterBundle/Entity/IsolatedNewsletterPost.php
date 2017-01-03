@@ -45,7 +45,7 @@ class IsolatedNewsletterPost
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
-     * @Vich\UploadableField(mapping="slider", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="isolated_newsletter", fileNameProperty="image")
      */
     protected $imageFile;
 
@@ -59,9 +59,9 @@ class IsolatedNewsletterPost
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false, options={"default"="."})
      */
-    private $shortDescription;
+    private $shortDescription = '.';
 
     /**
      * @var string
@@ -96,10 +96,17 @@ class IsolatedNewsletterPost
     /**
      * @var \DateTime
      *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $created;
+    private $created;
 
     /**
      * @var \DateTime
@@ -107,7 +114,7 @@ class IsolatedNewsletterPost
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $updated;
+    private $updated;
 
     /**
      *
@@ -291,6 +298,26 @@ class IsolatedNewsletterPost
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     *
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
 
         return $this;
     }
