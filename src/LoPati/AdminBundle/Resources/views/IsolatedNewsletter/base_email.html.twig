@@ -84,28 +84,46 @@
                                 {% block content %}{% endblock %}
                                 {# Footer #}
                                 {% block footer %}
-                                    <table class="row black-background">
+                                    <table class="row white-background">
                                         <tr>
                                             <th class="small-6 large-6 first columns vertical-padding">
-                                                <a href="{{ url('inici') }}">LO PATI</a>
+                                                <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati.png')) }}" alt="LO PATI logo"></a>
                                             </th>
                                             <th class="small-6 large-6 last columns vertical-padding">
-                                                <p class="white-color text-right">
+                                                <p class="black-color text-right">
                                                     logos
                                                 </p>
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
                                     </table>
-                                    <table class="row black-background">
+                                    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                    <table class="row white-background">
                                         <tr>
                                             <th class="small-6 large-8 first columns vertical-padding">
-                                                <p class="white-color">
+                                                <p class="footer-bottom">
                                                     C. Gran Capità, 38-40 | 43870 Amposta | Tel. 977 709 400
                                                 </p>
                                             </th>
-                                            <th class="small-6 large-4 last columns vertical-padding ">
-                                                <a href="http://www.facebook.com/pages/Lo-Pati/339606589419890">facebook</a>
+                                            <th class="small-6 large-4 last columns vertical-padding">
+                                                <p class="text-right">
+                                                    <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_fb.png')) }}" alt="Facebook logo">
+                                                    </a>
+                                                    <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
+                                                    </a>
+                                                    {#<a href="" class="footer-bottom-icon">#}
+                                                    {#<img src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">#}
+                                                    {#</a>#}
+                                                    <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
+                                                    </a>
+                                                    <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon-last">
+                                                        <img src="{{ absolute_url(asset('images/xarxa_flickr.png')) }}" alt="Flickr logo">
+                                                    </a>
+                                                </p>
+
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
