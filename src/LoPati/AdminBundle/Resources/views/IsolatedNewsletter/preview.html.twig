@@ -18,13 +18,24 @@
                             {{ post.date | date('j') }} de {{ post.date | date('F') }} de {{ post.date | date('Y') }}
                         </p>
                     {% endif %}
-                    <h5>{{ post.title }}</h5>
+                    <h5 style="font-weight:bolder">{{ post.title }}</h5>
                     <p class="post-short-description">
                         {{ post.shortDescription }}
                     </p>
-                    <p class="post-show-detail">
-                        <a href="#{# TODO fetch show detail post info absolute path admin outside #}">INFO</a>
-                    </p>
+                    <table class="button small secondary radius">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td><a href="#{# TODO fetch show detail post info absolute path admin outside #}">+ INFO</a></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    {#<p class="post-show-detail">#}
+                        {#<a href="##}{# TODO fetch show detail post info absolute path admin outside #}{#">+INFO</a>#}
+                    {#</p>#}
                 </th>
                 <th class="expander"></th>
             </tr>
