@@ -122,19 +122,19 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                         ),
                     )
                 )
-                ->add(
-                    'description',
-                    'textarea',
-                    array(
-                        'label'    => 'Descripció',
-                        'required' => false,
-                        'attr'     => array(
-                            'class'      => 'tinymce',
-                            'data-theme' => 'simple',
-                            'style'      => 'width:100%;height:300px;'
-                        ),
-                    )
-                )
+//                ->add(
+//                    'description',
+//                    'textarea',
+//                    array(
+//                        'label'    => 'Descripció',
+//                        'required' => false,
+//                        'attr'     => array(
+//                            'class'      => 'tinymce',
+//                            'data-theme' => 'simple',
+//                            'style'      => 'width:100%;height:300px;'
+//                        ),
+//                    )
+//                )
                 ->end()
                 ->with('Controls', $this->getFormMdSuccessBoxArray(4))
                 ->add(

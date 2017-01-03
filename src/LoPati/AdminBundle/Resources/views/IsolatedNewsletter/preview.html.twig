@@ -8,9 +8,13 @@
             <tbody>
             <tr>
                 <th class="small-12 large-7 columns first small-padding-bottom">
-                    <a href="#{# TODO fetch show detail post info absolute URL path admin outside #}">
+                    {% if post.link %}
+                        <a href="{{ post.link }}">
+                            <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                        </a>
+                    {% else %}
                         <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
-                    </a>
+                    {% endif %}
                 </th>
                 <th class="small-12 large-5 columns last small-padding-bottom">
                     {% if post.date %}
@@ -24,20 +28,11 @@
                         {{ post.shortDescription }}
                     </p>
                     {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
-                    <a href="#{# TODO fetch show detail post info absolute URL path admin outside #}">
-                        <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
-                    </a>
-                    {#<table class="button small secondary radius">#}
-                        {#<tr>#}
-                            {#<td>#}
-                                {#<table>#}
-                                    {#<tr>#}
-                                        {#<td><a href="##}{#">+ INFO</a></td>#}
-                                    {#</tr>#}
-                                {#</table>#}
-                            {#</td>#}
-                        {#</tr>#}
-                    {#</table>#}
+                    {% if post.link %}
+                        <a href="{{ post.link }}">
+                            <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
+                        </a>
+                    {% endif %}
                 </th>
                 <th class="expander"></th>
             </tr>
