@@ -66,11 +66,11 @@
                                 <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-12 large-8 first columns extra-padding-top">
+                                        <th class="small-8 large-8 first columns extra-padding-top">
                                             <h1 style="font-weight:bolder;font-size:3.5em">{{ newsletter | draw_type }}</h1>
                                         </th>
-                                        <th class="small-12 large-4 last columns extra-padding-top grey-color">
-                                            <h6 style="font-weight:bolder" class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
+                                        <th class="small-4 large-4 last columns extra-padding-top grey-color">
+                                            <h6 style="font-weight:bolder" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>
                                             <p class="heading-date">
                                                 {% if show_top_bar == false %}
                                                     {# Production mode #}
@@ -104,12 +104,12 @@
                                     {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' with {class: 'vertical-padding'} %}
                                     <table class="row white-background">
                                         <tr>
-                                            <th class="small-6 large-8 first columns">
+                                            <th class="small-8 large-8 first columns">
                                                 <p class="footer-bottom">
                                                     C. Gran Capità, 38-40 | 43870 Amposta | Tel. 977 709 400
                                                 </p>
                                             </th>
-                                            <th class="small-6 large-4 last columns text-right">
+                                            <th class="small-4 large-4 last columns text-right">
                                                 <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon">
                                                     <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_fl.png')) }}" alt="Flickr logo">
                                                 </a>
