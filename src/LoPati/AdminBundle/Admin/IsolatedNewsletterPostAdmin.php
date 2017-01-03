@@ -62,7 +62,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'file',
                     array(
                         'label'       => 'Imatge',
-                        'required'    => false,
+                        'required'    => true,
                         'sonata_help' => $imageHelp,
                         'help'        => $imageHelp,
                     )
@@ -158,7 +158,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'file',
                     array(
                         'label'       => 'Imatge',
-                        'required'    => false,
+                        'required'    => true,
                         'help'        => $imageHelp,
                     )
                 )

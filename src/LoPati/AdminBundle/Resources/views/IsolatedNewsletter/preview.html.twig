@@ -7,21 +7,23 @@
         <table class="row">
             <tbody>
             <tr>
-                <th class="small-12 large-7 columns first vertical-padding">
+                <th class="small-12 large-7 columns first small-padding-bottom">
                     <a href="#{# TODO fetch show detail post info absolute URL path admin outside #}">
                         <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
                     </a>
                 </th>
-                <th class="small-12 large-5 columns last vertical-padding">
+                <th class="small-12 large-5 columns last small-padding-bottom">
                     {% if post.date %}
                         <p class="post-heading">
-                            {{ post.date | date('j') }} de {{ post.date | date('F') }} de {{ post.date | date('Y') }}
+                            {{ post.date | date('d/m/Y') }}
                         </p>
                     {% endif %}
                     <h5 style="font-weight:bolder">{{ post.title }}</h5>
+                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}
                     <p class="post-short-description">
                         {{ post.shortDescription }}
                     </p>
+                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
                     <table class="button small secondary radius">
                         <tr>
                             <td>
@@ -33,9 +35,6 @@
                             </td>
                         </tr>
                     </table>
-                    {#<p class="post-show-detail">#}
-                        {#<a href="##}{# TODO fetch show detail post info absolute URL path admin outside #}{#">+INFO</a>#}
-                    {#</p>#}
                 </th>
                 <th class="expander"></th>
             </tr>
