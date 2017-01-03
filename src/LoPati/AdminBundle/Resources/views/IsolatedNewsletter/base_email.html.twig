@@ -39,7 +39,7 @@
                                                 <a href="{{ path('admin_lopati_newsletter_isolatednewsletter_list') }}">&laquo; tornar al CMS</a>
                                             </th>
                                             <th class="small-6 large-6 last columns white-color padding-bottom text-right">
-                                                mode previsualització
+                                                [ mode previsualització ]
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
@@ -70,14 +70,14 @@
                                             <h1 style="font-weight:bolder;font-size:3.5em">{{ newsletter | draw_type }}</h1>
                                         </th>
                                         <th class="small-12 large-4 last columns vertical-padding grey-color">
-                                            <h6 class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
+                                            <h6 style="font-weight:bolder" class="text-right">{% block heading_date %}{{ newsletter.date | date('d/m/Y') }}{% endblock %}</h6>
                                             <p class="heading-date">
                                                 {% if show_top_bar %}
                                                     {# Preview mode #}
                                                 {% else %}
                                                     {# Production mode #}
-                                                    Clic <a href="{{ path('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>
-                                                    Clic <a href="{{ path('newsletter_unsuscribe', {token: 'token'}) }}{# TODO fetch unsubscribe absolute path admin outside #}">aquí</a> per donar-te de baixa
+                                                    Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>
+                                                    Clic <a href="{{ url('newsletter_unsuscribe', {token: 'token'}) }}{# TODO fetch unsubscribe absolute path admin outside #}">aquí</a> per donar-te de baixa
                                                 {% endif %}
                                             </p>
                                         </th>

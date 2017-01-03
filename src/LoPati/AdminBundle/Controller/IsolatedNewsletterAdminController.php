@@ -119,7 +119,13 @@ class IsolatedNewsletterAdminController extends Controller
         /** @var array $edl email destinations list */
         $edl = $this->getEdl();
         /** @var string $content message content */
-        $content = 'hola';
+        $content = $this->renderView(
+            'AdminBundle:IsolatedNewsletter:preview.html.twig',
+            array(
+                'newsletter'   => $object,
+                'show_top_bar' => false,
+            )
+        );
 
         $result = $ms->delivery('[TEST] ' . $object->getSubject(), $edl, $content);
         if ($result == true) {
