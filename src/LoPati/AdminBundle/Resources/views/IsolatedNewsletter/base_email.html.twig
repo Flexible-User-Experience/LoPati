@@ -90,10 +90,10 @@
                                 {% block footer %}
                                     <table class="row white-background">
                                         <tr>
-                                            <th class="small-4 large-4 first columns">
-                                                <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati.png')) }}" alt="LO PATI logo"></a>
+                                            <th class="small-4 large-4 first columns vertical-padding">
+                                                <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati_newsletter.png')) }}" alt="LO PATI logo"></a>
                                             </th>
-                                            <th class="small-8 large-8 last columns">
+                                            <th class="small-8 large-8 last columns vertical-padding">
                                                 <p class="grey-color text-right footer-right">
                                                     <a href="http://www.amposta.cat">Ajuntament d'Amposta</a> | <a href="http://www.diputaciodetarragona.cat">Diputació de Tarragona</a> | <a href="http://cultura.gencat.cat/ca/inici/">Generalitat de Catalunya</a>
                                                 </p>
@@ -101,7 +101,7 @@
                                             <th class="expander"></th>
                                         </tr>
                                     </table>
-                                    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' with {class: 'vertical-padding'} %}
                                     <table class="row white-background">
                                         <tr>
                                             <th class="small-6 large-8 first columns">
@@ -111,19 +111,19 @@
                                             </th>
                                             <th class="small-6 large-4 last columns text-right">
                                                 <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon">
-                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/xarxa_flickr.png')) }}" alt="Flickr logo">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_fl.png')) }}" alt="Flickr logo">
                                                 </a>
                                                 <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
-                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/xarxa_vimeo.png')) }}" alt="Vimeo logo">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_vm.png')) }}" alt="Vimeo logo">
                                                 </a>
                                                 <a href="https://www.instagram.com/centreartlopati/" class="footer-bottom-icon">
-                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/xarxa_instagram.png')) }}" alt="Instagram logo">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_it.png')) }}" alt="Instagram logo">
                                                 </a>
                                                 <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
-                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/xarxa_twitter.png')) }}" alt="Twitter logo">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_tw.png')) }}" alt="Twitter logo">
                                                 </a>
                                                 <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
-                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/xarxa_fb.png')) }}" alt="Facebook logo">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_fb.png')) }}" alt="Facebook logo">
                                                 </a>
                                             </th>
                                             <th class="expander"></th>
