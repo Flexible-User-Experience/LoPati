@@ -9,8 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterGroupAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Newsletter grup';
     protected $baseRoutePattern = 'newsletter/group';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC',

@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ConfiguracioDiesLaboralsAgendaAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'Configuració dies laborals agenda';
     protected $baseRoutePattern = 'configuration/calendar';
 
     /**

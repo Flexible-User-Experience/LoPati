@@ -9,8 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaginaAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Pàgina';
     protected $baseRoutePattern = 'pages/page';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction

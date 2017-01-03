@@ -9,8 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class NewsletterPaginaAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Newsletter de pàgina';
     protected $baseRoutePattern = 'pages/newsletter';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction
