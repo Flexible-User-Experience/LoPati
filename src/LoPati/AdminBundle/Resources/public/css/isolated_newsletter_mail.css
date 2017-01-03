@@ -9,10 +9,16 @@
 .grey-color       { color: #8B8B8B; }
 
 /* Margins */
-.vertical-padding { padding: 20px 0; }
-.padding-bottom   { padding: 16px 0; }
-.vertical-margin { margin: 20px 0; }
-.margin-bottom   { margin: 16px 0; }
+.small-vertical-padding { padding: 10px 0; }
+.vertical-padding       { padding: 20px 0; }
+.extra-padding-top      { padding-top: 64px; }
+.padding-top            { padding-top: 16px; }
+.small-padding-top      { padding-top: 8px; }
+.padding-bottom         { padding-bottom: 16px; }
+.small-padding-bottom   { padding-bottom: 8px; }
+.vertical-margin     { margin: 20px 0; }
+.margin-bottom       { margin-bottom: 16px; }
+.small-margin-bottom { margin-bottom: 8px; }
 
 /* Custom main container */
 .container-main {
