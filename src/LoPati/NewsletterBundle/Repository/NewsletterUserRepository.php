@@ -119,4 +119,16 @@ class NewsletterUserRepository extends EntityRepository
 
         return $query->getArrayResult();
     }
+
+    /**
+     * @return array
+     */
+    public function findAllEnabled()
+    {
+        $query = $this->createQueryBuilder('u')
+            ->where('u.active = :enabled')
+            ->setParameter('enabled', true);
+
+        return $query->getQuery()->getResult();
+    }
 }

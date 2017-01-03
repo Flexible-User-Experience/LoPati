@@ -15,8 +15,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
  */
 class CategoriaAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Menú primer nivell';
     protected $baseRoutePattern = 'menu/level/1';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction

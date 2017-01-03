@@ -41,7 +41,7 @@ class AdminExtensionTwig extends \Twig_Extension
     {
         $htmlFragment = '';
         if ($object instanceof IsolatedNewsletter) {
-            $htmlFragment .= $object->getTypeString();
+            $htmlFragment .= mb_strtoupper($object->getTypeString());
         } else {
             $htmlFragment .= '---';
         }

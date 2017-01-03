@@ -2,6 +2,7 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
+use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
@@ -116,6 +117,30 @@ class DefaultController extends Controller
         }
 
         return $this->redirect($this->generateUrl('portada', array('_locale' => $request->getLocale())));
+    }
+
+    /**
+     * @param $id
+     *
+     * @return Response
+     */
+    public function isolatedPreviewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /** @var IsolatedNewsletter $object */
+        $object = $em->getRepository('NewsletterBundle:IsolatedNewsletter')->find($id);
+        if (!$object) {
+            throw $this->createNotFoundException(sprintf('Unable to find isolated newsletter record with ID:%s', $id));
+        }
+
+        return $this->render(
+            'AdminBundle:IsolatedNewsletter:preview.html.twig',
+            array(
+                'newsletter'   => $object,
+                'user_token'   => 'undefined',
+                'show_top_bar' => false,
+            )
+        );
     }
 
     /**

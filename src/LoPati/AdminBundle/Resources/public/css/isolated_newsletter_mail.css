@@ -62,12 +62,7 @@ p.footer-bottom {
 }
 
 a.footer-bottom-icon {
-    float: left;
-    margin-right: 5px;
-    display: inline-block;
-}
-
-a.footer-bottom-icon-last {
-    float: left;
+    float: right;
+    margin-left: 5px;
     display: inline-block;
 }

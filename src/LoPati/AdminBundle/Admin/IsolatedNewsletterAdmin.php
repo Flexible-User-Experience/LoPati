@@ -20,8 +20,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
  */
 class IsolatedNewsletterAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Newsletter';
     protected $baseRoutePattern = 'newsletter/newsletter';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'DESC', // sort direction

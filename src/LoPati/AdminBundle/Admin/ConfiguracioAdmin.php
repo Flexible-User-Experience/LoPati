@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ConfiguracioAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Configuració peu de pàgina';
     protected $baseRoutePattern = 'configuration/footer';
 
     /**

@@ -22,6 +22,10 @@ newsletter:
     requirements:
        _locale: ca|es|en
 
+isolated_newsletter_preview:
+    path: /newsletter/{id}/
+    defaults: { _controller: NewsletterBundle:Default:isolatedPreview }
+
 admin_lopati_newsletter_newsletteruser_async_search:
     path: /admin/newsletter/user/async/search-users-by-email/
     defaults: { _controller: NewsletterBundle:NewsletterUser:searchUsersByEmailAsync }

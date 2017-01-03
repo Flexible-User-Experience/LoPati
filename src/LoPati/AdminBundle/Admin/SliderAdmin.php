@@ -15,8 +15,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
  */
 class SliderAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Slider';
     protected $baseRoutePattern = 'slider';
-
     protected $datagridValues = array(
         '_page' => 1,
         '_sort_order' => 'ASC', // sort direction

@@ -15,8 +15,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
  */
 class ArtistaAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Artista';
     protected $baseRoutePattern = 'artist';
-
     protected $datagridValues = array(
         '_page'       => 1,
         '_sort_order' => 'ASC', // sort direction

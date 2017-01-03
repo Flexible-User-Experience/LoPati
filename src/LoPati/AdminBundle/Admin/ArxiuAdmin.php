@@ -14,8 +14,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
  */
 class ArxiuAdmin extends AbstractBaseAdmin
 {
+    protected $classnameLabel = 'Arxiu';
     protected $baseRoutePattern = 'archive';
-
     protected $datagridValues = array(
         '_page' => 1,
         '_sort_order' => 'DESC', // sort direction
