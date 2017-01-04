@@ -4,6 +4,67 @@
     <div class="box box-info">
         <div class="box-header">
             <h3 class="box-title">{{ title }}</h3>
+            <button style="margin-left: 10px" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#csvHelperModal">
+                <i class="fa fa-question-circle"></i>
+            </button>
+            {#<!-- Modal -->#}
+            <div class="modal fade" id="csvHelperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>El format del fitxer a importar ha de ser compatible amb XLS. La primera fila del fitxer serà ingorada. El fitxer ha de respectar l'ordre les següents columnes i garantir que existeixin. L'única columna obligatoria és la del email.</p>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Posició</th>
+                                    <th>Nom</th>
+                                    <th>Contingut</th>
+                                    <th>Restriccions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nom</td>
+                                    <td>Text amb el nom i cognoms de la persona</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Email</td>
+                                    <td>Text amb email de la persona</td>
+                                    <td>Camp obligatori. Els emails existents actualitzaran la informació, no es crearan duplicats.</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Grup</td>
+                                    <td>Grup del newsletter al qual pertany</td>
+                                    <td>El nom del grup ha de coincidir amb els noms existents. Per exemple ART, SON, PRO, COM...</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Població</td>
+                                    <td>Text amb la població</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Edat</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Telèfon</td>
+                                    <td>Text amb el telèfon</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="box-body">
             <div class="sonata-ba-collapsed-fields">
