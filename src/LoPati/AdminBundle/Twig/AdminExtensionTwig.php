@@ -17,7 +17,7 @@ class AdminExtensionTwig extends \Twig_Extension
     /**
      *
      *
-     * Twig Filters
+     * Twig Functions
      *
      *
      */
@@ -25,10 +25,10 @@ class AdminExtensionTwig extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFilter('draw_type', array($this, 'drawIsolatedNewsletterType')),
+            new \Twig_SimpleFunction('getAssetType', array($this, 'getAssetType')),
         );
     }
 
@@ -37,16 +37,18 @@ class AdminExtensionTwig extends \Twig_Extension
      *
      * @return string
      */
-    public function drawIsolatedNewsletterType($object)
+    public function getAssetType($object)
     {
-        $htmlFragment = '';
-        if ($object instanceof IsolatedNewsletter) {
-            $htmlFragment .= mb_strtoupper($object->getTypeString());
-        } else {
-            $htmlFragment .= '---';
+        $result = 'images/newsletter_type_noticies.png';
+        if ($object->getType() === NewsletterTypeEnum::NEWS) {
+            $result = 'images/newsletter_type_noticies.png';
+        } elseif ($object->getType() === NewsletterTypeEnum::EVENTS) {
+            $result = 'images/newsletter_type_activitats.png';
+        } elseif ($object->getType() === NewsletterTypeEnum::EXPOSITIONS) {
+            $result = 'images/newsletter_type_exposicions.png';
         }
 
-        return $htmlFragment;
+        return $result;
     }
 
     /**
