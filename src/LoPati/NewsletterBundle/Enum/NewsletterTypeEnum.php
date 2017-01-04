@@ -22,7 +22,7 @@ class NewsletterTypeEnum
     {
         return array(
             self::NEWS         => 'notícies',
-            self::EVENTS       => 'esdeveniments',
+            self::EVENTS       => 'activitats',
             self::EXPOSITIONS  => 'exposicions',
         );
     }
