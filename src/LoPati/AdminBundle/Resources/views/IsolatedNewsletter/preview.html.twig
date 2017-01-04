@@ -22,7 +22,7 @@
                             {{ post.date | date('d/m/Y') }}
                         </p>
                     {% endif %}
-                    <h5 style="font-weight:bolder">{{ post.title }}</h5>
+                    <h5 style="font-weight:bolder;line-height:1">{{ post.title }}</h5>
                     {% if post.shortDescription %}
                         {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}
                         <p class="post-short-description">
