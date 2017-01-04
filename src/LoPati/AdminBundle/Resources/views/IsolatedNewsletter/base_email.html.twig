@@ -67,11 +67,10 @@
                                     <tbody>
                                     <tr>
                                         <th class="small-8 large-8 first columns extra-padding-top">
-                                            <img style="width:250px" class="float-left" src="{{ absolute_url(asset(getAssetType(newsletter))) }}" alt="+Info button">
-                                            {#<h1 style="font-weight:bolder;font-size:3.5em">{{ newsletter | draw_type }}</h1>#}
+                                            <img class="float-left" src="{{ absolute_url(asset(getAssetType(newsletter))) }}" alt="{{ newsletter.typeString }} logo">
                                         </th>
                                         <th class="small-4 large-4 last columns extra-padding-top grey-color">
-                                            <h6 style="font-weight:bolder" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>
+                                            <h6 style="font-weight:bolder;margin-top:15px" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>
                                             <p class="heading-date">
                                                 {% if show_top_bar == false %}
                                                     {# Production mode #}
