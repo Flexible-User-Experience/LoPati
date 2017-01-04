@@ -21,12 +21,12 @@ sonata_admin:
                 icon: "<i class='fa fa-file-o'></i>"
             Arxius:
                 icon: "<i class='fa fa-archive'></i>"
-            Newsletters:
-                icon: "<i class='fa fa-rss'></i>"
             Irradiador:
                 icon: "<i class='fa fa-street-view'></i>"
             Configuracions:
                 icon: "<i class='fa fa-cogs'></i>"
+            Newsletters:
+                icon: "<i class='fa fa-rss'></i>"
         blocks:
             -
                 position: top
@@ -45,7 +45,10 @@ sonata_admin:
                 position: right
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: [ Newsletters, Irradiador, Configuracions ]
+                    groups: [ Irradiador, Configuracions, Newsletters ]
+            -
+                position: right
+                type: sonata.admin.block.isolated_newsletter_xls_import
             -
                 position: bottom
                 type: sonata.block.service.text
@@ -56,13 +59,11 @@ sonata_admin:
 
 # Sonata Block
 sonata_block:
-    default_contexts: [ cms ]
+    default_contexts: [ admin ]
     blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [ admin ]
         sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
+        sonata.admin.block.admin_list:
+        sonata.admin.block.isolated_newsletter_xls_import:
 
 # Sonata User
 sonata_user:

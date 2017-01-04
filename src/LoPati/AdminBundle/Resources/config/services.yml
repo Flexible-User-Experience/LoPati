@@ -122,6 +122,15 @@ services:
       - "@sendgrid"
       - "@logger"
       - "%sendgrip_api_key%"
+# Sonata Blocks
+  sonata.admin.block.isolated_newsletter_xls_import:
+    class: LoPati\AdminBundle\Admin\Block\IsolatedNewsletterXlsImportBlock
+    tags:
+      - { name: sonata.block }
+    arguments:
+      - "sonata.admin.block.messages"
+      - "@templating"
+      - "@form.factory"
   # Twig
   app.twig_extension:
     class: LoPati\AdminBundle\Twig\AdminExtensionTwig
