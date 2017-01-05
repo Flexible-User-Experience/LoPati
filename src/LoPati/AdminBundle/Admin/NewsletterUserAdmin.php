@@ -46,7 +46,47 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
     {
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'Nom'
+                )
+            )
             ->add('email')
+            ->add(
+                'city',
+                null,
+                array(
+                    'label' => 'Població'
+                )
+            )
+            ->add(
+                'phone',
+                null,
+                array(
+                    'label' => 'Telèfon'
+                )
+            )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'active',
+                null,
+                array(
+                    'label' => 'Actiu',
+                    'required' => false
+                )
+            )
+            ->add(
+                'birthdate',
+                'sonata_type_date_picker',
+                array(
+                    'label'    => 'Data aniversari',
+                    'format'   => 'd/M/y',
+                    'required' => false,
+                )
+            )
             ->add(
                 'groups',
                 'sonata_type_model',
@@ -60,6 +100,7 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                     'by_reference' => false,
                 )
             )
+
             ->add(
                 'idioma',
                 'choice',
@@ -68,9 +109,6 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                     'required' => true,
                 )
             )
-            ->end()
-            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
-            ->add('active', null, array('label' => 'Actiu', 'required' => false))
             ->end()
         ;
     }
