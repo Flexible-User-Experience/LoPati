@@ -7,7 +7,7 @@ use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use LoPati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Symfony\Component\Validator\Constraints\NotBlank as NotBlankConstraint;
-use Symfony\Component\Validator\Validator\RecursiveValidator as Validator;
+use Symfony\Component\Validator\Validator\ValidatorInterface as Validator;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
 /**
