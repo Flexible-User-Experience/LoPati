@@ -198,31 +198,31 @@ class IsolatedNewsletterAdminController extends Controller
                                 foreach ($cellIterator as $cell) {
                                     if (!is_null($cell)) {
                                         if ($cell->getColumn() === 'A') {
-                                            $importedUser->setName($cell->getCalculatedValue());
+                                            $importedUser->setName($cell->getValue());
                                         }
                                         if ($cell->getColumn() === 'B') {
-                                            $importedUser->setName($cell->getCalculatedValue());
+                                            $importedUser->setEmail($cell->getValue());
                                         }
                                         if ($cell->getColumn() === 'C') {
-                                            $importedUser->setGroups($cell->getCalculatedValue());
+                                            $importedUser->setImprotedGroup($cell->getValue());
                                         }
                                         if ($cell->getColumn() === 'D') {
-                                            $importedUser->setCity($cell->getCalculatedValue());
+                                            $importedUser->setCity($cell->getValue());
                                         }
                                         if ($cell->getColumn() === 'E') {
-                                            $importedUser->setAge($cell->getCalculatedValue());
+                                            $importedUser->setAge($cell->getValue());
                                         }
                                         if ($cell->getColumn() === 'F') {
-                                            $importedUser->setPhone($cell->getCalculatedValue());
+                                            $importedUser->setPhone($cell->getValue());
                                         }
-
-                                        $this->get('session')->getFlashBag()->add(
-                                            'app_flash',
-                                            '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] · [cel·la ' . $cell->getColumn() . '] ' . $cell->getCalculatedValue()
-                                        );
-
                                     }
                                 }
+                                $importedUser->setActive(true);
+                                $importedUser->setIdioma('ca');
+                                $this->get('session')->getFlashBag()->add(
+                                    'app_flash',
+                                    '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
+                                );
                             }
                         }
                     } else {

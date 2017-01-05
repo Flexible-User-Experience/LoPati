@@ -97,6 +97,11 @@ class NewsletterUser
     private $fail = 0;
 
     /**
+     * @var string
+     */
+    private $improtedGroup;
+
+    /**
      * @var array|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterGroup", mappedBy="users")
@@ -237,15 +242,24 @@ class NewsletterUser
         return $this->created->format('d/m/Y H:i:s');
     }
 
+    /**
+     * Set fail
+     *
+     * @param bool $fail
+     *
+     * @return $this
+     */
     public function setFail($fail)
     {
         $this->fail = $fail;
+
+        return $this;
     }
 
     /**
      * Get fail
      *
-     * @return \DateTime
+     * @return bool
      */
     public function getFail()
     {
@@ -384,6 +398,66 @@ class NewsletterUser
         $this->birthdate = $birthdate;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge()
+    {
+        $result = 0;
+        if ($this->birthdate) {
+            $currentYear = new \DateTime();
+            $result = intval($currentYear->format('Y')) - intval($this->getBirthdate()->format('Y'));
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param int $age
+     *
+     * @return $this
+     */
+    public function setAge($age)
+    {
+        if ($age) {
+            $currentYear = new \DateTime();
+            $resultYear = intval($currentYear->format('Y')) - $age;
+            $calculatedDate = new \DateTime();
+            $calculatedDate->setDate($resultYear, 1, 1);
+            $this->birthdate = $calculatedDate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImprotedGroup()
+    {
+        return $this->improtedGroup;
+    }
+
+    /**
+     * @param string $improtedGroup
+     *
+     * @return $this
+     */
+    public function setImprotedGroup($improtedGroup)
+    {
+        $this->improtedGroup = $improtedGroup;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportXlsString()
+    {
+        return 'A=' . $this->name . ' · B=' . $this->email . ' · C=' . $this->improtedGroup . ' · D=' . $this->city . ' · E=' . $this->getAge() . ' · F=' . $this->phone;
     }
 
     /**
