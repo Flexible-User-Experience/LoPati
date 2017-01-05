@@ -126,7 +126,7 @@ services:
     class: LoPati\AdminBundle\Service\NewsletterUserManagementService
     arguments:
       - "@doctrine.orm.entity_manager"
-      - "@validator.inner"
+      - "@validator"
 # Sonata Blocks
   sonata.admin.block.isolated_newsletter_xls_import:
     class: LoPati\AdminBundle\Admin\Block\IsolatedNewsletterXlsImportBlock
