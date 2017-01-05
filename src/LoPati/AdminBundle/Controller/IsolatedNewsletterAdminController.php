@@ -189,22 +189,42 @@ class IsolatedNewsletterAdminController extends Controller
                         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filename->getRealPath());
                         /** @var \PHPExcel_Worksheet $worksheet */
                         foreach ($phpExcelObject->getWorksheetIterator() as $worksheet) {
-                            $this->get('session')->getFlashBag()->add(
-                                'app_flash',
-                                'Worksheet - ' . $worksheet->getTitle()
-                            );
                             /** @var \PHPExcel_Worksheet_Row $row */
                             foreach ($worksheet->getRowIterator() as $row) {
-                                $this->get('session')->getFlashBag()->add(
-                                    'app_flash',
-                                    'Row - ' . $row->getRowIndex()
-                                );
+                                $cellIterator = $row->getCellIterator();
+                                $cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+                                $importedUser = new NewsletterUser();
+                                /** @var \PHPExcel_Cell $cell */
+                                foreach ($cellIterator as $cell) {
+                                    if (!is_null($cell)) {
+                                        if ($cell->getColumn() === 'A') {
+                                            $importedUser->setName($cell->getCalculatedValue());
+                                        }
+                                        if ($cell->getColumn() === 'B') {
+                                            $importedUser->setName($cell->getCalculatedValue());
+                                        }
+                                        if ($cell->getColumn() === 'C') {
+                                            $importedUser->setGroups($cell->getCalculatedValue());
+                                        }
+                                        if ($cell->getColumn() === 'D') {
+                                            $importedUser->setCity($cell->getCalculatedValue());
+                                        }
+                                        if ($cell->getColumn() === 'E') {
+                                            $importedUser->setAge($cell->getCalculatedValue());
+                                        }
+                                        if ($cell->getColumn() === 'F') {
+                                            $importedUser->setPhone($cell->getCalculatedValue());
+                                        }
+
+                                        $this->get('session')->getFlashBag()->add(
+                                            'app_flash',
+                                            '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] · [cel·la ' . $cell->getColumn() . '] ' . $cell->getCalculatedValue()
+                                        );
+
+                                    }
+                                }
                             }
                         }
-                        $this->get('session')->getFlashBag()->add(
-                            'app_flash',
-                            'OK.'
-                        );
                     } else {
                         $this->get('session')->getFlashBag()->add(
                             'app_flash_error',
