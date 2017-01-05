@@ -283,7 +283,7 @@ class NewsletterUser
     /**
      * Get Groups
      *
-     * @return mixed
+     * @return array|ArrayCollection
      */
     public function getGroups()
     {

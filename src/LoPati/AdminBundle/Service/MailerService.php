@@ -11,7 +11,7 @@ use Symfony\Bridge\Monolog\Logger;
  * Class MailerService
  *
  * @category Service
- * @package  FinquesFarnos\AppBundle\Service
+ * @package  LoPati\AdminBundle\Service
  * @author   David Romaní <david@flux.cat>
  */
 class MailerService
@@ -30,6 +30,14 @@ class MailerService
      * @var string
      */
     private $sgApiKey;
+
+    /**
+     *
+     *
+     * Methods
+     *
+     *
+     */
 
     /**
      * Constructor

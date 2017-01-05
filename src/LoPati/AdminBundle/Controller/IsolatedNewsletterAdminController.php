@@ -5,6 +5,7 @@ namespace LoPati\AdminBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
+use LoPati\AdminBundle\Service\NewsletterUserManagementService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -186,6 +187,8 @@ class IsolatedNewsletterAdminController extends Controller
                         }
                     }
                     if ($valid) {
+                        /** @var NewsletterUserManagementService $ums */
+                        $ums = $this->get('app.newsletter_user_manager.service');
                         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filename->getRealPath());
                         /** @var \PHPExcel_Worksheet $worksheet */
                         foreach ($phpExcelObject->getWorksheetIterator() as $worksheet) {
@@ -219,8 +222,10 @@ class IsolatedNewsletterAdminController extends Controller
                                 }
                                 $importedUser->setActive(true);
                                 $importedUser->setIdioma('ca');
+                                $result = $ums->writeUser($importedUser);
+
                                 $this->get('session')->getFlashBag()->add(
-                                    'app_flash',
+                                    $result ? 'app_flash' : 'app_flash_error',
                                     '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
                                 );
                             }

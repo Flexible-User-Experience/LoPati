@@ -122,6 +122,11 @@ services:
       - "@sendgrid"
       - "@logger"
       - "%sendgrip_api_key%"
+  app.newsletter_user_manager.service:
+    class: LoPati\AdminBundle\Service\NewsletterUserManagementService
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@validator.inner"
 # Sonata Blocks
   sonata.admin.block.isolated_newsletter_xls_import:
     class: LoPati\AdminBundle\Admin\Block\IsolatedNewsletterXlsImportBlock
