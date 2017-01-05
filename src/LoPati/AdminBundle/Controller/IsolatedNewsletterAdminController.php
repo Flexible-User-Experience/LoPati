@@ -3,11 +3,14 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
-use LoPati\NewsletterBundle\Entity\NewsletterGroup;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -148,6 +151,76 @@ class IsolatedNewsletterAdminController extends Controller
         }
 
         return $this->redirect('../list');
+    }
+
+    /**
+     * @param Request|null $request
+     *
+     * @return RedirectResponse
+     * @throws NotFoundHttpException If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     */
+    public function uploadAction(Request $request = null)
+    {
+        $form = $this->createForm(IsolatedNewsletterXlsFileUploadFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Filesystem $filesystem */
+            $filesystem = $this->get('filesystem');
+            /** @var UploadedFile $filename */
+            $filename = $form->getData()['file'];
+            if ($filename) {
+                if (!$filesystem->exists($filename)) {
+                    $this->get('session')->getFlashBag()->add(
+                        'app_flash_error',
+                        'No s\'ha trobat el fitxer adjunt.'
+                    );
+                } else {
+                    $valid = false;
+                    $types = array('Excel2007', 'Excel5', 'Excel2003XML');
+                    foreach ($types as $type) {
+                        $reader = \PHPExcel_IOFactory::createReader($type);
+                        if ($reader->canRead($filename->getRealPath())) {
+                            $valid = true;
+                            break;
+                        }
+                    }
+                    if ($valid) {
+                        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filename->getRealPath());
+                        /** @var \PHPExcel_Worksheet $worksheet */
+                        foreach ($phpExcelObject->getWorksheetIterator() as $worksheet) {
+                            $this->get('session')->getFlashBag()->add(
+                                'app_flash',
+                                'Worksheet - ' . $worksheet->getTitle()
+                            );
+                            /** @var \PHPExcel_Worksheet_Row $row */
+                            foreach ($worksheet->getRowIterator() as $row) {
+                                $this->get('session')->getFlashBag()->add(
+                                    'app_flash',
+                                    'Row - ' . $row->getRowIndex()
+                                );
+                            }
+                        }
+                        $this->get('session')->getFlashBag()->add(
+                            'app_flash',
+                            'OK.'
+                        );
+                    } else {
+                        $this->get('session')->getFlashBag()->add(
+                            'app_flash_error',
+                            'L\'arxiu NO és compatible amb XLS.'
+                        );
+                    }
+                }
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'app_flash_error',
+                    'No has adjuntat cap fitxer.'
+                );
+            }
+        }
+
+        return $this->redirectToRoute('sonata_admin_dashboard');
     }
 
     /**

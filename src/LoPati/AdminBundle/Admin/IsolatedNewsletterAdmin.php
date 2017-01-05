@@ -309,6 +309,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
         $collection->add('send', $this->getRouterIdParameter() . '/send');
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
         $collection->add('test', $this->getRouterIdParameter() . '/test');
+        $collection->add('upload', 'upload');
         $collection->remove('delete');
         $collection->remove('batch');
         $collection->remove('show');

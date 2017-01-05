@@ -67,7 +67,7 @@ class IsolatedNewsletterXlsImportBlock extends AbstractBlockService
             IsolatedNewsletterXlsFileUploadFormType::class,
             null,
             array(
-                'action' => $this->rs->generate('sonata_admin_dashboard'),
+                'action' => $this->rs->generate('admin_lopati_newsletter_isolatednewsletter_upload'),
             )
         );
 

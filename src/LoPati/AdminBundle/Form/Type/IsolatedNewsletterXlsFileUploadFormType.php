@@ -23,7 +23,7 @@ class IsolatedNewsletterXlsFileUploadFormType extends AbstractType
     {
         $builder
             ->add(
-                'csv',
+                'file',
                 FileType::class,
                 array(
                     'label'    => 'Arxiu',
