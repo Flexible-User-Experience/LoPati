@@ -82,9 +82,9 @@ class NewsletterUserManagementService
             $user->setCity($searchedUser->getCity());
             $user->setBirthdate($searchedUser->getBirthdate());
             $user->setPhone($searchedUser->getPhone());
-//            if ($searchedGroup) {
-//                $user->addGroup($searchedGroup);
-//            }
+            if ($searchedGroup && !$user->getGroups()->contains($searchedGroup)) {
+                $user->addGroup($searchedGroup);
+            }
             $this->em->flush();
 
             return true;
@@ -102,9 +102,9 @@ class NewsletterUserManagementService
                 $user->setPhone($searchedUser->getPhone());
                 $user->setIdioma('ca');
                 $user->setActive(true);
-//                if ($searchedGroup) {
-//                    $user->addGroup($searchedGroup);
-//                }
+                if ($searchedGroup) {
+                    $user->addGroup($searchedGroup);
+                }
                 $this->em->persist($user);
                 $this->em->flush();
 
