@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use LoPati\NewsletterBundle\Repository\NewsletterUserRepository;
+use Symfony\Component\Validator\Constraints\NotBlank as NotBlankConstraint;
 use Symfony\Component\Validator\Validator\RecursiveValidator as Validator;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
@@ -92,7 +93,8 @@ class NewsletterUserManagementService
         } else {
             // new user
             $emailConstraint = new EmailConstraint();
-            $errors = $this->ev->validateValue($searchedUser->getEmail(), $emailConstraint);
+            $notBlankConstraint = new NotBlankConstraint();
+            $errors = $this->ev->validateValue($searchedUser->getEmail(), array($emailConstraint, $notBlankConstraint));
             if ($errors->count() == 0) {
                 $user = new NewsletterUser();
                 $user->setName($searchedUser->getName());
