@@ -47,7 +47,8 @@ sonata_admin:
                 settings:
                     groups: [ Irradiador, Configuracions, Newsletters ]
             -
-                position: right
+                position: bottom
+                class: col-md-12
                 type: sonata.admin.block.isolated_newsletter_xls_import
             -
                 position: bottom

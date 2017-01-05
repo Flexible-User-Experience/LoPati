@@ -457,7 +457,7 @@ class NewsletterUser
      */
     public function getImportXlsString()
     {
-        return 'A=' . $this->name . ' · B=' . $this->email . ' · C=' . $this->improtedGroup . ' · D=' . $this->city . ' · E=' . $this->getAge() . ' · F=' . $this->phone;
+        return 'NOM=' . $this->name . ' · EMAIL=' . $this->email . ' · GRUP=' . $this->improtedGroup . ' · CIUTAT=' . $this->city . ' · EDAT=' . $this->getAge() . ' · TEL=' . $this->phone;
     }
 
     /**
