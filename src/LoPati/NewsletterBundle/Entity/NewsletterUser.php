@@ -17,6 +17,7 @@ class NewsletterUser
 {
     /**
      * @var integer $id
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -24,48 +25,100 @@ class NewsletterUser
     private $id;
 
     /**
-     * @var string $email
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\Email()
      */
     private $email;
 
     /**
-     * @var string $idioma
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $birthdate;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="idioma", type="string", length=2)
      */
     private $idioma;
 
     /**
-     * @var string $token
+     * @var string
+     *
      * @ORM\Column(name="token", type="string", length=255)
      */
     private $token;
 
     /**
+     * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
-     * @var \DateTime
      */
     private $created;
 
     /**
-     * @var boolean $active
+     * @var boolean
+     *
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
 
     /**
-     * @var int $active
+     * @var int
+     *
      * @ORM\Column(name="fail", type="integer")
      */
     private $fail = 0;
 
     /**
+     * @var string
+     */
+    private $improtedGroup;
+
+    /**
+     * @var array|ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="LoPati\NewsletterBundle\Entity\NewsletterGroup", mappedBy="users")
      */
     protected $groups;
 
+    /**
+     *
+     *
+     * Methods
+     *
+     *
+     */
+
+    /**
+     * NewsletterUser constructor
+     */
     public function __construct()
     {
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -189,15 +242,24 @@ class NewsletterUser
         return $this->created->format('d/m/Y H:i:s');
     }
 
+    /**
+     * Set fail
+     *
+     * @param bool $fail
+     *
+     * @return $this
+     */
     public function setFail($fail)
     {
         $this->fail = $fail;
+
+        return $this;
     }
 
     /**
      * Get fail
      *
-     * @return \DateTime
+     * @return bool
      */
     public function getFail()
     {
@@ -258,6 +320,149 @@ class NewsletterUser
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return NewsletterUser
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return NewsletterUser
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return NewsletterUser
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * @param \DateTime $birthdate
+     *
+     * @return NewsletterUser
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAge()
+    {
+        $result = 0;
+        if ($this->birthdate) {
+            $currentYear = new \DateTime();
+            $result = intval($currentYear->format('Y')) - intval($this->getBirthdate()->format('Y'));
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param int $age
+     *
+     * @return $this
+     */
+    public function setAge($age)
+    {
+        if ($age) {
+            $currentYear = new \DateTime();
+            $resultYear = intval($currentYear->format('Y')) - $age;
+            $calculatedDate = new \DateTime();
+            $calculatedDate->setDate($resultYear, 1, 1);
+            $this->birthdate = $calculatedDate;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImprotedGroup()
+    {
+        return $this->improtedGroup;
+    }
+
+    /**
+     * @param string $improtedGroup
+     *
+     * @return $this
+     */
+    public function setImprotedGroup($improtedGroup)
+    {
+        $this->improtedGroup = $improtedGroup;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportXlsString()
+    {
+        return 'A=' . $this->name . ' · B=' . $this->email . ' · C=' . $this->improtedGroup . ' · D=' . $this->city . ' · E=' . $this->getAge() . ' · F=' . $this->phone;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->email ? $this->email : '---';

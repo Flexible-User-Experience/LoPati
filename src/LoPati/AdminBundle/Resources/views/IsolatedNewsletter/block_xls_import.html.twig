@@ -1,0 +1,87 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="box box-info">
+        <div class="box-header">
+            <h3 class="box-title">{{ title }}</h3>
+            <button style="margin-left: 10px" type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#csvHelperModal">
+                <i class="fa fa-question-circle"></i>
+            </button>
+            {#<!-- Modal -->#}
+            <div class="modal fade" id="csvHelperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>El format del fitxer a importar ha de ser compatible amb XLS. El fitxer ha de respectar l'ordre les següents columnes i garantir que existeixin. L'única columna obligatoria és la del email.</p>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Columna</th>
+                                    <th>Nom</th>
+                                    <th>Contingut</th>
+                                    <th>Restriccions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>A</td>
+                                    <td>Nom</td>
+                                    <td>Text amb el nom i cognoms de la persona</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>Email</td>
+                                    <td>Text amb email de la persona</td>
+                                    <td>Camp obligatori. Els emails existents actualitzaran la informació, no es crearan duplicats.</td>
+                                </tr>
+                                <tr>
+                                    <td>C</td>
+                                    <td>Grup</td>
+                                    <td>Grup del newsletter al qual pertany</td>
+                                    <td>El nom del grup ha de coincidir amb els noms existents. Per exemple ART, SON, PRO, COM...</td>
+                                </tr>
+                                <tr>
+                                    <td>D</td>
+                                    <td>Població</td>
+                                    <td>Text amb la població</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Edat</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>F</td>
+                                    <td>Telèfon</td>
+                                    <td>Text amb el telèfon</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            {% for flash_message in app.session.flashBag.get('app_flash_error') %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('app_flash') %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            <div class="sonata-ba-collapsed-fields">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
