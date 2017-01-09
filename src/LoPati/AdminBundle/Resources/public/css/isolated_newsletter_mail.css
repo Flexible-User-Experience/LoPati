@@ -73,3 +73,10 @@ a.footer-bottom-icon {
     margin-left: 5px;
     display: inline-block;
 }
+
+a.footer-pre-bottom-icon {
+    width: 80px;
+    float: right;
+    margin-left: 15px;
+    display: inline-block;
+}
