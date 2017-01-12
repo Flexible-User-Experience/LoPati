@@ -8,12 +8,14 @@
             <tbody>
             <tr>
                 <th class="small-12 large-7 columns first small-padding-bottom">
-                    {% if post.link %}
-                        <a href="{{ post.link }}">
+                    {% if post.imageName is defined %}
+                        {% if post.link %}
+                            <a href="{{ post.link }}">
+                                <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                            </a>
+                        {% else %}
                             <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
-                        </a>
-                    {% else %}
-                        <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                        {% endif %}
                     {% endif %}
                 </th>
                 <th class="small-12 large-5 columns last small-padding-bottom">

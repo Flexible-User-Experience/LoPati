@@ -62,7 +62,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'file',
                     array(
                         'label'       => 'Imatge',
-                        'required'    => true,
+                        'required'    => false,
                         'sonata_help' => $imageHelp,
                         'help'        => $imageHelp,
                     )
@@ -102,7 +102,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
         } else {
             // else is normal admin view
             $formMapper
-                ->with('General', $this->getFormMdSuccessBoxArray(8))
+                ->with('General', $this->getFormMdSuccessBoxArray(6))
                 ->add(
                     'title',
                     null,
@@ -118,7 +118,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                         'label'    => 'Descripció breu',
                         'required' => false,
                         'attr'     => array(
-                            'rows' => 5,
+                            'rows' => 10,
                         ),
                     )
                 )
@@ -136,23 +136,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
 //                    )
 //                )
                 ->end()
-                ->with('Controls', $this->getFormMdSuccessBoxArray(4))
-                ->add(
-                    'date',
-                    'sonata_type_date_picker',
-                    array(
-                        'label'    => 'Data',
-                        'format'   => 'd/M/y',
-                        'required' => false,
-                    )
-                )
-                ->add(
-                    'newsletter',
-                    null,
-                    array(
-                        'disabled' => true,
-                    )
-                )
+                ->with('Imatge', $this->getFormMdSuccessBoxArray(4))
                 ->add(
                     'imageFile',
                     'file',
@@ -170,6 +154,33 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                         'required' => false,
                     )
                 )
+                ->end()
+                ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+                ->add(
+                    'date',
+                    'sonata_type_date_picker',
+                    array(
+                        'label'    => 'Data inici',
+                        'format'   => 'd/M/y',
+                        'required' => false,
+                    )
+                )
+                ->add(
+                    'endDate',
+                    'sonata_type_date_picker',
+                    array(
+                        'label'    => 'Data fi',
+                        'format'   => 'd/M/y',
+                        'required' => false,
+                    )
+                )
+//                ->add(
+//                    'newsletter',
+//                    null,
+//                    array(
+//                        'disabled' => true,
+//                    )
+//                )
                 ->add(
                     'position',
                     null,
