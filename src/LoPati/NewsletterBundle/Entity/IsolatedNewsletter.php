@@ -38,7 +38,7 @@ class IsolatedNewsletter
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="date", nullable=false)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date;
 
@@ -52,7 +52,7 @@ class IsolatedNewsletter
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false, options={"default"=0})
+     * @ORM\Column(type="integer", nullable=true, options={"default"=0})
      */
     private $type = 0;
 
@@ -343,6 +343,6 @@ class IsolatedNewsletter
      */
     public function __toString()
     {
-        return $this->id ? $this->getDate()->format('d/m/Y') . ' · ' . $this->subject : '---';
+        return $this->date ? $this->getDate()->format('d/m/Y') . ' · ' . $this->subject : $this->id ? $this->subject : '---';
     }
 }

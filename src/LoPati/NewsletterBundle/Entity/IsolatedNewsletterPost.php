@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -52,16 +53,16 @@ class IsolatedNewsletterPost
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, name="image", nullable=false)
+     * @ORM\Column(type="string", length=255, name="image", nullable=true)
      */
     protected $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false, options={"default"="."})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $shortDescription = '.';
+    private $shortDescription;
 
     /**
      * @var string
@@ -99,6 +100,27 @@ class IsolatedNewsletterPost
      * @ORM\Column(type="date", nullable=true)
      */
     private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $intervalDateText;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $type;
 
     /**
      * @var \DateTime
@@ -318,6 +340,74 @@ class IsolatedNewsletterPost
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTime $endDate
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIntervalDateText()
+    {
+        return $this->intervalDateText;
+    }
+
+    /**
+     * @param string $intervalDateText
+     *
+     * @return $this
+     */
+    public function setIntervalDateText($intervalDateText)
+    {
+        $this->intervalDateText = $intervalDateText;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeString()
+    {
+        return NewsletterTypeEnum::getEnumArray()[$this->type];
+    }
+
+    /**
+     * @param int $type
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }

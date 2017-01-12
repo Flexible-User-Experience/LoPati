@@ -3,9 +3,11 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 use LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType;
 
@@ -62,7 +64,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'file',
                     array(
                         'label'       => 'Imatge',
-                        'required'    => true,
+                        'required'    => false,
                         'sonata_help' => $imageHelp,
                         'help'        => $imageHelp,
                     )
@@ -73,6 +75,18 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     array(
                         'label'    => 'Títol de l\'article',
                         'required' => true,
+                    )
+                )
+                ->add(
+                    'type',
+                    ChoiceType::class,
+                    array(
+                        'label'    => 'Tipus',
+                        'choices'  => NewsletterTypeEnum::getEnumArray(),
+                        'multiple' => false,
+                        'expanded' => false,
+                        'required' => false,
+                        'disabled' => false,
                     )
                 )
                 ->add(
@@ -102,7 +116,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
         } else {
             // else is normal admin view
             $formMapper
-                ->with('General', $this->getFormMdSuccessBoxArray(8))
+                ->with('General', $this->getFormMdSuccessBoxArray(6))
                 ->add(
                     'title',
                     null,
@@ -118,41 +132,70 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                         'label'    => 'Descripció breu',
                         'required' => false,
                         'attr'     => array(
-                            'rows' => 5,
+                            'rows' => 12,
                         ),
                     )
                 )
-//                ->add(
-//                    'description',
-//                    'textarea',
-//                    array(
-//                        'label'    => 'Descripció',
-//                        'required' => false,
-//                        'attr'     => array(
-//                            'class'      => 'tinymce',
-//                            'data-theme' => 'simple',
-//                            'style'      => 'width:100%;height:300px;'
-//                        ),
-//                    )
-//                )
                 ->end()
-                ->with('Controls', $this->getFormMdSuccessBoxArray(4))
+                ->with('Dates', $this->getFormMdSuccessBoxArray(3))
                 ->add(
                     'date',
                     'sonata_type_date_picker',
                     array(
-                        'label'    => 'Data',
+                        'label'    => 'Data inici',
                         'format'   => 'd/M/y',
                         'required' => false,
                     )
                 )
                 ->add(
-                    'newsletter',
-                    null,
+                    'endDate',
+                    'sonata_type_date_picker',
                     array(
-                        'disabled' => true,
+                        'label'    => 'Data fi',
+                        'format'   => 'd/M/y',
+                        'required' => false,
                     )
                 )
+                ->add(
+                    'intervalDateText',
+                    null,
+                    array(
+                        'label'    => 'Interval o data en forma de text',
+                        'required' => false,
+                        'help'     => 'si escrius algun text, la data inci o fi no apareixeran al newsletter',
+                    )
+                )
+                ->end()
+                ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+                ->add(
+                    'type',
+                    ChoiceType::class,
+                    array(
+                        'label'    => 'Tipus',
+                        'choices'  => NewsletterTypeEnum::getEnumArray(),
+                        'multiple' => false,
+                        'expanded' => false,
+                        'required' => false,
+                        'disabled' => false,
+                    )
+                )
+//                ->add(
+//                    'newsletter',
+//                    null,
+//                    array(
+//                        'disabled' => true,
+//                    )
+//                )
+                ->add(
+                    'position',
+                    null,
+                    array(
+                        'label'    => 'Posició',
+                        'required' => false,
+                    )
+                )
+                ->end()
+                ->with('Imatge', $this->getFormMdSuccessBoxArray(5))
                 ->add(
                     'imageFile',
                     'file',
@@ -167,14 +210,6 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     null,
                     array(
                         'label'    => 'Enllaç',
-                        'required' => false,
-                    )
-                )
-                ->add(
-                    'position',
-                    null,
-                    array(
-                        'label'    => 'Posició',
                         'required' => false,
                     )
                 )

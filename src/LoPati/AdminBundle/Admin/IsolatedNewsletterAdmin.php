@@ -3,7 +3,6 @@
 namespace LoPati\AdminBundle\Admin;
 
 use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
-use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Lopati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -62,30 +61,18 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'date',
                 'sonata_type_date_picker',
                 array(
-                    'label'  => 'Data',
-                    'format' => 'd/M/y',
+                    'label'    => 'Data',
+                    'format'   => 'd/M/y',
+                    'required' => false,
                 )
             )
-            ->add(
-                'type',
-                ChoiceType::class,
-                array(
-                    'label'    => 'Tipus',
-                    'choices'  => NewsletterTypeEnum::getEnumArray(),
-                    'multiple' => false,
-                    'expanded' => false,
-                    'required' => true,
-                    'disabled' => false,
-                )
-            )
-
             ->add(
                 'group',
                 'sonata_type_model',
                 array(
                     'label'    => 'Grup',
                     'query'    => $ngr->getActiveItemsSortByNameQuery(),
-                    'required' => true,
+                    'required' => false,
                     'expanded' => false,
                     'multiple' => false,
                     'btn_add'  => false,
@@ -164,19 +151,6 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 )
             )
             ->add(
-                'type',
-                null,
-                array(
-                    'label' => 'Tipus',
-                ),
-                'choice',
-                array(
-                    'expanded' => false,
-                    'multiple' => false,
-                    'choices'  => NewsletterTypeEnum::getEnumArray(),
-                )
-            )
-            ->add(
                 'subject',
                 null,
                 array(
@@ -229,15 +203,6 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'label'    => 'Data',
                     'editable' => true,
                     'format'   => 'd/m/Y',
-                )
-            )
-            ->add(
-                'type',
-                null,
-                array(
-                    'label'    => 'Tipus',
-                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_type_field.html.twig',
-                    'editable' => false,
                 )
             )
             ->add(
