@@ -19,7 +19,10 @@
                     {% endif %}
                 </th>
                 <th class="small-12 large-5 columns last small-padding-bottom">
-                    {% if post.date %}
+                    {% if post.intervalDateText is not null %}
+                        <p class="post-heading">{{ post.intervalDateText }}</p>
+                    {% endif %}
+                    {% if post.date and post.intervalDateText is null %}
                         <p class="post-heading">
                             {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
                         </p>
