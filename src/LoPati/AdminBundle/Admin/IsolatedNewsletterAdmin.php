@@ -62,30 +62,18 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'date',
                 'sonata_type_date_picker',
                 array(
-                    'label'  => 'Data',
-                    'format' => 'd/M/y',
+                    'label'    => 'Data',
+                    'format'   => 'd/M/y',
+                    'required' => false,
                 )
             )
-            ->add(
-                'type',
-                ChoiceType::class,
-                array(
-                    'label'    => 'Tipus',
-                    'choices'  => NewsletterTypeEnum::getEnumArray(),
-                    'multiple' => false,
-                    'expanded' => false,
-                    'required' => true,
-                    'disabled' => false,
-                )
-            )
-
             ->add(
                 'group',
                 'sonata_type_model',
                 array(
                     'label'    => 'Grup',
                     'query'    => $ngr->getActiveItemsSortByNameQuery(),
-                    'required' => true,
+                    'required' => false,
                     'expanded' => false,
                     'multiple' => false,
                     'btn_add'  => false,
@@ -163,19 +151,19 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'field_type' => 'sonata_type_date_picker',
                 )
             )
-            ->add(
-                'type',
-                null,
-                array(
-                    'label' => 'Tipus',
-                ),
-                'choice',
-                array(
-                    'expanded' => false,
-                    'multiple' => false,
-                    'choices'  => NewsletterTypeEnum::getEnumArray(),
-                )
-            )
+//            ->add(
+//                'type',
+//                null,
+//                array(
+//                    'label' => 'Tipus',
+//                ),
+//                'choice',
+//                array(
+//                    'expanded' => false,
+//                    'multiple' => false,
+//                    'choices'  => NewsletterTypeEnum::getEnumArray(),
+//                )
+//            )
             ->add(
                 'subject',
                 null,
@@ -231,15 +219,15 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'format'   => 'd/m/Y',
                 )
             )
-            ->add(
-                'type',
-                null,
-                array(
-                    'label'    => 'Tipus',
-                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_type_field.html.twig',
-                    'editable' => false,
-                )
-            )
+//            ->add(
+//                'type',
+//                null,
+//                array(
+//                    'label'    => 'Tipus',
+//                    'template' => 'AdminBundle:IsolatedNewsletter:list_custom_type_field.html.twig',
+//                    'editable' => false,
+//                )
+//            )
             ->add(
                 'subject',
                 null,
