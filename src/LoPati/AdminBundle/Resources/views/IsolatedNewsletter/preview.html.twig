@@ -8,7 +8,7 @@
             <tbody>
             <tr>
                 <th class="small-12 large-7 columns first small-padding-bottom">
-                    {% if post.imageName is defined %}
+                    {% if post.image is not null %}
                         {% if post.link %}
                             <a href="{{ post.link }}">
                                 <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
@@ -21,7 +21,7 @@
                 <th class="small-12 large-5 columns last small-padding-bottom">
                     {% if post.date %}
                         <p class="post-heading">
-                            {{ post.date | date('d/m/Y') }}
+                            {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
                         </p>
                     {% endif %}
                     <h5 style="font-weight:bolder;line-height:1">{{ post.title }}</h5>

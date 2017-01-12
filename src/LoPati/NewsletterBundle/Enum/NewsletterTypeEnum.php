@@ -21,9 +21,9 @@ class NewsletterTypeEnum
     public static function getEnumArray()
     {
         return array(
-            self::NEWS         => 'notícies',
+            self::NEWS         => 'noticia',
             self::EVENTS       => 'activitat',
-            self::EXPOSITIONS  => 'exposicions',
+            self::EXPOSITIONS  => 'exposició',
         );
     }
 }

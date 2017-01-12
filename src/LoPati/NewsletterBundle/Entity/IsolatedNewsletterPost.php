@@ -118,9 +118,9 @@ class IsolatedNewsletterPost
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=false, options={"default"=0})
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $type = 0;
+    private $type;
 
     /**
      * @var \DateTime

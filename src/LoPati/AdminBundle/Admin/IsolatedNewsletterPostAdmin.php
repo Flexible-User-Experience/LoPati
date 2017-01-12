@@ -3,9 +3,11 @@
 namespace LoPati\AdminBundle\Admin;
 
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 use LoPati\AdminBundle\Form\Type\EditIsolatedNewsletterPostActionButtonFormType;
 
@@ -102,7 +104,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
         } else {
             // else is normal admin view
             $formMapper
-                ->with('General', $this->getFormMdSuccessBoxArray(6))
+                ->with('General', $this->getFormMdSuccessBoxArray(7))
                 ->add(
                     'title',
                     null,
@@ -136,7 +138,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
 //                    )
 //                )
                 ->end()
-                ->with('Imatge', $this->getFormMdSuccessBoxArray(4))
+                ->with('Imatge', $this->getFormMdSuccessBoxArray(5))
                 ->add(
                     'imageFile',
                     'file',
@@ -156,6 +158,31 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                 )
                 ->end()
                 ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+//            ->add(
+//                'type',
+//                null,
+//                array(
+//                    'label' => 'Tipus',
+//                ),
+//                'choice',
+//                array(
+//                    'expanded' => false,
+//                    'multiple' => false,
+//                    'choices'  => NewsletterTypeEnum::getEnumArray(),
+//                )
+//            )
+                ->add(
+                    'type',
+                    ChoiceType::class,
+                    array(
+                        'label'    => 'Tipus',
+                        'choices'  => NewsletterTypeEnum::getEnumArray(),
+                        'multiple' => false,
+                        'expanded' => false,
+                        'required' => false,
+                        'disabled' => false,
+                    )
+                )
                 ->add(
                     'date',
                     'sonata_type_date_picker',
