@@ -51,6 +51,7 @@ swiftmailer:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
+    bundles:        [ AdminBundle, AgendaBundle, ArtistaBundle, BlogBundle, MenuBundle, NewsletterBundle, UserBundle ]
     filters:
         cssrewrite: ~
 
