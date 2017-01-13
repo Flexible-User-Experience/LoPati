@@ -90,10 +90,10 @@
                                 {% block footer %}
                                     <table class="row white-background">
                                         <tr>
-                                            <th class="small-5 large-5 first columns vertical-padding">
+                                            <th class="small-5 large-3 first columns vertical-padding">
                                                 <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati_newsletter.png')) }}" alt="LO PATI logo"></a>
                                             </th>
-                                            <th class="small-7 large-7 last columns vertical-padding">
+                                            <th class="small-7 large-9 last columns vertical-padding">
                                                 <p class="grey-color text-right footer-right">
                                                     <a href="http://cultura.gencat.cat/ca/inici/" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_gencat.png')) }}" alt="Gencat logo">
@@ -105,6 +105,7 @@
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_amposta.png')) }}" alt="Diputacio Tarragona logo">
                                                     </a>
                                                 </p>
+                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 23} %}
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
