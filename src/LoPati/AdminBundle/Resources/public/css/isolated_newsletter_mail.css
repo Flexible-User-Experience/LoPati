@@ -12,6 +12,7 @@
 .small-vertical-padding { padding: 10px 0; }
 .vertical-padding       { padding: 20px 0; }
 .extra-padding-top      { padding-top: 64px; }
+.normal-padding-top     { padding-top: 32px; }
 .padding-top            { padding-top: 16px; }
 .small-padding-top      { padding-top: 8px; }
 .padding-bottom         { padding-bottom: 16px; }
@@ -34,8 +35,8 @@
 
 p.heading-date {
     color: #8B8B8B;
-    text-align: right;
-    font-size: 8px;
+    text-align: left;
+    font-size: 9px;
 }
 
 p.heading-date a {
@@ -79,4 +80,15 @@ a.footer-pre-bottom-icon {
     float: right;
     margin-left: 15px;
     display: inline-block;
+}
+
+h6.h6-type {
+    font-weight: bolder;
+    line-height: 1;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+h6.h6-type span {
+    font-weight: normal;
 }

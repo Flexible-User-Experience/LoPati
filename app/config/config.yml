@@ -35,7 +35,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "2.2.7"
+        admin_tag_version:       "2.2.8"
         id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
@@ -51,6 +51,7 @@ swiftmailer:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
+    bundles:        [ AdminBundle, AgendaBundle, ArtistaBundle, BlogBundle, MenuBundle, NewsletterBundle, UserBundle ]
     filters:
         cssrewrite: ~
 

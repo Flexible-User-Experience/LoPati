@@ -66,19 +66,19 @@
                                 <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-8 large-8 first columns extra-padding-top">
-                                            <img class="float-left" src="{{ absolute_url(asset(getAssetType(newsletter))) }}" alt="{{ newsletter.typeString }} logo">
+                                        <th class="small-12 large-12 first last columns normal-padding-top">
+                                            <img class="float-left" src="{{ absolute_url(asset('images/newsletter_logo_header.png')) }}" alt="{{ newsletter.typeString }} logo">
                                         </th>
-                                        <th class="small-4 large-4 last columns extra-padding-top grey-color">
-                                            <h6 style="font-weight:bolder;margin-top:15px" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>
-                                            <p class="heading-date">
-                                                {% if show_top_bar == false %}
+                                        {#<th class="small-4 large-4 last columns extra-padding-top grey-color">#}
+                                            {#<h6 style="font-weight:bolder;margin-top:15px" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>#}
+                                            {#<p class="heading-date">#}
+                                                {#{% if show_top_bar == false %}#}
                                                     {# Production mode #}
-                                                    Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>
-                                                    Clic <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa
-                                                {% endif %}
-                                            </p>
-                                        </th>
+                                                    {#Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>#}
+                                                    {#Clic <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa#}
+                                                {#{% endif %}#}
+                                            {#</p>#}
+                                        {#</th>#}
                                         <th class="expander"></th>
                                     </tr>
                                     </tbody>
@@ -90,10 +90,10 @@
                                 {% block footer %}
                                     <table class="row white-background">
                                         <tr>
-                                            <th class="small-5 large-5 first columns vertical-padding">
+                                            <th class="small-3 large-3 first columns vertical-padding">
                                                 <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati_newsletter.png')) }}" alt="LO PATI logo"></a>
                                             </th>
-                                            <th class="small-7 large-7 last columns vertical-padding">
+                                            <th class="small-9 large-9 last columns vertical-padding">
                                                 <p class="grey-color text-right footer-right">
                                                     <a href="http://cultura.gencat.cat/ca/inici/" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_gencat.png')) }}" alt="Gencat logo">
@@ -105,6 +105,7 @@
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_amposta.png')) }}" alt="Diputacio Tarragona logo">
                                                     </a>
                                                 </p>
+                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 23} %}
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
@@ -139,6 +140,20 @@
                                             <th class="expander"></th>
                                         </tr>
                                     </table>
+                                    {% if show_top_bar == true %}
+                                        {# production mode #}
+                                        <table style="margin-top:-10px" class="row white-background">
+                                            <tr>
+                                                <th class="small-12 large-12 first last columns">
+                                                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
+                                                    <p class="heading-date">
+                                                        Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa
+                                                    </p>
+                                                </th>
+                                                <th class="expander"></th>
+                                            </tr>
+                                        </table>
+                                    {% endif %}
                                 {% endblock %}
                             </td>
                         </tr>

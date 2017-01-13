@@ -7,7 +7,7 @@
         <table class="row">
             <tbody>
             <tr>
-                <th class="small-12 large-7 columns first small-padding-bottom">
+                <th class="small-12 large-8 columns first small-padding-bottom">
                     {% if post.image is not null %}
                         {% if post.link %}
                             <a href="{{ post.link }}">
@@ -18,28 +18,32 @@
                         {% endif %}
                     {% endif %}
                 </th>
-                <th class="small-12 large-5 columns last small-padding-bottom">
+                <th class="small-12 large-4 columns last small-padding-bottom">
+                    {% if post.type is not null %}
+                        <h6 class="h6-type">{{ post.typeString | upper }}{% if post.date and post.endDate is null and post.intervalDateText is null %} <span>{{ post.date | date('d | m | y') }}</span>{% endif %}</h6>
+                    {% endif %}
                     {% if post.intervalDateText is not null %}
-                        <p class="post-heading">{{ post.intervalDateText }}</p>
+                        <h6 class="h6-type"><span>{{ post.intervalDateText }}</span></h6>
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
                     {% endif %}
                     {% if post.date and post.intervalDateText is null %}
-                        <p class="post-heading">
-                            {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
-                        </p>
-                    {% endif %}
-                    {% if post.type is not null %}
-                        <h6 style="font-weight:bolder;line-height:1">{{ post.typeString | upper }}</h6>
+                        <h6 class="h6-type">
+                            <span>
+                                {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
+                            </span>
+                        </h6>
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
                     {% endif %}
                     <h4 style="font-weight:bolder;line-height:1">{{ post.title }}</h4>
-                    {% if post.shortDescription %}
-                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}
-                        <p class="post-short-description">
-                            {{ post.shortDescription }}
-                        </p>
-                    {% endif %}
+                    {#{% if post.shortDescription %}#}
+                        {#{% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 10} %}#}
+                        {#<p class="post-short-description">#}
+                            {#{{ post.shortDescription }}#}
+                        {#</p>#}
+                    {#{% endif %}#}
                     {% if post.link %}
-                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
-                        <a href="{{ post.link }}">
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 60, show_for_large: true} %}
+                        <a href="{{ post.link }}" class="show-for-large">
                             <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
                         </a>
                     {% endif %}
