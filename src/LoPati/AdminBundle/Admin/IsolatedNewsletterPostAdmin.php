@@ -73,7 +73,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'title',
                     null,
                     array(
-                        'label'    => 'Títol de l\'article',
+                        'label'    => 'Títol',
                         'required' => false,
                     )
                 )
@@ -121,7 +121,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'title',
                     null,
                     array(
-                        'label'    => 'Títol de l\'article',
+                        'label'    => 'Títol',
                         'required' => false,
                     )
                 )
