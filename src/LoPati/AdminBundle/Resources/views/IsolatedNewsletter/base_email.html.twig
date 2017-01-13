@@ -90,22 +90,23 @@
                                 {% block footer %}
                                     <table class="row white-background">
                                         <tr>
-                                            <th class="small-3 large-3 first columns vertical-padding">
-                                                <a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati_newsletter.png')) }}" alt="LO PATI logo"></a>
-                                            </th>
-                                            <th class="small-9 large-9 last columns vertical-padding">
-                                                <p class="grey-color text-right footer-right">
+                                            {#<th class="small-3 large-3 first columns vertical-padding">#}
+                                                {#<a href="{{ url('inici') }}"><img src="{{ absolute_url(asset('images/logo_lopati_newsletter.png')) }}" alt="LO PATI logo"></a>#}
+                                            {#</th>#}
+                                            <th class="small-12 large-12 first last columns vertical-padding">
+                                                <p class="grey-color footer-right">
+                                                    <a href="http://www.amposta.cat" class="footer-pre-bottom-icon">
+                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_amposta.png')) }}" alt="Diputacio Tarragona logo">
+                                                    </a>
                                                     <a href="http://cultura.gencat.cat/ca/inici/" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_gencat.png')) }}" alt="Gencat logo">
                                                     </a>
                                                     <a href="http://www.diputaciodetarragona.cat" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_tarragona.png')) }}" alt="Diputacio Tarragona logo">
                                                     </a>
-                                                    <a href="http://www.amposta.cat" class="footer-pre-bottom-icon">
-                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_amposta.png')) }}" alt="Diputacio Tarragona logo">
-                                                    </a>
+
                                                 </p>
-                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 23} %}
+                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 13} %}
                                             </th>
                                             <th class="expander"></th>
                                         </tr>
@@ -115,8 +116,7 @@
                                         <tr>
                                             <th class="small-8 large-8 first columns">
                                                 <p class="footer-bottom">
-                                                    C. Gran Capità, 38-40<br>
-                                                    43870 Amposta<br><br>
+                                                    LO PATI | C. Gran Capità, 38-40 | 43870 Amposta<br><br>
                                                     <a href="mailto:info@lopati.cat">info@lopati.cat</a>
                                                 </p>
                                             </th>
