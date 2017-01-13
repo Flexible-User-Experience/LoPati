@@ -47,6 +47,13 @@ class NewsletterUser
     private $city;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $postalCode;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -59,6 +66,13 @@ class NewsletterUser
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $birthdate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $birthyear;
 
     /**
      * @var string
@@ -156,7 +170,11 @@ class NewsletterUser
         return $this->email;
     }
 
-
+    /**
+     * Set idioma
+     *
+     * @param $idioma
+     */
     public function setIdioma($idioma)
     {
         $this->idioma = $idioma;
@@ -361,6 +379,26 @@ class NewsletterUser
     }
 
     /**
+     * @return int
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param int $postalCode
+     *
+     * @return $this
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getPhone()
@@ -371,7 +409,7 @@ class NewsletterUser
     /**
      * @param string $phone
      *
-     * @return NewsletterUser
+     * @return $this
      */
     public function setPhone($phone)
     {
@@ -428,6 +466,26 @@ class NewsletterUser
             $calculatedDate->setDate($resultYear, 1, 1);
             $this->birthdate = $calculatedDate;
         }
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBirthyear()
+    {
+        return $this->birthyear;
+    }
+
+    /**
+     * @param int $birthyear
+     *
+     * @return $this
+     */
+    public function setBirthyear($birthyear)
+    {
+        $this->birthyear = $birthyear;
 
         return $this;
     }
