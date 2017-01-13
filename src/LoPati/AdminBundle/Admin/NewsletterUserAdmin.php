@@ -31,8 +31,6 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
      * Configure route collection
      *
      * @param RouteCollection $collection collection
-     *
-     * @return mixed
      */
     protected function configureRoutes(RouteCollection $collection)
     {
@@ -55,17 +53,34 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
             )
             ->add('email')
             ->add(
-                'city',
-                null,
-                array(
-                    'label' => 'Població'
-                )
-            )
-            ->add(
                 'phone',
                 null,
                 array(
                     'label' => 'Telèfon'
+                )
+            )
+            ->add(
+                'birthyear',
+                null,
+                array(
+                    'label' => 'Any naixement',
+                    'required' => false,
+                )
+            )
+            ->end()
+            ->with('Adreça', $this->getFormMdSuccessBoxArray(4))
+            ->add(
+                'postalCode',
+                null,
+                array(
+                    'label' => 'Codi postal'
+                )
+            )
+            ->add(
+                'city',
+                null,
+                array(
+                    'label' => 'Població'
                 )
             )
             ->end()
@@ -78,15 +93,15 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                     'required' => false
                 )
             )
-            ->add(
-                'birthdate',
-                'sonata_type_date_picker',
-                array(
-                    'label'    => 'Data aniversari',
-                    'format'   => 'd/M/y',
-                    'required' => false,
-                )
-            )
+//            ->add(
+//                'birthdate',
+//                'sonata_type_date_picker',
+//                array(
+//                    'label'    => 'Data aniversari',
+//                    'format'   => 'd/M/y',
+//                    'required' => false,
+//                )
+//            )
             ->add(
                 'groups',
                 'sonata_type_model',
@@ -122,7 +137,7 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
             ->addIdentifier('email')
             ->add('groups', null, array('label' => 'Grups'))
             ->add('idioma')
-            ->add('fail', null, array('label' => 'Enviaments erronis'))
+//            ->add('fail', null, array('label' => 'Enviaments erronis'))
             ->add('active', 'boolean', array('label' => 'Actiu', 'editable' => true))
             ->add(
                 '_action',
@@ -140,7 +155,10 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('name')
             ->add('email')
+            ->add('city')
+            ->add('postalCode')
             ->add('groups', null, array('label' => 'Grup'))
             ->add('idioma')
             ->add('created', 'doctrine_orm_date', array('label' => 'Data Alta'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
