@@ -12,6 +12,7 @@
 .small-vertical-padding { padding: 10px 0; }
 .vertical-padding       { padding: 20px 0; }
 .extra-padding-top      { padding-top: 64px; }
+.normal-padding-top     { padding-top: 32px; }
 .padding-top            { padding-top: 16px; }
 .small-padding-top      { padding-top: 8px; }
 .padding-bottom         { padding-bottom: 16px; }
