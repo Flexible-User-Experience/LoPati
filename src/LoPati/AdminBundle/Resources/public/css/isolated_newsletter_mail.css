@@ -81,3 +81,14 @@ a.footer-pre-bottom-icon {
     margin-left: 15px;
     display: inline-block;
 }
+
+h6.h6-type {
+    font-weight: bolder;
+    line-height: 1;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+h6.h6-type span {
+    font-weight: normal;
+}
