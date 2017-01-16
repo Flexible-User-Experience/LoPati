@@ -120,7 +120,7 @@ class NewsletterManager
      * @param array  $emailDestinationList
      * @param mixed  $content
      *
-     * @return array|bool
+     * @return boolean
      * @throws \Exception
      */
     public function sendMandrilMessage($subject, array $emailDestinationList, $content)

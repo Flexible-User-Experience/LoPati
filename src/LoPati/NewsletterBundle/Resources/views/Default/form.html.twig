@@ -1,7 +1,14 @@
 <form id="form_newsletter" action="{{ path('newsletter_user') }}" method="post" class="newsletter">
-{{ form_label(form.email) }}    
-{{ form_widget(form.email) }}
-    {{ form_widget(form.idioma) }}
-    {{ form_widget(form._token) }}    
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.age) }}
+    {{ form_row(form.city) }}
+    {#{{ form_label(form.name) }}#}
+    {#{{ form_widget(form.name) }}#}
+    {#{{ form_label(form.email) }}#}
+    {#{{ form_widget(form.email) }}#}
+    {#{{ form_widget(form.idioma) }}#}
+    {{ form_rest(form) }}
     <button id="mp_newsletter_button" type="submit">{% trans %}enviar{% endtrans %}</button>
 </form>

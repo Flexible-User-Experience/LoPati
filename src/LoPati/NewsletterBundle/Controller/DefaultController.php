@@ -242,7 +242,7 @@ class DefaultController extends Controller
                     }
                     /** @var SendGridResponse $result */
                     $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    if ($result->statusCode() == 200) {
+                    if ($result == true) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')
