@@ -74,7 +74,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     null,
                     array(
                         'label'    => 'Títol',
-                        'required' => false,
+                        'required' => true,
                     )
                 )
                 ->add(
@@ -122,7 +122,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     null,
                     array(
                         'label'    => 'Títol',
-                        'required' => false,
+                        'required' => true,
                     )
                 )
                 ->add(
