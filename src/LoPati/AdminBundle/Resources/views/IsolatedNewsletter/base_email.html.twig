@@ -66,19 +66,10 @@
                                 <table class="row white-background">
                                     <tbody>
                                     <tr>
-                                        <th class="small-12 large-12 first last columns normal-padding-top">
+                                        <th class="small-8 large-8 first last columns normal-padding-top">
                                             <img class="float-left" src="{{ absolute_url(asset('images/newsletter_logo_header.png')) }}" alt="{{ newsletter.typeString }} logo">
                                         </th>
-                                        {#<th class="small-4 large-4 last columns extra-padding-top grey-color">#}
-                                            {#<h6 style="font-weight:bolder;margin-top:15px" class="text-right">{{ newsletter.date | date('d/m/Y') }}</h6>#}
-                                            {#<p class="heading-date">#}
-                                                {#{% if show_top_bar == false %}#}
-                                                    {# Production mode #}
-                                                    {#Clic <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament<br>#}
-                                                    {#Clic <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa#}
-                                                {#{% endif %}#}
-                                            {#</p>#}
-                                        {#</th>#}
+                                        <th class="small-4 large-4 first last columns normal-padding-top"></th>
                                         <th class="expander"></th>
                                     </tr>
                                     </tbody>
@@ -116,8 +107,7 @@
                                         <tr>
                                             <th class="small-8 large-8 first columns">
                                                 <p class="footer-bottom">
-                                                    LO PATI | C. Gran Capità, 38-40 | 43870 Amposta<br><br>
-                                                    <a href="mailto:info@lopati.cat">info@lopati.cat</a>
+                                                    LO PATI | C. Gran Capità, 38-40 | 43870 Amposta | <a class="lopati-footer-email" href="mailto:info@lopati.cat">info@lopati.cat</a>
                                                 </p>
                                             </th>
                                             <th class="small-4 large-4 last columns text-right">
