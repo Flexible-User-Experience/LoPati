@@ -51,6 +51,9 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if ($newsletterUser->getAge()) {
+                $newsletterUser->setAgeTransformed($newsletterUser->getAge());
+            }
             $em->persist($newsletterUser);
             $em->flush();
             $subject = 'Confirmació per rebre el newsletter de LO PATI';
@@ -69,8 +72,9 @@ class DefaultController extends Controller
             $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
                 'NewsletterBundle:Default:confirmation.html.twig',
                 array(
-                    'token' => $newsletterUser->getToken(),
-                    'user'  => $newsletterUser,
+                    'user_token'   => $newsletterUser->getToken(),
+                    'user'         => $newsletterUser,
+                    'show_top_bar' => false,
                 )
             ));
             $flash = $this->get('translator')->trans('suscribe.register');

@@ -201,7 +201,7 @@ class IsolatedNewsletterPostAdmin extends AbstractBaseAdmin
                     'file',
                     array(
                         'label'       => 'Imatge',
-                        'required'    => true,
+                        'required'    => false,
                         'help'        => $imageHelp,
                     )
                 )
