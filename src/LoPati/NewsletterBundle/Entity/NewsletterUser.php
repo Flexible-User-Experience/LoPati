@@ -36,7 +36,8 @@ class NewsletterUser
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
-     * @Assert\Email()
+     * @Assert\NotBlank()
+     * @Assert\Email(checkMX=true)
      */
     private $email;
 
@@ -51,6 +52,7 @@ class NewsletterUser
      * @var integer
      *
      * @ORM\Column(type="string", length=5, nullable=true)
+     * @Assert\NotBlank()
      * @Assert\Length(min=5, max=5)
      * @Assert\Regex("/^\d/")
      */
@@ -80,9 +82,9 @@ class NewsletterUser
     /**
      * @var string
      *
-     * @ORM\Column(name="idioma", type="string", length=2)
+     * @ORM\Column(name="idioma", type="string", length=2, options={"default"="ca"})
      */
-    private $idioma;
+    private $idioma = 'ca';
 
     /**
      * @var string
@@ -102,14 +104,14 @@ class NewsletterUser
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(name="active", type="boolean", options={"default"=1})
      */
-    private $active;
+    private $active = true;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="fail", type="integer")
+     * @ORM\Column(name="fail", type="integer", nullable=true)
      */
     private $fail = 0;
 
@@ -139,7 +141,6 @@ class NewsletterUser
     public function __construct()
     {
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $this->active = false;
         $this->groups = new ArrayCollection();
     }
 

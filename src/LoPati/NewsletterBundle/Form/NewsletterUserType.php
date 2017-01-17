@@ -57,29 +57,29 @@ class NewsletterUserType extends AbstractType
                     'required' => true,
                 )
             )
-            ->add(
-                'phone',
-                TextType::class,
-                array(
-                    'label'    => 'newsletter.form.phone',
-                    'attr'     => array(
-                        'placeholder' => 'newsletter.form.phone',
-                    ),
-                    'required' => false,
-                )
-            )
-            ->add(
-                'age',
-                NumberType::class,
-                array(
-                    'label'    => 'newsletter.form.age',
-                    'attr'     => array(
-                        'placeholder' => 'newsletter.form.age',
-                    ),
-                    'required' => false,
-                    'mapped'   => false,
-                )
-            )
+//            ->add(
+//                'phone',
+//                TextType::class,
+//                array(
+//                    'label'    => 'newsletter.form.phone',
+//                    'attr'     => array(
+//                        'placeholder' => 'newsletter.form.phone',
+//                    ),
+//                    'required' => false,
+//                )
+//            )
+//            ->add(
+//                'age',
+//                NumberType::class,
+//                array(
+//                    'label'    => 'newsletter.form.age',
+//                    'attr'     => array(
+//                        'placeholder' => 'newsletter.form.age',
+//                    ),
+//                    'required' => false,
+//                    'mapped'   => false,
+//                )
+//            )
 //            ->add(
 //                'idioma',
 //                ChoiceType::class,

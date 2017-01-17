@@ -15,6 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use SendGrid\Response as SendGridResponse;
 
+/**
+ * Class DefaultController
+ *
+ * @package LoPati\NewsletterBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -38,34 +43,39 @@ class DefaultController extends Controller
      */
     public function suscribeAction(Request $request)
     {
+        $request->setLocale($this->get('session')->get('_locale'));
         $newsletterUser = new NewsletterUser();
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
         $form->handleRequest($request);
-        $request->setLocale($this->get('session')->get('_locale'));
+
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newsletterUser);
-            $em->flush();
-            $subject = 'Confirmació per rebre el newsletter de LO PATI';
-            if ($newsletterUser->getIdioma() == 'es') {
-                $subject = 'Confirmación para recibir el newsletter de LO PATI';
-            } else if ($newsletterUser->getIdioma() == 'en') {
-                $subject = 'Confirmation to receive newsletter LO PATI';
-            }
-            /** @var NewsletterManager $nb */
-            $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
+            if ($this->get('kernel')->getEnvironment() == 'prod') {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($newsletterUser);
+                $em->flush();
+                $subject = 'Confirmació per rebre el newsletter de LO PATI';
+                if ($newsletterUser->getIdioma() == 'es') {
+                    $subject = 'Confirmación para recibir el newsletter de LO PATI';
+                } else if ($newsletterUser->getIdioma() == 'en') {
+                    $subject = 'Confirmation to receive newsletter LO PATI';
+                }
+                /** @var NewsletterManager $nb */
+                $nb = $this->container->get('newsletter.build_content');
+                $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
                     'NewsletterBundle:Default:confirmation.html.twig',
                     array(
                         'token' => $newsletterUser->getToken(),
                         'user'  => $newsletterUser,
                     )
                 ));
-            $flash = $this->get('translator')->trans('suscribe.register');
-            $this->get('session')->getFlashBag()->add('notice', $flash);
+                $flash = $this->get('translator')->trans('suscribe.register');
+                $this->get('session')->getFlashBag()->add('notice', $flash);
+            }
+
 
         } else {
-            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
+//            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
+            $this->get('session')->getFlashBag()->add('notice', (string) $form->getErrors(true, false));
         }
 
         return $this->redirect(
