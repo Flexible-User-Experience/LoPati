@@ -1,5 +1,5 @@
 agenda: Agenda
-activitats: Activitats per al dia
+activitats.dia: Activitats per al dia
 formaciones.titulo: Formacions
 formaciones.noformaciones: No existeix cap formació disponible durant els 3 mesos visualitzats.
 

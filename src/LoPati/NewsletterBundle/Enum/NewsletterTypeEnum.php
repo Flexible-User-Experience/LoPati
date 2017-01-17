@@ -11,9 +11,10 @@ namespace LoPati\NewsletterBundle\Enum;
  */
 class NewsletterTypeEnum
 {
-    const NEWS        = 0;
-    const EVENTS      = 1;
-    const EXPOSITIONS = 2;
+    const NEWS            = 0;
+    const EVENTS          = 1;
+    const EXPOSITIONS     = 2;
+    const RECOMMENDATIONS = 3;
 
     /**
      * @return array
@@ -21,9 +22,10 @@ class NewsletterTypeEnum
     public static function getEnumArray()
     {
         return array(
-            self::NEWS         => 'noticia',
-            self::EVENTS       => 'activitat',
-            self::EXPOSITIONS  => 'exposició',
+            self::NEWS             => 'notícies',
+            self::EVENTS           => 'activitats',
+            self::EXPOSITIONS      => 'exposicions',
+            self::RECOMMENDATIONS  => 'recomanem',
         );
     }
 }
