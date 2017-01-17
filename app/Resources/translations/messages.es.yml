@@ -10,3 +10,11 @@ newsletter:
     follow: "Siguenos en"
     colabora: "Colabora"
     butlleti: "Boletín"
+    form:
+        name: "nombre*"
+        email: "email*"
+        city: "población*"
+        zip: "código postal"
+        phone: "teléfono"
+        age: "edad"
+        send: "enviar"

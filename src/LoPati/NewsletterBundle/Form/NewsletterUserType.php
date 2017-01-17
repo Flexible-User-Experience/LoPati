@@ -33,7 +33,7 @@ class NewsletterUserType extends AbstractType
                 'name',
                 TextType::class,
                 array(
-                    'label'    => 'name',
+                    'label'    => 'newsletter.form.name',
                     'required' => false,
                 )
             )
@@ -41,7 +41,15 @@ class NewsletterUserType extends AbstractType
                 'email',
                 EmailType::class,
                 array(
-                    'label'    => 'email*',
+                    'label'    => 'newsletter.form.email',
+                    'required' => true,
+                )
+            )
+            ->add(
+                'postalCode',
+                NumberType::class,
+                array(
+                    'label'    => 'newsletter.form.zip',
                     'required' => true,
                 )
             )
@@ -49,7 +57,7 @@ class NewsletterUserType extends AbstractType
                 'phone',
                 TextType::class,
                 array(
-                    'label'    => 'phone',
+                    'label'    => 'newsletter.form.phone',
                     'required' => false,
                 )
             )
@@ -57,17 +65,9 @@ class NewsletterUserType extends AbstractType
                 'age',
                 NumberType::class,
                 array(
-                    'label'    => 'age',
+                    'label'    => 'newsletter.form.age',
                     'required' => false,
                     'mapped'   => false,
-                )
-            )
-            ->add(
-                'city',
-                TextType::class,
-                array(
-                    'label'    => 'city',
-                    'required' => false,
                 )
             )
 //            ->add(
