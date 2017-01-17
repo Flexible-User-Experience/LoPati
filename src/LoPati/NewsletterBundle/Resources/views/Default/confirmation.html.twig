@@ -4,10 +4,10 @@
     </p>
     <p>
         Per confirmar la subscripció, si us plau segueix el següent enllaç:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
+        <a href="{{ absolute_url('newsletter_confirmation', {token: token}) }}">{{ absolute_url('newsletter_confirmation', {token: token}) }}</a>
     </p>
     <p>
-        Si l'enllaç no funciona, copiï aquest enllaç {{ url('newsletter_confirmation', { 'token': token }) }} a la barra
+        Si l'enllaç no funciona, copiï aquest enllaç {{ absolute_url('newsletter_confirmation', {token: token}) }} a la barra
         de direcció del seu navegador.
     </p>
 {% elseif user.idioma == 'es' %}
@@ -16,10 +16,10 @@
     </p>
     <p>
         Para confirmar la suscripción, por favor sigue el siguiente enlace:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
+        <a href="{{ absolute_url('newsletter_confirmation', {token: token}) }}">{{ absolute_url('newsletter_confirmation', {token: token}) }}</a>
     </p>
     <p>
-        Si el enlace no funciona, copie este enlace{{ url('newsletter_confirmation', { 'token': token }) }} en la barra
+        Si el enlace no funciona, copie este enlace{{ absolute_url('newsletter_confirmation', {token: token}) }} en la barra
         de dirección de su navegador.
     </p>
 {% elseif user.idioma == 'en' %}
@@ -28,10 +28,10 @@
     </p>
     <p>
         To confirm subscription, please follow the link below:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
+        <a href="{{ absolute_url('newsletter_confirmation', {token: token}) }}">{{ absolute_url('newsletter_confirmation', {token: token}) }}</a>
     </p>
     <p>
-        If the link does not work, copy this link {{ url('newsletter_confirmation', { 'token': token }) }} in the
+        If the link does not work, copy this link {{ absolute_url('newsletter_confirmation', {token: token}) }} in the
         address bar of your browser.
     </p>
 {% endif %}

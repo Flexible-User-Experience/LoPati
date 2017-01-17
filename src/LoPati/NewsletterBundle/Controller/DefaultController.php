@@ -2,6 +2,7 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
+use LoPati\AdminBundle\Controller\NewsletterPageAdminController;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
@@ -49,32 +50,33 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newsletterUser);
+            $em->flush();
+            $subject = 'Confirmació per rebre el newsletter de LO PATI';
+//                if ($newsletterUser->getIdioma() == 'es') {
+//                    $subject = 'Confirmación para recibir el newsletter de LO PATI';
+//                } else if ($newsletterUser->getIdioma() == 'en') {
+//                    $subject = 'Confirmation to receive newsletter LO PATI';
+//                }
+            /** @var NewsletterManager $nb */
+            $nb = $this->container->get('newsletter.build_content');
             if ($this->get('kernel')->getEnvironment() == 'prod') {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($newsletterUser);
-                $em->flush();
-                $subject = 'Confirmació per rebre el newsletter de LO PATI';
-                if ($newsletterUser->getIdioma() == 'es') {
-                    $subject = 'Confirmación para recibir el newsletter de LO PATI';
-                } else if ($newsletterUser->getIdioma() == 'en') {
-                    $subject = 'Confirmation to receive newsletter LO PATI';
-                }
-                /** @var NewsletterManager $nb */
-                $nb = $this->container->get('newsletter.build_content');
-                $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
-                    'NewsletterBundle:Default:confirmation.html.twig',
-                    array(
-                        'token' => $newsletterUser->getToken(),
-                        'user'  => $newsletterUser,
-                    )
-                ));
-                $flash = $this->get('translator')->trans('suscribe.register');
-                $this->get('session')->getFlashBag()->add('notice', $flash);
+                $destEmail = $newsletterUser->getEmail();
+            } else {
+                $destEmail = NewsletterPageAdminController::testEmail3;
             }
-
+            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+                'NewsletterBundle:Default:confirmation.html.twig',
+                array(
+                    'token' => $newsletterUser->getToken(),
+                    'user'  => $newsletterUser,
+                )
+            ));
+            $flash = $this->get('translator')->trans('suscribe.register');
+            $this->get('session')->getFlashBag()->add('notice', $flash);
 
         } else {
-//            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
             $this->get('session')->getFlashBag()->add('notice', (string) $form->getErrors(true, false));
         }
 
