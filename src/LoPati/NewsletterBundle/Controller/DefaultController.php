@@ -102,29 +102,32 @@ class DefaultController extends Controller
      */
     public function confirmationAction(Request $request, $token)
     {
+        $request->setLocale($this->get('session')->get('_locale'));
         $em = $this->getDoctrine()->getManager();
         /** @var NewsletterUser $user */
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-        $request->setLocale($this->get('session')->get('_locale'));
+
         if ($user) {
             $user->setActive(true);
             $em->flush();
-            $logger = $this->get('logger');
-            $logger->info('user idioma:' . $user->getIdioma());
-            $logger->info('get idioma:' . $request->getLocale());
-            $logger->info('session idioma:' . $this->get('session')->get('_locale'));
             $subject = 'La seva adreça de correu electrònic ha estat activada correctament';
-            if ($user->getIdioma() == 'es') {
-                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
-            } else if ($user->getIdioma() == 'en') {
-                $subject = 'Your email address has been activated';
-            }
+//            if ($user->getIdioma() == 'es') {
+//                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
+//            } else if ($user->getIdioma() == 'en') {
+//                $subject = 'Your email address has been activated';
+//            }
             /** @var NewsletterManager $nb */
             $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
+            if ($this->get('kernel')->getEnvironment() == 'prod') {
+                $destEmail = $user->getEmail();
+            } else {
+                $destEmail = NewsletterPageAdminController::testEmail3;
+            }
+            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
                     'NewsletterBundle:Default:activated.html.twig',
                     array(
-                        'user' => $user
+                        'user'         => $user,
+                        'show_top_bar' => false,
                     )
                 ));
             $this->get('session')->getFlashBag()->add(
