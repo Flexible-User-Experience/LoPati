@@ -250,18 +250,25 @@ class DefaultController extends Controller
                 /** @var NewsletterUser $user */
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
-                    $edl = array($user->getEmail());
-                    $content = $this->get('templating')->render('NewsletterBundle:Default:finalEmailMessage.html.twig', array(
-                            'user' => $user,
-                        ));
                     $subject = 'Confirmació per NO rebre el newsletter de LO PATI';
-                    if ($user->getIdioma() == 'es') {
-                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
-                    } else if ($user->getIdioma() == 'en') {
-                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
+//                    if ($user->getIdioma() == 'es') {
+//                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
+//                    } else if ($user->getIdioma() == 'en') {
+//                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
+//                    }
+                    if ($this->get('kernel')->getEnvironment() == 'prod') {
+                        $destEmail = $user->getEmail();
+                    } else {
+                        $destEmail = NewsletterPageAdminController::testEmail3;
                     }
-                    /** @var SendGridResponse $result */
-                    $result = $nb->sendMandrilMessage($subject, $edl, $content);
+                    $result = $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+                        'NewsletterBundle:Default:finalEmailMessage.html.twig',
+                        array(
+                            'user'         => $user,
+                            'show_top_bar' => false,
+                        )
+                    ));
+
                     if ($result == true) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',

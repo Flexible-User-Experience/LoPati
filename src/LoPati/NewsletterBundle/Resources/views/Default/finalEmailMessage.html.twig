@@ -1,16 +1,21 @@
-{% if user.idioma == 'ca' %}
-    <p>
-        S'ha rebut una petició per donar-se de baixa al nostre Butlletí Informatiu. Per confirmar definitivament la seva baixa clic <a href="{{ url('newsletter_unsuscribe', { 'token': user.token }) }}">aquí</a>.
-    </p>
-    <p>Atentament, Lo Pati</p>
-{% elseif user.idioma == 'es' %}
-    <p>
-        Se ha recibido una petición para darse de baja en nuestro Boletín Informativo. Para confirmar definitivamente su baja clic <a href="{{ url('newsletter_unsuscribe', { 'token': user.token }) }}">aquí</a>.
-    </p>
-    <p>Atentamente, Lo Pati</p>
-{% elseif user.idioma == 'en' %}
-    <p>
-        We have received a request to unsubscribe our Newsletter. To definitively confirm this action click <a href="{{ url('newsletter_unsuscribe', { 'token': user.token }) }}">here</a>.
-    </p>
-    <p>Sincelery, Lo Pati</p>
-{% endif %}
+{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+
+{% block subject %}Newsletter unsubscribe{% endblock %}
+
+{% block content %}
+    <table class="row">
+        <tbody>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p>
+                    S'ha rebut una petició per donar-se de baixa al nostre butlletí informatiu. Per confirmar definitivament la baixa fes clic <a href="{{ url('newsletter_unsuscribe', { 'token': user.token }) }}">aquí</a>.
+                </p>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                <p>Atentament, Lo Pati</p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        </tbody>
+    </table>
+    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+{% endblock %}
