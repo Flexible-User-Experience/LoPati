@@ -80,6 +80,13 @@ class NewsletterUser
     private $birthyear;
 
     /**
+     * @var integer
+     *
+     * @Assert\GreaterThan(0)
+     */
+    private $age;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="idioma", type="string", length=2, options={"default"="ca"})
@@ -447,10 +454,30 @@ class NewsletterUser
      */
     public function getAge()
     {
+        return $this->age;
+    }
+
+    /**
+     * @param int $age
+     *
+     * @return $this
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAgeTransformed()
+    {
         $result = 0;
-        if ($this->birthdate) {
+        if ($this->birthyear) {
             $currentYear = new \DateTime();
-            $result = intval($currentYear->format('Y')) - intval($this->getBirthdate()->format('Y'));
+            $result = intval($currentYear->format('Y')) - $this->getBirthyear();
         }
 
         return $result;
@@ -461,14 +488,11 @@ class NewsletterUser
      *
      * @return $this
      */
-    public function setAge($age)
+    public function setAgeTransformed($age)
     {
         if ($age) {
             $currentYear = new \DateTime();
-            $resultYear = intval($currentYear->format('Y')) - $age;
-            $calculatedDate = new \DateTime();
-            $calculatedDate->setDate($resultYear, 1, 1);
-            $this->birthdate = $calculatedDate;
+            $this->birthyear = intval($currentYear->format('Y')) - $age;
         }
 
         return $this;

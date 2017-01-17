@@ -77,7 +77,6 @@ class NewsletterUserType extends AbstractType
                         'placeholder' => 'newsletter.form.age',
                     ),
                     'required' => false,
-                    'mapped'   => false,
                 )
             )
 //            ->add(
