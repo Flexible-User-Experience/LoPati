@@ -16,5 +16,5 @@ newsletter:
         city: "població*"
         zip: "codi postal*"
         phone: "telèfon"
-        age: "edad"
+        age: "edat"
         send: "enviar"

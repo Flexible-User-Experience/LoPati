@@ -20,7 +20,7 @@
                 <div class="contingut">
                     {% if pagines %}
                         <h1>{% trans %}agenda{% endtrans %}</h1>
-                        <h2 id="activitats_agenda">{% trans %}activitats{% endtrans %}: {{ dia | date('d/m/Y')}} </h2>
+                        <h2 id="activitats_agenda">{% trans %}activitats.dia{% endtrans %}: {{ dia | date('d/m/Y')}} </h2>
                         <div class="separadorcontingutreg" ></div>
                     {% endif %}
                     {% for pagina in pagines %}
