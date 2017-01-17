@@ -195,7 +195,6 @@ div.contenidor.extra div.continguts ol.bloc01 li div.bloc01a div.bloc01a-shot di
 .dreta {
 	width: 174px;
 	float: right;
-	height: 100%;
 	margin: 30px 0;
 	background-color: #fff;
 }
@@ -847,9 +846,6 @@ div.categories ul div.menu-buscador form p.menu-buscador-picon input.menu-buscad
 	background-repeat: no-repeat;
 	background-position:  right bottom;
 }
-
-
-
 .dades{
 	width: 95%;
 	margin: 5px;
@@ -859,35 +855,31 @@ div.categories ul div.menu-buscador form p.menu-buscador-picon input.menu-buscad
 .dades p {
 	margin: 5px;
 }
-
 .destacats {
 	width: 100%;
 	min-height: 150px;
-	height: auto !important;
-	height: 150px;
 	margin: 0;
 	padding: 0;
 	clear: both;
 }
-.destacats img { }
 .destacats .destacat {
 	width: 100%;
 	min-height: 30px;
-	height: auto !important;
-	height: 30px;
 	margin: 0 0 20px 0;
 	padding: 0;
 }
 .destacats .destacat a {
 	color: #666666;
 	text-decoration: none;
-	display: block;opacity:0.6;
-	filter:alpha(opacity=60); /* For IE8 and earlier */
+	display: block;
+	opacity: 0.6;
+	filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 .destacats .destacat a:hover {
 	color: #E31853;
-	text-decoration: none;opacity:1;
-	filter:alpha(opacity=100); /* For IE8 and earlier */
+	text-decoration: none;
+	opacity: 1;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 .destacats .destacat img {
 	margin: 0;

@@ -3,9 +3,13 @@
 namespace LoPati\MenuBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use LoPati\BlogBundle\Entity;
 use LoPati\MenuBundle\Entity\SubCategoria;
 
+/**
+ * Class DefaultController
+ *
+ * @package LoPati\MenuBundle\Controller
+ */
 class DefaultController extends Controller
 {
 	public function pintaMenuAction($id = null, $pagina = null)
