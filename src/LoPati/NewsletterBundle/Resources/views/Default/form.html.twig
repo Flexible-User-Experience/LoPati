@@ -1,14 +1,19 @@
 <form id="form_newsletter" action="{{ path('newsletter_user') }}" method="post" class="newsletter">
-    {{ form_row(form.name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.postalCode) }}
-    {{ form_row(form.phone) }}
-    {{ form_row(form.age) }}
+    {{ form_widget(form.name) }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.email) }}
+    {{ form_errors(form.email) }}
+    {{ form_widget(form.postalCode) }}
+    {{ form_errors(form.postalCode) }}
+    {{ form_widget(form.phone) }}
+    {{ form_errors(form.phone) }}
+    {{ form_widget(form.age) }}
+    {{ form_errors(form.age) }}
     {#{{ form_label(form.name) }}#}
     {#{{ form_widget(form.name) }}#}
     {#{{ form_label(form.email) }}#}
     {#{{ form_widget(form.email) }}#}
     {#{{ form_widget(form.idioma) }}#}
     {{ form_rest(form) }}
-    <button id="mp_newsletter_button" type="submit">{% trans %}enviar{% endtrans %}</button>
+    {#<button id="mp_newsletter_button" type="submit">{% trans %}enviar{% endtrans %}</button>#}
 </form>
