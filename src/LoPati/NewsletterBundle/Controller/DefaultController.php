@@ -51,6 +51,7 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $newsletterUser->setActive(false);
             if ($newsletterUser->getAge()) {
                 $newsletterUser->setAgeTransformed($newsletterUser->getAge());
             }
