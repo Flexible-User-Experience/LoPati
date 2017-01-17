@@ -2,6 +2,7 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
+use LoPati\AdminBundle\Controller\NewsletterPageAdminController;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
@@ -15,6 +16,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use SendGrid\Response as SendGridResponse;
 
+/**
+ * Class DefaultController
+ *
+ * @package LoPati\NewsletterBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -38,34 +44,45 @@ class DefaultController extends Controller
      */
     public function suscribeAction(Request $request)
     {
+        $request->setLocale($this->get('session')->get('_locale'));
         $newsletterUser = new NewsletterUser();
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
         $form->handleRequest($request);
-        $request->setLocale($this->get('session')->get('_locale'));
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $newsletterUser->setActive(false);
+            if ($newsletterUser->getAge()) {
+                $newsletterUser->setAgeTransformed($newsletterUser->getAge());
+            }
             $em->persist($newsletterUser);
             $em->flush();
             $subject = 'Confirmació per rebre el newsletter de LO PATI';
-            if ($newsletterUser->getIdioma() == 'es') {
-                $subject = 'Confirmación para recibir el newsletter de LO PATI';
-            } else if ($newsletterUser->getIdioma() == 'en') {
-                $subject = 'Confirmation to receive newsletter LO PATI';
-            }
+//                if ($newsletterUser->getIdioma() == 'es') {
+//                    $subject = 'Confirmación para recibir el newsletter de LO PATI';
+//                } else if ($newsletterUser->getIdioma() == 'en') {
+//                    $subject = 'Confirmation to receive newsletter LO PATI';
+//                }
             /** @var NewsletterManager $nb */
             $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
-                    'NewsletterBundle:Default:confirmation.html.twig',
-                    array(
-                        'token' => $newsletterUser->getToken(),
-                        'user'  => $newsletterUser,
-                    )
-                ));
+            if ($this->get('kernel')->getEnvironment() == 'prod') {
+                $destEmail = $newsletterUser->getEmail();
+            } else {
+                $destEmail = NewsletterPageAdminController::testEmail3;
+            }
+            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+                'NewsletterBundle:Default:confirmation.html.twig',
+                array(
+                    'user_token'   => $newsletterUser->getToken(),
+                    'user'         => $newsletterUser,
+                    'show_top_bar' => false,
+                )
+            ));
             $flash = $this->get('translator')->trans('suscribe.register');
             $this->get('session')->getFlashBag()->add('notice', $flash);
 
         } else {
-            $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.error'));
+            $this->get('session')->getFlashBag()->add('notice', (string) $form->getErrors(true, false));
         }
 
         return $this->redirect(
@@ -85,29 +102,32 @@ class DefaultController extends Controller
      */
     public function confirmationAction(Request $request, $token)
     {
+        $request->setLocale($this->get('session')->get('_locale'));
         $em = $this->getDoctrine()->getManager();
         /** @var NewsletterUser $user */
         $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
-        $request->setLocale($this->get('session')->get('_locale'));
+
         if ($user) {
             $user->setActive(true);
             $em->flush();
-            $logger = $this->get('logger');
-            $logger->info('user idioma:' . $user->getIdioma());
-            $logger->info('get idioma:' . $request->getLocale());
-            $logger->info('session idioma:' . $this->get('session')->get('_locale'));
             $subject = 'La seva adreça de correu electrònic ha estat activada correctament';
-            if ($user->getIdioma() == 'es') {
-                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
-            } else if ($user->getIdioma() == 'en') {
-                $subject = 'Your email address has been activated';
-            }
+//            if ($user->getIdioma() == 'es') {
+//                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
+//            } else if ($user->getIdioma() == 'en') {
+//                $subject = 'Your email address has been activated';
+//            }
             /** @var NewsletterManager $nb */
             $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
+            if ($this->get('kernel')->getEnvironment() == 'prod') {
+                $destEmail = $user->getEmail();
+            } else {
+                $destEmail = NewsletterPageAdminController::testEmail3;
+            }
+            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
                     'NewsletterBundle:Default:activated.html.twig',
                     array(
-                        'user' => $user
+                        'user'         => $user,
+                        'show_top_bar' => false,
                     )
                 ));
             $this->get('session')->getFlashBag()->add(
@@ -230,19 +250,26 @@ class DefaultController extends Controller
                 /** @var NewsletterUser $user */
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
-                    $edl = array($user->getEmail());
-                    $content = $this->get('templating')->render('NewsletterBundle:Default:finalEmailMessage.html.twig', array(
-                            'user' => $user,
-                        ));
                     $subject = 'Confirmació per NO rebre el newsletter de LO PATI';
-                    if ($user->getIdioma() == 'es') {
-                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
-                    } else if ($user->getIdioma() == 'en') {
-                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
+//                    if ($user->getIdioma() == 'es') {
+//                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
+//                    } else if ($user->getIdioma() == 'en') {
+//                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
+//                    }
+                    if ($this->get('kernel')->getEnvironment() == 'prod') {
+                        $destEmail = $user->getEmail();
+                    } else {
+                        $destEmail = NewsletterPageAdminController::testEmail3;
                     }
-                    /** @var SendGridResponse $result */
-                    $result = $nb->sendMandrilMessage($subject, $edl, $content);
-                    if ($result->statusCode() == 200) {
+                    $result = $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+                        'NewsletterBundle:Default:finalEmailMessage.html.twig',
+                        array(
+                            'user'         => $user,
+                            'show_top_bar' => false,
+                        )
+                    ));
+
+                    if ($result == true) {
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             $this->get('translator')->trans('unsuscribe.confirmation.finalemailmessage')

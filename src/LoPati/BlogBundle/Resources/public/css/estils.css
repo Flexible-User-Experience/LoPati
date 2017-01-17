@@ -195,7 +195,6 @@ div.contenidor.extra div.continguts ol.bloc01 li div.bloc01a div.bloc01a-shot di
 .dreta {
 	width: 174px;
 	float: right;
-	height: 100%;
 	margin: 30px 0;
 	background-color: #fff;
 }
@@ -847,9 +846,6 @@ div.categories ul div.menu-buscador form p.menu-buscador-picon input.menu-buscad
 	background-repeat: no-repeat;
 	background-position:  right bottom;
 }
-
-
-
 .dades{
 	width: 95%;
 	margin: 5px;
@@ -859,35 +855,31 @@ div.categories ul div.menu-buscador form p.menu-buscador-picon input.menu-buscad
 .dades p {
 	margin: 5px;
 }
-
 .destacats {
 	width: 100%;
 	min-height: 150px;
-	height: auto !important;
-	height: 150px;
 	margin: 0;
 	padding: 0;
 	clear: both;
 }
-.destacats img { }
 .destacats .destacat {
 	width: 100%;
 	min-height: 30px;
-	height: auto !important;
-	height: 30px;
 	margin: 0 0 20px 0;
 	padding: 0;
 }
 .destacats .destacat a {
 	color: #666666;
 	text-decoration: none;
-	display: block;opacity:0.6;
-	filter:alpha(opacity=60); /* For IE8 and earlier */
+	display: block;
+	opacity: 0.6;
+	filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 .destacats .destacat a:hover {
 	color: #E31853;
-	text-decoration: none;opacity:1;
-	filter:alpha(opacity=100); /* For IE8 and earlier */
+	text-decoration: none;
+	opacity: 1;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 .destacats .destacat img {
 	margin: 0;
@@ -2195,7 +2187,7 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 	display:none;
 }
 .success{
-	margin:10px 0;
+	margin: 10px 0;
 	text-align: center;
 	padding: 3px 0;
 	background-color: #FDD;
@@ -2205,30 +2197,33 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 }
 #newsletter form{
 	margin: 10px 0;
-
 }
 #form_newsletter{
-	display:none;
-
+	display: none;
 }
-#form_newsletter #mp_newsletter_user_email{
-    width: 170px;
+#form_newsletter #mp_newsletter_user_name,
+#form_newsletter #mp_newsletter_user_email,
+#form_newsletter #mp_newsletter_user_postalCode,
+#form_newsletter #mp_newsletter_user_phone,
+#form_newsletter #mp_newsletter_user_age
+{
+    width: 100%;
     border: 1px solid #666;
-    margin:3px 0 10px 0;
+    margin: 3px 0 10px 0;
 }
 #newsletter h5{
-	margin:10px 0;
-	font-size:1em;
-	font-weight:normal;
+	margin: 10px 0;
+	font-size: 1em;
+	font-weight: normal;
 	color: #666;
-	cursor:pointer;
+	cursor: pointer;
 }
 #mp_newsletter_button_confirm{
-	cursor:pointer;
+	cursor: pointer;
 }
 .agenda{
-    width:100%;
-    border-top:1px solid #666;
+    width: 100%;
+    border-top: 1px solid #666;
     margin-top: 10px;
     padding-top: 10px;
 }
@@ -2237,16 +2232,14 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
     width: 100%;
 }
 .calendar-header-title{
-
     position: relative;
     right: 28px;
-
 }
 #agenda_boto_esquerre, #agenda_boto_dret{
     position:relative;
-    left:150px;
-    float:left;
-    width:15px;
+    left: 150px;
+    float: left;
+    width: 15px;
     cursor: pointer;
 }
 #agenda_boto_esquerre:hover, #agenda_boto_dret:hover{ color: #000; }
@@ -2257,30 +2250,22 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
      text-align: right;
 }
 table.calendari tbody tr td:first-child {
-
     padding-left:0;
 }
-
 table.calendari tbody tr td:last-child{
-
     padding-right:0;
 }
-
 table.calendari tbody tr td a {
     text-decoration: none;
     color: #E31853;
-
 }
-
 table.calendari tbody tr td a:hover {
     font-weight: bold;
 }
-
 table.calendari tbody tr td.hit-single a {
     font-weight: bold;
     text-decoration: underline;
 }
-
 #activitats_agenda{
     font-size:1.3em;
     margin:0 5px;

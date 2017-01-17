@@ -1,28 +1,25 @@
-{% if user.idioma == 'ca' %}
-    <p>
-        S'ha activat el seu compte de correu i ja podrà rebre el nostre Butlletí Informatiu. Gràcies pel seu interès.
-    </p>
-    <p>
-        Si per qualsevol motiu no vol continuar rebent els nostres butlletins, visiteu aquesta adreça: <a
-                href="{{ url('newsletter_confirm_unsuscribe', { 'token': user.token }) }}">Eliminar subscripció</a>
-    </p>
-    <p>Atentament, Lo Pati</p>
-{% elseif user.idioma == 'es' %}
-    <p>
-         Se ha activado su cuenta de correo y ya podrá recibir nuestro Boletín Informativo. Gracias por su interés.
-    </p>
-    <p>
-           Si por cualquier motivo no quiere seguir recibiendo nuestros boletines, visite esta dirección: <a
-                href="{{ url('newsletter_confirm_unsuscribe', { 'token': user.token }) }}">Eliminar suscripción</a>
-    </p>
-    <p>Atentamente, Lo Pati</p>
-{% elseif user.idioma == 'en' %}
-    <p>
-        Activated your email and you will receive our Newsletter. Thanks for your interest.
-    </p>
-    <p>
-          If for any reason you do not want to continue receiving our newsletter, visit this address: <a
-                href="{{ url('newsletter_confirm_unsuscribe', { 'token': user.token }) }}">Remove subscription</a>
-    </p>
-    <p>Sincelery, Lo Pati</p>
-{% endif %}
+{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+
+{% block subject %}Newsletter confirm{% endblock %}
+
+{% block content %}
+    <table class="row">
+        <tbody>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p>
+                    S'ha activat el seu compte de correu. A partir d'ara ja podrà rebre el nostre butlletí informatiu. Gràcies pel seu interès.
+                </p>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                <p>
+                    Si per qualsevol motiu no vol continuar rebent els nostres butlletins, visiteu aquesta adreça: <a href="{{ url('newsletter_confirm_unsuscribe', {token: user.token}) }}">eliminar subscripció</a>.
+                </p>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                <p>Atentament, Lo Pati.</p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        </tbody>
+    </table>
+    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+{% endblock %}

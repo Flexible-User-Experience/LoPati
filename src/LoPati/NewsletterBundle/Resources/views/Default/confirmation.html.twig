@@ -1,37 +1,27 @@
-{% if user.idioma == 'ca' %}
-    <p>
-        Hem rebut una petició de subscripció de l'adreça {{ user.email }} al newsletter de Lo Pati.
-    </p>
-    <p>
-        Per confirmar la subscripció, si us plau segueix el següent enllaç:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
-    </p>
-    <p>
-        Si l'enllaç no funciona, copiï aquest enllaç {{ url('newsletter_confirmation', { 'token': token }) }} a la barra
-        de direcció del seu navegador.
-    </p>
-{% elseif user.idioma == 'es' %}
-    <p>
-        Hemos recibido una petición de suscripción de la dirección {{ user.email }} al newsletter de Lo Pati.
-    </p>
-    <p>
-        Para confirmar la suscripción, por favor sigue el siguiente enlace:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
-    </p>
-    <p>
-        Si el enlace no funciona, copie este enlace{{ url('newsletter_confirmation', { 'token': token }) }} en la barra
-        de dirección de su navegador.
-    </p>
-{% elseif user.idioma == 'en' %}
-    <p>
-        We received a request from the address {{ user.email }} to newsletter Lo Pati.
-    </p>
-    <p>
-        To confirm subscription, please follow the link below:
-        <a href="{{ url('newsletter_confirmation', { 'token': token }) }}">{{ url('newsletter_confirmation', { 'token': token }) }}</a>
-    </p>
-    <p>
-        If the link does not work, copy this link {{ url('newsletter_confirmation', { 'token': token }) }} in the
-        address bar of your browser.
-    </p>
-{% endif %}
+{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+
+{% block subject %}Newsletter confirm{% endblock %}
+
+{% block content %}
+    <table class="row">
+        <tbody>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p>
+                    Hem rebut una petició de subscripció de l'adreça {{ user.email }} al newsletter de Lo Pati.
+                </p>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                <p>
+                    Per confirmar la subscripció, si us plau, fes clic <a href="{{ url('newsletter_confirmation', {token: user_token}) }}">aquí</a>.
+                </p>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
+                <p style="font-size:10px;">
+                    Si l'enllaç no funciona, copiï aquesta adreça {{ url('newsletter_confirmation', {token: user_token}) }} al seu navegador.
+                </p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        </tbody>
+    </table>
+    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+{% endblock %}

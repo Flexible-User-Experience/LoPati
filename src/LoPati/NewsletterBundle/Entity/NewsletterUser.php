@@ -28,6 +28,7 @@ class NewsletterUser
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -35,7 +36,8 @@ class NewsletterUser
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
-     * @Assert\Email()
+     * @Assert\NotBlank()
+     * @Assert\Email(checkMX=true)
      */
     private $email;
 
@@ -49,7 +51,10 @@ class NewsletterUser
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=5, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5, max=5)
+     * @Assert\Regex("/^\d/")
      */
     private $postalCode;
 
@@ -75,11 +80,18 @@ class NewsletterUser
     private $birthyear;
 
     /**
+     * @var integer
+     *
+     * @Assert\GreaterThan(0)
+     */
+    private $age;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="idioma", type="string", length=2)
+     * @ORM\Column(name="idioma", type="string", length=2, options={"default"="ca"})
      */
-    private $idioma;
+    private $idioma = 'ca';
 
     /**
      * @var string
@@ -99,14 +111,14 @@ class NewsletterUser
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(name="active", type="boolean", options={"default"=1})
      */
-    private $active;
+    private $active = true;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="fail", type="integer")
+     * @ORM\Column(name="fail", type="integer", nullable=true)
      */
     private $fail = 0;
 
@@ -136,7 +148,6 @@ class NewsletterUser
     public function __construct()
     {
         $this->token = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $this->active = false;
         $this->groups = new ArrayCollection();
     }
 
@@ -443,10 +454,30 @@ class NewsletterUser
      */
     public function getAge()
     {
+        return $this->age;
+    }
+
+    /**
+     * @param int $age
+     *
+     * @return $this
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAgeTransformed()
+    {
         $result = 0;
-        if ($this->birthdate) {
+        if ($this->birthyear) {
             $currentYear = new \DateTime();
-            $result = intval($currentYear->format('Y')) - intval($this->getBirthdate()->format('Y'));
+            $result = intval($currentYear->format('Y')) - $this->getBirthyear();
         }
 
         return $result;
@@ -457,14 +488,11 @@ class NewsletterUser
      *
      * @return $this
      */
-    public function setAge($age)
+    public function setAgeTransformed($age)
     {
         if ($age) {
             $currentYear = new \DateTime();
-            $resultYear = intval($currentYear->format('Y')) - $age;
-            $calculatedDate = new \DateTime();
-            $calculatedDate->setDate($resultYear, 1, 1);
-            $this->birthdate = $calculatedDate;
+            $this->birthyear = intval($currentYear->format('Y')) - $age;
         }
 
         return $this;
