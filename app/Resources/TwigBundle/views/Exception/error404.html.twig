@@ -1,0 +1,5 @@
+{% extends 'TwigBundle:Exception:error.html.twig' %}
+
+{% block title %}{{ parent() }} 404{% endblock %}
+
+{% block error_text %}{{ parent() }} 404 · {{ 'error.404' | trans }}{% endblock %}
