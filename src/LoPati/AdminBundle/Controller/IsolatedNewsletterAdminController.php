@@ -200,23 +200,29 @@ class IsolatedNewsletterAdminController extends Controller
                                 /** @var \PHPExcel_Cell $cell */
                                 foreach ($cellIterator as $cell) {
                                     if (!is_null($cell)) {
+                                        // name
                                         if ($cell->getColumn() === 'A') {
                                             $importedUser->setName($cell->getValue());
                                         }
+                                        // email
                                         if ($cell->getColumn() === 'B') {
                                             $importedUser->setEmail($cell->getValue());
                                         }
+                                        // group
                                         if ($cell->getColumn() === 'C') {
                                             $importedUser->setImprotedGroup($cell->getValue());
                                         }
+                                        // postal code
                                         if ($cell->getColumn() === 'D') {
-                                            $importedUser->setCity($cell->getValue());
+                                            $importedUser->setPostalCode($cell->getValue());
                                         }
+                                        // phone
                                         if ($cell->getColumn() === 'E') {
-                                            $importedUser->setAge($cell->getValue());
-                                        }
-                                        if ($cell->getColumn() === 'F') {
                                             $importedUser->setPhone($cell->getValue());
+                                        }
+                                        // birthyear
+                                        if ($cell->getColumn() === 'F') {
+                                            $importedUser->setBirthyear($cell->getValue());
                                         }
                                     }
                                 }
