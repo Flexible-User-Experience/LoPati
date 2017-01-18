@@ -38,11 +38,13 @@ class NewsletterUserAdminController extends Controller
         }
         $what = Array(
             'id',
+            'createdString',
+            'name',
             'email',
-            'idioma',
+            'postalCode',
+            'phone',
+            'birthyear',
             'active',
-            'fail',
-            'createdString'
         );
         $format = $request->get('format');
         $allowedExportFormats = (array)$this->admin->getExportFormats();

@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class NewsletterUserType
@@ -29,10 +30,13 @@ class NewsletterUserType extends AbstractType
                 TextType::class,
                 array(
                     'label'    => 'newsletter.form.name',
+                    'required' => false,
                     'attr'     => array(
                         'placeholder' => 'newsletter.form.name',
                     ),
-                    'required' => false,
+                    'constraints' => array(
+                        new Assert\NotBlank(),
+                    ),
                 )
             )
             ->add(
@@ -40,10 +44,18 @@ class NewsletterUserType extends AbstractType
                 EmailType::class,
                 array(
                     'label'    => 'newsletter.form.email',
+                    'required' => true,
                     'attr'     => array(
                         'placeholder' => 'newsletter.form.email',
                     ),
-                    'required' => true,
+                    'constraints' => array(
+                        new Assert\NotBlank(),
+                        new Assert\Email(
+                            array(
+                                'checkMX' => true,
+                            )
+                        ),
+                    ),
                 )
             )
             ->add(
@@ -51,10 +63,20 @@ class NewsletterUserType extends AbstractType
                 TextType::class,
                 array(
                     'label'    => 'newsletter.form.zip',
+                    'required' => true,
                     'attr'     => array(
                         'placeholder' => 'newsletter.form.zip',
                     ),
-                    'required' => true,
+                    'constraints' => array(
+                        new Assert\NotBlank(),
+                        new Assert\Regex('/^\d/'),
+                        new Assert\Length(
+                            array(
+                                'min' => 5,
+                                'max' => 5,
+                            )
+                        ),
+                    ),
                 )
             )
             ->add(
@@ -62,10 +84,10 @@ class NewsletterUserType extends AbstractType
                 TextType::class,
                 array(
                     'label'    => 'newsletter.form.phone',
+                    'required' => false,
                     'attr'     => array(
                         'placeholder' => 'newsletter.form.phone',
                     ),
-                    'required' => false,
                 )
             )
             ->add(
@@ -73,25 +95,15 @@ class NewsletterUserType extends AbstractType
                 NumberType::class,
                 array(
                     'label'    => 'newsletter.form.age',
+                    'required' => false,
                     'attr'     => array(
                         'placeholder' => 'newsletter.form.age',
                     ),
-                    'required' => false,
+                    'constraints' => array(
+                        new Assert\GreaterThan(0),
+                    ),
                 )
             )
-//            ->add(
-//                'idioma',
-//                ChoiceType::class,
-//                array(
-//                    'data'     => 'ca',
-//                    'required' => false,
-//                    'choices'  => array(
-//                        'ca' => 'Català',
-//                        'es' => 'Castellano',
-//                        'en' => 'English'
-//                    ),
-//                )
-//            )
             ->add(
                 'send',
                 SubmitType::class,
