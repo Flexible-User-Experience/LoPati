@@ -119,6 +119,7 @@ services:
   app.mailer.service:
     class: LoPati\AdminBundle\Service\MailerService
     arguments:
+      - "@kernel"
       - "@sendgrid"
       - "@logger"
       - "%sendgrip_api_key%"

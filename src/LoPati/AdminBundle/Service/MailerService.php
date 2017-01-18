@@ -2,10 +2,12 @@
 
 namespace LoPati\AdminBundle\Service;
 
+use LoPati\AdminBundle\Controller\NewsletterPageAdminController;
 use SendGrid;
 use SendGrid\Email;
 use SendGrid\Exception as SendgridException;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class MailerService
@@ -16,6 +18,11 @@ use Symfony\Bridge\Monolog\Logger;
  */
 class MailerService
 {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
     /**
      * @var SendGrid
      */
@@ -42,12 +49,15 @@ class MailerService
     /**
      * Constructor
      *
-     * @param SendGrid $sendgrid
-     * @param Logger   $logger
-     * @param string   $sgApiKey
+     * @param KernelInterface $kernel
+     * @param SendGrid        $sendgrid
+     * @param Logger          $logger
+     * @param string          $sgApiKey
      */
-    public function __construct(SendGrid $sendgrid, Logger $logger, $sgApiKey)
+    public function __construct(KernelInterface $kernel, SendGrid $sendgrid, Logger $logger, $sgApiKey)
     {
+        $this->kernel   = $kernel;
+        $this->sendgrid = $sendgrid;
         $this->sendgrid = $sendgrid;
         $this->logger   = $logger;
         $this->sgApiKey = $sgApiKey;
@@ -76,23 +86,27 @@ class MailerService
             foreach ($chunks as $chunk) {
                 $email = new Email();
                 $email
-                    ->setFrom('butlleti@lopati.cat')
+                    ->setFrom('info@lopati.cat')
                     ->setFromName('Centre d\'Art Lo Pati')
                     ->setSubject($subject)
-                    ->setSmtpapiTos($chunk)
+
                     ->setHtml($content);
+                if ($this->kernel->getEnvironment() == 'prod') {
+                    $email->setSmtpapiTos($chunk);
+                } else {
+                    $email->setSmtpapiTos(array(NewsletterPageAdminController::testEmail3));
+                }
                 $this->sendgrid->send($email); // => $result = is possible to read the result
             }
-
-            return true;
-
         } catch (SendgridException $e) {
-            $this->logger->error('Error ' . $e->getCode() . ' al enviar el test.');
+            $this->logger->error('ERROR: Sendgrid code: ' . $e->getCode());
             foreach ($e->getErrors() as $er) {
-                $this->logger->error('Error ' . $er);
+                $this->logger->error('>>> Error: ' . $er);
             }
+
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

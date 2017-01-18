@@ -66,7 +66,9 @@ class IsolatedNewsletterAdminController extends Controller
                     'show_top_bar' => false,
                 )
             );
-            $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
+            if ($user->getEmail()) {
+                $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
+            }
         }
         $this->get('session')->getFlashBag()->add('sonata_flash_success', 'El newsletter s\'ha enviat a totes les bústies.');
 
