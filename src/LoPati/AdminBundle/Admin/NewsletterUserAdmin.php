@@ -54,65 +54,54 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(4))
+            ->with('General', $this->getFormMdSuccessBoxArray(5))
             ->add(
                 'name',
                 null,
                 array(
-                    'label' => 'Nom'
+                    'label' => 'Nom',
                 )
             )
-            ->add('email')
+            ->add(
+                'email',
+                null,
+                array(
+                    'label'    => 'Email',
+                    'required' => true,
+                )
+            )
+            ->add(
+                'postalCode',
+                null,
+                array(
+                    'label' => 'Codi postal',
+                )
+            )
             ->add(
                 'phone',
                 null,
                 array(
-                    'label' => 'Telèfon'
+                    'label' => 'Telèfon',
+                )
+            )
+            ->end()
+            ->with('Controls', $this->getFormMdSuccessBoxArray(3))
+            ->add(
+                'active',
+                null,
+                array(
+                    'label'    => 'Actiu',
+                    'required' => false,
                 )
             )
             ->add(
                 'birthyear',
                 null,
                 array(
-                    'label' => 'Any naixement',
+                    'label'    => 'Any naixement',
                     'required' => false,
                 )
             )
-            ->end()
-            ->with('Adreça', $this->getFormMdSuccessBoxArray(4))
-            ->add(
-                'postalCode',
-                null,
-                array(
-                    'label' => 'Codi postal'
-                )
-            )
-            ->add(
-                'city',
-                null,
-                array(
-                    'label' => 'Població'
-                )
-            )
-            ->end()
-            ->with('Controls', $this->getFormMdSuccessBoxArray(4))
-            ->add(
-                'active',
-                null,
-                array(
-                    'label' => 'Actiu',
-                    'required' => false
-                )
-            )
-//            ->add(
-//                'birthdate',
-//                'sonata_type_date_picker',
-//                array(
-//                    'label'    => 'Data aniversari',
-//                    'format'   => 'd/M/y',
-//                    'required' => false,
-//                )
-//            )
             ->add(
                 'groups',
                 'sonata_type_model',
@@ -124,15 +113,6 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                     'multiple' => true,
                     'btn_add' => false,
                     'by_reference' => false,
-                )
-            )
-
-            ->add(
-                'idioma',
-                'choice',
-                array(
-                    'choices'  => array('ca' => 'Català', 'es' => 'Castellano', 'en' => 'English'),
-                    'required' => true,
                 )
             )
             ->end()
