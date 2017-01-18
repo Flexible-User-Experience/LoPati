@@ -7,21 +7,21 @@ imports:
 # Symfony
 framework:
     translator:      { fallbacks: [ "%locale%" ] }
+    validation:      { enable_annotations: true }
+    default_locale:  "%locale%"
     secret:          "%secret%"
+    fragments:       ~
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    form:            ~
+    csrf_protection: ~
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
     templating:
         engines: [ "twig" ]
-    default_locale:  "%locale%"
-    trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         handler_id:  ~
-    fragments:       ~
     http_method_override: true
 
 # Twig
@@ -69,7 +69,7 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        auto_mapping:                true
 
 # Doctrine Migrations
 doctrine_migrations:
