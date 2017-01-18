@@ -2207,9 +2207,10 @@ ol.bloc01 li div.bloc01a a.bloc01-over {
 #form_newsletter #mp_newsletter_user_phone,
 #form_newsletter #mp_newsletter_user_age
 {
-    width: 100%;
+    width: 94%;
     border: 1px solid #666;
     margin: 3px 0 10px 0;
+	padding: 0 5px;
 }
 #newsletter h5{
 	margin: 10px 0;
