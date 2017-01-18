@@ -28,7 +28,6 @@ class NewsletterUser
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
      */
     private $name;
 
@@ -36,7 +35,6 @@ class NewsletterUser
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
-     * @Assert\NotBlank()
      * @Assert\Email(checkMX=true)
      */
     private $email;
@@ -52,9 +50,6 @@ class NewsletterUser
      * @var integer
      *
      * @ORM\Column(type="string", length=5, nullable=true)
-     * @Assert\NotBlank()
-     * @Assert\Length(min=5, max=5)
-     * @Assert\Regex("/^\d/")
      */
     private $postalCode;
 
@@ -81,8 +76,6 @@ class NewsletterUser
 
     /**
      * @var integer
-     *
-     * @Assert\GreaterThan(0)
      */
     private $age;
 

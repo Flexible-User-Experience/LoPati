@@ -19,8 +19,8 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
     protected $baseRoutePattern = 'newsletter/user';
     protected $datagridValues = array(
         '_page'       => 1,
-        '_sort_order' => 'ASC', // sort direction
-        '_sort_by'    => 'email' // field name
+        '_sort_order' => 'DESC', // sort direction
+        '_sort_by'    => 'created' // field name
     );
 
     /**
@@ -222,7 +222,8 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                 'created',
                 'doctrine_orm_date',
                 array(
-                    'label' => 'Data alta',
+                    'label'      => 'Data alta',
+                    'field_type' => 'sonata_type_date_picker',
                 )
             )
             ->add(
@@ -274,15 +275,6 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                     'label' => 'Actiu',
                 )
             )
-
-//            ->add('name')
-//            ->add('email')
-//            ->add('city')
-//            ->add('postalCode')
-//            ->add('groups', null, array('label' => 'Grup'))
-//            ->add('idioma')
-//            ->add('created', 'doctrine_orm_date', array('label' => 'Data Alta'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
-//            ->add('active', null, array('label' => 'Actiu'));
         ;
     }
 
