@@ -89,7 +89,6 @@ class MailerService
                     ->setFrom('info@lopati.cat')
                     ->setFromName('Centre d\'Art Lo Pati')
                     ->setSubject($subject)
-
                     ->setHtml($content);
                 if ($this->kernel->getEnvironment() == 'prod') {
                     $email->setSmtpapiTos($chunk);
