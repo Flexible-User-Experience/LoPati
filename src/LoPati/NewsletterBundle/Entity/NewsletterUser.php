@@ -353,7 +353,7 @@ class NewsletterUser
     /**
      * @param string $name
      *
-     * @return NewsletterUser
+     * @return $this
      */
     public function setName($name)
     {
