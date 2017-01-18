@@ -11,8 +11,12 @@
             <div class="modal fade" id="csvHelperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="box-title">Ajuda {{ title }}</h2>
+                        </div>
                         <div class="modal-body">
                             <p>El format del fitxer a importar ha de ser compatible amb XLS. El fitxer ha de respectar l'ordre les següents columnes i garantir que existeixin. L'única columna obligatoria és la del email.</p>
+                            <p>Els emails exstents actualitzen la informació del mateix registre, mai es crea cap duplicat.</p>
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -26,37 +30,37 @@
                                 <tr>
                                     <td>A</td>
                                     <td>Nom</td>
-                                    <td>Text amb el nom i cognoms de la persona</td>
+                                    <td>Text amb el nom i cognoms de la persona.</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>B</td>
                                     <td>Email</td>
-                                    <td>Text amb email de la persona</td>
-                                    <td>Camp obligatori. Els emails existents actualitzaran la informació, no es crearan duplicats.</td>
+                                    <td>Text amb email de la persona.</td>
+                                    <td><strong>Camp obligatori.</strong> Els emails existents actualitzaran la informació, no es crearan duplicats.</td>
                                 </tr>
                                 <tr>
                                     <td>C</td>
                                     <td>Grup</td>
-                                    <td>Grup del newsletter al qual pertany</td>
+                                    <td>Grup del newsletter al qual pertany.</td>
                                     <td>El nom del grup ha de coincidir amb els noms existents. Per exemple ART, SON, PRO, COM...</td>
                                 </tr>
                                 <tr>
                                     <td>D</td>
-                                    <td>Població</td>
-                                    <td>Text amb la població</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>E</td>
-                                    <td>Edat</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Codi postal</td>
+                                    <td>5 caràcters de text amb el codi postal.</td>
+                                    <td>Només números del 0 al 9.</td>
                                 </tr>
                                 <tr>
                                     <td>F</td>
                                     <td>Telèfon</td>
-                                    <td>Text amb el telèfon</td>
+                                    <td>Text amb el número de telèfon.</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Any de naixement</td>
+                                    <td>Número amb l'any de naixement.</td>
                                     <td></td>
                                 </tr>
                                 </tbody>

@@ -7,6 +7,7 @@ use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use LoPati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Symfony\Component\Validator\Constraints\NotBlank as NotBlankConstraint;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface as Validator;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
@@ -79,10 +80,11 @@ class NewsletterUserManagementService
         $user = $this->ur->findOneBy(['email' => $searchedUser->getEmail()]);
         if ($user) {
             // existing user
-            $user->setName($searchedUser->getName());
-            $user->setCity($searchedUser->getCity());
-            $user->setBirthdate($searchedUser->getBirthdate());
-            $user->setPhone($searchedUser->getPhone());
+            $user
+                ->setName($searchedUser->getName())
+                ->setPostalCode($searchedUser->getPostalCode())
+                ->setPhone($searchedUser->getPhone())
+                ->setBirthyear($searchedUser->getBirthyear());
             if ($searchedGroup && !$user->getGroups()->contains($searchedGroup)) {
                 $user->addGroup($searchedGroup);
             }
@@ -94,14 +96,16 @@ class NewsletterUserManagementService
             // new user
             $emailConstraint = new EmailConstraint();
             $notBlankConstraint = new NotBlankConstraint();
-            $errors = $this->ev->validateValue($searchedUser->getEmail(), array($emailConstraint, $notBlankConstraint));
+            /** @var ConstraintViolationListInterface $errors */
+            $errors = $this->ev->validate($searchedUser->getEmail(), array($emailConstraint, $notBlankConstraint));
+//            $errors = $this->ev->validateValue($searchedUser->getEmail(), array($emailConstraint, $notBlankConstraint));
             if ($errors->count() == 0) {
                 $user = new NewsletterUser();
                 $user->setName($searchedUser->getName());
                 $user->setEmail($searchedUser->getEmail());
-                $user->setCity($searchedUser->getCity());
-                $user->setBirthdate($searchedUser->getBirthdate());
+                $user->setPostalCode($searchedUser->getPostalCode());
                 $user->setPhone($searchedUser->getPhone());
+                $user->setBirthyear($searchedUser->getBirthyear());
                 $user->setIdioma('ca');
                 $user->setActive(true);
                 if ($searchedGroup) {
