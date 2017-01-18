@@ -7,6 +7,12 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+/**
+ * Class NewsletterUserAdmin
+ *
+ * @category Admin
+ * @package  LoPati\AdminBundle\Admin
+ */
 class NewsletterUserAdmin extends AbstractBaseAdmin
 {
     protected $classnameLabel = 'Newsletter usuari';
@@ -40,6 +46,11 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
         $collection->remove('show');
     }
 
+    /**
+     * Edit form view
+     *
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -128,17 +139,64 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
         ;
     }
 
+    /**
+     * List view
+     *
+     * @param ListMapper $mapper
+     */
     protected function configureListFields(ListMapper $mapper)
     {
         unset($this->listModes['mosaic']);
         $mapper
-//            ->add('id')
-            ->add('created', null, array('label' => 'Data alta', 'template' => 'AdminBundle:Admin:list_custom_created_datetime_field.html.twig'))
-            ->addIdentifier('email')
-            ->add('groups', null, array('label' => 'Grups'))
-            ->add('idioma')
-//            ->add('fail', null, array('label' => 'Enviaments erronis'))
-            ->add('active', 'boolean', array('label' => 'Actiu', 'editable' => true))
+            ->add(
+                'created',
+                'date',
+                array(
+                    'label'    => 'Data alta',
+                    'format'   => 'd/m/Y H:i',
+                    'editable' => false,
+                )
+            )
+            ->add(
+                'name',
+                null,
+                array(
+                    'label'    => 'Nom',
+                    'editable' => true,
+                )
+            )
+            ->add(
+                'email',
+                null,
+                array(
+                    'label'    => 'Email',
+                    'editable' => true,
+                )
+            )
+            ->add(
+                'postalCode',
+                null,
+                array(
+                    'label'    => 'Codi postal',
+                    'editable' => true,
+                )
+            )
+            ->add(
+                'groups',
+                null,
+                array(
+                    'label'    => 'Grups',
+                    'editable' => false,
+                )
+            )
+            ->add(
+                'active',
+                'boolean',
+                array(
+                    'label'    => 'Actiu',
+                    'editable' => true,
+                )
+            )
             ->add(
                 '_action',
                 'actions',
@@ -152,19 +210,87 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
         ;
     }
 
+    /**
+     * Configure list view filters
+     *
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('email')
-            ->add('city')
-            ->add('postalCode')
-            ->add('groups', null, array('label' => 'Grup'))
-            ->add('idioma')
-            ->add('created', 'doctrine_orm_date', array('label' => 'Data Alta'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
-            ->add('active', null, array('label' => 'Actiu'));
+            ->add(
+                'created',
+                'doctrine_orm_date',
+                array(
+                    'label' => 'Data alta',
+                )
+            )
+            ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'Nom',
+                )
+            )
+            ->add(
+                'email',
+                null,
+                array(
+                    'label' => 'Email',
+                )
+            )
+            ->add(
+                'postalCode',
+                null,
+                array(
+                    'label' => 'Codi postal',
+                )
+            )
+            ->add(
+                'phone',
+                null,
+                array(
+                    'label' => 'Telèfon',
+                )
+            )
+            ->add(
+                'birthyear',
+                null,
+                array(
+                    'label' => 'Any naixement',
+                )
+            )
+            ->add(
+                'groups',
+                null,
+                array(
+                    'label' => 'Grups',
+                )
+            )
+            ->add(
+                'active',
+                null,
+                array(
+                    'label' => 'Actiu',
+                )
+            )
+
+//            ->add('name')
+//            ->add('email')
+//            ->add('city')
+//            ->add('postalCode')
+//            ->add('groups', null, array('label' => 'Grup'))
+//            ->add('idioma')
+//            ->add('created', 'doctrine_orm_date', array('label' => 'Data Alta'), null, array('widget' => 'single_text', 'required' => false,  'attr' => array('class' => 'datepicker')))
+//            ->add('active', null, array('label' => 'Actiu'));
+        ;
     }
 
+    /**
+     * Configure batch actions
+     *
+     * @return mixed
+     */
     public function getBatchActions()
     {
         $actions['group'] = [
