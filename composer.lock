@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "153e23b4f7cee2c9fd603e792e70ec3f",
-    "content-hash": "e2b0a1915abf54abf3ff815f46112a63",
+    "hash": "67e97f19ce94eb12e897f08349bac562",
+    "content-hash": "265de1977d0966796ad944c9779ebcd6",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -5948,55 +5948,6 @@
                 "templating"
             ],
             "time": "2017-01-11 19:36:15"
-        },
-        {
-            "name": "tystr/sendgrid-bundle",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tystr/TystrSendgridBundle.git",
-                "reference": "88d90d4e259db56cbfaf61968ffd0142f93d489b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tystr/TystrSendgridBundle/zipball/88d90d4e259db56cbfaf61968ffd0142f93d489b",
-                "reference": "88d90d4e259db56cbfaf61968ffd0142f93d489b",
-                "shasum": ""
-            },
-            "require": {
-                "phpoption/phpoption": "~1.4",
-                "sendgrid/sendgrid": "*",
-                "symfony/framework-bundle": "~2.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*",
-                "symfony/browser-kit": "~2.2",
-                "symfony/finder": "~2.2",
-                "symfony/monolog-bundle": "~2.2"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Tystr\\Bundle\\SendgridBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tyler Stroud",
-                    "email": "tyler@tylerstroud.com"
-                }
-            ],
-            "description": "A bundle for integrating the sendgrid php library into the Symfony2 framework",
-            "homepage": "https://github.com/tystr/TystrSendgridBundle",
-            "keywords": [
-                "email",
-                "sendgrid"
-            ],
-            "time": "2015-04-01 18:03:35"
         },
         {
             "name": "vich/uploader-bundle",

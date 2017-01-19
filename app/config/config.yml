@@ -168,8 +168,3 @@ fos_elastica:
 genemu_form:
     select2: ~
     date:    ~
-
-# Sendgrid
-tystr_sendgrid:
-    username: "%sendgrip_username%"
-    password: "%sendgrip_password%"

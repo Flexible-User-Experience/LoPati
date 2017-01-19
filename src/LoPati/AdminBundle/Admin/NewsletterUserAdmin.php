@@ -170,6 +170,14 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                 )
             )
             ->add(
+                'fail',
+                null,
+                array(
+                    'label'    => 'Enviaments fallats',
+                    'editable' => false,
+                )
+            )
+            ->add(
                 'active',
                 'boolean',
                 array(
@@ -246,6 +254,13 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                 null,
                 array(
                     'label' => 'Grups',
+                )
+            )
+            ->add(
+                'fail',
+                null,
+                array(
+                    'label'    => 'Enviaments fallats',
                 )
             )
             ->add(
