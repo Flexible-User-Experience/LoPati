@@ -125,8 +125,6 @@ class IsolatedNewsletterAdminController extends Controller
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
 
-        /** @var array $edl email destinations list */
-        $edl = $this->getEdl();
         /** @var string $content message content */
         $content = $this->renderView(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
@@ -137,18 +135,18 @@ class IsolatedNewsletterAdminController extends Controller
             )
         );
 
-        $result = $ms->delivery('[TEST] ' . $object->getSubject(), $edl, $content);
-        if ($result == true) {
+        $result = $ms->delivery('[TEST] ' . $object->getSubject(), $this->getTestEmailsDestinationList(), $content);
+        if ($result == 0) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el test.'
+            );
+        } else {
             $object->setTested(true);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
-            );
-        } else {
-            $this->get('session')->getFlashBag()->add(
-                'sonata_flash_error',
-                'S\'ha produït un ERROR en enviar el test.'
+                '[SGC#' . $result . '] S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
             );
         }
 
@@ -282,12 +280,12 @@ class IsolatedNewsletterAdminController extends Controller
     /**
      * @return array
      */
-    private function getEdl()
+    private function getTestEmailsDestinationList()
     {
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-            $this->getParameter('email_address_test_1'),
-            $this->getParameter('email_address_test_2'),
+//            $this->getParameter('email_address_test_1'),
+//            $this->getParameter('email_address_test_2'),
             $this->getParameter('email_address_test_3'),
         );
 

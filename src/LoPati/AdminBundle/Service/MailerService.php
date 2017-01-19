@@ -69,17 +69,17 @@ class MailerService
         $this->sgApiKey    = $sgApiKey;
         $this->sgFromName  = $sgFromName;
         $this->sgFromEmail = $sgFromEmail;
-        $this->sendgrid    = new \SendGrid($sgApiKey);
+        $this->sendgrid    = new \SendGrid($this->sgApiKey);
     }
 
     /**
-     * Deliver email notifitacion task
+     * Deliver a notifitacion email task
      *
-     * @param string $subject
-     * @param array  $emailDestinationList
-     * @param mixed  $content
+     * @param string $subject              Email subject
+     * @param array  $emailDestinationList List of emails to deliver
+     * @param mixed  $content              HTML email content
      *
-     * @return array|bool
+     * @return integer
      * @throws \Exception
      */
     public function delivery($subject, array $emailDestinationList, $content)
@@ -91,38 +91,32 @@ class MailerService
         try {
             // slice recipients in portions of 100 items
             //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
-            $chunks = array_chunk($emailDestinationList, 500);
+            $chunks = array_chunk($emailDestinationList, 950);
             $from        = new SendGrid\Email($this->sgFromName, $this->sgFromEmail);
             $to          = new SendGrid\Email($this->sgFromName, $this->sgFromEmail);
             $mailContent = new SendGrid\Content('text/html', $content);
             /** @var array $chunk */
             foreach ($chunks as $chunk) {
+                // slices of 950 emails per chunk
                 $mail = new SendGrid\Mail($from, $subject, $to, $mailContent);
-//                $personalizations = $mail->personalization->getPersonalizations();
-                /** @var SendGrid\Personalization $mail->personalization */
-                $mail->personalization->addSubstitution('-token-', 'my-token');
+//                $mail->personalization[0]->addSubstitution('-token-', 'my-token');
                 /** @var string $destEmail */
                 foreach ($chunk as $destEmail) {
-                    $bcc = new SendGrid\Personalization();
-                    $mail->addPersonalization($bcc->addBcc($destEmail));
-
-//                    $this->sendgrid->client->mail()->send()->post($mail);
+                    $bcc = new SendGrid\Email(null, $destEmail);
+                    $mail->personalization[0]->addBcc($bcc);
                 }
 
+                /** @var  $response */
+                $response = $this->sendgrid->client->mail()->send()->post($mail);
 
-
-//                $email = new SendGrid\Email();
-//                $email
-//                    ->setFrom('info@lopati.cat')
-//                    ->setFromName('Centre d\'Art Lo Pati')
-//                    ->setSubject($subject)
-//                    ->setHtml($content);
 //                if ($this->kernel->getEnvironment() == 'prod') {
 //                    $email->setSmtpapiTos($chunk);
 //                } else {
 //                    $email->setSmtpapiTos(array(NewsletterPageAdminController::testEmail3));
 //                }
-//                $this->sendgrid->send($email); // => $result = is possible to read the result
+
+                return $response->statusCode();
+
             }
         } catch (\Exception $e) {
             $this->logger->error('ERROR: Sendgrid code: ' . $e->getCode());
