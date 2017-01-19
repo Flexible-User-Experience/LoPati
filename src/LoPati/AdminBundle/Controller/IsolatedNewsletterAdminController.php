@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class IsolatedNewsletterAdminController
@@ -144,7 +143,7 @@ class IsolatedNewsletterAdminController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: ' . NewsletterPageAdminController::testEmail1 . ', ' . NewsletterPageAdminController::testEmail2 . ' i ' . NewsletterPageAdminController::testEmail3
+                'S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
             );
         } else {
             $this->get('session')->getFlashBag()->add(
@@ -285,22 +284,12 @@ class IsolatedNewsletterAdminController extends Controller
      */
     private function getEdl()
     {
-        /** @var KernelInterface $ki */
-        $ki = $this->container->get('kernel');
-
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-            NewsletterPageAdminController::testEmail3,
+            $this->getParameter('email_address_test_1'),
+            $this->getParameter('email_address_test_2'),
+            $this->getParameter('email_address_test_3'),
         );
-
-        if ($ki->getEnvironment() === 'prod') {
-            /** @var array $edl email destinations list */
-            $edl = array(
-                NewsletterPageAdminController::testEmail1,
-                NewsletterPageAdminController::testEmail2,
-                NewsletterPageAdminController::testEmail3,
-            );
-        }
 
         return $edl;
     }

@@ -21,10 +21,11 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
  */
 class NewsletterPageAdminController extends Controller
 {
-    const testEmail1 = 'direccio@lopati.cat';
-    const testEmail2 = 'comunicacio@lopati.cat';
-    const testEmail3 = 'david@flux.cat';
-
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function enviarAction($id)
     {
         /** @var EntityManager $em */
@@ -109,6 +110,11 @@ class NewsletterPageAdminController extends Controller
         return $this->redirect('../list');
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function previewAction($id)
     {
         /** @var NewsletterManager $nb */
@@ -121,6 +127,11 @@ class NewsletterPageAdminController extends Controller
         return $this->render('AdminBundle:Newsletter:preview.html.twig', $nb->buildNewsletterContentArray($id, $newsletter, $host, 'ca'));
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function testAction($id)
     {
         /** @var NewsletterManager $nb */
@@ -136,9 +147,9 @@ class NewsletterPageAdminController extends Controller
         $contenido = $this->renderView('NewsletterBundle:Default:mail2.html.twig', $nb->buildNewsletterContentArray($id, $newsletter2, $host, 'ca'));
         $subject = '[TEST] ' . $newsletter->getName();
         $edl = array(
-            self::testEmail1,
-            self::testEmail2,
-            self::testEmail3,
+            $this->getParameter('email_address_test_1'),
+            $this->getParameter('email_address_test_2'),
+            $this->getParameter('email_address_test_3'),
         );
 
         /** @var Response $result */
@@ -146,7 +157,7 @@ class NewsletterPageAdminController extends Controller
         if ($result == true) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'Mail de test enviat correctament a les bústies: ' . self::testEmail1 . ', ' . self::testEmail2 . ' i ' . self::testEmail3
+                'Mail de test enviat correctament a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
             );
         } else {
             $this->get('session')->getFlashBag()->add('sonata_flash_error', 'ERROR al enviar el test');
@@ -158,6 +169,9 @@ class NewsletterPageAdminController extends Controller
         return $this->redirect('../list');
     }
 
+    /**
+     * @return string
+     */
     private function getHostRoute()
     {
         /** @var Router $router */
@@ -166,13 +180,23 @@ class NewsletterPageAdminController extends Controller
         return $router->getContext()->getScheme() . '://' . $router->getContext()->getHost();
     }
 
+    /**
+     * @param $msg
+     */
     private function makeLog($msg)
     {
         /** @var $logger LoggerInterface */
         $logger = $this->get('logger');
         $logger->debug($msg, array('internal-newsletter-command'));
     }
-    
+
+    /**
+     * @param $locale
+     * @param Newsletter $newsletter
+     * @param EntityManager $em
+     * @param NewsletterManager $nb
+     * @param $host
+     */
     private function sendEmailBlockToLocale($locale, Newsletter $newsletter, EntityManager $em, NewsletterManager $nb, $host)
     {
         $this->get('translator')->setLocale($locale);
