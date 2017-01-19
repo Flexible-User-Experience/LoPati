@@ -67,7 +67,7 @@ class NewsletterUserManagementService
      *
      * @param NewsletterUser $searchedUser
      *
-     * @return array|bool
+     * @return bool true if everything goes well
      * @throws \Exception
      */
     public function writeUser(NewsletterUser $searchedUser)

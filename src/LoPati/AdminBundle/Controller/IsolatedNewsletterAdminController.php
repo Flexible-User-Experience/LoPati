@@ -192,6 +192,8 @@ class IsolatedNewsletterAdminController extends Controller
                         /** @var NewsletterUserManagementService $ums */
                         $ums = $this->get('app.newsletter_user_manager.service');
                         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filename->getRealPath());
+                        $wrongImportsCounter = 0;
+                        $rightImportsCounter = 0;
                         /** @var \PHPExcel_Worksheet $worksheet */
                         foreach ($phpExcelObject->getWorksheetIterator() as $worksheet) {
                             /** @var \PHPExcel_Worksheet_Row $row */
@@ -232,12 +234,20 @@ class IsolatedNewsletterAdminController extends Controller
                                 $importedUser->setIdioma('ca');
                                 $result = $ums->writeUser($importedUser);
 
-                                $this->get('session')->getFlashBag()->add(
-                                    $result ? 'app_flash' : 'app_flash_error',
-                                    '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
-                                );
+                                if ($result === false) {
+                                    $wrongImportsCounter++;
+                                    $this->get('session')->getFlashBag()->add(
+                                        'app_flash_error',
+                                        '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
+                                    );
+                                } else {
+                                    $rightImportsCounter++;
+                                }
                             }
                         }
+                        $this->get('session')->getFlashBag()->add('app_flash', 'S\'ha importat un total de: ' . ($wrongImportsCounter + $rightImportsCounter) . ' registres.');
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Registres importats correctament: ' . $rightImportsCounter);
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Errors detectats: ' . $wrongImportsCounter);
                     } else {
                         $this->get('session')->getFlashBag()->add(
                             'app_flash_error',

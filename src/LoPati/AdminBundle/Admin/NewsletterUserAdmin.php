@@ -54,7 +54,7 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', $this->getFormMdSuccessBoxArray(5))
+            ->with('General', $this->getFormMdSuccessBoxArray(6))
             ->add(
                 'name',
                 null,
@@ -106,13 +106,23 @@ class NewsletterUserAdmin extends AbstractBaseAdmin
                 'groups',
                 'sonata_type_model',
                 array(
-                    'label' => 'Grups',
-                    'class' => 'LoPati\NewsletterBundle\Entity\NewsletterGroup',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => true,
-                    'btn_add' => false,
+                    'label'        => 'Grups',
+                    'class'        => 'LoPati\NewsletterBundle\Entity\NewsletterGroup',
+                    'required'     => false,
+                    'expanded'     => false,
+                    'multiple'     => true,
+                    'btn_add'      => false,
                     'by_reference' => false,
+                )
+            )
+            ->end()
+            ->with('Informació', $this->getFormMdSuccessBoxArray(3))
+            ->add(
+                'fail',
+                null,
+                array(
+                    'label'    => 'Enviaments fallats',
+                    'disabled' => true,
                 )
             )
             ->end()
