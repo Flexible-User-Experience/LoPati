@@ -8,6 +8,7 @@ use LoPati\AdminBundle\Service\MailerService;
 use LoPati\AdminBundle\Service\NewsletterUserManagementService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
+use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -77,7 +78,8 @@ class IsolatedNewsletterAdminController extends Controller
                 'S\'ha produït un ERROR en enviar el newsletter. Contacta amb l\'administrador del sistema'
             );
         } else {
-            $object->setTested(true);
+            $object->setState(NewsletterStatusEnum::SENDED);
+            $object->setBeginSend(new \DateTime('now'));
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
