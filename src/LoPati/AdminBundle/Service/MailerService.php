@@ -21,11 +21,6 @@ class MailerService
     private $kernel;
 
     /**
-     * @var \SendGrid
-     */
-    private $sendgrid;
-
-    /**
      * @var Logger
      */
     private $logger;
@@ -44,6 +39,11 @@ class MailerService
      * @var string
      */
     private $sgFromEmail;
+
+    /**
+     * @var \SendGrid
+     */
+    private $sendgrid;
 
     /**
      *
@@ -69,7 +69,7 @@ class MailerService
         $this->sgApiKey    = $sgApiKey;
         $this->sgFromName  = $sgFromName;
         $this->sgFromEmail = $sgFromEmail;
-        $this->sendgrid    = new \SendGrid($this->sgApiKey);
+        $this->sendgrid    = new \SendGrid($sgApiKey);
     }
 
     /**
