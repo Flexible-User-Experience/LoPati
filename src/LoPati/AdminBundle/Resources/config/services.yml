@@ -124,6 +124,7 @@ services:
       - "%sendgrip_api_key%"
       - "%sendgrid_from_name%"
       - "%sendgrid_from_email%"
+      - "@sendgrid"
   app.newsletter_user_manager.service:
     class: LoPati\AdminBundle\Service\NewsletterUserManagementService
     arguments:

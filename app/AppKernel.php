@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Tystr\Bundle\SendgridBundle\TystrSendgridBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             // A2lix (exception, leave this bundle here)
             new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
