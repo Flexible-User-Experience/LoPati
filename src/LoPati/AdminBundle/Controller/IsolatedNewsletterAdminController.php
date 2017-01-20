@@ -8,6 +8,7 @@ use LoPati\AdminBundle\Service\MailerService;
 use LoPati\AdminBundle\Service\NewsletterUserManagementService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
+use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class IsolatedNewsletterAdminController
@@ -49,6 +49,15 @@ class IsolatedNewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
+        /** @var string $content message content */
+        $content = $this->renderView(
+            'AdminBundle:IsolatedNewsletter:preview.html.twig',
+            array(
+                'newsletter'   => $object,
+                'user_token'   => 'undefined', // TODO replace for each user token
+                'show_top_bar' => false,
+            )
+        );
 
         if ($object->getGroup()) {
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($object->getGroup());
@@ -56,19 +65,27 @@ class IsolatedNewsletterAdminController extends Controller
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->findAllEnabled();
         }
 
+        $emailsDestinationList = array();
         /** @var NewsletterUser $user */
         foreach ($users as $user) {
-            $content = $this->renderView(
-                'AdminBundle:IsolatedNewsletter:preview.html.twig',
-                array(
-                    'newsletter'   => $object,
-                    'user_token'   => $user->getToken(),
-                    'show_top_bar' => false,
-                )
-            );
-            $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
+            $emailsDestinationList[] = $user->getEmail();
         }
-        $this->get('session')->getFlashBag()->add('sonata_flash_success', 'El newsletter s\'ha enviat a totes les bústies.');
+
+        $result = $ms->delivery($object->getSubject(), $emailsDestinationList, $content);
+        if ($result == 0) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el newsletter. Contacta amb l\'administrador del sistema'
+            );
+        } else {
+            $object->setState(NewsletterStatusEnum::SENDED);
+            $object->setBeginSend(new \DateTime('now'));
+            $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'El newsletter s\'ha enviat a totes les bústies.'
+            );
+        }
 
         return $this->redirect('../list');
     }
@@ -123,9 +140,6 @@ class IsolatedNewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
-
-        /** @var array $edl email destinations list */
-        $edl = $this->getEdl();
         /** @var string $content message content */
         $content = $this->renderView(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
@@ -136,18 +150,18 @@ class IsolatedNewsletterAdminController extends Controller
             )
         );
 
-        $result = $ms->delivery('[TEST] ' . $object->getSubject(), $edl, $content);
-        if ($result == true) {
+        $result = $ms->delivery('[TEST] ' . $object->getSubject(), $this->getTestEmailsDestinationList(), $content);
+        if ($result == 0) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el test.'
+            );
+        } else {
             $object->setTested(true);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: ' . NewsletterPageAdminController::testEmail1 . ', ' . NewsletterPageAdminController::testEmail2 . ' i ' . NewsletterPageAdminController::testEmail3
-            );
-        } else {
-            $this->get('session')->getFlashBag()->add(
-                'sonata_flash_error',
-                'S\'ha produït un ERROR en enviar el test.'
+                'S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
             );
         }
 
@@ -190,6 +204,8 @@ class IsolatedNewsletterAdminController extends Controller
                         /** @var NewsletterUserManagementService $ums */
                         $ums = $this->get('app.newsletter_user_manager.service');
                         $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject($filename->getRealPath());
+                        $wrongImportsCounter = 0;
+                        $rightImportsCounter = 0;
                         /** @var \PHPExcel_Worksheet $worksheet */
                         foreach ($phpExcelObject->getWorksheetIterator() as $worksheet) {
                             /** @var \PHPExcel_Worksheet_Row $row */
@@ -230,12 +246,20 @@ class IsolatedNewsletterAdminController extends Controller
                                 $importedUser->setIdioma('ca');
                                 $result = $ums->writeUser($importedUser);
 
-                                $this->get('session')->getFlashBag()->add(
-                                    $result ? 'app_flash' : 'app_flash_error',
-                                    '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
-                                );
+                                if ($result === false) {
+                                    $wrongImportsCounter++;
+                                    $this->get('session')->getFlashBag()->add(
+                                        'app_flash_error',
+                                        '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
+                                    );
+                                } else {
+                                    $rightImportsCounter++;
+                                }
                             }
                         }
+                        $this->get('session')->getFlashBag()->add('app_flash', 'S\'ha importat un total de: ' . ($wrongImportsCounter + $rightImportsCounter) . ' registres.');
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Registres importats correctament: ' . $rightImportsCounter);
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Errors detectats: ' . $wrongImportsCounter);
                     } else {
                         $this->get('session')->getFlashBag()->add(
                             'app_flash_error',
@@ -271,24 +295,14 @@ class IsolatedNewsletterAdminController extends Controller
     /**
      * @return array
      */
-    private function getEdl()
+    private function getTestEmailsDestinationList()
     {
-        /** @var KernelInterface $ki */
-        $ki = $this->container->get('kernel');
-
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-            NewsletterPageAdminController::testEmail3,
+            $this->getParameter('email_address_test_1'),
+            $this->getParameter('email_address_test_2'),
+            $this->getParameter('email_address_test_3'),
         );
-
-        if ($ki->getEnvironment() === 'prod') {
-            /** @var array $edl email destinations list */
-            $edl = array(
-                NewsletterPageAdminController::testEmail1,
-                NewsletterPageAdminController::testEmail2,
-                NewsletterPageAdminController::testEmail3,
-            );
-        }
 
         return $edl;
     }

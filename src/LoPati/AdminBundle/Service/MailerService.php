@@ -6,6 +6,7 @@ use SendGrid;
 use SendGrid\Email;
 use SendGrid\Exception as SendgridException;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class MailerService
@@ -17,9 +18,9 @@ use Symfony\Bridge\Monolog\Logger;
 class MailerService
 {
     /**
-     * @var SendGrid
+     * @var KernelInterface
      */
-    private $sendgrid;
+    private $kernel;
 
     /**
      * @var Logger
@@ -32,6 +33,21 @@ class MailerService
     private $sgApiKey;
 
     /**
+     * @var string
+     */
+    private $sgFromName;
+
+    /**
+     * @var string
+     */
+    private $sgFromEmail;
+
+    /**
+     * @var SendGrid
+     */
+    private $sendgrid;
+
+    /**
      *
      *
      * Methods
@@ -42,25 +58,31 @@ class MailerService
     /**
      * Constructor
      *
-     * @param SendGrid $sendgrid
-     * @param Logger   $logger
-     * @param string   $sgApiKey
+     * @param KernelInterface $kernel
+     * @param Logger          $logger
+     * @param string          $sgApiKey
+     * @param string          $sgFromName
+     * @param string          $sgFromEmail
+     * @param SendGrid        $sendgrid
      */
-    public function __construct(SendGrid $sendgrid, Logger $logger, $sgApiKey)
+    public function __construct(KernelInterface $kernel, Logger $logger, $sgApiKey, $sgFromName, $sgFromEmail, SendGrid $sendgrid)
     {
-        $this->sendgrid = $sendgrid;
-        $this->logger   = $logger;
-        $this->sgApiKey = $sgApiKey;
+        $this->kernel      = $kernel;
+        $this->logger      = $logger;
+        $this->sgApiKey    = $sgApiKey;
+        $this->sgFromName  = $sgFromName;
+        $this->sgFromEmail = $sgFromEmail;
+        $this->sendgrid    = $sendgrid;
     }
 
     /**
-     * Deliver email notifitacion task
+     * Deliver a notifitacion email task
      *
-     * @param string $subject
-     * @param array  $emailDestinationList
-     * @param mixed  $content
+     * @param string $subject              Email subject
+     * @param array  $emailDestinationList List of emails to deliver
+     * @param mixed  $content              HTML email content
      *
-     * @return array|bool
+     * @return integer
      * @throws \Exception
      */
     public function delivery($subject, array $emailDestinationList, $content)
@@ -72,27 +94,31 @@ class MailerService
         try {
             // slice recipients in portions of 100 items
             //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
-            $chunks = array_chunk($emailDestinationList, 500);
+            $chunks = array_chunk($emailDestinationList, 950);
+            /** @var array $chunk */
             foreach ($chunks as $chunk) {
+                // slices of 950 emails per chunk
                 $email = new Email();
                 $email
-                    ->setFrom('butlleti@lopati.cat')
-                    ->setFromName('Centre d\'Art Lo Pati')
+                    ->setFrom($this->sgFromEmail)
+                    ->setFromName($this->sgFromName)
                     ->setSubject($subject)
-                    ->setSmtpapiTos($chunk)
+                    ->setTos(array($this->sgFromEmail))
+                    ->setBccs($chunk)
                     ->setHtml($content);
-                $this->sendgrid->send($email); // => $result = is possible to read the result
+
+                $this->sendgrid->send($email);
             }
-
-            return true;
-
         } catch (SendgridException $e) {
-            $this->logger->error('Error ' . $e->getCode() . ' al enviar el test.');
+            $this->logger->error('ERROR: Sendgrid code: ' . $e->getCode());
+            $this->logger->error('ERROR: Sendgrid msg: ' . $e->getMessage());
             foreach ($e->getErrors() as $er) {
-                $this->logger->error('Error ' . $er);
+                $this->logger->error('>>> Error: ' . $er);
             }
+
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

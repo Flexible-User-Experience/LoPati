@@ -67,7 +67,7 @@ class NewsletterUserManagementService
      *
      * @param NewsletterUser $searchedUser
      *
-     * @return array|bool
+     * @return bool true if everything goes well
      * @throws \Exception
      */
     public function writeUser(NewsletterUser $searchedUser)
@@ -80,11 +80,18 @@ class NewsletterUserManagementService
         $user = $this->ur->findOneBy(['email' => $searchedUser->getEmail()]);
         if ($user) {
             // existing user
-            $user
-                ->setName($searchedUser->getName())
-                ->setPostalCode($searchedUser->getPostalCode())
-                ->setPhone($searchedUser->getPhone())
-                ->setBirthyear($searchedUser->getBirthyear());
+            if ($searchedUser->getName()) {
+                $user->setName($searchedUser->getName());
+            }
+            if ($searchedUser->getPostalCode()) {
+                $user->setPostalCode($searchedUser->getPostalCode());
+            }
+            if ($searchedUser->getPhone()) {
+                $user->setPhone($searchedUser->getPhone());
+            }
+            if ($searchedUser->getBirthyear()) {
+                $user->setBirthyear($searchedUser->getBirthyear());
+            }
             if ($searchedGroup && !$user->getGroups()->contains($searchedGroup)) {
                 $user->addGroup($searchedGroup);
             }

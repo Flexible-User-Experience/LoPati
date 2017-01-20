@@ -2,7 +2,6 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
-use LoPati\AdminBundle\Controller\NewsletterPageAdminController;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
@@ -65,12 +64,7 @@ class DefaultController extends Controller
 //                }
             /** @var NewsletterManager $nb */
             $nb = $this->container->get('newsletter.build_content');
-            if ($this->get('kernel')->getEnvironment() == 'prod') {
-                $destEmail = $newsletterUser->getEmail();
-            } else {
-                $destEmail = NewsletterPageAdminController::testEmail3;
-            }
-            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+            $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
                 'NewsletterBundle:Default:confirmation.html.twig',
                 array(
                     'user_token'   => $newsletterUser->getToken(),
@@ -118,12 +112,7 @@ class DefaultController extends Controller
 //            }
             /** @var NewsletterManager $nb */
             $nb = $this->container->get('newsletter.build_content');
-            if ($this->get('kernel')->getEnvironment() == 'prod') {
-                $destEmail = $user->getEmail();
-            } else {
-                $destEmail = NewsletterPageAdminController::testEmail3;
-            }
-            $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+            $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
                     'NewsletterBundle:Default:activated.html.twig',
                     array(
                         'user'         => $user,
@@ -256,12 +245,7 @@ class DefaultController extends Controller
 //                    } else if ($user->getIdioma() == 'en') {
 //                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
 //                    }
-                    if ($this->get('kernel')->getEnvironment() == 'prod') {
-                        $destEmail = $user->getEmail();
-                    } else {
-                        $destEmail = NewsletterPageAdminController::testEmail3;
-                    }
-                    $result = $nb->sendMandrilMessage($subject, array($destEmail), $this->renderView(
+                    $result = $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
                         'NewsletterBundle:Default:finalEmailMessage.html.twig',
                         array(
                             'user'         => $user,

@@ -6,9 +6,7 @@ services:
         arguments:
             - "@templating"
             - "@translator"
-            - "@sendgrid"
-            - "@logger"
-            - "%sendgrip_api_key%"
+            - "@app.mailer.service"
     newsletter.sendgrid.hooks:
         class: LoPati\NewsletterBundle\Listener\SendgridListener
         tags:
@@ -19,4 +17,5 @@ services:
             - { name: kernel.event_listener, event: sendgrid.bounce, method: onEmailBounce }
             - { name: kernel.event_listener, event: sendgrid.spamreport, method: onEmailSpam }
             - { name: kernel.event_listener, event: sendgrid.unsubscribe, method: onEmailUnsubscribe }
-        arguments: [ "@logger" ]
+        arguments:
+            - "@logger"

@@ -2,14 +2,18 @@
 
 namespace LoPati\NewsletterBundle\Manager;
 
+use LoPati\AdminBundle\Service\MailerService;
 use LoPati\NewsletterBundle\Entity\Newsletter;
-use SendGrid;
-use SendGrid\Email;
-use SendGrid\Exception as SendgridException;
 use Symfony\Component\Templating\EngineInterface;
-use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Class NewsletterManager
+ *
+ * @category Manager
+ * @package  LoPati\NewsletterBundle\Manager
+ * @author   David Romaní <david@flux.cat>
+ */
 class NewsletterManager
 {
     /**
@@ -23,41 +27,25 @@ class NewsletterManager
     private $translator;
 
     /**
-     * @var SendGrid
+     * @var MailerService
      */
-    private $sendgrid;
-
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    /**
-     * @var string
-     */
-    private $sgApiKey;
+    private $mailerService;
 
     /**
      * Constructor
      *
      * @param EngineInterface     $templatingEngine
      * @param TranslatorInterface $translator
-     * @param SendGrid            $sendgrid
-     * @param Logger              $logger
-     * @param string              $sgApiKey
+     * @param MailerService       $mailerService
      */
     public function __construct(
         EngineInterface $templatingEngine,
         TranslatorInterface $translator,
-        SendGrid $sendgrid,
-        Logger $logger,
-        $sgApiKey
+        MailerService $mailerService
     ) {
         $this->templatingEngine = $templatingEngine;
-        $this->translator = $translator;
-        $this->sendgrid = $sendgrid;
-        $this->logger = $logger;
-        $this->sgApiKey = $sgApiKey;
+        $this->translator       = $translator;
+        $this->mailerService    = $mailerService;
     }
 
     /**
@@ -129,29 +117,6 @@ class NewsletterManager
             throw new \Exception('Email destination list empty');
         }
 
-        try {
-            // slice recipients in portions of 100 items
-            //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
-            $chunks = array_chunk($emailDestinationList, 500);
-            foreach ($chunks as $chunk) {
-                $email = new Email();
-                $email
-                    ->setFrom('butlleti@lopati.cat')
-                    ->setFromName('Centre d\'Art Lo Pati')
-                    ->setSubject($subject)
-                    ->setSmtpapiTos($chunk)
-                    ->setHtml($content);
-                $this->sendgrid->send($email); // => $result = is possible to read the result
-            }
-
-            return true;
-        } catch (SendgridException $e) {
-            $this->logger->error('Error ' . $e->getCode() . ' al enviar el test.');
-            foreach ($e->getErrors() as $er) {
-                $this->logger->error('Error ' . $er);
-            }
-        }
-
-        return false;
+        return $this->mailerService->delivery($subject, $emailDestinationList, $content);
     }
 }

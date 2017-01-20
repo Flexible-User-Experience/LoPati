@@ -3,22 +3,27 @@
 namespace LoPati\NewsletterBundle\Command;
 
 use Doctrine\ORM\EntityManager;
-use Gedmo\Translatable\TranslatableListener;
 use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use SendGrid\Response;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class NewsletterSendCommand
+ *
+ * @category Command
+ * @package  LoPati\NewsletterBundle\Command
+ */
 class NewsletterSendCommand extends ContainerAwareCommand
 {
+    /**
+     * Configure
+     */
 	protected function configure()
     {
 		$this->setName('newsletter:send')
@@ -30,6 +35,12 @@ EOT
 				);
 	}
 
+    /**
+     * Execute
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
 	protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var NewsletterManager $nb */

@@ -35,7 +35,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "2.3.7"
+        admin_tag_version:       "2.3.8"
         id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
@@ -169,7 +169,7 @@ genemu_form:
     select2: ~
     date:    ~
 
-# Sendgrid
+# Tystr Sendgrid
 tystr_sendgrid:
     username: "%sendgrip_username%"
     password: "%sendgrip_password%"

@@ -42,8 +42,10 @@ class NewsletterUserAdminController extends Controller
             'name',
             'email',
             'postalCode',
+            'groupsString',
             'phone',
             'birthyear',
+            'fail',
             'active',
         );
         $format = $request->get('format');

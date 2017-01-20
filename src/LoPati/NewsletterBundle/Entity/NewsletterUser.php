@@ -313,6 +313,26 @@ class NewsletterUser
     }
 
     /**
+     * Get Groups
+     *
+     * @return string
+     */
+    public function getGroupsString()
+    {
+        if (count($this->groups) > 0) {
+            $result = '';
+            /** @var NewsletterGroup $group */
+            foreach ($this->groups as $group) {
+                $result .= $group->getName() . ', ';
+            }
+
+            return substr($result, 0, -2);
+        }
+
+        return '';
+    }
+
+    /**
      * Add group
      *
      * @param NewsletterGroup $group

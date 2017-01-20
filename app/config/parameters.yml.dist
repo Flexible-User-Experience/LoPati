@@ -25,9 +25,11 @@ parameters:
 
     swiftmailer_delivery_address_dev_environment: me@me.com     #change this
 
-    sendgrip_username: "sendgrip_username"
-    sendgrip_password: "sendgrip_password"
-    sendgrip_api_key:  "sendgrip_api_key"
+    sendgrip_username:   "sendgrip_username"
+    sendgrip_password:   "sendgrip_password"
+    sendgrip_api_key:    "sendgrip_api_key"
+    sendgrid_from_name:  "your email name"
+    sendgrid_from_email: "your@email.com"
 
     admin_user_test: test   #change it
     admin_pass_test: test   #change it
@@ -36,3 +38,7 @@ parameters:
     private_admin_test_pass: admin
     private_editor_test_user: user
     private_editor_test_pass: user
+
+    email_address_test_1: "test1@email.com"
+    email_address_test_2: "test2@email.com"
+    email_address_test_3: "test3@email.com"

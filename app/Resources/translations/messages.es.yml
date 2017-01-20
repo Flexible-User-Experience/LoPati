@@ -1,3 +1,7 @@
+error:
+    403: "Prohibido"
+    404: "Página no encontrada"
+    500: "Error interno de servidor"
 newsletter:
     visualitzar: "Click aquí para visualizar correctamente"
     baixa: "Click aquí para darte de baja"

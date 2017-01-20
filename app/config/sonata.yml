@@ -1,13 +1,13 @@
 # Sonata Admin
 sonata_admin:
-    title: "CMS"
-    title_logo: "/images/logo_lopati_inverted.png"
+    title:           "CMS"
+    title_logo:      "/images/logo_lopati_inverted.png"
+    persist_filters: true
     options:
         html5_validate: true
         confirm_exit:   true
         use_select2:    true
         pager_links:    10
-    persist_filters: true
     templates:
         layout: "AdminBundle:Admin:my_standard_layout.html.twig"
         edit:   "AdminBundle:Admin:my_edit.html.twig"
@@ -35,7 +35,7 @@ sonata_admin:
                 settings:
                     content: >
                         <h1 style="margin: -20px 0 10px 0">Lo Pati CMS</h1>
-                        <h5 style="margin-bottom: 40px">Benvingut a l'administrador de continguts de l'aplicació <a href="http://www.lopati.cat" target="_blank">www.lopati.cat</a></h5>
+                        <h5 style="margin-bottom: 40px">Benvingut a l'administrador de continguts de la pàgina web <a href="http://www.lopati.cat" target="_blank">www.lopati.cat</a></h5>
             -
                 position: left
                 type: sonata.admin.block.admin_list

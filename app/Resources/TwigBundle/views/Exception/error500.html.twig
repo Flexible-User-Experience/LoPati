@@ -1,0 +1,5 @@
+{% extends 'TwigBundle:Exception:error.html.twig' %}
+
+{% block title %}{{ parent() }} 500{% endblock %}
+
+{% block error_text %}{{ parent() }} 500 · {{ 'error.500' | trans }}{% endblock %}
