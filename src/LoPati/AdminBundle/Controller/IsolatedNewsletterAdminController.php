@@ -48,6 +48,15 @@ class IsolatedNewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
+        /** @var string $content message content */
+        $content = $this->renderView(
+            'AdminBundle:IsolatedNewsletter:preview.html.twig',
+            array(
+                'newsletter'   => $object,
+                'user_token'   => 'undefined', // TODO replace for each user token
+                'show_top_bar' => false,
+            )
+        );
 
         if ($object->getGroup()) {
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersByGroup($object->getGroup());
@@ -55,21 +64,26 @@ class IsolatedNewsletterAdminController extends Controller
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->findAllEnabled();
         }
 
+        $emailsDestinationList = array();
         /** @var NewsletterUser $user */
         foreach ($users as $user) {
-            $content = $this->renderView(
-                'AdminBundle:IsolatedNewsletter:preview.html.twig',
-                array(
-                    'newsletter'   => $object,
-                    'user_token'   => $user->getToken(),
-                    'show_top_bar' => false,
-                )
-            );
-            if ($user->getEmail()) {
-                $ms->delivery($object->getSubject(), array($user->getEmail()), $content);
-            }
+            $emailsDestinationList[] = $user->getEmail();
         }
-        $this->get('session')->getFlashBag()->add('sonata_flash_success', 'El newsletter s\'ha enviat a totes les bústies.');
+
+        $result = $ms->delivery($object->getSubject(), $emailsDestinationList, $content);
+        if ($result == 0) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el newsletter. Contacta amb l\'administrador del sistema'
+            );
+        } else {
+            $object->setTested(true);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'El newsletter s\'ha enviat a totes les bústies.'
+            );
+        }
 
         return $this->redirect('../list');
     }
@@ -124,7 +138,6 @@ class IsolatedNewsletterAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
-
         /** @var string $content message content */
         $content = $this->renderView(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
@@ -146,7 +159,7 @@ class IsolatedNewsletterAdminController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                '[SGC#' . $result . '] S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
+                'S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
             );
         }
 
@@ -284,8 +297,8 @@ class IsolatedNewsletterAdminController extends Controller
     {
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-//            $this->getParameter('email_address_test_1'),
-//            $this->getParameter('email_address_test_2'),
+            $this->getParameter('email_address_test_1'),
+            $this->getParameter('email_address_test_2'),
             $this->getParameter('email_address_test_3'),
         );
 

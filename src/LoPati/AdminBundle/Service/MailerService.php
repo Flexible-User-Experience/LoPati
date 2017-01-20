@@ -103,7 +103,7 @@ class MailerService
                     ->setFrom($this->sgFromEmail)
                     ->setFromName($this->sgFromName)
                     ->setSubject($subject)
-                    ->setSmtpapiTos(array($this->sgFromEmail))
+                    ->setTos(array($this->sgFromEmail))
                     ->setBccs($chunk)
                     ->setHtml($content);
 
