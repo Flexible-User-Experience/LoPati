@@ -5,6 +5,9 @@ namespace LoPati\NewsletterBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use LoPati\NewsletterBundle\Entity\NewsletterGroup;
 
+/**
+ * Class NewsletterUserRepository.
+ */
 class NewsletterUserRepository extends EntityRepository
 {
     public function getActiveUsersWithMoreThanFails($fails)
@@ -16,7 +19,7 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Get active users plain array by group
+     * Get active users plain array by group.
      *
      * @param NewsletterGroup|null $group
      *
@@ -28,10 +31,10 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Get active users plain array by group & locale
+     * Get active users plain array by group & locale.
      *
      * @param NewsletterGroup|null $group
-     * @param string $locale
+     * @param string               $locale
      *
      * @return \Doctrine\ORM\AbstractQuery|\Doctrine\ORM\Query
      */
@@ -51,7 +54,7 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Get active users plain array by group
+     * Get active users plain array by group.
      *
      * @param NewsletterGroup|null $group
      *
@@ -63,7 +66,7 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Reusable get active users by group
+     * Reusable get active users by group.
      *
      * @param NewsletterGroup|null $group
      *
@@ -82,11 +85,11 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Get active users by group amount
+     * Get active users by group amount.
      *
      * @param NewsletterGroup|null $group
      *
-     * @return integer
+     * @return int
      */
     public function getActiveUsersByGroupAmount($group)
     {
@@ -102,7 +105,7 @@ class NewsletterUserRepository extends EntityRepository
     }
 
     /**
-     * Get users by email
+     * Get users by email.
      *
      * @param string $email
      * @param int    $limit
@@ -114,7 +117,7 @@ class NewsletterUserRepository extends EntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.email LIKE :email ORDER BY u.email ASC')
             ->setParameters(array(
-                    'email' => '%' .$email . '%',
+                    'email' => '%'.$email.'%',
                 ));
 
         return $query->getArrayResult();
