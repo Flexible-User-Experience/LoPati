@@ -7,7 +7,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 class AdminControllerTest extends WebTestCase
 {
     /**
-     * Test admin login request is successful
+     * Test admin login request is successful.
      */
     public function testAdminLoginPageIsSuccessful()
     {
@@ -18,7 +18,7 @@ class AdminControllerTest extends WebTestCase
     }
 
     /**
-     * Test page is successful
+     * Test page is successful.
      *
      * @dataProvider provideUrls
      *
@@ -33,7 +33,7 @@ class AdminControllerTest extends WebTestCase
     }
 
     /**
-     * Urls provider
+     * Urls provider.
      *
      * @return array
      */
@@ -70,6 +70,7 @@ class AdminControllerTest extends WebTestCase
             array('/admin/newsletter/newsletter/list'),
             array('/admin/newsletter/newsletter/create'),
             array('/admin/newsletter/newsletter/1/edit'),
+            array('/admin/newsletter/newsletter/1/delete'),
             array('/admin/newsletter/newsletter-post/list'),
             array('/admin/newsletter/newsletter-post/create'),
             array('/admin/newsletter/newsletter-post/1/edit'),
@@ -79,6 +80,7 @@ class AdminControllerTest extends WebTestCase
             array('/admin/slider/list'),
             array('/admin/slider/create'),
             array('/admin/slider/1/edit'),
+            array('/admin/slider/1/delete'),
         );
     }
 }
