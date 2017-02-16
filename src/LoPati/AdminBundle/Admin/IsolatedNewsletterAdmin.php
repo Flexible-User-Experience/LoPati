@@ -11,10 +11,10 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * Class IsolatedNewsletterAdmin
+ * Class IsolatedNewsletterAdmin.
  *
  * @category Admin
- * @package  LoPati\AdminBundle\Admin
+ *
  * @author   David Romaní <david@flux.cat>
  */
 class IsolatedNewsletterAdmin extends AbstractBaseAdmin
@@ -22,13 +22,13 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
     protected $classnameLabel = 'Newsletter';
     protected $baseRoutePattern = 'newsletter/newsletter';
     protected $datagridValues = array(
-        '_page'       => 1,
+        '_page' => 1,
         '_sort_order' => 'DESC', // sort direction
-        '_sort_by'    => 'date' // field name
+        '_sort_by' => 'date', // field name
     );
 
     /**
-     * Configure export formats
+     * Configure export formats.
      *
      * @return array
      */
@@ -38,7 +38,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
     }
 
     /**
-     * Create & edit view
+     * Create & edit view.
      *
      * @param FormMapper $formMapper
      */
@@ -52,7 +52,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'subject',
                 null,
                 array(
-                    'label' => 'Títol del missatge'
+                    'label' => 'Títol del missatge',
                 )
             )
             ->end()
@@ -61,8 +61,8 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'date',
                 'sonata_type_date_picker',
                 array(
-                    'label'    => 'Data',
-                    'format'   => 'd/M/y',
+                    'label' => 'Data',
+                    'format' => 'd/M/y',
                     'required' => false,
                 )
             )
@@ -70,12 +70,12 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'group',
                 'sonata_type_model',
                 array(
-                    'label'    => 'Grup',
-                    'query'    => $ngr->getActiveItemsSortByNameQuery(),
+                    'label' => 'Grup',
+                    'query' => $ngr->getActiveItemsSortByNameQuery(),
                     'required' => false,
                     'expanded' => false,
                     'multiple' => false,
-                    'btn_add'  => false,
+                    'btn_add' => false,
                 )
             )
             ->end()
@@ -84,7 +84,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'tested',
                 null,
                 array(
-                    'label'    => 'Test',
+                    'label' => 'Test',
                     'disabled' => true,
                     'required' => false,
                 )
@@ -93,8 +93,8 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'state',
                 ChoiceType::class,
                 array(
-                    'label'    => 'Estat',
-                    'choices'  => NewsletterStatusEnum::getEnumArray(),
+                    'label' => 'Estat',
+                    'choices' => NewsletterStatusEnum::getEnumArray(),
                     'multiple' => false,
                     'expanded' => false,
                     'required' => false,
@@ -105,8 +105,8 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'beginSend',
                 'sonata_type_date_picker',
                 array(
-                    'label'    => 'Inici enviament',
-                    'format'   => 'd/M/y',
+                    'label' => 'Inici enviament',
+                    'format' => 'd/M/y',
                     'disabled' => true,
                     'required' => false,
                 )
@@ -121,12 +121,12 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                     'posts',
                     'sonata_type_collection',
                     array(
-                        'label'              => ' ',
+                        'label' => ' ',
                         'cascade_validation' => true,
                     ),
                     array(
-                        'edit'     => 'inline',
-                        'inline'   => 'table',
+                        'edit' => 'inline',
+                        'inline' => 'table',
                         'sortable' => 'position',
                     )
                 )
@@ -135,7 +135,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
     }
 
     /**
-     * Filter view
+     * Filter view.
      *
      * @param DatagridMapper $datagridMapper
      */
@@ -146,7 +146,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'date',
                 'doctrine_orm_date',
                 array(
-                    'label'      => 'Data',
+                    'label' => 'Data',
                     'field_type' => 'sonata_type_date_picker',
                 )
             )
@@ -181,14 +181,14 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'expanded' => false,
                     'multiple' => false,
-                    'choices'  => NewsletterStatusEnum::getEnumArray(),
+                    'choices' => NewsletterStatusEnum::getEnumArray(),
                 )
             )
         ;
     }
 
     /**
-     * List view
+     * List view.
      *
      * @param ListMapper $mapper
      */
@@ -200,16 +200,16 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'date',
                 'date',
                 array(
-                    'label'    => 'Data',
+                    'label' => 'Data',
                     'editable' => true,
-                    'format'   => 'd/m/Y',
+                    'format' => 'd/m/Y',
                 )
             )
             ->add(
                 'subject',
                 null,
                 array(
-                    'label'    => 'Títol del missatge',
+                    'label' => 'Títol del missatge',
                     'editable' => true,
                 )
             )
@@ -224,14 +224,14 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'tested',
                 null,
                 array(
-                    'label' => 'Test'
+                    'label' => 'Test',
                 )
             )
             ->add(
                 'state',
                 null,
                 array(
-                    'label'    => 'Estat',
+                    'label' => 'Estat',
                     'template' => 'AdminBundle:IsolatedNewsletter:list_custom_state_field.html.twig',
                 )
             )
@@ -239,7 +239,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 'beginSend',
                 null,
                 array(
-                    'label'    => 'Inici enviament',
+                    'label' => 'Inici enviament',
                     'template' => 'AdminBundle:IsolatedNewsletter:list_custom_begin_send_field.html.twig',
                 )
             )
@@ -249,16 +249,19 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
                 array(
                     'actions' => array(
                         'preview' => array(
-                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_preview_button.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_preview_button.html.twig',
                         ),
                         'test' => array(
-                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_test_button.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_test_button.html.twig',
                         ),
                         'send' => array(
-                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_send_button.html.twig'
+                            'template' => 'AdminBundle:IsolatedNewsletter:list__action_send_button.html.twig',
                         ),
                         'edit' => array(
-                            'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'
+                            'template' => 'AdminBundle:Admin:list__action_edit_button.html.twig',
+                        ),
+                        'delete' => array(
+                            'template' => 'AdminBundle:Admin:list__action_delete_button.html.twig',
                         ),
                     ),
                     'label' => 'Accions',
@@ -271,11 +274,10 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('send', $this->getRouterIdParameter() . '/send');
-        $collection->add('preview', $this->getRouterIdParameter() . '/preview');
-        $collection->add('test', $this->getRouterIdParameter() . '/test');
+        $collection->add('send', $this->getRouterIdParameter().'/send');
+        $collection->add('preview', $this->getRouterIdParameter().'/preview');
+        $collection->add('test', $this->getRouterIdParameter().'/test');
         $collection->add('upload', 'upload');
-        $collection->remove('delete');
         $collection->remove('batch');
         $collection->remove('show');
         $collection->remove('export');
