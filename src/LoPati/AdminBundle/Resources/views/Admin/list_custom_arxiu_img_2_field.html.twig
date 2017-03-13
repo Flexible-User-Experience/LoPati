@@ -1,13 +1,11 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
-{% block field%}
+{% block field %}
     {% spaceless %}
-        <div>
-            {% if object.imagePetita2Name %}
-                <img src="{{ vich_uploader_asset(object, 'imagePetita2') | imagine_filter('thumb_imatge_admin_list_view') }}" alt="">
-            {% else %}
-                ---
-            {% endif %}
-        </div>
+        {% if object.imagePetita2Name %}
+            <img src="{{ vich_uploader_asset(object, 'imagePetita2') | imagine_filter('thumb_imatge_admin_list_view') }}" alt="thumbnail">
+        {% else %}
+            ---
+        {% endif %}
     {% endspaceless %}
 {% endblock %}
