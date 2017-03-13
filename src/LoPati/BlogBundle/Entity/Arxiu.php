@@ -77,6 +77,13 @@ class Arxiu
     protected $imagePetita2Name;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $updatedAt;
+
+    /**
      * Methods.
      */
 
@@ -146,6 +153,11 @@ class Arxiu
     public function setImagePetita($file)
     {
         $this->imagePetita = $file;
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
 
         return $this;
     }
@@ -186,6 +198,11 @@ class Arxiu
     public function setImagePetita2($file)
     {
         $this->imagePetita2 = $file;
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
 
         return $this;
     }
@@ -206,6 +223,26 @@ class Arxiu
     public function setImagePetita2Name($filename)
     {
         $this->imagePetita2Name = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
