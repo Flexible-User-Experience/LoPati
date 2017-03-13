@@ -6,9 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class Arxiu.
+ *
  * @ORM\Table(name="Arxiu")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
@@ -17,6 +18,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Arxiu
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -24,102 +27,98 @@ class Arxiu
     protected $id;
 
     /**
-     * @var integer
+     * @var int
+     *
      * @ORM\Column(type="integer", unique=true)
      */
     protected $any;
 
-    /** @ORM\Column(type="boolean", nullable=true) */
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
     protected $actiu = false;
 
     /**
+     * @var File
+     *
      * @Assert\File(
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetitaName")
-     *
-     * @var File $imagePetita
      */
     protected $imagePetita;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="image_petita_name", nullable=true)
-     * @var string $imagePetitaName
      */
     protected $imagePetitaName;
 
     /**
+     * @var File
+     *
      * @Assert\File(
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpg", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      * @Vich\UploadableField(mapping="imatge", fileNameProperty="imagePetita2Name")
-     *
-     * @var File $imagePetita2
      */
     protected $imagePetita2;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="image_petita2_name", nullable=true)
-     * @var string $imagePetita2Name
      */
     protected $imagePetita2Name;
 
     /**
-     * Get id
+     * @var \DateTime
      *
-     * @return integer
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $updatedAt;
+
+    /**
+     * Methods.
+     */
+
+    /**
+     * Get id.
+     *
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getImagePetitaName()
+    /**
+     * @return int
+     */
+    public function getAny()
     {
-        return $this->imagePetitaName;
-    }
-
-    public function setImagePetitaName($filename)
-    {
-        $this->imagePetitaName = $filename;
-    }
-
-    public function getImagePetita()
-    {
-        return $this->imagePetita;
-    }
-
-    public function setImagePetita($file)
-    {
-        $this->imagePetita = $file;
-    }
-
-    public function getImagePetita2()
-    {
-        return $this->imagePetita2;
-    }
-
-    public function setImagePetita2($file)
-    {
-        $this->imagePetita2 = $file;
-    }
-
-    public function getImagePetita2Name()
-    {
-        return $this->imagePetita2Name;
-    }
-
-    public function setImagePetita2Name($filename)
-    {
-        $this->imagePetita2Name = $filename;
+        return $this->any;
     }
 
     /**
-     * Get actiu
+     * @param $any
      *
-     * @return boolean
+     * @return $this
+     */
+    public function setAny($any)
+    {
+        $this->any = $any;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
      */
     public function getActiu()
     {
@@ -127,13 +126,125 @@ class Arxiu
     }
 
     /**
-     * Set actiu
+     * @param bool $actiu
      *
-     * @param boolean $actiu
+     * @return $this
      */
     public function setActiu($actiu)
     {
         $this->actiu = $actiu;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImagePetita()
+    {
+        return $this->imagePetita;
+    }
+
+    /**
+     * @param File $file
+     *
+     * @return $this
+     */
+    public function setImagePetita($file)
+    {
+        $this->imagePetita = $file;
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePetitaName()
+    {
+        return $this->imagePetitaName;
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return $this
+     */
+    public function setImagePetitaName($filename)
+    {
+        $this->imagePetitaName = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImagePetita2()
+    {
+        return $this->imagePetita2;
+    }
+
+    /**
+     * @param File $file
+     *
+     * @return $this
+     */
+    public function setImagePetita2($file)
+    {
+        $this->imagePetita2 = $file;
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePetita2Name()
+    {
+        return $this->imagePetita2Name;
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return $this
+     */
+    public function setImagePetita2Name($filename)
+    {
+        $this->imagePetita2Name = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return $this
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
@@ -142,20 +253,5 @@ class Arxiu
     public function __toString()
     {
         return $this->id ? (string) $this->getAny() : '---';
-    }
-
-    /**
-     * Get data_caducitat
-     *
-     * @return string
-     */
-    public function getAny()
-    {
-        return $this->any;
-    }
-
-    public function setAny($dataCaducitat)
-    {
-        $this->any = $dataCaducitat;
     }
 }
