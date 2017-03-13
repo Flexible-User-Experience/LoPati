@@ -6,10 +6,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 /**
- * Class ArxiuAdmin
+ * Class ArxiuAdmin.
  *
  * @category Admin
- * @package  LoPati\AdminBundle\Admin
+ *
  * @author   David Romaní <david@flux.cat>
  */
 class ArxiuAdmin extends AbstractBaseAdmin
@@ -19,7 +19,7 @@ class ArxiuAdmin extends AbstractBaseAdmin
     protected $datagridValues = array(
         '_page' => 1,
         '_sort_order' => 'DESC', // sort direction
-        '_sort_by' => 'any' // field name
+        '_sort_by' => 'any', // field name
     );
 
     /**
@@ -51,12 +51,12 @@ class ArxiuAdmin extends AbstractBaseAdmin
             ->add(
                 'imagePetitaName',
                 null,
-                array('label' => 'Imatge', 'template' => 'AdminBundle:Admin:customarxiuimglistfield.html.twig')
+                array('label' => 'Imatge', 'template' => 'AdminBundle:Admin:list_custom_arxiu_img_1_field.html.twig')
             )
             ->add(
                 'imagePetita2Name',
                 null,
-                array('label' => 'Imatge vermell', 'template' => 'AdminBundle:Admin:customarxiuredimglistfield.html.twig')
+                array('label' => 'Imatge vermell', 'template' => 'AdminBundle:Admin:list_custom_arxiu_img_2_field.html.twig')
             )
             ->add('actiu', 'boolean', array('editable' => true))
             ->add(
@@ -66,7 +66,7 @@ class ArxiuAdmin extends AbstractBaseAdmin
                     'actions' => array(
                         'edit' => array('template' => 'AdminBundle:Admin:list__action_edit_button.html.twig'),
                     ),
-                    'label'   => 'Accions'
+                    'label' => 'Accions',
                 )
             );
     }
