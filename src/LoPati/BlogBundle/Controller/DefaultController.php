@@ -9,8 +9,10 @@ use LoPati\Utilities\Utils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session;
 
+/**
+ * Class DefaultController.
+ */
 class DefaultController extends Controller
 {
     const THUMBNAILS_PER_PAGE_SLIDER = 10;
@@ -52,6 +54,11 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('portada', array('_locale' => $culture)));
     }
 
+    /**
+     * @param string $_locale
+     *
+     * @return Response
+     */
     public function portadaAction($_locale)
     {
         $this->getRequest()->setLocale($_locale);
@@ -72,6 +79,11 @@ class DefaultController extends Controller
         return $this->render($template, array('portades' => $pagination, 'slides' => $slides));
     }
 
+    /**
+     * @param int $id
+     *
+     * @return Response
+     */
     public function paginaAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -85,6 +97,9 @@ class DefaultController extends Controller
         return $this->render('BlogBundle:Default:pagina.html.twig', array('pagina' => $pagina, 'id' => $id, 'tipus_video' => $tipus_video));
     }
 
+    /**
+     * @return Response
+     */
     public function arbre_de_contingutAction()
     {
         /** @var EntityManager $em */
@@ -95,16 +110,27 @@ class DefaultController extends Controller
         return $this->render('AdminBundle:Admin:arbre_de_contingut.html.twig', array('categories' => $categories));
     }
 
+    /**
+     * @return Response
+     */
     public function peuAction()
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT c FROM BlogBundle:Configuracio c WHERE c.id =1');
+        $query = $em->createQuery('SELECT c FROM BlogBundle:Configuracio c WHERE c.id = 1');
         $configuracio = $query->getOneOrNullResult();
 
         return $this->render('BlogBundle:Default:peu.html.twig', array('peu' => $configuracio));
     }
 
+    /**
+     * @param $categoria
+     * @param $subcategoria
+     * @param $categoria_id
+     * @param $subcategoria_id
+     *
+     * @return Response
+     */
     public function llistaAction($categoria, $subcategoria, $categoria_id, $subcategoria_id)
     {
         /** @var EntityManager $em */
@@ -126,18 +152,26 @@ class DefaultController extends Controller
         return $this->render(
             'BlogBundle:Default:llista.html.twig',
             array(
-                'pagines'         => $pagines,
-                'categoria_id'    => $categoria_id,
-                'subcategoria_id' => $subcategoria_id
+                'pagines' => $pagines,
+                'categoria_id' => $categoria_id,
+                'subcategoria_id' => $subcategoria_id,
             )
         );
     }
 
+    /**
+     * @return Response
+     */
     public function menuIdiomaAction()
     {
         return $this->render('BlogBundle:Default:menuIdioma.html.twig');
     }
 
+    /**
+     * @param int $id
+     *
+     * @return Response
+     */
     public function articleAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -154,6 +188,12 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param int $categoria_id
+     * @param $arxiu
+     *
+     * @return Response
+     */
     public function arxiuAction($categoria_id, $arxiu)
     {
         /** @var EntityManager $em */
@@ -175,6 +215,13 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param $any
+     * @param $categoria_id
+     * @param $arxiu
+     *
+     * @return Response
+     */
     public function arxiuLlistaAnyAction($any, $categoria_id, $arxiu)
     {
         /** @var EntityManager $em */
@@ -192,8 +239,8 @@ class DefaultController extends Controller
         );
         $consulta2->setParameter('avui', new \DateTime('today'));
         $consulta2->setParameter('actiu', '1');
-        $consulta2->setParameter('data1', new \DateTime($any . "-01-01"));
-        $consulta2->setParameter('data2', new \DateTime($any . "-12-31"));
+        $consulta2->setParameter('data1', new \DateTime($any.'-01-01'));
+        $consulta2->setParameter('data2', new \DateTime($any.'-12-31'));
         $pagines = $consulta2->getResult();
         $consulta3 = $em->createQuery('SELECT cat FROM MenuBundle:Categoria cat WHERE cat.id = :id');
         $consulta3->setParameter('id', $categoria_id);
@@ -203,14 +250,19 @@ class DefaultController extends Controller
             'BlogBundle:Default:arxiuLlistaAny.html.twig',
             array(
                 'categoria_id' => $categoria->getId(),
-                'any'          => $any,
-                'arxiu'        => $arxiu,
-                'pagines'      => $pagines,
-                'categoria'    => $categoria
+                'any' => $any,
+                'arxiu' => $arxiu,
+                'pagines' => $pagines,
+                'categoria' => $categoria,
             )
         );
     }
 
+    /**
+     * @param int $id
+     *
+     * @return Response
+     */
     public function arxiuArticleAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -224,14 +276,21 @@ class DefaultController extends Controller
         return $this->render(
             'BlogBundle:Default:articleArxiu.html.twig',
             array(
-                'pagina'      => $pagina,
-                'id'          => $id,
-                'tipus_video' => $tipus_video
+                'pagina' => $pagina,
+                'id' => $id,
+                'tipus_video' => $tipus_video,
             )
         );
     }
 
-    public function menuDretaArxiuAction($any_current = null, $categoria_id, $arxiu)
+    /**
+     * @param null $any_current
+     * @param $categoria_id
+     * @param $arxiu
+     *
+     * @return Response
+     */
+    public function menuDretaArxiuAction($any_current, $categoria_id, $arxiu)
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
@@ -244,10 +303,10 @@ class DefaultController extends Controller
         return $this->render(
             'BlogBundle:Default:menuDretaArxiu.html.twig',
             array(
-                'any_current'  => $any_current,
-                'anys'         => $anys,
+                'any_current' => $any_current,
+                'anys' => $anys,
                 'categoria_id' => $categoria_id,
-                'arxiu'        => $arxiu
+                'arxiu' => $arxiu,
             )
         );
     }
