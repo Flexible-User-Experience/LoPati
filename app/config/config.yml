@@ -21,7 +21,8 @@ framework:
     templating:
         engines: [ "twig" ]
     session:
-        handler_id:  ~
+        name:       LPSESSID
+        handler_id: ~
     http_method_override: true
 
 # Twig
@@ -35,7 +36,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "2.4.4"
+        admin_tag_version:       "v2.4.5"
         id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
@@ -115,6 +116,9 @@ fos_user:
         group_manager: sonata.user.orm.group_manager
     service:
         user_manager: sonata.user.orm.user_manager
+    from_email:
+        address:     "%sendgrid_from_email%"
+        sender_name: "%sendgrid_from_name%"
 
 # TinyMCE
 stfalcon_tinymce:
