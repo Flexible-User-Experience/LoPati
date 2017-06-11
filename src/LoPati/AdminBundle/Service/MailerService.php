@@ -3,8 +3,6 @@
 namespace LoPati\AdminBundle\Service;
 
 use SendGrid;
-use SendGrid\Email;
-use SendGrid\Exception as SendgridException;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -67,7 +65,7 @@ class MailerService
         $this->sgApiKey = $sgApiKey;
         $this->sgFromName = $sgFromName;
         $this->sgFromEmail = $sgFromEmail;
-        $this->sendgrid = new SendGrid($sgApiKey);
+        $this->sendgrid = new SendGrid($this->sgApiKey);
     }
 
     /**
@@ -77,7 +75,7 @@ class MailerService
      * @param array  $emailDestinationList List of emails to deliver
      * @param mixed  $content              HTML email content
      *
-     * @return int
+     * @return bool True if everything goes well
      *
      * @throws \Exception
      */
@@ -88,29 +86,30 @@ class MailerService
         }
 
         try {
-            // slice recipients in portions of 100 items
-            //   Sendgrid can send up to 1000 recipents per mail and 100 mails per connection
+            // sliced recipients in portions of 100 items
+            // (Sendgrid can send up to 1000 recipents per mail and 100 mails per connection)
             $chunks = array_chunk($emailDestinationList, 950);
+            $from = new SendGrid\Email($this->sgFromName, $this->sgFromEmail);
+            $to = new SendGrid\Email($this->sgFromName, $this->sgFromEmail);
+            $mailContent = new SendGrid\Content('text/html', $content);
             /** @var array $chunk */
             foreach ($chunks as $chunk) {
                 // slices of 950 emails per chunk
-                $email = new Email();
-                $email
-                    ->setFrom($this->sgFromEmail)
-                    ->setFromName($this->sgFromName)
-                    ->setSubject($subject)
-                    ->setTos(array($this->sgFromEmail))
-                    ->setBccs($chunk)
-                    ->setHtml($content);
+                $mail = new SendGrid\Mail($from, $subject, $to, $mailContent);
+                $personalitzation = new SendGrid\Personalization();
+                /** @var string $destEmail */
+                foreach ($chunk as $destEmail) {
+                    $bcc = new SendGrid\Email(null, $destEmail);
+                    $personalitzation->addBcc($bcc);
+                    $personalitzation->addSubstitution('-token-', 'my-test-token');
+                    $mail->addPersonalization($personalitzation);
+                }
 
-                $this->sendgrid->send($email);
+                $this->sendgrid->client->mail()->send()->post($mail);
             }
-        } catch (SendgridException $e) {
+        } catch (\Exception $e) {
             $this->logger->error('ERROR: Sendgrid code: '.$e->getCode());
             $this->logger->error('ERROR: Sendgrid msg: '.$e->getMessage());
-            foreach ($e->getErrors() as $er) {
-                $this->logger->error('>>> Error: '.$er);
-            }
 
             return false;
         }
