@@ -67,7 +67,7 @@ class MailerService
         $this->sgApiKey = $sgApiKey;
         $this->sgFromName = $sgFromName;
         $this->sgFromEmail = $sgFromEmail;
-//        $this->sendgrid    = $sendgrid;
+        $this->sendgrid = new SendGrid($sgApiKey);
     }
 
     /**
