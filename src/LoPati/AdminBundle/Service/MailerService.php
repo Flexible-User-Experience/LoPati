@@ -9,10 +9,10 @@ use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class MailerService
+ * Class MailerService.
  *
  * @category Service
- * @package  LoPati\AdminBundle\Service
+ *
  * @author   David Romaní <david@flux.cat>
  */
 class MailerService
@@ -48,41 +48,37 @@ class MailerService
     private $sendgrid;
 
     /**
-     *
-     *
-     * Methods
-     *
-     *
+     * Methods.
      */
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param KernelInterface $kernel
      * @param Logger          $logger
      * @param string          $sgApiKey
      * @param string          $sgFromName
      * @param string          $sgFromEmail
-     * @param SendGrid        $sendgrid
      */
-    public function __construct(KernelInterface $kernel, Logger $logger, $sgApiKey, $sgFromName, $sgFromEmail, SendGrid $sendgrid)
+    public function __construct(KernelInterface $kernel, Logger $logger, $sgApiKey, $sgFromName, $sgFromEmail)
     {
-        $this->kernel      = $kernel;
-        $this->logger      = $logger;
-        $this->sgApiKey    = $sgApiKey;
-        $this->sgFromName  = $sgFromName;
+        $this->kernel = $kernel;
+        $this->logger = $logger;
+        $this->sgApiKey = $sgApiKey;
+        $this->sgFromName = $sgFromName;
         $this->sgFromEmail = $sgFromEmail;
-        $this->sendgrid    = $sendgrid;
+//        $this->sendgrid    = $sendgrid;
     }
 
     /**
-     * Deliver a notifitacion email task
+     * Deliver a notifitacion email task.
      *
      * @param string $subject              Email subject
      * @param array  $emailDestinationList List of emails to deliver
      * @param mixed  $content              HTML email content
      *
-     * @return integer
+     * @return int
+     *
      * @throws \Exception
      */
     public function delivery($subject, array $emailDestinationList, $content)
@@ -110,10 +106,10 @@ class MailerService
                 $this->sendgrid->send($email);
             }
         } catch (SendgridException $e) {
-            $this->logger->error('ERROR: Sendgrid code: ' . $e->getCode());
-            $this->logger->error('ERROR: Sendgrid msg: ' . $e->getMessage());
+            $this->logger->error('ERROR: Sendgrid code: '.$e->getCode());
+            $this->logger->error('ERROR: Sendgrid msg: '.$e->getMessage());
             foreach ($e->getErrors() as $er) {
-                $this->logger->error('>>> Error: ' . $er);
+                $this->logger->error('>>> Error: '.$er);
             }
 
             return false;
