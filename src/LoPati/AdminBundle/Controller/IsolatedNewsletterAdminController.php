@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\AdminBundle\Entity\EmailToken;
 use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
 use LoPati\AdminBundle\Service\NewsletterUserManagementService;
@@ -55,7 +56,6 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined', // TODO replace for each user token
                 'show_top_bar' => false,
             )
         );
@@ -69,10 +69,10 @@ class IsolatedNewsletterAdminController extends Controller
         $emailsDestinationList = array();
         /** @var NewsletterUser $user */
         foreach ($users as $user) {
-            $emailsDestinationList[] = $user->getEmail();
+            $emailsDestinationList[] = new EmailToken($user->getEmail(), $user->getToken());
         }
 
-        $result = $ms->delivery($object->getSubject(), $emailsDestinationList, $content);
+        $result = $ms->batchDelivery($object->getSubject(), $emailsDestinationList, $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
@@ -114,7 +114,6 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined',
                 'show_top_bar' => true,
             )
         );
@@ -148,12 +147,11 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined',
                 'show_top_bar' => false,
             )
         );
 
-        $result = $ms->delivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
+        $result = $ms->batchDelivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
@@ -303,9 +301,9 @@ class IsolatedNewsletterAdminController extends Controller
     {
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-            $this->getParameter('email_address_test_1'),
-            $this->getParameter('email_address_test_2'),
-            $this->getParameter('email_address_test_3'),
+            new EmailToken($this->getParameter('email_address_test_1'), 'fake-token-1'),
+            new EmailToken($this->getParameter('email_address_test_2'), 'fake-token-2'),
+            new EmailToken($this->getParameter('email_address_test_3'), 'fake-token-3'),
         );
 
         return $edl;

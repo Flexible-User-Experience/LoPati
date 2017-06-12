@@ -120,6 +120,7 @@ services:
     class: LoPati\AdminBundle\Service\MailerService
     arguments:
       - "@kernel"
+      - "@router"
       - "@logger"
       - "%sendgrip_api_key%"
       - "%sendgrid_from_name%"
