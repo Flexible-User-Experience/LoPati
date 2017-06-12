@@ -12,11 +12,11 @@
                 </p>
                 {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
                 <p>
-                    Per confirmar la subscripció, si us plau, fes clic <a href="{{ url('newsletter_confirmation', {token: user_token}) }}">aquí</a>.
+                    Per confirmar la subscripció, si us plau, fes clic <a href="{{ url('newsletter_confirmation', {token: user.token}) }}">aquí</a>.
                 </p>
                 {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 40} %}
                 <p style="font-size:10px;">
-                    Si l'enllaç no funciona, copiï aquesta adreça {{ url('newsletter_confirmation', {token: user_token}) }} al seu navegador.
+                    Si l'enllaç no funciona, copiï aquesta adreça {{ url('newsletter_confirmation', {token: user.token}) }} al seu navegador.
                 </p>
             </th>
             <th class="expander"></th>

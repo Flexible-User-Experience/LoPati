@@ -2,10 +2,10 @@
 
 namespace LoPati\NewsletterBundle\Controller;
 
+use LoPati\AdminBundle\Service\MailerService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Form\NewsletterUserType;
-use LoPati\NewsletterBundle\Manager\NewsletterManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -58,19 +58,15 @@ class DefaultController extends Controller
             $em->persist($newsletterUser);
             $em->flush();
             $subject = 'Confirmació per rebre el newsletter de LO PATI';
-//                if ($newsletterUser->getIdioma() == 'es') {
-//                    $subject = 'Confirmación para recibir el newsletter de LO PATI';
-//                } else if ($newsletterUser->getIdioma() == 'en') {
-//                    $subject = 'Confirmation to receive newsletter LO PATI';
-//                }
-            /** @var NewsletterManager $nb */
-            $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
+
+            /** @var MailerService $ms */
+            $ms = $this->get('app.mailer.service');
+            $ms->delivery($subject, $newsletterUser, $this->renderView(
                 'NewsletterBundle:Default:confirmation.html.twig',
                 array(
-                    'user_token' => $newsletterUser->getToken(),
                     'user' => $newsletterUser,
                     'show_top_bar' => false,
+                    'show_bottom_bar' => false,
                 )
             ));
             $flash = $this->get('translator')->trans('suscribe.register');
@@ -106,18 +102,15 @@ class DefaultController extends Controller
             $user->setActive(true);
             $em->flush();
             $subject = 'La seva adreça de correu electrònic ha estat activada correctament';
-//            if ($user->getIdioma() == 'es') {
-//                $subject = 'Su dirección de correo electrónico ha sido activada correctamente';
-//            } else if ($user->getIdioma() == 'en') {
-//                $subject = 'Your email address has been activated';
-//            }
-            /** @var NewsletterManager $nb */
-            $nb = $this->container->get('newsletter.build_content');
-            $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
+
+            /** @var MailerService $ms */
+            $ms = $this->get('app.mailer.service');
+            $ms->delivery($subject, $user, $this->renderView(
                     'NewsletterBundle:Default:activated.html.twig',
                     array(
                         'user' => $user,
                         'show_top_bar' => false,
+                        'show_bottom_bar' => false,
                     )
                 ));
             $this->get('session')->getFlashBag()->add(
@@ -236,22 +229,19 @@ class DefaultController extends Controller
             $email = $request->get('email');
             if (strlen($email) > 0) {
                 $em = $this->getDoctrine()->getManager();
-                /** @var NewsletterManager $nb */
-                $nb = $this->container->get('newsletter.build_content');
+                /** @var MailerService $ms */
+                $ms = $this->get('app.mailer.service');
                 /** @var NewsletterUser $user */
                 $user = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
                 if ($user) {
                     $subject = 'Confirmació per NO rebre el newsletter de LO PATI';
-//                    if ($user->getIdioma() == 'es') {
-//                        $subject = 'Confirmación para NO recibir el newsletter de LO PATI';
-//                    } else if ($user->getIdioma() == 'en') {
-//                        $subject = 'Confirmation to NOT receive newsletter LO PATI';
-//                    }
-                    $result = $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
+
+                    $result = $ms->delivery($subject, $user, $this->renderView(
                         'NewsletterBundle:Default:finalEmailMessage.html.twig',
                         array(
                             'user' => $user,
                             'show_top_bar' => false,
+                            'show_bottom_bar' => false,
                         )
                     ));
 
