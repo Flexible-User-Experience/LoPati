@@ -2,6 +2,7 @@
 
 namespace LoPati\AdminBundle\Service;
 
+use LoPati\AdminBundle\Entity\EmailToken;
 use SendGrid;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -128,9 +129,9 @@ class MailerService
     /**
      * Deliver a newsletter to a bunch of users.
      *
-     * @param string $subject              Email subject
-     * @param array  $emailDestinationList List of emails to deliver
-     * @param mixed  $content              HTML email content
+     * @param string             $subject              Email subject
+     * @param array|EmailToken[] $emailDestinationList EmailToken collection of entities to deliver and change token
+     * @param mixed              $content              HTML email content
      *
      * @return bool True if everything goes well
      *
@@ -154,13 +155,13 @@ class MailerService
                 // slices of 950 emails per chunk
                 $mail = new SendGrid\Mail($from, $subject, $to, $mailContent);
 
-                /** @var string $destEmail */
+                /** @var EmailToken $destEmail */
                 foreach ($chunk as $destEmail) {
                     $personalitzation = new SendGrid\Personalization();
-                    $pTo = new SendGrid\Email(null, $destEmail);
+                    $pTo = new SendGrid\Email(null, $destEmail->getEmail());
                     $personalitzation->addTo($pTo);
                     $personalitzation->addSubstitution('%token%', $this->router->generate('newsletter_unsuscribe', array(
-                        'token' => 'hit', // TODO change by real user token
+                        'token' => $destEmail->getToken(),
                     ), Router::ABSOLUTE_URL));
                     $mail->addPersonalization($personalitzation);
                 }

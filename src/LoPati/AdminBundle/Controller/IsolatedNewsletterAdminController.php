@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\AdminBundle\Entity\EmailToken;
 use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
 use LoPati\AdminBundle\Service\NewsletterUserManagementService;
@@ -68,7 +69,7 @@ class IsolatedNewsletterAdminController extends Controller
         $emailsDestinationList = array();
         /** @var NewsletterUser $user */
         foreach ($users as $user) {
-            $emailsDestinationList[] = $user->getEmail();
+            $emailsDestinationList[] = new EmailToken($user->getEmail(), $user->getToken());
         }
 
         $result = $ms->batchDelivery($object->getSubject(), $emailsDestinationList, $content);
@@ -300,9 +301,9 @@ class IsolatedNewsletterAdminController extends Controller
     {
         /** @var array $edl email destinations list only for developer */
         $edl = array(
-            $this->getParameter('email_address_test_1'),
-            $this->getParameter('email_address_test_2'),
-            $this->getParameter('email_address_test_3'),
+            new EmailToken($this->getParameter('email_address_test_1'), 'fake-token-1'),
+            new EmailToken($this->getParameter('email_address_test_2'), 'fake-token-2'),
+            new EmailToken($this->getParameter('email_address_test_3'), 'fake-token-3'),
         );
 
         return $edl;
