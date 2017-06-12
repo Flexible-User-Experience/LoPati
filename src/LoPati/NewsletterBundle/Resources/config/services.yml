@@ -6,7 +6,6 @@ services:
         arguments:
             - "@templating"
             - "@translator"
-            - "@app.mailer.service"
     newsletter.sendgrid.hooks:
         class: LoPati\NewsletterBundle\Listener\SendgridListener
         tags:
