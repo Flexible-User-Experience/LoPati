@@ -55,7 +55,6 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined', // TODO replace for each user token
                 'show_top_bar' => false,
             )
         );
@@ -114,7 +113,6 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined',
                 'show_top_bar' => true,
             )
         );
@@ -148,7 +146,6 @@ class IsolatedNewsletterAdminController extends Controller
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
                 'newsletter' => $object,
-                'user_token' => 'undefined',
                 'show_top_bar' => false,
             )
         );
