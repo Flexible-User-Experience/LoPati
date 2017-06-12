@@ -71,7 +71,7 @@ class IsolatedNewsletterAdminController extends Controller
             $emailsDestinationList[] = $user->getEmail();
         }
 
-        $result = $ms->delivery($object->getSubject(), $emailsDestinationList, $content);
+        $result = $ms->batchDelivery($object->getSubject(), $emailsDestinationList, $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
@@ -150,7 +150,7 @@ class IsolatedNewsletterAdminController extends Controller
             )
         );
 
-        $result = $ms->delivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
+        $result = $ms->batchDelivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
