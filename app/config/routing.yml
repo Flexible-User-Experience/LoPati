@@ -25,3 +25,6 @@ AdminBundle:
 _liip_imagine:
     resource: '@LiipImagineBundle/Resources/config/routing.xml'
     options:  { i18n: false }
+
+sendgrid_hooks:
+    resource: "@TystrSendgridBundle/Resources/config/routing.xml"
