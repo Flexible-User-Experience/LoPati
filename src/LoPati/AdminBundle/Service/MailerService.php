@@ -96,12 +96,13 @@ class MailerService
             foreach ($chunks as $chunk) {
                 // slices of 950 emails per chunk
                 $mail = new SendGrid\Mail($from, $subject, $to, $mailContent);
-                $personalitzation = new SendGrid\Personalization();
+
                 /** @var string $destEmail */
                 foreach ($chunk as $destEmail) {
-                    $bcc = new SendGrid\Email(null, $destEmail);
-                    $personalitzation->addBcc($bcc);
-                    $personalitzation->addSubstitution('-token-', 'my-test-token');
+                    $personalitzation = new SendGrid\Personalization();
+                    $pTo = new SendGrid\Email(null, $destEmail);
+                    $personalitzation->addTo($pTo);
+                    $personalitzation->addSubstitution('-token-', $destEmail); // TODO change by token
                     $mail->addPersonalization($personalitzation);
                 }
 
