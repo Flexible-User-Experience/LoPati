@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class NewsletterUser
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -47,7 +47,7 @@ class NewsletterUser
     private $city;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="string", length=5, nullable=true)
      */
@@ -68,14 +68,14 @@ class NewsletterUser
     private $birthdate;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $birthyear;
 
     /**
-     * @var integer
+     * @var int
      */
     private $age;
 
@@ -102,7 +102,7 @@ class NewsletterUser
     private $created;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="active", type="boolean", options={"default"=1})
      */
@@ -128,15 +128,11 @@ class NewsletterUser
     protected $groups;
 
     /**
-     *
-     *
-     * Methods
-     *
-     *
+     * Methods.
      */
 
     /**
-     * NewsletterUser constructor
+     * NewsletterUser constructor.
      */
     public function __construct()
     {
@@ -145,9 +141,9 @@ class NewsletterUser
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -155,7 +151,7 @@ class NewsletterUser
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      */
@@ -165,7 +161,7 @@ class NewsletterUser
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -175,7 +171,7 @@ class NewsletterUser
     }
 
     /**
-     * Set idioma
+     * Set idioma.
      *
      * @param $idioma
      */
@@ -185,7 +181,7 @@ class NewsletterUser
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -195,7 +191,7 @@ class NewsletterUser
     }
 
     /**
-     * Set token
+     * Set token.
      *
      * @param string $token
      */
@@ -205,7 +201,7 @@ class NewsletterUser
     }
 
     /**
-     * Get token
+     * Get token.
      *
      * @return string
      */
@@ -215,9 +211,9 @@ class NewsletterUser
     }
 
     /**
-     * Set active
+     * Set active.
      *
-     * @param boolean $active
+     * @param bool $active
      */
     public function setActive($active)
     {
@@ -225,9 +221,9 @@ class NewsletterUser
     }
 
     /**
-     * Get active
+     * Get active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getActive()
     {
@@ -235,7 +231,7 @@ class NewsletterUser
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      */
@@ -245,7 +241,7 @@ class NewsletterUser
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
@@ -255,7 +251,7 @@ class NewsletterUser
     }
 
     /**
-     * Get created string format
+     * Get created string format.
      *
      * @return string
      */
@@ -265,9 +261,9 @@ class NewsletterUser
     }
 
     /**
-     * Set fail
+     * Set fail.
      *
-     * @param bool $fail
+     * @param int $fail
      *
      * @return $this
      */
@@ -279,9 +275,9 @@ class NewsletterUser
     }
 
     /**
-     * Get fail
+     * Get fail.
      *
-     * @return bool
+     * @return int
      */
     public function getFail()
     {
@@ -289,7 +285,7 @@ class NewsletterUser
     }
 
     /**
-     * Set Groups
+     * Set Groups.
      *
      * @param mixed $groups groups
      *
@@ -303,7 +299,7 @@ class NewsletterUser
     }
 
     /**
-     * Get Groups
+     * Get Groups.
      *
      * @return array|ArrayCollection
      */
@@ -313,7 +309,7 @@ class NewsletterUser
     }
 
     /**
-     * Get Groups
+     * Get Groups.
      *
      * @return string
      */
@@ -323,7 +319,7 @@ class NewsletterUser
             $result = '';
             /** @var NewsletterGroup $group */
             foreach ($this->groups as $group) {
-                $result .= $group->getName() . ', ';
+                $result .= $group->getName().', ';
             }
 
             return substr($result, 0, -2);
@@ -333,7 +329,7 @@ class NewsletterUser
     }
 
     /**
-     * Add group
+     * Add group.
      *
      * @param NewsletterGroup $group
      *
@@ -348,7 +344,7 @@ class NewsletterUser
     }
 
     /**
-     * Remove group
+     * Remove group.
      *
      * @param NewsletterGroup $group
      *
@@ -556,7 +552,7 @@ class NewsletterUser
      */
     public function getImportXlsString()
     {
-        return 'NOM=' . $this->name . ' · EMAIL=' . $this->email . ' · GRUP=' . $this->improtedGroup . ' · CIUTAT=' . $this->city . ' · EDAT=' . $this->getAge() . ' · TEL=' . $this->phone;
+        return 'NOM='.$this->name.' · EMAIL='.$this->email.' · GRUP='.$this->improtedGroup.' · CIUTAT='.$this->city.' · EDAT='.$this->getAge().' · TEL='.$this->phone;
     }
 
     /**
