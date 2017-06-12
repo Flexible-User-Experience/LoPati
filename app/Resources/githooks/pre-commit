@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -x "$(command -v php-cs-fixer)" ]; then
-    FILES=`git diff --name-only`
+    FILES=`git diff --name-only --diff-filter=AM`
     printf '%s\n' "$FILES" | while IFS= read -r FILE
     do
         if [[ $FILE == "src/"* ]]; then
@@ -9,7 +9,7 @@ if [ -x "$(command -v php-cs-fixer)" ]; then
             # git add "$FILE"
         fi
     done
-    FILES=`git diff --name-only --staged`
+    FILES=`git diff --name-only --staged --diff-filter=AM`
     printf '%s\n' "$FILES" | while IFS= read -r FILE
     do
         if [[ $FILE == "src/"* ]]; then

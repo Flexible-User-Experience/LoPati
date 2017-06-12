@@ -19,10 +19,10 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class IsolatedNewsletterAdminController
+ * Class IsolatedNewsletterAdminController.
  *
  * @category AdminController
- * @package  LoPati\AdminBundle\Controller
+ *
  * @author   David Romaní <david@flux.cat>
  */
 class IsolatedNewsletterAdminController extends Controller
@@ -31,7 +31,8 @@ class IsolatedNewsletterAdminController extends Controller
      * @param Request|null $request
      *
      * @return Response
-     * @throws NotFoundHttpException If the object does not exist
+     *
+     * @throws NotFoundHttpException     If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
      */
     public function sendAction(Request $request = null)
@@ -53,8 +54,8 @@ class IsolatedNewsletterAdminController extends Controller
         $content = $this->renderView(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
-                'newsletter'   => $object,
-                'user_token'   => 'undefined', // TODO replace for each user token
+                'newsletter' => $object,
+                'user_token' => 'undefined', // TODO replace for each user token
                 'show_top_bar' => false,
             )
         );
@@ -72,7 +73,7 @@ class IsolatedNewsletterAdminController extends Controller
         }
 
         $result = $ms->delivery($object->getSubject(), $emailsDestinationList, $content);
-        if ($result == 0) {
+        if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
                 'S\'ha produït un ERROR en enviar el newsletter. Contacta amb l\'administrador del sistema'
@@ -94,7 +95,8 @@ class IsolatedNewsletterAdminController extends Controller
      * @param Request|null $request
      *
      * @return Response
-     * @throws NotFoundHttpException If the object does not exist
+     *
+     * @throws NotFoundHttpException     If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
      */
     public function previewAction(Request $request = null)
@@ -111,8 +113,8 @@ class IsolatedNewsletterAdminController extends Controller
         return $this->render(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
-                'newsletter'   => $object,
-                'user_token'   => 'undefined',
+                'newsletter' => $object,
+                'user_token' => 'undefined',
                 'show_top_bar' => true,
             )
         );
@@ -122,7 +124,8 @@ class IsolatedNewsletterAdminController extends Controller
      * @param Request|null $request
      *
      * @return Response
-     * @throws NotFoundHttpException If the object does not exist
+     *
+     * @throws NotFoundHttpException     If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
      */
     public function testAction(Request $request = null)
@@ -144,14 +147,14 @@ class IsolatedNewsletterAdminController extends Controller
         $content = $this->renderView(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
-                'newsletter'   => $object,
-                'user_token'   => 'undefined',
+                'newsletter' => $object,
+                'user_token' => 'undefined',
                 'show_top_bar' => false,
             )
         );
 
-        $result = $ms->delivery('[TEST] ' . $object->getSubject(), $this->getTestEmailsDestinationList(), $content);
-        if ($result == 0) {
+        $result = $ms->delivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
+        if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
                 'S\'ha produït un ERROR en enviar el test.'
@@ -161,7 +164,7 @@ class IsolatedNewsletterAdminController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: ' . $this->getParameter('email_address_test_1') . ', ' . $this->getParameter('email_address_test_2') . ' i ' . $this->getParameter('email_address_test_3')
+                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_1').', '.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
             );
         }
 
@@ -172,7 +175,8 @@ class IsolatedNewsletterAdminController extends Controller
      * @param Request|null $request
      *
      * @return RedirectResponse
-     * @throws NotFoundHttpException If the object does not exist
+     *
+     * @throws NotFoundHttpException     If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
      */
     public function uploadAction(Request $request = null)
@@ -247,19 +251,19 @@ class IsolatedNewsletterAdminController extends Controller
                                 $result = $ums->writeUser($importedUser);
 
                                 if ($result === false) {
-                                    $wrongImportsCounter++;
+                                    ++$wrongImportsCounter;
                                     $this->get('session')->getFlashBag()->add(
                                         'app_flash_error',
-                                        '[' . $worksheet->getTitle() . '] [fila ' . $row->getRowIndex() . '] ' . $importedUser->getImportXlsString()
+                                        '['.$worksheet->getTitle().'] [fila '.$row->getRowIndex().'] '.$importedUser->getImportXlsString()
                                     );
                                 } else {
-                                    $rightImportsCounter++;
+                                    ++$rightImportsCounter;
                                 }
                             }
                         }
-                        $this->get('session')->getFlashBag()->add('app_flash', 'S\'ha importat un total de: ' . ($wrongImportsCounter + $rightImportsCounter) . ' registres.');
-                        $this->get('session')->getFlashBag()->add('app_flash', 'Registres importats correctament: ' . $rightImportsCounter);
-                        $this->get('session')->getFlashBag()->add('app_flash', 'Errors detectats: ' . $wrongImportsCounter);
+                        $this->get('session')->getFlashBag()->add('app_flash', 'S\'ha importat un total de: '.($wrongImportsCounter + $rightImportsCounter).' registres.');
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Registres importats correctament: '.$rightImportsCounter);
+                        $this->get('session')->getFlashBag()->add('app_flash', 'Errors detectats: '.$wrongImportsCounter);
                     } else {
                         $this->get('session')->getFlashBag()->add(
                             'app_flash_error',

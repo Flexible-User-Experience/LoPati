@@ -129,20 +129,18 @@
                                             <th class="expander"></th>
                                         </tr>
                                     </table>
-                                    {% if show_top_bar == true %}
-                                        {# production mode #}
-                                        <table style="margin-top:-10px" class="row white-background">
-                                            <tr>
-                                                <th class="small-12 large-12 first last columns">
-                                                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
-                                                    <p class="heading-date">
-                                                        Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="{{ url('newsletter_unsuscribe', {token: user_token}) }}">aquí</a> per donar-te de baixa
-                                                    </p>
-                                                </th>
-                                                <th class="expander"></th>
-                                            </tr>
-                                        </table>
-                                    {% endif %}
+                                    {# newsletter user managment footer #}
+                                    <table style="margin-top:-10px" class="row white-background">
+                                        <tr>
+                                            <th class="small-12 large-12 first last columns">
+                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
+                                                <p class="heading-date">
+                                                    Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="%token%{#{{ url('newsletter_unsuscribe', {token: user_token}) }}#}">aquí</a> per donar-te de baixa
+                                                </p>
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
                                 {% endblock %}
                             </td>
                         </tr>
