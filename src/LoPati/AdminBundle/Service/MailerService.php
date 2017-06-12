@@ -102,7 +102,7 @@ class MailerService
                     $personalitzation = new SendGrid\Personalization();
                     $pTo = new SendGrid\Email(null, $destEmail);
                     $personalitzation->addTo($pTo);
-                    $personalitzation->addSubstitution('-token-', $destEmail); // TODO change by token
+                    $personalitzation->addSubstitution('%token%', $destEmail); // TODO change by token
                     $mail->addPersonalization($personalitzation);
                 }
 

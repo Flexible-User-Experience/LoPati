@@ -135,7 +135,7 @@
                                             <th class="small-12 large-12 first last columns">
                                                 {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
                                                 <p class="heading-date">
-                                                    Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="-token-{#{{ url('newsletter_unsuscribe', {token: user_token}) }}#}">aquí</a> per donar-te de baixa
+                                                    Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="%token%{#{{ url('newsletter_unsuscribe', {token: user_token}) }}#}">aquí</a> per donar-te de baixa
                                                 </p>
                                             </th>
                                             <th class="expander"></th>
