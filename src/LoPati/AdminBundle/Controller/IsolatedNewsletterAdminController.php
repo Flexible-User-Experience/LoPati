@@ -57,6 +57,7 @@ class IsolatedNewsletterAdminController extends Controller
             array(
                 'newsletter' => $object,
                 'show_top_bar' => false,
+                'show_bottom_bar' => true,
             )
         );
 
@@ -115,6 +116,7 @@ class IsolatedNewsletterAdminController extends Controller
             array(
                 'newsletter' => $object,
                 'show_top_bar' => true,
+                'show_bottom_bar' => false,
             )
         );
     }
@@ -148,6 +150,7 @@ class IsolatedNewsletterAdminController extends Controller
             array(
                 'newsletter' => $object,
                 'show_top_bar' => false,
+                'show_bottom_bar' => false,
             )
         );
 

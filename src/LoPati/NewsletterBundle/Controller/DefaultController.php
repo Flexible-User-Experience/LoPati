@@ -15,10 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class DefaultController
+ * Class DefaultController.
  *
  * @category Controller
- * @package  LoPati\NewsletterBundle\Controller
  */
 class DefaultController extends Controller
 {
@@ -36,9 +35,11 @@ class DefaultController extends Controller
     /**
      * @Route("/newsletter/suscribe", name="newsletter_user")
      * @Method({"POST"})
+     *
      * @param Request $request
      *
      * @return RedirectResponse
+     *
      * @throws \Exception
      */
     public function suscribeAction(Request $request)
@@ -67,14 +68,13 @@ class DefaultController extends Controller
             $nb->sendMandrilMessage($subject, array($newsletterUser->getEmail()), $this->renderView(
                 'NewsletterBundle:Default:confirmation.html.twig',
                 array(
-                    'user_token'   => $newsletterUser->getToken(),
-                    'user'         => $newsletterUser,
+                    'user_token' => $newsletterUser->getToken(),
+                    'user' => $newsletterUser,
                     'show_top_bar' => false,
                 )
             ));
             $flash = $this->get('translator')->trans('suscribe.register');
             $this->get('session')->getFlashBag()->add('notice', $flash);
-
         } else {
             $this->get('session')->getFlashBag()->add('notice', (string) $form->getErrors(true, false));
         }
@@ -92,6 +92,7 @@ class DefaultController extends Controller
      * @param string  $token
      *
      * @return RedirectResponse
+     *
      * @throws \Exception
      */
     public function confirmationAction(Request $request, $token)
@@ -115,7 +116,7 @@ class DefaultController extends Controller
             $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
                     'NewsletterBundle:Default:activated.html.twig',
                     array(
-                        'user'         => $user,
+                        'user' => $user,
                         'show_top_bar' => false,
                     )
                 ));
@@ -145,9 +146,9 @@ class DefaultController extends Controller
         return $this->render(
             'AdminBundle:IsolatedNewsletter:preview.html.twig',
             array(
-                'newsletter'   => $object,
-                'user_token'   => 'undefined',
+                'newsletter' => $object,
                 'show_top_bar' => false,
+                'show_bottom_bar' => false,
             )
         );
     }
@@ -187,7 +188,7 @@ class DefaultController extends Controller
             $follow = 'Siguenos en';
             $colabora = 'Colabora';
             $butlleti = 'Boletín';
-        } else if ($_locale == 'en') {
+        } elseif ($_locale == 'en') {
             $visualitzar_correctament = 'Click here to visualize correctly';
             $baixa = 'Click here to provide you low';
             $lloc = 'Place';
@@ -204,20 +205,20 @@ class DefaultController extends Controller
         return $this->render(
             'NewsletterBundle:Default:mail2.html.twig',
             array(
-                'host'                     => $host,
-                'pagines'                  => $pagines,
-                'idioma'                   => $_locale,
+                'host' => $host,
+                'pagines' => $pagines,
+                'idioma' => $_locale,
                 'visualitzar_correctament' => $visualitzar_correctament,
-                'baixa'                    => $baixa,
-                'lloc'                     => $lloc,
-                'data'                     => $data,
-                'publicat'                 => $publicat,
-                'links'                    => $links,
-                'organitza'                => $organitza,
-                'suport'                   => $suport,
-                'follow'                   => $follow,
-                'colabora'                 => $colabora,
-                'butlleti'                 => $butlleti
+                'baixa' => $baixa,
+                'lloc' => $lloc,
+                'data' => $data,
+                'publicat' => $publicat,
+                'links' => $links,
+                'organitza' => $organitza,
+                'suport' => $suport,
+                'follow' => $follow,
+                'colabora' => $colabora,
+                'butlleti' => $butlleti,
             )
         );
     }
@@ -226,6 +227,7 @@ class DefaultController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
      * @throws \Exception
      */
     public function confirmUnsuscribeAction(Request $request)
@@ -248,7 +250,7 @@ class DefaultController extends Controller
                     $result = $nb->sendMandrilMessage($subject, array($user->getEmail()), $this->renderView(
                         'NewsletterBundle:Default:finalEmailMessage.html.twig',
                         array(
-                            'user'         => $user,
+                            'user' => $user,
                             'show_top_bar' => false,
                         )
                     ));
@@ -283,6 +285,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/newsletter/confirm-unsuscribe/{token}", name="newsletter_unsuscribe")
+     *
      * @param Request $request
      * @param string  $token
      *
