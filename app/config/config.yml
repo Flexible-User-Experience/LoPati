@@ -36,7 +36,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "v2.5.1"
+        admin_tag_version:       "v2.5.2"
         id_page_item_irradiador: "%id_page_item_irradiador%"
 
 # Swiftmailer
@@ -150,7 +150,7 @@ fos_elastica:
     clients:
         default: { host: localhost, port: "%port_elastica%" }
     indexes:
-        website:
+        lopati_website:
             client: default
             types:
                 pagines:

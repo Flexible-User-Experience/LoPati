@@ -28,7 +28,7 @@ class DefaultController extends Controller
         $pagines = null;
         $textabuscar = null;
         if ($request->getMethod() == 'POST') {
-            $finder = $this->container->get('fos_elastica.finder.website.pagines');
+            $finder = $this->container->get('fos_elastica.finder.lopati_website.pagines');
             /** var array of Acme\UserBundle\Entity\User */
             $pagines = $finder->find($request->get('textabuscar'));
             /** var array of Acme\UserBundle\Entity\User limited to 10 results */
