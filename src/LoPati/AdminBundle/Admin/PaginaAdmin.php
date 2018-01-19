@@ -6,7 +6,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+/**
+ * Class PaginaAdmin
+ */
 class PaginaAdmin extends AbstractBaseAdmin
 {
     protected $classnameLabel = 'Pàgina';
@@ -31,8 +36,6 @@ class PaginaAdmin extends AbstractBaseAdmin
      * Configure route collection
      *
      * @param RouteCollection $collection collection
-     *
-     * @return mixed
      */
     protected function configureRoutes(RouteCollection $collection)
     {
@@ -41,27 +44,49 @@ class PaginaAdmin extends AbstractBaseAdmin
         $collection->remove('batch');
     }
 
+    /**
+     * @param FormMapper $formMapper
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->with('General', $this->getFormMdSuccessBoxArray(8))
-            ->add('tipus', 'choice', array('choices' => array('w' => 'Web', 'b' => 'Bloc'), 'required' => true,))
-            ->add('titol', null, array('label' => 'Títol'))
+            ->add(
+                'tipus',
+                ChoiceType::class,
+                array(
+                    'choices' => array('w' => 'Web', 'b' => 'Bloc'),
+                    'required' => true,
+                    )
+            )
+            ->add(
+                'titol',
+                null,
+                array(
+                    'label' => 'Títol',
+                )
+            )
             ->add(
                 'resum',
-                'textarea',
-                array('label' => 'Resum', 'required' => false, 'attr' => (array('style' => 'height:90px;')))
+                TextareaType::class,
+                array(
+                    'label' => 'Resum',
+                    'required' => false,
+                    'attr' => array(
+                        'style' => 'height:90px;',
+                    )
+                )
             )
             ->add(
                 'descripcio',
-                'textarea',
+                TextareaType::class,
                 array(
+                    'label' => 'Descripció',
                     'attr'  => array(
                         'class'      => 'tinymce',
                         'data-theme' => 'simple',
                         'style'      => 'width:100%;height:400px;'
                     ),
-                    'label' => 'Descripció'
                 )
             )
             ->end()
