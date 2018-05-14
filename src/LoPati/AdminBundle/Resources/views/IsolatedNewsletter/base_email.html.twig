@@ -92,9 +92,6 @@
                                                     <a href="http://www.diputaciodetarragona.cat" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_tarragona.png')) }}" alt="Diputacio Tarragona logo">
                                                     </a>
-                                                    <a href="http://www.mataroartcontemporani.cat" class="footer-pre-bottom-icon">
-                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_mataro.png')) }}" alt="Moritz logo">
-                                                    </a>
                                                 </p>
                                                 {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 13} %}
                                             </th>
@@ -136,7 +133,7 @@
                                                 <th class="small-12 large-12 first last columns">
                                                     {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
                                                     <p class="heading-date">
-                                                        Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="%token%{#{{ url('newsletter_unsuscribe', {token: user_token}) }}#}">aquí</a> per donar-te de baixa
+                                                        Clica <a href="{{ url('isolated_newsletter_preview', {id: newsletter.id}) }}">aquí</a> per visualitzar correctament | Clica <a href="%token%">aquí</a> per donar-te de baixa
                                                     </p>
                                                 </th>
                                                 <th class="expander"></th>
