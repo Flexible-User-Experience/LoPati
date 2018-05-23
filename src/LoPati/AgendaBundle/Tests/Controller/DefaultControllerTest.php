@@ -2,17 +2,21 @@
 
 namespace LoPati\AgendaBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest
+ */
 class DefaultControllerTest extends WebTestCase
 {
-    // TODO: test agenda routing
+    /**
+     * Test HTTP response is successful.
+     */
     public function testIndex()
     {
-        /*$client = static::createClient();
+        $client = $this->createClient();           // anonymous user
 
-        $crawler = $client->request('GET', '/hello/Fabien');
-
-        $this->assertTrue($crawler->filter('html:contains("Hello Fabien")')->count() > 0);*/
+        $client->request('GET', '/ca/agenda/2018/01/01/');
+        $this->assertStatusCode(200, $client);
     }
 }

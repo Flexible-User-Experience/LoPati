@@ -9,17 +9,11 @@ use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
  * Class AdminExtensionTwig
  *
  * @category Twig
- * @package  LoPati\AdminBundle\Twig
- * @author   David Romaní <david@flux.cat>
  */
 class AdminExtensionTwig extends \Twig_Extension
 {
     /**
-     *
-     *
      * Twig Functions
-     *
-     *
      */
 
     /**

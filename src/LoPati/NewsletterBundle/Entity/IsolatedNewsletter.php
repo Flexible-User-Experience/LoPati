@@ -5,14 +5,11 @@ namespace LoPati\NewsletterBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class IsolatedNewsletter
  *
  * @category Entity
- * @package  LoPati\NewsletterBundle\Entity
- * @author   David Romaní <david@flux.cat>
  *
  * @ORM\Table(name="isolated_newsletter")
  * @ORM\Entity(repositoryClass="LoPati\NewsletterBundle\Repository\IsolatedNewsletterRepository")
@@ -94,11 +91,7 @@ class IsolatedNewsletter
     private $group;
 
     /**
-     *
-     *
      * Methods
-     *
-     *
      */
 
     /**
