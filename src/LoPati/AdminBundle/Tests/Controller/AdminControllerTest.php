@@ -74,6 +74,7 @@ class AdminControllerTest extends WebTestCase
             array('/admin/newsletter/newsletter/create'),
             array('/admin/newsletter/newsletter/1/edit'),
             array('/admin/newsletter/newsletter/1/delete'),
+            array('/admin/newsletter/newsletter/1/preview'),
             array('/admin/newsletter/newsletter-post/list'),
             array('/admin/newsletter/newsletter-post/create'),
             array('/admin/newsletter/newsletter-post/1/edit'),
