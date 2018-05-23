@@ -4,8 +4,14 @@ namespace LoPati\ArtistaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest
+ */
 class DefaultControllerTest extends WebTestCase
 {
+    /**
+     * Test HTTP response is successful.
+     */
     public function testIrradiador()
     {
         $client = static::createClient();
@@ -19,6 +25,9 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isNotFound());
     }
 
+    /**
+     * Test HTTP response is successful.
+     */
     public function testIrradiadorDetail()
     {
         $client = static::createClient();

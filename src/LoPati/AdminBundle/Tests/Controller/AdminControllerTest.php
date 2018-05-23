@@ -4,6 +4,9 @@ namespace LoPati\AdminBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
+/**
+ * Class AdminControllerTest
+ */
 class AdminControllerTest extends WebTestCase
 {
     /**
