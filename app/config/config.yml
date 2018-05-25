@@ -38,6 +38,7 @@ twig:
         main_brand_title:        "Lo Pati"
         admin_tag_version:       "v2.6.1"
         id_page_item_irradiador: "%id_page_item_irradiador%"
+        addthis_api_key:         "%addthis_api_key%"
 
 # Swiftmailer
 swiftmailer:
