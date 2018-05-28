@@ -1,18 +1,11 @@
 {% extends '::frontend.html.twig' %}
 
-{% block opengraph %}
-    {% if pagina.titol %}<meta content="{{ pagina.titol }}" property="og:title"/>{% endif %}
-    {% if pagina.imageGran1Name %}<meta content="{{ vich_uploader_asset(pagina, 'imageGran1') | imagine_filter('imatge_pagina') }}" property="og:image"/>{% endif %}
-    {% if pagina.resum %}<meta content="{{ pagina.resum }}" property="og:description"/>{% endif %}
-{% endblock %}
-
-{% block title %}: {{ pagina.titol }}{% endblock %}
+{% block title %}: Privacy Policy{% endblock %}
 
 {% block menu %}
-    {% render controller("MenuBundle:Default:pintaMenu", {id: id}) %}
+    {#{% render controller("MenuBundle:Default:pintaMenu", {id: id}) %}#}
 {% endblock %}
 
 {% block contenidor %}
-    {% include 'BlogBundle:Default:blog.html.twig' with {pagina: pagina} %}
     Privacy Policy
 {% endblock %}
