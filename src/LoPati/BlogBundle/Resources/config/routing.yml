@@ -73,3 +73,9 @@ search:
   defaults: { _controller: BlogBundle:Default:search}
   requirements:
         _locale: ca|es|en
+
+privacypolicy:
+  path: /{_locale}/privacy-policy/
+  defaults: { _controller: BlogBundle:Default:privacyPolicy}
+  requirements:
+        _locale: ca|es|en
