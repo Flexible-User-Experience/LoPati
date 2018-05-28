@@ -74,8 +74,20 @@ search:
   requirements:
         _locale: ca|es|en
 
-privacypolicy:
+privacypolicy_ca:
+  path: /{_locale}/politica-de-privacitat/
+  defaults: { _controller: BlogBundle:Default:privacyPolicy}
+  requirements:
+        _locale: ca
+
+privacypolicy_es:
+  path: /{_locale}/politica-de-privacidad/
+  defaults: { _controller: BlogBundle:Default:privacyPolicy}
+  requirements:
+        _locale: es
+
+privacypolicy_en:
   path: /{_locale}/privacy-policy/
   defaults: { _controller: BlogBundle:Default:privacyPolicy}
   requirements:
-        _locale: ca|es|en
+        _locale: en

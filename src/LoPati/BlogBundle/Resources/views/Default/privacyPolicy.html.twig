@@ -1,9 +1,9 @@
 {% extends '::frontend.html.twig' %}
 
-{% block title %}: Privacy Policy{% endblock %}
+{% block title %}: {{ 'privacy_policy'|trans|capitalize }}{% endblock %}
 
 {% block menu %}
-    {#{% render controller("MenuBundle:Default:pintaMenu", {id: id}) %}#}
+    {% render controller("MenuBundle:Default:pintaMenu", {id: null, llista: 0}) %}
 {% endblock %}
 
 {% block contenidor %}
