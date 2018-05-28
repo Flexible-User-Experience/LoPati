@@ -310,4 +310,13 @@ class DefaultController extends Controller
             )
         );
     }
+
+    /**
+     * @return Response
+     */
+    public function privacyPolicy()
+    {
+
+        return $this->render('BlogBundle:Default:privacyPolicy.html.twig');
+    }
 }
