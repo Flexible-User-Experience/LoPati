@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -105,12 +106,22 @@ class NewsletterUserType extends AbstractType
                 )
             )
             ->add(
+                'privacy_policy',
+                CheckboxType::class,
+                array(
+                    'mapped' => false,
+                    'label' => 'Confirm the privacy policy',
+                    'required' => true,
+                )
+            )
+            ->add(
                 'send',
                 SubmitType::class,
                 array(
                     'label'    => 'newsletter.form.send',
                 )
             )
+
         ;
     }
 
