@@ -105,15 +105,15 @@ class NewsletterUserType extends AbstractType
                     ),
                 )
             )
-            ->add(
-                'privacy_policy',
-                CheckboxType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'Confirm the privacy policy',
-                    'required' => true,
-                )
-            )
+//            ->add(
+//                'privacy_policy',
+//                CheckboxType::class,
+//                array(
+//                    'mapped' => false,
+//                    'label' => 'accept_legal_terms',
+//                    'required' => true,
+//                )
+//            )
             ->add(
                 'send',
                 SubmitType::class,
@@ -121,7 +121,6 @@ class NewsletterUserType extends AbstractType
                     'label'    => 'newsletter.form.send',
                 )
             )
-
         ;
     }
 
@@ -131,7 +130,8 @@ class NewsletterUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser'
+            'data_class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser',
+            'allow_extra_fields' => true,
         ));
     }
 

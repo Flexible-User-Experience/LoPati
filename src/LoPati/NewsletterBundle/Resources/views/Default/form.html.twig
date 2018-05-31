@@ -1,11 +1,11 @@
-{% form_theme form _self %}
+{#{% form_theme form _self %}#}
 
-{% block _mp_newsletter_user_privacy_policy_widget %}
-    <div class="checkbox">
-        <input type="checkbox" {{ block('widget_attributes') }} />
-        <a style="display: inline-block" href="{{path('privacypolicy_'~app.request.locale )}}">{{ 'accept_legal_terms'|trans|capitalize }}</a>
-    </div>
-{% endblock %}
+{#{% block _mp_newsletter_user_privacy_policy_widget %}#}
+    {#<div class="checkbox">#}
+        {#<input type="checkbox" {{ block('widget_attributes') }} />#}
+        {#<a style="display: inline-block" href="{{path('privacypolicy_'~app.request.locale )}}">{{ 'accept_legal_terms'|trans|capitalize }}</a>#}
+    {#</div>#}
+{#{% endblock %}#}
 
 <form id="form_newsletter" action="{{ path('newsletter_user') }}" method="post" class="newsletter">
     {{ form_widget(form.name) }}
@@ -18,7 +18,11 @@
     {{ form_errors(form.phone) }}
     {{ form_widget(form.age) }}
     {{ form_errors(form.age) }}
-    {{ form_widget(form.privacy_policy) }}
-    {{ form_errors(form.privacy_policy) }}
+    <div class="checkbox">
+        <input type="checkbox" id="mp_newsletter_user_privacy_policy" name="mp_newsletter_user[privacy_policy]" required="required">
+        <a style="display: inline-block; margin-bottom: 5px" href="{{path('privacypolicy_'~app.request.locale )}}">{{ 'accept_legal_terms'|trans|capitalize }}</a>
+    </div>
+    {#{{ form_widget(form.privacy_policy) }}#}
+    {#{{ form_errors(form.privacy_policy) }}#}
     {{ form_rest(form) }}
 </form>
