@@ -56,5 +56,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertStatusCode(302, $client);
         $client->request('GET', '/xx/');
         $this->assertStatusCode(404, $client);
+        $client->request('GET', '/newsletter/250/');
+        $this->assertStatusCode(404, $client);
     }
 }

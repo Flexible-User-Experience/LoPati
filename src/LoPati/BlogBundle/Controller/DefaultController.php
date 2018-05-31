@@ -316,7 +316,6 @@ class DefaultController extends Controller
      */
     public function privacyPolicyAction()
     {
-
-        return $this->render('BlogBundle:Default:privacyPolicy.html.twig');
+        return $this->render('BlogBundle:Default:privacy_policy.html.twig');
     }
 }
