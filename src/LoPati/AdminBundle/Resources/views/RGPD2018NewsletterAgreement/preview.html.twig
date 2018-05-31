@@ -1,0 +1,56 @@
+{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+
+{% block subject %}Resposta{% endblock %}
+
+{% block content %}
+    {% for post in newsletter.posts %}
+        <table class="row">
+            <tbody>
+            <tr>
+                <th class="small-12 large-8 columns first small-padding-bottom">
+                    {% if post.image is not null %}
+                        {% if post.link %}
+                            <a href="{{ post.link }}">
+                                <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                            </a>
+                        {% else %}
+                            <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
+                        {% endif %}
+                    {% endif %}
+                </th>
+                <th class="small-12 large-4 columns last small-padding-bottom">
+                    {% if post.type is not null %}
+                        <h6 class="h6-type">{{ post.typeString | upper }}{% if post.date and post.endDate is null and post.intervalDateText is null %} <span>{{ post.date | date('d | m | y') }}</span>{% endif %}</h6>
+                    {% endif %}
+                    {% if post.intervalDateText is not null %}
+                        <h6 class="h6-type"><span>{{ post.intervalDateText }}</span></h6>
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
+                    {% endif %}
+                    {% if post.date and post.intervalDateText is null %}
+                        <h6 class="h6-type">
+                            <span>
+                                {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
+                            </span>
+                        </h6>
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
+                    {% endif %}
+                    <h4 style="font-weight:bolder;line-height:1">{{ post.title }}</h4>
+                    {% if post.shortDescription %}
+                        <p class="post-short-description">
+                            {{ post.shortDescription }}
+                        </p>
+                    {% endif %}
+                    {% if post.link %}
+                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25, show_for_large: true} %}
+                        <a href="{{ post.link }}" class="show-for-large">
+                            <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
+                        </a>
+                    {% endif %}
+                </th>
+                <th class="expander"></th>
+            </tr>
+            </tbody>
+        </table>
+        {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+    {% endfor %}
+{% endblock %}
