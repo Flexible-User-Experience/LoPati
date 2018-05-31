@@ -2,15 +2,21 @@
 
 namespace LoPati\NewsletterBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest
+ */
 class DefaultControllerTest extends WebTestCase
 {
+    /**
+     * Test newsletter subscribe
+     */
     public function testIndex()
     {
-        $client = static::createClient();
+        $client = $this->createClient();
         $client->request('POST', '/newsletter/suscribe');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertStatusCode(302, $client);
     }
 }

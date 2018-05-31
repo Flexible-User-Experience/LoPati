@@ -2,7 +2,7 @@
 
 namespace LoPati\ArtistaBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 /**
  * Class DefaultControllerTest
@@ -11,29 +11,44 @@ class DefaultControllerTest extends WebTestCase
 {
     /**
      * Test HTTP response is successful.
+     *
+     * @dataProvider provideSuccessUrls
+     *
+     * @param $url
      */
-    public function testIrradiador()
+    public function testSuccess($url)
     {
-        $client = static::createClient();
-        $client->request('GET', '/ca/projectes/irradiador/');
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $client->request('GET', '/es/proyectos/irradiador/');
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $client->request('GET', '/en/projects/irradiador/');
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $client->request('GET', '/en/proyects/irradiador/');
-        $this->assertTrue($client->getResponse()->isNotFound());
+        $client = $this->createClient();
+        $client->request('GET', $url);
+
+        $this->assertStatusCode(200, $client);
     }
 
     /**
-     * Test HTTP response is successful.
+     * Success urls provider.
+     *
+     * @return array
      */
-    public function testIrradiadorDetail()
+    public function provideSuccessUrls()
     {
-        $client = static::createClient();
-        $client->request('GET', '/ca/projectes/irradiador/alba-sotorra/');
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        return array(
+            array('/ca/projectes/irradiador/'),
+            array('/es/proyectos/irradiador/'),
+            array('/en/projects/irradiador/'),
+            array('/ca/projectes/irradiador/alba-sotorra/'),
+        );
+    }
+
+    /**
+     * Other tests
+     */
+    public function otherTests()
+    {
+        $client = $this->createClient();
+
+        $client->request('GET', '/en/proyects/irradiador/');
+        $this->assertStatusCode(404, $client);
         $client->request('GET', '/ca/projectes/irradiador/alba-sotorra-666/');
-        $this->assertTrue($client->getResponse()->isServerError());
+        $this->assertStatusCode(500, $client);
     }
 }
