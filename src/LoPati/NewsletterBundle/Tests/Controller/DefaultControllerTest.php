@@ -15,8 +15,8 @@ class DefaultControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = $this->createClient();
-        $client->request('POST', '/newsletter/suscribe');
 
+        $client->request('POST', '/newsletter/suscribe');
         $this->assertStatusCode(302, $client);
     }
 }

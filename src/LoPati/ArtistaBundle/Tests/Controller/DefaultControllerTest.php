@@ -19,8 +19,8 @@ class DefaultControllerTest extends WebTestCase
     public function testSuccess($url)
     {
         $client = $this->createClient();
-        $client->request('GET', $url);
 
+        $client->request('GET', $url);
         $this->assertStatusCode(200, $client);
     }
 
