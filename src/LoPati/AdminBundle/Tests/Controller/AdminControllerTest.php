@@ -15,8 +15,8 @@ class AdminControllerTest extends WebTestCase
     public function testAdminLoginPageIsSuccessful()
     {
         $client = $this->createClient();           // anonymous user
-        $client->request('GET', '/admin/login');
 
+        $client->request('GET', '/admin/login');
         $this->assertStatusCode(200, $client);
     }
 
@@ -30,8 +30,8 @@ class AdminControllerTest extends WebTestCase
     public function testAdminPagesAreSuccessful($url)
     {
         $client = $this->makeClient(true);         // authenticated user
-        $client->request('GET', $url);
 
+        $client->request('GET', $url);
         $this->assertStatusCode(200, $client);
     }
 
@@ -85,6 +85,9 @@ class AdminControllerTest extends WebTestCase
             array('/admin/slider/create'),
             array('/admin/slider/1/edit'),
             array('/admin/slider/1/delete'),
+            array('/admin/configuration/footer/list'),
+            array('/admin/configuration/footer/1/edit'),
+            array('/admin/configuration/calendar/list'),
         );
     }
 }

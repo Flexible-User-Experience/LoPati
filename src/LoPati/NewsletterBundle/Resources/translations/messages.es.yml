@@ -19,3 +19,6 @@ unsuscribe:
     emailsenderror: Error! No se pudo enviar el mail de confirmación, aunque estás registrado. Envíanos un mensaje a centredart@lopati.cat para informarnos de este problema. Gracias.
     finalemailmessage: Se ha enviado un mensaje con un enlace a su dirección de correo electrónico. Haz clic en el enlace para confirmar definitivamente tu baja.
     actionerror: Error! No se ha eliminado su suscripción.
+
+accept_legal_terms: accepto los términos legales
+

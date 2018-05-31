@@ -31,6 +31,8 @@ parameters:
     sendgrid_from_name:  "your email name"
     sendgrid_from_email: "your@email.com"
 
+    addthis_api_key: "addthis_api_key"
+
     admin_user_test: test   #change it
     admin_pass_test: test   #change it
 

@@ -3,6 +3,7 @@
 namespace LoPati\NewsletterBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -104,6 +105,15 @@ class NewsletterUserType extends AbstractType
                     ),
                 )
             )
+//            ->add(
+//                'privacy_policy',
+//                CheckboxType::class,
+//                array(
+//                    'mapped' => false,
+//                    'label' => 'accept_legal_terms',
+//                    'required' => true,
+//                )
+//            )
             ->add(
                 'send',
                 SubmitType::class,
@@ -120,7 +130,8 @@ class NewsletterUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser'
+            'data_class' => 'LoPati\NewsletterBundle\Entity\NewsletterUser',
+            'allow_extra_fields' => true,
         ));
     }
 

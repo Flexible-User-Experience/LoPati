@@ -1,24 +1,24 @@
 calendari:
-    pattern:        /{_locale}/calendari/{fletxa}/
-    defaults:       { _controller: AgendaBundle:Default:calendari }
+    path:     /{_locale}/calendari/{fletxa}/
+    defaults: { _controller: AgendaBundle:Default:calendari }
     requirements:
         fletxa: dreta|esquerra
         _locale: ca|es|en
 
 agenda_ca:
-    pattern:        /{_locale}/agenda/{year}/{month}/{day}/
-    defaults:       { _controller: AgendaBundle:Default:agenda }
+    path:     /{_locale}/agenda/{year}/{month}/{day}/
+    defaults: { _controller: AgendaBundle:Default:agenda }
     requirements:
         _locale: ca
 
 agenda_es:
-    pattern:        /{_locale}/agenda/{year}/{month}/{day}/
-    defaults:       { _controller: AgendaBundle:Default:agenda }
+    path:     /{_locale}/agenda/{year}/{month}/{day}/
+    defaults: { _controller: AgendaBundle:Default:agenda }
     requirements:
         _locale: es
 
 agenda_en:
-    pattern:        /{_locale}/diary/{year}/{month}/{day}/
-    defaults:       { _controller: AgendaBundle:Default:agenda }
+    path:     /{_locale}/diary/{year}/{month}/{day}/
+    defaults: { _controller: AgendaBundle:Default:agenda }
     requirements:
         _locale: en
