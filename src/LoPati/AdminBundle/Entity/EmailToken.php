@@ -10,12 +10,12 @@ class EmailToken
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      */
-    private $token;
+    protected $token;
 
     /**
      * Methods.
