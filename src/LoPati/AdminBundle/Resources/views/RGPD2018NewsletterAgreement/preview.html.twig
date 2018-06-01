@@ -1,56 +1,66 @@
-{% extends 'AdminBundle:IsolatedNewsletter:base_email.html.twig' %}
+{% extends 'AdminBundle:RGPD2018NewsletterAgreement:base_email.html.twig' %}
 
 {% block subject %}Resposta{% endblock %}
 
 {% block content %}
-    {% for post in newsletter.posts %}
-        <table class="row">
-            <tbody>
-            <tr>
-                <th class="small-12 large-8 columns first small-padding-bottom">
-                    {% if post.image is not null %}
-                        {% if post.link %}
-                            <a href="{{ post.link }}">
-                                <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
-                            </a>
-                        {% else %}
-                            <img src="{{ absolute_url(vich_uploader_asset(post, 'imageFile')) }}" alt="{{ post.title }}">
-                        {% endif %}
-                    {% endif %}
-                </th>
-                <th class="small-12 large-4 columns last small-padding-bottom">
-                    {% if post.type is not null %}
-                        <h6 class="h6-type">{{ post.typeString | upper }}{% if post.date and post.endDate is null and post.intervalDateText is null %} <span>{{ post.date | date('d | m | y') }}</span>{% endif %}</h6>
-                    {% endif %}
-                    {% if post.intervalDateText is not null %}
-                        <h6 class="h6-type"><span>{{ post.intervalDateText }}</span></h6>
-                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
-                    {% endif %}
-                    {% if post.date and post.intervalDateText is null %}
-                        <h6 class="h6-type">
-                            <span>
-                                {{ post.date | date('d | m | y') }}{% if post.endDate is not null %} &#8212; {{ post.endDate | date('d | m | y') }}{% endif %}
-                            </span>
-                        </h6>
-                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25} %}
-                    {% endif %}
-                    <h4 style="font-weight:bolder;line-height:1">{{ post.title }}</h4>
-                    {% if post.shortDescription %}
-                        <p class="post-short-description">
-                            {{ post.shortDescription }}
-                        </p>
-                    {% endif %}
-                    {% if post.link %}
-                        {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 25, show_for_large: true} %}
-                        <a href="{{ post.link }}" class="show-for-large">
-                            <img style="width:50px" class="float-left" src="{{ absolute_url(asset('images/newsletter_info.png')) }}" alt="+Info button">
-                        </a>
-                    {% endif %}
-                </th>
-                <th class="expander"></th>
-            </tr>
-            </tbody>
-        </table>
-        {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
-    {% endfor %}
+    <table class="row">
+        <tbody>
+        <tr>
+            <th class="small-12 large-12 columns first last small-padding-bottom">
+                <h5 class="h6-type">Hola %name%,</h5>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p>
+                    El Nou Reglament General de Protecció de Dades (RGPD) té efecte a partir del 25 de maig de 2018, i a partir d'aquest moment, deixen de ser vàlids els consentiments tàcits per tal de tractar dades personals.
+                </p>
+                <p>
+                    Esperem que el nostre butlletí informatiu et sigui útil i entem què, si vols continuar rebent-lo, si us plau, fes clic al següent botó.
+                </p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <center data-parsed="">
+                    <table class="button large radius alert float-center">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="#{# TODO set path to confirm subscription #}">Sí, vull continuar rebent el newsletter</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p class="post">
+                    Per ajudar-nos a complir amb els nous requeriments del RGPD, necessitem que <strong>confirmis que desitges continuar rebent comunicacions i informació</strong> relacionada amb el Centre d'Art Lo Pati.
+                </p>
+                <ul class="post-short-description">
+                    <li><strong>Responsable del tractament:</strong> Centre d'Art Lo Pati amb CIF P4301400J, i domicili al carrer Gran Capità, 38-40, d’Amposta (Tarragona), amb codi postal 43870.</li>
+                    <li><strong>Finalitat:</strong> Gestionar l'enviament de comunicacions i informació relacionada amb les activitats, exposicions i esdeveniments del centre d'art.</li>
+                    <li><strong>Drets de les persones interessades:</strong> En qualsevol moment pots decidir no rebre més butlletins electrònics. Només cal fer clic l'enllaç para donar-te de baixa que situat al peu de tots els nostres correus electrònics, o contactant directament amb <a href="mailto:info@lopati.cat">info@lopati.cat</a>.</li>
+                    <li><strong>Política de privacitat:</strong> Si vols més informació, pots consultar <a href="{{ url('privacypolicy_ca') }}">aquí</a> la nova política de privacitat.</li>
+                </ul>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
+                <p class="post">
+                    <em>NOTA: Si no fas clic al botó vermell "Sí, vull continuar rebent el newsletter", deixaràs de rebre aquest butlletí electrònic.</em>
+                </p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        </tbody>
+    </table>
+    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
 {% endblock %}
