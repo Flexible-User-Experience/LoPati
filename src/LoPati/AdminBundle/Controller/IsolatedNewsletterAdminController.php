@@ -326,7 +326,7 @@ class IsolatedNewsletterAdminController extends Controller
             new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'fake-token-2'),
         );
 
-        $result = $ms->batchDelivery('[TEST] RGPD 2018 newsletter agreement', $edl, $content);
+        $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[TEST] RGPD 2018 newsletter agreement', $edl, $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
