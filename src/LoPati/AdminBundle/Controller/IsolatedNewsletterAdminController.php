@@ -323,7 +323,7 @@ class IsolatedNewsletterAdminController extends Controller
         $edl = array(
             new EmailNameToken($this->getParameter('email_address_test_1'), 'Direcció', 'fake-token-1'),
             new EmailNameToken($this->getParameter('email_address_test_2'), 'Comunicació', 'fake-token-2'),
-            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'fake-token-3'),
+            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'obzl55srmiow4k48c0wsgwo4wk8kwc8'),
         );
 
         $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[TEST] [GDPR] Acceptar subscripció newsletter · Aceptar subscripción newsletter · Accept newsletter subscription', $edl, $content);
@@ -335,7 +335,7 @@ class IsolatedNewsletterAdminController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
+                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_1').','.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
             );
         }
 
