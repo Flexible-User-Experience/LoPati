@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use LoPati\AdminBundle\Entity\EmailNameToken;
 use LoPati\AdminBundle\Entity\EmailToken;
 use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
@@ -297,6 +298,48 @@ class IsolatedNewsletterAdminController extends Controller
                 'show_bottom_bar' => true,
             )
         );
+    }
+
+    /**
+     * @return Response
+     *
+     * @throws NotFoundHttpException     If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     * @throws \Exception
+     */
+    public function testRGPD2018NewsletterAgreementAction()
+    {
+        /** @var MailerService $ms */
+        $ms = $this->container->get('app.mailer.service');
+        /** @var string $content message content */
+        $content = $this->renderView(
+            'AdminBundle:RGPD2018NewsletterAgreement:preview.html.twig',
+            array(
+                'show_top_bar' => false,
+                'show_bottom_bar' => false,
+            )
+        );
+
+        /** @var array $edl email destinations list only for developer */
+        $edl = array(
+            new EmailNameToken($this->getParameter('email_address_test_2'), 'Comunicació', 'fake-token-1'),
+            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'fake-token-2'),
+        );
+
+        $result = $ms->batchDelivery('[TEST] RGPD 2018 newsletter agreement', $edl, $content);
+        if ($result == false) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el test.'
+            );
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
+            );
+        }
+
+        return $this->redirect('../list');
     }
 
     /**
