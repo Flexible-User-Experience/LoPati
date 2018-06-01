@@ -327,7 +327,7 @@ class DefaultController extends Controller
      * @param string $token
      * @return RedirectResponse
      */
-    public function newsletterAgreement($token)
+    public function newsletterAgreementAction($token)
     {
         /** @var NewsletterUser $newsletterUser */
         $newsletterUser = $this->getDoctrine()->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
