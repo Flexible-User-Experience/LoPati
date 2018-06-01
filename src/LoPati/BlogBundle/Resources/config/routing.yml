@@ -91,3 +91,7 @@ privacypolicy_en:
   defaults: { _controller: BlogBundle:Default:privacyPolicy}
   requirements:
         _locale: en
+
+newsletter_agreement:
+  path: /rgpd-2018-newsletter-agreement/{token}
+  defaults: { _controller: BlogBundle:Default:newsletterAgreement}
