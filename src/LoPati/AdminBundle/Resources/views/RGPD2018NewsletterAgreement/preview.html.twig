@@ -30,7 +30,7 @@
         <tr>
             <th class="small-12 large-12 columns first last">
                 <p>
-                    El Nou Reglament General de Protecció de Dades (RGPD) té efecte a partir del 25 de maig de 2018, i a partir d'aquest moment, deixen de ser vàlids els consentiments tàcits per tal de tractar dades personals.
+                    El nou Reglament General de Protecció de Dades Europeu (RGPD) té efecte a partir del 25 de maig de 2018, i a partir d'aquest moment, deixen de ser vàlids els consentiments tàcits per tal de tractar dades personals.
                 </p>
                 <p>
                     Esperem que el nostre butlletí informatiu et sigui útil i entem què, si vols continuar rebent-lo, si us plau, fes clic al següent botó.
@@ -106,10 +106,86 @@
         <tr>
             <th class="small-12 large-12 columns first last">
                 <p>
-                    El Nuevo Reglamento General de Protección de Datos (RGPD) tiene efecto a partir del 25 de mayo de 2018, y a partir de ese momento, dejan de ser válidos los consentimientos tácitos para tratar datos personales.
+                    El nuevo Reglamento General de Protección de Datos Europeo (RGPD) tiene efecto a partir del 25 de mayo de 2018, y a partir de ese momento, dejan de ser válidos los consentimientos tácitos para tratar datos personales.
                 </p>
                 <p>
-                    Esperem que el nostre butlletí informatiu et sigui útil i entem què, si vols continuar rebent-lo, si us plau, fes clic al següent botó.
+                    Esperamos que nuestro boletín informativo te sea útil y entem que, si quieres continuar recibiéndolo, por favor, haz clic en el siguiente botón.
+                </p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <center data-parsed="">
+                    <table class="button large radius alert float-center">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="{{ url('newsletter_agreement', {token: 'TODO'}) }}">Sí, vull continuar rebent el newsletter</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p class="post">
+                    Per ajudar-nos a complir amb els nous requeriments del RGPD, necessitem que <strong>confirmis que desitges continuar rebent comunicacions i informació</strong> relacionada amb el Centre d'Art Lo Pati.
+                </p>
+                <ul class="post-short-description">
+                    <li><strong>Responsable del tractament:</strong> Centre d'Art Lo Pati amb CIF P4301400J, i domicili al carrer Gran Capità, 38-40, d’Amposta (Tarragona), amb codi postal 43870.</li>
+                    <li><strong>Finalitat:</strong> Gestionar l'enviament de comunicacions i informació relacionada amb les activitats, exposicions i esdeveniments del centre d'art.</li>
+                    <li><strong>Drets de les persones interessades:</strong> En qualsevol moment pots decidir no rebre més butlletins electrònics. Només cal fer clic l'enllaç para donar-te de baixa que situat al peu de tots els nostres correus electrònics, o contactant directament amb <a href="mailto:info@lopati.cat">info@lopati.cat</a>.</li>
+                    <li><strong>Política de privacitat:</strong> Si vols més informació, pots consultar <a href="{{ url('privacypolicy_ca') }}">aquí</a> la nova política de privacitat.</li>
+                </ul>
+                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
+                <p class="post">
+                    <em>NOTA: Si no fas clic al botó vermell, deixaràs de rebre informació sobre totes les activitats de Lo Pati per correu electrònic.</em>
+                </p>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        </tbody>
+    </table>
+    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+    <table class="row">
+        <tbody>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <table class="button tiny warning expanded">
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><a>[ english ]</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last small-padding-bottom">
+                <h5 class="h6-type">Hola %name%,</h5>
+            </th>
+            <th class="expander"></th>
+        </tr>
+        <tr>
+            <th class="small-12 large-12 columns first last">
+                <p>
+                    The new European General Regulation for Data Protection (GDPR) will take effect from May 25, 2018, and from that moment on, tacit consent is no longer valid in order to handle personal data.
+                </p>
+                <p>
+                    We hope that our newsletter will be useful to you and understand what, if you want to continue receiving it, please click on the button below.
                 </p>
             </th>
             <th class="expander"></th>
