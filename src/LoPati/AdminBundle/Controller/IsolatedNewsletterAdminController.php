@@ -9,8 +9,10 @@ use LoPati\AdminBundle\Form\Type\IsolatedNewsletterXlsFileUploadFormType;
 use LoPati\AdminBundle\Service\MailerService;
 use LoPati\AdminBundle\Service\NewsletterUserManagementService;
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
+use LoPati\NewsletterBundle\Entity\NewsletterGroup;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
 use LoPati\NewsletterBundle\Enum\NewsletterStatusEnum;
+use LoPati\NewsletterBundle\Repository\NewsletterGroupRepository;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -309,6 +311,8 @@ class IsolatedNewsletterAdminController extends Controller
      */
     public function testRGPD2018NewsletterAgreementAction()
     {
+        /** @var NewsletterGroupRepository $ngr */
+        $ngr = $this->container->get('doctrine')->getRepository('NewsletterBundle:NewsletterGroup');
         /** @var MailerService $ms */
         $ms = $this->container->get('app.mailer.service');
         /** @var string $content message content */
@@ -320,11 +324,13 @@ class IsolatedNewsletterAdminController extends Controller
             )
         );
 
-        /** @var array $edl email destinations list only for developer */
-        $edl = array(
-            new EmailNameToken($this->getParameter('email_address_test_2'), 'Comunicació', 'fake-token-1'),
-            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'fake-token-2'),
-        );
+        /** @var NewsletterGroup $ng */
+        $ng = $ngr->find(8);
+        $edl = array();
+        /** @var NewsletterUser $newsletterUser */
+        foreach ($ng->getUsers() as $newsletterUser) {
+            $edl[] = new EmailNameToken($newsletterUser->getEmail(), $newsletterUser->getName() ? $newsletterUser->getName() : $newsletterUser->getEmail(), $newsletterUser->getToken());
+        }
 
         $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[TEST] RGPD 2018 newsletter agreement', $edl, $content);
         if ($result == false) {
