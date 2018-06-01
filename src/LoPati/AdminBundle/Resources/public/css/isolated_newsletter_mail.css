@@ -61,6 +61,11 @@ p.post-short-description {
     font-size: 11px;
 }
 
+ul.post-short-description {
+    color: #000000;
+    font-size: 12px;
+}
+
 p.footer-right {
     font-size: 10px;
     line-height: 1.5;

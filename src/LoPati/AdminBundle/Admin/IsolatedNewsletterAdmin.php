@@ -14,8 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
  * Class IsolatedNewsletterAdmin.
  *
  * @category Admin
- *
- * @author   David Romaní <david@flux.cat>
  */
 class IsolatedNewsletterAdmin extends AbstractBaseAdmin
 {
@@ -274,12 +272,15 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->add('send', $this->getRouterIdParameter().'/send');
-        $collection->add('preview', $this->getRouterIdParameter().'/preview');
-        $collection->add('test', $this->getRouterIdParameter().'/test');
-        $collection->add('upload', 'upload');
-        $collection->remove('batch');
-        $collection->remove('show');
-        $collection->remove('export');
+        $collection
+            ->add('send', $this->getRouterIdParameter().'/send')
+            ->add('preview', $this->getRouterIdParameter().'/preview')
+            ->add('test', $this->getRouterIdParameter().'/test')
+            ->add('upload', 'upload')
+            ->add('previewRGPD2018NewsletterAgreement', 'preview-rgpd-2018-newsletter-agreement')
+            ->remove('batch')
+            ->remove('show')
+            ->remove('export')
+        ;
     }
 }

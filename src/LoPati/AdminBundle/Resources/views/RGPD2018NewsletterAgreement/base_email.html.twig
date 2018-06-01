@@ -1,0 +1,159 @@
+{% spaceless %}
+{{ zurb_ink_styles.add("@HampeZurbInkBundle/Resources/public/css/foundation-for-emails/2/foundation.min.css") }}
+{% block preHtml %}{% endblock %}
+{% inlinestyle %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    {% block headStyles %}
+        <style type="text/css">
+            {% autoescape false %}
+            {{ includeStyles(zurb_ink_styles) }}
+            {% block aditionalStyles %}
+                {{ zurb_ink_styles.add("@AdminBundle/Resources/public/css/isolated_newsletter_mail.css") }}
+            {% endblock %}
+            {% endautoescape %}
+        </style>
+    {% endblock %}
+</head>
+{% inky %}
+<body>
+{% block body %}
+    {% if show_top_bar %}
+        {# Preview mode #}
+        <table class="body">
+            <tr class="black-background">
+                <td class="center" align="center" valign="top">
+                    <center>
+                        <table class="container">
+                            <tbody>
+                            <tr class="white-color">
+                                <td>
+                                    {# Header #}
+                                    <table class="row black-background">
+                                        <tbody>
+                                        <tr>
+                                            <th class="small-6 large-6 first columns white-color vertical-padding">
+                                                <a href="{{ path('sonata_admin_dashboard') }}">&laquo; tornar al CMS</a>
+                                            </th>
+                                            <th class="small-6 large-6 last columns white-color vertical-padding text-right">
+                                                [ mode previsualització ]
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+    <table class="body">
+        <tr class="light-grey-background">
+            <td class="center" align="center" valign="top">
+                <center>
+                    <table class="container">
+                        <tbody>
+                        <tr class="black-color">
+                            <td>
+                                {# Header #}
+                                <table class="row white-background">
+                                    <tbody>
+                                    <tr>
+                                        <th class="small-8 large-8 first last columns normal-padding-top">
+                                            <img class="float-left" src="{{ absolute_url(asset('images/newsletter_logo_header.png')) }}" alt="Lo Pati newsletter logo">
+                                        </th>
+                                        <th class="small-4 large-4 first last columns normal-padding-top"></th>
+                                        <th class="expander"></th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                {# Body #}
+                                {% block content %}{% endblock %}
+                                {# Footer #}
+                                {% block footer %}
+                                    <table class="row white-background">
+                                        <tr>
+                                            <th class="small-12 large-12 first last columns vertical-padding">
+                                                <p class="grey-color footer-right">
+                                                    <a href="http://www.amposta.cat" class="footer-pre-bottom-icon">
+                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_amposta.png')) }}" alt="Diputacio Tarragona logo">
+                                                    </a>
+                                                    <a href="http://cultura.gencat.cat/ca/inici/" class="footer-pre-bottom-icon">
+                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_gencat.png')) }}" alt="Gencat logo">
+                                                    </a>
+                                                    <a href="http://www.diputaciodetarragona.cat" class="footer-pre-bottom-icon">
+                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_tarragona.png')) }}" alt="Diputacio Tarragona logo">
+                                                    </a>
+                                                </p>
+                                                {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 13} %}
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                    {% include 'AdminBundle:IsolatedNewsletter:include_hr_separator.html.twig' %}
+                                    <table style="margin-top:-10px" class="row white-background">
+                                        <tr>
+                                            <th class="small-8 large-8 first columns">
+                                                <p class="footer-bottom">
+                                                    LO PATI | C. Gran Capità, 38-40 | 43870 Amposta | <a class="lopati-footer-email" href="mailto:info@lopati.cat">info@lopati.cat</a>
+                                                </p>
+                                            </th>
+                                            <th class="small-4 large-4 last columns text-right">
+                                                <a href="https://www.flickr.com/photos/lopati" class="footer-bottom-icon">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_fl.png')) }}" alt="Flickr logo">
+                                                </a>
+                                                <a href="https://vimeo.com/lopati" class="footer-bottom-icon">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_vm.png')) }}" alt="Vimeo logo">
+                                                </a>
+                                                <a href="https://www.instagram.com/centreartlopati/" class="footer-bottom-icon">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_it.png')) }}" alt="Instagram logo">
+                                                </a>
+                                                <a href="https://twitter.com/centreartlopati" class="footer-bottom-icon">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_tw.png')) }}" alt="Twitter logo">
+                                                </a>
+                                                <a href="https://www.facebook.com/centreartlopati/" class="footer-bottom-icon">
+                                                    <img style="width:18px;" class="float-right" src="{{ absolute_url(asset('images/newsletter_icon_fb.png')) }}" alt="Facebook logo">
+                                                </a>
+                                            </th>
+                                            <th class="expander"></th>
+                                        </tr>
+                                    </table>
+                                    {# newsletter user managment footer #}
+                                    {% if show_bottom_bar %}
+                                        <table style="margin-top:-10px" class="row white-background">
+                                            <tr>
+                                                <th class="small-12 large-12 first last columns">
+                                                    {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 15} %}
+                                                    <p class="heading-date">
+                                                        Clica <a href="#{# TODO url('isolated_newsletter_preview', {id: newsletter.id}) #}">aquí</a> per visualitzar correctament{# | Clica <a href="%token%">aquí</a> per donar-te de baixa #}
+                                                    </p>
+                                                </th>
+                                                <th class="expander"></th>
+                                            </tr>
+                                        </table>
+                                    {% endif %}
+                                {% endblock %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </td>
+        </tr>
+    </table>
+    {#<!-- prevent Gmail on iOS font size manipulation -->#}
+    <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+{% endblock %}
+</body>
+{% endinky %}
+</html>
+{% endinlinestyle %}
+{% endspaceless %}
