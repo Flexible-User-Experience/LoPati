@@ -367,7 +367,10 @@ class IsolatedNewsletterAdminController extends Controller
         /** @var NewsletterUser $newsletterUser */
         foreach ($newsletterUsers as $newsletterUser) {
             $edl[] = new EmailNameToken($newsletterUser->getEmail(), $newsletterUser->getName() ? $newsletterUser->getName() : $newsletterUser->getEmail(), $newsletterUser->getToken());
+            $newsletterUser->setActive(false);
         }
+        // set all users to disabled newsletter deliveries
+        $this->container->get('doctrine')->getManager()->flush();
 
         $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[GDPR] Acceptar subscripció newsletter · Aceptar subscripción newsletter · Accept newsletter subscription', $edl, $content);
         if ($result == false) {
