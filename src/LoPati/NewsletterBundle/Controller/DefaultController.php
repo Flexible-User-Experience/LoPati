@@ -49,14 +49,32 @@ class DefaultController extends Controller
         $form = $this->createForm(new NewsletterUserType(), $newsletterUser);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
-            $newsletterUser->setActive(false);
-            if ($newsletterUser->getAge()) {
-                $newsletterUser->setAgeTransformed($newsletterUser->getAge());
+
+            $searchedNewsletterUser = $this->getDoctrine()->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $newsletterUser->getEmail()));
+
+            if ($searchedNewsletterUser) {
+                // update user
+                $searchedNewsletterUser
+                    ->setName($newsletterUser->getName())
+                    ->setPhone($newsletterUser->getPhone())
+                    ->setPostalCode($newsletterUser->getPostalCode())
+                    ->setAge($newsletterUser->getAge())
+                    ->setAgeTransformed($newsletterUser->getAge())
+                    ->setActive(false)
+                ;
+                $em->flush();
+            } else {
+                // new user
+                $newsletterUser->setActive(false);
+                if ($newsletterUser->getAge()) {
+                    $newsletterUser->setAgeTransformed($newsletterUser->getAge());
+                }
+                $em->persist($newsletterUser);
+                $em->flush();
             }
-            $em->persist($newsletterUser);
-            $em->flush();
+
             $subject = 'Confirmació per rebre el newsletter de LO PATI';
 
             /** @var MailerService $ms */
@@ -69,8 +87,10 @@ class DefaultController extends Controller
                     'show_bottom_bar' => false,
                 )
             ));
+
             $flash = $this->get('translator')->trans('suscribe.register');
             $this->get('session')->getFlashBag()->add('notice', $flash);
+
         } else {
             $this->get('session')->getFlashBag()->add('notice', (string) $form->getErrors(true, false));
         }
