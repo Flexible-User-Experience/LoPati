@@ -14,8 +14,6 @@ use Symfony\Component\Routing\RouterInterface;
  * Class MailerService.
  *
  * @category Service
- *
- * @author   David Romaní <david@flux.cat>
  */
 class MailerService
 {
@@ -24,7 +22,9 @@ class MailerService
      */
     private $kernel;
 
-    /** @var RouterInterface */
+    /**
+     * @var RouterInterface
+     */
     private $router;
 
     /**
@@ -134,7 +134,6 @@ class MailerService
             foreach ($chunks as $chunk) {
                 // slices of 950 emails per chunk
                 $mail = new SendGrid\Mail($from, $subject, $to, $mailContent);
-
                 /** @var EmailToken $destEmail */
                 foreach ($chunk as $destEmail) {
                     $personalitzation = new SendGrid\Personalization();
