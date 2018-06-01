@@ -10,6 +10,11 @@ use LoPati\NewsletterBundle\Entity\NewsletterGroup;
  */
 class NewsletterUserRepository extends EntityRepository
 {
+    /**
+     * @param int $fails
+     *
+     * @return array
+     */
     public function getActiveUsersWithMoreThanFails($fails)
     {
         $query = $this->getEntityManager()->createQuery('SELECT u FROM NewsletterBundle:NewsletterUser u WHERE u.fail >= :fail AND u.active = 1');
@@ -34,9 +39,9 @@ class NewsletterUserRepository extends EntityRepository
      * Get active users plain array by group & locale.
      *
      * @param NewsletterGroup|null $group
-     * @param string               $locale
+     * @param string $locale
      *
-     * @return \Doctrine\ORM\AbstractQuery|\Doctrine\ORM\Query
+     * @return array
      */
     public function getActiveUsersByGroupAndLocale($group, $locale = 'ca')
     {
@@ -130,6 +135,19 @@ class NewsletterUserRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('u')
             ->where('u.active = :enabled')
+            ->setParameter('enabled', true);
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function findEnabledWithoutFails()
+    {
+        $query = $this->createQueryBuilder('u')
+            ->where('u.active = :enabled')
+            ->andWhere('u.fail = 0')
             ->setParameter('enabled', true);
 
         return $query->getQuery()->getResult();

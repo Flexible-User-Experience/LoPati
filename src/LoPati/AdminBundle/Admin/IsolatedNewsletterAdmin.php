@@ -279,6 +279,7 @@ class IsolatedNewsletterAdmin extends AbstractBaseAdmin
             ->add('upload', 'upload')
             ->add('previewRGPD2018NewsletterAgreement', 'preview-rgpd-2018-newsletter-agreement')
             ->add('testRGPD2018NewsletterAgreement', 'test-rgpd-2018-newsletter-agreement')
+            ->add('sendRGPD2018NewsletterAgreement', 'send-rgpd-2018-newsletter-agreement')
             ->remove('batch')
             ->remove('show')
             ->remove('export')

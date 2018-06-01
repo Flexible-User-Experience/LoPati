@@ -320,13 +320,13 @@ class IsolatedNewsletterAdminController extends Controller
             )
         );
 
-        /** @var array $edl email destinations list only for developer */
         $edl = array(
-            new EmailNameToken($this->getParameter('email_address_test_2'), 'Comunicació', 'fake-token-1'),
-            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'fake-token-2'),
+            new EmailNameToken($this->getParameter('email_address_test_1'), 'Direcció', 'fake-token-1'),
+            new EmailNameToken($this->getParameter('email_address_test_2'), 'Comunicació', 'fake-token-2'),
+            new EmailNameToken($this->getParameter('email_address_test_3'), 'Test', 'obzl55srmiow4k48c0wsgwo4wk8kwc8'),
         );
 
-        $result = $ms->batchDelivery('[TEST] RGPD 2018 newsletter agreement', $edl, $content);
+        $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[TEST] [GDPR] Acceptar subscripció newsletter · Aceptar subscripción newsletter · Accept newsletter subscription', $edl, $content);
         if ($result == false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
@@ -335,11 +335,57 @@ class IsolatedNewsletterAdminController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_success',
-                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
+                'S\'ha enviat correctament un email de test a les bústies: '.$this->getParameter('email_address_test_1').','.$this->getParameter('email_address_test_2').' i '.$this->getParameter('email_address_test_3')
             );
         }
 
-        return $this->redirect('../list');
+        return $this->redirectToList();
+    }
+
+    /**
+     * @return Response
+     *
+     * @throws NotFoundHttpException     If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     * @throws \Exception
+     */
+    public function sendRGPD2018NewsletterAgreementAction()
+    {
+        /** @var MailerService $ms */
+        $ms = $this->container->get('app.mailer.service');
+        /** @var string $content message content */
+        $content = $this->renderView(
+            'AdminBundle:RGPD2018NewsletterAgreement:preview.html.twig',
+            array(
+                'show_top_bar' => false,
+                'show_bottom_bar' => false,
+            )
+        );
+
+        $edl = array();
+        $newsletterUsers = $this->container->get('doctrine')->getRepository('NewsletterBundle:NewsletterUser')->findEnabledWithoutFails();
+        /** @var NewsletterUser $newsletterUser */
+        foreach ($newsletterUsers as $newsletterUser) {
+            $edl[] = new EmailNameToken($newsletterUser->getEmail(), $newsletterUser->getName() ? $newsletterUser->getName() : $newsletterUser->getEmail(), $newsletterUser->getToken());
+            $newsletterUser->setActive(false);
+        }
+        // set all users to disabled newsletter deliveries
+        $this->container->get('doctrine')->getManager()->flush();
+
+        $result = $ms->batchDeliveryRGPD2018NewsletterAgreement('[GDPR] Acceptar subscripció newsletter · Aceptar subscripción newsletter · Accept newsletter subscription', $edl, $content);
+        if ($result == false) {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_error',
+                'S\'ha produït un ERROR en enviar el butlletí.'
+            );
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                'sonata_flash_success',
+                'S\'ha enviat correctament el email a '.count($newsletterUsers).' usuaris'
+            );
+        }
+
+        return $this->redirectToList();
     }
 
     /**
