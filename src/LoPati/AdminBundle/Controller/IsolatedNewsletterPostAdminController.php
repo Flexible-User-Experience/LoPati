@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
  * Class IsolatedNewsletterPostAdminController
  *
  * @category AdminController
- * @package  LoPati\AdminBundle\Controller
- * @author   David Romaní <david@flux.cat>
  */
 class IsolatedNewsletterPostAdminController extends Controller
 {

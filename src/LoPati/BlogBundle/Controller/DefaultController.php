@@ -4,11 +4,15 @@ namespace LoPati\BlogBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
+use LoPati\NewsletterBundle\Entity\NewsletterUser;
+use LoPati\NewsletterBundle\NewsletterBundle;
+use LoPati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LoPati\Utilities\Utils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class DefaultController.
@@ -317,5 +321,28 @@ class DefaultController extends Controller
     public function privacyPolicyAction()
     {
         return $this->render('BlogBundle:Default:privacy_policy.html.twig');
+    }
+
+    /**
+     * @param string $token
+     * @return RedirectResponse
+     */
+    public function newsletterAgreementAction($token)
+    {
+        /** @var NewsletterUser $newsletterUser */
+        $newsletterUser = $this->getDoctrine()->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('token' => $token));
+
+        if (!$newsletterUser){
+            throw new NotFoundHttpException('The user does not exist');
+        }
+
+        $newsletterUser->setActive(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('notice', $this->get('translator')->trans('suscribe.confirmation.user'));
+
+        return $this->redirectToRoute('inici');
     }
 }

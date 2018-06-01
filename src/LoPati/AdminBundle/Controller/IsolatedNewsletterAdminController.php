@@ -23,8 +23,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Class IsolatedNewsletterAdminController.
  *
  * @category AdminController
- *
- * @author   David Romaní <david@flux.cat>
  */
 class IsolatedNewsletterAdminController extends Controller
 {
@@ -33,8 +31,8 @@ class IsolatedNewsletterAdminController extends Controller
      *
      * @return Response
      *
-     * @throws NotFoundHttpException     If the object does not exist
-     * @throws AccessDeniedHttpException If access is not granted
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function sendAction(Request $request = null)
     {
@@ -128,6 +126,7 @@ class IsolatedNewsletterAdminController extends Controller
      *
      * @throws NotFoundHttpException     If the object does not exist
      * @throws AccessDeniedHttpException If access is not granted
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function testAction(Request $request = null)
     {
@@ -177,8 +176,8 @@ class IsolatedNewsletterAdminController extends Controller
      *
      * @return RedirectResponse
      *
-     * @throws NotFoundHttpException     If the object does not exist
-     * @throws AccessDeniedHttpException If access is not granted
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
      */
     public function uploadAction(Request $request = null)
     {
@@ -281,6 +280,23 @@ class IsolatedNewsletterAdminController extends Controller
         }
 
         return $this->redirectToRoute('sonata_admin_dashboard');
+    }
+
+    /**
+     * @return Response
+     *
+     * @throws NotFoundHttpException     If the object does not exist
+     * @throws AccessDeniedHttpException If access is not granted
+     */
+    public function previewRGPD2018NewsletterAgreementAction()
+    {
+        return $this->render(
+            'AdminBundle:RGPD2018NewsletterAgreement:preview.html.twig',
+            array(
+                'show_top_bar' => true,
+                'show_bottom_bar' => true,
+            )
+        );
     }
 
     /**
