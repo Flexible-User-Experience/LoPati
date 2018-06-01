@@ -62,13 +62,16 @@ class DefaultController extends Controller
                     ->setPostalCode($newsletterUser->getPostalCode())
                     ->setAge($newsletterUser->getAge())
                     ->setAgeTransformed($newsletterUser->getAge())
+                    ->setIdioma($request->getLocale())
                     ->setActive(false)
                 ;
+                $newsletterUser->setToken($searchedNewsletterUser->getToken());
                 $em->flush();
             } else {
                 // new user
                 $newsletterUser->setActive(false);
                 if ($newsletterUser->getAge()) {
+                    $newsletterUser->setIdioma($request->getLocale());
                     $newsletterUser->setAgeTransformed($newsletterUser->getAge());
                 }
                 $em->persist($newsletterUser);

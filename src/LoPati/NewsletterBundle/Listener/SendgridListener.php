@@ -10,8 +10,6 @@ use Symfony\Bridge\Monolog\Logger;
  * Class SendgridListener.
  *
  * @category Listener
- *
- * @author   David Romaní <david@flux.cat>
  */
 class SendgridListener
 {
@@ -67,6 +65,8 @@ class SendgridListener
 
     /**
      * @param WebHookEvent $event
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function onEmailBounce(WebHookEvent $event)
     {
@@ -76,6 +76,8 @@ class SendgridListener
 
     /**
      * @param WebHookEvent $event
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function onEmailSpam(WebHookEvent $event)
     {
@@ -95,6 +97,8 @@ class SendgridListener
      * Manage user bounces or spam reports.
      *
      * @param WebHookEvent $event
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     private function anomalyManagement(WebHookEvent $event)
     {
