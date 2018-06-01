@@ -141,8 +141,6 @@ class NewsletterUser
     }
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
@@ -151,18 +149,18 @@ class NewsletterUser
     }
 
     /**
-     * Set email.
-     *
      * @param string $email
+     *
+     * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
-     * Get email.
-     *
      * @return string
      */
     public function getEmail()
@@ -171,18 +169,18 @@ class NewsletterUser
     }
 
     /**
-     * Set idioma.
-     *
      * @param $idioma
+     *
+     * @return $this
      */
     public function setIdioma($idioma)
     {
         $this->idioma = $idioma;
+
+        return $this;
     }
 
     /**
-     * Get email.
-     *
      * @return string
      */
     public function getIdioma()
@@ -191,18 +189,18 @@ class NewsletterUser
     }
 
     /**
-     * Set token.
-     *
      * @param string $token
+     *
+     * @return $this
      */
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
     }
 
     /**
-     * Get token.
-     *
      * @return string
      */
     public function getToken()
@@ -211,18 +209,18 @@ class NewsletterUser
     }
 
     /**
-     * Set active.
-     *
      * @param bool $active
+     *
+     * @return $this
      */
     public function setActive($active)
     {
         $this->active = $active;
+
+        return $this;
     }
 
     /**
-     * Get active.
-     *
      * @return bool
      */
     public function getActive()
@@ -231,18 +229,18 @@ class NewsletterUser
     }
 
     /**
-     * Set created.
-     *
      * @param \DateTime $created
+     *
+     * @return $this
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
-     * Get created.
-     *
      * @return \DateTime
      */
     public function getCreated()
@@ -251,8 +249,6 @@ class NewsletterUser
     }
 
     /**
-     * Get created string format.
-     *
      * @return string
      */
     public function getCreatedString()
@@ -261,8 +257,6 @@ class NewsletterUser
     }
 
     /**
-     * Set fail.
-     *
      * @param int $fail
      *
      * @return $this
@@ -275,8 +269,6 @@ class NewsletterUser
     }
 
     /**
-     * Get fail.
-     *
      * @return int
      */
     public function getFail()
@@ -285,9 +277,7 @@ class NewsletterUser
     }
 
     /**
-     * Set Groups.
-     *
-     * @param mixed $groups groups
+     * @param array $groups
      *
      * @return $this
      */
@@ -299,8 +289,6 @@ class NewsletterUser
     }
 
     /**
-     * Get Groups.
-     *
      * @return array|ArrayCollection
      */
     public function getGroups()
@@ -309,8 +297,6 @@ class NewsletterUser
     }
 
     /**
-     * Get Groups.
-     *
      * @return string
      */
     public function getGroupsString()
@@ -329,8 +315,6 @@ class NewsletterUser
     }
 
     /**
-     * Add group.
-     *
      * @param NewsletterGroup $group
      *
      * @return $this
@@ -344,8 +328,6 @@ class NewsletterUser
     }
 
     /**
-     * Remove group.
-     *
      * @param NewsletterGroup $group
      *
      * @return $this
@@ -389,7 +371,7 @@ class NewsletterUser
     /**
      * @param string $city
      *
-     * @return NewsletterUser
+     * @return $this
      */
     public function setCity($city)
     {
@@ -449,7 +431,7 @@ class NewsletterUser
     /**
      * @param \DateTime $birthdate
      *
-     * @return NewsletterUser
+     * @return $this
      */
     public function setBirthdate($birthdate)
     {
