@@ -34,14 +34,12 @@ class DefaultControllerTest extends WebTestCase
         return array(
             array('/ca/'),
             array('/es/'),
-            array('/en/'),
             array('/newsletter/1/'),
             array('/ca/search/'),
             array('/ca/projectes/1/'),
             array('/ca/1/arxiu/4/'),
             array('/ca/politica-de-privacitat/'),
             array('/es/politica-de-privacidad/'),
-            array('/en/privacy-policy/'),
         );
     }
 

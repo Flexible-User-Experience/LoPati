@@ -92,7 +92,6 @@ class NewsletterPageAdminController extends Controller
 
             $this->sendEmailBlockToLocale('ca', $newsletter, $em, $nb, $host);
             $this->sendEmailBlockToLocale('es', $newsletter, $em, $nb, $host);
-            $this->sendEmailBlockToLocale('en', $newsletter, $em, $nb, $host);
 
             $newsletter->setEstat('Sended');
             $newsletter->setFiEnviament(new \DateTime('now'));

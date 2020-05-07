@@ -204,18 +204,6 @@ class DefaultController extends Controller
             $follow = 'Siguenos en';
             $colabora = 'Colabora';
             $butlleti = 'Boletín';
-        } elseif ($_locale == 'en') {
-            $visualitzar_correctament = 'Click here to visualize correctly';
-            $baixa = 'Click here to provide you low';
-            $lloc = 'Place';
-            $data = 'Date';
-            $publicat = 'Published';
-            $links = 'Links';
-            $organitza = 'Organizes';
-            $suport = 'With de support of';
-            $follow = 'Follow us';
-            $colabora = 'Collaborate';
-            $butlleti = 'Newsletter';
         }
 
         return $this->render(

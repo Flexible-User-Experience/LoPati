@@ -153,8 +153,6 @@ fos_elastica:
                         descripcio: { boost: 3 }
                         translatedTitleEs: { boost: 5 }
                         translatedDescripcioEs: { boost: 3 }
-                        translatedTitleEn: { boost: 5 }
-                        translatedDescripcioEn: { boost: 3 }
                     persistence:
                         driver: orm
                         model: LoPati\BlogBundle\Entity\Pagina

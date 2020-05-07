@@ -34,7 +34,6 @@ class DefaultControllerTest extends WebTestCase
         return array(
             array('/ca/agenda/2018/01/01/'),
             array('/es/agenda/2018/01/02/'),
-            array('/en/diary/2018/01/03/'),
         );
     }
 

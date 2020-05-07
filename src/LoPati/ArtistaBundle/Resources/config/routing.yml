@@ -10,12 +10,6 @@ irradiador_es:
     requirements:
         _locale: es
 
-irradiador_en:
-    path:           /{_locale}/projects/irradiador/
-    defaults:       { _controller: ArtistaBundle:Default:index }
-    requirements:
-        _locale: en
-
 irradiador_detail_ca:
     path:           /{_locale}/projectes/irradiador/{artista}/
     defaults:       { _controller: ArtistaBundle:Default:detail }
@@ -27,9 +21,3 @@ irradiador_detail_es:
     defaults:       { _controller: ArtistaBundle:Default:detail }
     requirements:
         _locale: es
-
-irradiador_detail_en:
-    path:           /{_locale}/projects/irradiador/{artista}/
-    defaults:       { _controller: ArtistaBundle:Default:detail }
-    requirements:
-        _locale: en

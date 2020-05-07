@@ -16,7 +16,7 @@
                     <ul class="menu-artistes">
                         {% for artist in artistes %}
                             <li>
-                                <a {% if artist.slug == artista.slug%}class="current"{% endif %} href="{{ path('irradiador_detail_' ~ app.request.locale, { 'artista' : artist.slug } ) }}">{{ artist.name }}<br/></a>
+                                <a {% if artist.slug == artista.slug%}class="current"{% endif %} href="{{ path('irradiador_detail_' ~ app.request.locale, {artista: artist.slug} ) }}">{{ artist.name }}<br/></a>
                             </li>
                         {% endfor %}
                     </ul>

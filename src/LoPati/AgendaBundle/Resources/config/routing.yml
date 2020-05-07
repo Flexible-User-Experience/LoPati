@@ -3,7 +3,7 @@ calendari:
     defaults: { _controller: AgendaBundle:Default:calendari }
     requirements:
         fletxa: dreta|esquerra
-        _locale: ca|es|en
+        _locale: ca|es
 
 agenda_ca:
     path:     /{_locale}/agenda/{year}/{month}/{day}/
@@ -16,9 +16,3 @@ agenda_es:
     defaults: { _controller: AgendaBundle:Default:agenda }
     requirements:
         _locale: es
-
-agenda_en:
-    path:     /{_locale}/diary/{year}/{month}/{day}/
-    defaults: { _controller: AgendaBundle:Default:agenda }
-    requirements:
-        _locale: en

@@ -35,7 +35,7 @@
                         {% if hitsMatrix[day2] is defined %}
                             {# a mes s'ha detectat un esdevenint dins d'aquella data #}
                             <td class="{{ hitsMatrix[day2] }}">
-                                <a href="{{ path( 'agenda_' ~ app.request.locale, {'year' : any, 'month' : mes2, 'day' : day } ) }}">{{ daysMatrix[(semana * 7) + dia]['nday'] }}</a>
+                                <a href="{{ path( 'agenda_' ~ app.request.locale, {year: any, month: mes2, day: day } ) }}">{{ daysMatrix[(semana * 7) + dia]['nday'] }}</a>
                         {% else %}
                             {# NO hi ha cap esdevenint, per tant pintar només el número de dia #}
                             <td>{{ daysMatrix[(semana * 7) + dia]['nday'] }}
