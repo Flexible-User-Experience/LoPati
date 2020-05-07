@@ -4,12 +4,15 @@ namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use RuntimeException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -27,8 +30,9 @@ class NewsletterUserAdminController extends Controller
      *
      * @param Request $request request
      *
-     * @return Response|\Symfony\Component\HttpFoundation\StreamedResponse
-     * @throws \RuntimeException
+     * @return Response|StreamedResponse
+     *
+     * @throws RuntimeException
      * @throws AccessDeniedException
      */
     public function exportAction(Request $request)
@@ -79,7 +83,8 @@ class NewsletterUserAdminController extends Controller
      * @param ProxyQueryInterface $selectedModelQuery
      *
      * @return RedirectResponse
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     *
+     * @throws AccessDeniedException
      */
     public function batchActionGroup(ProxyQueryInterface $selectedModelQuery)
     {
@@ -101,7 +106,8 @@ class NewsletterUserAdminController extends Controller
      * Pre set group action
      *
      * @return Response
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     *
+     * @throws AccessDeniedException
      */
     public function groupAction()
     {
@@ -120,7 +126,7 @@ class NewsletterUserAdminController extends Controller
             }
         }
 
-        return $this->render('AdminBundle:Newsletter:AddUserToGroup/preset_group_form.html.twig', array(
+        return $this->renderWithExtraParams('AdminBundle:Newsletter:AddUserToGroup/preset_group_form.html.twig', array(
                 'users'  => $users,
                 'groups' => $groups,
             ));
@@ -129,7 +135,8 @@ class NewsletterUserAdminController extends Controller
     /**
      * Final set group action
      *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws AccessDeniedException
+     * @throws OptimisticLockException
      */
     public function setgroupAction()
     {

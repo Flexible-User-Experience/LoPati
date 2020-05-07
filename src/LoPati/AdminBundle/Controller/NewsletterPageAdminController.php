@@ -3,6 +3,7 @@
 namespace LoPati\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
 use LoPati\AdminBundle\Entity\EmailToken;
 use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\Newsletter;
@@ -12,6 +13,8 @@ use Psr\Log\LoggerInterface;
 use SendGrid\Response;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class NewsletterPageAdminController.
@@ -23,9 +26,10 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 class NewsletterPageAdminController extends Controller
 {
     /**
-     * @param $id
+     * @param int|string $id
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
+     * @throws OptimisticLockException
      */
     public function enviarAction($id)
     {
@@ -40,25 +44,6 @@ class NewsletterPageAdminController extends Controller
             $newsletter->setIniciEnviament(new \DateTime('now'));
             $newsletter->setFiEnviament(null);
 
-//            $rejects = $nb->getRejectList();
-//            foreach ($rejects as $item) {
-//                $email = $item['email'];
-//                $reason = $item['reason'];
-//                /** @var NewsletterUser $ruser */
-//                $ruser = $em->getRepository('NewsletterBundle:NewsletterUser')->findOneBy(array('email' => $email));
-//                if ($ruser) {
-//                    if ($reason == 'soft-bounce') {
-//                        // increment fail counter
-//                        $ruser->setFail($ruser->getFail() + 1);
-//                        $em->flush();
-//                    } else {
-//                        // remove user (other API reason results are: hard-bounce, spam, unsub & custom)
-//                        $em->remove($ruser);
-//                        $em->flush();
-//                    }
-//                }
-//            }
-
             // Clean fail delivery users
             $users = $em->getRepository('NewsletterBundle:NewsletterUser')->getActiveUsersWithMoreThanFails(3);
             foreach ($users as $user) {
@@ -70,14 +55,8 @@ class NewsletterPageAdminController extends Controller
             $newsletter->setSubscrits($users);
             $em->flush();
 
-            // Start delivery process asynchronous
-//            $command = 'php ' . $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'console newsletter:send --env=' . $this->get('kernel')->getEnvironment();
-//            $process = new Process($command);
-//            $process->start();
-//            $this->get('session')->getFlashBag()->add('sonata_flash_success', 'Iniciant enviament del newsletter núm. ' . $newsletter->getNumero());
-
             // Welcome
-            $host = $this->get('kernel')->getEnvironment() == 'prod' ? 'http://www.lopati.cat' : 'http://lopati2.local';
+            $host = $this->get('kernel')->getEnvironment() == 'prod' ? 'https://www.lopati.cat' : 'http://lopati.devel';
 
             $this->makeLog('Welcome to LoPati newsletter:send command.');
             $this->makeLog('initializing... host = '.$host);
@@ -109,9 +88,9 @@ class NewsletterPageAdminController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int|string $id
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return SymfonyResponse
      */
     public function previewAction($id)
     {
@@ -122,13 +101,14 @@ class NewsletterPageAdminController extends Controller
         $newsletter = $em->getRepository('NewsletterBundle:Newsletter')->findPaginesNewsletterById($id);
         $host = $this->getHostRoute();
 
-        return $this->render('AdminBundle:Newsletter:preview.html.twig', $nb->buildNewsletterContentArray($id, $newsletter, $host, 'ca'));
+        return $this->renderWithExtraParams('AdminBundle:Newsletter:preview.html.twig', $nb->buildNewsletterContentArray($id, $newsletter, $host, 'ca'));
     }
 
     /**
-     * @param $id
+     * @param int|string $id
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
+     * @throws OptimisticLockException
      */
     public function testAction($id)
     {
@@ -189,11 +169,13 @@ class NewsletterPageAdminController extends Controller
     }
 
     /**
-     * @param $locale
-     * @param Newsletter        $newsletter
-     * @param EntityManager     $em
+     * @param string $locale
+     * @param Newsletter $newsletter
+     * @param EntityManager $em
      * @param NewsletterManager $nb
-     * @param $host
+     * @param string $host
+     *
+     * @throws OptimisticLockException
      */
     private function sendEmailBlockToLocale($locale, Newsletter $newsletter, EntityManager $em, NewsletterManager $nb, $host)
     {

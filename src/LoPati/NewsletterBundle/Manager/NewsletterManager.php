@@ -70,7 +70,7 @@ class NewsletterManager
      */
     public function buildNewsletterContentArray($id, $newsletter, $host, $lang, $token = null)
     {
-        $result = array(
+        return array(
             'id' => $id,
             'host' => $host,
             'pagines' => $newsletter,
@@ -88,7 +88,5 @@ class NewsletterManager
             'butlleti' => $this->getTrans('newsletter.butlleti', $lang),
             'token' => $token,
         );
-
-        return $result;
     }
 }
