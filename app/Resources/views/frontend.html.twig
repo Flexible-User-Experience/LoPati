@@ -10,7 +10,6 @@
     <link href="{{ asset('bundles/blog/css/estils.css') }}" rel="stylesheet" type="text/css"/>
     {% block estils %}{% endblock %}
     <script type="text/javascript" src="{{ asset('bundles/blog/js/jquery-1.8.2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/blog/js/funcions.js') }}"></script>
 </head>
 <body>
 <div class="pagina">
@@ -47,7 +46,7 @@
             </div>
             {% block menuArxiu %}{% endblock %}
             <div id="newsletter" class="xarxes">
-                <h5 onclick="newsletter(this)">{{ 'tr.newsletter' | trans }} <img style="width:18px;margin-top:1px;" src="{{ asset('images/envelop.gif') }}" alt="newsletter"/></h5>
+                <h5>{{ 'tr.newsletter' | trans }} <img style="width:18px;margin-top:1px;" src="{{ asset('images/envelop.gif') }}" alt="newsletter"/></h5>
                 {% render controller('NewsletterBundle:Default:form') %}
             </div>
             <div class="xarxes">

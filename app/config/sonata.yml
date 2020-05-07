@@ -1,7 +1,7 @@
 # Sonata Admin
 sonata_admin:
     title:           "CMS"
-    title_logo:      "/images/logo_lopati_inverted.png"
+    title_logo:      "/images/logo_lopati_magenta.jpg"
     persist_filters: true
     options:
         html5_validate: true

@@ -6,7 +6,7 @@ portada:
   path: /{_locale}/
   defaults: { _controller: BlogBundle:Default:portada}
   requirements:
-        _locale: ca|es|en
+        _locale: ca|es
 
 categoriaenenllas:
   path: /{_locale}/{categoria}/{id}/
@@ -14,13 +14,13 @@ categoriaenenllas:
   requirements:
     id:  \d+
     method:  GET
-    _locale: ca|es|en
+    _locale: ca|es
 
 arxiuarticle:
   path: /{_locale}/{arxiu}/{any}/{titol}/{id}/
   defaults: { _controller: BlogBundle:Default:arxiuArticle}
   requirements:
-    _locale: ca|es|en
+    _locale: ca|es
     id:  \d+
     any: \d+
     method:  GET
@@ -32,13 +32,13 @@ llista:
     categoria_id: \d+
     subcategoria_id: \d+
     method:  GET
-    _locale: ca|es|en
+    _locale: ca|es
 
 arxiullistaany:
   path: /{_locale}/{arxiu}/{any}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiuLlistaAny}
   requirements:
-    _locale: ca|es|en
+    _locale: ca|es
     any:  \d+
     categoria_id: \d+
     method:  GET
@@ -47,7 +47,7 @@ arxiu:
   path: /{_locale}/{arxiu}/{categoria}/{categoria_id}/
   defaults: { _controller: BlogBundle:Default:arxiu}
   requirements:
-        _locale: ca|es|en
+        _locale: ca|es
         arxiu: \d+
         categoria: "[a-zA-Z]+"
         categoria_id: \d+
@@ -66,13 +66,13 @@ pagina:
   requirements:
     id:  \d+
     method:  GET
-    _locale: ca|es|en
+    _locale: ca|es
 
 search:
   path: /{_locale}/search/
   defaults: { _controller: BlogBundle:Default:search}
   requirements:
-        _locale: ca|es|en
+        _locale: ca|es
 
 privacypolicy_ca:
   path: /{_locale}/politica-de-privacitat/
@@ -85,12 +85,6 @@ privacypolicy_es:
   defaults: { _controller: BlogBundle:Default:privacyPolicy}
   requirements:
         _locale: es
-
-privacypolicy_en:
-  path: /{_locale}/privacy-policy/
-  defaults: { _controller: BlogBundle:Default:privacyPolicy}
-  requirements:
-        _locale: en
 
 newsletter_agreement:
   path: /rgpd-2018-newsletter-agreement/{token}

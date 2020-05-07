@@ -34,7 +34,6 @@ class DefaultControllerTest extends WebTestCase
         return array(
             array('/ca/projectes/irradiador/'),
             array('/es/proyectos/irradiador/'),
-            array('/en/projects/irradiador/'),
             array('/ca/projectes/irradiador/alba-sotorra/'),
         );
     }

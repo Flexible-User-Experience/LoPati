@@ -20,7 +20,7 @@ newsletter:
     path: /{_locale}/newsletter/{data}/
     defaults: { _controller: NewsletterBundle:Default:visit }
     requirements:
-       _locale: ca|es|en
+       _locale: ca|es
 
 isolated_newsletter_preview:
     path: /newsletter/{id}/

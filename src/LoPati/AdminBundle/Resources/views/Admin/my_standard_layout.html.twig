@@ -3,12 +3,21 @@
 {# removes top search bar #}
 {% block sonata_sidebar_search %}{% endblock %}
 
+{# custom logo #}
+{% block logo %}
+    {% spaceless %}
+        <a class="logo" href="{{ path('sonata_admin_dashboard') }}" style="background-color:#F92178;">
+            <img src="{{ asset(sonata_admin.adminPool.titlelogo) }}" alt="{{ sonata_admin.adminPool.title }}">
+        </a>
+    {% endspaceless %}
+{% endblock %}
+
 {# custom sidebar footer #}
 {% block side_bar_after_nav %}
     <p class="text-left small" style="padding:50px 0 0 20px;color:#EEE;">
         {{ admin_tag_version }}<br>
-        <i class="fa fa-code"></i> Desenvolupat per <a href="http://www.flux.cat" target="_blank">Flux</a><br>
-        <i class="fa fa-copyright"></i> {{ 'now' | date('Y') }} <a href="http://www.lopati.cat" target="_blank">{{ main_brand_title }}</a></p>
+        <i class="fa fa-code"></i> Desenvolupat per <a href="https://www.flux.cat" target="_blank">Flux</a><br>
+        <i class="fa fa-copyright"></i> {{ 'now' | date('Y') }} <a href="https://www.lopati.cat" target="_blank">{{ main_brand_title }}</a></p>
 {% endblock %}
 
 {# custom top menu #}
@@ -16,6 +25,7 @@
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav navbar-right">
             <li><a href="{{ path('inici') }}"><i class="fa fa-globe"></i></a></li>
+            <li><a href="#"><i class="fa fa-user-circle-o"></i> {{ app.user.username }}</a></li>
             <li><a href="{{ path('sonata_user_admin_security_logout') }}"><i class="fa fa-power-off text-success"></i></a></li>
         </ul>
     </div>

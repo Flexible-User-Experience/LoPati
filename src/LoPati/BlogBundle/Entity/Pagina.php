@@ -1058,32 +1058,6 @@ class Pagina
         return null;
     }
 
-    public function getTranslatedDescripcioEn()
-    {
-        $i=0;
-        while ($i<count($this->translations)){
-            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='descripcio'){
-                return $this->translations[$i]->getContent();
-            }else{
-                $i++;
-            }
-        }
-        return null;
-    }
-
-    public function getTranslatedTitleEn()
-    {
-        $i=0;
-        while ($i<count($this->translations)) {
-            if ($this->translations[$i]->getLocale()=='en' && $this->translations[$i]->getField()=='titol') {
-                return $this->translations[$i]->getContent();
-            } else {
-                $i++;
-            }
-        }
-        return null;
-    }
-
     /**
      * @param mixed $created
      */
