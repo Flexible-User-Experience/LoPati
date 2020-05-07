@@ -4,13 +4,15 @@ namespace LoPati\AdminBundle\Twig;
 
 use LoPati\NewsletterBundle\Entity\IsolatedNewsletter;
 use LoPati\NewsletterBundle\Enum\NewsletterTypeEnum;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Class AdminExtensionTwig
  *
  * @category Twig
  */
-class AdminExtensionTwig extends \Twig_Extension
+class AdminExtensionTwig extends AbstractExtension
 {
     /**
      * Twig Functions
@@ -22,7 +24,7 @@ class AdminExtensionTwig extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('getAssetType', array($this, 'getAssetType')),
+            new TwigFunction('getAssetType', array($this, 'getAssetType')),
         );
     }
 
