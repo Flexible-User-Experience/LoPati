@@ -16,15 +16,15 @@
                 {% block sonata_user_login_error %}
                     {% if error %}
                         <div class="alert alert-danger alert-error">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                            {{ error.messageKey | trans(error.messageData, 'security') }}
                         </div>
                     {% endif %}
                 {% endblock %}
-                <p class="login-box-msg">{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</p>
+                <p class="login-box-msg">{{ 'title_user_authentication' | trans({}, 'SonataUserBundle') }}</p>
                 <form action="{{ path("sonata_user_admin_security_check") }}" method="post" role="form">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" id="username"  name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username' | trans({}, 'SonataUserBundle') }}"/>
+                        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username' | trans({}, 'SonataUserBundle') }}"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
@@ -32,14 +32,7 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
-                        <div class="col-xs-8">
-                            {#<div class="checkbox">#}
-                                {#<label>#}
-                                    {#<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>#}
-                                    {#{{ 'security.login.remember_me' | trans({}, 'FOSUserBundle') }}#}
-                                {#</label>#}
-                            {#</div>#}
-                        </div>
+                        <div class="col-xs-8"></div>
                         <div class="col-xs-4">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'security.login.submit' | trans({}, 'FOSUserBundle') }}</button>
                         </div>
