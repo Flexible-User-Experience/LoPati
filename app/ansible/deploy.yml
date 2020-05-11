@@ -3,7 +3,6 @@
   hosts: s6
   gather_facts: false
   roles:
-    - { role: "carlosbuenosvinos.ansistrano-deploy" }
     - { role: "cbrunnkvist.ansistrano-symfony-deploy" }
   vars_files:
     - "{{ playbook_dir }}/vars/config.yml"
@@ -35,7 +34,8 @@
     symfony_console_path: "app/console"
     symfony_run_composer: true
     symfony_composer_path: "{{ ansistrano_deploy_to }}/composer.phar"
-    symfony_composer_options: "--no-dev --optimize-autoloader --no-interaction --no-scripts"
+    symfony_composer_options: "--no-dev --optimize-autoloader --no-interaction"
+    symfony_composer_version: 1.10.1
     symfony_composer_self_update: false
     symfony_run_assets_install: true
     symfony_run_assetic_dump: true

@@ -32,12 +32,13 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <button style="margin-bottom:10px" type="submit" class="btn btn-primary btn-bloc">{{ 'security.login.submit' | trans({}, 'FOSUserBundle') }}</button>
+                        <div class="col-xs-8"></div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'security.login.submit' | trans({}, 'FOSUserBundle') }}</button>
                         </div>
                     </div>
                 </form>
-                <a href="{{ reset_route }}"><i class="fa fa-key"></i> {{ 'forgotten_password' | trans({}, 'SonataUserBundle') }}</a>
+                <a href="{{ reset_route }}">{{ 'forgotten_password' | trans({}, 'SonataUserBundle') }}</a>
             {% endblock %}
         </div>
         {% include '@SonataUser/Includes/login_footer_fragment.html.twig' %}

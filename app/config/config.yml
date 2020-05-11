@@ -36,7 +36,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "v2.6.6"
+        admin_tag_version:       "v2.6.7"
         id_page_item_irradiador: "%id_page_item_irradiador%"
         addthis_api_key:         "%addthis_api_key%"
 
