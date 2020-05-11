@@ -5,6 +5,7 @@ php:
 
 services:
   - elasticsearch
+  - mysql
 
 before_script:
   - sleep 10
