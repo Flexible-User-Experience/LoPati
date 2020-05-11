@@ -50,7 +50,7 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "symfony/assetic-bundle": "^2.7",
         "symfony/monolog-bundle": "~2.4",
-        "symfony/symfony": ">=2.8.52",
+        "symfony/symfony": "^2.8.52",
         "symfony/swiftmailer-bundle": "~2.3",
         "twbs/bootstrap": "^3.0",
         "tystr/sendgrid-bundle": "^0.1",
@@ -61,8 +61,7 @@
     "require-dev": {
         "cypresslab/gitelephant": "3.0.0",
         "cypresslab/gitelephant-bundle": "^0.0.6",
-        "phpunit/phpunit": "^5.0",
-        "sensio/generator-bundle": "~3.0"
+        "phpunit/phpunit": "^5.0"
     },
     "scripts": {
         "symfony-scripts": [
