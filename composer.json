@@ -27,7 +27,7 @@
         "friendsofsymfony/jsrouting-bundle": "^1.0",
         "friendsofsymfony/rest-bundle": "^1.7",
         "genemu/form-bundle": "^2.2",
-        "gremo/zurb-ink-bundle": "^2.3",
+        "gremo/zurb-ink-bundle": "^4.0",
         "hautelook/alice-bundle": "^1.0",
         "incenteev/composer-parameter-handler": "^2.1",
         "ircmaxell/password-compat": "~1.0",

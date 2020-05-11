@@ -1,28 +1,13 @@
-{% spaceless %}
-{{ zurb_ink_styles.add("@HampeZurbInkBundle/Resources/public/css/foundation-for-emails/2/foundation.min.css") }}
-{% block preHtml %}{% endblock %}
-{% inlinestyle %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width"/>
-    {% block headStyles %}
-        <style type="text/css">
-            {% autoescape false %}
-            {{ includeStyles(zurb_ink_styles) }}
-            {% block aditionalStyles %}
-                {{ zurb_ink_styles.add("@AdminBundle/Resources/public/css/isolated_newsletter_mail.css") }}
-            {% endblock %}
-            {% endautoescape %}
-        </style>
-    {% endblock %}
-</head>
-{% inky %}
-<body>
+{% extends "@GremoZurbInk/foundation-emails/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ zurb_ink_add_stylesheet('@AdminBundle/Resources/public/css/isolated_newsletter_mail.css') }}
+{% endblock %}
+
 {% block body %}
     {% if show_top_bar %}
-        {# Preview mode #}
+         Preview mode
         <table class="body">
             <tr class="black-background">
                 <td class="center" align="center" valign="top">
@@ -92,9 +77,9 @@
                                                     <a href="http://www.diputaciodetarragona.cat" class="footer-pre-bottom-icon">
                                                         <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_tarragona.png')) }}" alt="Diputacio Tarragona logo">
                                                     </a>
-{#                                                    <a href="mailto:deltacanya@gmail.com" class="footer-pre-bottom-icon">#}
-{#                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_fineta.png')) }}" alt="Deltacanya Fineta logo">#}
-{#                                                    </a>#}
+                                                    <a href="mailto:deltacanya@gmail.com" class="footer-pre-bottom-icon">
+                                                        <img class="float-right" src="{{ absolute_url(asset('images/newsletter_logo_fineta.png')) }}" alt="Deltacanya Fineta logo">
+                                                    </a>
                                                 </p>
                                                 {% include 'AdminBundle:IsolatedNewsletter:include_vertical_spacer.html.twig' with {size: 13} %}
                                             </th>
@@ -129,7 +114,7 @@
                                             <th class="expander"></th>
                                         </tr>
                                     </table>
-                                    {# newsletter user managment footer #}
+                                    {# Newsletter user managment footer #}
                                     {% if show_bottom_bar %}
                                         <table style="margin-top:-10px" class="row white-background">
                                             <tr>
@@ -152,11 +137,4 @@
             </td>
         </tr>
     </table>
-    {#<!-- prevent Gmail on iOS font size manipulation -->#}
-    <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
 {% endblock %}
-</body>
-{% endinky %}
-</html>
-{% endinlinestyle %}
-{% endspaceless %}
