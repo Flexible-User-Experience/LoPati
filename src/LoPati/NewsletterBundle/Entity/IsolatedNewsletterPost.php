@@ -83,7 +83,7 @@ class IsolatedNewsletterPost
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url(checkDNS=true)
+     * @Assert\Url
      */
     private $link;
 
