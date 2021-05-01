@@ -3,6 +3,8 @@
 app/bootstrap.php.cache
 app/bootstrap_cache.php.cache
 app/config/parameters.ini
+app/ansible/vars/*
+!app/ansible/vars/.gitkeep
 app/cache/*
 app/logs/*
 app/sessions/*
