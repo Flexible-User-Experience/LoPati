@@ -36,7 +36,7 @@ twig:
         - "AdminBundle:Form:action_button_from_template.html.twig"
     globals:
         main_brand_title:        "Lo Pati"
-        admin_tag_version:       "v2.6.8"
+        admin_tag_version:       "v2.6.9"
         id_page_item_irradiador: "%id_page_item_irradiador%"
         addthis_api_key:         "%addthis_api_key%"
 
@@ -145,20 +145,19 @@ fos_elastica:
         default: { host: localhost, port: "%port_elastica%" }
     indexes:
         lopati_website:
-            client: default
             types:
                 pagines:
                     mappings:
-                        titol: { boost: 5 }
-                        descripcio: { boost: 3 }
-                        translatedTitleEs: { boost: 5 }
-                        translatedDescripcioEs: { boost: 3 }
+                        titol: ~
+                        descripcio: ~
+                        translatedTitleEs: ~
+                        translatedDescripcioEs: ~
                     persistence:
-                        driver: orm
-                        model: LoPati\BlogBundle\Entity\Pagina
-                        provider:
-                        listener:
-                        finder:
+                        driver:   orm
+                        model:    LoPati\BlogBundle\Entity\Pagina
+                        provider: ~
+                        listener: ~
+                        finder:   ~
 
 # Genemu
 genemu_form:
