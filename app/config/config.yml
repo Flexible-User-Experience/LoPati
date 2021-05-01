@@ -145,20 +145,19 @@ fos_elastica:
         default: { host: localhost, port: "%port_elastica%" }
     indexes:
         lopati_website:
-            client: default
             types:
                 pagines:
                     mappings:
-                        titol: { boost: 5 }
-                        descripcio: { boost: 3 }
-                        translatedTitleEs: { boost: 5 }
-                        translatedDescripcioEs: { boost: 3 }
+                        titol: ~
+                        descripcio: ~
+                        translatedTitleEs: ~
+                        translatedDescripcioEs: ~
                     persistence:
-                        driver: orm
-                        model: LoPati\BlogBundle\Entity\Pagina
-                        provider:
-                        listener:
-                        finder:
+                        driver:   orm
+                        model:    LoPati\BlogBundle\Entity\Pagina
+                        provider: ~
+                        listener: ~
+                        finder:   ~
 
 # Genemu
 genemu_form:
