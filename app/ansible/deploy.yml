@@ -7,7 +7,6 @@
   vars_files:
     - "{{ playbook_dir }}/vars/config.yml"
   vars:
-    # sy
     # ansistrano deploys config
     ansistrano_deploy_from: "{{ playbook_dir }}/../../"
     ansistrano_deploy_to: "{{ vhost_path }}"
@@ -31,11 +30,12 @@
     ansistrano_after_cleanup_tasks_file: "{{ playbook_dir }}/hooks/after-cleanup-tasks.yml"
     ansistrano_before_symlink_shared_tasks_file: "{{ playbook_dir }}/hooks/before-symlink-shared-tasks.yml"
     # symfony config
+    symfony_php_path: "/usr/bin/php{{ vhost_php_version}}"
     symfony_console_path: "app/console"
     symfony_run_composer: true
     symfony_composer_path: "{{ ansistrano_deploy_to }}/composer.phar"
-    symfony_composer_options: "--no-dev --optimize-autoloader --no-interaction"
-    symfony_composer_version: 1.10.1
+    symfony_composer_options: "--no-dev --optimize-autoloader --no-interaction --no-scripts"
+    symfony_composer_version: 2.0.12
     symfony_composer_self_update: false
     symfony_run_assets_install: true
     symfony_run_assetic_dump: true
