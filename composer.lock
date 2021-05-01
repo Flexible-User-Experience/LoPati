@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a282e3a9e1abb7cc356264943f25c43",
+    "content-hash": "e9500b4c4d5815d6901259242e5fd4be",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -1696,53 +1696,50 @@
         },
         {
             "name": "friendsofsymfony/elastica-bundle",
-            "version": "v3.2.4",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "8e99041b78a8de4783645e0763a619bb1a16b7d7"
+                "reference": "8fa790b8fd093a6553e026f34bd056de02a71eda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/8e99041b78a8de4783645e0763a619bb1a16b7d7",
-                "reference": "8e99041b78a8de4783645e0763a619bb1a16b7d7",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/8fa790b8fd093a6553e026f34bd056de02a71eda",
+                "reference": "8fa790b8fd093a6553e026f34bd056de02a71eda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "psr/log": "~1.0",
-                "ruflin/elastica": "~2.1",
-                "symfony/asset": "~2.3|~3.0",
-                "symfony/console": "~2.1|~3.0",
-                "symfony/form": "~2.1|~3.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/property-access": "~2.3|~3.0",
-                "symfony/templating": "~2.3|~3.0",
-                "symfony/translation": "~2.3|~3.0"
+                "php": ">=5.5.0",
+                "psr/log": "^1.0",
+                "ruflin/elastica": "3.2.*",
+                "symfony/console": "^2.8|^3.2",
+                "symfony/dependency-injection": "^2.8|^3.2",
+                "symfony/framework-bundle": "^2.8|^3.2",
+                "symfony/options-resolver": "^2.8|^3.2",
+                "symfony/property-access": "^2.8|^3.2"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.4",
-                "doctrine/phpcr-bundle": "~1.2",
-                "jackalope/jackalope-doctrine-dbal": "~1.1",
-                "jms/serializer-bundle": "~0.13|~1.0",
-                "knplabs/knp-components": "~1.2",
-                "knplabs/knp-paginator-bundle": "~2.4",
-                "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "propel/propel1": "1.6.*",
-                "symfony/browser-kit": "~2.3|~3.0",
-                "symfony/expression-language": "~2.4|~3.0",
-                "symfony/serializer": "~2.3|~3.0",
-                "symfony/twig-bundle": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
+                "doctrine/doctrine-bundle": "^1.6",
+                "doctrine/orm": "^2.5",
+                "doctrine/phpcr-bundle": "^1.3",
+                "doctrine/phpcr-odm": "^1.4",
+                "jackalope/jackalope-doctrine-dbal": "^1.2",
+                "jms/serializer-bundle": "^2.2",
+                "knplabs/knp-components": "^1.2",
+                "pagerfanta/pagerfanta": "^1.0.5",
+                "phpunit/phpunit": "^4.8|^5.0",
+                "propel/propel1": "^1.7",
+                "symfony/browser-kit": "^2.8|^3.2",
+                "symfony/expression-language": "^2.8|^3.2",
+                "symfony/serializer": "^2.8|^3.2",
+                "symfony/stopwatch": "^2.8|^3.2",
+                "symfony/twig-bundle": "^2.8|^3.4",
+                "symfony/yaml": "^2.8|^3.2"
+            },
+            "suggest": {
+                "enqueue/elastica-bundle": "The bundle adds extra features to FOSElasticaBundle bundle. Aimed to improve performance."
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "FOS\\ElasticaBundle\\": ""
@@ -1770,7 +1767,7 @@
                     "email": "jmikola@gmail.com"
                 }
             ],
-            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
+            "description": "Elasticsearch PHP integration for your Symfony project using Elastica",
             "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
             "keywords": [
                 "doctrine2",
@@ -1782,9 +1779,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/tree/v3.2.4"
+                "source": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/tree/4.x"
             },
-            "time": "2017-08-10T13:39:35+00:00"
+            "time": "2018-01-03T13:19:09+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3896,36 +3893,36 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "2.3.3",
+            "version": "3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "29262657b33c003cf138b7c66f75e78bc5e01ddf"
+                "reference": "62ff0a20749db4228bcd9a8124480e8f968870b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/29262657b33c003cf138b7c66f75e78bc5e01ddf",
-                "reference": "29262657b33c003cf138b7c66f75e78bc5e01ddf",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/62ff0a20749db4228bcd9a8124480e8f968870b5",
+                "reference": "62ff0a20749db4228bcd9a8124480e8f968870b5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
+                "php": ">=5.4.0",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "guzzlehttp/guzzle": "5.3.*",
-                "munkie/elasticsearch-thrift-php": "1.4.*"
+                "aws/aws-sdk-php": "~3.0",
+                "guzzlehttp/guzzle": "~6.0"
             },
             "suggest": {
+                "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
                 "egeloen/http-adapter": "Allow using httpadapter transport",
-                "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
-                "monolog/monolog": "Logging request",
-                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+                "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport (Requires php 5.5)",
+                "monolog/monolog": "Logging request"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -3951,9 +3948,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ruflin/Elastica/issues",
-                "source": "https://github.com/ruflin/Elastica/tree/2.3.3"
+                "source": "https://github.com/ruflin/Elastica/tree/3.2.4"
             },
-            "time": "2019-01-11T17:45:52+00:00"
+            "time": "2018-12-28T12:57:02+00:00"
         },
         {
             "name": "sendgrid/php-http-client",

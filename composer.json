@@ -23,7 +23,7 @@
         "doctrine/orm": "^2.4.8",
         "egeloen/ckeditor-bundle": "^4.0",
         "egulias/email-validator": "^1.2",
-        "friendsofsymfony/elastica-bundle": "^3.0",
+        "friendsofsymfony/elastica-bundle": "^4.0",
         "friendsofsymfony/jsrouting-bundle": "^1.0",
         "friendsofsymfony/rest-bundle": "^1.7",
         "genemu/form-bundle": "^2.2",
