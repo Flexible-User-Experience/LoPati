@@ -83,6 +83,22 @@ class Utils
         $cadena = str_replace('Ñ', 'NY', $cadena);
         $cadena = str_replace('ñ', 'ny', $cadena);
         $cadena = str_replace('\'', '-', $cadena);
+        $cadena = str_replace('´', '-', $cadena);
+        $cadena = str_replace('`', '-', $cadena);
+        $cadena = str_replace('·', '-', $cadena);
+        $cadena = str_replace('/', '-', $cadena);
+        // elimina signes de puntuació
+        $cadena = str_replace('"', '', $cadena);
+        $cadena = str_replace('@', '', $cadena);
+        $cadena = str_replace('#', '', $cadena);
+        $cadena = str_replace('$', '', $cadena);
+        $cadena = str_replace('%', '', $cadena);
+        $cadena = str_replace('&', '', $cadena);
+        $cadena = str_replace('=', '', $cadena);
+        $cadena = str_replace('!', '', $cadena);
+        $cadena = str_replace('¡', '', $cadena);
+        $cadena = str_replace('?', '', $cadena);
+        $cadena = str_replace('¿', '', $cadena);
         // Codigo copiado de http://cubiq.org/the-perfect-php-clean-url-generator
         $slug = iconv('UTF-8', 'ASCII//TRANSLIT', $cadena);
         $slug = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $slug);
