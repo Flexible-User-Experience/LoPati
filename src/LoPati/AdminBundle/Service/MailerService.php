@@ -120,7 +120,7 @@ class MailerService
      */
     public function batchDelivery($subject, array $emailDestinationList, $content)
     {
-        if (count($emailDestinationList) == 0) {
+        if (count($emailDestinationList) === 0) {
             throw new \Exception('Email destination list empty');
         }
 

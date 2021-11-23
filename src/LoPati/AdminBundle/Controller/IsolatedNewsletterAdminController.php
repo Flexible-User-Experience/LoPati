@@ -155,7 +155,7 @@ class IsolatedNewsletterAdminController extends Controller
         );
 
         $result = $ms->batchDelivery('[TEST] '.$object->getSubject(), $this->getTestEmailsDestinationList(), $content);
-        if ($result == false) {
+        if ($result === false) {
             $this->get('session')->getFlashBag()->add(
                 'sonata_flash_error',
                 'S\'ha produït un ERROR en enviar el test.'
