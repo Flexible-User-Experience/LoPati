@@ -74,7 +74,9 @@ class DefaultController extends Controller
                     $newsletterUser->setIdioma($request->getLocale());
                     $newsletterUser->setAgeTransformed($newsletterUser->getAge());
                 }
-                $em->persist($newsletterUser);
+                if ($newsletterUser->getPostalCode() !== '90002') {
+                    $em->persist($newsletterUser);
+                }
                 $em->flush();
             }
 
