@@ -5,8 +5,6 @@ namespace LoPati\BlogBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use LoPati\BlogBundle\Entity\Pagina;
 use LoPati\NewsletterBundle\Entity\NewsletterUser;
-use LoPati\NewsletterBundle\NewsletterBundle;
-use LoPati\NewsletterBundle\Repository\NewsletterUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use LoPati\Utilities\Utils;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +17,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class DefaultController extends Controller
 {
-    const THUMBNAILS_PER_PAGE_SLIDER = 10;
-    const THUMBNAILS_PER_PAGE_NORMAL = 8;
+    public const THUMBNAILS_PER_PAGE_SLIDER = 10;
+    public const THUMBNAILS_PER_PAGE_NORMAL = 8;
 
     /**
      * @param Request $request
